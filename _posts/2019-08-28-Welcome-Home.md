@@ -15,9 +15,9 @@ icon: icon-html
 
 ## About Me
 
-Hello World! I'm Kushashwa Ravi Shrimali (friends call me Kush, world knows me as krshrimali), a Computer Science Graduate International Institute of Information Technology, Naya Raipur. I'm currently working as an AI Engineer at a Florida based company, CareAI. Previously, I was a R&D Deep Learning Engineer at <a href="https://mydukaan.io">Dukaan</a>, a startup based in Bangalore. I was also an intern at Care AI (http://care.ai/) this year. I've previously worked at NVIDIA (Santa Clara, US) in the DL Frameworks Team (PyTorch), ROSE Labs, NTU Singapore (CV and DL) and with a US based Startup, Big Vision LLC and LearnOpenCV under mentorship of Dr. Satya Mallick. 
+Hello World! I'm Kushashwa Ravi Shrimali (friends call me Kush, world knows me as krshrimali), a Computer Science Graduate International Institute of Information Technology, Naya Raipur. I love development, optimization and reading source codes! Have explored a lot of fields during my graduation, development is what I found the most intuitive for myself. 
 
-While on the weekdays, I am an AI Engineer, on the weekends - I contribute to opensource, go live on YouTube and also write blogs (where you are right now). Make sure to check out my <a href="https://youtube.com/c/kushashwaraviShrimali">YouTube channel</a> if you like it!
+Over the weekends - I contribute to opensource, go live on YouTube and also write blogs (where you are right now). Make sure to check out my <a href="https://youtube.com/c/kushashwaraviShrimali">YouTube channel</a> if you like it! But that's not it, I like singing, dancing on any random music I like and discussing science & politics.
 
 I love writing impactful codes! My work doesn't stop at getting the accuracy. I love optimizing the models to help deploy in real-time.
 
@@ -25,8 +25,16 @@ Please navigate to <a href="https://krshrimali.github.io/pytorch/">PyTorch</a>, 
 
 ## Work Experience
 
-- **Care AI** (AI Engineer), Florida, US** (WFH, November 2020 to Present)
-    - Working as an AI Engineer for the healthcare startup, CareAI. (Work will be updated with time)
+- **Sybill AI (Applied ML Engineer), Bangalore, India** (February 2020 to Present)
+    - Designed multi‑modal models in ML pipeline.
+    - Working on designing ML test framework and using MLFlow for ML experiments and hyper parameter tracking.
+- **NVIDIA (Deep Learning Frameworks Team, PyTorch), Santa Clara, US**
+    - On site internship at NVIDIA Head Quarters, Santa Clara. See the following PRs if you want to know what I worked on.
+        * https://github.com/pytorch/pytorch/pull/33322
+        * https://github.com/pytorch/pytorch/pull/33063
+        * https://github.com/pytorch/pytorch/pull/33063
+    - Mentor: Michael Carilli (Senior Software Developer, NVIDIA)
+    - Manager: Christian Sarofeen
 - **Dukaan (R&D Deep Learning Engineer), Bangalore, India** (September 2020 to October 2020)
     - Worked as R&D DL Engineer.
     - Contributed in training custom CV and NLP models for deployment for Dukaan App.
@@ -35,13 +43,6 @@ Please navigate to <a href="https://krshrimali.github.io/pytorch/">PyTorch</a>, 
     - Remotely working (due to COVID-19 pandemic). Major responsibilities include:
         * Optimizing workflow using TensorRT (mainly using C++ API).
 	* Applying Deep Learning, Speech Recognition and Machine Learning models on Android Apps.
-- **NVIDIA (Deep Learning Frameworks Team, PyTorch), Santa Clara, US**
-    - On site internship at NVIDIA Head Quarters, Santa Clara. See the following PRs if you want to know what I worked on.
-        * https://github.com/pytorch/pytorch/pull/33322
-        * https://github.com/pytorch/pytorch/pull/33063
-        * https://github.com/pytorch/pytorch/pull/33063
-    - Mentor: Michael Carilli (Senior Software Developer, NVIDIA)
-    - Manager: Christian Sarofeen
 - **Rapid Rich Object Search (ROSE) Labs, NTU Singapore** 
     - On-site internship at ROSE Labs, NTU Singapore under Prof. Alex Kot (Director, ROSE Labs). Worked on Automatic License Plate Recognition technique in real time using PyTorch in both C++ and Python. Used YOLO based network and achieved 85% accuracy for Single Line License Plates and Double Line License Plates (tested on real time dataset of Singaporean Vehicles).
     - Mentor: Prof. Alex Kot, Dennis Sng (Deputy Director & Principal Scientist) and Devadeep Shyam (Project Mangaer, AI)
@@ -57,17 +58,6 @@ Please navigate to <a href="https://krshrimali.github.io/pytorch/">PyTorch</a>, 
     - Worked under Preetha Ram and Ashwin Ram (now: Technical Director of AI, Google Cloud)
 - **Student Activity Concil, IIIT Naya Raipur**
     - Coordinated clubs running under SAC: Artificial Intelligence and Machine Learning Club, The Society of Coders. Also became the Technical Coordinator of Annual Technical and Cultural Fest - TechNovate 2019.
-
-## Research Interests
-	
-- Deep Learning and Computer Vision
-	* Optimization and Pruning
-	* Software Development
-	* Generative Adversarial Networks
-	* Reinforcement Learning
-	* Object Detection and Image Analysis
-- Development
-	* Open Source Framework Development in Libraries: PyTorch, OpenCV, NumPy
 
 ## YouTube Channel
 
