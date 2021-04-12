@@ -4,7 +4,7 @@ title: About
 permalink: /about/
 ---
 
-I'm a Computer Science graduate from IIIT Naya Raipur, India (2016-20). I love development which makes AI happen in real-time scenarios. And I love writing impactful codes. I am currently working as an AI Engineer at <a href="https://care.ai">CareAI</a>, which is a US-based healthcare startup. I was also a R&D DL Engineer for a short span of time at Dukaan, an Indian strartup based in Bengaluru.
+I'm a Computer Science graduate from IIIT Naya Raipur, India (2016-20). I love development, whatever I write or see - my passion is in optimizing pipelines. My motivation has been reading source codes of amazing libraries like PyTorch, NumPy and more.
 
 I run my <a href="https://youtube.com/c/kushashwaraviShrimali/">YouTube channel</a> to share what I have learnt so far apart from this blog.
 
