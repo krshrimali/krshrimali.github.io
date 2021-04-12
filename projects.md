@@ -3,6 +3,8 @@ layout: page
 permalink: /projects/
 ---
 
+**Note**: This page might be outdated, please check out my <a href="krshrimali.github.io/resume.pdf">Resume</a> if you want to know more about my projects, or you can check my <a href="http://github.com/krshrimali/">GitHub profile</a> and my <a href="http://github.com/BuffetCodes">GitHub organization</a> as well.
+
 Deep Learning PyTorch Tutorials
 ====================
 
