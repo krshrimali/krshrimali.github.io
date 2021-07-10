@@ -4,7 +4,7 @@ title: About
 permalink: /about/
 ---
 
-I'm a Computer Science graduate from IIIT Naya Raipur, India (2016-20). I love development, whatever I write or see - my passion is in optimizing pipelines. My motivation has been reading source codes of amazing libraries like PyTorch, NumPy and more.
+I work as a Software Developer at Quansight Labs in the PyTorch team. I love development, whatever I write or see - my passion is in optimizing pipelines. You'll mostly finding me exploring libraries, source codes and reading technical books/blogs.
 
 I run my <a href="https://youtube.com/c/kushashwaraviShrimali/">YouTube channel</a> to share what I have learnt so far apart from this blog.
 
@@ -18,6 +18,10 @@ I have previously interned at:
 
 ### Experience
 
+* Software Developer (PyTorch) at Quansight Labs (Present)
+* Applied ML Engineer at Sybill AI
+* AI Engineer at CareAI
+* R&D DL Engineer at Dukaan
 * PyTorch and OpenCV Contributor
     * To know more, check out the [projects section](https://krshrimali.github.io/krshrimali.github.io/projects/). 
 * Student Activity Center Science and Technology Head (2018-2019 Session). 
