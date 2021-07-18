@@ -10,7 +10,7 @@ blog: [C++]
 published: true
 excerpt_separator: <!--more-->
 images:
-  - url: /assets/blogs/cpp/fptr_fobj_cover.png
+  - url: /assets/blogs/cpp/fptr-fobj-cover.png
 icon: icon-html
 ---
 
@@ -20,7 +20,7 @@ Please note that, function objects are commonly referred as _functors_ but we ha
 
 <!--more-->
 
-<img src="/assets/blogs/cpp/fptr_fobj_cover.png"/>
+<img src="/assets/blogs/cpp/fptr-fobj-cover.png"/>
 
 ## Function Pointers
 
