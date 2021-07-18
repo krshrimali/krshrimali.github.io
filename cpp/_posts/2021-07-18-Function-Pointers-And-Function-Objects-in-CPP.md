@@ -18,6 +18,10 @@ In today's blog, we'll talk about two important concepts in C++: Function Pointe
 
 Please note that, function objects are commonly referred as _functors_ but we have failed to notice any official alias to the name. Hence, we'll restrict ourselves to using _Function Objects_ in this blog.
 
+<!--more-->
+
+<img src="/assets/blogs/cpp/fptr_fobj_cover.png"/>
+
 ## Function Pointers
 
 As the name sounds, a function pointer is simply a pointer to the memory address of a function. Consider a following function:
