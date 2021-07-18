@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Function Pointers and Function Objects in C++"
-date: 2021-07-18
+date: 2021-07-18 10:00:00 +0530
 desc: "Understanding Function Pointers and Objects in C++"
 keywords: "Blog, C++, Functors, Function Objects, Pointers, Function Pointers"
 categories: [Blog, C++]
