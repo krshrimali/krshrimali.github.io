@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="map[name:Kushashwa Ravi Shrimali]">
+<meta name="description" content="Recap of the last blog Before we move on, it&amp;rsquo;s important what we covered in the last blog. We&amp;rsquo;ll be going forward from loading Custom Dataset to now using the dataset to train our VGG-16 Network. Previously, we were able to load our custom dataset using the following template:
+" />
+<meta name="keywords" content="" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="#252627" />
+<link rel="canonical" href="https://krshrimali.github.io/posts/2019/07/training-a-network-on-custom-dataset-using-pytorch-c-api/" />
+
+
+<title>
+    
+    Training a Network on Custom Dataset using PyTorch C&#43;&#43; API :: Kushashwa Ravi Shrimali (Kush)  — Hello Friend NG HZ Theme
+    
+</title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+      type="text/css">
+
+
+
+<link rel="stylesheet" href="https://krshrimali.github.io/main.min.b6dbce0fdf6c61563a0c2226e857d5dadd8e5afa2c4f73ec9ea55abd831f9a72.css">
+
+
+
+
+
+    <link rel="webmention" href="https://webmention.io/example.com/webmention" />
+    <link rel="pingback" href="https://webmention.io/example.com/xmlrpc" />
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="https://krshrimali.github.io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://krshrimali.github.io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://krshrimali.github.io/favicon-16x16.png">
+    <link rel="manifest" href="https://krshrimali.github.io/site.webmanifest">
+    <link rel="mask-icon" href="https://krshrimali.github.io/safari-pinned-tab.svg" color="#252627">
+    <link rel="shortcut icon" href="https://krshrimali.github.io/favicon.ico">
+    <meta name="msapplication-TileColor" content="#252627">
+    <meta name="theme-color" content="#252627">
+
+<meta itemprop="name" content="Training a Network on Custom Dataset using PyTorch C&#43;&#43; API">
+<meta itemprop="description" content="Recap of the last blog
+Before we move on, it&rsquo;s important what we covered in the last blog. We&rsquo;ll be going forward from loading Custom Dataset to now using the dataset to train our VGG-16 Network. Previously, we were able to load our custom dataset using the following template:"><meta itemprop="datePublished" content="2019-07-05T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2019-07-05T00:00:00+00:00" />
+<meta itemprop="wordCount" content="794"><meta itemprop="image" content="https://krshrimali.github.io"/>
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://krshrimali.github.io"/>
+
+<meta name="twitter:title" content="Training a Network on Custom Dataset using PyTorch C&#43;&#43; API"/>
+<meta name="twitter:description" content="Recap of the last blog
+Before we move on, it&rsquo;s important what we covered in the last blog. We&rsquo;ll be going forward from loading Custom Dataset to now using the dataset to train our VGG-16 Network. Previously, we were able to load our custom dataset using the following template:"/>
+
+
+
+
+
+    <meta property="article:published_time" content="2019-07-05 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+    </head>
+
+    <body class="dark-theme">
+        <div class="container">
+            <header class="header">
+    <div class="header__inner">
+        <div class="header__left">
+        <div class="logo">
+<a href="https://krshrimali.github.io/" style="text-decoration: none;">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">$ cd /home/</span>
+            <span class="logo__cursor" style=
+                  "
+                   
+                   ">
+            </span>
+        
+</a>
+</div>
+
+        </div>
+
+        
+        <div class="header__mid">
+        <button class="button">
+            <div class="button__text">
+        <a href="https://krshrimali.github.io/search" >
+                Search
+        </a>
+            </div>
+        </button>
+        </div>
+       
+
+        <div class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="https://krshrimali.github.io/about">About</a></li><li><a href="https://krshrimali.github.io/posts">Blog</a></li>
+    </ul>
+    <ul class="menu__inner"><li><a href="https://krshrimali.github.io/categories">Categories</a></li><li><a href="https://krshrimali.github.io/tags">Tags</a></li>
+    </ul>
+</nav>
+
+            <button id="toggleMenu">
+                <div class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </div>
+             </button>
+            
+
+            <button class="theme-toggle" id="toggleTheme"><svg class="theme-toggler" width="32" height="32" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+</button>
+        </div>
+    </div>
+</header>
+
+            
+<script src="https://krshrimali.github.io/js/mathjax-config.js"></script>
+
+
+<script id="MathJax-script" async src="https://unpkg.com/mathjax@3/es5/tex-chtml.js"></script>
+
+            
+    <main class="post">
+
+        <div class="post-info">
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>4 minutes
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>Written: 2019-07-05 00:00 &#43;0000</p>
+
+            
+
+            </p>
+        </div>
+
+        <article class="h-entry">
+            <h1 class="post-title p-name">
+                <a class="u-url" href="https://krshrimali.github.io/posts/2019/07/training-a-network-on-custom-dataset-using-pytorch-c-api/">Training a Network on Custom Dataset using PyTorch C++ API</a>
+            </h1>
+        <div class="post-info"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-pen-tool"><path d="M12 19l7-7 3 3-7 7-3-3z"></path><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path><path d="M2 2l7.586 7.586"></path><circle cx="11" cy="11" r="2"></circle></svg>
+                         <span class="author u-author p-author"><a href="https://krshrimali.github.io/author/kushashwa-ravi-shrimali">Kushashwa Ravi Shrimali</a></span>
+        </div>
+
+            
+
+            <div class="post-content e-content">
+                <h2 id="recap-of-the-last-blog">Recap of the last blog</h2>
+<p>Before we move on, it&rsquo;s important what we covered in the last blog. We&rsquo;ll be going forward from loading Custom Dataset to now using the dataset to train our VGG-16 Network. Previously, we were able to load our custom dataset using the following template:</p>
+<p><strong>Note</strong>: Those who are already aware of loading a custom dataset can skip this section.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CustomDataset</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> torch<span style="color:#f92672">::</span>data<span style="color:#f92672">::</span>dataset<span style="color:#f92672">&lt;</span>CustomDataset<span style="color:#f92672">&gt;</span> {
+<span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+  <span style="color:#75715e">// Declare 2 vectors of tensors for images and labels
+</span><span style="color:#75715e"></span>  vector<span style="color:#f92672">&lt;</span>torch<span style="color:#f92672">::</span>Tensor<span style="color:#f92672">&gt;</span> images, labels;
+<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+  <span style="color:#75715e">// Constructor
+</span><span style="color:#75715e"></span>  CustomDataset(vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> list_images, vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> list_labels) {
+    images <span style="color:#f92672">=</span> process_images(list_images);
+    labels <span style="color:#f92672">=</span> process_labels(list_labels);
+  };
+
+  <span style="color:#75715e">// Override get() function to return tensor at location index
+</span><span style="color:#75715e"></span>  torch<span style="color:#f92672">::</span>data<span style="color:#f92672">::</span>Example<span style="color:#f92672">&lt;&gt;</span> get(size_t index) <span style="color:#66d9ef">override</span> {
+    torch<span style="color:#f92672">::</span>Tensor sample_img <span style="color:#f92672">=</span> images.at(index);
+    torch<span style="color:#f92672">::</span>Tensor sample_label <span style="color:#f92672">=</span> labels.at(index);
+    <span style="color:#66d9ef">return</span> {sample_img.clone(), sample_label.clone()};
+  };
+
+  <span style="color:#75715e">// Return the length of data
+</span><span style="color:#75715e"></span>  torch<span style="color:#f92672">::</span>optional<span style="color:#f92672">&lt;</span>size_t<span style="color:#f92672">&gt;</span> size() <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">override</span> {
+    <span style="color:#66d9ef">return</span> labels.size();
+  };
+};
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">int</span> argc, <span style="color:#66d9ef">char</span><span style="color:#f92672">**</span> argv) {
+  vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> list_images; <span style="color:#75715e">// list of path of images
+</span><span style="color:#75715e"></span>  vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> list_labels; <span style="color:#75715e">// list of integer labels
+</span><span style="color:#75715e"></span>
+  <span style="color:#75715e">// Dataset init and apply transforms - None!
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">auto</span> custom_dataset <span style="color:#f92672">=</span> CustomDataset(list_images, list_labels).map(torch<span style="color:#f92672">::</span>data<span style="color:#f92672">::</span>transforms<span style="color:#f92672">::</span>Stack<span style="color:#f92672">&lt;&gt;</span>());
+}
+</code></pre></div><p>These were the steps we followed last time:</p>
+<!-- raw HTML omitted -->
+<h2 id="overview-how-to-pass-batches-to-our-network">Overview: How to pass batches to our network?</h2>
+<p>Since we have our dataset loaded, let&rsquo;s see how to pass batches of data to our network. Before we go on and see how PyTorch C++ API does it, let&rsquo;s see how it&rsquo;s done in Python.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">dataset_loader <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>utils<span style="color:#f92672">.</span>data<span style="color:#f92672">.</span>DataLoader(custom_dataset,
+                                             batch_size<span style="color:#f92672">=</span><span style="color:#ae81ff">4</span>, shuffle<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+</code></pre></div><p>Just a short review of what <code>DataLoader()</code> class does: It loads the data and returns single or multiple iterators over the dataset. We pass in our object from <code>Dataset</code> class (here, <code>custom_dataset</code>). We will do the same process in C++ using the following template:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">auto</span> data_loader <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>data<span style="color:#f92672">::</span>make_data_loader<span style="color:#f92672">&lt;</span>torch<span style="color:#f92672">::</span>data<span style="color:#f92672">::</span>samplers<span style="color:#f92672">::</span>SequentialSampler<span style="color:#f92672">&gt;</span>(
+  std<span style="color:#f92672">::</span>move(custom_dataset),
+  batch_size
+);
+</code></pre></div><p>In brief, we are loading our data using <code>SequentialSampler</code> class which samples our data in the same order that we provided it with. Have a look at the <code>SequentialSampler</code> class <a href="https://pytorch.org/docs/stable/data.html#torch.utils.data.SequentialSampler">here</a>.</p>
+<p>For the definition of this function: <code>torch::data::make_data_loader</code> <a href="https://pytorch.org/cppdocs/api/function_namespacetorch_1_1data_1a0d29ca9900cae66957c5cc5052ecc122.html#exhale-function-namespacetorch-1-1data-1a0d29ca9900cae66957c5cc5052ecc122">here</a>. A short screenshot from the documentation is given below.</p>
+<!-- raw HTML omitted -->
+<p>Let&rsquo;s go ahead and learn to iterate through our data loader and pass each batch of data and labels to our network. For once, imagine that we have a <code>struct</code> named <code>Net</code> which defines our network and <code>forward()</code> function which parses the data through each layer and returns the output.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span><span style="color:#f92672">&amp;</span> batch: <span style="color:#f92672">*</span>data_loader) {
+  <span style="color:#66d9ef">auto</span> data <span style="color:#f92672">=</span> batch.data;
+  <span style="color:#66d9ef">auto</span> target <span style="color:#f92672">=</span> batch.target.squeeze();
+}
+</code></pre></div><p>So we have retrieved our <code>data</code> and label (<code>target</code>) - which also depends on the batch size. If you have <code>batch_size</code> as 4 in the <code>torch::data::make_data_loader()</code> function, then size of the target and data will be 4.</p>
+<h2 id="defining-the-hyperparameters-in-libtorch">Defining the Hyperparameters in Libtorch</h2>
+<p>Remember the Hyperparameters we need to define for training? Let&rsquo;s take a quick review of what they are:</p>
+<ol>
+<li><strong>Batch Size</strong></li>
+<li><strong>Optimizer</strong></li>
+<li><strong>Loss Function</strong></li>
+</ol>
+<p>We have used <code>batch_size</code> parameter above while making the data loader. For defining optimizer, we&rsquo;ll go for <code>Adam</code> Optimizer here:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// We need to define the network first
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">auto</span> net <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>make_shared<span style="color:#f92672">&lt;</span>Net<span style="color:#f92672">&gt;</span>();
+torch<span style="color:#f92672">::</span>optim<span style="color:#f92672">::</span>Adam optimizer(net<span style="color:#f92672">-&gt;</span>parameters(), torch<span style="color:#f92672">::</span>optim<span style="color:#f92672">::</span>AdamOptions(<span style="color:#ae81ff">1e-3</span>));
+</code></pre></div><p><strong>Note that the PyTorch C++ API supports below listed optimizers:</strong></p>
+<ol>
+<li><a href="https://pytorch.org/cppdocs/api/classtorch_1_1optim_1_1_r_m_sprop.html#exhale-class-classtorch-1-1optim-1-1-r-m-sprop">RMSprop</a></li>
+<li><a href="https://pytorch.org/cppdocs/api/classtorch_1_1optim_1_1_s_g_d.html#exhale-class-classtorch-1-1optim-1-1-s-g-d">SGD</a></li>
+<li><a href="https://pytorch.org/cppdocs/api/classtorch_1_1optim_1_1_adam.html#exhale-class-classtorch-1-1optim-1-1-adam">Adam</a></li>
+<li><a href="https://pytorch.org/cppdocs/api/classtorch_1_1optim_1_1_adagrad.html#exhale-class-classtorch-1-1optim-1-1-adagrad">Adagrad</a></li>
+<li><a href="https://pytorch.org/cppdocs/api/classtorch_1_1optim_1_1_l_b_f_g_s.html#exhale-class-classtorch-1-1optim-1-1-l-b-f-g-s">LBFGS</a></li>
+<li><a href="https://pytorch.org/cppdocs/api/classtorch_1_1optim_1_1_loss_closure_optimizer.html#exhale-class-classtorch-1-1optim-1-1-loss-closure-optimizer">LossClosureOptimizer</a></li>
+</ol>
+<p>As mentioned in the documentation of <code>torch.optim</code> package:</p>
+<!-- raw HTML omitted -->
+<p>The documentation is self explanatory, so all we need to do is pass parameters of our Network which will be optimized using our optimizer, and pass in the learning rate like above. To know about parameters we can pass through <code>AdamOptions</code>, check out this <a href="https://pytorch.org/cppdocs/api/structtorch_1_1optim_1_1_adam_options.html#exhale-struct-structtorch-1-1optim-1-1-adam-options">documentation page</a>.</p>
+<p>Let&rsquo;s go ahead and learn to define <strong>Loss Function</strong> in PyTorch C++ API. For an example, we&rsquo;ll define <code>nll_loss</code> (Negative Log Likelihood Loss Function):</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">auto</span> output <span style="color:#f92672">=</span> net<span style="color:#f92672">-&gt;</span>forward(data);
+<span style="color:#66d9ef">auto</span> loss <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>nll_loss(output, target);
+
+<span style="color:#75715e">// To backpropagate loss
+</span><span style="color:#75715e"></span>loss.backward()
+</code></pre></div><p>If you need to output the loss, use: <code>loss.item&lt;float&gt;()</code>.</p>
+<h2 id="training-the-network">Training the Network</h2>
+<p>We are close to our last step! Training the network is almost similar to the way we do in Python. That&rsquo;s why, I&rsquo;ll include the code snippet here which should be self explanatory (since we have already discussed the core parts of it).</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">dataset_size <span style="color:#f92672">=</span> custom_dataset.size().value();
+<span style="color:#66d9ef">int</span> n_epochs <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>; <span style="color:#75715e">// Number of epochs
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> epoch<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>; epoch<span style="color:#f92672">&lt;=</span>n_epochs; epoch<span style="color:#f92672">++</span>) {
+  <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span><span style="color:#f92672">&amp;</span> batch: <span style="color:#f92672">*</span>data_loader) {
+    <span style="color:#66d9ef">auto</span> data <span style="color:#f92672">=</span> batch.data;
+    <span style="color:#66d9ef">auto</span> target <span style="color:#f92672">=</span> batch.target.squeeze();
+
+    <span style="color:#75715e">// Convert data to float32 format and target to Int64 format
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// Assuming you have labels as integers
+</span><span style="color:#75715e"></span>    data <span style="color:#f92672">=</span> data.to(torch<span style="color:#f92672">::</span>kF2);
+    target <span style="color:#f92672">=</span> target.to(torch<span style="color:#f92672">::</span>kInt64);
+
+    <span style="color:#75715e">// Clear the optimizer parameters
+</span><span style="color:#75715e"></span>    optimizer.zero_grad();
+
+    <span style="color:#66d9ef">auto</span> output <span style="color:#f92672">=</span> net<span style="color:#f92672">-&gt;</span>forward(data);
+    <span style="color:#66d9ef">auto</span> loss <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>nll_loss(output, target);
+
+    <span style="color:#75715e">// Backpropagate the loss
+</span><span style="color:#75715e"></span>    loss.backward();
+    <span style="color:#75715e">// Update the parameters
+</span><span style="color:#75715e"></span>    optimizer.step();
+
+    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Train Epoch: %d/%ld [%5ld/%5d] Loss: %.4f&#34;</span> <span style="color:#f92672">&lt;&lt;</span> epoch <span style="color:#f92672">&lt;&lt;</span> n_epochs <span style="color:#f92672">&lt;&lt;</span> batch_index <span style="color:#f92672">*</span> batch.data.size(<span style="color:#ae81ff">0</span>) <span style="color:#f92672">&lt;&lt;</span> dataset_size <span style="color:#f92672">&lt;&lt;</span> loss.item<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">float</span><span style="color:#f92672">&gt;</span>() <span style="color:#f92672">&lt;&lt;</span> endl;
+  }
+}
+
+<span style="color:#75715e">// Save the model
+</span><span style="color:#75715e"></span>torch<span style="color:#f92672">::</span>save(net, <span style="color:#e6db74">&#34;best_model.pt&#34;</span>);
+</code></pre></div><p>In the next blog (<strong>coming soon</strong>), we&rsquo;ll be discussing about <strong>Making Predictions</strong> using our network and will also show an example of training our network on a benchmark dataset.</p>
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>794 Words</p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>Posted: <time class="dt-published"> 2019-07-05 05:30 &#43;0530</time></p>
+<a class="resp-sharing-button__link" href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2019%2f07%2ftraining-a-network-on-custom-dataset-using-pytorch-c-api%2f" target="_blank" rel="noopener" aria-label="Facebook">
+  <div class="resp-sharing-button resp-sharing-button--facebook resp-sharing-button--medium"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--circle">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11.5"/><path d="M15.84 9.5H13.5V8.48c0-.53.35-.65.6-.65h1.4v-2.3h-2.35c-2.3 0-2.65 1.7-2.65 2.8V9.5h-2v2h2v7h3v-7h2.1l.24-2z"/></svg></div>Facebook</div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="https://twitter.com/intent/tweet/?text=%22Training%20a%20Network%20on%20Custom%20Dataset%20using%20PyTorch%20C%2b%2b%20API%22%20seems%20like%20an%20interesting%20read%20from%20%40rg0swami&amp;url=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2019%2f07%2ftraining-a-network-on-custom-dataset-using-pytorch-c-api%2f" target="_blank" rel="noopener" aria-label="Twitter">
+  <div class="resp-sharing-button resp-sharing-button--twitter resp-sharing-button--medium"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--circle">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.5 7.4l-2 .2c-.4-.5-1-.8-2-.8C13.3 6.8 12 8 12 9.4v.6c-2 0-4-1-5.4-2.7-.2.4-.3.8-.3 1.3 0 1 .4 1.7 1.2 2.2-.5 0-1 0-1.2-.3 0 1.3 1 2.3 2 2.6-.3.4-.7.4-1 0 .2 1.4 1.2 2 2.3 2-1 1-2.5 1.4-4 1 1.3 1 2.7 1.4 4.2 1.4 4.8 0 7.5-4 7.5-7.5v-.4c.5-.4.8-1.5 1.2-2z"/><circle cx="12" cy="12" r="11.5"/></svg></div>Twitter</div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="mailto:?subject=%22Training%20a%20Network%20on%20Custom%20Dataset%20using%20PyTorch%20C%2b%2b%20API%22%20seems%20interesting...&amp;body=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2019%2f07%2ftraining-a-network-on-custom-dataset-using-pytorch-c-api%2f" target="_self" rel="noopener" aria-label="E-Mail">
+  <div class="resp-sharing-button resp-sharing-button--email resp-sharing-button--medium"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--circle">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19.5 16c0 .8-.7 1.5-1.5 1.5H6c-.8 0-1.5-.7-1.5-1.5V8c0-.8.7-1.5 1.5-1.5h12c.8 0 1.5.7 1.5 1.5v8zm-2-7.5L12 13 6.5 8.5m11 6l-4-2.5m-7 2.5l4-2.5"/><circle cx="12" cy="12" r="11.5"/></svg></div>E-Mail</div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2019%2f07%2ftraining-a-network-on-custom-dataset-using-pytorch-c-api%2f&amp;title=%22Training%20a%20Network%20on%20Custom%20Dataset%20using%20PyTorch%20C%2b%2b%20API%22%20seems%20interesting...&amp;summary=%22Training%20a%20Network%20on%20Custom%20Dataset%20using%20PyTorch%20C%2b%2b%20API%22%20seems%20interesting...&amp;source=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2019%2f07%2ftraining-a-network-on-custom-dataset-using-pytorch-c-api%2f" target="_blank" rel="noopener" aria-label="LinkedIn">
+  <div class="resp-sharing-button resp-sharing-button--linkedin resp-sharing-button--medium"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--circle">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11.5"/><path d="M15 12.5c-.28 0-.5.22-.5.5v3.5h-3s.03-6.48 0-7h3v.83s.46-.75 1.7-.75c1.56 0 2.3 1.12 2.3 3.3v3.62h-3V13c0-.28-.23-.5-.5-.5zm-7.5-3h2v7h-2z"/><circle cx="8.5" cy="6.5" r="1"/></svg></div>LinkedIn</div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="https://reddit.com/submit/?url=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2019%2f07%2ftraining-a-network-on-custom-dataset-using-pytorch-c-api%2f&amp;resubmit=true&amp;title=%22Training%20a%20Network%20on%20Custom%20Dataset%20using%20PyTorch%20C%2b%2b%20API%22%20seems%20interesting..." target="_blank" rel="noopener" aria-label="Reddit">
+  <div class="resp-sharing-button resp-sharing-button--reddit resp-sharing-button--medium"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--circle">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11.5"/><ellipse cx="12" cy="14.37" rx="6.2" ry="4.24"/><path d="M14.3 16.25c-.62.36-1.42.57-2.3.57-.88 0-1.7-.2-2.32-.58"/><circle cx="14.61" cy="13.39" r=".98"/><circle cx="9.39" cy="13.39" r=".98"/><path d="M16.4 11.38c.26-.55.82-.92 1.47-.92.9 0 1.63.73 1.63 1.63 0 .8-.6 1.47-1.38 1.6"/><circle cx="17.22" cy="7.52" r="1.63"/><path d="M7.6 11.38c-.26-.54-.82-.92-1.47-.92-.9 0-1.63.73-1.63 1.63 0 .8.6 1.47 1.38 1.6M12 10.12s-.08-4.82 3.6-2.6"/></svg></div>Reddit</div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="whatsapp://send?text=%22Training%20a%20Network%20on%20Custom%20Dataset%20using%20PyTorch%20C%2b%2b%20API%22%20seems%20interesting...%20https%3a%2f%2fkrshrimali.github.io%2fposts%2f2019%2f07%2ftraining-a-network-on-custom-dataset-using-pytorch-c-api%2f" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <div class="resp-sharing-button resp-sharing-button--whatsapp resp-sharing-button--medium"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--circle">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle xmlns="http://www.w3.org/2000/svg" cx="12" cy="12" r="11.5"/><path stroke-width="1px" d="M17.6 6.2c-1.5-1.5-3.4-2.3-5.5-2.3-4.3 0-7.8 3.5-7.8 7.8 0 1.4.4 2.7 1 3.9l-1.1 4 4.1-1.1c1.1.6 2.4.9 3.7.9 4.3 0 7.8-3.5 7.8-7.8.1-2-.7-3.9-2.2-5.4zm-5.5 11.9c-1.2 0-2.3-.3-3.3-.9l-.2-.1-2.4.6.7-2.4-.2-.2c-.6-1-1-2.2-1-3.4 0-3.6 2.9-6.5 6.5-6.5 1.7 0 3.3.7 4.6 1.9 1.2 1.2 1.9 2.8 1.9 4.6-.1 3.5-3 6.4-6.6 6.4zm3.5-4.8c-.2-.1-1.1-.6-1.3-.6-.2-.1-.3-.1-.4.1-.1.2-.5.6-.6.8-.1.1-.2.1-.4 0s-.8-.3-1.6-1c-.6-.5-1-1.2-1.1-1.3-.1-.2 0-.3.1-.4l.3-.3s.1-.2.2-.3c.1-.1 0-.2 0-.3s-.4-1.1-.6-1.4c-.2-.4-.3-.3-.4-.3h-.4s-.3 0-.5.2-.7.7-.7 1.6c0 1 .7 1.9.8 2s1.4 2.1 3.3 2.9c.5.2.8.3 1.1.4.5.1.9.1 1.2.1.4-.1 1.1-.5 1.3-.9.2-.5.2-.8.1-.9 0-.2-.2-.3-.4-.4z"/></svg></div>WhatsApp</div>
+</a>
+</div>
+
+        
+            <div class="pagination">
+                <div class="pagination__title">
+                    <span class="pagination__title-h"></span>
+                    <hr />
+                </div>
+
+                <div class="pagination__buttons">
+                    
+                        <span class="button previous">
+                            <a href="https://krshrimali.github.io/posts/2019/07/classifying-dogs-vs-cats-using-pytorch-c-api-part-1/">
+                                <span class="button__icon">←</span>
+                                <span class="button__text">Classifying Dogs vs Cats using PyTorch C&#43;&#43; API: Part-1</span>
+                            </a>
+                        </span>
+                    
+
+                    
+                        <span class="button next">
+                            <a href="https://krshrimali.github.io/posts/2019/07/announcing-a-series-of-blogs-on-pytorch-c-api/">
+                                <span class="button__text">Announcing a series of blogs on PyTorch C&#43;&#43; API</span>
+                                <span class="button__icon">→</span>
+                            </a>
+                        </span>
+                    
+                </div>
+            </div>
+        
+
+        
+            <div class="webmention-form">
+                <form action="https://webmention.io/krshrimali.github.io/webmention" method="post">
+                    <label>Did you mention this article on your website? Put the URL of your post here:</label><br/>
+                    <input name="source" type="url"/>
+                    <input name="target" value="https://krshrimali.github.io/posts/2019/07/training-a-network-on-custom-dataset-using-pytorch-c-api/" type="hidden"/>
+                    <input value="Send Webmention" type="submit"/>
+                </form>
+            </div>
+            <div id="webmention-container"></div>
+        
+
+        
+    </main>
+
+            
+                <footer class="footer">
+    <p>
+        &copy; 2021
+            
+                <span><a href="https://krshrimali.github.io">Kushashwa Ravi Shrimali</a></span>
+                
+                 <a href="https://krshrimali.github.io/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
+                <br>
+            <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a>
+                Powered by <a href="http://gohugo.io"><u>Hugo</u></a> and <a href="https://github.com/HaoZeke/hugo-theme-hello-friend-ng-hz"><u>this theme</u></a>.</br>
+                
+                
+                <script src="https://liberapay.com/rohit/widgets/button.js"></script>
+<noscript><a href="https://liberapay.com/rohit/donate"><img alt="Donate using Liberapay" src="https://liberapay.com/assets/widgets/donate.svg"></a></noscript>
+
+                
+    </p>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+
+
+<script src="https://krshrimali.github.io/bundle.min.5fae9992ea406007408dc33b0b3a8376d61e2f1d6ac50ba1dad7580ac50afb5199bcef3bbc3677e77553a9980bf882cf71edc2f755687dd7725f12ece4304ac2.js"></script>
+<script src="https://krshrimali.github.io/js/webmention.min.513a53d009530b21cba09721b6f4dc912e9c20ad2c0adbb5c4e486c4f77774a6e9eca8c2e1e4e8bc9e9e86693aa5ca91e7bf232b50f7f8bee4e64efc874040a7.js" data-id="webmention-container"></script>
+
+
+
+
+    </body>
+</html>

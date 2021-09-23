@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="map[name:Kushashwa Ravi Shrimali]">
+<meta name="description" content="Transfer Learning &amp;ndash; Before we go ahead and discuss the Why question of Transfer Learning, let&amp;rsquo;s have a look at What is Transfer Learning? Let&amp;rsquo;s have a look at the Notesfrom CS231n on Transfer Learning:
+" />
+<meta name="keywords" content="" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="#252627" />
+<link rel="canonical" href="https://krshrimali.github.io/posts/2019/08/applying-transfer-learning-on-dogs-vs-cats-dataset-resnet18-using-pytorch-c-api/" />
+
+
+<title>
+    
+    Applying Transfer Learning on Dogs vs Cats Dataset (ResNet18) using PyTorch C&#43;&#43; API :: Kushashwa Ravi Shrimali (Kush)  — Hello Friend NG HZ Theme
+    
+</title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+      type="text/css">
+
+
+
+<link rel="stylesheet" href="https://krshrimali.github.io/main.min.b6dbce0fdf6c61563a0c2226e857d5dadd8e5afa2c4f73ec9ea55abd831f9a72.css">
+
+
+
+
+
+    <link rel="webmention" href="https://webmention.io/example.com/webmention" />
+    <link rel="pingback" href="https://webmention.io/example.com/xmlrpc" />
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="https://krshrimali.github.io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://krshrimali.github.io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://krshrimali.github.io/favicon-16x16.png">
+    <link rel="manifest" href="https://krshrimali.github.io/site.webmanifest">
+    <link rel="mask-icon" href="https://krshrimali.github.io/safari-pinned-tab.svg" color="#252627">
+    <link rel="shortcut icon" href="https://krshrimali.github.io/favicon.ico">
+    <meta name="msapplication-TileColor" content="#252627">
+    <meta name="theme-color" content="#252627">
+
+<meta itemprop="name" content="Applying Transfer Learning on Dogs vs Cats Dataset (ResNet18) using PyTorch C&#43;&#43; API">
+<meta itemprop="description" content="Transfer Learning
+&ndash;
+Before we go ahead and discuss the Why question of Transfer Learning, let&rsquo;s have a look at What is Transfer Learning? Let&rsquo;s have a look at the Notes from CS231n on Transfer Learning:"><meta itemprop="datePublished" content="2019-08-16T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2019-08-16T00:00:00+00:00" />
+<meta itemprop="wordCount" content="1525"><meta itemprop="image" content="https://krshrimali.github.io"/>
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://krshrimali.github.io"/>
+
+<meta name="twitter:title" content="Applying Transfer Learning on Dogs vs Cats Dataset (ResNet18) using PyTorch C&#43;&#43; API"/>
+<meta name="twitter:description" content="Transfer Learning
+&ndash;
+Before we go ahead and discuss the Why question of Transfer Learning, let&rsquo;s have a look at What is Transfer Learning? Let&rsquo;s have a look at the Notes from CS231n on Transfer Learning:"/>
+
+
+
+
+
+    <meta property="article:published_time" content="2019-08-16 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+    </head>
+
+    <body class="dark-theme">
+        <div class="container">
+            <header class="header">
+    <div class="header__inner">
+        <div class="header__left">
+        <div class="logo">
+<a href="https://krshrimali.github.io/" style="text-decoration: none;">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">$ cd /home/</span>
+            <span class="logo__cursor" style=
+                  "
+                   
+                   ">
+            </span>
+        
+</a>
+</div>
+
+        </div>
+
+        
+        <div class="header__mid">
+        <button class="button">
+            <div class="button__text">
+        <a href="https://krshrimali.github.io/search" >
+                Search
+        </a>
+            </div>
+        </button>
+        </div>
+       
+
+        <div class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="https://krshrimali.github.io/about">About</a></li><li><a href="https://krshrimali.github.io/posts">Blog</a></li>
+    </ul>
+    <ul class="menu__inner"><li><a href="https://krshrimali.github.io/categories">Categories</a></li><li><a href="https://krshrimali.github.io/tags">Tags</a></li>
+    </ul>
+</nav>
+
+            <button id="toggleMenu">
+                <div class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </div>
+             </button>
+            
+
+            <button class="theme-toggle" id="toggleTheme"><svg class="theme-toggler" width="32" height="32" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+</button>
+        </div>
+    </div>
+</header>
+
+            
+<script src="https://krshrimali.github.io/js/mathjax-config.js"></script>
+
+
+<script id="MathJax-script" async src="https://unpkg.com/mathjax@3/es5/tex-chtml.js"></script>
+
+            
+    <main class="post">
+
+        <div class="post-info">
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>8 minutes
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>Written: 2019-08-16 00:00 &#43;0000</p>
+
+            
+
+            </p>
+        </div>
+
+        <article class="h-entry">
+            <h1 class="post-title p-name">
+                <a class="u-url" href="https://krshrimali.github.io/posts/2019/08/applying-transfer-learning-on-dogs-vs-cats-dataset-resnet18-using-pytorch-c-api/">Applying Transfer Learning on Dogs vs Cats Dataset (ResNet18) using PyTorch C++ API</a>
+            </h1>
+        <div class="post-info"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-pen-tool"><path d="M12 19l7-7 3 3-7 7-3-3z"></path><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path><path d="M2 2l7.586 7.586"></path><circle cx="11" cy="11" r="2"></circle></svg>
+                         <span class="author u-author p-author"><a href="https://krshrimali.github.io/author/kushashwa-ravi-shrimali">Kushashwa Ravi Shrimali</a></span>
+        </div>
+
+            
+
+            <div class="post-content e-content">
+                <h2 id="transfer-learning">Transfer Learning</h2>
+<p>&ndash;
+Before we go ahead and discuss the <strong>Why</strong> question of Transfer Learning, let&rsquo;s have a look at <strong>What is Transfer Learning?</strong> Let&rsquo;s have a look at the <!-- raw HTML omitted -->Notes<!-- raw HTML omitted --> from CS231n on Transfer Learning:</p>
+<blockquote>
+<p>In practice, very few people train an entire Convolutional Network from scratch (with random initialization), because it is relatively rare to have a dataset of sufficient size. Instead, it is common to pretrain a ConvNet on a very large dataset (e.g. ImageNet, which contains 1.2 million images with 1000 categories), and then use the ConvNet either as an initialization or a fixed feature extractor for the task of interest.</p>
+</blockquote>
+<!-- raw HTML omitted -->
+<p>There are 3 scenarios possible:</p>
+<ol>
+<li>When the data you have is similar (but not enough) to data trained on pre-trained model: Take an example of a pre-trained model trained on ImageNet dataset (containing 1000 classes). And the data we have has Dogs and Cats classes. Fortunate enough, ImageNet has some of the classes of Dog and Cat breeds and thus the model must have learned important features from the data. Let&rsquo;s say we don&rsquo;t have enough data but since the data is similar to the breeds in the ImageNet data set, we can simply use the ConvNet (except the last FC layer) to extract features from our dataset and train only the last Linear (FC) layer.</li>
+<li>When you have enough data (and is similar to the data trained with pre-trained model): Then you might go for fine tuning the weights of all the layers in the network. This is largely due to the reason that we know we won&rsquo;t overfit because we have enough data.</li>
+<li>Using pre-trained models might just be enough if you have the data which matches the classes in the original data set.</li>
+</ol>
+<p>Transfer Learning came into existence (the answer of <strong>Why Transfer Learning?</strong>) because of some major reasons, which include:</p>
+<ol>
+<li>Lack of resources or data set to train a CNN. At times, we either don&rsquo;t have enough data or we don&rsquo;t have enough resources to train a CNN from scratch.</li>
+<li>Random Initialization of weights vs Initialization of weights from the pre-trained model. Sometimes, it&rsquo;s just better to initialize weights from the pre-trained model (as it must have learned the generic features from it&rsquo;s data set) instead of randomly initializing the weights.</li>
+</ol>
+<h2 id="setting-up-the-data-with-pytorch-c-api">Setting up the data with PyTorch C++ API</h2>
+<p>At every stage, we will compare the Python and C++ codes to do the same thing, to make the analogy easier and understandable. Starting with setting up the data we have. Note that we do have enough data and it is also similar to the original data set of ImageNet, but since I don&rsquo;t have enough resources to fine tune through the whole network, we perform Transfer Learning on the final FC layer only.</p>
+<p>Starting with loading the dataset, as discussed in the blogs before, I&rsquo;ll just post a flow chart of procedure.</p>
+<!-- raw HTML omitted -->
+<p>Once done, we can initialize the <code>CustomDataset</code> class:</p>
+<p><strong>C++</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// List of images of Dogs and Cats, use load_data_from_folder function explained in previous blogs
+</span><span style="color:#75715e"></span>std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span>std<span style="color:#f92672">::</span>string<span style="color:#f92672">&gt;</span> list_images; 
+<span style="color:#75715e">// List of labels of the images
+</span><span style="color:#75715e"></span>std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> list_labels; 
+<span style="color:#66d9ef">auto</span> custom_dataset <span style="color:#f92672">=</span> CustomDataset(list_images, list_labels).map(torch<span style="color:#f92672">::</span>data<span style="color:#f92672">::</span>transforms<span style="color:#f92672">::</span>Stack<span style="color:#f92672">&lt;&gt;</span>());
+</code></pre></div><p><strong>Python</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> torchvision <span style="color:#f92672">import</span> datasets, transforms
+<span style="color:#f92672">import</span> torch
+
+folder_path <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;/Users/krshrimali/Documents/dataset/train/&#34;</span>
+transform <span style="color:#f92672">=</span> transforms<span style="color:#f92672">.</span>Compose([transforms<span style="color:#f92672">.</span>CenterCrop(<span style="color:#ae81ff">224</span>), transforms<span style="color:#f92672">.</span>ToTensor())
+data <span style="color:#f92672">=</span> datasets<span style="color:#f92672">.</span>ImageFolder(root <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(folder_path), transform <span style="color:#f92672">=</span> transform)
+</code></pre></div><p>We then use <code>RandomSampler</code> to make our data loader: (Note: it&rsquo;s important to use <code>RandomSampler</code> as we load the images sequentially and we want mixture of images in each batch of data passed to the network in an epoch)</p>
+<p><strong>C++</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">int</span> batch_size <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>;
+<span style="color:#66d9ef">auto</span> data_loader <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>data<span style="color:#f92672">::</span>make_data_loader<span style="color:#f92672">&lt;</span>torch<span style="color:#f92672">::</span>data<span style="color:#f92672">::</span>samplers<span style="color:#f92672">::</span>RandomSampler<span style="color:#f92672">&gt;</span>(std<span style="color:#f92672">::</span>move(custom_dataset), batch_size);
+</code></pre></div><p><strong>Python</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">batch_size <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>
+data_loader <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>utils<span style="color:#f92672">.</span>data<span style="color:#f92672">.</span>DataLoader(dataset<span style="color:#f92672">=</span>data, batch_size <span style="color:#f92672">=</span> batch_size, shuffle <span style="color:#f92672">=</span> <span style="color:#66d9ef">True</span>)
+</code></pre></div><h2 id="loading-the-pre-trained-model">Loading the pre-trained model</h2>
+<p>The steps to load the pre-trained model and perform Transfer Learning are listed below:</p>
+<ol>
+<li>Download the pre-trained model of <strong>ResNet18</strong>.</li>
+<li>Load pre-trained model.</li>
+<li>Change output features of the final FC layer of the model loaded. (Number of classes would change from 1000 - ImageNet to 2 - Dogs vs Cats).</li>
+<li>Define optimizer on parameters from the final FC layer to be trained.</li>
+<li>Train the FC layer on Dogs vs Cats dataset.</li>
+<li>Save the model.</li>
+</ol>
+<p>Let&rsquo;s go step by step.</p>
+<h3 id="step-1-download-the-pre-trained-model-of-resnet18">Step-1: Download the pre-trained model of ResNet18</h3>
+<p>Thanks to the developers, we do have C++ models available in torchvision
+(<a href="https://github.com/pytorch/vision/pull/728">https://github.com/pytorch/vision/pull/728</a>) but for this tutorial, transferring the pre- trained model from Python to C++ using torch.jit is a good idea, as most PyTorch models in the wild are written in Python right now, and people can use this tutorial to learn how to trace their Python model and transfer it to C++.</p>
+<p>First we download the pre-trained model and save it in the form of <code>torch.jit.trace</code> format to our local drive.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Reference: #TODO- Add Link</span>
+<span style="color:#f92672">from</span> torchvision <span style="color:#f92672">import</span> models
+<span style="color:#75715e"># Download and load the pre-trained model</span>
+model <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>resnet18(pretrained<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+
+<span style="color:#75715e"># Set upgrading the gradients to False</span>
+<span style="color:#66d9ef">for</span> param <span style="color:#f92672">in</span> model<span style="color:#f92672">.</span>parameters():
+	param<span style="color:#f92672">.</span>requires_grad <span style="color:#f92672">=</span> <span style="color:#66d9ef">False</span>
+
+<span style="color:#75715e"># Save the model except the final FC Layer</span>
+resnet18 <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>nn<span style="color:#f92672">.</span>Sequential(<span style="color:#f92672">*</span>list(resnet18<span style="color:#f92672">.</span>children())[:<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>])
+
+example_input <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>rand(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">224</span>, <span style="color:#ae81ff">224</span>)
+script_module <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>jit<span style="color:#f92672">.</span>trace(resnet18, example_input)
+script_module<span style="color:#f92672">.</span>save(<span style="color:#e6db74">&#39;resnet18_without_last_layer.pt&#39;</span>)
+</code></pre></div><p>We will be using <code>resnet18_without_last_layer.pt</code> model file as our pre-trained model for transfer learning.</p>
+<h3 id="step-2-load-the-pre-trained-model">Step-2: Load the pre-trained model</h3>
+<p>Let&rsquo;s go ahead and load the pre-trained model using <code>torch::jit</code> module. Note that the reason we have converted <code>torch.nn.Module</code> to <code>torch.jit.ScriptModule</code> type, is because C++ API currently does not support loading Python <code>torch.nn.Module</code> models directly.</p>
+<p><strong>C++</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">torch<span style="color:#f92672">::</span>jit<span style="color:#f92672">::</span>script<span style="color:#f92672">::</span>Module module;
+<span style="color:#75715e">// argv[1] should be the path to the model
+</span><span style="color:#75715e"></span>module <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>jit<span style="color:#f92672">::</span>load(argv[<span style="color:#ae81ff">1</span>]); 
+
+<span style="color:#75715e">/* We need to convert last layer input and output features from (512, 1000) to (512, 2) since we only have 2 classes */</span>
+torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Linear linear_layer(<span style="color:#ae81ff">512</span>, <span style="color:#ae81ff">2</span>);
+
+<span style="color:#75715e">// Define the optimizer on parameters of linear_layer with learning_rate = 1e-3
+</span><span style="color:#75715e"></span>torch<span style="color:#f92672">::</span>optim<span style="color:#f92672">::</span>Adam optimizer(linear_layer<span style="color:#f92672">-&gt;</span>parameters(), torch<span style="color:#f92672">::</span>optim<span style="color:#f92672">::</span>AdamOptions(<span style="color:#ae81ff">1e-3</span>))
+</code></pre></div><p><strong>Python</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># We will directly load the torch.nn pre-trained model</span>
+model <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>resnet18(pretrained <span style="color:#f92672">=</span> <span style="color:#66d9ef">True</span>)
+
+<span style="color:#66d9ef">for</span> param <span style="color:#f92672">in</span> model<span style="color:#f92672">.</span>parameters():
+    param<span style="color:#f92672">.</span>requires_grad <span style="color:#f92672">=</span> <span style="color:#66d9ef">False</span>
+
+model<span style="color:#f92672">.</span>fc <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>nn<span style="color:#f92672">.</span>Linear(<span style="color:#ae81ff">512</span>, <span style="color:#ae81ff">2</span>)
+<span style="color:#66d9ef">for</span> param <span style="color:#f92672">in</span> model<span style="color:#f92672">.</span>fc<span style="color:#f92672">.</span>parameters():
+	param<span style="color:#f92672">.</span>requires_grad <span style="color:#f92672">=</span> <span style="color:#66d9ef">True</span>
+
+optimizer <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>optim<span style="color:#f92672">.</span>Adam(model<span style="color:#f92672">.</span>fc<span style="color:#f92672">.</span>parameters())
+cost <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>nn<span style="color:#f92672">.</span>CrossEntropyLoss()
+</code></pre></div><h2 id="trainining-the-fc-layer">Trainining the FC Layer</h2>
+<p>Let&rsquo;s first have a look at ResNet18 Network Architecture</p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --><a href="https://www.researchgate.net/figure/ResNet-18-Architecture_tbl1_322476121">https://www.researchgate.net/figure/ResNet-18-Architecture_tbl1_322476121</a><!-- raw HTML omitted --></p>
+<p>The final step is to train the Fully Connected layer that we inserted at the end of the network (<code>linear_layer</code>). This one should be pretty straight forward, let&rsquo;s see how to do it.</p>
+<p><strong>C++</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">train</span>(torch<span style="color:#f92672">::</span>jit<span style="color:#f92672">::</span>script<span style="color:#f92672">::</span>Module net, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Linear lin, Dataloader<span style="color:#f92672">&amp;</span> data_loader, torch<span style="color:#f92672">::</span>optim<span style="color:#f92672">::</span>Optimizer<span style="color:#f92672">&amp;</span> optimizer, size_t dataset_size) {
+    <span style="color:#75715e">/*
+</span><span style="color:#75715e">     This function trains the network on our data loader using optimizer for given number of epochs.
+</span><span style="color:#75715e">     
+</span><span style="color:#75715e">     Parameters
+</span><span style="color:#75715e">     ==================
+</span><span style="color:#75715e">     torch::jit::script::Module net: Pre-trained model
+</span><span style="color:#75715e">     torch::nn::Linear lin: Linear layer
+</span><span style="color:#75715e">     DataLoader&amp; data_loader: Training data loader
+</span><span style="color:#75715e">     torch::optim::Optimizer&amp; optimizer: Optimizer like Adam, SGD etc.
+</span><span style="color:#75715e">     size_t dataset_size: Size of training dataset
+</span><span style="color:#75715e">     */</span>
+    
+    <span style="color:#66d9ef">float</span> batch_index <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+    
+    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>; i<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">15</span>; i<span style="color:#f92672">++</span>) {
+        <span style="color:#66d9ef">float</span> mse <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+        <span style="color:#66d9ef">float</span> Acc <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0</span>;
+        
+        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span><span style="color:#f92672">&amp;</span> batch: <span style="color:#f92672">*</span>data_loader) {
+            <span style="color:#66d9ef">auto</span> data <span style="color:#f92672">=</span> batch.data;
+            <span style="color:#66d9ef">auto</span> target <span style="color:#f92672">=</span> batch.target.squeeze();
+            
+            <span style="color:#75715e">// Should be of length: batch_size
+</span><span style="color:#75715e"></span>            data <span style="color:#f92672">=</span> data.to(torch<span style="color:#f92672">::</span>kF32);
+            target <span style="color:#f92672">=</span> target.to(torch<span style="color:#f92672">::</span>kInt64);
+            
+            std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span>torch<span style="color:#f92672">::</span>jit<span style="color:#f92672">::</span>IValue<span style="color:#f92672">&gt;</span> input;
+            input.push_back(data);
+            optimizer.zero_grad();
+
+            <span style="color:#66d9ef">auto</span> output <span style="color:#f92672">=</span> net.forward(input).toTensor();
+            <span style="color:#75715e">// For transfer learning
+</span><span style="color:#75715e"></span>            output <span style="color:#f92672">=</span> output.view({output.size(<span style="color:#ae81ff">0</span>), <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>});
+
+            output <span style="color:#f92672">=</span> lin(output);
+            <span style="color:#75715e">// Explicitly calculate torch::log_softmax of output from the FC Layer
+</span><span style="color:#75715e"></span>            <span style="color:#66d9ef">auto</span> loss <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>nll_loss(torch<span style="color:#f92672">::</span>log_softmax(output, <span style="color:#ae81ff">1</span>), target);
+           	
+            loss.backward();
+            optimizer.step();
+            
+            <span style="color:#66d9ef">auto</span> acc <span style="color:#f92672">=</span> output.argmax(<span style="color:#ae81ff">1</span>).eq(target).sum();
+
+            Acc <span style="color:#f92672">+=</span> acc.<span style="color:#66d9ef">template</span> item<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">float</span><span style="color:#f92672">&gt;</span>();
+            mse <span style="color:#f92672">+=</span> loss.<span style="color:#66d9ef">template</span> item<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">float</span><span style="color:#f92672">&gt;</span>();
+            
+            batch_index <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>;
+        }
+        
+        mse <span style="color:#f92672">=</span> mse<span style="color:#f92672">/</span><span style="color:#66d9ef">float</span>(batch_index); <span style="color:#75715e">// Take mean of loss
+</span><span style="color:#75715e"></span>        std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Epoch: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> i  <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;, &#34;</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Accuracy: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> Acc<span style="color:#f92672">/</span>dataset_size <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;, &#34;</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;MSE: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> mse <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+        net.save(<span style="color:#e6db74">&#34;model.pt&#34;</span>);
+    }
+}
+</code></pre></div><p><strong>Python</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">n_epochs <span style="color:#f92672">=</span> <span style="color:#ae81ff">15</span>
+
+<span style="color:#66d9ef">for</span> epoch <span style="color:#f92672">in</span> range(n_epochs):
+    mse <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0</span>
+    acc <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+    batch_index <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+
+    <span style="color:#66d9ef">for</span> data_batch <span style="color:#f92672">in</span> data_loader:
+        batch_index <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+        image, label <span style="color:#f92672">=</span> data_batch
+        
+        optimizer<span style="color:#f92672">.</span>zero_grad()
+
+        output <span style="color:#f92672">=</span> model(image)
+        _, predicted_label <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>max(output<span style="color:#f92672">.</span>data, <span style="color:#ae81ff">1</span>)
+        
+        loss <span style="color:#f92672">=</span> cost(output, label)
+        
+        loss<span style="color:#f92672">.</span>backward()
+        optimizer<span style="color:#f92672">.</span>step()
+
+        mse <span style="color:#f92672">+=</span> loss<span style="color:#f92672">.</span>item() <span style="color:#75715e"># data[0]</span>
+        acc <span style="color:#f92672">+=</span> torch<span style="color:#f92672">.</span>sum(predicted_label <span style="color:#f92672">==</span> label<span style="color:#f92672">.</span>data)
+    
+    mse <span style="color:#f92672">=</span> mse<span style="color:#f92672">/</span>len(data)
+    acc <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span><span style="color:#f92672">*</span>acc<span style="color:#f92672">/</span>len(data)
+    
+    print(<span style="color:#e6db74">&#34;Epoch: </span><span style="color:#e6db74">{}</span><span style="color:#e6db74">/</span><span style="color:#e6db74">{}</span><span style="color:#e6db74">, Loss: </span><span style="color:#e6db74">{:.4f}</span><span style="color:#e6db74">, Accuracy: </span><span style="color:#e6db74">{:.4f}</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">.</span>format(epoch<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>, n_epochs, mse, acc))
+</code></pre></div><p>The code to test should also not change much except the need of optimizer.</p>
+<h2 id="results">Results</h2>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted -->Results using PyTorch C++ API<!-- raw HTML omitted -->
+<!-- raw HTML omitted --><!-- raw HTML omitted -->Results using PyTorch in Python<!-- raw HTML omitted --></p>
+<p>On a set of 400 images for training data, the maximum training Accuracy I could achieve was 91.25% in just less than 15 epochs using PyTorch C++ API and 89.0% using Python. (Note that this doesn&rsquo;t conclude superiority in terms of accuracy between any of the two backends - C++ or Python)</p>
+<p>Let&rsquo;s have a look at correct and wrong predictions.</p>
+<p><strong>Correct Predictions - Dogs</strong>
+<!-- raw HTML omitted --></p>
+<p><strong>Wrong Predictions - Dogs</strong>
+<!-- raw HTML omitted --></p>
+<p><strong>Correct Predictions - Cats</strong>
+<!-- raw HTML omitted --></p>
+<p><strong>Wrong Predictions - Cats</strong>
+<!-- raw HTML omitted --></p>
+<h2 id="acknowledgements">Acknowledgements</h2>
+<p>I would like to thank a few people to help me bring this out to the community. Thanks to <a href="https://github.com/ptrblck">Piotr</a> for his comments and answers in the PyTorch Discussion forum. Thanks to <a href="https://github.com/yf225">Will Feng</a> for reviewing the blog and the code and also his constant motivation to bring this out to you all. Would like to thank my constant motivation behind all my work, <a href="https://github.com/vishwesh5">Vishwesh Ravi Shrimali</a> for all his help to start with PyTorch C++ API and help the community. Special thanks to <a href="https://github.com/krutikabapat">Krutika Bapat</a> as well, for reviewing the Python equivalent code and suggesting modifications.</p>
+<p>And shout out to all the readers, please share your feedback with me in the comments below. I would love to hear if this blog helped you!</p>
+<p>In the upcoming blog, I&rsquo;ll be sharing something very exciting. Till then, happy learning!</p>
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>1525 Words</p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>Posted: <time class="dt-published"> 2019-08-16 05:30 &#43;0530</time></p>
+<a class="resp-sharing-button__link" href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2019%2f08%2fapplying-transfer-learning-on-dogs-vs-cats-dataset-resnet18-using-pytorch-c-api%2f" target="_blank" rel="noopener" aria-label="Facebook">
+  <div class="resp-sharing-button resp-sharing-button--facebook resp-sharing-button--medium"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--circle">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11.5"/><path d="M15.84 9.5H13.5V8.48c0-.53.35-.65.6-.65h1.4v-2.3h-2.35c-2.3 0-2.65 1.7-2.65 2.8V9.5h-2v2h2v7h3v-7h2.1l.24-2z"/></svg></div>Facebook</div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="https://twitter.com/intent/tweet/?text=%22Applying%20Transfer%20Learning%20on%20Dogs%20vs%20Cats%20Dataset%20%28ResNet18%29%20using%20PyTorch%20C%2b%2b%20API%22%20seems%20like%20an%20interesting%20read%20from%20%40rg0swami&amp;url=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2019%2f08%2fapplying-transfer-learning-on-dogs-vs-cats-dataset-resnet18-using-pytorch-c-api%2f" target="_blank" rel="noopener" aria-label="Twitter">
+  <div class="resp-sharing-button resp-sharing-button--twitter resp-sharing-button--medium"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--circle">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.5 7.4l-2 .2c-.4-.5-1-.8-2-.8C13.3 6.8 12 8 12 9.4v.6c-2 0-4-1-5.4-2.7-.2.4-.3.8-.3 1.3 0 1 .4 1.7 1.2 2.2-.5 0-1 0-1.2-.3 0 1.3 1 2.3 2 2.6-.3.4-.7.4-1 0 .2 1.4 1.2 2 2.3 2-1 1-2.5 1.4-4 1 1.3 1 2.7 1.4 4.2 1.4 4.8 0 7.5-4 7.5-7.5v-.4c.5-.4.8-1.5 1.2-2z"/><circle cx="12" cy="12" r="11.5"/></svg></div>Twitter</div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="mailto:?subject=%22Applying%20Transfer%20Learning%20on%20Dogs%20vs%20Cats%20Dataset%20%28ResNet18%29%20using%20PyTorch%20C%2b%2b%20API%22%20seems%20interesting...&amp;body=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2019%2f08%2fapplying-transfer-learning-on-dogs-vs-cats-dataset-resnet18-using-pytorch-c-api%2f" target="_self" rel="noopener" aria-label="E-Mail">
+  <div class="resp-sharing-button resp-sharing-button--email resp-sharing-button--medium"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--circle">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19.5 16c0 .8-.7 1.5-1.5 1.5H6c-.8 0-1.5-.7-1.5-1.5V8c0-.8.7-1.5 1.5-1.5h12c.8 0 1.5.7 1.5 1.5v8zm-2-7.5L12 13 6.5 8.5m11 6l-4-2.5m-7 2.5l4-2.5"/><circle cx="12" cy="12" r="11.5"/></svg></div>E-Mail</div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2019%2f08%2fapplying-transfer-learning-on-dogs-vs-cats-dataset-resnet18-using-pytorch-c-api%2f&amp;title=%22Applying%20Transfer%20Learning%20on%20Dogs%20vs%20Cats%20Dataset%20%28ResNet18%29%20using%20PyTorch%20C%2b%2b%20API%22%20seems%20interesting...&amp;summary=%22Applying%20Transfer%20Learning%20on%20Dogs%20vs%20Cats%20Dataset%20%28ResNet18%29%20using%20PyTorch%20C%2b%2b%20API%22%20seems%20interesting...&amp;source=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2019%2f08%2fapplying-transfer-learning-on-dogs-vs-cats-dataset-resnet18-using-pytorch-c-api%2f" target="_blank" rel="noopener" aria-label="LinkedIn">
+  <div class="resp-sharing-button resp-sharing-button--linkedin resp-sharing-button--medium"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--circle">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11.5"/><path d="M15 12.5c-.28 0-.5.22-.5.5v3.5h-3s.03-6.48 0-7h3v.83s.46-.75 1.7-.75c1.56 0 2.3 1.12 2.3 3.3v3.62h-3V13c0-.28-.23-.5-.5-.5zm-7.5-3h2v7h-2z"/><circle cx="8.5" cy="6.5" r="1"/></svg></div>LinkedIn</div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="https://reddit.com/submit/?url=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2019%2f08%2fapplying-transfer-learning-on-dogs-vs-cats-dataset-resnet18-using-pytorch-c-api%2f&amp;resubmit=true&amp;title=%22Applying%20Transfer%20Learning%20on%20Dogs%20vs%20Cats%20Dataset%20%28ResNet18%29%20using%20PyTorch%20C%2b%2b%20API%22%20seems%20interesting..." target="_blank" rel="noopener" aria-label="Reddit">
+  <div class="resp-sharing-button resp-sharing-button--reddit resp-sharing-button--medium"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--circle">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11.5"/><ellipse cx="12" cy="14.37" rx="6.2" ry="4.24"/><path d="M14.3 16.25c-.62.36-1.42.57-2.3.57-.88 0-1.7-.2-2.32-.58"/><circle cx="14.61" cy="13.39" r=".98"/><circle cx="9.39" cy="13.39" r=".98"/><path d="M16.4 11.38c.26-.55.82-.92 1.47-.92.9 0 1.63.73 1.63 1.63 0 .8-.6 1.47-1.38 1.6"/><circle cx="17.22" cy="7.52" r="1.63"/><path d="M7.6 11.38c-.26-.54-.82-.92-1.47-.92-.9 0-1.63.73-1.63 1.63 0 .8.6 1.47 1.38 1.6M12 10.12s-.08-4.82 3.6-2.6"/></svg></div>Reddit</div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="whatsapp://send?text=%22Applying%20Transfer%20Learning%20on%20Dogs%20vs%20Cats%20Dataset%20%28ResNet18%29%20using%20PyTorch%20C%2b%2b%20API%22%20seems%20interesting...%20https%3a%2f%2fkrshrimali.github.io%2fposts%2f2019%2f08%2fapplying-transfer-learning-on-dogs-vs-cats-dataset-resnet18-using-pytorch-c-api%2f" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <div class="resp-sharing-button resp-sharing-button--whatsapp resp-sharing-button--medium"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--circle">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle xmlns="http://www.w3.org/2000/svg" cx="12" cy="12" r="11.5"/><path stroke-width="1px" d="M17.6 6.2c-1.5-1.5-3.4-2.3-5.5-2.3-4.3 0-7.8 3.5-7.8 7.8 0 1.4.4 2.7 1 3.9l-1.1 4 4.1-1.1c1.1.6 2.4.9 3.7.9 4.3 0 7.8-3.5 7.8-7.8.1-2-.7-3.9-2.2-5.4zm-5.5 11.9c-1.2 0-2.3-.3-3.3-.9l-.2-.1-2.4.6.7-2.4-.2-.2c-.6-1-1-2.2-1-3.4 0-3.6 2.9-6.5 6.5-6.5 1.7 0 3.3.7 4.6 1.9 1.2 1.2 1.9 2.8 1.9 4.6-.1 3.5-3 6.4-6.6 6.4zm3.5-4.8c-.2-.1-1.1-.6-1.3-.6-.2-.1-.3-.1-.4.1-.1.2-.5.6-.6.8-.1.1-.2.1-.4 0s-.8-.3-1.6-1c-.6-.5-1-1.2-1.1-1.3-.1-.2 0-.3.1-.4l.3-.3s.1-.2.2-.3c.1-.1 0-.2 0-.3s-.4-1.1-.6-1.4c-.2-.4-.3-.3-.4-.3h-.4s-.3 0-.5.2-.7.7-.7 1.6c0 1 .7 1.9.8 2s1.4 2.1 3.3 2.9c.5.2.8.3 1.1.4.5.1.9.1 1.2.1.4-.1 1.1-.5 1.3-.9.2-.5.2-.8.1-.9 0-.2-.2-.3-.4-.4z"/></svg></div>WhatsApp</div>
+</a>
+</div>
+
+        
+            <div class="pagination">
+                <div class="pagination__title">
+                    <span class="pagination__title-h"></span>
+                    <hr />
+                </div>
+
+                <div class="pagination__buttons">
+                    
+                        <span class="button previous">
+                            <a href="https://krshrimali.github.io/posts/2019/08/setting-up-jupyter-notebook-xeus-cling-for-libtorch-and-opencv-libraries/">
+                                <span class="button__icon">←</span>
+                                <span class="button__text">Setting up Jupyter Notebook (Xeus Cling) for Libtorch and OpenCV Libraries</span>
+                            </a>
+                        </span>
+                    
+
+                    
+                        <span class="button next">
+                            <a href="https://krshrimali.github.io/posts/2019/07/classifying-dogs-vs-cats-using-pytorch-c-part-2/">
+                                <span class="button__text">Classifying Dogs vs Cats using PyTorch C&#43;&#43;: Part 2</span>
+                                <span class="button__icon">→</span>
+                            </a>
+                        </span>
+                    
+                </div>
+            </div>
+        
+
+        
+            <div class="webmention-form">
+                <form action="https://webmention.io/krshrimali.github.io/webmention" method="post">
+                    <label>Did you mention this article on your website? Put the URL of your post here:</label><br/>
+                    <input name="source" type="url"/>
+                    <input name="target" value="https://krshrimali.github.io/posts/2019/08/applying-transfer-learning-on-dogs-vs-cats-dataset-resnet18-using-pytorch-c-api/" type="hidden"/>
+                    <input value="Send Webmention" type="submit"/>
+                </form>
+            </div>
+            <div id="webmention-container"></div>
+        
+
+        
+    </main>
+
+            
+                <footer class="footer">
+    <p>
+        &copy; 2021
+            
+                <span><a href="https://krshrimali.github.io">Kushashwa Ravi Shrimali</a></span>
+                
+                 <a href="https://krshrimali.github.io/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
+                <br>
+            <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a>
+                Powered by <a href="http://gohugo.io"><u>Hugo</u></a> and <a href="https://github.com/HaoZeke/hugo-theme-hello-friend-ng-hz"><u>this theme</u></a>.</br>
+                
+                
+                <script src="https://liberapay.com/rohit/widgets/button.js"></script>
+<noscript><a href="https://liberapay.com/rohit/donate"><img alt="Donate using Liberapay" src="https://liberapay.com/assets/widgets/donate.svg"></a></noscript>
+
+                
+    </p>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+
+
+<script src="https://krshrimali.github.io/bundle.min.5fae9992ea406007408dc33b0b3a8376d61e2f1d6ac50ba1dad7580ac50afb5199bcef3bbc3677e77553a9980bf882cf71edc2f755687dd7725f12ece4304ac2.js"></script>
+<script src="https://krshrimali.github.io/js/webmention.min.513a53d009530b21cba09721b6f4dc912e9c20ad2c0adbb5c4e486c4f77774a6e9eca8c2e1e4e8bc9e9e86693aa5ca91e7bf232b50f7f8bee4e64efc874040a7.js" data-id="webmention-container"></script>
+
+
+
+
+    </body>
+</html>

@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="map[name:Kushashwa Ravi Shrimali]">
+<meta name="description" content="Hi Everyone! So excited to be back with another blog in the series of PyTorch C&#43;&#43; Blogs.
+Today, we are going to see a practical example of applying a CNN to a Custom Dataset - Dogs vs Cats. This is going to be a short post of showing results and discussion about hyperparameters and loss functions for the task, as code snippets and explanation has been provided here, hereand here.
+" />
+<meta name="keywords" content="" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="#252627" />
+<link rel="canonical" href="https://krshrimali.github.io/posts/2019/07/classifying-dogs-vs-cats-using-pytorch-c-api-part-1/" />
+
+
+<title>
+    
+    Classifying Dogs vs Cats using PyTorch C&#43;&#43; API: Part-1 :: Kushashwa Ravi Shrimali (Kush)  — Hello Friend NG HZ Theme
+    
+</title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+      type="text/css">
+
+
+
+<link rel="stylesheet" href="https://krshrimali.github.io/main.min.b6dbce0fdf6c61563a0c2226e857d5dadd8e5afa2c4f73ec9ea55abd831f9a72.css">
+
+
+
+
+
+    <link rel="webmention" href="https://webmention.io/example.com/webmention" />
+    <link rel="pingback" href="https://webmention.io/example.com/xmlrpc" />
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="https://krshrimali.github.io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://krshrimali.github.io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://krshrimali.github.io/favicon-16x16.png">
+    <link rel="manifest" href="https://krshrimali.github.io/site.webmanifest">
+    <link rel="mask-icon" href="https://krshrimali.github.io/safari-pinned-tab.svg" color="#252627">
+    <link rel="shortcut icon" href="https://krshrimali.github.io/favicon.ico">
+    <meta name="msapplication-TileColor" content="#252627">
+    <meta name="theme-color" content="#252627">
+
+<meta itemprop="name" content="Classifying Dogs vs Cats using PyTorch C&#43;&#43; API: Part-1">
+<meta itemprop="description" content="Hi Everyone! So excited to be back with another blog in the series of PyTorch C&#43;&#43; Blogs.
+Today, we are going to see a practical example of applying a CNN to a Custom Dataset - Dogs vs Cats. This is going to be a short post of showing results and discussion about hyperparameters and loss functions for the task, as code snippets and explanation has been provided here, here and here."><meta itemprop="datePublished" content="2019-07-23T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2019-07-23T00:00:00+00:00" />
+<meta itemprop="wordCount" content="1371"><meta itemprop="image" content="https://krshrimali.github.io"/>
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://krshrimali.github.io"/>
+
+<meta name="twitter:title" content="Classifying Dogs vs Cats using PyTorch C&#43;&#43; API: Part-1"/>
+<meta name="twitter:description" content="Hi Everyone! So excited to be back with another blog in the series of PyTorch C&#43;&#43; Blogs.
+Today, we are going to see a practical example of applying a CNN to a Custom Dataset - Dogs vs Cats. This is going to be a short post of showing results and discussion about hyperparameters and loss functions for the task, as code snippets and explanation has been provided here, here and here."/>
+
+
+
+
+
+    <meta property="article:published_time" content="2019-07-23 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+    </head>
+
+    <body class="dark-theme">
+        <div class="container">
+            <header class="header">
+    <div class="header__inner">
+        <div class="header__left">
+        <div class="logo">
+<a href="https://krshrimali.github.io/" style="text-decoration: none;">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">$ cd /home/</span>
+            <span class="logo__cursor" style=
+                  "
+                   
+                   ">
+            </span>
+        
+</a>
+</div>
+
+        </div>
+
+        
+        <div class="header__mid">
+        <button class="button">
+            <div class="button__text">
+        <a href="https://krshrimali.github.io/search" >
+                Search
+        </a>
+            </div>
+        </button>
+        </div>
+       
+
+        <div class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="https://krshrimali.github.io/about">About</a></li><li><a href="https://krshrimali.github.io/posts">Blog</a></li>
+    </ul>
+    <ul class="menu__inner"><li><a href="https://krshrimali.github.io/categories">Categories</a></li><li><a href="https://krshrimali.github.io/tags">Tags</a></li>
+    </ul>
+</nav>
+
+            <button id="toggleMenu">
+                <div class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </div>
+             </button>
+            
+
+            <button class="theme-toggle" id="toggleTheme"><svg class="theme-toggler" width="32" height="32" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+</button>
+        </div>
+    </div>
+</header>
+
+            
+<script src="https://krshrimali.github.io/js/mathjax-config.js"></script>
+
+
+<script id="MathJax-script" async src="https://unpkg.com/mathjax@3/es5/tex-chtml.js"></script>
+
+            
+    <main class="post">
+
+        <div class="post-info">
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>7 minutes
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>Written: 2019-07-23 00:00 &#43;0000</p>
+
+            
+
+            </p>
+        </div>
+
+        <article class="h-entry">
+            <h1 class="post-title p-name">
+                <a class="u-url" href="https://krshrimali.github.io/posts/2019/07/classifying-dogs-vs-cats-using-pytorch-c-api-part-1/">Classifying Dogs vs Cats using PyTorch C++ API: Part-1</a>
+            </h1>
+        <div class="post-info"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-pen-tool"><path d="M12 19l7-7 3 3-7 7-3-3z"></path><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path><path d="M2 2l7.586 7.586"></path><circle cx="11" cy="11" r="2"></circle></svg>
+                         <span class="author u-author p-author"><a href="https://krshrimali.github.io/author/kushashwa-ravi-shrimali">Kushashwa Ravi Shrimali</a></span>
+        </div>
+
+            
+
+            <div class="post-content e-content">
+                <p>Hi Everyone! So excited to be back with another blog in the series of PyTorch C++ Blogs.</p>
+<p>Today, we are going to see a practical example of applying a CNN to a Custom Dataset - Dogs vs Cats. This is going to be a short post of showing results and discussion about hyperparameters and loss functions for the task, as code snippets and explanation has been provided <!-- raw HTML omitted -->here<!-- raw HTML omitted -->, <!-- raw HTML omitted -->here<!-- raw HTML omitted --> and <!-- raw HTML omitted -->here<!-- raw HTML omitted -->.</p>
+<p><strong>Note</strong>: This is Part-1 of the blog on Dogs vs Cats Classification using PyTorch C++ API.</p>
+<h2 id="dataset-overview">Dataset Overview</h2>
+<p>Let&rsquo;s have a look at the dataset and it&rsquo;s statistics. <strong>Dogs vs Cats</strong> dataset has been taken from the famous <!-- raw HTML omitted -->Kaggle Competition<!-- raw HTML omitted -->.</p>
+<p>The training set contains 25k images combined of dogs and cats. The data can be downloaded from <!-- raw HTML omitted -->this<!-- raw HTML omitted --> link.</p>
+<p>Let&rsquo;s have a look at sample of the data:</p>
+<p><img src="https://raw.githubusercontent.com/krshrimali/krshrimali.github.io/master/assets/dogs-dataset.jpg" alt="Figure 1: Sample of Dog Images in the Dataset"></p>
+<p><img src="https://raw.githubusercontent.com/krshrimali/krshrimali.github.io/master/assets/cats-dataset.jpg" alt="Figure 2: Sample of Cat Images in the Dataset"></p>
+<p>As we can see, the dataset contains images of cats and dogs with multiple instances in the same sample as well.</p>
+<h2 id="loading-data">Loading Data</h2>
+<p>Although we have discussed this before (<!-- raw HTML omitted -->here<!-- raw HTML omitted -->), but let&rsquo;s just see how we load the data. Since this is a binary classification problem (2 classes: Dog and Cat), we will have labels as 0 (for a Cat) and 1 (for a Dog). The data comes in two zip files:</p>
+<ol>
+<li><code>train.zip</code>: Data to be used for training</li>
+<li><code>test.zip</code>: Data to be used for testing</li>
+</ol>
+<p>The <code>train.zip</code> file contains files with filenames like <code>&lt;class&gt;.&lt;number&gt;.jpg</code> where:</p>
+<ul>
+<li><code>class</code> can be either cat or dog.</li>
+<li><code>number</code> represents the count of the sample.</li>
+</ul>
+<p>For example: <code>cat.100.jpg</code> and <code>dog.1.jpg</code>. In order to load the data, we will move the cat images to <code>train/cat</code> folder and dog images to <code>train/dog</code> folder. You can accomplish this using <code>shutil</code> module:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># This code moves cat and dog images to train/cat and train/dog folders respectively</span>
+<span style="color:#f92672">import</span> shutil<span style="color:#f92672">,</span> os
+
+files <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>listdir(<span style="color:#e6db74">&#39;train/&#39;</span>)
+
+count_cat <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span> <span style="color:#75715e"># Number representing count of the cat image</span>
+count_dog <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span> <span style="color:#75715e"># Number representing count of the dog image</span>
+
+<span style="color:#66d9ef">for</span> file <span style="color:#f92672">in</span> files:
+	<span style="color:#66d9ef">if</span>(file<span style="color:#f92672">.</span>startswith(<span style="color:#e6db74">&#39;cat&#39;</span>) <span style="color:#f92672">and</span> file<span style="color:#f92672">.</span>endswith(<span style="color:#e6db74">&#39;jpg&#39;</span>)):
+		count_cat <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+		shutil<span style="color:#f92672">.</span>copy(<span style="color:#e6db74">&#39;train/&#39;</span> <span style="color:#f92672">+</span> file, <span style="color:#e6db74">&#39;train/cat/&#39;</span> <span style="color:#f92672">+</span> str(count_cat) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;.jpg&#34;</span>)
+	<span style="color:#66d9ef">elif</span>(file<span style="color:#f92672">.</span>startswith(<span style="color:#e6db74">&#39;dog&#39;</span>) <span style="color:#f92672">and</span> file<span style="color:#f92672">.</span>endswith(<span style="color:#e6db74">&#39;jpg&#39;</span>)):
+		count_dog <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+		shutil<span style="color:#f92672">.</span>copy(<span style="color:#e6db74">&#39;test/&#39;</span> <span style="color:#f92672">+</span> file, <span style="color:#e6db74">&#39;train/dog/&#39;</span> <span style="color:#f92672">+</span> str(count_dog) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;.jpg&#39;</span>)
+</code></pre></div><p>Once done, let&rsquo;s go ahead and load this data. Since we have discussed this <!-- raw HTML omitted -->before<!-- raw HTML omitted -->, I&rsquo;ll just paste the snippet here.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">torch<span style="color:#f92672">::</span>Tensor read_data(std<span style="color:#f92672">::</span>string loc) {
+	<span style="color:#75715e">// Read Image from the location of image
+</span><span style="color:#75715e"></span>	cv<span style="color:#f92672">::</span>Mat img <span style="color:#f92672">=</span> cv<span style="color:#f92672">::</span>imread(loc, <span style="color:#ae81ff">0</span>);
+	cv<span style="color:#f92672">::</span>resize(img, img, cv<span style="color:#f92672">::</span>Size(<span style="color:#ae81ff">200</span>, <span style="color:#ae81ff">200</span>), cv<span style="color:#f92672">::</span>INTER_CUBIC);
+	std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Sizes: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> img.size() <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+	torch<span style="color:#f92672">::</span>Tensor img_tensor <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>from_blob(img.data, {img.rows, img.cols, <span style="color:#ae81ff">1</span>}, torch<span style="color:#f92672">::</span>kByte);
+	img_tensor <span style="color:#f92672">=</span> img_tensor.permute({<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>}); <span style="color:#75715e">// Channels x Height x Width
+</span><span style="color:#75715e"></span>
+	<span style="color:#66d9ef">return</span> img_tensor.clone();
+};
+
+torch<span style="color:#f92672">::</span>Tensor read_label(<span style="color:#66d9ef">int</span> label) {
+	torch<span style="color:#f92672">::</span>Tensor label_tensor <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>full({<span style="color:#ae81ff">1</span>}, label);
+	<span style="color:#66d9ef">return</span> label_tensor.clone();
+}
+
+vector<span style="color:#f92672">&lt;</span>torch<span style="color:#f92672">::</span>Tensor<span style="color:#f92672">&gt;</span> process_images(vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> list_images) {
+	cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Reading images...&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+	vector<span style="color:#f92672">&lt;</span>torch<span style="color:#f92672">::</span>Tensor<span style="color:#f92672">&gt;</span> states;
+	<span style="color:#66d9ef">for</span> (std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;::</span>iterator it <span style="color:#f92672">=</span> list_images.begin(); it <span style="color:#f92672">!=</span> list_images.end(); <span style="color:#f92672">++</span>it) {
+        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Location being read: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#f92672">*</span>it <span style="color:#f92672">&lt;&lt;</span> endl;
+		torch<span style="color:#f92672">::</span>Tensor img <span style="color:#f92672">=</span> read_data(<span style="color:#f92672">*</span>it);
+		states.push_back(img);
+	}
+	cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Reading and Processing images done!&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+	<span style="color:#66d9ef">return</span> states;
+}
+
+vector<span style="color:#f92672">&lt;</span>torch<span style="color:#f92672">::</span>Tensor<span style="color:#f92672">&gt;</span> process_labels(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> list_labels) {
+	cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Reading labels...&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+	vector<span style="color:#f92672">&lt;</span>torch<span style="color:#f92672">::</span>Tensor<span style="color:#f92672">&gt;</span> labels;
+	<span style="color:#66d9ef">for</span> (std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;::</span>iterator it <span style="color:#f92672">=</span> list_labels.begin(); it <span style="color:#f92672">!=</span> list_labels.end(); <span style="color:#f92672">++</span>it) {
+		torch<span style="color:#f92672">::</span>Tensor label <span style="color:#f92672">=</span> read_label(<span style="color:#f92672">*</span>it);
+		labels.push_back(label);
+	}
+	cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Labels reading done!&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+	<span style="color:#66d9ef">return</span> labels;
+}
+
+<span style="color:#75715e">/* This function returns a pair of vector of images paths (strings) and labels (integers) */</span>
+std<span style="color:#f92672">::</span>pair<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span>,vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> load_data_from_folder(vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> folders_name) {
+	vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> list_images;
+	vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> list_labels;
+	<span style="color:#66d9ef">int</span> label <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+	<span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> <span style="color:#66d9ef">const</span><span style="color:#f92672">&amp;</span> value: folders_name) {
+		string base_name <span style="color:#f92672">=</span> value <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;/&#34;</span>;
+		cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Reading from: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> base_name <span style="color:#f92672">&lt;&lt;</span> endl;
+		DIR<span style="color:#f92672">*</span> dir;
+		<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">dirent</span> <span style="color:#f92672">*</span>ent;
+		<span style="color:#66d9ef">if</span>((dir <span style="color:#f92672">=</span> opendir(base_name.c_str())) <span style="color:#f92672">!=</span> NULL) {
+			<span style="color:#66d9ef">while</span>((ent <span style="color:#f92672">=</span> readdir(dir)) <span style="color:#f92672">!=</span> NULL) {
+				string filename <span style="color:#f92672">=</span> ent<span style="color:#f92672">-&gt;</span>d_name;
+				<span style="color:#66d9ef">if</span>(filename.length() <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">4</span> <span style="color:#f92672">&amp;&amp;</span> filename.substr(filename.length() <span style="color:#f92672">-</span> <span style="color:#ae81ff">3</span>) <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;jpg&#34;</span>) {
+					cout <span style="color:#f92672">&lt;&lt;</span> base_name <span style="color:#f92672">+</span> ent<span style="color:#f92672">-&gt;</span>d_name <span style="color:#f92672">&lt;&lt;</span> endl;
+					<span style="color:#75715e">// cv::Mat temp = cv::imread(base_name + &#34;/&#34; + ent-&gt;d_name, 1);
+</span><span style="color:#75715e"></span>					list_images.push_back(base_name <span style="color:#f92672">+</span> ent<span style="color:#f92672">-&gt;</span>d_name);
+					list_labels.push_back(label);
+				}
+
+			}
+			closedir(dir);
+		} <span style="color:#66d9ef">else</span> {
+			cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Could not open directory&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+			<span style="color:#75715e">// return EXIT_FAILURE;
+</span><span style="color:#75715e"></span>		}
+		label <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>;
+	}
+	<span style="color:#66d9ef">return</span> std<span style="color:#f92672">::</span>make_pair(list_images, list_labels);
+}
+</code></pre></div><p>The above snippet has the utility functions we need. Here is a quick summary of what they do:</p>
+<ol>
+<li>
+<p><strong>load_data_from_folder</strong>: This function returns a tuple of list of image paths (string) and list of labels (int). It takes a vector of folders names (string type) as parameter.</p>
+</li>
+<li>
+<p><strong>process_images</strong>: This function returns a vector of Tensors (images). This function calls <code>read_data</code> function which reads, resizes and converts an image to a Torch Tensor. It takes a vector of image paths (string) as parameter.</p>
+</li>
+<li>
+<p><strong>process_labels</strong>: Similar to <code>process_images</code> function, this function returns a vector of Tensors (labels). This function calls <code>read_label</code> function which takes an <code>int</code> as a parameter (label: 0 or 1) and returns a Tensor.</p>
+</li>
+</ol>
+<p>Let&rsquo;s now go ahead and see how we load the data. For this, we first need to define the <code>Dataset</code> class. This class should initialize two variables: one for images and one for labels. As discussed <!-- raw HTML omitted -->before<!-- raw HTML omitted -->, we&rsquo;ll also define <code>get()</code> and <code>size()</code> functions.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CustomDataset</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> torch<span style="color:#f92672">::</span>data<span style="color:#f92672">::</span>Dataset<span style="color:#f92672">&lt;</span>CustomDataset<span style="color:#f92672">&gt;</span> {
+<span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+	<span style="color:#75715e">/* data */</span>
+	<span style="color:#75715e">// Should be 2 tensors
+</span><span style="color:#75715e"></span>	vector<span style="color:#f92672">&lt;</span>torch<span style="color:#f92672">::</span>Tensor<span style="color:#f92672">&gt;</span> states, labels;
+<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+	CustomDataset(vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> list_images, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> list_labels) {
+		states <span style="color:#f92672">=</span> process_images(list_images);
+		labels <span style="color:#f92672">=</span> process_labels(list_labels);
+	};
+
+	torch<span style="color:#f92672">::</span>data<span style="color:#f92672">::</span>Example<span style="color:#f92672">&lt;&gt;</span> get(size_t index) <span style="color:#66d9ef">override</span> {
+		<span style="color:#75715e">/* This should return {torch::Tensor, torch::Tensor} */</span>
+		torch<span style="color:#f92672">::</span>Tensor sample_img <span style="color:#f92672">=</span> states.at(index);
+		torch<span style="color:#f92672">::</span>Tensor sample_label <span style="color:#f92672">=</span> labels.at(index);
+		<span style="color:#66d9ef">return</span> {sample_img.clone(), sample_label.clone()};
+	};
+
+  torch<span style="color:#f92672">::</span>optional<span style="color:#f92672">&lt;</span>size_t<span style="color:#f92672">&gt;</span> size() <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">override</span> {
+		<span style="color:#66d9ef">return</span> states.size();
+  };
+};
+</code></pre></div><p>Once done, we can go ahead and initialize the Dataset in our <code>main()</code> function.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">int</span> argc, <span style="color:#66d9ef">char</span> <span style="color:#66d9ef">const</span> <span style="color:#f92672">*</span>argv[]) {
+  <span style="color:#75715e">// Load the model.
+</span><span style="color:#75715e"></span>  <span style="color:#75715e">// Read Data
+</span><span style="color:#75715e"></span>  vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> folders_name;
+  folders_name.push_back(<span style="color:#e6db74">&#34;/home/krshrimali/Documents/data-dogs-cats/train/cat&#34;</span>);
+  folders_name.push_back(<span style="color:#e6db74">&#34;/home/krshrimali/Documents/data-dogs-cats/train/dog&#34;</span>);
+
+  std<span style="color:#f92672">::</span>pair<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span>, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> pair_images_labels <span style="color:#f92672">=</span> load_data_from_folder(folders_name);
+
+  vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> list_images <span style="color:#f92672">=</span> pair_images_labels.first;
+  vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> list_labels <span style="color:#f92672">=</span> pair_images_labels.second;
+
+  <span style="color:#66d9ef">auto</span> custom_dataset <span style="color:#f92672">=</span> CustomDataset(list_images, list_labels).map(torch<span style="color:#f92672">::</span>data<span style="color:#f92672">::</span>transforms<span style="color:#f92672">::</span>Stack<span style="color:#f92672">&lt;&gt;</span>());
+}
+</code></pre></div><h2 id="network-overview">Network Overview</h2>
+<p>To make things easy to read (a programmer&rsquo;s mantra), we define our network in a header file. We will use a CNN network initially for this binary classification task. Since I&rsquo;m not using a GPU, the training is slow and that&rsquo;s why I experimented it only for 10 epochs. The whole objective is to discuss and show how to use PyTorch C++ API for this. You can always run it for more epochs or change the network parameters.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">NetImpl</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Module {
+    NetImpl() {
+        <span style="color:#75715e">// Initialize the network
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">// On how to pass strides and padding: https://github.com/pytorch/pytorch/issues/12649#issuecomment-430156160
+</span><span style="color:#75715e"></span>        conv1_1 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;conv1_1&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">3</span>).padding(<span style="color:#ae81ff">1</span>)));
+        conv1_2 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;conv1_2&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">3</span>).padding(<span style="color:#ae81ff">1</span>)));
+        <span style="color:#75715e">// Insert pool layer
+</span><span style="color:#75715e"></span>        conv2_1 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;conv2_1&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(<span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">30</span>, <span style="color:#ae81ff">3</span>).padding(<span style="color:#ae81ff">1</span>)));
+        conv2_2 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;conv2_2&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(<span style="color:#ae81ff">30</span>, <span style="color:#ae81ff">40</span>, <span style="color:#ae81ff">3</span>).padding(<span style="color:#ae81ff">1</span>)));
+        <span style="color:#75715e">// Insert pool layer
+</span><span style="color:#75715e"></span>        conv3_1 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;conv3_1&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(<span style="color:#ae81ff">40</span>, <span style="color:#ae81ff">50</span>, <span style="color:#ae81ff">3</span>).padding(<span style="color:#ae81ff">1</span>)));
+        conv3_2 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;conv3_2&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(<span style="color:#ae81ff">50</span>, <span style="color:#ae81ff">60</span>, <span style="color:#ae81ff">3</span>).padding(<span style="color:#ae81ff">1</span>)));
+        conv3_3 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;conv3_3&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(<span style="color:#ae81ff">60</span>, <span style="color:#ae81ff">70</span>, <span style="color:#ae81ff">3</span>).padding(<span style="color:#ae81ff">1</span>)));
+        <span style="color:#75715e">// Insert pool layer
+</span><span style="color:#75715e"></span>        conv4_1 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;conv4_1&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(<span style="color:#ae81ff">70</span>, <span style="color:#ae81ff">80</span>, <span style="color:#ae81ff">3</span>).padding(<span style="color:#ae81ff">1</span>)));
+        conv4_2 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;conv4_2&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(<span style="color:#ae81ff">80</span>, <span style="color:#ae81ff">90</span>, <span style="color:#ae81ff">3</span>).padding(<span style="color:#ae81ff">1</span>)));
+        conv4_3 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;conv4_3&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(<span style="color:#ae81ff">90</span>, <span style="color:#ae81ff">100</span>, <span style="color:#ae81ff">3</span>).padding(<span style="color:#ae81ff">1</span>)));
+        <span style="color:#75715e">// Insert pool layer
+</span><span style="color:#75715e"></span>        conv5_1 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;conv5_1&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(<span style="color:#ae81ff">100</span>, <span style="color:#ae81ff">110</span>, <span style="color:#ae81ff">3</span>).padding(<span style="color:#ae81ff">1</span>)));
+        conv5_2 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;conv5_2&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(<span style="color:#ae81ff">110</span>, <span style="color:#ae81ff">120</span>, <span style="color:#ae81ff">3</span>).padding(<span style="color:#ae81ff">1</span>)));
+        conv5_3 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;conv5_3&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(<span style="color:#ae81ff">120</span>, <span style="color:#ae81ff">130</span>, <span style="color:#ae81ff">3</span>).padding(<span style="color:#ae81ff">1</span>)));
+        <span style="color:#75715e">// Insert pool layer
+</span><span style="color:#75715e"></span>        fc1 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;fc1&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Linear(<span style="color:#ae81ff">130</span><span style="color:#f92672">*</span><span style="color:#ae81ff">6</span><span style="color:#f92672">*</span><span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">2000</span>));
+        fc2 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;fc2&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Linear(<span style="color:#ae81ff">2000</span>, <span style="color:#ae81ff">1000</span>));
+        fc3 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;fc3&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Linear(<span style="color:#ae81ff">1000</span>, <span style="color:#ae81ff">100</span>));
+        fc4 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;fc4&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Linear(<span style="color:#ae81ff">100</span>, <span style="color:#ae81ff">2</span>));
+    }
+
+    <span style="color:#75715e">// Implement Algorithm
+</span><span style="color:#75715e"></span>    torch<span style="color:#f92672">::</span>Tensor forward(torch<span style="color:#f92672">::</span>Tensor x) {
+        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(conv1_1<span style="color:#f92672">-&gt;</span>forward(x));
+        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(conv1_2<span style="color:#f92672">-&gt;</span>forward(x));
+        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>max_pool2d(x, <span style="color:#ae81ff">2</span>);
+
+        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(conv2_1<span style="color:#f92672">-&gt;</span>forward(x));
+        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(conv2_2<span style="color:#f92672">-&gt;</span>forward(x));
+        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>max_pool2d(x, <span style="color:#ae81ff">2</span>);
+
+        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(conv3_1<span style="color:#f92672">-&gt;</span>forward(x));
+        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(conv3_2<span style="color:#f92672">-&gt;</span>forward(x));
+        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(conv3_3<span style="color:#f92672">-&gt;</span>forward(x));
+        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>max_pool2d(x, <span style="color:#ae81ff">2</span>);
+
+        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(conv4_1<span style="color:#f92672">-&gt;</span>forward(x));
+        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(conv4_2<span style="color:#f92672">-&gt;</span>forward(x));
+        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(conv4_3<span style="color:#f92672">-&gt;</span>forward(x));
+        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>max_pool2d(x, <span style="color:#ae81ff">2</span>);
+
+        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(conv5_1<span style="color:#f92672">-&gt;</span>forward(x));
+        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(conv5_2<span style="color:#f92672">-&gt;</span>forward(x));
+        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(conv5_3<span style="color:#f92672">-&gt;</span>forward(x));
+        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>max_pool2d(x, <span style="color:#ae81ff">2</span>);
+
+
+        x <span style="color:#f92672">=</span> x.view({<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">130</span><span style="color:#f92672">*</span><span style="color:#ae81ff">6</span><span style="color:#f92672">*</span><span style="color:#ae81ff">6</span>});
+
+        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(fc1<span style="color:#f92672">-&gt;</span>forward(x));
+        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(fc2<span style="color:#f92672">-&gt;</span>forward(x));
+        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(fc3<span style="color:#f92672">-&gt;</span>forward(x));
+        x <span style="color:#f92672">=</span> fc4<span style="color:#f92672">-&gt;</span>forward(x);
+        <span style="color:#66d9ef">return</span> torch<span style="color:#f92672">::</span>log_softmax(x, <span style="color:#ae81ff">1</span>);
+    }
+
+    <span style="color:#75715e">// Declare layers
+</span><span style="color:#75715e"></span>    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d conv1_1{<span style="color:#66d9ef">nullptr</span>};
+    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d conv1_2{<span style="color:#66d9ef">nullptr</span>};
+    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d conv2_1{<span style="color:#66d9ef">nullptr</span>};
+    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d conv2_2{<span style="color:#66d9ef">nullptr</span>};
+    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d conv3_1{<span style="color:#66d9ef">nullptr</span>};
+    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d conv3_2{<span style="color:#66d9ef">nullptr</span>};
+    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d conv3_3{<span style="color:#66d9ef">nullptr</span>};
+    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d conv4_1{<span style="color:#66d9ef">nullptr</span>};
+    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d conv4_2{<span style="color:#66d9ef">nullptr</span>};
+    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d conv4_3{<span style="color:#66d9ef">nullptr</span>};
+    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d conv5_1{<span style="color:#66d9ef">nullptr</span>};
+    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d conv5_2{<span style="color:#66d9ef">nullptr</span>};
+    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d conv5_3{<span style="color:#66d9ef">nullptr</span>};
+
+    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Linear fc1{<span style="color:#66d9ef">nullptr</span>}, fc2{<span style="color:#66d9ef">nullptr</span>}, fc3{<span style="color:#66d9ef">nullptr</span>}, fc4{<span style="color:#66d9ef">nullptr</span>};
+};
+</code></pre></div><p>We will initialize this network and pass each batch of our data once in an epoch.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// Initialize the Network
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">auto</span> net <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>make_shared<span style="color:#f92672">&lt;</span>NetImpl<span style="color:#f92672">&gt;</span>();
+</code></pre></div><h2 id="training-the-network-on-dogs-vs-cats-dataset">Training the Network on Dogs vs Cats Dataset</h2>
+<p>We had before discussed code for training <!-- raw HTML omitted -->here<!-- raw HTML omitted -->. I suggest the reader to go through that blog in order to train the dataset. I&rsquo;ll give more insights on training in the next blog!</p>
+<p>That&rsquo;s it for today. I&rsquo;ll be back with Part-2 of this &ldquo;Dogs vs Cats Classification&rdquo; with training, experimentation and results. We&rsquo;ll also discuss on using different networks, and in the Part-3, we&rsquo;ll discuss using <strong>Transfer Learning</strong> for this classification task.</p>
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>1371 Words</p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>Posted: <time class="dt-published"> 2019-07-23 05:30 &#43;0530</time></p>
+<a class="resp-sharing-button__link" href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2019%2f07%2fclassifying-dogs-vs-cats-using-pytorch-c-api-part-1%2f" target="_blank" rel="noopener" aria-label="Facebook">
+  <div class="resp-sharing-button resp-sharing-button--facebook resp-sharing-button--medium"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--circle">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11.5"/><path d="M15.84 9.5H13.5V8.48c0-.53.35-.65.6-.65h1.4v-2.3h-2.35c-2.3 0-2.65 1.7-2.65 2.8V9.5h-2v2h2v7h3v-7h2.1l.24-2z"/></svg></div>Facebook</div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="https://twitter.com/intent/tweet/?text=%22Classifying%20Dogs%20vs%20Cats%20using%20PyTorch%20C%2b%2b%20API%3a%20Part-1%22%20seems%20like%20an%20interesting%20read%20from%20%40rg0swami&amp;url=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2019%2f07%2fclassifying-dogs-vs-cats-using-pytorch-c-api-part-1%2f" target="_blank" rel="noopener" aria-label="Twitter">
+  <div class="resp-sharing-button resp-sharing-button--twitter resp-sharing-button--medium"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--circle">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.5 7.4l-2 .2c-.4-.5-1-.8-2-.8C13.3 6.8 12 8 12 9.4v.6c-2 0-4-1-5.4-2.7-.2.4-.3.8-.3 1.3 0 1 .4 1.7 1.2 2.2-.5 0-1 0-1.2-.3 0 1.3 1 2.3 2 2.6-.3.4-.7.4-1 0 .2 1.4 1.2 2 2.3 2-1 1-2.5 1.4-4 1 1.3 1 2.7 1.4 4.2 1.4 4.8 0 7.5-4 7.5-7.5v-.4c.5-.4.8-1.5 1.2-2z"/><circle cx="12" cy="12" r="11.5"/></svg></div>Twitter</div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="mailto:?subject=%22Classifying%20Dogs%20vs%20Cats%20using%20PyTorch%20C%2b%2b%20API%3a%20Part-1%22%20seems%20interesting...&amp;body=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2019%2f07%2fclassifying-dogs-vs-cats-using-pytorch-c-api-part-1%2f" target="_self" rel="noopener" aria-label="E-Mail">
+  <div class="resp-sharing-button resp-sharing-button--email resp-sharing-button--medium"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--circle">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19.5 16c0 .8-.7 1.5-1.5 1.5H6c-.8 0-1.5-.7-1.5-1.5V8c0-.8.7-1.5 1.5-1.5h12c.8 0 1.5.7 1.5 1.5v8zm-2-7.5L12 13 6.5 8.5m11 6l-4-2.5m-7 2.5l4-2.5"/><circle cx="12" cy="12" r="11.5"/></svg></div>E-Mail</div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2019%2f07%2fclassifying-dogs-vs-cats-using-pytorch-c-api-part-1%2f&amp;title=%22Classifying%20Dogs%20vs%20Cats%20using%20PyTorch%20C%2b%2b%20API%3a%20Part-1%22%20seems%20interesting...&amp;summary=%22Classifying%20Dogs%20vs%20Cats%20using%20PyTorch%20C%2b%2b%20API%3a%20Part-1%22%20seems%20interesting...&amp;source=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2019%2f07%2fclassifying-dogs-vs-cats-using-pytorch-c-api-part-1%2f" target="_blank" rel="noopener" aria-label="LinkedIn">
+  <div class="resp-sharing-button resp-sharing-button--linkedin resp-sharing-button--medium"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--circle">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11.5"/><path d="M15 12.5c-.28 0-.5.22-.5.5v3.5h-3s.03-6.48 0-7h3v.83s.46-.75 1.7-.75c1.56 0 2.3 1.12 2.3 3.3v3.62h-3V13c0-.28-.23-.5-.5-.5zm-7.5-3h2v7h-2z"/><circle cx="8.5" cy="6.5" r="1"/></svg></div>LinkedIn</div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="https://reddit.com/submit/?url=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2019%2f07%2fclassifying-dogs-vs-cats-using-pytorch-c-api-part-1%2f&amp;resubmit=true&amp;title=%22Classifying%20Dogs%20vs%20Cats%20using%20PyTorch%20C%2b%2b%20API%3a%20Part-1%22%20seems%20interesting..." target="_blank" rel="noopener" aria-label="Reddit">
+  <div class="resp-sharing-button resp-sharing-button--reddit resp-sharing-button--medium"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--circle">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11.5"/><ellipse cx="12" cy="14.37" rx="6.2" ry="4.24"/><path d="M14.3 16.25c-.62.36-1.42.57-2.3.57-.88 0-1.7-.2-2.32-.58"/><circle cx="14.61" cy="13.39" r=".98"/><circle cx="9.39" cy="13.39" r=".98"/><path d="M16.4 11.38c.26-.55.82-.92 1.47-.92.9 0 1.63.73 1.63 1.63 0 .8-.6 1.47-1.38 1.6"/><circle cx="17.22" cy="7.52" r="1.63"/><path d="M7.6 11.38c-.26-.54-.82-.92-1.47-.92-.9 0-1.63.73-1.63 1.63 0 .8.6 1.47 1.38 1.6M12 10.12s-.08-4.82 3.6-2.6"/></svg></div>Reddit</div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="whatsapp://send?text=%22Classifying%20Dogs%20vs%20Cats%20using%20PyTorch%20C%2b%2b%20API%3a%20Part-1%22%20seems%20interesting...%20https%3a%2f%2fkrshrimali.github.io%2fposts%2f2019%2f07%2fclassifying-dogs-vs-cats-using-pytorch-c-api-part-1%2f" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <div class="resp-sharing-button resp-sharing-button--whatsapp resp-sharing-button--medium"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--circle">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle xmlns="http://www.w3.org/2000/svg" cx="12" cy="12" r="11.5"/><path stroke-width="1px" d="M17.6 6.2c-1.5-1.5-3.4-2.3-5.5-2.3-4.3 0-7.8 3.5-7.8 7.8 0 1.4.4 2.7 1 3.9l-1.1 4 4.1-1.1c1.1.6 2.4.9 3.7.9 4.3 0 7.8-3.5 7.8-7.8.1-2-.7-3.9-2.2-5.4zm-5.5 11.9c-1.2 0-2.3-.3-3.3-.9l-.2-.1-2.4.6.7-2.4-.2-.2c-.6-1-1-2.2-1-3.4 0-3.6 2.9-6.5 6.5-6.5 1.7 0 3.3.7 4.6 1.9 1.2 1.2 1.9 2.8 1.9 4.6-.1 3.5-3 6.4-6.6 6.4zm3.5-4.8c-.2-.1-1.1-.6-1.3-.6-.2-.1-.3-.1-.4.1-.1.2-.5.6-.6.8-.1.1-.2.1-.4 0s-.8-.3-1.6-1c-.6-.5-1-1.2-1.1-1.3-.1-.2 0-.3.1-.4l.3-.3s.1-.2.2-.3c.1-.1 0-.2 0-.3s-.4-1.1-.6-1.4c-.2-.4-.3-.3-.4-.3h-.4s-.3 0-.5.2-.7.7-.7 1.6c0 1 .7 1.9.8 2s1.4 2.1 3.3 2.9c.5.2.8.3 1.1.4.5.1.9.1 1.2.1.4-.1 1.1-.5 1.3-.9.2-.5.2-.8.1-.9 0-.2-.2-.3-.4-.4z"/></svg></div>WhatsApp</div>
+</a>
+</div>
+
+        
+            <div class="pagination">
+                <div class="pagination__title">
+                    <span class="pagination__title-h"></span>
+                    <hr />
+                </div>
+
+                <div class="pagination__buttons">
+                    
+                        <span class="button previous">
+                            <a href="https://krshrimali.github.io/posts/2019/07/classifying-dogs-vs-cats-using-pytorch-c-part-2/">
+                                <span class="button__icon">←</span>
+                                <span class="button__text">Classifying Dogs vs Cats using PyTorch C&#43;&#43;: Part 2</span>
+                            </a>
+                        </span>
+                    
+
+                    
+                        <span class="button next">
+                            <a href="https://krshrimali.github.io/posts/2019/07/training-a-network-on-custom-dataset-using-pytorch-c-api/">
+                                <span class="button__text">Training a Network on Custom Dataset using PyTorch C&#43;&#43; API</span>
+                                <span class="button__icon">→</span>
+                            </a>
+                        </span>
+                    
+                </div>
+            </div>
+        
+
+        
+            <div class="webmention-form">
+                <form action="https://webmention.io/krshrimali.github.io/webmention" method="post">
+                    <label>Did you mention this article on your website? Put the URL of your post here:</label><br/>
+                    <input name="source" type="url"/>
+                    <input name="target" value="https://krshrimali.github.io/posts/2019/07/classifying-dogs-vs-cats-using-pytorch-c-api-part-1/" type="hidden"/>
+                    <input value="Send Webmention" type="submit"/>
+                </form>
+            </div>
+            <div id="webmention-container"></div>
+        
+
+        
+    </main>
+
+            
+                <footer class="footer">
+    <p>
+        &copy; 2021
+            
+                <span><a href="https://krshrimali.github.io">Kushashwa Ravi Shrimali</a></span>
+                
+                 <a href="https://krshrimali.github.io/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
+                <br>
+            <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a>
+                Powered by <a href="http://gohugo.io"><u>Hugo</u></a> and <a href="https://github.com/HaoZeke/hugo-theme-hello-friend-ng-hz"><u>this theme</u></a>.</br>
+                
+                
+                <script src="https://liberapay.com/rohit/widgets/button.js"></script>
+<noscript><a href="https://liberapay.com/rohit/donate"><img alt="Donate using Liberapay" src="https://liberapay.com/assets/widgets/donate.svg"></a></noscript>
+
+                
+    </p>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+
+
+<script src="https://krshrimali.github.io/bundle.min.5fae9992ea406007408dc33b0b3a8376d61e2f1d6ac50ba1dad7580ac50afb5199bcef3bbc3677e77553a9980bf882cf71edc2f755687dd7725f12ece4304ac2.js"></script>
+<script src="https://krshrimali.github.io/js/webmention.min.513a53d009530b21cba09721b6f4dc912e9c20ad2c0adbb5c4e486c4f77774a6e9eca8c2e1e4e8bc9e9e86693aa5ca91e7bf232b50f7f8bee4e64efc874040a7.js" data-id="webmention-container"></script>
+
+
+
+
+    </body>
+</html>

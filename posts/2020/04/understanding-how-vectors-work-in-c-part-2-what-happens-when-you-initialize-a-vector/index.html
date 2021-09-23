@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="map[name:Kushashwa Ravi Shrimali]">
+<meta name="description" content="In the last blog post, I realized there were a lot of methods inherited from the base struct _Vector_base_ and _Vector_impl_data. Instead of directly going to the source code of these structs, I&amp;rsquo;ll go through their methods and objects by explaining what happens when we initialize a vector.
+" />
+<meta name="keywords" content="" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="#252627" />
+<link rel="canonical" href="https://krshrimali.github.io/posts/2020/04/understanding-how-vectors-work-in-c-part-2-what-happens-when-you-initialize-a-vector/" />
+
+
+<title>
+    
+    Understanding how Vectors work in C&#43;&#43; (Part-2): What happens when you initialize a vector? :: Kushashwa Ravi Shrimali (Kush)  — Hello Friend NG HZ Theme
+    
+</title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+      type="text/css">
+
+
+
+<link rel="stylesheet" href="https://krshrimali.github.io/main.min.b6dbce0fdf6c61563a0c2226e857d5dadd8e5afa2c4f73ec9ea55abd831f9a72.css">
+
+
+
+
+
+    <link rel="webmention" href="https://webmention.io/example.com/webmention" />
+    <link rel="pingback" href="https://webmention.io/example.com/xmlrpc" />
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="https://krshrimali.github.io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://krshrimali.github.io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://krshrimali.github.io/favicon-16x16.png">
+    <link rel="manifest" href="https://krshrimali.github.io/site.webmanifest">
+    <link rel="mask-icon" href="https://krshrimali.github.io/safari-pinned-tab.svg" color="#252627">
+    <link rel="shortcut icon" href="https://krshrimali.github.io/favicon.ico">
+    <meta name="msapplication-TileColor" content="#252627">
+    <meta name="theme-color" content="#252627">
+
+<meta itemprop="name" content="Understanding how Vectors work in C&#43;&#43; (Part-2): What happens when you initialize a vector?">
+<meta itemprop="description" content="In the last blog post, I realized there were a lot of methods inherited from the base struct _Vector_base_ and _Vector_impl_data. Instead of directly going to the source code of these structs, I&rsquo;ll go through their methods and objects by explaining what happens when we initialize a vector."><meta itemprop="datePublished" content="2020-04-26T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2020-04-26T00:00:00+00:00" />
+<meta itemprop="wordCount" content="1460"><meta itemprop="image" content="https://krshrimali.github.io"/>
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://krshrimali.github.io"/>
+
+<meta name="twitter:title" content="Understanding how Vectors work in C&#43;&#43; (Part-2): What happens when you initialize a vector?"/>
+<meta name="twitter:description" content="In the last blog post, I realized there were a lot of methods inherited from the base struct _Vector_base_ and _Vector_impl_data. Instead of directly going to the source code of these structs, I&rsquo;ll go through their methods and objects by explaining what happens when we initialize a vector."/>
+
+
+
+
+
+    <meta property="article:published_time" content="2020-04-26 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+    </head>
+
+    <body class="dark-theme">
+        <div class="container">
+            <header class="header">
+    <div class="header__inner">
+        <div class="header__left">
+        <div class="logo">
+<a href="https://krshrimali.github.io/" style="text-decoration: none;">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">$ cd /home/</span>
+            <span class="logo__cursor" style=
+                  "
+                   
+                   ">
+            </span>
+        
+</a>
+</div>
+
+        </div>
+
+        
+        <div class="header__mid">
+        <button class="button">
+            <div class="button__text">
+        <a href="https://krshrimali.github.io/search" >
+                Search
+        </a>
+            </div>
+        </button>
+        </div>
+       
+
+        <div class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="https://krshrimali.github.io/about">About</a></li><li><a href="https://krshrimali.github.io/posts">Blog</a></li>
+    </ul>
+    <ul class="menu__inner"><li><a href="https://krshrimali.github.io/categories">Categories</a></li><li><a href="https://krshrimali.github.io/tags">Tags</a></li>
+    </ul>
+</nav>
+
+            <button id="toggleMenu">
+                <div class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </div>
+             </button>
+            
+
+            <button class="theme-toggle" id="toggleTheme"><svg class="theme-toggler" width="32" height="32" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+</button>
+        </div>
+    </div>
+</header>
+
+            
+<script src="https://krshrimali.github.io/js/mathjax-config.js"></script>
+
+
+<script id="MathJax-script" async src="https://unpkg.com/mathjax@3/es5/tex-chtml.js"></script>
+
+            
+    <main class="post">
+
+        <div class="post-info">
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>7 minutes
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>Written: 2020-04-26 00:00 &#43;0000</p>
+
+            
+
+            </p>
+        </div>
+
+        <article class="h-entry">
+            <h1 class="post-title p-name">
+                <a class="u-url" href="https://krshrimali.github.io/posts/2020/04/understanding-how-vectors-work-in-c-part-2-what-happens-when-you-initialize-a-vector/">Understanding how Vectors work in C++ (Part-2): What happens when you initialize a vector?</a>
+            </h1>
+        <div class="post-info"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-pen-tool"><path d="M12 19l7-7 3 3-7 7-3-3z"></path><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path><path d="M2 2l7.586 7.586"></path><circle cx="11" cy="11" r="2"></circle></svg>
+                         <span class="author u-author p-author"><a href="https://krshrimali.github.io/author/kushashwa-ravi-shrimali">Kushashwa Ravi Shrimali</a></span>
+        </div>
+
+            
+
+            <div class="post-content e-content">
+                <p>In the last blog post, I realized there were a lot of methods inherited from the base struct <code>_Vector_base_</code> and <code>_Vector_impl_data</code>. Instead of directly going to the source code of these structs, I&rsquo;ll go through their methods and objects by explaining what happens when we initialize a vector.</p>
+<!-- raw HTML omitted -->
+<p>That is, we will start from calling a vector constructor and then see how memory is allocated. If you haven&rsquo;t looked at the previous blog post, please take a look <!-- raw HTML omitted -->here<!-- raw HTML omitted -->. I want to be thorough with the blog post, so I&rsquo;ll divide this into multiple posts. By the end of this post, you&rsquo;ll go through the following structs:</p>
+<ol>
+<li><code>_Vector_impl_data</code> struct which contains pointers to memory locations (start, finish and end of storage).</li>
+<li><code>_Vector_impl</code> struct (inherits <code>_Vector_impl_data</code> as well)).</li>
+</ol>
+<p>I usually opt for the bottom-up approach. Vectors can be initialized in many ways, three of them will be discussed in today&rsquo;s blog. We&rsquo;ll start from the very basic constructor of a vector using an initializer list and slowly reach to memory allocation and how the above 2 structs are used. Let&rsquo;s start!</p>
+<h2 id="using-initializer-lists">Using Initializer Lists</h2>
+<p>So what happens when we initialize a vector with an initializer list?</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> vec {<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>};
+</code></pre></div><p>The vector class has many constructors in GCC depending on the type of inputs you give. Let&rsquo;s take a look at the constructor when the input is an initializer list:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">vector(initializer_list<span style="color:#f92672">&lt;</span>value_type<span style="color:#f92672">&gt;</span> __l, <span style="color:#66d9ef">const</span> allocator_type<span style="color:#f92672">&amp;</span> __a <span style="color:#f92672">=</span> allocator_type()) <span style="color:#f92672">:</span> _Base(__a) {
+    _M_range_initialize(__l.begin(), __l.end(), random_access_iterator_tag());
+}
+</code></pre></div><p>If you are curious what <code>_Base</code> is, <code>_Base</code> is declared as: <code>typedef _Vector_base&lt;_Tp, _Alloc&gt; _Base;</code>. Just so you know, where and how is <code>_Vector_base</code> used. When the constructor is called, it calls the constructor of <code>_Vector_base</code> with <code>__a</code> (allocator type). As you might have noticed, we are calling <code>_M_range_initialize</code> and passing 2 iterators (<code>__l.begin(), __l.end()</code>) and 1 forward iterator tag.</p>
+<p>Note that the iterators are Forward Iterators, that is: we can use these iterators to access elements from begin (accessed using <code>.begin()</code>) till the end (accessed using <code>.end()</code>).</p>
+<p>We are using <code>random_access_iterator_tag</code> as <code>forward_iterator_tag</code>. This tag helps us to categorize the iterator as random-access iterator. Random-access iterators allow accessing elements by passing arbitrary offset position (see: <!-- raw HTML omitted --><a href="http://www.cplusplus.com/reference/iterator/RandomAccessIterator/">http://www.cplusplus.com/reference/iterator/RandomAccessIterator/</a><!-- raw HTML omitted --> for more details).</p>
+<p>Let&rsquo;s go ahead and see what <code>_M_range_initialize</code> does.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> _ForwardIterator<span style="color:#f92672">&gt;</span>
+<span style="color:#66d9ef">void</span> _M_range_initialize(_ForwardIterator __first, _ForwardIterator __last, std<span style="color:#f92672">::</span>forward_iterator_tag) {
+    <span style="color:#66d9ef">const</span> size_type __n <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>distance(__first, __last);
+    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>_M_impl._M_start <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>_M_allocate(_S_check_init_len(__n, _M_get_Tp_allocator()));
+    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>_M_impl._M_end_of_storage <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>_M_impl._M_start <span style="color:#f92672">+</span> __n;
+    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>_M_impl._M_finish <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>__uninitialized_copy_a(__first, __last, <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>_M_impl._M_start, _M_get_Tp_allocator());
+}
+</code></pre></div><p>Let&rsquo;s go line by line.</p>
+<ul>
+<li>First we find the distance using <code>std::distance</code> which takes first and last iterators, and returns size such as: <code>__last = __first + size</code>.</li>
+<li>Next, we allocate memory for <code>__n</code> objects. The function <code>this-&gt;_M_allocate</code> returns pointer to the starting location of the memory allocated.
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">static</span> size_type <span style="color:#a6e22e">_S_check_init_len</span>(size_type __n, <span style="color:#66d9ef">const</span> allocator_type<span style="color:#f92672">&amp;</span> __a)
+{
+    <span style="color:#66d9ef">if</span> (__n <span style="color:#f92672">&gt;</span> _S_max_size(_Tp_alloc_type(__a)))
+    __throw_length_error(
+        __N(<span style="color:#e6db74">&#34;cannot create std::vector larger than max_size()&#34;</span>));
+    <span style="color:#66d9ef">return</span> __n;
+}
+</code></pre></div><ul>
+<li>The function <code>_S_check_init_len</code> is called by constructors to check size. If the requested size is greater than the maximum size for the allocator type, it throws length error (<code>&quot;cannot create std::vector larger than max_size()&quot;</code>). Else, it returns <code>__n</code>.</li>
+<li>Once we have validated the size, <code>this-&gt;_M_allocate</code> call allocates the memory. Note that, <code>_M_allocate</code> is a part of <code>_Vector_base</code> struct. <code>_M_allocate</code> allocates memory for <code>__n</code> number of objects. This returns a pointer to the memory location (starting), to <code>_M_start</code>.</li>
+<li>The end of storage pointer stores the end of memory location for the memory allocated for <code>__n</code> objects.</li>
+<li>The function <code>std::__uninitialized_copy_a</code> copies the range <code>[__first, __last)</code> into the <code>this-&gt;_M_impl._M_start</code>. This returns a pointer to memory location starting at <code>this-&gt;_M_impl._M_start</code> with length of <code>__first - __last</code>.</li>
+</ul>
+</li>
+</ul>
+<p>To summarize, when we initialized vector with initializer list:</p>
+<ol>
+<li>It first calculates the number of objects to allocate memory for. This is assigned to <code>__n</code>.</li>
+<li>Then, memory is allocated for <code>__n</code> objects (including a check if this much memory can be allocated based on the allocator type, if not then it returns a length error). The pointer <code>_M_start</code> points to the starting memory location.</li>
+<li>The end of storage is the end location of the storage. Since we have passed the initializer list, so it knows the end of storage is starting location + len(initializer_list).</li>
+<li>The elements are then copied the range <code>[__first, __last)</code> into the memory allocated.</li>
+</ol>
+<p>Depending on how you initialize your vectors, the process may change but overall, the intention is the same: to allocate memory (if valid) and set pointers (start, end of storage and finish).</p>
+<h2 id="using-similar-value-and-specified-number-of-elements-fill">Using similar value and specified number of elements (fill)</h2>
+<p>Let&rsquo;s take a look at an example of using</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> vec(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">0</span>);
+</code></pre></div><p>The above constructor call will give you a vector of 10 elements with all zeros. You can print the elements using:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// Instead of using auto, we can use
+</span><span style="color:#75715e">// for (std::vector&lt;int&gt;::iterator it = vec.begin(); it != vec.end(); it++) {
+</span><span style="color:#75715e">//     std::cout &lt;&lt; *it &lt;&lt; &#34; &#34;;
+</span><span style="color:#75715e">// }
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> it <span style="color:#f92672">=</span> vec.begin(); it <span style="color:#f92672">!=</span> vec.end(); it<span style="color:#f92672">++</span>) {
+    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#f92672">*</span>it <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34; &#34;</span>;
+}
+std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+</code></pre></div><p>Let&rsquo;s see what changes when the vector is constructed in the above mentioned way. Let&rsquo;s take a look at the constructor which is called:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">vector(size_type __n, <span style="color:#66d9ef">const</span> value_type<span style="color:#f92672">&amp;</span> __value, <span style="color:#66d9ef">const</span> allocator_type<span style="color:#f92672">&amp;</span> __a <span style="color:#f92672">=</span> allocator_type()) <span style="color:#f92672">:</span> _Base(_S_check_init_len(__n, __a), __a {
+    _M_fill_initialize(__n, __value);
+}
+</code></pre></div><p>As the documentation of the above constructor explains, this constructor fills the vector with <code>__n</code> copies of <code>__a</code> value. Note the use of <code>_S_check_init_len</code> here (we discussed this before). Instead of calling <code>_M_range_initialize</code>, <code>_M_fill_initialize</code> is called here. For our example, this function is passed with values: 10 (<code>__n</code>) and 0 (<code>__value</code>). Let&rsquo;s take a look at the definition of <code>_M_fill_initialize</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">_M_fill_initialize</span>(size_type __n, <span style="color:#66d9ef">const</span> value_type<span style="color:#f92672">&amp;</span> __value) {
+    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>_M_impl._M_finish <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>__uninitialized_fill_n_a(<span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>_M_impl._M_start, __n, __value, _M_get_Tp_allocator());
+}
+</code></pre></div><p>The call <code>__uninitialized_fill_n</code> copies the value (<code>__value</code>, here 0) into the range <code>[this-&gt;_M_impl._M_start, this-&gt;_M_impl._M_start + __n)</code> and returns the end of it&rsquo;s range. As per the documentation, it is similar to <code>fill_n()</code> but does not require an initialized output range. Wait, you might be wondering, we didn&rsquo;t initialize <code>this-&gt;_M_impl._M_start</code>! We did! Note that we called <code>_Base(_S_check_init_len(__n, __a)</code> when the constructor is called. <code>_Base</code> is nothing but a typedef of <code>_Vector_base</code>. Let&rsquo;s take a look at this call:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">_Vector_base(size_t __n) <span style="color:#f92672">:</span> _M_impl() {
+    _M_create_storage(__n);
+}
+</code></pre></div><ul>
+<li><code>_M_impl</code> is an object of type <code>_Vector_impl</code> declared in <code>_Vector_base</code> struct.</li>
+<li><code>_M_create_storage(__n)</code> is defined as:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">_M_create_storage</span>(size_t __n) {
+    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>_M_impl._M_start <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>_M_allocate(__n);
+    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>_M_impl._M_finish <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>_M_impl._M_start;
+    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>_M_impl._M_end_of_storage <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>_M_impl._M_start <span style="color:#f92672">+</span> __n;
+}
+</code></pre></div><p>This will answer most of your queries. Let&rsquo;s start line by line.</p>
+<ul>
+<li><code>this-&gt;_M_allocate(__n)</code> was discussed before, which allocates memory for <code>__n</code> objects. Please note that the constructor call <code>_M_impl()</code> had initialized these pointers for us. Here, the pointer is set to the starting memory location.</li>
+<li>Since the function <code>_M_create_storage</code> creates storage, and doesn&rsquo;t copy elements to the memory location. So <code>this-&gt;_M_impl._M_finish</code> is set to <code>this-&gt;_M_impl._M_start</code>.</li>
+<li>The end of storage is, as before, set to <code>this-&gt;_M_impl._M_start + __n</code>.</li>
+</ul>
+</li>
+</ul>
+<p>So, eventually, it&rsquo;s quite similar to what we saw when we initialized our vector with initializer list.</p>
+<h2 id="using-another-vector-copy">Using another vector (copy)</h2>
+<p>Let&rsquo;s take a look at another way to another initalize a vector:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> vec_copy {<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>};
+std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> vec(vec_copy);
+
+<span style="color:#75715e">// Try printing the elements of vec
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> it <span style="color:#f92672">=</span> vec.begin(); it <span style="color:#f92672">!=</span> vec.end(); it<span style="color:#f92672">++</span>) {
+    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#f92672">*</span>it <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+}
+</code></pre></div><p>When you call <code>vec(vec_copy)</code>, the copy constructor is called. Let&rsquo;s take a look at it&rsquo;s definition:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">vector(<span style="color:#66d9ef">const</span> vector<span style="color:#f92672">&amp;</span> __x) <span style="color:#f92672">:</span> _Base(__x.size(), _Alloc_traits<span style="color:#f92672">::</span>_S_select_on_copy(__x._M_get_Tp_allocator()) {
+    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>_M_impl._M_finish <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>__uninitialized_copy_a(__x.begin(), __x.end(), <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>_M_impl._M_start, _M_get_Tp_allocator());
+}
+</code></pre></div><p>The function body is similar to what we saw in the constructor definition when we initialized vector using <code>size_type __n, value_type value</code>. Notice how we initialize the base struct here. Let&rsquo;s take a look at <code>_S_select_on_copy(__x._M_get_Tp_allocator())</code> first. <code>_M_get_Tp_allocator()</code> returns <code>_M_impl</code> object.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">const</span> _Tp_alloc_type<span style="color:#f92672">&amp;</span> _M_get_Tp_allocator() {
+    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>_M_impl;
+}
+</code></pre></div><p>Note that, here, <code>this-&gt;_M_impl</code> will already have the pointers set to the memory locations for start, finish and end of storage (as we use the allocator of <code>__x</code>). The objective is to use the copy of allocator object used by <code>__x</code>. Let&rsquo;s take a look at the constructor of Base struct:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">_Vector_base(size_t __n, <span style="color:#66d9ef">const</span> allocator_type<span style="color:#f92672">&amp;</span> __a) <span style="color:#f92672">:</span> _M_impl(__a) {
+    _M_create_storage(__n);
+}
+</code></pre></div><p>Overall, it&rsquo;s the same to what we saw before except that we use the copy of the alloactor of vector <code>__x</code>. The call <code>_M_create_storage(__n)</code> does the same task of setting pointers <code>_M_start, M_end_of_storage, _M_finish</code> as we observed before.</p>
+<p>For today&rsquo;s blog, we discussed 3 popular ways to initialize a vector in C++ and went through how memory is allocated when the constructors are called. As we move forward, we will slowly get familiar with the design patterns and methods used in GCC.</p>
+<p>As always, I would love to hear your feedback on my blogs. Correct me if I was wrong anywhere, no one is perfect afterall. If this helped you, please let me know - it keeps me going! See you all in the next blog!</p>
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>1460 Words</p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>Posted: <time class="dt-published"> 2020-04-26 05:30 &#43;0530</time></p>
+<a class="resp-sharing-button__link" href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2020%2f04%2funderstanding-how-vectors-work-in-c-part-2-what-happens-when-you-initialize-a-vector%2f" target="_blank" rel="noopener" aria-label="Facebook">
+  <div class="resp-sharing-button resp-sharing-button--facebook resp-sharing-button--medium"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--circle">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11.5"/><path d="M15.84 9.5H13.5V8.48c0-.53.35-.65.6-.65h1.4v-2.3h-2.35c-2.3 0-2.65 1.7-2.65 2.8V9.5h-2v2h2v7h3v-7h2.1l.24-2z"/></svg></div>Facebook</div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="https://twitter.com/intent/tweet/?text=%22Understanding%20how%20Vectors%20work%20in%20C%2b%2b%20%28Part-2%29%3a%20What%20happens%20when%20you%20initialize%20a%20vector%3f%22%20seems%20like%20an%20interesting%20read%20from%20%40rg0swami&amp;url=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2020%2f04%2funderstanding-how-vectors-work-in-c-part-2-what-happens-when-you-initialize-a-vector%2f" target="_blank" rel="noopener" aria-label="Twitter">
+  <div class="resp-sharing-button resp-sharing-button--twitter resp-sharing-button--medium"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--circle">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.5 7.4l-2 .2c-.4-.5-1-.8-2-.8C13.3 6.8 12 8 12 9.4v.6c-2 0-4-1-5.4-2.7-.2.4-.3.8-.3 1.3 0 1 .4 1.7 1.2 2.2-.5 0-1 0-1.2-.3 0 1.3 1 2.3 2 2.6-.3.4-.7.4-1 0 .2 1.4 1.2 2 2.3 2-1 1-2.5 1.4-4 1 1.3 1 2.7 1.4 4.2 1.4 4.8 0 7.5-4 7.5-7.5v-.4c.5-.4.8-1.5 1.2-2z"/><circle cx="12" cy="12" r="11.5"/></svg></div>Twitter</div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="mailto:?subject=%22Understanding%20how%20Vectors%20work%20in%20C%2b%2b%20%28Part-2%29%3a%20What%20happens%20when%20you%20initialize%20a%20vector%3f%22%20seems%20interesting...&amp;body=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2020%2f04%2funderstanding-how-vectors-work-in-c-part-2-what-happens-when-you-initialize-a-vector%2f" target="_self" rel="noopener" aria-label="E-Mail">
+  <div class="resp-sharing-button resp-sharing-button--email resp-sharing-button--medium"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--circle">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19.5 16c0 .8-.7 1.5-1.5 1.5H6c-.8 0-1.5-.7-1.5-1.5V8c0-.8.7-1.5 1.5-1.5h12c.8 0 1.5.7 1.5 1.5v8zm-2-7.5L12 13 6.5 8.5m11 6l-4-2.5m-7 2.5l4-2.5"/><circle cx="12" cy="12" r="11.5"/></svg></div>E-Mail</div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2020%2f04%2funderstanding-how-vectors-work-in-c-part-2-what-happens-when-you-initialize-a-vector%2f&amp;title=%22Understanding%20how%20Vectors%20work%20in%20C%2b%2b%20%28Part-2%29%3a%20What%20happens%20when%20you%20initialize%20a%20vector%3f%22%20seems%20interesting...&amp;summary=%22Understanding%20how%20Vectors%20work%20in%20C%2b%2b%20%28Part-2%29%3a%20What%20happens%20when%20you%20initialize%20a%20vector%3f%22%20seems%20interesting...&amp;source=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2020%2f04%2funderstanding-how-vectors-work-in-c-part-2-what-happens-when-you-initialize-a-vector%2f" target="_blank" rel="noopener" aria-label="LinkedIn">
+  <div class="resp-sharing-button resp-sharing-button--linkedin resp-sharing-button--medium"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--circle">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11.5"/><path d="M15 12.5c-.28 0-.5.22-.5.5v3.5h-3s.03-6.48 0-7h3v.83s.46-.75 1.7-.75c1.56 0 2.3 1.12 2.3 3.3v3.62h-3V13c0-.28-.23-.5-.5-.5zm-7.5-3h2v7h-2z"/><circle cx="8.5" cy="6.5" r="1"/></svg></div>LinkedIn</div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="https://reddit.com/submit/?url=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2020%2f04%2funderstanding-how-vectors-work-in-c-part-2-what-happens-when-you-initialize-a-vector%2f&amp;resubmit=true&amp;title=%22Understanding%20how%20Vectors%20work%20in%20C%2b%2b%20%28Part-2%29%3a%20What%20happens%20when%20you%20initialize%20a%20vector%3f%22%20seems%20interesting..." target="_blank" rel="noopener" aria-label="Reddit">
+  <div class="resp-sharing-button resp-sharing-button--reddit resp-sharing-button--medium"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--circle">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11.5"/><ellipse cx="12" cy="14.37" rx="6.2" ry="4.24"/><path d="M14.3 16.25c-.62.36-1.42.57-2.3.57-.88 0-1.7-.2-2.32-.58"/><circle cx="14.61" cy="13.39" r=".98"/><circle cx="9.39" cy="13.39" r=".98"/><path d="M16.4 11.38c.26-.55.82-.92 1.47-.92.9 0 1.63.73 1.63 1.63 0 .8-.6 1.47-1.38 1.6"/><circle cx="17.22" cy="7.52" r="1.63"/><path d="M7.6 11.38c-.26-.54-.82-.92-1.47-.92-.9 0-1.63.73-1.63 1.63 0 .8.6 1.47 1.38 1.6M12 10.12s-.08-4.82 3.6-2.6"/></svg></div>Reddit</div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="whatsapp://send?text=%22Understanding%20how%20Vectors%20work%20in%20C%2b%2b%20%28Part-2%29%3a%20What%20happens%20when%20you%20initialize%20a%20vector%3f%22%20seems%20interesting...%20https%3a%2f%2fkrshrimali.github.io%2fposts%2f2020%2f04%2funderstanding-how-vectors-work-in-c-part-2-what-happens-when-you-initialize-a-vector%2f" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <div class="resp-sharing-button resp-sharing-button--whatsapp resp-sharing-button--medium"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--circle">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle xmlns="http://www.w3.org/2000/svg" cx="12" cy="12" r="11.5"/><path stroke-width="1px" d="M17.6 6.2c-1.5-1.5-3.4-2.3-5.5-2.3-4.3 0-7.8 3.5-7.8 7.8 0 1.4.4 2.7 1 3.9l-1.1 4 4.1-1.1c1.1.6 2.4.9 3.7.9 4.3 0 7.8-3.5 7.8-7.8.1-2-.7-3.9-2.2-5.4zm-5.5 11.9c-1.2 0-2.3-.3-3.3-.9l-.2-.1-2.4.6.7-2.4-.2-.2c-.6-1-1-2.2-1-3.4 0-3.6 2.9-6.5 6.5-6.5 1.7 0 3.3.7 4.6 1.9 1.2 1.2 1.9 2.8 1.9 4.6-.1 3.5-3 6.4-6.6 6.4zm3.5-4.8c-.2-.1-1.1-.6-1.3-.6-.2-.1-.3-.1-.4.1-.1.2-.5.6-.6.8-.1.1-.2.1-.4 0s-.8-.3-1.6-1c-.6-.5-1-1.2-1.1-1.3-.1-.2 0-.3.1-.4l.3-.3s.1-.2.2-.3c.1-.1 0-.2 0-.3s-.4-1.1-.6-1.4c-.2-.4-.3-.3-.4-.3h-.4s-.3 0-.5.2-.7.7-.7 1.6c0 1 .7 1.9.8 2s1.4 2.1 3.3 2.9c.5.2.8.3 1.1.4.5.1.9.1 1.2.1.4-.1 1.1-.5 1.3-.9.2-.5.2-.8.1-.9 0-.2-.2-.3-.4-.4z"/></svg></div>WhatsApp</div>
+</a>
+</div>
+
+        
+            <div class="pagination">
+                <div class="pagination__title">
+                    <span class="pagination__title-h"></span>
+                    <hr />
+                </div>
+
+                <div class="pagination__buttons">
+                    
+                        <span class="button previous">
+                            <a href="https://krshrimali.github.io/posts/2020/09/releasing-docker-container-and-binder-for-using-xeus-cling-libtorch-and-opencv-in-c-/">
+                                <span class="button__icon">←</span>
+                                <span class="button__text">Releasing Docker Container and Binder for using Xeus-Cling, Libtorch and OpenCV in C&#43;&#43;</span>
+                            </a>
+                        </span>
+                    
+
+                    
+                        <span class="button next">
+                            <a href="https://krshrimali.github.io/posts/2020/04/understanding-how-vectors-work-in-c-part-3-diving-deep-into-member-functions-of-vectors/">
+                                <span class="button__text">Understanding how Vectors work in C&#43;&#43; (Part-3): Diving deep into member functions of vectors</span>
+                                <span class="button__icon">→</span>
+                            </a>
+                        </span>
+                    
+                </div>
+            </div>
+        
+
+        
+            <div class="webmention-form">
+                <form action="https://webmention.io/krshrimali.github.io/webmention" method="post">
+                    <label>Did you mention this article on your website? Put the URL of your post here:</label><br/>
+                    <input name="source" type="url"/>
+                    <input name="target" value="https://krshrimali.github.io/posts/2020/04/understanding-how-vectors-work-in-c-part-2-what-happens-when-you-initialize-a-vector/" type="hidden"/>
+                    <input value="Send Webmention" type="submit"/>
+                </form>
+            </div>
+            <div id="webmention-container"></div>
+        
+
+        
+    </main>
+
+            
+                <footer class="footer">
+    <p>
+        &copy; 2021
+            
+                <span><a href="https://krshrimali.github.io">Kushashwa Ravi Shrimali</a></span>
+                
+                 <a href="https://krshrimali.github.io/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
+                <br>
+            <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a>
+                Powered by <a href="http://gohugo.io"><u>Hugo</u></a> and <a href="https://github.com/HaoZeke/hugo-theme-hello-friend-ng-hz"><u>this theme</u></a>.</br>
+                
+                
+                <script src="https://liberapay.com/rohit/widgets/button.js"></script>
+<noscript><a href="https://liberapay.com/rohit/donate"><img alt="Donate using Liberapay" src="https://liberapay.com/assets/widgets/donate.svg"></a></noscript>
+
+                
+    </p>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+
+
+<script src="https://krshrimali.github.io/bundle.min.5fae9992ea406007408dc33b0b3a8376d61e2f1d6ac50ba1dad7580ac50afb5199bcef3bbc3677e77553a9980bf882cf71edc2f755687dd7725f12ece4304ac2.js"></script>
+<script src="https://krshrimali.github.io/js/webmention.min.513a53d009530b21cba09721b6f4dc912e9c20ad2c0adbb5c4e486c4f77774a6e9eca8c2e1e4e8bc9e9e86693aa5ca91e7bf232b50f7f8bee4e64efc874040a7.js" data-id="webmention-container"></script>
+
+
+
+
+    </body>
+</html>

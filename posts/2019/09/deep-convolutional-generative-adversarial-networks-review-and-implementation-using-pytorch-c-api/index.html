@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="map[name:Kushashwa Ravi Shrimali]">
+<meta name="description" content="I&amp;rsquo;m pleased to start a series of blogs on GANs and their implementation with PyTorch C&#43;&#43; API. We&amp;rsquo;ll be starting with one of the initial GANs - DCGANs (Deep Convolutional Generative Adversarial Networks).
+" />
+<meta name="keywords" content="" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="#252627" />
+<link rel="canonical" href="https://krshrimali.github.io/posts/2019/09/deep-convolutional-generative-adversarial-networks-review-and-implementation-using-pytorch-c-api/" />
+
+
+<title>
+    
+    Deep Convolutional Generative Adversarial Networks: Review and Implementation using PyTorch C&#43;&#43; API :: Kushashwa Ravi Shrimali (Kush)  — Hello Friend NG HZ Theme
+    
+</title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+      type="text/css">
+
+
+
+<link rel="stylesheet" href="https://krshrimali.github.io/main.min.b6dbce0fdf6c61563a0c2226e857d5dadd8e5afa2c4f73ec9ea55abd831f9a72.css">
+
+
+
+
+
+    <link rel="webmention" href="https://webmention.io/example.com/webmention" />
+    <link rel="pingback" href="https://webmention.io/example.com/xmlrpc" />
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="https://krshrimali.github.io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://krshrimali.github.io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://krshrimali.github.io/favicon-16x16.png">
+    <link rel="manifest" href="https://krshrimali.github.io/site.webmanifest">
+    <link rel="mask-icon" href="https://krshrimali.github.io/safari-pinned-tab.svg" color="#252627">
+    <link rel="shortcut icon" href="https://krshrimali.github.io/favicon.ico">
+    <meta name="msapplication-TileColor" content="#252627">
+    <meta name="theme-color" content="#252627">
+
+<meta itemprop="name" content="Deep Convolutional Generative Adversarial Networks: Review and Implementation using PyTorch C&#43;&#43; API">
+<meta itemprop="description" content="I&rsquo;m pleased to start a series of blogs on GANs and their implementation with PyTorch C&#43;&#43; API. We&rsquo;ll be starting with one of the initial GANs - DCGANs (Deep Convolutional Generative Adversarial Networks)."><meta itemprop="datePublished" content="2019-09-15T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2019-09-15T00:00:00+00:00" />
+<meta itemprop="wordCount" content="2047"><meta itemprop="image" content="https://krshrimali.github.io"/>
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://krshrimali.github.io"/>
+
+<meta name="twitter:title" content="Deep Convolutional Generative Adversarial Networks: Review and Implementation using PyTorch C&#43;&#43; API"/>
+<meta name="twitter:description" content="I&rsquo;m pleased to start a series of blogs on GANs and their implementation with PyTorch C&#43;&#43; API. We&rsquo;ll be starting with one of the initial GANs - DCGANs (Deep Convolutional Generative Adversarial Networks)."/>
+
+
+
+
+
+    <meta property="article:published_time" content="2019-09-15 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+    </head>
+
+    <body class="dark-theme">
+        <div class="container">
+            <header class="header">
+    <div class="header__inner">
+        <div class="header__left">
+        <div class="logo">
+<a href="https://krshrimali.github.io/" style="text-decoration: none;">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">$ cd /home/</span>
+            <span class="logo__cursor" style=
+                  "
+                   
+                   ">
+            </span>
+        
+</a>
+</div>
+
+        </div>
+
+        
+        <div class="header__mid">
+        <button class="button">
+            <div class="button__text">
+        <a href="https://krshrimali.github.io/search" >
+                Search
+        </a>
+            </div>
+        </button>
+        </div>
+       
+
+        <div class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="https://krshrimali.github.io/about">About</a></li><li><a href="https://krshrimali.github.io/posts">Blog</a></li>
+    </ul>
+    <ul class="menu__inner"><li><a href="https://krshrimali.github.io/categories">Categories</a></li><li><a href="https://krshrimali.github.io/tags">Tags</a></li>
+    </ul>
+</nav>
+
+            <button id="toggleMenu">
+                <div class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </div>
+             </button>
+            
+
+            <button class="theme-toggle" id="toggleTheme"><svg class="theme-toggler" width="32" height="32" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+</button>
+        </div>
+    </div>
+</header>
+
+            
+<script src="https://krshrimali.github.io/js/mathjax-config.js"></script>
+
+
+<script id="MathJax-script" async src="https://unpkg.com/mathjax@3/es5/tex-chtml.js"></script>
+
+            
+    <main class="post">
+
+        <div class="post-info">
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>10 minutes
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>Written: 2019-09-15 00:00 &#43;0000</p>
+
+            
+
+            </p>
+        </div>
+
+        <article class="h-entry">
+            <h1 class="post-title p-name">
+                <a class="u-url" href="https://krshrimali.github.io/posts/2019/09/deep-convolutional-generative-adversarial-networks-review-and-implementation-using-pytorch-c-api/">Deep Convolutional Generative Adversarial Networks: Review and Implementation using PyTorch C++ API</a>
+            </h1>
+        <div class="post-info"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-pen-tool"><path d="M12 19l7-7 3 3-7 7-3-3z"></path><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path><path d="M2 2l7.586 7.586"></path><circle cx="11" cy="11" r="2"></circle></svg>
+                         <span class="author u-author p-author"><a href="https://krshrimali.github.io/author/kushashwa-ravi-shrimali">Kushashwa Ravi Shrimali</a></span>
+        </div>
+
+            
+
+            <div class="post-content e-content">
+                <p>I&rsquo;m pleased to start a series of blogs on GANs and their implementation with PyTorch C++ API. We&rsquo;ll be starting with one of the initial GANs - DCGANs (Deep Convolutional Generative Adversarial Networks).</p>
+<!-- raw HTML omitted -->
+<p>The authors (Soumith Chintala, Radford and Luke Metz) in <!-- raw HTML omitted -->this<!-- raw HTML omitted --> Seminal Paper on DCGANs introduced DCGANs to the world like this:</p>
+<blockquote>
+<p>We introduce a class of CNNs called deep convolutional generative adversarial networks (DCGANs), that have certain architectural constraints, and demonstrate that they are a strong candidate for unsupervised learning. Training on various image datasets, we show convincing evidence that our deep convolutional adversarial pair learns a hierarchy of representations from object parts to scenes in both the generator and discriminator. Additionally, we use the learned features for novel tasks - demonstrating their applicability as general image representations.</p>
+</blockquote>
+<p>Even though, the introduction to DCGANs is quite lucid, but here are some points to note:</p>
+<ol>
+<li>DCGANs are a class of Convolutional Neural Networks.</li>
+<li>They are a strong candidate for Unsupervised Learning.</li>
+<li>They are applicable as general image representations as well.</li>
+</ol>
+<p>Let&rsquo;s go ahead and see what exactly is DCGAN?</p>
+<h2 id="introduction-to-dcgan">Introduction to DCGAN</h2>
+<p>At the time when this paper was released, there was quite a focus on Supervised Learning. The paper aimed at bridging the gap between Unsupervised Learning and Supervised Learning. DCGANs are a way to understand and extract important feature representations from a dataset and generate good image representations by training.</p>
+<p>Any Generative Adversarial Network has 2 major components: a Generator and a Discriminator. The tasks for both of them are simple.</p>
+<ol>
+<li><strong>Generator</strong>: Generates Images similar to the data distribution such that Discriminator can not distinguish it with the original data.</li>
+<li><strong>Discriminator</strong>: Discriminator has a task on accurately distinguishing between the image from the generator and from the data distribution. It basically has to recognize an image as fake or real, correctly.</li>
+</ol>
+<p>Both Generator and Discriminator tasks can be represented beautifully with the following equation:</p>
+<!-- raw HTML omitted -->
+<p>The above equation, shows how the Generator and Discriminator plays min-max game.</p>
+<ol>
+<li>The <strong>Generator tries to minimize the loss function.</strong> It follows up with two cases:
+<ol>
+<li><strong>When the data is from the data distribution:</strong> Generator has a task of forcing the Discriminator to predict the data as fake.</li>
+<li><strong>When data is from the Generator:</strong> Generator has a task of forcing the Discriminator to predict the data as real.</li>
+</ol>
+</li>
+<li>The <strong>Discriminator tries to maximize the loss function.</strong> It follows up with two cases:
+<ol>
+<li><strong>When the data is from the data distribution:</strong> Discriminator tries to predict the data as real.</li>
+<li><strong>When the data is from the Generator:</strong> Discriminator tries to predict the data as fake.</li>
+</ol>
+</li>
+</ol>
+<p>Fundamentally, the Generator is trying to fool the Discriminator and the Discriminator is trying not to get fooled with. Because of it&rsquo;s analogy, it&rsquo;s also called a police-thief game. (Police is the Discriminator and thief is the Generator).</p>
+<p>We have good enough discussion on GANs, to kickstart discussion on DCGANs. Let&rsquo;s go ahead and see what changes they proposed on common CNNs:</p>
+<p>Changes in the <strong>Generator</strong>:</p>
+<ol>
+<li>Spatial Pooling Layers such as MaxPool Layers were replaced with Fractional-Strided Convolutions (a.k.a Transposed Convolutions). This allows the network to learn it&rsquo;s own spatial downsampling, instead of explicitly mentioning the downsampling parameters by Max Pooling.</li>
+<li>Use BatchNorm in the Generator.</li>
+<li>Remove Fully Connected layers for deeper architectures.</li>
+<li>Use ReLU activation function for all the layers except the output layer (which uses Tanh activation function).</li>
+</ol>
+<p>Changes in the <strong>Discriminator</strong>:</p>
+<ol>
+<li>Spatial Pooling Layers such as MaxPool layers were replaced with Strided Convolutions.</li>
+<li>Use BatchNorm in the Discriminator.</li>
+<li>Remove FC layers for deeper architectures.</li>
+<li>Use LeakyReLU activation function for all the layers in the Discriminator.</li>
+</ol>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted -->Generator of the DCGAN used for LSUN scene modeling. Source: <a href="https://arxiv.org/pdf/1511.06434.pdf">https://arxiv.org/pdf/1511.06434.pdf</a><!-- raw HTML omitted --></p>
+<p>As you would note in the above architecture, there is absence of spatial pooling layers and fully connected layers.</p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted -->Discriminator of the DCGAN used for LSUN scene modeling. Source: <a href="https://github.com/ChengBinJin/DCGAN-TensorFlow">https://github.com/ChengBinJin/DCGAN-TensorFlow</a><!-- raw HTML omitted --></p>
+<p>Notably again, there are no pooling and fully connected layers (except the last layer).</p>
+<p>Let&rsquo;s start with defining the architectures of both Generators and Discriminators using PyTorch C++ API. I used the Object Oriented approach by making class, each for Generator and Discriminator. Note that each of them are a type of CNNs, and also inherit functions (or methods) from <code>torch::nn::Module</code> class.</p>
+<p>As mentioned before, Generator uses Transposed Convolutional Layers and has no pooling and FC layers. It also uses ReLU Activation Function (except the last layer). The parameters used for the Generator include:</p>
+<ol>
+<li><code>dataroot</code>: (type: <code>std::string</code>) Path of the dataset&rsquo;s root directory.</li>
+<li><code>workers</code>: (type: <code>int</code>) Having more <code>workers</code> will increase CPU memory usage. (Check this link <!-- raw HTML omitted -->for more details<!-- raw HTML omitted -->)</li>
+<li><code>batch_size</code>: (type: <code>int</code>) Batch Size to consider.</li>
+<li><code>image_size</code>: (type: <code>int</code>) Size of the image to resize it to.</li>
+<li><code>nc</code>: (type: <code>int</code>) Number of channels in the Input Image.</li>
+<li><code>nz</code>: (type: <code>int</code>) Length of latent vector, from which the input image is taken.</li>
+<li><code>ngf</code>: (type <code>int</code>) Depth of feature maps carried through the generator.</li>
+<li><code>num_epochs</code>: (type <code>int</code>) Number of epochs for which the model is trained.</li>
+<li><code>lr</code>: (type <code>float</code>) Learning Rate for training. Authors described it to be 0.0002</li>
+<li><code>beta1</code>: (type: <code>float</code>) Hyperparameter for Optimizer used (Adam).</li>
+<li><code>ngpu</code>: (type: <code>int</code>) Number of GPUs available to use. (use <code>0</code> if no GPU available)</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Generator</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Module {
+<span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+    std<span style="color:#f92672">::</span>string dataroot;
+    <span style="color:#66d9ef">int</span> workers;
+    <span style="color:#66d9ef">int</span> batch_size;
+    <span style="color:#66d9ef">int</span> image_size;
+    <span style="color:#66d9ef">int</span> nc;
+    <span style="color:#66d9ef">int</span> nz;
+    <span style="color:#66d9ef">int</span> ngf;
+    <span style="color:#66d9ef">int</span> num_epochs;
+    <span style="color:#66d9ef">float</span> lr;
+    <span style="color:#66d9ef">float</span> beta1;
+    <span style="color:#66d9ef">int</span> ngpu;
+<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Sequential main;
+    Generator(std<span style="color:#f92672">::</span>string dataroot_ <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;data/celeba&#34;</span>, <span style="color:#66d9ef">int</span> workers_ <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>, <span style="color:#66d9ef">int</span> batch_size_ <span style="color:#f92672">=</span> <span style="color:#ae81ff">128</span>, <span style="color:#66d9ef">int</span> image_size_ <span style="color:#f92672">=</span> <span style="color:#ae81ff">64</span>, <span style="color:#66d9ef">int</span> nc_ <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>, <span style="color:#66d9ef">int</span> nz_ <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>, <span style="color:#66d9ef">int</span> ngf_ <span style="color:#f92672">=</span> <span style="color:#ae81ff">64</span>, <span style="color:#66d9ef">int</span> ndf_ <span style="color:#f92672">=</span> <span style="color:#ae81ff">64</span>, <span style="color:#66d9ef">int</span> num_epochs_ <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>, <span style="color:#66d9ef">float</span> lr_ <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0002</span>, <span style="color:#66d9ef">float</span> beta1_ <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.5</span>, <span style="color:#66d9ef">int</span> ngpu_ <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>) {
+        
+        <span style="color:#75715e">// Set the arguments
+</span><span style="color:#75715e"></span>        dataroot <span style="color:#f92672">=</span> dataroot_;
+        workers <span style="color:#f92672">=</span> workers_;
+        batch_size <span style="color:#f92672">=</span> batch_size_;
+        image_size <span style="color:#f92672">=</span> image_size_;
+        nc <span style="color:#f92672">=</span> nc_;
+        nz <span style="color:#f92672">=</span> nz_;
+        ngf <span style="color:#f92672">=</span> ngf_;
+        ndf <span style="color:#f92672">=</span> ndf_;
+        num_epochs <span style="color:#f92672">=</span> num_epochs_;
+        lr <span style="color:#f92672">=</span> lr_;
+        beta1 <span style="color:#f92672">=</span> beta1_;
+        ngpu <span style="color:#f92672">=</span> ngpu_;
+        
+        main <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Sequential(
+           torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(nz, ngf<span style="color:#f92672">*</span><span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">4</span>).stride(<span style="color:#ae81ff">1</span>).padding(<span style="color:#ae81ff">0</span>).with_bias(false).transposed(true)),
+             torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>BatchNorm(ngf<span style="color:#f92672">*</span><span style="color:#ae81ff">8</span>),
+             torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Functional(torch<span style="color:#f92672">::</span>relu),
+             torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(ngf<span style="color:#f92672">*</span><span style="color:#ae81ff">8</span>, ngf<span style="color:#f92672">*</span><span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">4</span>).stride(<span style="color:#ae81ff">2</span>).padding(<span style="color:#ae81ff">1</span>).with_bias(false).transposed(true)),
+             torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>BatchNorm(ngf<span style="color:#f92672">*</span><span style="color:#ae81ff">4</span>),
+             torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Functional(torch<span style="color:#f92672">::</span>relu),
+             torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(ngf<span style="color:#f92672">*</span><span style="color:#ae81ff">4</span>, ngf<span style="color:#f92672">*</span><span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">4</span>).stride(<span style="color:#ae81ff">2</span>).padding(<span style="color:#ae81ff">1</span>).with_bias(false).transposed(true)),
+             torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>BatchNorm(ngf<span style="color:#f92672">*</span><span style="color:#ae81ff">2</span>),
+             torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Functional(torch<span style="color:#f92672">::</span>relu),
+             torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(ngf<span style="color:#f92672">*</span><span style="color:#ae81ff">2</span>, ngf, <span style="color:#ae81ff">4</span>).stride(<span style="color:#ae81ff">2</span>).padding(<span style="color:#ae81ff">1</span>).with_bias(false).transposed(true)),
+             torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>BatchNorm(ngf),
+             torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Functional(torch<span style="color:#f92672">::</span>relu),
+             torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(ngf, nc, <span style="color:#ae81ff">4</span>).stride(<span style="color:#ae81ff">2</span>).padding(<span style="color:#ae81ff">1</span>).with_bias(false).transposed(true)),
+             torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Functional(torch<span style="color:#f92672">::</span>tanh)
+        );
+    }
+    
+    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Sequential main_func() {
+    	<span style="color:#75715e">// Returns Sequential Model of the Generator
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">return</span> main;
+    }
+};
+</code></pre></div><p>Note how we used Transposed Convolution, by passing <code>.transposed(true)</code>.</p>
+<p>Similarly, we define the class for Discriminator.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Discriminator</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Module {
+<span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+    std<span style="color:#f92672">::</span>string dataroot;
+    <span style="color:#66d9ef">int</span> workers;
+    <span style="color:#66d9ef">int</span> batch_size;
+    <span style="color:#66d9ef">int</span> image_size;
+    <span style="color:#66d9ef">int</span> nc;
+    <span style="color:#66d9ef">int</span> nz;
+    <span style="color:#66d9ef">int</span> ndf;
+    <span style="color:#66d9ef">int</span> num_epochs;
+    <span style="color:#66d9ef">float</span> lr;
+    <span style="color:#66d9ef">float</span> beta1;
+    <span style="color:#66d9ef">int</span> ngpu;
+<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Sequential main;
+    Discriminator(std<span style="color:#f92672">::</span>string dataroot_ <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;data/celeba&#34;</span>, <span style="color:#66d9ef">int</span> workers_ <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>, <span style="color:#66d9ef">int</span> batch_size_ <span style="color:#f92672">=</span> <span style="color:#ae81ff">128</span>, <span style="color:#66d9ef">int</span> image_size_ <span style="color:#f92672">=</span> <span style="color:#ae81ff">64</span>, <span style="color:#66d9ef">int</span> nc_ <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>, <span style="color:#66d9ef">int</span> nz_ <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>, <span style="color:#66d9ef">int</span> ngf_ <span style="color:#f92672">=</span> <span style="color:#ae81ff">64</span>, <span style="color:#66d9ef">int</span> ndf_ <span style="color:#f92672">=</span> <span style="color:#ae81ff">64</span>, <span style="color:#66d9ef">int</span> num_epochs_ <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>, <span style="color:#66d9ef">float</span> lr_ <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0002</span>, <span style="color:#66d9ef">float</span> beta1_ <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.5</span>, <span style="color:#66d9ef">int</span> ngpu_ <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>) {
+        
+        dataroot <span style="color:#f92672">=</span> dataroot_;
+        workers <span style="color:#f92672">=</span> workers_;
+        batch_size <span style="color:#f92672">=</span> batch_size_;
+        image_size <span style="color:#f92672">=</span> image_size_;
+        nc <span style="color:#f92672">=</span> nc_;
+        nz <span style="color:#f92672">=</span> nz_;
+        ngf <span style="color:#f92672">=</span> ngf_;
+        ndf <span style="color:#f92672">=</span> ndf_;
+        num_epochs <span style="color:#f92672">=</span> num_epochs_;
+        lr <span style="color:#f92672">=</span> lr_;
+        beta1 <span style="color:#f92672">=</span> beta1_;
+        ngpu <span style="color:#f92672">=</span> ngpu_;
+        
+        main <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Sequential(
+           torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(nc, ndf, <span style="color:#ae81ff">4</span>).stride(<span style="color:#ae81ff">2</span>).padding(<span style="color:#ae81ff">1</span>).with_bias(false)),
+           torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Functional(torch<span style="color:#f92672">::</span>leaky_relu, <span style="color:#ae81ff">0.2</span>),
+           torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(ndf, ndf<span style="color:#f92672">*</span><span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">4</span>).stride(<span style="color:#ae81ff">2</span>).padding(<span style="color:#ae81ff">1</span>).with_bias(false)),
+           torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>BatchNorm(ndf<span style="color:#f92672">*</span><span style="color:#ae81ff">2</span>),
+           torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Functional(torch<span style="color:#f92672">::</span>leaky_relu, <span style="color:#ae81ff">0.2</span>),
+           torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(ndf<span style="color:#f92672">*</span><span style="color:#ae81ff">2</span>, ndf<span style="color:#f92672">*</span><span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">4</span>).stride(<span style="color:#ae81ff">2</span>).padding(<span style="color:#ae81ff">1</span>).with_bias(false)),
+           torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>BatchNorm(ndf<span style="color:#f92672">*</span><span style="color:#ae81ff">4</span>),
+           torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Functional(torch<span style="color:#f92672">::</span>leaky_relu, <span style="color:#ae81ff">0.2</span>),
+           torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(ndf<span style="color:#f92672">*</span><span style="color:#ae81ff">4</span>, ndf<span style="color:#f92672">*</span><span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">4</span>).stride(<span style="color:#ae81ff">2</span>).padding(<span style="color:#ae81ff">1</span>).with_bias(false)),
+           torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>BatchNorm(ndf<span style="color:#f92672">*</span><span style="color:#ae81ff">8</span>),
+           torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Functional(torch<span style="color:#f92672">::</span>leaky_relu, <span style="color:#ae81ff">0.2</span>),
+           torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(ndf<span style="color:#f92672">*</span><span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">4</span>).stride(<span style="color:#ae81ff">1</span>).padding(<span style="color:#ae81ff">0</span>).with_bias(false)),
+           torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Functional(torch<span style="color:#f92672">::</span>sigmoid)
+        );
+    }
+    
+    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Sequential main_func() {
+        <span style="color:#66d9ef">return</span> main;
+    }
+};
+</code></pre></div><p>We can initialize these networks as shown below:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// Uses default arguments if no args passed
+</span><span style="color:#75715e"></span>Generator gen <span style="color:#f92672">=</span> Generator()
+Discriminator dis <span style="color:#f92672">=</span> Discriminator()
+
+torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Sequential gen_model <span style="color:#f92672">=</span> gen.main_func()
+torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Sequential dis_model <span style="color:#f92672">=</span> dis.main_func()
+</code></pre></div><p>In case you are using a GPU, you can convert the models:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">torch<span style="color:#f92672">::</span>Device device <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>kCPU;
+<span style="color:#66d9ef">if</span>(torch<span style="color:#f92672">::</span>cuda<span style="color:#f92672">::</span>is_available()) {
+    device <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>kCUDA;
+}
+
+gen_model<span style="color:#f92672">-&gt;</span>to(device);
+dis_model<span style="color:#f92672">-&gt;</span>to(device);
+</code></pre></div><p><strong>Note on Data Loading</strong>: In the past blogs, I&rsquo;ve discussed on loading custom data. Please refer to the previous blogs for a quick review on loading data.</p>
+<p>Let&rsquo;s go ahead and define optimizers and train our model. We use the parameters defined by the authors, for optimizer (Adam, <code>beta</code> = 0.5) and learning rate of <code>2e-4</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">torch<span style="color:#f92672">::</span>optim<span style="color:#f92672">::</span>Adam gen_optimizer(gen_model<span style="color:#f92672">-&gt;</span>parameters(), torch<span style="color:#f92672">::</span>optim<span style="color:#f92672">::</span>AdamOptions(<span style="color:#ae81ff">2e-4</span>).beta1(<span style="color:#ae81ff">0.5</span>));
+torch<span style="color:#f92672">::</span>optim<span style="color:#f92672">::</span>Adam dis_optimizer(dis_model<span style="color:#f92672">-&gt;</span>parameters(), torch<span style="color:#f92672">::</span>optim<span style="color:#f92672">::</span>AdamOptions(<span style="color:#ae81ff">2e-4</span>).beta1(<span style="color:#ae81ff">0.5</span>));
+</code></pre></div><p>Time to write our training code. We are using <code>CelebA</code> dataset which looks like this:</p>
+<!-- raw HTML omitted -->
+<p>The dataset is huge, and contains 10,177 number of identities and around ~200k number of face images. It also contains annotations, but since GANs are a way of unsupervised learning, so they don&rsquo;t actually consider annotations. Before we move on, we&rsquo;ll see a quick step by step review on training the Discriminator and Generator simultaneously:</p>
+<ol>
+<li><strong>Step-1: Train Discriminator</strong>. Remember from above, the discriminator tries to maximize the loss function such that it predicts the fake images as fake and real images as real.
+<ol>
+<li>As the first step for every training process, we set the gradients to zero. This helps in calculating correct gradients, and not getting confused with gradients stored in the previous iteration.</li>
+<li>First calculate <strong>discriminator loss on real images</strong> (that is, data from our dataset). We do this by getting data from the batch and labels as anything between 0.8 and 1.0 (since it&rsquo;s real, we approximate it from 0.8 to 1.0).</li>
+<li>Do a forward pass to the discriminator network, and calculate output on the batch of data from our dataset.</li>
+<li>Calculate loss by using <code>torch::binary_cross_entropy</code> and backpropagate the loss.</li>
+<li>We now calculate <strong>discriminator loss on fake images</strong> (that is, data from the generator). For this, we take a noise of shape similar to the batch of data, and pass that noise to the generator.</li>
+<li>The labels are given zero values (as the images are fake).</li>
+<li>Again, calculate the loss by using <code>torch::binary_cross_entropy</code> and backpropagate the loss.</li>
+<li>Sum both the losses, <strong>discriminator loss on real images</strong> + <strong>discriminator loss on fake images</strong>. This will be our discriminator loss.</li>
+<li>We then update our parameters using the optimizer.</li>
+</ol>
+</li>
+<li><strong>Step-2: Train Generator</strong>. The task of a Generator is to minimize the loss function. Since it has to produce images which can fool the discriminator, so it only has to consider fake images.
+<ol>
+<li>As the first step for every training process, we set the gradients to zero. This helps in calculating correct gradients, and not getting confused with gradients stored in the previous iteration.</li>
+<li>We use the fake images produced in the Step-1 and pass it to the discriminator.</li>
+<li>Fill the labels with 1. (since generator wants to fool the discriminator, by making it predict as real images).</li>
+<li>Calculate loss, by using <code>torch::binary_cross_entropy</code> and backpropagate the loss.</li>
+<li>Update the parameters using optimizer of the Generator.</li>
+</ol>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> epoch<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>; epoch<span style="color:#f92672">&lt;=</span><span style="color:#ae81ff">10</span>; epoch<span style="color:#f92672">++</span>) {
+    <span style="color:#75715e">// Store batch count in a variable
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> batch_count <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+    <span style="color:#75715e">// You can use torch::data::Example&lt;&gt;&amp; batch: *data_loader
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span><span style="color:#f92672">&amp;</span> batch: <span style="color:#f92672">*</span>data_loader) {
+        <span style="color:#75715e">// Step-1: Train the Discriminator
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">// Set gradients to zero
+</span><span style="color:#75715e"></span>        netD<span style="color:#f92672">-&gt;</span>zero_grad();
+        <span style="color:#75715e">// Calculating discriminator loss on real images
+</span><span style="color:#75715e"></span>        torch<span style="color:#f92672">::</span>Tensor images_real <span style="color:#f92672">=</span> batch.data.to(device);
+        torch<span style="color:#f92672">::</span>Tensor labels_real <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>empty(batch.data.size(<span style="color:#ae81ff">0</span>), device).uniform_(<span style="color:#ae81ff">0.8</span>, <span style="color:#ae81ff">1.0</span>));
+        <span style="color:#75715e">// Do a forward pass to the Discriminator network
+</span><span style="color:#75715e"></span>        torch<span style="color:#f92672">::</span>Tensor output_D_real <span style="color:#f92672">=</span> netD<span style="color:#f92672">-&gt;</span>forward(images_real);
+        <span style="color:#75715e">// Calculate the loss
+</span><span style="color:#75715e"></span>        torch<span style="color:#f92672">::</span>Tensor loss_real_D <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>binary_cross_entropy(output_D_real, labels_real);
+        loss_real_D.backward();
+
+        <span style="color:#75715e">// Calculate discriminator loss on fake images
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">// Generate noise and do forward pass to generate fake images
+</span><span style="color:#75715e"></span>        torch:Tensor fake_random <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>randn({batch.data.size(<span style="color:#ae81ff">0</span>), args.nz, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>}, device);
+        torch<span style="color:#f92672">::</span>Tensor images_fake <span style="color:#f92672">=</span> netG<span style="color:#f92672">-&gt;</span>forward(images_fake);
+        torch<span style="color:#f92672">::</span>Tensor labels_fake <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>zeros(batch.data.size(<span style="color:#ae81ff">0</span>), device);
+        <span style="color:#75715e">// Do a forward pass to the Discriminator network
+</span><span style="color:#75715e"></span>        torch<span style="color:#f92672">::</span>Tensor output_D_fake <span style="color:#f92672">=</span> netD<span style="color:#f92672">-&gt;</span>forward(images_fake);
+        <span style="color:#75715e">// Calculate the loss
+</span><span style="color:#75715e"></span>        torch<span style="color:#f92672">::</span>Tensor loss_fake_D <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>binary_cross_entropy(output_D_fake, labels_fake);
+        loss_fake_D.backward();
+
+        <span style="color:#75715e">// Total discriminator loss
+</span><span style="color:#75715e"></span>        torch<span style="color:#f92672">::</span>Tensor loss_discriminator <span style="color:#f92672">=</span> loss_real_D <span style="color:#f92672">+</span> loss_fake_D;
+        <span style="color:#75715e">// Update the parameters
+</span><span style="color:#75715e"></span>        dis_optimizer.step();
+
+        <span style="color:#75715e">// Step-2: Train the Generator
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">// Set gradients to zero
+</span><span style="color:#75715e"></span>        netG<span style="color:#f92672">-&gt;</span>zero_grad();
+        <span style="color:#75715e">// calculating generator loss on fake images
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">// Change labels_fake from all zeros to all ones
+</span><span style="color:#75715e"></span>        labels_fake.fill_(<span style="color:#ae81ff">1</span>);
+        <span style="color:#75715e">// Do forward pass to the Discriminator on the fake images generated above
+</span><span style="color:#75715e"></span>        torch<span style="color:#f92672">::</span>Tensor output_G_fake <span style="color:#f92672">=</span> netD<span style="color:#f92672">-&gt;</span>forward(images_fake);
+        <span style="color:#75715e">// Calculate loss
+</span><span style="color:#75715e"></span>        torch<span style="color:#f92672">::</span>Tensor loss_generator <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>binary_cross_entropy(output_G_fake, labels_fake);
+        loss_generator.backward();
+        <span style="color:#75715e">// Update the parameters
+</span><span style="color:#75715e"></span>        gen_optimizer.step();
+
+        std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Epoch: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> epoch <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;, Batch: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> batch_count <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;, Gen Loss: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> loss_generator.item<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">float</span><span style="color:#f92672">&gt;</span>() <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;, Discriminator Loss: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> loss_discriminator.item<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">float</span><span style="color:#f92672">&gt;</span>() <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+	
+        batch_count<span style="color:#f92672">++</span>;
+    }
+}
+</code></pre></div><p>We are all set to train our first DCGAN in C++ using Libtorch. How amazing it is?</p>
+<p>In the coming blog, I&rsquo;ll share the results and answer a few common questions on the architecture of DCGAN.</p>
+<h2 id="acknowledgement-and-references">Acknowledgement and References</h2>
+<p>I would like to thank <!-- raw HTML omitted -->Will Feng<!-- raw HTML omitted --> and <!-- raw HTML omitted -->Piotr<!-- raw HTML omitted --> for their useful suggestions. The code used in this blog, is partially analogous to the official <!-- raw HTML omitted -->PyTorch examples repo on DCGAN using Libtorch<!-- raw HTML omitted -->. I&rsquo;ve also referred the original paper by <!-- raw HTML omitted -->Soumith Chintala<!-- raw HTML omitted --> and others. The sources of reference images (for Network architectures) have been acknowledged in the captions of respective images.</p>
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>2047 Words</p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>Posted: <time class="dt-published"> 2019-09-15 05:30 &#43;0530</time></p>
+<a class="resp-sharing-button__link" href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2019%2f09%2fdeep-convolutional-generative-adversarial-networks-review-and-implementation-using-pytorch-c-api%2f" target="_blank" rel="noopener" aria-label="Facebook">
+  <div class="resp-sharing-button resp-sharing-button--facebook resp-sharing-button--medium"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--circle">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11.5"/><path d="M15.84 9.5H13.5V8.48c0-.53.35-.65.6-.65h1.4v-2.3h-2.35c-2.3 0-2.65 1.7-2.65 2.8V9.5h-2v2h2v7h3v-7h2.1l.24-2z"/></svg></div>Facebook</div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="https://twitter.com/intent/tweet/?text=%22Deep%20Convolutional%20Generative%20Adversarial%20Networks%3a%20Review%20and%20Implementation%20using%20PyTorch%20C%2b%2b%20API%22%20seems%20like%20an%20interesting%20read%20from%20%40rg0swami&amp;url=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2019%2f09%2fdeep-convolutional-generative-adversarial-networks-review-and-implementation-using-pytorch-c-api%2f" target="_blank" rel="noopener" aria-label="Twitter">
+  <div class="resp-sharing-button resp-sharing-button--twitter resp-sharing-button--medium"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--circle">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.5 7.4l-2 .2c-.4-.5-1-.8-2-.8C13.3 6.8 12 8 12 9.4v.6c-2 0-4-1-5.4-2.7-.2.4-.3.8-.3 1.3 0 1 .4 1.7 1.2 2.2-.5 0-1 0-1.2-.3 0 1.3 1 2.3 2 2.6-.3.4-.7.4-1 0 .2 1.4 1.2 2 2.3 2-1 1-2.5 1.4-4 1 1.3 1 2.7 1.4 4.2 1.4 4.8 0 7.5-4 7.5-7.5v-.4c.5-.4.8-1.5 1.2-2z"/><circle cx="12" cy="12" r="11.5"/></svg></div>Twitter</div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="mailto:?subject=%22Deep%20Convolutional%20Generative%20Adversarial%20Networks%3a%20Review%20and%20Implementation%20using%20PyTorch%20C%2b%2b%20API%22%20seems%20interesting...&amp;body=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2019%2f09%2fdeep-convolutional-generative-adversarial-networks-review-and-implementation-using-pytorch-c-api%2f" target="_self" rel="noopener" aria-label="E-Mail">
+  <div class="resp-sharing-button resp-sharing-button--email resp-sharing-button--medium"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--circle">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19.5 16c0 .8-.7 1.5-1.5 1.5H6c-.8 0-1.5-.7-1.5-1.5V8c0-.8.7-1.5 1.5-1.5h12c.8 0 1.5.7 1.5 1.5v8zm-2-7.5L12 13 6.5 8.5m11 6l-4-2.5m-7 2.5l4-2.5"/><circle cx="12" cy="12" r="11.5"/></svg></div>E-Mail</div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2019%2f09%2fdeep-convolutional-generative-adversarial-networks-review-and-implementation-using-pytorch-c-api%2f&amp;title=%22Deep%20Convolutional%20Generative%20Adversarial%20Networks%3a%20Review%20and%20Implementation%20using%20PyTorch%20C%2b%2b%20API%22%20seems%20interesting...&amp;summary=%22Deep%20Convolutional%20Generative%20Adversarial%20Networks%3a%20Review%20and%20Implementation%20using%20PyTorch%20C%2b%2b%20API%22%20seems%20interesting...&amp;source=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2019%2f09%2fdeep-convolutional-generative-adversarial-networks-review-and-implementation-using-pytorch-c-api%2f" target="_blank" rel="noopener" aria-label="LinkedIn">
+  <div class="resp-sharing-button resp-sharing-button--linkedin resp-sharing-button--medium"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--circle">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11.5"/><path d="M15 12.5c-.28 0-.5.22-.5.5v3.5h-3s.03-6.48 0-7h3v.83s.46-.75 1.7-.75c1.56 0 2.3 1.12 2.3 3.3v3.62h-3V13c0-.28-.23-.5-.5-.5zm-7.5-3h2v7h-2z"/><circle cx="8.5" cy="6.5" r="1"/></svg></div>LinkedIn</div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="https://reddit.com/submit/?url=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2019%2f09%2fdeep-convolutional-generative-adversarial-networks-review-and-implementation-using-pytorch-c-api%2f&amp;resubmit=true&amp;title=%22Deep%20Convolutional%20Generative%20Adversarial%20Networks%3a%20Review%20and%20Implementation%20using%20PyTorch%20C%2b%2b%20API%22%20seems%20interesting..." target="_blank" rel="noopener" aria-label="Reddit">
+  <div class="resp-sharing-button resp-sharing-button--reddit resp-sharing-button--medium"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--circle">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11.5"/><ellipse cx="12" cy="14.37" rx="6.2" ry="4.24"/><path d="M14.3 16.25c-.62.36-1.42.57-2.3.57-.88 0-1.7-.2-2.32-.58"/><circle cx="14.61" cy="13.39" r=".98"/><circle cx="9.39" cy="13.39" r=".98"/><path d="M16.4 11.38c.26-.55.82-.92 1.47-.92.9 0 1.63.73 1.63 1.63 0 .8-.6 1.47-1.38 1.6"/><circle cx="17.22" cy="7.52" r="1.63"/><path d="M7.6 11.38c-.26-.54-.82-.92-1.47-.92-.9 0-1.63.73-1.63 1.63 0 .8.6 1.47 1.38 1.6M12 10.12s-.08-4.82 3.6-2.6"/></svg></div>Reddit</div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="whatsapp://send?text=%22Deep%20Convolutional%20Generative%20Adversarial%20Networks%3a%20Review%20and%20Implementation%20using%20PyTorch%20C%2b%2b%20API%22%20seems%20interesting...%20https%3a%2f%2fkrshrimali.github.io%2fposts%2f2019%2f09%2fdeep-convolutional-generative-adversarial-networks-review-and-implementation-using-pytorch-c-api%2f" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <div class="resp-sharing-button resp-sharing-button--whatsapp resp-sharing-button--medium"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--circle">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle xmlns="http://www.w3.org/2000/svg" cx="12" cy="12" r="11.5"/><path stroke-width="1px" d="M17.6 6.2c-1.5-1.5-3.4-2.3-5.5-2.3-4.3 0-7.8 3.5-7.8 7.8 0 1.4.4 2.7 1 3.9l-1.1 4 4.1-1.1c1.1.6 2.4.9 3.7.9 4.3 0 7.8-3.5 7.8-7.8.1-2-.7-3.9-2.2-5.4zm-5.5 11.9c-1.2 0-2.3-.3-3.3-.9l-.2-.1-2.4.6.7-2.4-.2-.2c-.6-1-1-2.2-1-3.4 0-3.6 2.9-6.5 6.5-6.5 1.7 0 3.3.7 4.6 1.9 1.2 1.2 1.9 2.8 1.9 4.6-.1 3.5-3 6.4-6.6 6.4zm3.5-4.8c-.2-.1-1.1-.6-1.3-.6-.2-.1-.3-.1-.4.1-.1.2-.5.6-.6.8-.1.1-.2.1-.4 0s-.8-.3-1.6-1c-.6-.5-1-1.2-1.1-1.3-.1-.2 0-.3.1-.4l.3-.3s.1-.2.2-.3c.1-.1 0-.2 0-.3s-.4-1.1-.6-1.4c-.2-.4-.3-.3-.4-.3h-.4s-.3 0-.5.2-.7.7-.7 1.6c0 1 .7 1.9.8 2s1.4 2.1 3.3 2.9c.5.2.8.3 1.1.4.5.1.9.1 1.2.1.4-.1 1.1-.5 1.3-.9.2-.5.2-.8.1-.9 0-.2-.2-.3-.4-.4z"/></svg></div>WhatsApp</div>
+</a>
+</div>
+
+        
+            <div class="pagination">
+                <div class="pagination__title">
+                    <span class="pagination__title-h"></span>
+                    <hr />
+                </div>
+
+                <div class="pagination__buttons">
+                    
+                        <span class="button previous">
+                            <a href="https://krshrimali.github.io/posts/2020/02/training-and-results-deep-convolutional-generative-adversarial-networks-on-celeba-dataset-using-pytorch-c-api/">
+                                <span class="button__icon">←</span>
+                                <span class="button__text">[Training and Results] Deep Convolutional Generative Adversarial Networks on CelebA Dataset using PyTorch C&#43;&#43; API</span>
+                            </a>
+                        </span>
+                    
+
+                    
+                        <span class="button next">
+                            <a href="https://krshrimali.github.io/posts/2019/08/setting-up-jupyter-notebook-xeus-cling-for-libtorch-and-opencv-libraries/">
+                                <span class="button__text">Setting up Jupyter Notebook (Xeus Cling) for Libtorch and OpenCV Libraries</span>
+                                <span class="button__icon">→</span>
+                            </a>
+                        </span>
+                    
+                </div>
+            </div>
+        
+
+        
+            <div class="webmention-form">
+                <form action="https://webmention.io/krshrimali.github.io/webmention" method="post">
+                    <label>Did you mention this article on your website? Put the URL of your post here:</label><br/>
+                    <input name="source" type="url"/>
+                    <input name="target" value="https://krshrimali.github.io/posts/2019/09/deep-convolutional-generative-adversarial-networks-review-and-implementation-using-pytorch-c-api/" type="hidden"/>
+                    <input value="Send Webmention" type="submit"/>
+                </form>
+            </div>
+            <div id="webmention-container"></div>
+        
+
+        
+    </main>
+
+            
+                <footer class="footer">
+    <p>
+        &copy; 2021
+            
+                <span><a href="https://krshrimali.github.io">Kushashwa Ravi Shrimali</a></span>
+                
+                 <a href="https://krshrimali.github.io/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
+                <br>
+            <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a>
+                Powered by <a href="http://gohugo.io"><u>Hugo</u></a> and <a href="https://github.com/HaoZeke/hugo-theme-hello-friend-ng-hz"><u>this theme</u></a>.</br>
+                
+                
+                <script src="https://liberapay.com/rohit/widgets/button.js"></script>
+<noscript><a href="https://liberapay.com/rohit/donate"><img alt="Donate using Liberapay" src="https://liberapay.com/assets/widgets/donate.svg"></a></noscript>
+
+                
+    </p>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+
+
+<script src="https://krshrimali.github.io/bundle.min.5fae9992ea406007408dc33b0b3a8376d61e2f1d6ac50ba1dad7580ac50afb5199bcef3bbc3677e77553a9980bf882cf71edc2f755687dd7725f12ece4304ac2.js"></script>
+<script src="https://krshrimali.github.io/js/webmention.min.513a53d009530b21cba09721b6f4dc912e9c20ad2c0adbb5c4e486c4f77774a6e9eca8c2e1e4e8bc9e9e86693aa5ca91e7bf232b50f7f8bee4e64efc874040a7.js" data-id="webmention-container"></script>
+
+
+
+
+    </body>
+</html>

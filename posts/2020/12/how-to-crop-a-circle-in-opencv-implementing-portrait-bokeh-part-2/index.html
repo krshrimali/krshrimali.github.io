@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="map[name:Kushashwa Ravi Shrimali]">
+<meta name="description" content="Hi everyone! In the previous blog we implemented Portrait Bokeh using Face Detection in OpenCV. While the results were good for a start, we definitely want to be closer to the output we expect. The end goal is to blur everything except the face. The main problem we noticed was:
+ The face cropped was a rectangle, and it was clearly visible in the output result.  To overcome this, we will be talking about cropping a circle in OpenCV today." />
+<meta name="keywords" content="" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="#252627" />
+<link rel="canonical" href="https://krshrimali.github.io/posts/2020/12/how-to-crop-a-circle-in-opencv-implementing-portrait-bokeh-part-2/" />
+
+
+<title>
+    
+    How to crop a circle in OpenCV? Implementing Portrait Bokeh - Part 2 :: Kushashwa Ravi Shrimali (Kush)  — Hello Friend NG HZ Theme
+    
+</title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+      type="text/css">
+
+
+
+<link rel="stylesheet" href="https://krshrimali.github.io/main.min.b6dbce0fdf6c61563a0c2226e857d5dadd8e5afa2c4f73ec9ea55abd831f9a72.css">
+
+
+
+
+
+    <link rel="webmention" href="https://webmention.io/example.com/webmention" />
+    <link rel="pingback" href="https://webmention.io/example.com/xmlrpc" />
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="https://krshrimali.github.io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://krshrimali.github.io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://krshrimali.github.io/favicon-16x16.png">
+    <link rel="manifest" href="https://krshrimali.github.io/site.webmanifest">
+    <link rel="mask-icon" href="https://krshrimali.github.io/safari-pinned-tab.svg" color="#252627">
+    <link rel="shortcut icon" href="https://krshrimali.github.io/favicon.ico">
+    <meta name="msapplication-TileColor" content="#252627">
+    <meta name="theme-color" content="#252627">
+
+<meta itemprop="name" content="How to crop a circle in OpenCV? Implementing Portrait Bokeh - Part 2">
+<meta itemprop="description" content="Hi everyone! In the previous blog we implemented Portrait Bokeh using Face Detection in OpenCV. While the results were good for a start, we definitely want to be closer to the output we expect. The end goal is to blur everything except the face. The main problem we noticed was:
+ The face cropped was a rectangle, and it was clearly visible in the output result.  To overcome this, we will be talking about cropping a circle in OpenCV today."><meta itemprop="datePublished" content="2020-12-10T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2020-12-10T00:00:00+00:00" />
+<meta itemprop="wordCount" content="2125"><meta itemprop="image" content="https://krshrimali.github.io"/>
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://krshrimali.github.io"/>
+
+<meta name="twitter:title" content="How to crop a circle in OpenCV? Implementing Portrait Bokeh - Part 2"/>
+<meta name="twitter:description" content="Hi everyone! In the previous blog we implemented Portrait Bokeh using Face Detection in OpenCV. While the results were good for a start, we definitely want to be closer to the output we expect. The end goal is to blur everything except the face. The main problem we noticed was:
+ The face cropped was a rectangle, and it was clearly visible in the output result.  To overcome this, we will be talking about cropping a circle in OpenCV today."/>
+
+
+
+
+
+    <meta property="article:published_time" content="2020-12-10 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+    </head>
+
+    <body class="dark-theme">
+        <div class="container">
+            <header class="header">
+    <div class="header__inner">
+        <div class="header__left">
+        <div class="logo">
+<a href="https://krshrimali.github.io/" style="text-decoration: none;">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">$ cd /home/</span>
+            <span class="logo__cursor" style=
+                  "
+                   
+                   ">
+            </span>
+        
+</a>
+</div>
+
+        </div>
+
+        
+        <div class="header__mid">
+        <button class="button">
+            <div class="button__text">
+        <a href="https://krshrimali.github.io/search" >
+                Search
+        </a>
+            </div>
+        </button>
+        </div>
+       
+
+        <div class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="https://krshrimali.github.io/about">About</a></li><li><a href="https://krshrimali.github.io/posts">Blog</a></li>
+    </ul>
+    <ul class="menu__inner"><li><a href="https://krshrimali.github.io/categories">Categories</a></li><li><a href="https://krshrimali.github.io/tags">Tags</a></li>
+    </ul>
+</nav>
+
+            <button id="toggleMenu">
+                <div class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </div>
+             </button>
+            
+
+            <button class="theme-toggle" id="toggleTheme"><svg class="theme-toggler" width="32" height="32" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+</button>
+        </div>
+    </div>
+</header>
+
+            
+<script src="https://krshrimali.github.io/js/mathjax-config.js"></script>
+
+
+<script id="MathJax-script" async src="https://unpkg.com/mathjax@3/es5/tex-chtml.js"></script>
+
+            
+    <main class="post">
+
+        <div class="post-info">
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>10 minutes
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>Written: 2020-12-10 00:00 &#43;0000</p>
+
+            
+
+            </p>
+        </div>
+
+        <article class="h-entry">
+            <h1 class="post-title p-name">
+                <a class="u-url" href="https://krshrimali.github.io/posts/2020/12/how-to-crop-a-circle-in-opencv-implementing-portrait-bokeh-part-2/">How to crop a circle in OpenCV? Implementing Portrait Bokeh - Part 2</a>
+            </h1>
+        <div class="post-info"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-pen-tool"><path d="M12 19l7-7 3 3-7 7-3-3z"></path><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path><path d="M2 2l7.586 7.586"></path><circle cx="11" cy="11" r="2"></circle></svg>
+                         <span class="author u-author p-author"><a href="https://krshrimali.github.io/author/kushashwa-ravi-shrimali">Kushashwa Ravi Shrimali</a></span>
+        </div>
+
+            
+
+            <div class="post-content e-content">
+                <!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>Hi everyone! In the previous blog we implemented Portrait Bokeh using Face Detection in OpenCV. While the results were good for a start, we definitely want to be closer to the output we expect. The end goal is to blur everything except the face. The main problem we noticed was:</p>
+<ul>
+<li>The face cropped was a rectangle, and it was clearly visible in the output result.</li>
+</ul>
+<p>To overcome this, we will be talking about cropping a circle in OpenCV today. This will enable us to get rid of &ldquo;some&rdquo; of the background noise we got earlier, for Portrait Bokeh. Let&rsquo;s take this step by step, and first talk about the intuition.</p>
+<h2 id="intuition-behind-cropping-a-circle">Intuition behind cropping a circle</h2>
+<p>while pixels are just the brightness values for each channel at a particular coordinate, so you can&rsquo;t really get half of the pixel and crop an exact circle. But the closest we can get to cropping a circle, is to imagine a circle circumscribed in a rectangle (face detection algorithm in OpenCV - CascadeClassifier returns a rectangle - can be a square as well). So if we are able to get a circle from our output of face detection (a rectangle), we will be closer to what we want.</p>
+<p>But how do we get started? Clearly, since the circle is circumscribing the rectangle, the closest we can get to finding radius is: <code>max(width, height)/2</code>. While center will be: <code>(top_left_x + width/2, top_left_y + height/2)</code>. Once we know these two properties of the circle, we will now have the circle equation.</p>
+<h2 id="methodology">Methodology</h2>
+<p>Let&rsquo;s divide this problem statement into steps:</p>
+<ol>
+<li>Get face from Face Detection.</li>
+<li>Get circle circumscribing the face (rectangle).</li>
+<li>Crop the circle and store it in different array.</li>
+<li>Blur the whole image except the face.</li>
+</ol>
+<p>Essentially, the main goal is to get the face cropped as a circle. Once we have that, we can simply overlay this on the blurred image. The trick is to figure out on how we can crop the circle once we know it&rsquo;s coordinates. Let&rsquo;s talk about it&rsquo;s solution in the next section.</p>
+<h2 id="cropping-a-circle">Cropping a circle</h2>
+<p>Usually, our images will have 3 channels (colored image): Blue, Green, Red (BGR). How about we add a transparency channel to our image? The idea behind this is to make all pixels transparent which are NOT in the face, and all the pixels opaque which are within/on the face (circle) boundary. The pseudo code for this should look something like this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Assuming you got a circle equation representing the face</span>
+face <span style="color:#f92672">=</span> circle_equation
+
+<span style="color:#75715e"># Now iterate through all the pixel values in the imagge</span>
+<span style="color:#75715e"># Check if the pixel is outside the face, if yes - then make it transparent</span>
+<span style="color:#75715e"># Else - opaque</span>
+<span style="color:#66d9ef">for</span> pixel_value <span style="color:#f92672">in</span> image:
+    <span style="color:#66d9ef">if</span> pixel_value <span style="color:#f92672">is</span> outside the face:
+        <span style="color:#75715e"># Make this pixel transparent</span>
+    <span style="color:#66d9ef">else</span>:
+        <span style="color:#75715e"># Make this pixel opaque</span>
+        <span style="color:#75715e"># This will be visible</span>
+</code></pre></div><p>To have an option to add transparency, you need to convert the BGR input image to BGRA (4 channel image: Blue, Green, Red, Alpha) - here Alpha channel denotes transparency channel. When the transparency is set to 0, that represents opaque and when it&rsquo;s set to 255, it represents transparent value. Let&rsquo;s go ahead and use this for our application.</p>
+<h2 id="video-tutorial">Video Tutorial</h2>
+<p>I started a YouTube channel where I go live on the weekends, and upload videos on the week days (not so regularly) about Computer Vision, deploying models into production and more. If you haven&rsquo;t seen it before, please check it out <!-- raw HTML omitted -->here<!-- raw HTML omitted -->. For this blog, I have already uploaded a detailed tutorial. Check it out here:</p>
+<p><a href="https://www.youtube.com/watch?v=7seEhDVGvn4"><img src="https://raw.githubusercontent.com/krshrimali/krshrimali.github.io/master/assets/opencv/preview/yt_preview_method2.jpg" alt="KRSHRIMALI&rsquo;S YT CHANNEL"></a></p>
+<h2 id="step-1-get-face-from-face-detection">Step 1: Get face from face detection</h2>
+<p>We have discussed this <!-- raw HTML omitted -->before<!-- raw HTML omitted -->, so we won&rsquo;t go in details but for the sake of continuity, I&rsquo;ll add the code for Face Detection.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> cv2<span style="color:#f92672">,</span> sys
+
+<span style="color:#75715e"># Get image path and read image</span>
+img_path <span style="color:#f92672">=</span> sys<span style="color:#f92672">.</span>argv[<span style="color:#ae81ff">1</span>] <span style="color:#66d9ef">if</span> len(sys<span style="color:#f92672">.</span>argv) <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">else</span> <span style="color:#e6db74">&#34;sample.png&#34;</span>
+img <span style="color:#f92672">=</span> cv2<span style="color:#f92672">.</span>imread(img_path, <span style="color:#ae81ff">1</span>)
+
+<span style="color:#75715e"># Convert to grayscale, since Face Detection takes gray scale image as input</span>
+gray <span style="color:#f92672">=</span> cv2<span style="color:#f92672">.</span>cvtColor(img, cv2<span style="color:#f92672">.</span>COLOR_BGR2GRAY)
+
+<span style="color:#75715e"># Initialize face detector from the model file</span>
+face_detector <span style="color:#f92672">=</span> cv2<span style="color:#f92672">.</span>CascadeClassifier(<span style="color:#e6db74">&#34;haarcascade_frontalface_default.xml&#34;</span>)
+
+<span style="color:#75715e"># Detect faces from gray-scaled image, using default parameters (scaleFactor)</span>
+faces <span style="color:#f92672">=</span> face_detector<span style="color:#f92672">.</span>detectMultiScale(gray, scaleFactor <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.1</span>, minNeighbors <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>)
+
+<span style="color:#75715e"># Note: Format of faces will be: [ [top_left_x, top_left_y, w, h (for face 1)], [... (for face 2)], ... ]</span>
+</code></pre></div><p>Once you have ROI (Region Of Interest) of the faces in the image, we can go ahead and start cropping a circle (yay!).</p>
+<h2 id="step-2-get-circle-circumscribing-the-face">Step 2: Get circle circumscribing the face</h2>
+<p>From Step-1, we got the faces. Let&rsquo;s iterate through each face, and get the equation of the circle circumscribing that face. As we discussed before in the <strong>Intuition</strong> section, we&rsquo;ll have to calculate the radius and center of the face.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Make sure to convert BGR to BGRA image first</span>
+<span style="color:#75715e"># To be used later</span>
+imgTransp <span style="color:#f92672">=</span> cv2<span style="color:#f92672">.</span>cvtColor(img, cv2<span style="color:#f92672">.</span>COLOR_BGR2BGRA)
+
+<span style="color:#75715e"># Iterate through each face one by one</span>
+<span style="color:#66d9ef">for</span> face <span style="color:#f92672">in</span> faces:
+    top_left_x, top_left_y, width, height <span style="color:#f92672">=</span> face[<span style="color:#ae81ff">0</span>], face[<span style="color:#ae81ff">1</span>], face[<span style="color:#ae81ff">2</span>], face[<span style="color:#ae81ff">3</span>]
+
+    radius <span style="color:#f92672">=</span> max(width, height)<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>
+    center <span style="color:#f92672">=</span> (top_left_x <span style="color:#f92672">+</span> width<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>, top_left_y <span style="color:#f92672">+</span> height<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>)
+
+    <span style="color:#75715e"># Cropping circle code will come here</span>
+</code></pre></div><p>Here, we find the circle contained in the rectangle (closest) for each face. Let&rsquo;s go ahead and crop this circle one by one, and see how we can use this for Portrait Bokeh!</p>
+<h2 id="step-3-crop-the-circle-and-store-it-in-different-array">Step 3: Crop the circle and store it in different array</h2>
+<p>We discussed the pseudo code of this in <strong>Cropping a Circle</strong> section of this blog. But before this, we have to figure out: How to find a point is within that circle? Think of this as a simple maths problem where you have to find a given coordinate is inside a circle or not. What would you do?</p>
+<ul>
+<li>Find distance between point and center of the circle.</li>
+<li>If distance is greater than radius, it&rsquo;s outside.</li>
+<li>If distance is equal to radius, it&rsquo;s on the boundary.</li>
+<li>If distance is less than radius, it&rsquo;s inside.</li>
+</ul>
+<p>We can simplify this for circle as we know it&rsquo;s equation: <code>(point_x - center_x)^2 + (point_y - center_y)^2 - radius^2</code>, which will be:</p>
+<ul>
+<li>0 if the point is on the boundary.</li>
+<li>greater than 0 if the point is outside the circle.</li>
+<li>less than 0 if the point is inside the circle.</li>
+</ul>
+<p>Let&rsquo;s use this concept here:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">is_inside</span>(point, center, radius):
+    <span style="color:#e6db74">&#34;&#34;&#34; This function returns True if point is inside/on the boundary, False otherwise &#34;&#34;&#34;</span>
+    eqn <span style="color:#f92672">=</span> (point[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">-</span> center[<span style="color:#ae81ff">0</span>]) <span style="color:#f92672">**</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> (point[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">-</span> center[<span style="color:#ae81ff">1</span>])<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">-</span> radius<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>
+    <span style="color:#66d9ef">return</span> eqn <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0</span>
+
+<span style="color:#75715e"># Iterate through all the pixels in the image</span>
+<span style="color:#66d9ef">for</span> row <span style="color:#f92672">in</span> range(img<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">0</span>]):
+    <span style="color:#66d9ef">for</span> col <span style="color:#f92672">in</span> range(img<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">1</span>]):
+        <span style="color:#66d9ef">if</span> is_inside(img[row][col], center, radius):
+            <span style="color:#75715e"># Means the point is inside/on the face</span>
+            <span style="color:#75715e"># Make it opaque</span>
+            img[row][col][<span style="color:#ae81ff">3</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+        <span style="color:#66d9ef">else</span>:
+            <span style="color:#75715e"># Means the point is outside the face</span>
+            <span style="color:#75715e"># Make it transparent</span>
+            img[row][col][<span style="color:#ae81ff">3</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">255</span>
+</code></pre></div><p>We will have to execute the for loop once for each face, which means the code becomes:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Make sure to convert BGR to BGRA image first</span>
+<span style="color:#75715e"># To be used later</span>
+imgTransp <span style="color:#f92672">=</span> cv2<span style="color:#f92672">.</span>cvtColor(img, cv2<span style="color:#f92672">.</span>COLOR_BGR2BGRA)
+<span style="color:#75715e"># Make the whole image transparent, by default</span>
+imgTransp[<span style="color:#f92672">...</span>, <span style="color:#ae81ff">3</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">255</span>
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">is_inside</span>(point, center, radius):
+    <span style="color:#e6db74">&#34;&#34;&#34; This function returns True if point is inside/on the boundary, False otherwise &#34;&#34;&#34;</span>
+    eqn <span style="color:#f92672">=</span> (point[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">-</span> center[<span style="color:#ae81ff">0</span>]) <span style="color:#f92672">**</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> (point[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">-</span> center[<span style="color:#ae81ff">1</span>])<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">-</span> radius<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>
+    <span style="color:#66d9ef">return</span> eqn <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0</span>
+
+<span style="color:#75715e"># Iterate through each face one by one</span>
+<span style="color:#66d9ef">for</span> face <span style="color:#f92672">in</span> faces:
+    top_left_x, top_left_y, width, height <span style="color:#f92672">=</span> face[<span style="color:#ae81ff">0</span>], face[<span style="color:#ae81ff">1</span>], face[<span style="color:#ae81ff">2</span>], face[<span style="color:#ae81ff">3</span>]
+
+    radius <span style="color:#f92672">=</span> max(width, height)<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>
+    center <span style="color:#f92672">=</span> (top_left_x <span style="color:#f92672">+</span> width<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>, top_left_y <span style="color:#f92672">+</span> height<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>)
+
+    <span style="color:#75715e"># Cropping circle code will come here</span>
+    <span style="color:#75715e"># Iterate through all the pixels in the image</span>
+    <span style="color:#66d9ef">for</span> row <span style="color:#f92672">in</span> range(img<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">0</span>]):
+        <span style="color:#66d9ef">for</span> col <span style="color:#f92672">in</span> range(img<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">1</span>]):
+            <span style="color:#66d9ef">if</span> is_inside(img[row][col], center, radius):
+                <span style="color:#75715e"># Means the point is inside/on the face</span>
+                <span style="color:#75715e"># Make it opaque</span>
+                imgTransp[row][col][<span style="color:#ae81ff">3</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">255</span>
+            <span style="color:#66d9ef">else</span>:
+                <span style="color:#75715e"># Means the point is outside the face</span>
+                <span style="color:#75715e"># Make it transparent</span>
+                imgTransp[row][col][<span style="color:#ae81ff">3</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</code></pre></div><p>If you notice, we have 3 nested for loops, which will result into really non-efficient code for HD Images (1920x1080 images? Think of the number of computations happening in this case). Suppose we have 3 faces detected and our input image is 1920 x 1080 (width x height). Total number of times the function <code>is_inside</code> called will be: 3 x 1920 x 1080, which is 6220800 (approx. 6.2 Million or 62 Lacs). It&rsquo;s a lot!</p>
+<p>We can not avoid these loops though, but why iterate through the whole image when you know the circle is anyways gonna be within that rectangle (face)! Imagine the face is 200 x 200 now, and everything remains same (3 faces, HD input Image: 1920 x 1080). If we only iterate through the face everytime, the computations will be: 3 * 200 * 200, which is 120000 (120 thousand or 1.2 lacs). Much better. All we have to do is, pick the face ROI, and iterate through that region. Everything else remains same:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">for</span> row <span style="color:#f92672">in</span> range(tly, tly <span style="color:#f92672">+</span> height):
+    <span style="color:#66d9ef">for</span> col <span style="color:#f92672">in</span> range(tlx, tlx <span style="color:#f92672">+</span> width):
+        <span style="color:#66d9ef">if</span> is_inside(img[row][col], center, radius):
+            <span style="color:#75715e"># Means the point is inside/on the face</span>
+            <span style="color:#75715e"># Make it opaque</span>
+            imgTransp[row][col][<span style="color:#ae81ff">3</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">255</span>
+        <span style="color:#66d9ef">else</span>:
+            <span style="color:#75715e"># Means the point is outside the face</span>
+            <span style="color:#75715e"># Make it transparent</span>
+            imgTransp[row][col][<span style="color:#ae81ff">3</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</code></pre></div><p>So, the code should look like this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Make sure to convert BGR to BGRA image first</span>
+<span style="color:#75715e"># To be used later</span>
+imgTransp <span style="color:#f92672">=</span> cv2<span style="color:#f92672">.</span>cvtColor(img, cv2<span style="color:#f92672">.</span>COLOR_BGR2BGRA)
+<span style="color:#75715e"># Make the whole image transparent by default</span>
+imgTransp[<span style="color:#f92672">...</span>, <span style="color:#ae81ff">3</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">255</span>
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">is_inside</span>(point, center, radius):
+    <span style="color:#e6db74">&#34;&#34;&#34; This function returns True if point is inside/on the boundary, False otherwise &#34;&#34;&#34;</span>
+    eqn <span style="color:#f92672">=</span> (point[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">-</span> center[<span style="color:#ae81ff">0</span>]) <span style="color:#f92672">**</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> (point[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">-</span> center[<span style="color:#ae81ff">1</span>])<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">-</span> radius<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>
+    <span style="color:#66d9ef">return</span> eqn <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0</span>
+
+<span style="color:#75715e"># Iterate through each face one by one</span>
+<span style="color:#66d9ef">for</span> face <span style="color:#f92672">in</span> faces:
+    top_left_x, top_left_y, width, height <span style="color:#f92672">=</span> face[<span style="color:#ae81ff">0</span>], face[<span style="color:#ae81ff">1</span>], face[<span style="color:#ae81ff">2</span>], face[<span style="color:#ae81ff">3</span>]
+
+    radius <span style="color:#f92672">=</span> max(width, height)<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>
+    center <span style="color:#f92672">=</span> (top_left_x <span style="color:#f92672">+</span> width<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>, top_left_y <span style="color:#f92672">+</span> height<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>)
+
+    <span style="color:#75715e"># Cropping circle code will come here</span>
+    <span style="color:#75715e"># Iterate through all the pixels in the image</span>
+    <span style="color:#66d9ef">for</span> row <span style="color:#f92672">in</span> range(tly, tly <span style="color:#f92672">+</span> height):
+        <span style="color:#66d9ef">for</span> col <span style="color:#f92672">in</span> range(tlx, tlx <span style="color:#f92672">+</span> width):
+            <span style="color:#66d9ef">if</span> is_inside((col, row), center, radius):
+                <span style="color:#75715e"># Means the point is inside/on the face</span>
+                <span style="color:#75715e"># Make it opaque</span>
+                imgTransp[row][col][<span style="color:#ae81ff">3</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">255</span>
+            <span style="color:#66d9ef">else</span>:
+                <span style="color:#75715e"># Means the point is outside the face</span>
+                <span style="color:#75715e"># Make it transparent</span>
+                imgTransp[row][col][<span style="color:#ae81ff">3</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</code></pre></div><p>Let&rsquo;s try to visualize <code>imgTransp</code> here and see how this looks like:</p>
+<!-- raw HTML omitted -->
+<p>This looks good so far! We have cropped the circle (face), and all we need to do now is - overlay this image on a blurred image. Let&rsquo;s head straight to Step 4.</p>
+<h2 id="step-4-blurring-and-overlaying">Step 4: Blurring and overlaying</h2>
+<p>In Step 3, we were able to crop the circle. But think about this, whenever we know the pixel is inside the face, let&rsquo;s just replace the blurred pixel with original image.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Blur the whole image first</span>
+img_blurred <span style="color:#f92672">=</span> cv2<span style="color:#f92672">.</span>GaussianBlur(img, (<span style="color:#ae81ff">11</span>, <span style="color:#ae81ff">11</span>), <span style="color:#ae81ff">0</span>)
+
+<span style="color:#75715e"># Iterate through the faces we were doing before</span>
+<span style="color:#75715e"># Whenever the pixel is inside, replace the point at img_blurred with original img</span>
+
+<span style="color:#75715e"># Make sure to convert BGR to BGRA image first</span>
+<span style="color:#75715e"># To be used later</span>
+imgTransp <span style="color:#f92672">=</span> cv2<span style="color:#f92672">.</span>cvtColor(img, cv2<span style="color:#f92672">.</span>COLOR_BGR2BGRA)
+<span style="color:#75715e"># Make the whole image transparent by default</span>
+imgTransp[<span style="color:#f92672">...</span>, <span style="color:#ae81ff">3</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">255</span>
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">is_inside</span>(point, center, radius):
+    <span style="color:#e6db74">&#34;&#34;&#34; This function returns True if point is inside/on the boundary, False otherwise &#34;&#34;&#34;</span>
+    eqn <span style="color:#f92672">=</span> (point[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">-</span> center[<span style="color:#ae81ff">0</span>]) <span style="color:#f92672">**</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> (point[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">-</span> center[<span style="color:#ae81ff">1</span>])<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">-</span> radius<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>
+    <span style="color:#66d9ef">return</span> eqn <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0</span>
+
+<span style="color:#75715e"># Iterate through each face one by one</span>
+<span style="color:#66d9ef">for</span> face <span style="color:#f92672">in</span> faces:
+    top_left_x, top_left_y, width, height <span style="color:#f92672">=</span> face[<span style="color:#ae81ff">0</span>], face[<span style="color:#ae81ff">1</span>], face[<span style="color:#ae81ff">2</span>], face[<span style="color:#ae81ff">3</span>]
+
+    radius <span style="color:#f92672">=</span> max(width, height)<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>
+    center <span style="color:#f92672">=</span> (top_left_x <span style="color:#f92672">+</span> width<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>, top_left_y <span style="color:#f92672">+</span> height<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>)
+
+    <span style="color:#75715e"># Cropping circle code will come here</span>
+    <span style="color:#75715e"># Iterate through all the pixels in the image</span>
+    <span style="color:#66d9ef">for</span> row <span style="color:#f92672">in</span> range(tly, tly <span style="color:#f92672">+</span> height):
+        <span style="color:#66d9ef">for</span> col <span style="color:#f92672">in</span> range(tlx, tlx <span style="color:#f92672">+</span> width):
+            <span style="color:#66d9ef">if</span> is_inside((col, row), center, radius):
+                <span style="color:#75715e"># Means the point is inside/on the face</span>
+                <span style="color:#75715e"># Make it opaque</span>
+                imgTransp[row][col][<span style="color:#ae81ff">3</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">255</span>
+                <span style="color:#75715e"># Replace pixel of blurred image with original image</span>
+                imgBlurred[row][col] <span style="color:#f92672">=</span> img[row][col]
+            <span style="color:#66d9ef">else</span>:
+                <span style="color:#75715e"># Means the point is outside the face</span>
+                <span style="color:#75715e"># Make it transparent</span>
+                imgTransp[row][col][<span style="color:#ae81ff">3</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</code></pre></div><p><strong>Note:</strong> The only reason we used <code>imgTransp</code> here, is to show how to crop a circle. For portrait bokeh, you don&rsquo;t need to have <code>imgTransp</code> and transparency channels.</p>
+<p>Here is how the output looks like. While I understand that there is still some background, but we can definitely be better than this - and this will be our topic for the next blog!</p>
+<!-- raw HTML omitted -->
+<p>This should be it for this blog, and I hope you learnt something new today. If you liked the content, please leave a comment below. I would love to read your feedbacks, suggestions and if this helped you out in any way. I also go live on weekends, and upload videos on weekdays on my <!-- raw HTML omitted -->YouTube channel<!-- raw HTML omitted -->, so make sure to subscribe there and join me in if you find it interesting! Thank you for reading this blog.</p>
+
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>2125 Words</p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>Posted: <time class="dt-published"> 2020-12-10 05:30 &#43;0530</time></p>
+<a class="resp-sharing-button__link" href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2020%2f12%2fhow-to-crop-a-circle-in-opencv-implementing-portrait-bokeh-part-2%2f" target="_blank" rel="noopener" aria-label="Facebook">
+  <div class="resp-sharing-button resp-sharing-button--facebook resp-sharing-button--medium"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--circle">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11.5"/><path d="M15.84 9.5H13.5V8.48c0-.53.35-.65.6-.65h1.4v-2.3h-2.35c-2.3 0-2.65 1.7-2.65 2.8V9.5h-2v2h2v7h3v-7h2.1l.24-2z"/></svg></div>Facebook</div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="https://twitter.com/intent/tweet/?text=%22How%20to%20crop%20a%20circle%20in%20OpenCV%3f%20Implementing%20Portrait%20Bokeh%20-%20Part%202%22%20seems%20like%20an%20interesting%20read%20from%20%40rg0swami&amp;url=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2020%2f12%2fhow-to-crop-a-circle-in-opencv-implementing-portrait-bokeh-part-2%2f" target="_blank" rel="noopener" aria-label="Twitter">
+  <div class="resp-sharing-button resp-sharing-button--twitter resp-sharing-button--medium"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--circle">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.5 7.4l-2 .2c-.4-.5-1-.8-2-.8C13.3 6.8 12 8 12 9.4v.6c-2 0-4-1-5.4-2.7-.2.4-.3.8-.3 1.3 0 1 .4 1.7 1.2 2.2-.5 0-1 0-1.2-.3 0 1.3 1 2.3 2 2.6-.3.4-.7.4-1 0 .2 1.4 1.2 2 2.3 2-1 1-2.5 1.4-4 1 1.3 1 2.7 1.4 4.2 1.4 4.8 0 7.5-4 7.5-7.5v-.4c.5-.4.8-1.5 1.2-2z"/><circle cx="12" cy="12" r="11.5"/></svg></div>Twitter</div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="mailto:?subject=%22How%20to%20crop%20a%20circle%20in%20OpenCV%3f%20Implementing%20Portrait%20Bokeh%20-%20Part%202%22%20seems%20interesting...&amp;body=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2020%2f12%2fhow-to-crop-a-circle-in-opencv-implementing-portrait-bokeh-part-2%2f" target="_self" rel="noopener" aria-label="E-Mail">
+  <div class="resp-sharing-button resp-sharing-button--email resp-sharing-button--medium"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--circle">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19.5 16c0 .8-.7 1.5-1.5 1.5H6c-.8 0-1.5-.7-1.5-1.5V8c0-.8.7-1.5 1.5-1.5h12c.8 0 1.5.7 1.5 1.5v8zm-2-7.5L12 13 6.5 8.5m11 6l-4-2.5m-7 2.5l4-2.5"/><circle cx="12" cy="12" r="11.5"/></svg></div>E-Mail</div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2020%2f12%2fhow-to-crop-a-circle-in-opencv-implementing-portrait-bokeh-part-2%2f&amp;title=%22How%20to%20crop%20a%20circle%20in%20OpenCV%3f%20Implementing%20Portrait%20Bokeh%20-%20Part%202%22%20seems%20interesting...&amp;summary=%22How%20to%20crop%20a%20circle%20in%20OpenCV%3f%20Implementing%20Portrait%20Bokeh%20-%20Part%202%22%20seems%20interesting...&amp;source=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2020%2f12%2fhow-to-crop-a-circle-in-opencv-implementing-portrait-bokeh-part-2%2f" target="_blank" rel="noopener" aria-label="LinkedIn">
+  <div class="resp-sharing-button resp-sharing-button--linkedin resp-sharing-button--medium"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--circle">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11.5"/><path d="M15 12.5c-.28 0-.5.22-.5.5v3.5h-3s.03-6.48 0-7h3v.83s.46-.75 1.7-.75c1.56 0 2.3 1.12 2.3 3.3v3.62h-3V13c0-.28-.23-.5-.5-.5zm-7.5-3h2v7h-2z"/><circle cx="8.5" cy="6.5" r="1"/></svg></div>LinkedIn</div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="https://reddit.com/submit/?url=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2020%2f12%2fhow-to-crop-a-circle-in-opencv-implementing-portrait-bokeh-part-2%2f&amp;resubmit=true&amp;title=%22How%20to%20crop%20a%20circle%20in%20OpenCV%3f%20Implementing%20Portrait%20Bokeh%20-%20Part%202%22%20seems%20interesting..." target="_blank" rel="noopener" aria-label="Reddit">
+  <div class="resp-sharing-button resp-sharing-button--reddit resp-sharing-button--medium"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--circle">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11.5"/><ellipse cx="12" cy="14.37" rx="6.2" ry="4.24"/><path d="M14.3 16.25c-.62.36-1.42.57-2.3.57-.88 0-1.7-.2-2.32-.58"/><circle cx="14.61" cy="13.39" r=".98"/><circle cx="9.39" cy="13.39" r=".98"/><path d="M16.4 11.38c.26-.55.82-.92 1.47-.92.9 0 1.63.73 1.63 1.63 0 .8-.6 1.47-1.38 1.6"/><circle cx="17.22" cy="7.52" r="1.63"/><path d="M7.6 11.38c-.26-.54-.82-.92-1.47-.92-.9 0-1.63.73-1.63 1.63 0 .8.6 1.47 1.38 1.6M12 10.12s-.08-4.82 3.6-2.6"/></svg></div>Reddit</div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="whatsapp://send?text=%22How%20to%20crop%20a%20circle%20in%20OpenCV%3f%20Implementing%20Portrait%20Bokeh%20-%20Part%202%22%20seems%20interesting...%20https%3a%2f%2fkrshrimali.github.io%2fposts%2f2020%2f12%2fhow-to-crop-a-circle-in-opencv-implementing-portrait-bokeh-part-2%2f" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <div class="resp-sharing-button resp-sharing-button--whatsapp resp-sharing-button--medium"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--circle">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle xmlns="http://www.w3.org/2000/svg" cx="12" cy="12" r="11.5"/><path stroke-width="1px" d="M17.6 6.2c-1.5-1.5-3.4-2.3-5.5-2.3-4.3 0-7.8 3.5-7.8 7.8 0 1.4.4 2.7 1 3.9l-1.1 4 4.1-1.1c1.1.6 2.4.9 3.7.9 4.3 0 7.8-3.5 7.8-7.8.1-2-.7-3.9-2.2-5.4zm-5.5 11.9c-1.2 0-2.3-.3-3.3-.9l-.2-.1-2.4.6.7-2.4-.2-.2c-.6-1-1-2.2-1-3.4 0-3.6 2.9-6.5 6.5-6.5 1.7 0 3.3.7 4.6 1.9 1.2 1.2 1.9 2.8 1.9 4.6-.1 3.5-3 6.4-6.6 6.4zm3.5-4.8c-.2-.1-1.1-.6-1.3-.6-.2-.1-.3-.1-.4.1-.1.2-.5.6-.6.8-.1.1-.2.1-.4 0s-.8-.3-1.6-1c-.6-.5-1-1.2-1.1-1.3-.1-.2 0-.3.1-.4l.3-.3s.1-.2.2-.3c.1-.1 0-.2 0-.3s-.4-1.1-.6-1.4c-.2-.4-.3-.3-.4-.3h-.4s-.3 0-.5.2-.7.7-.7 1.6c0 1 .7 1.9.8 2s1.4 2.1 3.3 2.9c.5.2.8.3 1.1.4.5.1.9.1 1.2.1.4-.1 1.1-.5 1.3-.9.2-.5.2-.8.1-.9 0-.2-.2-.3-.4-.4z"/></svg></div>WhatsApp</div>
+</a>
+</div>
+
+        
+            <div class="pagination">
+                <div class="pagination__title">
+                    <span class="pagination__title-h"></span>
+                    <hr />
+                </div>
+
+                <div class="pagination__buttons">
+                    
+                        <span class="button previous">
+                            <a href="https://krshrimali.github.io/posts/2021/07/function-pointers-and-function-objects-in-c-/">
+                                <span class="button__icon">←</span>
+                                <span class="button__text">Function Pointers and Function Objects in C&#43;&#43;</span>
+                            </a>
+                        </span>
+                    
+
+                    
+                        <span class="button next">
+                            <a href="https://krshrimali.github.io/posts/2020/12/implementing-portrait-bokeh-in-opencv-using-face-detection-part-1/">
+                                <span class="button__text">Implementing Portrait Bokeh in OpenCV using Face Detection (Part-1)</span>
+                                <span class="button__icon">→</span>
+                            </a>
+                        </span>
+                    
+                </div>
+            </div>
+        
+
+        
+            <div class="webmention-form">
+                <form action="https://webmention.io/krshrimali.github.io/webmention" method="post">
+                    <label>Did you mention this article on your website? Put the URL of your post here:</label><br/>
+                    <input name="source" type="url"/>
+                    <input name="target" value="https://krshrimali.github.io/posts/2020/12/how-to-crop-a-circle-in-opencv-implementing-portrait-bokeh-part-2/" type="hidden"/>
+                    <input value="Send Webmention" type="submit"/>
+                </form>
+            </div>
+            <div id="webmention-container"></div>
+        
+
+        
+    </main>
+
+            
+                <footer class="footer">
+    <p>
+        &copy; 2021
+            
+                <span><a href="https://krshrimali.github.io">Kushashwa Ravi Shrimali</a></span>
+                
+                 <a href="https://krshrimali.github.io/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
+                <br>
+            <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a>
+                Powered by <a href="http://gohugo.io"><u>Hugo</u></a> and <a href="https://github.com/HaoZeke/hugo-theme-hello-friend-ng-hz"><u>this theme</u></a>.</br>
+                
+                
+                <script src="https://liberapay.com/rohit/widgets/button.js"></script>
+<noscript><a href="https://liberapay.com/rohit/donate"><img alt="Donate using Liberapay" src="https://liberapay.com/assets/widgets/donate.svg"></a></noscript>
+
+                
+    </p>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+
+
+<script src="https://krshrimali.github.io/bundle.min.5fae9992ea406007408dc33b0b3a8376d61e2f1d6ac50ba1dad7580ac50afb5199bcef3bbc3677e77553a9980bf882cf71edc2f755687dd7725f12ece4304ac2.js"></script>
+<script src="https://krshrimali.github.io/js/webmention.min.513a53d009530b21cba09721b6f4dc912e9c20ad2c0adbb5c4e486c4f77774a6e9eca8c2e1e4e8bc9e9e86693aa5ca91e7bf232b50f7f8bee4e64efc874040a7.js" data-id="webmention-container"></script>
+
+
+
+
+    </body>
+</html>

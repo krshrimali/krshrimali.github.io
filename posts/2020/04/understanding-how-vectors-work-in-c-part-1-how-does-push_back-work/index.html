@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="map[name:Kushashwa Ravi Shrimali]">
+<meta name="description" content="This blog is focused to explain how vectors work in the backend, and we&amp;rsquo;ll specially look at push_back method of the vector container. Looking at the source code helps to understand the implementation, and how vectors can be used efficiently.
+" />
+<meta name="keywords" content="" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="#252627" />
+<link rel="canonical" href="https://krshrimali.github.io/posts/2020/04/understanding-how-vectors-work-in-c-part-1-how-does-push_back-work/" />
+
+
+<title>
+    
+    Understanding how Vectors work in C&#43;&#43; (Part-1): How does push_back work? :: Kushashwa Ravi Shrimali (Kush)  — Hello Friend NG HZ Theme
+    
+</title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+      type="text/css">
+
+
+
+<link rel="stylesheet" href="https://krshrimali.github.io/main.min.b6dbce0fdf6c61563a0c2226e857d5dadd8e5afa2c4f73ec9ea55abd831f9a72.css">
+
+
+
+
+
+    <link rel="webmention" href="https://webmention.io/example.com/webmention" />
+    <link rel="pingback" href="https://webmention.io/example.com/xmlrpc" />
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="https://krshrimali.github.io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://krshrimali.github.io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://krshrimali.github.io/favicon-16x16.png">
+    <link rel="manifest" href="https://krshrimali.github.io/site.webmanifest">
+    <link rel="mask-icon" href="https://krshrimali.github.io/safari-pinned-tab.svg" color="#252627">
+    <link rel="shortcut icon" href="https://krshrimali.github.io/favicon.ico">
+    <meta name="msapplication-TileColor" content="#252627">
+    <meta name="theme-color" content="#252627">
+
+<meta itemprop="name" content="Understanding how Vectors work in C&#43;&#43; (Part-1): How does push_back work?">
+<meta itemprop="description" content="This blog is focused to explain how vectors work in the backend, and we&rsquo;ll specially look at push_back method of the vector container. Looking at the source code helps to understand the implementation, and how vectors can be used efficiently."><meta itemprop="datePublished" content="2020-04-18T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2020-04-18T00:00:00+00:00" />
+<meta itemprop="wordCount" content="1375"><meta itemprop="image" content="https://krshrimali.github.io"/>
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://krshrimali.github.io"/>
+
+<meta name="twitter:title" content="Understanding how Vectors work in C&#43;&#43; (Part-1): How does push_back work?"/>
+<meta name="twitter:description" content="This blog is focused to explain how vectors work in the backend, and we&rsquo;ll specially look at push_back method of the vector container. Looking at the source code helps to understand the implementation, and how vectors can be used efficiently."/>
+
+
+
+
+
+    <meta property="article:published_time" content="2020-04-18 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+    </head>
+
+    <body class="dark-theme">
+        <div class="container">
+            <header class="header">
+    <div class="header__inner">
+        <div class="header__left">
+        <div class="logo">
+<a href="https://krshrimali.github.io/" style="text-decoration: none;">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">$ cd /home/</span>
+            <span class="logo__cursor" style=
+                  "
+                   
+                   ">
+            </span>
+        
+</a>
+</div>
+
+        </div>
+
+        
+        <div class="header__mid">
+        <button class="button">
+            <div class="button__text">
+        <a href="https://krshrimali.github.io/search" >
+                Search
+        </a>
+            </div>
+        </button>
+        </div>
+       
+
+        <div class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="https://krshrimali.github.io/about">About</a></li><li><a href="https://krshrimali.github.io/posts">Blog</a></li>
+    </ul>
+    <ul class="menu__inner"><li><a href="https://krshrimali.github.io/categories">Categories</a></li><li><a href="https://krshrimali.github.io/tags">Tags</a></li>
+    </ul>
+</nav>
+
+            <button id="toggleMenu">
+                <div class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </div>
+             </button>
+            
+
+            <button class="theme-toggle" id="toggleTheme"><svg class="theme-toggler" width="32" height="32" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+</button>
+        </div>
+    </div>
+</header>
+
+            
+<script src="https://krshrimali.github.io/js/mathjax-config.js"></script>
+
+
+<script id="MathJax-script" async src="https://unpkg.com/mathjax@3/es5/tex-chtml.js"></script>
+
+            
+    <main class="post">
+
+        <div class="post-info">
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>7 minutes
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>Written: 2020-04-18 00:00 &#43;0000</p>
+
+            
+
+            </p>
+        </div>
+
+        <article class="h-entry">
+            <h1 class="post-title p-name">
+                <a class="u-url" href="https://krshrimali.github.io/posts/2020/04/understanding-how-vectors-work-in-c-part-1-how-does-push_back-work/">Understanding how Vectors work in C++ (Part-1): How does push_back work?</a>
+            </h1>
+        <div class="post-info"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-pen-tool"><path d="M12 19l7-7 3 3-7 7-3-3z"></path><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path><path d="M2 2l7.586 7.586"></path><circle cx="11" cy="11" r="2"></circle></svg>
+                         <span class="author u-author p-author"><a href="https://krshrimali.github.io/author/kushashwa-ravi-shrimali">Kushashwa Ravi Shrimali</a></span>
+        </div>
+
+            
+
+            <div class="post-content e-content">
+                <p>This blog is focused to explain how vectors work in the backend, and we&rsquo;ll specially look at <code>push_back</code> method of the vector container. Looking at the source code helps to understand the implementation, and how vectors can be used efficiently.</p>
+<!-- raw HTML omitted -->
+<p>Vector Containers are type of sequenced containers in C++ commonly uses as a better alternative of arrays. They are also known as dynamic arrays, and as the term suggests - it&rsquo;s one of the advantages they hold over native arrays in C++. You might have heard of Standard Library containers like <code>vector</code>, <code>set</code>, <code>queue</code>, <code>priority_queue</code> before. They all implement methods defined by the Container Concept.</p>
+<p><strong>A few important notes before we start:</strong></p>
+<ul>
+<li>I&rsquo;m using GCC 10.0.1 which is in the development stage. I&rsquo;ve built GCC 10.0.1 from source on my local system. But everything I discuss here, should be same with GCC 8.4 or GCC 9.3 releases.</li>
+<li>I assume you are at least using C++11. If for any reason you are using C++98, there might be a few differences (for example, variadic arguments were not present in C++98). To not include lots of macros to check C++ versions, I&rsquo;ve at times assumed the reader is using C++11 or greater.</li>
+<li>This blog uses lots of C++ Design Patterns that many would not be aware of. I understand it might just be a good idea to explain them first in a blog, but for now - I assume you have at least heard of them and know a thing or two about C++. I&rsquo;ll cover these in future.</li>
+</ul>
+<p>Let&rsquo;s start with a basic comparison of using arrays and vectors in C++:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// Create an array of fixed size: 10
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span><span style="color:#f92672">*</span> InputArray <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">int</span>[<span style="color:#ae81ff">10</span>];
+<span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">10</span>; i<span style="color:#f92672">++</span>) {
+    <span style="color:#75715e">// Let&#39;s assign values to the array
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// Values are same as indices
+</span><span style="color:#75715e"></span>    InputArray[i] <span style="color:#f92672">=</span> i;
+}
+</code></pre></div><p>We can do the same (from what you see above) using <code>vector</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// Include this to be able to use vector container
+</span><span style="color:#75715e"></span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;vector&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> InputVector {};
+<span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">10</span>; i<span style="color:#f92672">++</span>) {
+    InputVector.push_back(i);
+}
+</code></pre></div><p>While both do the same, but there are many important differences that happen in the backend. Let&rsquo;s start with performance.</p>
+<ul>
+<li>The piece of code using vector containers in C++ took 23.834 microseconds.</li>
+<li>The piece of code using arrays in C++ took 3.26 microseconds.</li>
+</ul>
+<p>If we had to do this for 10k numbers, the performance might be significant:</p>
+<ul>
+<li>The piece of code using vector containers in C++ (for 10k numbers) took 713 microseconds.</li>
+<li>The piece of code using arrays in C++ took 173 microseconds.</li>
+</ul>
+<p>As in software development, there is always a tradeoff. Since vectors aim to provide dynamic memory allocation, they lose some performance while trying to <code>push_back</code> elements in the vectors since the memory is not allocated before. This can be constant if memory is allocated before.</p>
+<p>Let&rsquo;s try to infer this from the source code of vector container. The signature of a vector container looks like this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> _Tp, <span style="color:#66d9ef">typename</span> _Alloc <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>allocator<span style="color:#f92672">&lt;</span>_Tp<span style="color:#f92672">&gt;</span> <span style="color:#f92672">&gt;</span>
+    <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">vector</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">protected</span> _Vector_base<span style="color:#f92672">&lt;</span>_Tp, _Alloc<span style="color:#f92672">&gt;</span>
+</code></pre></div><p>Where <code>_Tp</code> is the type of element, and <code>_Alloc</code> is the allocator type (defaults to <code>std::allocator&lt;_Tp&gt;</code>). Let&rsquo;s start from the constructor of <code>vector</code> (when no parameter is passed):</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#if __cplusplus &gt;= 201103L
+</span><span style="color:#75715e"></span>      vector() <span style="color:#f92672">=</span> <span style="color:#66d9ef">default</span>;
+<span style="color:#75715e">#else
+</span><span style="color:#75715e"></span>      vector() { }
+<span style="color:#75715e">#endif
+</span></code></pre></div><p>The constructor when called with no params, creates a vector with no elements. As always, there are various ways to initialize a vector object.</p>
+<p>I want to focus more on <code>push_back</code> today, so let&rsquo;s take a look at it&rsquo;s signature. It&rsquo;s located in <code>stl_vector.h</code> file.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// Note that value_type is defined as: typedef _Tp value_type as a public type
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">push_back</span>(<span style="color:#66d9ef">const</span> value_type<span style="color:#f92672">&amp;</span> __x)
+{
+    <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>_M_impl._M_finish <span style="color:#f92672">!=</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>_M_impl._M_end_of_storage)
+    {
+        _GLIBCXX_ASAN_ANNOTATE_GROW(<span style="color:#ae81ff">1</span>);
+        _Alloc_traits<span style="color:#f92672">::</span>construct(<span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>_M_impl, <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>_M_impl._M_finish,
+                        __x);
+        <span style="color:#f92672">++</span><span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>_M_impl._M_finish;
+        _GLIBCXX_ASAN_ANNOTATE_GREW(<span style="color:#ae81ff">1</span>);
+    }
+    <span style="color:#66d9ef">else</span>
+        _M_realloc_insert(end(), __x);
+}
+</code></pre></div><p>A few notes to take:</p>
+<ul>
+<li>
+<p><code>value_type</code>: This is the type of the elements in the vector container. That is, if the vector is <code>std::vector&lt;std::vector&lt;int&gt; &gt;</code>, then value_type of the given vector will be <code>std::vector&lt;int&gt;</code>. This comes handy later for type checking and more.</p>
+</li>
+<li>
+<p><code>_GLIBCXX_ASAN_ANNOTATE_GROW(1)</code>: The definition of this macro is:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#define _GLIBCXX_ASAN_ANNOTATE_GROW(n) \
+</span><span style="color:#75715e">    typename _Base::_Vector_impl::template _Asan&lt;&gt;::_Grow \
+</span><span style="color:#75715e">        __attribute__((__unused__)) __grow_guard(this-&gt;_M_impl, (n))
+</span></code></pre></div><ul>
+<li>The base struct <code>_Vector_base</code> defines these functions and structs. Let&rsquo;s take a look at struct <code>_Asan</code>. Essentially, all we want to do with the above macro is to grow the vector container memory by n. Since when we insert an element, we only need to grow by 1, so we pass 1 to the macro call.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> <span style="color:#f92672">=</span> _Tp_alloc_type<span style="color:#f92672">&gt;</span>
+    <span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">_Asan</span>
+    {
+        <span style="color:#66d9ef">typedef</span> <span style="color:#66d9ef">typename</span> __gnu_cxx<span style="color:#f92672">::</span>__alloc_traits<span style="color:#f92672">&lt;</span>_Tp_alloc_type<span style="color:#f92672">&gt;::</span>size_type size_type;
+
+        <span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">_Grow</span>
+        {
+            _Grow(_Vector_impl<span style="color:#f92672">&amp;</span>, size_type) { }
+            <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">_M_grew</span>(size_type) { }
+        };
+
+        <span style="color:#75715e">// ...
+</span><span style="color:#75715e"></span>    };
+</code></pre></div><p>If usage of Macros is new to you, please leave it for now as we&rsquo;ll discuss more about these design patterns in future.</p>
+</li>
+<li>
+<p>A note on usage of <code>_M_impl</code>. It is declared as: <code>_Vector_impl&amp; _M_impl</code> in the header file. <code>_Vector_impl</code> is a struct defined as:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">_Vector_impl</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> _Tp_alloc_type, <span style="color:#66d9ef">public</span> _Vector_impl_data
+{
+    _Vector_impl() _GLIBCXX_NOEXCEPT_IF(is_nothrow_default_constructible<span style="color:#f92672">&lt;</span>_Tp_alloc_type<span style="color:#f92672">&gt;::</span>value) <span style="color:#f92672">:</span> _Tp_alloc_type() { }
+}
+<span style="color:#75715e">// more overloads for the constructor
+</span></code></pre></div><p>The base struct <code>_Vector_impl_data</code> gives you helpful pointers to access later on:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">_Vector_impl_data</span>
+{
+    pointer _M_start;
+    pointer _M_finish;
+    pointer _M_end_of_storage;
+
+    <span style="color:#75715e">// overloads of constructors
+</span><span style="color:#75715e"></span>}
+</code></pre></div><p>To go deep into the details is not useful here, but as you would have sensed, this helps us to access pointer to the start, finish and end of storage of the vector.</p>
+</li>
+</ul>
+<p>You would have guessed by now, that <code>push_back</code> call will add the element to the end (observe <code>_Alloc_traits::construct(this-&gt;_M_impl, this-&gt;_M_impl._M_finish, __x);</code>) and will then increment the variable <code>_M_finish</code> by 1.</p>
+<p>Note how <code>push_back</code> first checks if there is memory available. Of course we have limited memory available with us, and it checks if the end location of the current vector container equals the end storage capacity:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>_M_impl._M_finish <span style="color:#f92672">!=</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>_M_impl._M_end_of_storage) {
+    <span style="color:#75715e">// ...
+</span><span style="color:#75715e"></span>} <span style="color:#66d9ef">else</span> {
+    _M_realloc_insert(end(), __x);
+}
+</code></pre></div><p>So if we have reached the end of storage, it calls <code>_M_realloc_insert(end(), __x)</code>. Now what is this? Let&rsquo;s take a look at it&rsquo;s definition:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> _Tp, <span style="color:#66d9ef">typename</span> _Alloc<span style="color:#f92672">&gt;</span>
+  <span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span>... _Args<span style="color:#f92672">&gt;</span>
+    <span style="color:#66d9ef">void</span> vector<span style="color:#f92672">&lt;</span>_Tp, _Alloc<span style="color:#f92672">&gt;::</span>_M_realloc_insert(iterator __position, _Args<span style="color:#f92672">&amp;&amp;</span>... __args) {
+        <span style="color:#75715e">// ...
+</span><span style="color:#75715e"></span>        pointer __old_start <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>_M_impl._M_start;
+        pointer __old_finish <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>_M_impl._M_finish;
+        <span style="color:#75715e">// Here we have passed __position as end()
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">// So __elems_before will be total number of elements in our original vector
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">const</span> size_type __elems_before <span style="color:#f92672">=</span> __position <span style="color:#f92672">-</span> begin();
+        
+        <span style="color:#75715e">// Declare new starting and finishing pointers
+</span><span style="color:#75715e"></span>        pointer <span style="color:#a6e22e">__new_start</span>(<span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>_M_allocate(__len));
+        pointer <span style="color:#a6e22e">__new_finish</span>(__new_start);
+
+        <span style="color:#66d9ef">__try</span>
+        {
+            <span style="color:#75715e">// Allocate memory and copy original vector to the new memory locations
+</span><span style="color:#75715e"></span>        }
+        __catch(...)
+
+        <span style="color:#75715e">// Destroy the original memory location
+</span><span style="color:#75715e"></span>        std<span style="color:#f92672">::</span>_Destroy(__old_start, __old_finish, _M_get_Tp_allocator());
+        
+        <span style="color:#75715e">// Change starting, finishing and end of storage pointers to new pointers
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>_M_impl._M_start <span style="color:#f92672">=</span> __new_start;
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>_M_impl._M_finish <span style="color:#f92672">=</span> __new_finish;
+        <span style="color:#75715e">// here __len is 1
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>_M_impl._M_end_of_storage <span style="color:#f92672">=</span> __new_start <span style="color:#f92672">+</span> __len;
+    }
+</code></pre></div><p>Even though the above piece of code might scare a few (it did scare me when I looked at it for the first time), but just saying - this is just 10% of the definition of <code>_M_realloc_insert</code>.</p>
+<p>If you haven&rsquo;t noticed so far, there is something very puzzling in the code: <code>template&lt;typename... _Args&gt;</code> &ndash; these are variadic arguments introduced in C++11. We&rsquo;ll talk about them later in the series of blogs.</p>
+<p>Intuitively, by calling <code>_M_realloc_insert(end(), __x)</code> all we are trying to do is reallocate memory (end_of_storage + 1), copy the original vector data to the new memory locations, add <code>__x</code> and deallocate (or destroy) the original memory in the heap. This also allows to keep vector to have contiguous memory allocation.</p>
+<p>For today, I think we discussed a lot about vectors and their implementation in GCC. We&rsquo;ll continue to cover rest of the details in the next part of the blog. I&rsquo;m sure, the next time you plan to use <code>push_back</code> - you&rsquo;ll know how things are happening in the backend. Till then, have fun and take care! :)</p>
+<h2 id="a-request">A request</h2>
+<p>For the past year, I&rsquo;ve been writing blogs on <!-- raw HTML omitted -->PyTorch C++ API<!-- raw HTML omitted -->. I&rsquo;ve been overwhelmed with your feedback, help and comments. Thank you! This series of blogs on C++, is experimental for now. I love reading source codes, and explaining it to readers. I hope this helps. Please leave your comment and feedback here, or reach out to me at <a href="mailto:kushashwaravishrimali@gmail.com">kushashwaravishrimali@gmail.com</a> if you wish. Even if you don&rsquo;t like this, say it! I promise, I&rsquo;ll be better next time.</p>
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>1375 Words</p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>Posted: <time class="dt-published"> 2020-04-18 05:30 &#43;0530</time></p>
+<a class="resp-sharing-button__link" href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2020%2f04%2funderstanding-how-vectors-work-in-c-part-1-how-does-push_back-work%2f" target="_blank" rel="noopener" aria-label="Facebook">
+  <div class="resp-sharing-button resp-sharing-button--facebook resp-sharing-button--medium"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--circle">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11.5"/><path d="M15.84 9.5H13.5V8.48c0-.53.35-.65.6-.65h1.4v-2.3h-2.35c-2.3 0-2.65 1.7-2.65 2.8V9.5h-2v2h2v7h3v-7h2.1l.24-2z"/></svg></div>Facebook</div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="https://twitter.com/intent/tweet/?text=%22Understanding%20how%20Vectors%20work%20in%20C%2b%2b%20%28Part-1%29%3a%20How%20does%20push_back%20work%3f%22%20seems%20like%20an%20interesting%20read%20from%20%40rg0swami&amp;url=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2020%2f04%2funderstanding-how-vectors-work-in-c-part-1-how-does-push_back-work%2f" target="_blank" rel="noopener" aria-label="Twitter">
+  <div class="resp-sharing-button resp-sharing-button--twitter resp-sharing-button--medium"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--circle">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.5 7.4l-2 .2c-.4-.5-1-.8-2-.8C13.3 6.8 12 8 12 9.4v.6c-2 0-4-1-5.4-2.7-.2.4-.3.8-.3 1.3 0 1 .4 1.7 1.2 2.2-.5 0-1 0-1.2-.3 0 1.3 1 2.3 2 2.6-.3.4-.7.4-1 0 .2 1.4 1.2 2 2.3 2-1 1-2.5 1.4-4 1 1.3 1 2.7 1.4 4.2 1.4 4.8 0 7.5-4 7.5-7.5v-.4c.5-.4.8-1.5 1.2-2z"/><circle cx="12" cy="12" r="11.5"/></svg></div>Twitter</div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="mailto:?subject=%22Understanding%20how%20Vectors%20work%20in%20C%2b%2b%20%28Part-1%29%3a%20How%20does%20push_back%20work%3f%22%20seems%20interesting...&amp;body=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2020%2f04%2funderstanding-how-vectors-work-in-c-part-1-how-does-push_back-work%2f" target="_self" rel="noopener" aria-label="E-Mail">
+  <div class="resp-sharing-button resp-sharing-button--email resp-sharing-button--medium"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--circle">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19.5 16c0 .8-.7 1.5-1.5 1.5H6c-.8 0-1.5-.7-1.5-1.5V8c0-.8.7-1.5 1.5-1.5h12c.8 0 1.5.7 1.5 1.5v8zm-2-7.5L12 13 6.5 8.5m11 6l-4-2.5m-7 2.5l4-2.5"/><circle cx="12" cy="12" r="11.5"/></svg></div>E-Mail</div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2020%2f04%2funderstanding-how-vectors-work-in-c-part-1-how-does-push_back-work%2f&amp;title=%22Understanding%20how%20Vectors%20work%20in%20C%2b%2b%20%28Part-1%29%3a%20How%20does%20push_back%20work%3f%22%20seems%20interesting...&amp;summary=%22Understanding%20how%20Vectors%20work%20in%20C%2b%2b%20%28Part-1%29%3a%20How%20does%20push_back%20work%3f%22%20seems%20interesting...&amp;source=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2020%2f04%2funderstanding-how-vectors-work-in-c-part-1-how-does-push_back-work%2f" target="_blank" rel="noopener" aria-label="LinkedIn">
+  <div class="resp-sharing-button resp-sharing-button--linkedin resp-sharing-button--medium"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--circle">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11.5"/><path d="M15 12.5c-.28 0-.5.22-.5.5v3.5h-3s.03-6.48 0-7h3v.83s.46-.75 1.7-.75c1.56 0 2.3 1.12 2.3 3.3v3.62h-3V13c0-.28-.23-.5-.5-.5zm-7.5-3h2v7h-2z"/><circle cx="8.5" cy="6.5" r="1"/></svg></div>LinkedIn</div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="https://reddit.com/submit/?url=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2020%2f04%2funderstanding-how-vectors-work-in-c-part-1-how-does-push_back-work%2f&amp;resubmit=true&amp;title=%22Understanding%20how%20Vectors%20work%20in%20C%2b%2b%20%28Part-1%29%3a%20How%20does%20push_back%20work%3f%22%20seems%20interesting..." target="_blank" rel="noopener" aria-label="Reddit">
+  <div class="resp-sharing-button resp-sharing-button--reddit resp-sharing-button--medium"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--circle">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11.5"/><ellipse cx="12" cy="14.37" rx="6.2" ry="4.24"/><path d="M14.3 16.25c-.62.36-1.42.57-2.3.57-.88 0-1.7-.2-2.32-.58"/><circle cx="14.61" cy="13.39" r=".98"/><circle cx="9.39" cy="13.39" r=".98"/><path d="M16.4 11.38c.26-.55.82-.92 1.47-.92.9 0 1.63.73 1.63 1.63 0 .8-.6 1.47-1.38 1.6"/><circle cx="17.22" cy="7.52" r="1.63"/><path d="M7.6 11.38c-.26-.54-.82-.92-1.47-.92-.9 0-1.63.73-1.63 1.63 0 .8.6 1.47 1.38 1.6M12 10.12s-.08-4.82 3.6-2.6"/></svg></div>Reddit</div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="whatsapp://send?text=%22Understanding%20how%20Vectors%20work%20in%20C%2b%2b%20%28Part-1%29%3a%20How%20does%20push_back%20work%3f%22%20seems%20interesting...%20https%3a%2f%2fkrshrimali.github.io%2fposts%2f2020%2f04%2funderstanding-how-vectors-work-in-c-part-1-how-does-push_back-work%2f" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <div class="resp-sharing-button resp-sharing-button--whatsapp resp-sharing-button--medium"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--circle">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle xmlns="http://www.w3.org/2000/svg" cx="12" cy="12" r="11.5"/><path stroke-width="1px" d="M17.6 6.2c-1.5-1.5-3.4-2.3-5.5-2.3-4.3 0-7.8 3.5-7.8 7.8 0 1.4.4 2.7 1 3.9l-1.1 4 4.1-1.1c1.1.6 2.4.9 3.7.9 4.3 0 7.8-3.5 7.8-7.8.1-2-.7-3.9-2.2-5.4zm-5.5 11.9c-1.2 0-2.3-.3-3.3-.9l-.2-.1-2.4.6.7-2.4-.2-.2c-.6-1-1-2.2-1-3.4 0-3.6 2.9-6.5 6.5-6.5 1.7 0 3.3.7 4.6 1.9 1.2 1.2 1.9 2.8 1.9 4.6-.1 3.5-3 6.4-6.6 6.4zm3.5-4.8c-.2-.1-1.1-.6-1.3-.6-.2-.1-.3-.1-.4.1-.1.2-.5.6-.6.8-.1.1-.2.1-.4 0s-.8-.3-1.6-1c-.6-.5-1-1.2-1.1-1.3-.1-.2 0-.3.1-.4l.3-.3s.1-.2.2-.3c.1-.1 0-.2 0-.3s-.4-1.1-.6-1.4c-.2-.4-.3-.3-.4-.3h-.4s-.3 0-.5.2-.7.7-.7 1.6c0 1 .7 1.9.8 2s1.4 2.1 3.3 2.9c.5.2.8.3 1.1.4.5.1.9.1 1.2.1.4-.1 1.1-.5 1.3-.9.2-.5.2-.8.1-.9 0-.2-.2-.3-.4-.4z"/></svg></div>WhatsApp</div>
+</a>
+</div>
+
+        
+            <div class="pagination">
+                <div class="pagination__title">
+                    <span class="pagination__title-h"></span>
+                    <hr />
+                </div>
+
+                <div class="pagination__buttons">
+                    
+                        <span class="button previous">
+                            <a href="https://krshrimali.github.io/posts/2020/04/understanding-how-vectors-work-in-c-part-3-diving-deep-into-member-functions-of-vectors/">
+                                <span class="button__icon">←</span>
+                                <span class="button__text">Understanding how Vectors work in C&#43;&#43; (Part-3): Diving deep into member functions of vectors</span>
+                            </a>
+                        </span>
+                    
+
+                    
+                        <span class="button next">
+                            <a href="https://krshrimali.github.io/posts/2020/02/training-and-results-deep-convolutional-generative-adversarial-networks-on-celeba-dataset-using-pytorch-c-api/">
+                                <span class="button__text">[Training and Results] Deep Convolutional Generative Adversarial Networks on CelebA Dataset using PyTorch C&#43;&#43; API</span>
+                                <span class="button__icon">→</span>
+                            </a>
+                        </span>
+                    
+                </div>
+            </div>
+        
+
+        
+            <div class="webmention-form">
+                <form action="https://webmention.io/krshrimali.github.io/webmention" method="post">
+                    <label>Did you mention this article on your website? Put the URL of your post here:</label><br/>
+                    <input name="source" type="url"/>
+                    <input name="target" value="https://krshrimali.github.io/posts/2020/04/understanding-how-vectors-work-in-c-part-1-how-does-push_back-work/" type="hidden"/>
+                    <input value="Send Webmention" type="submit"/>
+                </form>
+            </div>
+            <div id="webmention-container"></div>
+        
+
+        
+    </main>
+
+            
+                <footer class="footer">
+    <p>
+        &copy; 2021
+            
+                <span><a href="https://krshrimali.github.io">Kushashwa Ravi Shrimali</a></span>
+                
+                 <a href="https://krshrimali.github.io/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
+                <br>
+            <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a>
+                Powered by <a href="http://gohugo.io"><u>Hugo</u></a> and <a href="https://github.com/HaoZeke/hugo-theme-hello-friend-ng-hz"><u>this theme</u></a>.</br>
+                
+                
+                <script src="https://liberapay.com/rohit/widgets/button.js"></script>
+<noscript><a href="https://liberapay.com/rohit/donate"><img alt="Donate using Liberapay" src="https://liberapay.com/assets/widgets/donate.svg"></a></noscript>
+
+                
+    </p>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+
+
+<script src="https://krshrimali.github.io/bundle.min.5fae9992ea406007408dc33b0b3a8376d61e2f1d6ac50ba1dad7580ac50afb5199bcef3bbc3677e77553a9980bf882cf71edc2f755687dd7725f12ece4304ac2.js"></script>
+<script src="https://krshrimali.github.io/js/webmention.min.513a53d009530b21cba09721b6f4dc912e9c20ad2c0adbb5c4e486c4f77774a6e9eca8c2e1e4e8bc9e9e86693aa5ca91e7bf232b50f7f8bee4e64efc874040a7.js" data-id="webmention-container"></script>
+
+
+
+
+    </body>
+</html>

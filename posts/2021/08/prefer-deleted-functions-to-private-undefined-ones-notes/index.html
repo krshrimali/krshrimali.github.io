@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="map[name:Kushashwa Ravi Shrimali]">
+<meta name="description" content="Prefer deleted functions to private undefined ones This item (11) in the chapter 3 focuses on:
+ Why and How to prevent users calling particular functions? C&#43;&#43;-98 and C&#43;&#43;-11 approach What&amp;rsquo;s the difference between deleting a function vs declaring a member function private (and not defining them)? " />
+<meta name="keywords" content="" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="#252627" />
+<link rel="canonical" href="https://krshrimali.github.io/posts/2021/08/prefer-deleted-functions-to-private-undefined-ones-notes/" />
+
+
+<title>
+    
+    Prefer Deleted Functions to Private Undefined Ones (Notes) :: Kushashwa Ravi Shrimali (Kush)  — Hello Friend NG HZ Theme
+    
+</title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+      type="text/css">
+
+
+
+<link rel="stylesheet" href="https://krshrimali.github.io/main.min.b6dbce0fdf6c61563a0c2226e857d5dadd8e5afa2c4f73ec9ea55abd831f9a72.css">
+
+
+
+
+
+    <link rel="webmention" href="https://webmention.io/example.com/webmention" />
+    <link rel="pingback" href="https://webmention.io/example.com/xmlrpc" />
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="https://krshrimali.github.io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://krshrimali.github.io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://krshrimali.github.io/favicon-16x16.png">
+    <link rel="manifest" href="https://krshrimali.github.io/site.webmanifest">
+    <link rel="mask-icon" href="https://krshrimali.github.io/safari-pinned-tab.svg" color="#252627">
+    <link rel="shortcut icon" href="https://krshrimali.github.io/favicon.ico">
+    <meta name="msapplication-TileColor" content="#252627">
+    <meta name="theme-color" content="#252627">
+
+<meta itemprop="name" content="Prefer Deleted Functions to Private Undefined Ones (Notes)">
+<meta itemprop="description" content="Prefer deleted functions to private undefined ones
+This item (11) in the chapter 3 focuses on:
+
+Why and How to prevent users calling particular functions?
+C&#43;&#43;-98 and C&#43;&#43;-11 approach
+What&rsquo;s the difference between deleting a function vs declaring a member function private (and not defining them)?
+"><meta itemprop="datePublished" content="2021-08-25T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2021-08-25T00:00:00+00:00" />
+<meta itemprop="wordCount" content="927"><meta itemprop="image" content="https://krshrimali.github.io"/>
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://krshrimali.github.io"/>
+
+<meta name="twitter:title" content="Prefer Deleted Functions to Private Undefined Ones (Notes)"/>
+<meta name="twitter:description" content="Prefer deleted functions to private undefined ones
+This item (11) in the chapter 3 focuses on:
+
+Why and How to prevent users calling particular functions?
+C&#43;&#43;-98 and C&#43;&#43;-11 approach
+What&rsquo;s the difference between deleting a function vs declaring a member function private (and not defining them)?
+"/>
+
+
+
+
+
+    <meta property="article:published_time" content="2021-08-25 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+    </head>
+
+    <body class="dark-theme">
+        <div class="container">
+            <header class="header">
+    <div class="header__inner">
+        <div class="header__left">
+        <div class="logo">
+<a href="https://krshrimali.github.io/" style="text-decoration: none;">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">$ cd /home/</span>
+            <span class="logo__cursor" style=
+                  "
+                   
+                   ">
+            </span>
+        
+</a>
+</div>
+
+        </div>
+
+        
+        <div class="header__mid">
+        <button class="button">
+            <div class="button__text">
+        <a href="https://krshrimali.github.io/search" >
+                Search
+        </a>
+            </div>
+        </button>
+        </div>
+       
+
+        <div class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="https://krshrimali.github.io/about">About</a></li><li><a href="https://krshrimali.github.io/posts">Blog</a></li>
+    </ul>
+    <ul class="menu__inner"><li><a href="https://krshrimali.github.io/categories">Categories</a></li><li><a href="https://krshrimali.github.io/tags">Tags</a></li>
+    </ul>
+</nav>
+
+            <button id="toggleMenu">
+                <div class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </div>
+             </button>
+            
+
+            <button class="theme-toggle" id="toggleTheme"><svg class="theme-toggler" width="32" height="32" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+</button>
+        </div>
+    </div>
+</header>
+
+            
+<script src="https://krshrimali.github.io/js/mathjax-config.js"></script>
+
+
+<script id="MathJax-script" async src="https://unpkg.com/mathjax@3/es5/tex-chtml.js"></script>
+
+            
+    <main class="post">
+
+        <div class="post-info">
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>5 minutes
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>Written: 2021-08-25 00:00 &#43;0000</p>
+
+            
+
+            </p>
+        </div>
+
+        <article class="h-entry">
+            <h1 class="post-title p-name">
+                <a class="u-url" href="https://krshrimali.github.io/posts/2021/08/prefer-deleted-functions-to-private-undefined-ones-notes/">Prefer Deleted Functions to Private Undefined Ones (Notes)</a>
+            </h1>
+        <div class="post-info"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-pen-tool"><path d="M12 19l7-7 3 3-7 7-3-3z"></path><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path><path d="M2 2l7.586 7.586"></path><circle cx="11" cy="11" r="2"></circle></svg>
+                         <span class="author u-author p-author"><a href="https://krshrimali.github.io/author/kushashwa-ravi-shrimali">Kushashwa Ravi Shrimali</a></span>
+        </div>
+
+            
+
+            <div class="post-content e-content">
+                <h2 id="prefer-deleted-functions-to-private-undefined-ones">Prefer deleted functions to private undefined ones</h2>
+<p>This item (11) in the chapter 3 focuses on:</p>
+<ul>
+<li>Why and How to prevent users calling particular functions?</li>
+<li>C++-98 and C++-11 approach</li>
+<li>What&rsquo;s the difference between deleting a function vs declaring a member function private (and not defining them)?</li>
+</ul>
+<!-- raw HTML omitted -->
+<hr>
+<p><strong>NOTE</strong></p>
+<p>These are my notes on Chapter 3, Item 11 of Effective Modern C++ written by Scott Meyers.</p>
+<p>Some (or even all) of the text can be similar to what you see in the book, as these are notes: I&rsquo;ve tried not to be unnecessarily creative with my words. :)</p>
+<hr>
+<ul>
+<li>When is it required to delete a function/not define a private member function?</li>
+</ul>
+<p>Problem:</p>
+<ul>
+<li>Cases when you don&rsquo;t want the client to call a particular function.</li>
+</ul>
+<p>Solution:</p>
+<ul>
+<li>Just don&rsquo;t declare the function</li>
+</ul>
+<p>But&hellip;doesn&rsquo;t work always:</p>
+<p><strong>Case:</strong> Special member functions generated by C++ automatically, discussed later). Examples considered in this blog:</p>
+<ul>
+<li>Copy Constructor</li>
+<li>Copy Assignment Operator</li>
+</ul>
+<p><strong>C++-98 Approach</strong>:</p>
+<ul>
+<li>
+<p>Declare these functions private and don&rsquo;t define them.</p>
+</li>
+<li>
+<p><em>Example:</em></p>
+<ul>
+<li>All <code>istream</code> and <code>ostream</code> objects inherit (possibly) from <code>basic_ios</code> class in the C++ Standard Library.</li>
+<li>Copying these objects is undersirable.</li>
+</ul>
+</li>
+<li>
+<p>Why is copying objects of <code>istream</code> and <code>ostream</code> undesirable? [Also see <a href="https://stackoverflow.com/questions/8785730/cannot-assign-or-copy-iostream-object">this</a> question on stackoverflow]</p>
+<ul>
+<li><code>istream</code> object: represents stream of input values.
+<ul>
+<li>some might have been read before.</li>
+<li>and some may be read later.</li>
+</ul>
+</li>
+<li>If you copy <code>istream</code> object:
+<ul>
+<li>Will that copy those values which have been read before?</li>
+<li>Or will also copy values which are to be read later?</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>Hence, it&rsquo;s just better to not allow copying <code>istream</code> or <code>ostream</code> objects.</p>
+<h2 id="in-c-98">In C++-98:</h2>
+<p>Reminder (from above): All <code>istream</code> and <code>ostream</code> objects inherit from <code>basic_ios</code> class (possibly) in the C++ standard, and the <code>basic_ios</code> class in C++-98 looks something like this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">charT</span>, <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">traits</span> <span style="color:#f92672">=</span> char_traits<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> <span style="color:#f92672">&gt;</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">basic_ios</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> ios_base {
+<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+    <span style="color:#75715e">// ...
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">// Declaring the copy constructor and copy assignment operator private prohibits clients from calling them
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+    basic_ios(<span style="color:#66d9ef">const</span> basic_ios<span style="color:#f92672">&amp;</span>);  <span style="color:#75715e">// not defined
+</span><span style="color:#75715e"></span>    basic_ios<span style="color:#f92672">&amp;</span> <span style="color:#66d9ef">operator</span><span style="color:#f92672">=</span>(<span style="color:#66d9ef">const</span> basic_ios<span style="color:#f92672">&amp;</span>);  <span style="color:#75715e">// not defined
+</span><span style="color:#75715e"></span>};
+</code></pre></div><p>Note that:</p>
+<ul>
+<li><code>basic_ios(const basic_ios&amp;)</code> is the copy constructor</li>
+<li><code>basic_ios&amp; operator=(const basic_ios&amp;)</code> is the copy assignment operator</li>
+</ul>
+<p>(and both are <code>private</code>).</p>
+<p>How does <em>not defining</em> these functions help?</p>
+<ul>
+<li>Consider a case where a <code>friend</code> class or member functions try accessing these functions, then linking will fail because of missing function definitions.</li>
+</ul>
+<h2 id="in-c-11">In C++-11</h2>
+<p>In C++-11, the above can be done using <code>= delete</code> to mark the copy constructor and the copy assignment operator as <em>deleted</em> functions.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">charT</span>, <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">traits</span> <span style="color:#f92672">=</span> char_traits<span style="color:#f92672">&lt;</span>charT<span style="color:#f92672">&gt;</span> <span style="color:#f92672">&gt;</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">basic_ios</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> ios_base {
+<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+    <span style="color:#75715e">// ...
+</span><span style="color:#75715e"></span>    basic_ios(<span style="color:#66d9ef">const</span> basic_ios<span style="color:#f92672">&amp;</span> ) <span style="color:#f92672">=</span> <span style="color:#66d9ef">delete</span>;  <span style="color:#75715e">// deleted function
+</span><span style="color:#75715e"></span>    basic_ios<span style="color:#f92672">&amp;</span> <span style="color:#66d9ef">operator</span><span style="color:#f92672">=</span>(<span style="color:#66d9ef">const</span> basic_ios<span style="color:#f92672">&amp;</span>) <span style="color:#f92672">=</span> <span style="color:#66d9ef">delete</span>;  <span style="color:#75715e">// deleted function
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// ...
+</span><span style="color:#75715e"></span>};
+</code></pre></div><p>It&rsquo;s a convention to declare <em>deleted</em> functions <code>public</code>, but why? Better error messages.</p>
+<p>In case you declare your <em>deleted</em> functions <code>private</code>, some compilers will probably complain about the function being <code>private</code> and can hide the error message of it not being usable (because it being <code>deleted</code>). Hence, it&rsquo;s a <em>good practice</em> to make them <code>public</code>:</p>
+<p>From my experience though, Apple&rsquo;s clang compiler (v 12.0.5) doesn&rsquo;t complain about it being <code>private</code>, but then - it can vary from compiler to compiler, so better to play safe. Here is an example of how the error message looks like:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Sample</span> {
+<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+    Sample(<span style="color:#66d9ef">int</span> x) <span style="color:#f92672">:</span> x(x) { };
+    <span style="color:#75715e">// Copy constructor has been deleted, so should not be callable
+</span><span style="color:#75715e"></span>    Sample(<span style="color:#66d9ef">const</span> Sample<span style="color:#f92672">&amp;</span>) <span style="color:#f92672">=</span> <span style="color:#66d9ef">delete</span>;
+    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">trying_copy_construct</span>(Sample s) {
+        <span style="color:#75715e">// This function tries to use a copy constructor
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">// This should fail
+</span><span style="color:#75715e"></span>        Sample new_object(s);
+    }
+<span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+    <span style="color:#66d9ef">int</span> x;
+};
+</code></pre></div><p>Compiling the above code fails with the following error:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">main.cpp:<span style="color:#ae81ff">10</span><span style="color:#f92672">:</span><span style="color:#ae81ff">16</span><span style="color:#f92672">:</span> error: call to deleted constructor of <span style="color:#960050;background-color:#1e0010">&#39;</span>Sample<span style="color:#960050;background-color:#1e0010">&#39;</span>
+        Sample new_object(s);
+               <span style="color:#f92672">^</span>          <span style="color:#f92672">~</span>
+main.cpp:<span style="color:#ae81ff">6</span><span style="color:#f92672">:</span><span style="color:#ae81ff">5</span><span style="color:#f92672">:</span> note: <span style="color:#960050;background-color:#1e0010">&#39;</span>Sample<span style="color:#960050;background-color:#1e0010">&#39;</span> has been explicitly marked deleted here
+    Sample(<span style="color:#66d9ef">const</span> Sample<span style="color:#f92672">&amp;</span>) <span style="color:#f92672">=</span> <span style="color:#66d9ef">delete</span>;
+</code></pre></div><h2 id="difference-bw-using-delete-vs-declaring-private">Difference b/w using delete vs declaring private</h2>
+<p>Note: There is more to it except the <em>good practice</em> reasoning.</p>
+<ul>
+<li>Using a <em>deleted</em> function in a member function or by a <code>friend</code> class won&rsquo;t even compile the code if it tries to copy <code>basic_ios</code> objects <em>while</em> declaring <code>private</code> will compile successfully but fail during link-time.</li>
+<li>Conventionally deleted functions are declared <code>public</code>, not <code>private</code> while the C++-98 way requires the functions to be declared private (see the section above for reasoning).</li>
+<li>Only member functions can be private, while <em>any</em> function can be deleted (so you can delete some overloads for your function, in case you don&rsquo;t want it to accept certain type inputs).</li>
+</ul>
+<p>Let&rsquo;s discuss the last point in detail:</p>
+<p>Consider the case where you have:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T<span style="color:#f92672">&gt;</span>
+<span style="color:#66d9ef">void</span> processPointer(T<span style="color:#f92672">*</span> ptr);
+</code></pre></div><p>And:</p>
+<ul>
+<li>You need a template that works with built-in pointers. You want to reject calls with <code>void*</code> and <code>char*</code> pointers (more on this later, these deserve special handling at times).</li>
+<li>Ideal way? Delete these instantiations (with <code>void*</code> or <code>char*</code> input pointers).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;&gt;</span>
+<span style="color:#66d9ef">void</span> processPointer<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">void</span><span style="color:#f92672">&gt;</span>(<span style="color:#66d9ef">void</span><span style="color:#f92672">*</span>) <span style="color:#f92672">=</span> <span style="color:#66d9ef">delete</span>;
+
+<span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;&gt;</span>
+<span style="color:#66d9ef">void</span> processPointer<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">char</span><span style="color:#f92672">&gt;</span>(<span style="color:#66d9ef">char</span><span style="color:#f92672">*</span>) <span style="color:#f92672">=</span> <span style="color:#66d9ef">delete</span>;
+</code></pre></div><p>But, with C++-98 way, it&rsquo;s not possible within the class scope. That is, you can not give template specialization to your member function within the class scope (it should be done in the namespace scope):</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Sample</span> {
+<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+    <span style="color:#75715e">// ...
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T<span style="color:#f92672">&gt;</span>
+    <span style="color:#66d9ef">void</span> processPointer(T<span style="color:#f92672">*</span> ptr)
+    { ... }
+
+<span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+    <span style="color:#75715e">// ...
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// This is template specialization inside the scope of the class - not allowed
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;&gt;</span>
+    <span style="color:#66d9ef">void</span> processPointer<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">void</span><span style="color:#f92672">&gt;</span>(<span style="color:#66d9ef">void</span><span style="color:#f92672">*</span>);  <span style="color:#75715e">// error
+</span><span style="color:#75715e"></span>};
+</code></pre></div><p>While with the C++-11 way, you can delete function outside the <code>class</code> scope:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Sample</span> {
+<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+    <span style="color:#75715e">// ...
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T<span style="color:#f92672">&gt;</span>
+    <span style="color:#66d9ef">void</span> processPointer(T<span style="color:#f92672">*</span> ptr)
+    { ... }
+    <span style="color:#75715e">// ...
+</span><span style="color:#75715e"></span>};
+
+<span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;&gt;</span>
+<span style="color:#66d9ef">void</span> Sample<span style="color:#f92672">::</span>processPointer<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">void</span><span style="color:#f92672">&gt;</span>(<span style="color:#66d9ef">void</span><span style="color:#f92672">*</span>) <span style="color:#f92672">=</span> <span style="color:#66d9ef">delete</span>;  <span style="color:#75715e">// in public scope, and deleted!
+</span></code></pre></div><p>I hope you liked this blog, thank you for reading! :)</p>
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>927 Words</p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>Posted: <time class="dt-published"> 2021-08-25 05:30 &#43;0530</time></p>
+<a class="resp-sharing-button__link" href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2021%2f08%2fprefer-deleted-functions-to-private-undefined-ones-notes%2f" target="_blank" rel="noopener" aria-label="Facebook">
+  <div class="resp-sharing-button resp-sharing-button--facebook resp-sharing-button--medium"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--circle">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11.5"/><path d="M15.84 9.5H13.5V8.48c0-.53.35-.65.6-.65h1.4v-2.3h-2.35c-2.3 0-2.65 1.7-2.65 2.8V9.5h-2v2h2v7h3v-7h2.1l.24-2z"/></svg></div>Facebook</div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="https://twitter.com/intent/tweet/?text=%22Prefer%20Deleted%20Functions%20to%20Private%20Undefined%20Ones%20%28Notes%29%22%20seems%20like%20an%20interesting%20read%20from%20%40rg0swami&amp;url=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2021%2f08%2fprefer-deleted-functions-to-private-undefined-ones-notes%2f" target="_blank" rel="noopener" aria-label="Twitter">
+  <div class="resp-sharing-button resp-sharing-button--twitter resp-sharing-button--medium"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--circle">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.5 7.4l-2 .2c-.4-.5-1-.8-2-.8C13.3 6.8 12 8 12 9.4v.6c-2 0-4-1-5.4-2.7-.2.4-.3.8-.3 1.3 0 1 .4 1.7 1.2 2.2-.5 0-1 0-1.2-.3 0 1.3 1 2.3 2 2.6-.3.4-.7.4-1 0 .2 1.4 1.2 2 2.3 2-1 1-2.5 1.4-4 1 1.3 1 2.7 1.4 4.2 1.4 4.8 0 7.5-4 7.5-7.5v-.4c.5-.4.8-1.5 1.2-2z"/><circle cx="12" cy="12" r="11.5"/></svg></div>Twitter</div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="mailto:?subject=%22Prefer%20Deleted%20Functions%20to%20Private%20Undefined%20Ones%20%28Notes%29%22%20seems%20interesting...&amp;body=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2021%2f08%2fprefer-deleted-functions-to-private-undefined-ones-notes%2f" target="_self" rel="noopener" aria-label="E-Mail">
+  <div class="resp-sharing-button resp-sharing-button--email resp-sharing-button--medium"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--circle">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19.5 16c0 .8-.7 1.5-1.5 1.5H6c-.8 0-1.5-.7-1.5-1.5V8c0-.8.7-1.5 1.5-1.5h12c.8 0 1.5.7 1.5 1.5v8zm-2-7.5L12 13 6.5 8.5m11 6l-4-2.5m-7 2.5l4-2.5"/><circle cx="12" cy="12" r="11.5"/></svg></div>E-Mail</div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2021%2f08%2fprefer-deleted-functions-to-private-undefined-ones-notes%2f&amp;title=%22Prefer%20Deleted%20Functions%20to%20Private%20Undefined%20Ones%20%28Notes%29%22%20seems%20interesting...&amp;summary=%22Prefer%20Deleted%20Functions%20to%20Private%20Undefined%20Ones%20%28Notes%29%22%20seems%20interesting...&amp;source=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2021%2f08%2fprefer-deleted-functions-to-private-undefined-ones-notes%2f" target="_blank" rel="noopener" aria-label="LinkedIn">
+  <div class="resp-sharing-button resp-sharing-button--linkedin resp-sharing-button--medium"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--circle">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11.5"/><path d="M15 12.5c-.28 0-.5.22-.5.5v3.5h-3s.03-6.48 0-7h3v.83s.46-.75 1.7-.75c1.56 0 2.3 1.12 2.3 3.3v3.62h-3V13c0-.28-.23-.5-.5-.5zm-7.5-3h2v7h-2z"/><circle cx="8.5" cy="6.5" r="1"/></svg></div>LinkedIn</div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="https://reddit.com/submit/?url=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2021%2f08%2fprefer-deleted-functions-to-private-undefined-ones-notes%2f&amp;resubmit=true&amp;title=%22Prefer%20Deleted%20Functions%20to%20Private%20Undefined%20Ones%20%28Notes%29%22%20seems%20interesting..." target="_blank" rel="noopener" aria-label="Reddit">
+  <div class="resp-sharing-button resp-sharing-button--reddit resp-sharing-button--medium"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--circle">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11.5"/><ellipse cx="12" cy="14.37" rx="6.2" ry="4.24"/><path d="M14.3 16.25c-.62.36-1.42.57-2.3.57-.88 0-1.7-.2-2.32-.58"/><circle cx="14.61" cy="13.39" r=".98"/><circle cx="9.39" cy="13.39" r=".98"/><path d="M16.4 11.38c.26-.55.82-.92 1.47-.92.9 0 1.63.73 1.63 1.63 0 .8-.6 1.47-1.38 1.6"/><circle cx="17.22" cy="7.52" r="1.63"/><path d="M7.6 11.38c-.26-.54-.82-.92-1.47-.92-.9 0-1.63.73-1.63 1.63 0 .8.6 1.47 1.38 1.6M12 10.12s-.08-4.82 3.6-2.6"/></svg></div>Reddit</div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="whatsapp://send?text=%22Prefer%20Deleted%20Functions%20to%20Private%20Undefined%20Ones%20%28Notes%29%22%20seems%20interesting...%20https%3a%2f%2fkrshrimali.github.io%2fposts%2f2021%2f08%2fprefer-deleted-functions-to-private-undefined-ones-notes%2f" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <div class="resp-sharing-button resp-sharing-button--whatsapp resp-sharing-button--medium"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--circle">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle xmlns="http://www.w3.org/2000/svg" cx="12" cy="12" r="11.5"/><path stroke-width="1px" d="M17.6 6.2c-1.5-1.5-3.4-2.3-5.5-2.3-4.3 0-7.8 3.5-7.8 7.8 0 1.4.4 2.7 1 3.9l-1.1 4 4.1-1.1c1.1.6 2.4.9 3.7.9 4.3 0 7.8-3.5 7.8-7.8.1-2-.7-3.9-2.2-5.4zm-5.5 11.9c-1.2 0-2.3-.3-3.3-.9l-.2-.1-2.4.6.7-2.4-.2-.2c-.6-1-1-2.2-1-3.4 0-3.6 2.9-6.5 6.5-6.5 1.7 0 3.3.7 4.6 1.9 1.2 1.2 1.9 2.8 1.9 4.6-.1 3.5-3 6.4-6.6 6.4zm3.5-4.8c-.2-.1-1.1-.6-1.3-.6-.2-.1-.3-.1-.4.1-.1.2-.5.6-.6.8-.1.1-.2.1-.4 0s-.8-.3-1.6-1c-.6-.5-1-1.2-1.1-1.3-.1-.2 0-.3.1-.4l.3-.3s.1-.2.2-.3c.1-.1 0-.2 0-.3s-.4-1.1-.6-1.4c-.2-.4-.3-.3-.4-.3h-.4s-.3 0-.5.2-.7.7-.7 1.6c0 1 .7 1.9.8 2s1.4 2.1 3.3 2.9c.5.2.8.3 1.1.4.5.1.9.1 1.2.1.4-.1 1.1-.5 1.3-.9.2-.5.2-.8.1-.9 0-.2-.2-.3-.4-.4z"/></svg></div>WhatsApp</div>
+</a>
+</div>
+
+        
+            <div class="pagination">
+                <div class="pagination__title">
+                    <span class="pagination__title-h"></span>
+                    <hr />
+                </div>
+
+                <div class="pagination__buttons">
+                    
+
+                    
+                        <span class="button next">
+                            <a href="https://krshrimali.github.io/posts/2021/08/prefer-scoped-enums-over-unscoped-enums-notes/">
+                                <span class="button__text">Prefer Scoped Enums over Unscoped Enums (Notes)</span>
+                                <span class="button__icon">→</span>
+                            </a>
+                        </span>
+                    
+                </div>
+            </div>
+        
+
+        
+            <div class="webmention-form">
+                <form action="https://webmention.io/krshrimali.github.io/webmention" method="post">
+                    <label>Did you mention this article on your website? Put the URL of your post here:</label><br/>
+                    <input name="source" type="url"/>
+                    <input name="target" value="https://krshrimali.github.io/posts/2021/08/prefer-deleted-functions-to-private-undefined-ones-notes/" type="hidden"/>
+                    <input value="Send Webmention" type="submit"/>
+                </form>
+            </div>
+            <div id="webmention-container"></div>
+        
+
+        
+    </main>
+
+            
+                <footer class="footer">
+    <p>
+        &copy; 2021
+            
+                <span><a href="https://krshrimali.github.io">Kushashwa Ravi Shrimali</a></span>
+                
+                 <a href="https://krshrimali.github.io/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
+                <br>
+            <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a>
+                Powered by <a href="http://gohugo.io"><u>Hugo</u></a> and <a href="https://github.com/HaoZeke/hugo-theme-hello-friend-ng-hz"><u>this theme</u></a>.</br>
+                
+                
+                <script src="https://liberapay.com/rohit/widgets/button.js"></script>
+<noscript><a href="https://liberapay.com/rohit/donate"><img alt="Donate using Liberapay" src="https://liberapay.com/assets/widgets/donate.svg"></a></noscript>
+
+                
+    </p>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+
+
+<script src="https://krshrimali.github.io/bundle.min.5fae9992ea406007408dc33b0b3a8376d61e2f1d6ac50ba1dad7580ac50afb5199bcef3bbc3677e77553a9980bf882cf71edc2f755687dd7725f12ece4304ac2.js"></script>
+<script src="https://krshrimali.github.io/js/webmention.min.513a53d009530b21cba09721b6f4dc912e9c20ad2c0adbb5c4e486c4f77774a6e9eca8c2e1e4e8bc9e9e86693aa5ca91e7bf232b50f7f8bee4e64efc874040a7.js" data-id="webmention-container"></script>
+
+
+
+
+    </body>
+</html>
