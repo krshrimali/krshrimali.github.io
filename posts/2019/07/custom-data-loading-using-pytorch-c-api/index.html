@@ -7,7 +7,7 @@
 <meta name="author" content="map[name:Kushashwa Ravi Shrimali]">
 <meta name="description" content="Overview: How C&#43;&#43; API loads data? In the last blog, we discussed application of a VGG-16 Network on MNIST Data. For those, who are reading this blog for the first time, here is how we had loaded MNIST data:
 auto data_loader = torch::data::make_data_loader&amp;lt;torch::data::samplers::SequentialSampler&amp;gt;( std::move(torch::data::datasets::MNIST(&amp;#34;../../data&amp;#34;).map(torch::data::transforms::Normalize&amp;lt;&amp;gt;(0.13707, 0.3081))).map( torch::data::transforms::Stack&amp;lt;&amp;gt;()), 64); Let&amp;rsquo;s break this piece by piece, as for beginners, this may be unclear. First, we ask the C&#43;&#43; API to load data (images and labels) into tensors." />
-<meta name="keywords" content="" />
+<meta name="keywords" content=", development, coding, cpp, notes, pytorch-cpp, libtorch" />
 <meta name="robots" content="noodp" />
 <meta name="theme-color" content="#252627" />
 <link rel="canonical" href="https://krshrimali.github.io/posts/2019/07/custom-data-loading-using-pytorch-c-api/" />
@@ -51,7 +51,7 @@ auto data_loader = torch::data::make_data_loader&amp;lt;torch::data::samplers::S
 auto data_loader = torch::data::make_data_loader&lt;torch::data::samplers::SequentialSampler&gt;( std::move(torch::data::datasets::MNIST(&#34;../../data&#34;).map(torch::data::transforms::Normalize&lt;&gt;(0.13707, 0.3081))).map( torch::data::transforms::Stack&lt;&gt;()), 64); Let&rsquo;s break this piece by piece, as for beginners, this may be unclear. First, we ask the C&#43;&#43; API to load data (images and labels) into tensors."><meta itemprop="datePublished" content="2019-07-02T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2019-07-02T00:00:00+00:00" />
 <meta itemprop="wordCount" content="1500"><meta itemprop="image" content="https://krshrimali.github.io"/>
-<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary_large_image"/>
+<meta itemprop="keywords" content="development,coding,cpp,notes,pytorch-cpp,libtorch," /><meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://krshrimali.github.io"/>
 
 <meta name="twitter:title" content="Custom Data Loading using PyTorch C&#43;&#43; API"/>
@@ -59,6 +59,10 @@ auto data_loader = torch::data::make_data_loader&lt;torch::data::samplers::Seque
 auto data_loader = torch::data::make_data_loader&lt;torch::data::samplers::SequentialSampler&gt;( std::move(torch::data::datasets::MNIST(&#34;../../data&#34;).map(torch::data::transforms::Normalize&lt;&gt;(0.13707, 0.3081))).map( torch::data::transforms::Stack&lt;&gt;()), 64); Let&rsquo;s break this piece by piece, as for beginners, this may be unclear. First, we ask the C&#43;&#43; API to load data (images and labels) into tensors."/>
 
 
+
+    <meta property="article:section" content="pytorch" />
+
+    <meta property="article:section" content="deep learning" />
 
 
 
@@ -470,6 +474,9 @@ vector<span style="color:#f92672">&lt;</span>torch<span style="color:#f92672">::
         <hr />
 
         <div class="post-info">
+                <p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://krshrimali.github.io/tags/development">development</a></span><span class="tag"><a href="https://krshrimali.github.io/tags/coding">coding</a></span><span class="tag"><a href="https://krshrimali.github.io/tags/cpp">cpp</a></span><span class="tag"><a href="https://krshrimali.github.io/tags/notes">notes</a></span><span class="tag"><a href="https://krshrimali.github.io/tags/pytorch-cpp">pytorch-cpp</a></span><span class="tag"><a href="https://krshrimali.github.io/tags/libtorch">libtorch</a></span>
+                </p>
 
             <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>1500 Words</p>
 

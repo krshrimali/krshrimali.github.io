@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>deleted functions on Kushashwa Ravi Shrimali (Kush)</title>
+    <link>https://krshrimali.github.io/tags/deleted-functions/</link>
+    <description>Recent content in deleted functions on Kushashwa Ravi Shrimali (Kush)</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
+    <lastBuildDate>Wed, 25 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://krshrimali.github.io/tags/deleted-functions/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Prefer Deleted Functions to Private Undefined Ones (Notes)</title>
+      <link>https://krshrimali.github.io/posts/2021/08/prefer-deleted-functions-to-private-undefined-ones-notes/</link>
+      <pubDate>Wed, 25 Aug 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://krshrimali.github.io/posts/2021/08/prefer-deleted-functions-to-private-undefined-ones-notes/</guid>
+      <description>&lt;h2 id=&#34;prefer-deleted-functions-to-private-undefined-ones&#34;&gt;Prefer deleted functions to private undefined ones&lt;/h2&gt;
+&lt;p&gt;This item (11) in the chapter 3 focuses on:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Why and How to prevent users calling particular functions?&lt;/li&gt;
+&lt;li&gt;C++-98 and C++-11 approach&lt;/li&gt;
+&lt;li&gt;What&amp;rsquo;s the difference between deleting a function vs declaring a member function private (and not defining them)?&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

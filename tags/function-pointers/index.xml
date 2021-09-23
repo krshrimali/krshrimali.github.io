@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>function pointers on Kushashwa Ravi Shrimali (Kush)</title>
+    <link>https://krshrimali.github.io/tags/function-pointers/</link>
+    <description>Recent content in function pointers on Kushashwa Ravi Shrimali (Kush)</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
+    <lastBuildDate>Sun, 18 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://krshrimali.github.io/tags/function-pointers/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Function Pointers and Function Objects in C&#43;&#43;</title>
+      <link>https://krshrimali.github.io/posts/2021/07/function-pointers-and-function-objects-in-c-/</link>
+      <pubDate>Sun, 18 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://krshrimali.github.io/posts/2021/07/function-pointers-and-function-objects-in-c-/</guid>
+      <description>&lt;p&gt;In today&amp;rsquo;s blog, we&amp;rsquo;ll talk about two important concepts in C++: Function Pointers and Function Objects.&lt;/p&gt;
+&lt;p&gt;Please note that, function objects are commonly referred as &lt;em&gt;functors&lt;/em&gt; but we have failed to notice any official alias to the name. Hence, we&amp;rsquo;ll restrict ourselves to using &lt;em&gt;Function Objects&lt;/em&gt; in this blog.&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
