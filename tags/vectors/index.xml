@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>vectors on Kushashwa Ravi Shrimali (Kush)</title>
+    <link>https://krshrimali.github.io/tags/vectors/</link>
+    <description>Recent content in vectors on Kushashwa Ravi Shrimali (Kush)</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
+    <lastBuildDate>Sun, 26 Apr 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://krshrimali.github.io/tags/vectors/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Understanding how Vectors work in C&#43;&#43; (Part-2): What happens when you initialize a vector?</title>
+      <link>https://krshrimali.github.io/posts/2020/04/understanding-how-vectors-work-in-c-part-2-what-happens-when-you-initialize-a-vector/</link>
+      <pubDate>Sun, 26 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://krshrimali.github.io/posts/2020/04/understanding-how-vectors-work-in-c-part-2-what-happens-when-you-initialize-a-vector/</guid>
+      <description>&lt;p&gt;In the last blog post, I realized there were a lot of methods inherited from the base struct &lt;code&gt;_Vector_base_&lt;/code&gt; and &lt;code&gt;_Vector_impl_data&lt;/code&gt;. Instead of directly going to the source code of these structs, I&amp;rsquo;ll go through their methods and objects by explaining what happens when we initialize a vector.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Understanding how Vectors work in C&#43;&#43; (Part-3): Diving deep into member functions of vectors</title>
+      <link>https://krshrimali.github.io/posts/2020/04/understanding-how-vectors-work-in-c-part-3-diving-deep-into-member-functions-of-vectors/</link>
+      <pubDate>Sun, 26 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://krshrimali.github.io/posts/2020/04/understanding-how-vectors-work-in-c-part-3-diving-deep-into-member-functions-of-vectors/</guid>
+      <description>&lt;p&gt;In this blog, we&amp;rsquo;ll continue diving deep into the source code of Vector Containers in GCC compiler. Today, we will be discussing some of the most commonly used methods of vectors, and how they are implemented.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Understanding how Vectors work in C&#43;&#43; (Part-1): How does push_back work?</title>
+      <link>https://krshrimali.github.io/posts/2020/04/understanding-how-vectors-work-in-c-part-1-how-does-push_back-work/</link>
+      <pubDate>Sat, 18 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://krshrimali.github.io/posts/2020/04/understanding-how-vectors-work-in-c-part-1-how-does-push_back-work/</guid>
+      <description>&lt;p&gt;This blog is focused to explain how vectors work in the backend, and we&amp;rsquo;ll specially look at &lt;code&gt;push_back&lt;/code&gt; method of the vector container. Looking at the source code helps to understand the implementation, and how vectors can be used efficiently.&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

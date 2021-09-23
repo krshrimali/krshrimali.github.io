@@ -65,11 +65,95 @@
     <loc>https://krshrimali.github.io/posts/2019/06/introduction-to-pytorch-c-api-mnist-digit-recognition-using-vgg-16-network/</loc>
     <lastmod>2019-06-07T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>https://krshrimali.github.io/categories/book-reading/</loc>
+    <lastmod>2021-08-25T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://krshrimali.github.io/categories/</loc>
+    <lastmod>2021-08-25T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://krshrimali.github.io/tags/coding/</loc>
+    <lastmod>2021-08-25T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://krshrimali.github.io/tags/cpp/</loc>
+    <lastmod>2021-08-25T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://krshrimali.github.io/categories/cpp/</loc>
+    <lastmod>2021-08-25T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://krshrimali.github.io/tags/deleted-functions/</loc>
+    <lastmod>2021-08-25T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://krshrimali.github.io/tags/development/</loc>
+    <lastmod>2021-08-25T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://krshrimali.github.io/</loc>
+    <lastmod>2021-08-25T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://krshrimali.github.io/tags/notes/</loc>
     <lastmod>2021-08-25T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://krshrimali.github.io/posts/</loc>
     <lastmod>2021-08-25T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://krshrimali.github.io/tags/</loc>
+    <lastmod>2021-08-25T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://krshrimali.github.io/tags/algorithms/</loc>
+    <lastmod>2021-08-14T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://krshrimali.github.io/categories/algorithms/</loc>
+    <lastmod>2021-08-14T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://krshrimali.github.io/tags/scoped-enums/</loc>
+    <lastmod>2021-08-14T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://krshrimali.github.io/tags/union-find/</loc>
+    <lastmod>2021-08-14T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://krshrimali.github.io/tags/unscoped-enums/</loc>
+    <lastmod>2021-08-14T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://krshrimali.github.io/tags/aliases/</loc>
+    <lastmod>2021-08-12T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://krshrimali.github.io/tags/typedefs/</loc>
+    <lastmod>2021-08-12T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://krshrimali.github.io/tags/function-objects/</loc>
+    <lastmod>2021-07-18T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://krshrimali.github.io/tags/function-pointers/</loc>
+    <lastmod>2021-07-18T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://krshrimali.github.io/tags/computer-vision/</loc>
+    <lastmod>2020-12-10T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://krshrimali.github.io/tags/image-processing/</loc>
+    <lastmod>2020-12-10T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://krshrimali.github.io/categories/opencv/</loc>
+    <lastmod>2020-12-10T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://krshrimali.github.io/tags/portrait-bokeh/</loc>
+    <lastmod>2020-12-10T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://krshrimali.github.io/tags/python/</loc>
+    <lastmod>2020-12-10T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://krshrimali.github.io/categories/deep-learning/</loc>
+    <lastmod>2020-09-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://krshrimali.github.io/tags/libtorch/</loc>
+    <lastmod>2020-09-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://krshrimali.github.io/categories/pytorch/</loc>
+    <lastmod>2020-09-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://krshrimali.github.io/tags/pytorch-cpp/</loc>
+    <lastmod>2020-09-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://krshrimali.github.io/tags/vectors/</loc>
+    <lastmod>2020-04-26T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://krshrimali.github.io/about/</loc>
     <lastmod>2014-04-09T00:00:00+00:00</lastmod>
@@ -78,10 +162,6 @@
   </url><url>
     <loc>https://krshrimali.github.io/categories/</loc>
   </url><url>
-    <loc>https://krshrimali.github.io/categories/</loc>
-  </url><url>
     <loc>https://krshrimali.github.io/search/</loc>
-  </url><url>
-    <loc>https://krshrimali.github.io/tags/</loc>
   </url>
 </urlset>
