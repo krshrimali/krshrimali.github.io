@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="author" content="map[name:Kushashwa Ravi Shrimali]">
 <meta name="description" content="In the last blog post, I realized there were a lot of methods inherited from the base struct _Vector_base_ and _Vector_impl_data. Instead of directly going to the source code of these structs, I&amp;rsquo;ll go through their methods and objects by explaining what happens when we initialize a vector.
-" />
+That is, we will start from calling a vector constructor and then see how memory is allocated. If you haven&amp;rsquo;t looked at the previous blog post, please take a look here." />
 <meta name="keywords" content=", development, coding, cpp, notes, vectors" />
 <meta name="robots" content="noodp" />
 <meta name="theme-color" content="#252627" />
@@ -44,14 +44,16 @@
     <meta name="theme-color" content="#252627">
 
 <meta itemprop="name" content="Understanding how Vectors work in C&#43;&#43; (Part-2): What happens when you initialize a vector?">
-<meta itemprop="description" content="In the last blog post, I realized there were a lot of methods inherited from the base struct _Vector_base_ and _Vector_impl_data. Instead of directly going to the source code of these structs, I&rsquo;ll go through their methods and objects by explaining what happens when we initialize a vector."><meta itemprop="datePublished" content="2020-04-26T00:00:00+00:00" />
+<meta itemprop="description" content="In the last blog post, I realized there were a lot of methods inherited from the base struct _Vector_base_ and _Vector_impl_data. Instead of directly going to the source code of these structs, I&rsquo;ll go through their methods and objects by explaining what happens when we initialize a vector.
+That is, we will start from calling a vector constructor and then see how memory is allocated. If you haven&rsquo;t looked at the previous blog post, please take a look here."><meta itemprop="datePublished" content="2020-04-26T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2020-04-26T00:00:00+00:00" />
 <meta itemprop="wordCount" content="1460"><meta itemprop="image" content="https://krshrimali.github.io"/>
 <meta itemprop="keywords" content="development,coding,cpp,notes,vectors," /><meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://krshrimali.github.io"/>
 
 <meta name="twitter:title" content="Understanding how Vectors work in C&#43;&#43; (Part-2): What happens when you initialize a vector?"/>
-<meta name="twitter:description" content="In the last blog post, I realized there were a lot of methods inherited from the base struct _Vector_base_ and _Vector_impl_data. Instead of directly going to the source code of these structs, I&rsquo;ll go through their methods and objects by explaining what happens when we initialize a vector."/>
+<meta name="twitter:description" content="In the last blog post, I realized there were a lot of methods inherited from the base struct _Vector_base_ and _Vector_impl_data. Instead of directly going to the source code of these structs, I&rsquo;ll go through their methods and objects by explaining what happens when we initialize a vector.
+That is, we will start from calling a vector constructor and then see how memory is allocated. If you haven&rsquo;t looked at the previous blog post, please take a look here."/>
 
 
 
@@ -163,7 +165,7 @@
 
             <div class="post-content e-content">
                 <p>In the last blog post, I realized there were a lot of methods inherited from the base struct <code>_Vector_base_</code> and <code>_Vector_impl_data</code>. Instead of directly going to the source code of these structs, I&rsquo;ll go through their methods and objects by explaining what happens when we initialize a vector.</p>
-<!-- raw HTML omitted -->
+<p><img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/cover-images/Vector-Part-2.png" alt=""></p>
 <p>That is, we will start from calling a vector constructor and then see how memory is allocated. If you haven&rsquo;t looked at the previous blog post, please take a look <!-- raw HTML omitted -->here<!-- raw HTML omitted -->. I want to be thorough with the blog post, so I&rsquo;ll divide this into multiple posts. By the end of this post, you&rsquo;ll go through the following structs:</p>
 <ol>
 <li><code>_Vector_impl_data</code> struct which contains pointers to memory locations (start, finish and end of storage).</li>
@@ -280,6 +282,7 @@ std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</
 </code></pre></div><p>Overall, it&rsquo;s the same to what we saw before except that we use the copy of the alloactor of vector <code>__x</code>. The call <code>_M_create_storage(__n)</code> does the same task of setting pointers <code>_M_start, M_end_of_storage, _M_finish</code> as we observed before.</p>
 <p>For today&rsquo;s blog, we discussed 3 popular ways to initialize a vector in C++ and went through how memory is allocated when the constructors are called. As we move forward, we will slowly get familiar with the design patterns and methods used in GCC.</p>
 <p>As always, I would love to hear your feedback on my blogs. Correct me if I was wrong anywhere, no one is perfect afterall. If this helped you, please let me know - it keeps me going! See you all in the next blog!</p>
+
             </div>
         </article>
 

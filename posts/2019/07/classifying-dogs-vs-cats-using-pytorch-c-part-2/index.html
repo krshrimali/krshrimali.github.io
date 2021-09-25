@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="author" content="map[name:Kushashwa Ravi Shrimali]">
 <meta name="description" content="In the last blog, we had discussed all but training and results of our custom CNN network on Dogs vs Cats dataset. Today, we&amp;rsquo;ll be making some small changes in the network and discussing training and results of the task.
-" />
+I&amp;rsquo;ll start with the network overview again, where we used a network similar to VGG-16 (with one extra Fully Connected Layer in the end). While there are absolutely no problems with that network, but since the dataset contains a lot of images (25000 in training dataset) and we were using (200x200x3) input shape to the network (which is 120,000 floating point numbers), this leads to high memory consumption." />
 <meta name="keywords" content=", development, coding, cpp, notes, pytorch-cpp, libtorch" />
 <meta name="robots" content="noodp" />
 <meta name="theme-color" content="#252627" />
@@ -44,14 +44,16 @@
     <meta name="theme-color" content="#252627">
 
 <meta itemprop="name" content="Classifying Dogs vs Cats using PyTorch C&#43;&#43;: Part 2">
-<meta itemprop="description" content="In the last blog, we had discussed all but training and results of our custom CNN network on Dogs vs Cats dataset. Today, we&rsquo;ll be making some small changes in the network and discussing training and results of the task."><meta itemprop="datePublished" content="2019-07-31T00:00:00+00:00" />
+<meta itemprop="description" content="In the last blog, we had discussed all but training and results of our custom CNN network on Dogs vs Cats dataset. Today, we&rsquo;ll be making some small changes in the network and discussing training and results of the task.
+I&rsquo;ll start with the network overview again, where we used a network similar to VGG-16 (with one extra Fully Connected Layer in the end). While there are absolutely no problems with that network, but since the dataset contains a lot of images (25000 in training dataset) and we were using (200x200x3) input shape to the network (which is 120,000 floating point numbers), this leads to high memory consumption."><meta itemprop="datePublished" content="2019-07-31T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2019-07-31T00:00:00+00:00" />
 <meta itemprop="wordCount" content="1387"><meta itemprop="image" content="https://krshrimali.github.io"/>
 <meta itemprop="keywords" content="development,coding,cpp,notes,pytorch-cpp,libtorch," /><meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://krshrimali.github.io"/>
 
 <meta name="twitter:title" content="Classifying Dogs vs Cats using PyTorch C&#43;&#43;: Part 2"/>
-<meta name="twitter:description" content="In the last blog, we had discussed all but training and results of our custom CNN network on Dogs vs Cats dataset. Today, we&rsquo;ll be making some small changes in the network and discussing training and results of the task."/>
+<meta name="twitter:description" content="In the last blog, we had discussed all but training and results of our custom CNN network on Dogs vs Cats dataset. Today, we&rsquo;ll be making some small changes in the network and discussing training and results of the task.
+I&rsquo;ll start with the network overview again, where we used a network similar to VGG-16 (with one extra Fully Connected Layer in the end). While there are absolutely no problems with that network, but since the dataset contains a lot of images (25000 in training dataset) and we were using (200x200x3) input shape to the network (which is 120,000 floating point numbers), this leads to high memory consumption."/>
 
 
 
@@ -165,7 +167,7 @@
 
             <div class="post-content e-content">
                 <p>In the last blog, we had discussed all but training and results of our custom CNN network on Dogs vs Cats dataset. Today, we&rsquo;ll be making some small changes in the network and discussing training and results of the task.</p>
-<p><img src="https://krshrimali.github.io/assets/Classify-Dogs-Cats-Blog-05.jpg" alt="Cover Pic"></p>
+<p><img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/cover-images/Classify-Dogs-Cats-Blog-05.jpg" alt=""></p>
 <p>I&rsquo;ll start with the network overview again, where we used a network similar to VGG-16 (with one extra Fully Connected Layer in the end). While there are absolutely no problems with that network, but since the dataset contains a lot of images (25000 in training dataset) and we were using (200x200x3) input shape to the network (which is 120,000 floating point numbers), this leads to high memory consumption. In short, I was out of RAM to store these many images during program execution.</p>
 <p>So, I decided to change some minute things:</p>
 <ol>
@@ -427,15 +429,17 @@ mse <span style="color:#f92672">+=</span> loss.<span style="color:#66d9ef">templ
 </ol>
 <p>Let&rsquo;s look at some of the correct and wrong predictions.</p>
 <h2 id="correct-predictions-dogs">Correct Predictions (Dogs)</h2>
-<p><img src="https://krshrimali.github.io/assets/Correct-Predictions-Dogs.png" alt="Correct Predictions of Dogs"></p>
+<p><img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/blogs/Correct-Predictions-Dogs.png" alt="Correct Predictions of Dogs"></p>
 <h2 id="correct-predictions-cats">Correct Predictions (Cats)</h2>
-<p><img src="https://krshrimali.github.io/assets/Correct-Predictions-Cats.png" alt="Correct Predictions of Cats"></p>
+<p><img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/blogs/Correct-Predictions-Cats.png" alt="Correct Predictions of Cats">
+<img src="https://krshrimali.github.io/assets/Correct-Predictions-Cats.png" alt="Correct Predictions of Cats"></p>
 <h2 id="wrong-predictions-dogs">Wrong Predictions (Dogs)</h2>
-<p><img src="https://krshrimali.github.io/assets/Wrong-Predictions-Dog.png" alt="Wrong Predictions of Dogs"></p>
+<p><img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/blogs/Wrong-Predictions-Dog.png" alt="Wrong Predictions of Dogs"></p>
 <h2 id="wrong-predictions-cats">Wrong Predictions (Cats)</h2>
-<p><img src="https://krshrimali.github.io/assets/Wrong-Predictions-Cats.png" alt="Wrong Predictions of Cats"></p>
+<p><img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/blogs/Wrong-Predictions-Cats.png" alt="Wrong Predictions of Cats"></p>
 <p>Clearly, the network has done well for just a 2 Convolutional and 3 FC Layer Network. It seems to have focused more on the posture of the animal (and body). We can make the network learn more robust features, with a more deeper CNN (like VGG-16). We&rsquo;ll be discussing on using pretrained weights on Dogs vs Cats Dataset using PyTorch C++ API and also Transfer Learning Approach in C++.</p>
 <p>Happy Learning!</p>
+
             </div>
         </article>
 

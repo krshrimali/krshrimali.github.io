@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="author" content="map[name:Kushashwa Ravi Shrimali]">
 <meta name="description" content="In this blog, we&amp;rsquo;ll continue diving deep into the source code of Vector Containers in GCC compiler. Today, we will be discussing some of the most commonly used methods of vectors, and how they are implemented.
-" />
+Before we start, if you haven&amp;rsquo;t looked at the previous blogs in the C&#43;&#43; series, please take a look here. If you are already familiar with memory allocation in vector containers and vector&amp;rsquo;s base structs, then you can skip reading the previous blogs and continue here." />
 <meta name="keywords" content=", development, coding, cpp, notes, vectors" />
 <meta name="robots" content="noodp" />
 <meta name="theme-color" content="#252627" />
@@ -44,14 +44,16 @@
     <meta name="theme-color" content="#252627">
 
 <meta itemprop="name" content="Understanding how Vectors work in C&#43;&#43; (Part-3): Diving deep into member functions of vectors">
-<meta itemprop="description" content="In this blog, we&rsquo;ll continue diving deep into the source code of Vector Containers in GCC compiler. Today, we will be discussing some of the most commonly used methods of vectors, and how they are implemented."><meta itemprop="datePublished" content="2020-04-26T00:00:00+00:00" />
+<meta itemprop="description" content="In this blog, we&rsquo;ll continue diving deep into the source code of Vector Containers in GCC compiler. Today, we will be discussing some of the most commonly used methods of vectors, and how they are implemented.
+Before we start, if you haven&rsquo;t looked at the previous blogs in the C&#43;&#43; series, please take a look here. If you are already familiar with memory allocation in vector containers and vector&rsquo;s base structs, then you can skip reading the previous blogs and continue here."><meta itemprop="datePublished" content="2020-04-26T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2020-04-26T00:00:00+00:00" />
 <meta itemprop="wordCount" content="1366"><meta itemprop="image" content="https://krshrimali.github.io"/>
 <meta itemprop="keywords" content="development,coding,cpp,notes,vectors," /><meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://krshrimali.github.io"/>
 
 <meta name="twitter:title" content="Understanding how Vectors work in C&#43;&#43; (Part-3): Diving deep into member functions of vectors"/>
-<meta name="twitter:description" content="In this blog, we&rsquo;ll continue diving deep into the source code of Vector Containers in GCC compiler. Today, we will be discussing some of the most commonly used methods of vectors, and how they are implemented."/>
+<meta name="twitter:description" content="In this blog, we&rsquo;ll continue diving deep into the source code of Vector Containers in GCC compiler. Today, we will be discussing some of the most commonly used methods of vectors, and how they are implemented.
+Before we start, if you haven&rsquo;t looked at the previous blogs in the C&#43;&#43; series, please take a look here. If you are already familiar with memory allocation in vector containers and vector&rsquo;s base structs, then you can skip reading the previous blogs and continue here."/>
 
 
 
@@ -163,7 +165,7 @@
 
             <div class="post-content e-content">
                 <p>In this blog, we&rsquo;ll continue diving deep into the source code of Vector Containers in GCC compiler. Today, we will be discussing some of the most commonly used methods of vectors, and how they are implemented.</p>
-<!-- raw HTML omitted -->
+<p><img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/cover-images/Vector-Part-3.png" alt=""></p>
 <p>Before we start, if you haven&rsquo;t looked at the previous blogs in the C++ series, please take a look <!-- raw HTML omitted -->here<!-- raw HTML omitted -->. If you are already familiar with memory allocation in vector containers and vector&rsquo;s base structs, then you can skip reading the previous blogs and continue here. If not, I suggest you reading them.</p>
 <p>Let&rsquo;s start off with <code>pop_back</code> member function, which essentially deletes the last element from the vector and reduces the size by one. Let&rsquo;s take a look how it is used:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e"># Initialize a vector using initializer list
@@ -300,6 +302,7 @@ X.pop_back();
 <p>I have received a lot of love and support for these blogs, and I am grateful to each and everyone of you! I write these blogs to share what I know with others and in a hope to motivate people to not fear when looking at the source code of any library. I think, reading codes is a good practice.</p>
 <p>I am thankful to <!-- raw HTML omitted -->Martin York<!-- raw HTML omitted --> (aka Loki Astari on <!-- raw HTML omitted -->stackoverflow<!-- raw HTML omitted -->)) for his constructive feedback on my blogs. Special thanks to <!-- raw HTML omitted -->Ujval Kapasi<!-- raw HTML omitted --> for taking time to read through my blogs and giving valuable feedback.</p>
 <p>I was, am and will always be grateful to my elder brother <!-- raw HTML omitted -->Vishwesh Ravi Shrimali<!-- raw HTML omitted --> (also my all time mentor) who helped me getting started with C++, AI and whatever I have been doing recently. He inspires me.</p>
+
             </div>
         </article>
 

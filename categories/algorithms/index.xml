@@ -13,16 +13,8 @@
       <pubDate>Sat, 14 Aug 2021 00:00:00 +0000</pubDate>
       
       <guid>https://krshrimali.github.io/posts/2021/08/union-find-problem-and-a-naive-implementation-c-/</guid>
-      <description>&lt;p&gt;Hi Everyone, today I want to talk about Union Find Problem. This is going to be a series covering:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Union Find Problem (this blog)&lt;/li&gt;
-&lt;li&gt;Solutions to Union Find (1): Quick Find&lt;/li&gt;
-&lt;li&gt;Solutions to Union Find (2): Quick Union&lt;/li&gt;
-&lt;li&gt;Solutions to Union Find (3): Weighted Quick Union&lt;/li&gt;
-&lt;li&gt;Applications of Union Find (perculation and more)&lt;/li&gt;
-&lt;li&gt;Cool project using Union Find&lt;/li&gt;
-&lt;li&gt;Solving some competitive programming questions using Union Find&lt;/li&gt;
-&lt;/ul&gt;</description>
+      <description>Hi Everyone, today I want to talk about Union Find Problem. This is going to be a series covering:
+ Union Find Problem (this blog) Solutions to Union Find (1): Quick Find Solutions to Union Find (2): Quick Union Solutions to Union Find (3): Weighted Quick Union Applications of Union Find (perculation and more) Cool project using Union Find Solving some competitive programming questions using Union Find  Each blog will try to cover very basic concepts behind the topic, and also what it&amp;rsquo;s all about.</description>
     </item>
     
   </channel>

@@ -6,7 +6,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="author" content="map[name:Kushashwa Ravi Shrimali]">
 <meta name="description" content="I&amp;rsquo;m pleased to start a series of blogs on GANs and their implementation with PyTorch C&#43;&#43; API. We&amp;rsquo;ll be starting with one of the initial GANs - DCGANs (Deep Convolutional Generative Adversarial Networks).
-" />
+The authors (Soumith Chintala, Radford and Luke Metz) in thisSeminal Paper on DCGANs introduced DCGANs to the world like this:
+ We introduce a class of CNNs called deep convolutional generative adversarial networks (DCGANs), that have certain architectural constraints, and demonstrate that they are a strong candidate for unsupervised learning." />
 <meta name="keywords" content=", development, coding, cpp, notes, pytorch-cpp, libtorch" />
 <meta name="robots" content="noodp" />
 <meta name="theme-color" content="#252627" />
@@ -44,14 +45,18 @@
     <meta name="theme-color" content="#252627">
 
 <meta itemprop="name" content="Deep Convolutional Generative Adversarial Networks: Review and Implementation using PyTorch C&#43;&#43; API">
-<meta itemprop="description" content="I&rsquo;m pleased to start a series of blogs on GANs and their implementation with PyTorch C&#43;&#43; API. We&rsquo;ll be starting with one of the initial GANs - DCGANs (Deep Convolutional Generative Adversarial Networks)."><meta itemprop="datePublished" content="2019-09-15T00:00:00+00:00" />
+<meta itemprop="description" content="I&rsquo;m pleased to start a series of blogs on GANs and their implementation with PyTorch C&#43;&#43; API. We&rsquo;ll be starting with one of the initial GANs - DCGANs (Deep Convolutional Generative Adversarial Networks).
+The authors (Soumith Chintala, Radford and Luke Metz) in thisSeminal Paper on DCGANs introduced DCGANs to the world like this:
+ We introduce a class of CNNs called deep convolutional generative adversarial networks (DCGANs), that have certain architectural constraints, and demonstrate that they are a strong candidate for unsupervised learning."><meta itemprop="datePublished" content="2019-09-15T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2019-09-15T00:00:00+00:00" />
 <meta itemprop="wordCount" content="2047"><meta itemprop="image" content="https://krshrimali.github.io"/>
 <meta itemprop="keywords" content="development,coding,cpp,notes,pytorch-cpp,libtorch," /><meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://krshrimali.github.io"/>
 
 <meta name="twitter:title" content="Deep Convolutional Generative Adversarial Networks: Review and Implementation using PyTorch C&#43;&#43; API"/>
-<meta name="twitter:description" content="I&rsquo;m pleased to start a series of blogs on GANs and their implementation with PyTorch C&#43;&#43; API. We&rsquo;ll be starting with one of the initial GANs - DCGANs (Deep Convolutional Generative Adversarial Networks)."/>
+<meta name="twitter:description" content="I&rsquo;m pleased to start a series of blogs on GANs and their implementation with PyTorch C&#43;&#43; API. We&rsquo;ll be starting with one of the initial GANs - DCGANs (Deep Convolutional Generative Adversarial Networks).
+The authors (Soumith Chintala, Radford and Luke Metz) in thisSeminal Paper on DCGANs introduced DCGANs to the world like this:
+ We introduce a class of CNNs called deep convolutional generative adversarial networks (DCGANs), that have certain architectural constraints, and demonstrate that they are a strong candidate for unsupervised learning."/>
 
 
 
@@ -165,7 +170,7 @@
 
             <div class="post-content e-content">
                 <p>I&rsquo;m pleased to start a series of blogs on GANs and their implementation with PyTorch C++ API. We&rsquo;ll be starting with one of the initial GANs - DCGANs (Deep Convolutional Generative Adversarial Networks).</p>
-<!-- raw HTML omitted -->
+<p><img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/cover-images/Cover-DCGAN.jpg" alt=""></p>
 <p>The authors (Soumith Chintala, Radford and Luke Metz) in <!-- raw HTML omitted -->this<!-- raw HTML omitted --> Seminal Paper on DCGANs introduced DCGANs to the world like this:</p>
 <blockquote>
 <p>We introduce a class of CNNs called deep convolutional generative adversarial networks (DCGANs), that have certain architectural constraints, and demonstrate that they are a strong candidate for unsupervised learning. Training on various image datasets, we show convincing evidence that our deep convolutional adversarial pair learns a hierarchy of representations from object parts to scenes in both the generator and discriminator. Additionally, we use the learned features for novel tasks - demonstrating their applicability as general image representations.</p>
@@ -445,6 +450,7 @@ torch<span style="color:#f92672">::</span>optim<span style="color:#f92672">::</s
 <p>In the coming blog, I&rsquo;ll share the results and answer a few common questions on the architecture of DCGAN.</p>
 <h2 id="acknowledgement-and-references">Acknowledgement and References</h2>
 <p>I would like to thank <!-- raw HTML omitted -->Will Feng<!-- raw HTML omitted --> and <!-- raw HTML omitted -->Piotr<!-- raw HTML omitted --> for their useful suggestions. The code used in this blog, is partially analogous to the official <!-- raw HTML omitted -->PyTorch examples repo on DCGAN using Libtorch<!-- raw HTML omitted -->. I&rsquo;ve also referred the original paper by <!-- raw HTML omitted -->Soumith Chintala<!-- raw HTML omitted --> and others. The sources of reference images (for Network architectures) have been acknowledged in the captions of respective images.</p>
+
             </div>
         </article>
 

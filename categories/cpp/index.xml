@@ -13,13 +13,10 @@
       <pubDate>Wed, 25 Aug 2021 00:00:00 +0000</pubDate>
       
       <guid>https://krshrimali.github.io/posts/2021/08/prefer-deleted-functions-to-private-undefined-ones-notes/</guid>
-      <description>&lt;h2 id=&#34;prefer-deleted-functions-to-private-undefined-ones&#34;&gt;Prefer deleted functions to private undefined ones&lt;/h2&gt;
-&lt;p&gt;This item (11) in the chapter 3 focuses on:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Why and How to prevent users calling particular functions?&lt;/li&gt;
-&lt;li&gt;C++-98 and C++-11 approach&lt;/li&gt;
-&lt;li&gt;What&amp;rsquo;s the difference between deleting a function vs declaring a member function private (and not defining them)?&lt;/li&gt;
-&lt;/ul&gt;</description>
+      <description>Prefer deleted functions to private undefined ones This item (11) in the chapter 3 focuses on:
+ Why and How to prevent users calling particular functions? C++-98 and C++-11 approach What&amp;rsquo;s the difference between deleting a function vs declaring a member function private (and not defining them)?   NOTE
+These are my notes on Chapter 3, Item 11 of Effective Modern C++ written by Scott Meyers.
+Some (or even all) of the text can be similar to what you see in the book, as these are notes: I&amp;rsquo;ve tried not to be unnecessarily creative with my words.</description>
     </item>
     
     <item>
@@ -28,11 +25,9 @@
       <pubDate>Sat, 14 Aug 2021 00:00:00 +0000</pubDate>
       
       <guid>https://krshrimali.github.io/posts/2021/08/prefer-scoped-enums-over-unscoped-enums-notes/</guid>
-      <description>&lt;h2 id=&#34;scoped-vs-unscoped-enums&#34;&gt;Scoped vs Unscoped Enums&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;General rule:&lt;/strong&gt; declaring a name inside curly braces is limited to that scope.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Exception:&lt;/strong&gt; C++-98 style Enums&lt;/li&gt;
-&lt;/ul&gt;</description>
+      <description>Scoped vs Unscoped Enums  General rule: declaring a name inside curly braces is limited to that scope. Exception: C++-98 style Enums   NOTE
+My notes on Chapter 3, Item 10 of Effective Modern C++ written by Scott Meyers.
+Some (or even all) of the text can be similar to what you see in the book, as these are notes: I&amp;rsquo;ve tried not to be unnecessarily creative with my words.</description>
     </item>
     
     <item>
@@ -41,16 +36,8 @@
       <pubDate>Sat, 14 Aug 2021 00:00:00 +0000</pubDate>
       
       <guid>https://krshrimali.github.io/posts/2021/08/union-find-problem-and-a-naive-implementation-c-/</guid>
-      <description>&lt;p&gt;Hi Everyone, today I want to talk about Union Find Problem. This is going to be a series covering:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Union Find Problem (this blog)&lt;/li&gt;
-&lt;li&gt;Solutions to Union Find (1): Quick Find&lt;/li&gt;
-&lt;li&gt;Solutions to Union Find (2): Quick Union&lt;/li&gt;
-&lt;li&gt;Solutions to Union Find (3): Weighted Quick Union&lt;/li&gt;
-&lt;li&gt;Applications of Union Find (perculation and more)&lt;/li&gt;
-&lt;li&gt;Cool project using Union Find&lt;/li&gt;
-&lt;li&gt;Solving some competitive programming questions using Union Find&lt;/li&gt;
-&lt;/ul&gt;</description>
+      <description>Hi Everyone, today I want to talk about Union Find Problem. This is going to be a series covering:
+ Union Find Problem (this blog) Solutions to Union Find (1): Quick Find Solutions to Union Find (2): Quick Union Solutions to Union Find (3): Weighted Quick Union Applications of Union Find (perculation and more) Cool project using Union Find Solving some competitive programming questions using Union Find  Each blog will try to cover very basic concepts behind the topic, and also what it&amp;rsquo;s all about.</description>
     </item>
     
     <item>
@@ -81,7 +68,8 @@
       <pubDate>Sun, 26 Apr 2020 00:00:00 +0000</pubDate>
       
       <guid>https://krshrimali.github.io/posts/2020/04/understanding-how-vectors-work-in-c-part-2-what-happens-when-you-initialize-a-vector/</guid>
-      <description>&lt;p&gt;In the last blog post, I realized there were a lot of methods inherited from the base struct &lt;code&gt;_Vector_base_&lt;/code&gt; and &lt;code&gt;_Vector_impl_data&lt;/code&gt;. Instead of directly going to the source code of these structs, I&amp;rsquo;ll go through their methods and objects by explaining what happens when we initialize a vector.&lt;/p&gt;</description>
+      <description>In the last blog post, I realized there were a lot of methods inherited from the base struct _Vector_base_ and _Vector_impl_data. Instead of directly going to the source code of these structs, I&amp;rsquo;ll go through their methods and objects by explaining what happens when we initialize a vector.
+That is, we will start from calling a vector constructor and then see how memory is allocated. If you haven&amp;rsquo;t looked at the previous blog post, please take a look here.</description>
     </item>
     
     <item>
@@ -90,7 +78,8 @@
       <pubDate>Sun, 26 Apr 2020 00:00:00 +0000</pubDate>
       
       <guid>https://krshrimali.github.io/posts/2020/04/understanding-how-vectors-work-in-c-part-3-diving-deep-into-member-functions-of-vectors/</guid>
-      <description>&lt;p&gt;In this blog, we&amp;rsquo;ll continue diving deep into the source code of Vector Containers in GCC compiler. Today, we will be discussing some of the most commonly used methods of vectors, and how they are implemented.&lt;/p&gt;</description>
+      <description>In this blog, we&amp;rsquo;ll continue diving deep into the source code of Vector Containers in GCC compiler. Today, we will be discussing some of the most commonly used methods of vectors, and how they are implemented.
+Before we start, if you haven&amp;rsquo;t looked at the previous blogs in the C++ series, please take a look here. If you are already familiar with memory allocation in vector containers and vector&amp;rsquo;s base structs, then you can skip reading the previous blogs and continue here.</description>
     </item>
     
     <item>
@@ -99,7 +88,8 @@
       <pubDate>Sat, 18 Apr 2020 00:00:00 +0000</pubDate>
       
       <guid>https://krshrimali.github.io/posts/2020/04/understanding-how-vectors-work-in-c-part-1-how-does-push_back-work/</guid>
-      <description>&lt;p&gt;This blog is focused to explain how vectors work in the backend, and we&amp;rsquo;ll specially look at &lt;code&gt;push_back&lt;/code&gt; method of the vector container. Looking at the source code helps to understand the implementation, and how vectors can be used efficiently.&lt;/p&gt;</description>
+      <description>This blog is focused to explain how vectors work in the backend, and we&amp;rsquo;ll specially look at push_back method of the vector container. Looking at the source code helps to understand the implementation, and how vectors can be used efficiently.
+Vector Containers are type of sequenced containers in C++ commonly uses as a better alternative of arrays. They are also known as dynamic arrays, and as the term suggests - it&amp;rsquo;s one of the advantages they hold over native arrays in C++.</description>
     </item>
     
   </channel>

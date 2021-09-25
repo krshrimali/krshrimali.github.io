@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="author" content="map[name:Kushashwa Ravi Shrimali]">
 <meta name="description" content="Transfer Learning &amp;ndash; Before we go ahead and discuss the Why question of Transfer Learning, let&amp;rsquo;s have a look at What is Transfer Learning? Let&amp;rsquo;s have a look at the Notesfrom CS231n on Transfer Learning:
-" />
+ In practice, very few people train an entire Convolutional Network from scratch (with random initialization), because it is relatively rare to have a dataset of sufficient size. Instead, it is common to pretrain a ConvNet on a very large dataset (e." />
 <meta name="keywords" content=", development, coding, cpp, notes, pytorch-cpp, libtorch" />
 <meta name="robots" content="noodp" />
 <meta name="theme-color" content="#252627" />
@@ -44,18 +44,16 @@
     <meta name="theme-color" content="#252627">
 
 <meta itemprop="name" content="Applying Transfer Learning on Dogs vs Cats Dataset (ResNet18) using PyTorch C&#43;&#43; API">
-<meta itemprop="description" content="Transfer Learning
-&ndash;
-Before we go ahead and discuss the Why question of Transfer Learning, let&rsquo;s have a look at What is Transfer Learning? Let&rsquo;s have a look at the Notes from CS231n on Transfer Learning:"><meta itemprop="datePublished" content="2019-08-16T00:00:00+00:00" />
+<meta itemprop="description" content="Transfer Learning &ndash; Before we go ahead and discuss the Why question of Transfer Learning, let&rsquo;s have a look at What is Transfer Learning? Let&rsquo;s have a look at the Notesfrom CS231n on Transfer Learning:
+ In practice, very few people train an entire Convolutional Network from scratch (with random initialization), because it is relatively rare to have a dataset of sufficient size. Instead, it is common to pretrain a ConvNet on a very large dataset (e."><meta itemprop="datePublished" content="2019-08-16T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2019-08-16T00:00:00+00:00" />
-<meta itemprop="wordCount" content="1525"><meta itemprop="image" content="https://krshrimali.github.io"/>
+<meta itemprop="wordCount" content="1517"><meta itemprop="image" content="https://krshrimali.github.io"/>
 <meta itemprop="keywords" content="development,coding,cpp,notes,pytorch-cpp,libtorch," /><meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://krshrimali.github.io"/>
 
 <meta name="twitter:title" content="Applying Transfer Learning on Dogs vs Cats Dataset (ResNet18) using PyTorch C&#43;&#43; API"/>
-<meta name="twitter:description" content="Transfer Learning
-&ndash;
-Before we go ahead and discuss the Why question of Transfer Learning, let&rsquo;s have a look at What is Transfer Learning? Let&rsquo;s have a look at the Notes from CS231n on Transfer Learning:"/>
+<meta name="twitter:description" content="Transfer Learning &ndash; Before we go ahead and discuss the Why question of Transfer Learning, let&rsquo;s have a look at What is Transfer Learning? Let&rsquo;s have a look at the Notesfrom CS231n on Transfer Learning:
+ In practice, very few people train an entire Convolutional Network from scratch (with random initialization), because it is relatively rare to have a dataset of sufficient size. Instead, it is common to pretrain a ConvNet on a very large dataset (e."/>
 
 
 
@@ -174,7 +172,7 @@ Before we go ahead and discuss the <strong>Why</strong> question of Transfer Lea
 <blockquote>
 <p>In practice, very few people train an entire Convolutional Network from scratch (with random initialization), because it is relatively rare to have a dataset of sufficient size. Instead, it is common to pretrain a ConvNet on a very large dataset (e.g. ImageNet, which contains 1.2 million images with 1000 categories), and then use the ConvNet either as an initialization or a fixed feature extractor for the task of interest.</p>
 </blockquote>
-<!-- raw HTML omitted -->
+<p><img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/cover-images/Cover-Transfer-Learning.jpg" alt=""></p>
 <p>There are 3 scenarios possible:</p>
 <ol>
 <li>When the data you have is similar (but not enough) to data trained on pre-trained model: Take an example of a pre-trained model trained on ImageNet dataset (containing 1000 classes). And the data we have has Dogs and Cats classes. Fortunate enough, ImageNet has some of the classes of Dog and Cat breeds and thus the model must have learned important features from the data. Let&rsquo;s say we don&rsquo;t have enough data but since the data is similar to the breeds in the ImageNet data set, we can simply use the ConvNet (except the last FC layer) to extract features from our dataset and train only the last Linear (FC) layer.</li>
@@ -189,7 +187,7 @@ Before we go ahead and discuss the <strong>Why</strong> question of Transfer Lea
 <h2 id="setting-up-the-data-with-pytorch-c-api">Setting up the data with PyTorch C++ API</h2>
 <p>At every stage, we will compare the Python and C++ codes to do the same thing, to make the analogy easier and understandable. Starting with setting up the data we have. Note that we do have enough data and it is also similar to the original data set of ImageNet, but since I don&rsquo;t have enough resources to fine tune through the whole network, we perform Transfer Learning on the final FC layer only.</p>
 <p>Starting with loading the dataset, as discussed in the blogs before, I&rsquo;ll just post a flow chart of procedure.</p>
-<!-- raw HTML omitted -->
+<p><img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/blogs/Steps-Loading-Data-PyTorch.png" alt=""></p>
 <p>Once done, we can initialize the <code>CustomDataset</code> class:</p>
 <p><strong>C++</strong></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// List of images of Dogs and Cats, use load_data_from_folder function explained in previous blogs
@@ -269,7 +267,7 @@ optimizer <span style="color:#f92672">=</span> torch<span style="color:#f92672">
 cost <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>nn<span style="color:#f92672">.</span>CrossEntropyLoss()
 </code></pre></div><h2 id="trainining-the-fc-layer">Trainining the FC Layer</h2>
 <p>Let&rsquo;s first have a look at ResNet18 Network Architecture</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --><a href="https://www.researchgate.net/figure/ResNet-18-Architecture_tbl1_322476121">https://www.researchgate.net/figure/ResNet-18-Architecture_tbl1_322476121</a><!-- raw HTML omitted --></p>
+<p><img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/blogs/ResNet18-Architecture.png" alt="https://www.researchgate.net/figure/ResNet-18-Architecture_tbl1_322476121"></p>
 <p>The final step is to train the Fully Connected layer that we inserted at the end of the network (<code>linear_layer</code>). This one should be pretty straight forward, let&rsquo;s see how to do it.</p>
 <p><strong>C++</strong>:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">train</span>(torch<span style="color:#f92672">::</span>jit<span style="color:#f92672">::</span>script<span style="color:#f92672">::</span>Module net, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Linear lin, Dataloader<span style="color:#f92672">&amp;</span> data_loader, torch<span style="color:#f92672">::</span>optim<span style="color:#f92672">::</span>Optimizer<span style="color:#f92672">&amp;</span> optimizer, size_t dataset_size) {
@@ -358,22 +356,23 @@ cost <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</sp
     print(<span style="color:#e6db74">&#34;Epoch: </span><span style="color:#e6db74">{}</span><span style="color:#e6db74">/</span><span style="color:#e6db74">{}</span><span style="color:#e6db74">, Loss: </span><span style="color:#e6db74">{:.4f}</span><span style="color:#e6db74">, Accuracy: </span><span style="color:#e6db74">{:.4f}</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">.</span>format(epoch<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>, n_epochs, mse, acc))
 </code></pre></div><p>The code to test should also not change much except the need of optimizer.</p>
 <h2 id="results">Results</h2>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted -->Results using PyTorch C++ API<!-- raw HTML omitted -->
-<!-- raw HTML omitted --><!-- raw HTML omitted -->Results using PyTorch in Python<!-- raw HTML omitted --></p>
+<p><img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/blogs/Training-Results.png" alt="Results using PyTorch C++ API">
+<img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/blogs/Training-Results-Python.png" alt="Results using PyTorch in Python"></p>
 <p>On a set of 400 images for training data, the maximum training Accuracy I could achieve was 91.25% in just less than 15 epochs using PyTorch C++ API and 89.0% using Python. (Note that this doesn&rsquo;t conclude superiority in terms of accuracy between any of the two backends - C++ or Python)</p>
 <p>Let&rsquo;s have a look at correct and wrong predictions.</p>
 <p><strong>Correct Predictions - Dogs</strong>
-<!-- raw HTML omitted --></p>
+<img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/blogs/correct-predictions-dogs-transfer-learning.png" alt=""></p>
 <p><strong>Wrong Predictions - Dogs</strong>
-<!-- raw HTML omitted --></p>
+<img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/blogs/wrong-predictions-dogs-transfer-learning.png" alt=""></p>
 <p><strong>Correct Predictions - Cats</strong>
-<!-- raw HTML omitted --></p>
+<img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/blogs/correct-predictions-cats-transfer-learning.png" alt=""></p>
 <p><strong>Wrong Predictions - Cats</strong>
-<!-- raw HTML omitted --></p>
+<img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/blogs/wrong-predictions-cats-transfer-learning.png" alt=""></p>
 <h2 id="acknowledgements">Acknowledgements</h2>
 <p>I would like to thank a few people to help me bring this out to the community. Thanks to <a href="https://github.com/ptrblck">Piotr</a> for his comments and answers in the PyTorch Discussion forum. Thanks to <a href="https://github.com/yf225">Will Feng</a> for reviewing the blog and the code and also his constant motivation to bring this out to you all. Would like to thank my constant motivation behind all my work, <a href="https://github.com/vishwesh5">Vishwesh Ravi Shrimali</a> for all his help to start with PyTorch C++ API and help the community. Special thanks to <a href="https://github.com/krutikabapat">Krutika Bapat</a> as well, for reviewing the Python equivalent code and suggesting modifications.</p>
 <p>And shout out to all the readers, please share your feedback with me in the comments below. I would love to hear if this blog helped you!</p>
 <p>In the upcoming blog, I&rsquo;ll be sharing something very exciting. Till then, happy learning!</p>
+
             </div>
         </article>
 
@@ -384,7 +383,7 @@ cost <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</sp
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://krshrimali.github.io/tags/development">development</a></span><span class="tag"><a href="https://krshrimali.github.io/tags/coding">coding</a></span><span class="tag"><a href="https://krshrimali.github.io/tags/cpp">cpp</a></span><span class="tag"><a href="https://krshrimali.github.io/tags/notes">notes</a></span><span class="tag"><a href="https://krshrimali.github.io/tags/pytorch-cpp">pytorch-cpp</a></span><span class="tag"><a href="https://krshrimali.github.io/tags/libtorch">libtorch</a></span>
                 </p>
 
-            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>1525 Words</p>
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>1517 Words</p>
 
             <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>Posted: <time class="dt-published"> 2019-08-16 05:30 &#43;0530</time></p>
 <a class="resp-sharing-button__link" href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2019%2f08%2fapplying-transfer-learning-on-dogs-vs-cats-dataset-resnet18-using-pytorch-c-api%2f" target="_blank" rel="noopener" aria-label="Facebook">
