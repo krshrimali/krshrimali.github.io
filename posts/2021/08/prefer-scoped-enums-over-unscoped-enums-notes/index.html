@@ -33,6 +33,9 @@ Some (or even all) of the text can be similar to what you see in the book, as th
 
 
 
+    <link rel="webmention" href="https://webmention.io/krshrimali.github.io/webmention" />
+    <link rel="pingback" href="https://webmention.io/krshrimali.github.io/xmlrpc" />
+
 
 
     <link rel="apple-touch-icon" sizes="180x180" href="https://krshrimali.github.io/apple-touch-icon.png">
@@ -437,6 +440,16 @@ UserInfo uInfo;
         
 
         
+            <div class="webmention-form">
+                <form action="https://webmention.io/krshrimali.github.io/webmention" method="post">
+                    <label>Did you mention this article on your website? Put the URL of your post here:</label><br/>
+                    <input name="source" type="url"/>
+                    <input name="target" value="https://krshrimali.github.io/posts/2021/08/prefer-scoped-enums-over-unscoped-enums-notes/" type="hidden"/>
+                    <input value="Send Webmention" type="submit"/>
+                </form>
+            </div>
+            <div id="webmention-container"></div>
+        
 
         
           <div id="comments" class="thin"><div class="pagination__title">
@@ -522,6 +535,7 @@ UserInfo uInfo;
         })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
         ga('create', 'UA-146662543-1', 'auto');ga('send', 'pageview');
     </script>
+<script src="https://krshrimali.github.io/js/webmention.min.513a53d009530b21cba09721b6f4dc912e9c20ad2c0adbb5c4e486c4f77774a6e9eca8c2e1e4e8bc9e9e86693aa5ca91e7bf232b50f7f8bee4e64efc874040a7.js" data-id="webmention-container"></script>
 
 
 
