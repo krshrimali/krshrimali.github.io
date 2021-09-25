@@ -6,7 +6,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="author" content="map[name:Kushashwa Ravi Shrimali]">
 <meta name="description" content="Introduction to Xeus Cling Today, we are going to run our C&#43;&#43; codes in the Jupyter Notebook. Sounds ambitious? Not much. Let&amp;rsquo;s see how we do it using Xeus Cling.
-I&amp;rsquo;ll quote the definition of Xeus Cling on the official documentation website. xeus-cling is a Jupyter kernel for C&#43;&#43; based on the C&#43;&#43; interpreter cling and the native implementation of the Jupyter protocol xeus.
+I&amp;rsquo;ll quote the definition of Xeus Cling on the official documentation website.
+ xeus-cling is a Jupyter kernel for C&#43;&#43; based on the C&#43;&#43; interpreter cling and the native implementation of the Jupyter protocol xeus.
  Just like we use Python Kernel in the Jupyter Notebook, we can also use a C&#43;&#43; based interpreter cling combined with a Jupyter protocol called Xeus to reach closer to implementing C&#43;&#43; code in the notebook." />
 <meta name="keywords" content=", development, coding, cpp, notes, pytorch-cpp, libtorch" />
 <meta name="robots" content="noodp" />
@@ -46,16 +47,18 @@ I&amp;rsquo;ll quote the definition of Xeus Cling on the official documentation 
 
 <meta itemprop="name" content="Setting up Jupyter Notebook (Xeus Cling) for Libtorch and OpenCV Libraries">
 <meta itemprop="description" content="Introduction to Xeus Cling Today, we are going to run our C&#43;&#43; codes in the Jupyter Notebook. Sounds ambitious? Not much. Let&rsquo;s see how we do it using Xeus Cling.
-I&rsquo;ll quote the definition of Xeus Cling on the official documentation website. xeus-cling is a Jupyter kernel for C&#43;&#43; based on the C&#43;&#43; interpreter cling and the native implementation of the Jupyter protocol xeus.
+I&rsquo;ll quote the definition of Xeus Cling on the official documentation website.
+ xeus-cling is a Jupyter kernel for C&#43;&#43; based on the C&#43;&#43; interpreter cling and the native implementation of the Jupyter protocol xeus.
  Just like we use Python Kernel in the Jupyter Notebook, we can also use a C&#43;&#43; based interpreter cling combined with a Jupyter protocol called Xeus to reach closer to implementing C&#43;&#43; code in the notebook."><meta itemprop="datePublished" content="2019-08-28T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2019-08-28T00:00:00+00:00" />
-<meta itemprop="wordCount" content="1325"><meta itemprop="image" content="https://krshrimali.github.io"/>
+<meta itemprop="wordCount" content="1324"><meta itemprop="image" content="https://krshrimali.github.io"/>
 <meta itemprop="keywords" content="development,coding,cpp,notes,pytorch-cpp,libtorch," /><meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://krshrimali.github.io"/>
 
 <meta name="twitter:title" content="Setting up Jupyter Notebook (Xeus Cling) for Libtorch and OpenCV Libraries"/>
 <meta name="twitter:description" content="Introduction to Xeus Cling Today, we are going to run our C&#43;&#43; codes in the Jupyter Notebook. Sounds ambitious? Not much. Let&rsquo;s see how we do it using Xeus Cling.
-I&rsquo;ll quote the definition of Xeus Cling on the official documentation website. xeus-cling is a Jupyter kernel for C&#43;&#43; based on the C&#43;&#43; interpreter cling and the native implementation of the Jupyter protocol xeus.
+I&rsquo;ll quote the definition of Xeus Cling on the official documentation website.
+ xeus-cling is a Jupyter kernel for C&#43;&#43; based on the C&#43;&#43; interpreter cling and the native implementation of the Jupyter protocol xeus.
  Just like we use Python Kernel in the Jupyter Notebook, we can also use a C&#43;&#43; based interpreter cling combined with a Jupyter protocol called Xeus to reach closer to implementing C&#43;&#43; code in the notebook."/>
 
 
@@ -172,7 +175,7 @@ I&rsquo;ll quote the definition of Xeus Cling on the official documentation webs
                 <h2 id="introduction-to-xeus-cling">Introduction to Xeus Cling</h2>
 <p>Today, we are going to run our C++ codes in the Jupyter Notebook. Sounds ambitious? Not much. Let&rsquo;s see how we do it using Xeus Cling.</p>
 <p><img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/cover-images/Cover-Xeus-Cling.jpg" alt=""></p>
-<p>I&rsquo;ll quote the definition of Xeus Cling on the official <!-- raw HTML omitted -->documentation website.<!-- raw HTML omitted --></p>
+<p>I&rsquo;ll quote the definition of Xeus Cling on the official <a href="https://xeus-cling.readthedocs.io/en/latest/#targetText=xeus%2Dcling%20is%20a%20Jupyter,of%20the%20Jupyter%20protocol%20xeus">documentation website</a>.</p>
 <blockquote>
 <p>xeus-cling is a Jupyter kernel for C++ based on the C++ interpreter cling and the native implementation of the Jupyter protocol xeus.</p>
 </blockquote>
@@ -319,7 +322,7 @@ I&rsquo;ll quote the definition of Xeus Cling on the official documentation webs
 </span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;dirent.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;opencv2/opencv.hpp&gt;</span><span style="color:#75715e">
 </span></code></pre></div><p><img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/blogs/Include-Libraries.png" alt=""></p>
-<p>After successfully importing libraries, we can define functions, write code and use the utilities Jupyter provides. Let&rsquo;s start with playing with Tensors and the code snippets mentioned in the official <!-- raw HTML omitted -->PyTorch C++ Frontend Docs<!-- raw HTML omitted -->.</p>
+<p>After successfully importing libraries, we can define functions, write code and use the utilities Jupyter provides. Let&rsquo;s start with playing with Tensors and the code snippets mentioned in the official <a href="https://pytorch.org/cppdocs">PyTorch C++ Frontend Docs</a>.</p>
 <p>Starting with using <code>ATen</code> tensor library. We&rsquo;ll create two tensors and add them together. <code>ATen</code> comes up with functionalities of mathematical operations on the Tensors.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;ATen/ATen.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span>
@@ -360,11 +363,11 @@ std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt
 }
 </code></pre></div><p><img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/blogs/Debug-Example.png" alt=""></p>
 <p>To solve, we can simply change the member from <code>size</code> to <code>Size</code>. One important point to consider is, that since this works on the top of Jupyter Interface, so whenever you re-run a cell, the variable names need to be changed as it will return an error of re-defining the variables which have already been defined.</p>
-<p>For testing, I have implemented Transfer Learning example that we discussed in the <!-- raw HTML omitted -->previous blog<!-- raw HTML omitted -->. This comes handy as I don&rsquo;t need to load the dataset again and again.</p>
+<p>For testing, I have implemented Transfer Learning example that we discussed in the <a href="https://krshrimali.github.io/posts/2019/08/applying-transfer-learning-on-dogs-vs-cats-dataset-resnet18-using-pytorch-c-api/">previous blog</a>. This comes handy as I don&rsquo;t need to load the dataset again and again.</p>
 <p><img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/blogs/Training-Image.png" alt=""></p>
 <h2 id="bonus">Bonus!</h2>
 <p>With this blog, I&rsquo;m also happy to share a Notebook file with implementation of Transfer Learning using ResNet18 Model on Dogs vs Cats Dataset. Additionally, I&rsquo;m elated to open source the code for Transfer Learning using ResNet18 Model using PyTorch C++ API.</p>
-<p>The source code and the notebook file can be found <!-- raw HTML omitted -->here<!-- raw HTML omitted -->.</p>
+<p>The source code and the notebook file can be found <a href="https://github.com/krshrimali/Transfer-Learning-Dogs-Cats-Libtorch.git">here</a>.</p>
 <h2 id="debugging---osx-systems">Debugging - OSX Systems</h2>
 <p>In case of OSX Systems, if you see any errors similar to: <code>You are probably missing the definition of &lt;function_name&gt;</code>, then try any (or all) of the following points:</p>
 <ol>
@@ -378,8 +381,8 @@ std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt
 </ol>
 <h2 id="references">References</h2>
 <ol>
-<li><!-- raw HTML omitted -->Xeus-Cling: Run C++ code in Jupyter Notebook by Vishwesh Ravi Shrimali<!-- raw HTML omitted -->.</li>
-<li><!-- raw HTML omitted -->Documentation of Xeus Cling<!-- raw HTML omitted -->.</li>
+<li><a href="https://www.learnopencv.com/xeus-cling-run-c-code-in-jupyter-notebook/">Xeus-Cling: Run C++ code in Jupyter Notebook by Vishwesh Ravi Shrimali</a>.</li>
+<li><a href="https://xeus-cling.readthedocs.io/en/latest">Documentation of Xeus-Cling</a>.</li>
 </ol>
 
             </div>
@@ -392,7 +395,7 @@ std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://krshrimali.github.io/tags/development">development</a></span><span class="tag"><a href="https://krshrimali.github.io/tags/coding">coding</a></span><span class="tag"><a href="https://krshrimali.github.io/tags/cpp">cpp</a></span><span class="tag"><a href="https://krshrimali.github.io/tags/notes">notes</a></span><span class="tag"><a href="https://krshrimali.github.io/tags/pytorch-cpp">pytorch-cpp</a></span><span class="tag"><a href="https://krshrimali.github.io/tags/libtorch">libtorch</a></span>
                 </p>
 
-            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>1325 Words</p>
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>1324 Words</p>
 
             <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>Posted: <time class="dt-published"> 2019-08-28 05:30 &#43;0530</time></p>
 <a class="resp-sharing-button__link" href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2019%2f08%2fsetting-up-jupyter-notebook-xeus-cling-for-libtorch-and-opencv-libraries%2f" target="_blank" rel="noopener" aria-label="Facebook">

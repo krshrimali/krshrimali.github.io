@@ -89,7 +89,7 @@ Vector Containers are type of sequenced containers in C++ commonly uses as a bet
       <pubDate>Sun, 23 Feb 2020 00:00:00 +0000</pubDate>
       
       <guid>https://krshrimali.github.io/posts/2020/02/training-and-results-deep-convolutional-generative-adversarial-networks-on-celeba-dataset-using-pytorch-c-api/</guid>
-      <description>It&amp;rsquo;s been around 5 months since I released my last blog on DCGAN Review and Implementation using PyTorch C++ APIand I&amp;rsquo;ve missed writing blogs badly! Straight the to the point, I&amp;rsquo;m back!
+      <description>It&amp;rsquo;s been around 5 months since I released my last blog on DCGAN Review and Implementation using PyTorch C++ API and I&amp;rsquo;ve missed writing blogs badly! Straight the to the point, I&amp;rsquo;m back!
 But before we start, the PyTorch C++ Frontend has gone through several changes and thanks to the awesome contributors around the world, it resembles the Python API more than it ever did! Since a lot of things have changed, I have also updated my previous blogs (tested on 1.</description>
     </item>
     
@@ -100,7 +100,7 @@ But before we start, the PyTorch C++ Frontend has gone through several changes a
       
       <guid>https://krshrimali.github.io/posts/2019/09/deep-convolutional-generative-adversarial-networks-review-and-implementation-using-pytorch-c-api/</guid>
       <description>I&amp;rsquo;m pleased to start a series of blogs on GANs and their implementation with PyTorch C++ API. We&amp;rsquo;ll be starting with one of the initial GANs - DCGANs (Deep Convolutional Generative Adversarial Networks).
-The authors (Soumith Chintala, Radford and Luke Metz) in thisSeminal Paper on DCGANs introduced DCGANs to the world like this:
+The authors (Soumith Chintala, Radford and Luke Metz) in this Seminal Paper on DCGANs introduced DCGANs to the world like this:
  We introduce a class of CNNs called deep convolutional generative adversarial networks (DCGANs), that have certain architectural constraints, and demonstrate that they are a strong candidate for unsupervised learning.</description>
     </item>
     
@@ -111,7 +111,8 @@ The authors (Soumith Chintala, Radford and Luke Metz) in thisSeminal Paper on DC
       
       <guid>https://krshrimali.github.io/posts/2019/08/setting-up-jupyter-notebook-xeus-cling-for-libtorch-and-opencv-libraries/</guid>
       <description>Introduction to Xeus Cling Today, we are going to run our C++ codes in the Jupyter Notebook. Sounds ambitious? Not much. Let&amp;rsquo;s see how we do it using Xeus Cling.
-I&amp;rsquo;ll quote the definition of Xeus Cling on the official documentation website. xeus-cling is a Jupyter kernel for C++ based on the C++ interpreter cling and the native implementation of the Jupyter protocol xeus.
+I&amp;rsquo;ll quote the definition of Xeus Cling on the official documentation website.
+ xeus-cling is a Jupyter kernel for C++ based on the C++ interpreter cling and the native implementation of the Jupyter protocol xeus.
  Just like we use Python Kernel in the Jupyter Notebook, we can also use a C++ based interpreter cling combined with a Jupyter protocol called Xeus to reach closer to implementing C++ code in the notebook.</description>
     </item>
     

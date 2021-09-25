@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="author" content="map[name:Kushashwa Ravi Shrimali]">
 <meta name="description" content="I&amp;rsquo;m pleased to start a series of blogs on GANs and their implementation with PyTorch C&#43;&#43; API. We&amp;rsquo;ll be starting with one of the initial GANs - DCGANs (Deep Convolutional Generative Adversarial Networks).
-The authors (Soumith Chintala, Radford and Luke Metz) in thisSeminal Paper on DCGANs introduced DCGANs to the world like this:
+The authors (Soumith Chintala, Radford and Luke Metz) in this Seminal Paper on DCGANs introduced DCGANs to the world like this:
  We introduce a class of CNNs called deep convolutional generative adversarial networks (DCGANs), that have certain architectural constraints, and demonstrate that they are a strong candidate for unsupervised learning." />
 <meta name="keywords" content=", development, coding, cpp, notes, pytorch-cpp, libtorch" />
 <meta name="robots" content="noodp" />
@@ -46,16 +46,16 @@ The authors (Soumith Chintala, Radford and Luke Metz) in thisSeminal Paper on DC
 
 <meta itemprop="name" content="Deep Convolutional Generative Adversarial Networks: Review and Implementation using PyTorch C&#43;&#43; API">
 <meta itemprop="description" content="I&rsquo;m pleased to start a series of blogs on GANs and their implementation with PyTorch C&#43;&#43; API. We&rsquo;ll be starting with one of the initial GANs - DCGANs (Deep Convolutional Generative Adversarial Networks).
-The authors (Soumith Chintala, Radford and Luke Metz) in thisSeminal Paper on DCGANs introduced DCGANs to the world like this:
+The authors (Soumith Chintala, Radford and Luke Metz) in this Seminal Paper on DCGANs introduced DCGANs to the world like this:
  We introduce a class of CNNs called deep convolutional generative adversarial networks (DCGANs), that have certain architectural constraints, and demonstrate that they are a strong candidate for unsupervised learning."><meta itemprop="datePublished" content="2019-09-15T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2019-09-15T00:00:00+00:00" />
-<meta itemprop="wordCount" content="2047"><meta itemprop="image" content="https://krshrimali.github.io"/>
+<meta itemprop="wordCount" content="2051"><meta itemprop="image" content="https://krshrimali.github.io"/>
 <meta itemprop="keywords" content="development,coding,cpp,notes,pytorch-cpp,libtorch," /><meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://krshrimali.github.io"/>
 
 <meta name="twitter:title" content="Deep Convolutional Generative Adversarial Networks: Review and Implementation using PyTorch C&#43;&#43; API"/>
 <meta name="twitter:description" content="I&rsquo;m pleased to start a series of blogs on GANs and their implementation with PyTorch C&#43;&#43; API. We&rsquo;ll be starting with one of the initial GANs - DCGANs (Deep Convolutional Generative Adversarial Networks).
-The authors (Soumith Chintala, Radford and Luke Metz) in thisSeminal Paper on DCGANs introduced DCGANs to the world like this:
+The authors (Soumith Chintala, Radford and Luke Metz) in this Seminal Paper on DCGANs introduced DCGANs to the world like this:
  We introduce a class of CNNs called deep convolutional generative adversarial networks (DCGANs), that have certain architectural constraints, and demonstrate that they are a strong candidate for unsupervised learning."/>
 
 
@@ -171,7 +171,7 @@ The authors (Soumith Chintala, Radford and Luke Metz) in thisSeminal Paper on DC
             <div class="post-content e-content">
                 <p>I&rsquo;m pleased to start a series of blogs on GANs and their implementation with PyTorch C++ API. We&rsquo;ll be starting with one of the initial GANs - DCGANs (Deep Convolutional Generative Adversarial Networks).</p>
 <p><img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/cover-images/Cover-DCGAN.jpg" alt=""></p>
-<p>The authors (Soumith Chintala, Radford and Luke Metz) in <!-- raw HTML omitted -->this<!-- raw HTML omitted --> Seminal Paper on DCGANs introduced DCGANs to the world like this:</p>
+<p>The authors (Soumith Chintala, Radford and Luke Metz) in <a href="https://arxiv.org/pdf/1511.06434.pdf">this</a> Seminal Paper on DCGANs introduced DCGANs to the world like this:</p>
 <blockquote>
 <p>We introduce a class of CNNs called deep convolutional generative adversarial networks (DCGANs), that have certain architectural constraints, and demonstrate that they are a strong candidate for unsupervised learning. Training on various image datasets, we show convincing evidence that our deep convolutional adversarial pair learns a hierarchy of representations from object parts to scenes in both the generator and discriminator. Additionally, we use the learned features for novel tasks - demonstrating their applicability as general image representations.</p>
 </blockquote>
@@ -230,7 +230,7 @@ The authors (Soumith Chintala, Radford and Luke Metz) in thisSeminal Paper on DC
 <p>As mentioned before, Generator uses Transposed Convolutional Layers and has no pooling and FC layers. It also uses ReLU Activation Function (except the last layer). The parameters used for the Generator include:</p>
 <ol>
 <li><code>dataroot</code>: (type: <code>std::string</code>) Path of the dataset&rsquo;s root directory.</li>
-<li><code>workers</code>: (type: <code>int</code>) Having more <code>workers</code> will increase CPU memory usage. (Check this link <!-- raw HTML omitted -->for more details<!-- raw HTML omitted -->)</li>
+<li><code>workers</code>: (type: <code>int</code>) Having more <code>workers</code> will increase CPU memory usage. (Check this link <a href="https://discuss.pytorch.org/t/guidelines-for-assigning-num-workers-to-dataloader/813/2">for more details</a>)</li>
 <li><code>batch_size</code>: (type: <code>int</code>) Batch Size to consider.</li>
 <li><code>image_size</code>: (type: <code>int</code>) Size of the image to resize it to.</li>
 <li><code>nc</code>: (type: <code>int</code>) Number of channels in the Input Image.</li>
@@ -449,7 +449,7 @@ torch<span style="color:#f92672">::</span>optim<span style="color:#f92672">::</s
 </code></pre></div><p>We are all set to train our first DCGAN in C++ using Libtorch. How amazing it is?</p>
 <p>In the coming blog, I&rsquo;ll share the results and answer a few common questions on the architecture of DCGAN.</p>
 <h2 id="acknowledgement-and-references">Acknowledgement and References</h2>
-<p>I would like to thank <!-- raw HTML omitted -->Will Feng<!-- raw HTML omitted --> and <!-- raw HTML omitted -->Piotr<!-- raw HTML omitted --> for their useful suggestions. The code used in this blog, is partially analogous to the official <!-- raw HTML omitted -->PyTorch examples repo on DCGAN using Libtorch<!-- raw HTML omitted -->. I&rsquo;ve also referred the original paper by <!-- raw HTML omitted -->Soumith Chintala<!-- raw HTML omitted --> and others. The sources of reference images (for Network architectures) have been acknowledged in the captions of respective images.</p>
+<p>I would like to thank <a href="https://github.com/yf225">Will Feng</a> and <a href="https://discuss.pytorch.org/u/ptrblck/summary">Piotr</a> for their useful suggestions. The code used in this blog, is partially analogous to the official <a href="https://github.com/pytorch/examples/tree/master/cpp/dcgan">PyTorch examples repo on DCGAN using LibTorch</a>. I&rsquo;ve also referred the original paper by <a href="https://twitter.com/soumithchintala">Soumith Chintala</a> and others. The sources of reference images (for Network architectures) have been acknowledged in the captions of respective images.</p>
 
             </div>
         </article>
@@ -461,7 +461,7 @@ torch<span style="color:#f92672">::</span>optim<span style="color:#f92672">::</s
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://krshrimali.github.io/tags/development">development</a></span><span class="tag"><a href="https://krshrimali.github.io/tags/coding">coding</a></span><span class="tag"><a href="https://krshrimali.github.io/tags/cpp">cpp</a></span><span class="tag"><a href="https://krshrimali.github.io/tags/notes">notes</a></span><span class="tag"><a href="https://krshrimali.github.io/tags/pytorch-cpp">pytorch-cpp</a></span><span class="tag"><a href="https://krshrimali.github.io/tags/libtorch">libtorch</a></span>
                 </p>
 
-            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>2047 Words</p>
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>2051 Words</p>
 
             <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>Posted: <time class="dt-published"> 2019-09-15 05:30 &#43;0530</time></p>
 <a class="resp-sharing-button__link" href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2019%2f09%2fdeep-convolutional-generative-adversarial-networks-review-and-implementation-using-pytorch-c-api%2f" target="_blank" rel="noopener" aria-label="Facebook">

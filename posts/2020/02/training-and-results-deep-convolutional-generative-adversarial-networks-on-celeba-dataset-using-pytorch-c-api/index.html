@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="author" content="map[name:Kushashwa Ravi Shrimali]">
-<meta name="description" content="It&amp;rsquo;s been around 5 months since I released my last blog on DCGAN Review and Implementation using PyTorch C&#43;&#43; APIand I&amp;rsquo;ve missed writing blogs badly! Straight the to the point, I&amp;rsquo;m back!
+<meta name="description" content="It&amp;rsquo;s been around 5 months since I released my last blog on DCGAN Review and Implementation using PyTorch C&#43;&#43; API and I&amp;rsquo;ve missed writing blogs badly! Straight the to the point, I&amp;rsquo;m back!
 But before we start, the PyTorch C&#43;&#43; Frontend has gone through several changes and thanks to the awesome contributors around the world, it resembles the Python API more than it ever did! Since a lot of things have changed, I have also updated my previous blogs (tested on 1." />
 <meta name="keywords" content=", development, coding, cpp, notes, pytorch-cpp, libtorch" />
 <meta name="robots" content="noodp" />
@@ -44,15 +44,15 @@ But before we start, the PyTorch C&#43;&#43; Frontend has gone through several c
     <meta name="theme-color" content="#252627">
 
 <meta itemprop="name" content="[Training and Results] Deep Convolutional Generative Adversarial Networks on CelebA Dataset using PyTorch C&#43;&#43; API">
-<meta itemprop="description" content="It&rsquo;s been around 5 months since I released my last blog on DCGAN Review and Implementation using PyTorch C&#43;&#43; APIand I&rsquo;ve missed writing blogs badly! Straight the to the point, I&rsquo;m back!
+<meta itemprop="description" content="It&rsquo;s been around 5 months since I released my last blog on DCGAN Review and Implementation using PyTorch C&#43;&#43; API and I&rsquo;ve missed writing blogs badly! Straight the to the point, I&rsquo;m back!
 But before we start, the PyTorch C&#43;&#43; Frontend has gone through several changes and thanks to the awesome contributors around the world, it resembles the Python API more than it ever did! Since a lot of things have changed, I have also updated my previous blogs (tested on 1."><meta itemprop="datePublished" content="2020-02-23T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2020-02-23T00:00:00+00:00" />
-<meta itemprop="wordCount" content="456"><meta itemprop="image" content="https://krshrimali.github.io"/>
+<meta itemprop="wordCount" content="457"><meta itemprop="image" content="https://krshrimali.github.io"/>
 <meta itemprop="keywords" content="development,coding,cpp,notes,pytorch-cpp,libtorch," /><meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://krshrimali.github.io"/>
 
 <meta name="twitter:title" content="[Training and Results] Deep Convolutional Generative Adversarial Networks on CelebA Dataset using PyTorch C&#43;&#43; API"/>
-<meta name="twitter:description" content="It&rsquo;s been around 5 months since I released my last blog on DCGAN Review and Implementation using PyTorch C&#43;&#43; APIand I&rsquo;ve missed writing blogs badly! Straight the to the point, I&rsquo;m back!
+<meta name="twitter:description" content="It&rsquo;s been around 5 months since I released my last blog on DCGAN Review and Implementation using PyTorch C&#43;&#43; API and I&rsquo;ve missed writing blogs badly! Straight the to the point, I&rsquo;m back!
 But before we start, the PyTorch C&#43;&#43; Frontend has gone through several changes and thanks to the awesome contributors around the world, it resembles the Python API more than it ever did! Since a lot of things have changed, I have also updated my previous blogs (tested on 1."/>
 
 
@@ -166,12 +166,12 @@ But before we start, the PyTorch C&#43;&#43; Frontend has gone through several c
             
 
             <div class="post-content e-content">
-                <p>It&rsquo;s been around 5 months since I released my last blog on <!-- raw HTML omitted -->DCGAN Review and Implementation using PyTorch C++ API<!-- raw HTML omitted --> and I&rsquo;ve missed writing blogs badly! Straight the to the point, I&rsquo;m back!</p>
+                <p>It&rsquo;s been around 5 months since I released my last blog on <a href="https://krshrimali.github.io/posts/2019/09/deep-convolutional-generative-adversarial-networks-review-and-implementation-using-pytorch-c-api/">DCGAN Review and Implementation using PyTorch C++ API</a> and I&rsquo;ve missed writing blogs badly! Straight the to the point, I&rsquo;m back!</p>
 <p><img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/cover-images/Cover-DCGAN-2.jpg" alt=""></p>
 <p>But before we start, the PyTorch C++ Frontend has gone through several changes and thanks to the awesome contributors around the world, it resembles the Python API more than it ever did! Since a lot of things have changed, I have also updated my previous blogs (tested on 1.4 Stable build).</p>
 <h2 id="what-has-changed">What has changed?</h2>
 <p>There have been major changes in the PyTorch C++ Frontend API (Libtorch) and we&rsquo;ll be discussing some of them which were related to our implementation on DCGAN. Let&rsquo;s see, what parts of our code have changed in the recent Libtorch version. Well, the frontend API of PyTorch in C++ resembles closely to Python now:</p>
-<p>For what concerns our code on DCGAN, quoting the author (Will Feng) of PR <!-- raw HTML omitted -->#28917<!-- raw HTML omitted -->:</p>
+<p>For what concerns our code on DCGAN, quoting the author (Will Feng) of PR <a href="https://github.com/pytorch/pytorch/pull/28917">#28917</a>.</p>
 <blockquote>
 <p>In Conv{1,2,3}dOptions:
 - with_bias is renamed to bias.
@@ -180,7 +180,7 @@ But before we start, the PyTorch C&#43;&#43; Frontend has gone through several c
 - The value of transposed doesn&rsquo;t affect the behavior of Conv{1,2,3}d layers anymore. Users should migrate their code to use ConvTranspose{1,2,3}d layers instead.</p>
 </blockquote>
 <p>So, starting first, we need to change <code>with_bias</code> to <code>bias</code> in our model definitions. The generator class in DCGAN uses Transposed Convolutions, and that&rsquo;s why we need to migrate from <code>torch::nn::Conv2dOptions</code> class to <code>torch::nn::ConvTranspose2dOptions</code> (this is because using <code>.transposed(true/false)</code> does not work anymore on <code>torch::nn::Conv2dOptions</code>).</p>
-<p>That is all for the changes we needed to make. To make it easy to track changes and use the code I wrote, I&rsquo;ve made the project public on <!-- raw HTML omitted -->GitHub<!-- raw HTML omitted -->. Feel free to file an issue in case you hit a bug/error.</p>
+<p>That is all for the changes we needed to make. To make it easy to track changes and use the code I wrote, I&rsquo;ve made the project public on <a href="https://github.com/BuffetCodes/DCGAN-CelebA-PyTorch-CPP.git">GitHub</a>. Feel free to file an issue in case you hit a bug/error.</p>
 <p>Time to talk about results!</p>
 <h2 id="results">Results</h2>
 <p>The aim of this blog is to get DCGAN running on our celebA dataset using PyTorch C++ Frontend API. I&rsquo;m in no way aiming to produce the best possible results. I trained the DCGAN network on celebA dataset for 10 epochs. In order to visualize results, for every checkpoint (where we save our models), we pass a sample noise image (64 images here) to the generator and save the output:</p>
@@ -192,7 +192,7 @@ But before we start, the PyTorch C&#43;&#43; Frontend has gone through several c
 </span><span style="color:#75715e"></span>torch<span style="color:#f92672">::</span>Tensor samples <span style="color:#f92672">=</span> netG<span style="color:#f92672">-&gt;</span>forward(torch<span style="color:#f92672">::</span>randn({<span style="color:#ae81ff">64</span>, args.nz, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>}, options));
 <span style="color:#75715e">// save the output
 </span><span style="color:#75715e"></span>torch<span style="color:#f92672">::</span>save(samples, torch<span style="color:#f92672">::</span>str(<span style="color:#e6db74">&#34;dcgan-sample-&#34;</span>, <span style="color:#f92672">++</span>checkpoint_counter, <span style="color:#e6db74">&#34;.pt&#34;</span>));
-</code></pre></div><p>Once we have the saved output, we can load the file and produce output (find the <code>display_samples.py</code> file in the <!-- raw HTML omitted -->GitHub repo for this blog<!-- raw HTML omitted -->). Here is how the output looks like, after 10 epochs of training:</p>
+</code></pre></div><p>Once we have the saved output, we can load the file and produce output (find the <code>display_samples.py</code> file in the <a href="https://krshrimali.github.io/posts/2019/09/deep-convolutional-generative-adversarial-networks-review-and-implementation-using-pytorch-c-api/">GitHub repo for this blog</a>). Here is how the output looks like, after 10 epochs of training:</p>
 <!-- raw HTML omitted -->
 <p>And how about an animation?</p>
 <!-- raw HTML omitted -->
@@ -209,7 +209,7 @@ But before we start, the PyTorch C&#43;&#43; Frontend has gone through several c
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://krshrimali.github.io/tags/development">development</a></span><span class="tag"><a href="https://krshrimali.github.io/tags/coding">coding</a></span><span class="tag"><a href="https://krshrimali.github.io/tags/cpp">cpp</a></span><span class="tag"><a href="https://krshrimali.github.io/tags/notes">notes</a></span><span class="tag"><a href="https://krshrimali.github.io/tags/pytorch-cpp">pytorch-cpp</a></span><span class="tag"><a href="https://krshrimali.github.io/tags/libtorch">libtorch</a></span>
                 </p>
 
-            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>456 Words</p>
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>457 Words</p>
 
             <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>Posted: <time class="dt-published"> 2020-02-23 05:30 &#43;0530</time></p>
 <a class="resp-sharing-button__link" href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2020%2f02%2ftraining-and-results-deep-convolutional-generative-adversarial-networks-on-celeba-dataset-using-pytorch-c-api%2f" target="_blank" rel="noopener" aria-label="Facebook">

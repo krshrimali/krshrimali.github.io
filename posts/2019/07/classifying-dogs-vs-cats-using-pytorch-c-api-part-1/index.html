@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="author" content="map[name:Kushashwa Ravi Shrimali]">
 <meta name="description" content="Hi Everyone! So excited to be back with another blog in the series of PyTorch C&#43;&#43; Blogs.
-Today, we are going to see a practical example of applying a CNN to a Custom Dataset - Dogs vs Cats. This is going to be a short post of showing results and discussion about hyperparameters and loss functions for the task, as code snippets and explanation has been provided here, hereand here.
+Today, we are going to see a practical example of applying a CNN to a Custom Dataset - Dogs vs Cats. This is going to be a short post of showing results and discussion about hyperparameters and loss functions for the task, as code snippets and explanation has been provided here, here and here.
 " />
 <meta name="keywords" content=", development, coding, cpp, notes, pytorch-cpp, libtorch" />
 <meta name="robots" content="noodp" />
@@ -49,7 +49,7 @@ Today, we are going to see a practical example of applying a CNN to a Custom Dat
 Today, we are going to see a practical example of applying a CNN to a Custom Dataset - Dogs vs Cats. This is going to be a short post of showing results and discussion about hyperparameters and loss functions for the task, as code snippets and explanation has been provided here, here and here.
 "><meta itemprop="datePublished" content="2019-07-23T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2019-07-23T00:00:00+00:00" />
-<meta itemprop="wordCount" content="1371"><meta itemprop="image" content="https://krshrimali.github.io"/>
+<meta itemprop="wordCount" content="1373"><meta itemprop="image" content="https://krshrimali.github.io"/>
 <meta itemprop="keywords" content="development,coding,cpp,notes,pytorch-cpp,libtorch," /><meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://krshrimali.github.io"/>
 
@@ -170,18 +170,18 @@ Today, we are going to see a practical example of applying a CNN to a Custom Dat
 
             <div class="post-content e-content">
                 <p>Hi Everyone! So excited to be back with another blog in the series of PyTorch C++ Blogs.</p>
-<p>Today, we are going to see a practical example of applying a CNN to a Custom Dataset - Dogs vs Cats. This is going to be a short post of showing results and discussion about hyperparameters and loss functions for the task, as code snippets and explanation has been provided <!-- raw HTML omitted -->here<!-- raw HTML omitted -->, <!-- raw HTML omitted -->here<!-- raw HTML omitted --> and <!-- raw HTML omitted -->here<!-- raw HTML omitted -->.</p>
+<p>Today, we are going to see a practical example of applying a CNN to a Custom Dataset - Dogs vs Cats. This is going to be a short post of showing results and discussion about hyperparameters and loss functions for the task, as code snippets and explanation has been provided <a href="https://krshrimali.github.io/Training-Network-Using-Custom-Dataset-PyTorch-CPP/">here</a>, <a href="https://krshrimali.github.io/Custom-Data-Loading-Using-PyTorch-CPP-API/">here</a> and <a href="https://krshrimali.github.io/PyTorch-C++-API/">here</a>.</p>
 <p><img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/cover-images/Cover-Dogs-Cats.jpg" alt=""></p>
 <p><strong>Note</strong>: This is Part-1 of the blog on Dogs vs Cats Classification using PyTorch C++ API.</p>
 <h2 id="dataset-overview">Dataset Overview</h2>
-<p>Let&rsquo;s have a look at the dataset and it&rsquo;s statistics. <strong>Dogs vs Cats</strong> dataset has been taken from the famous <!-- raw HTML omitted -->Kaggle Competition<!-- raw HTML omitted -->.</p>
-<p>The training set contains 25k images combined of dogs and cats. The data can be downloaded from <!-- raw HTML omitted -->this<!-- raw HTML omitted --> link.</p>
+<p>Let&rsquo;s have a look at the dataset and it&rsquo;s statistics. <strong>Dogs vs Cats</strong> dataset has been taken from the famous <a href="https://www.kaggle.com/c/dogs-vs-cats">Kaggle Competition</a>.</p>
+<p>The training set contains 25k images combined of dogs and cats. The data can be downloaded from <a href="https://www.kaggle.com/c/dogs-vs-cats/data">this</a> link.</p>
 <p>Let&rsquo;s have a look at sample of the data:</p>
 <p><img src="https://raw.githubusercontent.com/krshrimali/krshrimali.github.io/master/assets/dogs-dataset.jpg" alt="Figure 1: Sample of Dog Images in the Dataset"></p>
 <p><img src="https://raw.githubusercontent.com/krshrimali/krshrimali.github.io/master/assets/cats-dataset.jpg" alt="Figure 2: Sample of Cat Images in the Dataset"></p>
 <p>As we can see, the dataset contains images of cats and dogs with multiple instances in the same sample as well.</p>
 <h2 id="loading-data">Loading Data</h2>
-<p>Although we have discussed this before (<!-- raw HTML omitted -->here<!-- raw HTML omitted -->), but let&rsquo;s just see how we load the data. Since this is a binary classification problem (2 classes: Dog and Cat), we will have labels as 0 (for a Cat) and 1 (for a Dog). The data comes in two zip files:</p>
+<p>Although we have discussed this before (<a href="https://krshrimali.github.io/Custom-Data-Loading-Using-PyTorch-CPP-API/">here</a>), but let&rsquo;s just see how we load the data. Since this is a binary classification problem (2 classes: Dog and Cat), we will have labels as 0 (for a Cat) and 1 (for a Dog). The data comes in two zip files:</p>
 <ol>
 <li><code>train.zip</code>: Data to be used for training</li>
 <li><code>test.zip</code>: Data to be used for testing</li>
@@ -207,7 +207,7 @@ count_dog <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</sp
 	<span style="color:#66d9ef">elif</span>(file<span style="color:#f92672">.</span>startswith(<span style="color:#e6db74">&#39;dog&#39;</span>) <span style="color:#f92672">and</span> file<span style="color:#f92672">.</span>endswith(<span style="color:#e6db74">&#39;jpg&#39;</span>)):
 		count_dog <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
 		shutil<span style="color:#f92672">.</span>copy(<span style="color:#e6db74">&#39;test/&#39;</span> <span style="color:#f92672">+</span> file, <span style="color:#e6db74">&#39;train/dog/&#39;</span> <span style="color:#f92672">+</span> str(count_dog) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;.jpg&#39;</span>)
-</code></pre></div><p>Once done, let&rsquo;s go ahead and load this data. Since we have discussed this <!-- raw HTML omitted -->before<!-- raw HTML omitted -->, I&rsquo;ll just paste the snippet here.</p>
+</code></pre></div><p>Once done, let&rsquo;s go ahead and load this data. Since we have discussed this <a href="https://krshrimali.github.io/posts/2019/07/custom-data-loading-using-pytorch-c-api/">before</a>, I&rsquo;ll just paste the snippet here.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">torch<span style="color:#f92672">::</span>Tensor read_data(std<span style="color:#f92672">::</span>string loc) {
 	<span style="color:#75715e">// Read Image from the location of image
 </span><span style="color:#75715e"></span>	cv<span style="color:#f92672">::</span>Mat img <span style="color:#f92672">=</span> cv<span style="color:#f92672">::</span>imread(loc, <span style="color:#ae81ff">0</span>);
@@ -289,7 +289,7 @@ std<span style="color:#f92672">::</span>pair<span style="color:#f92672">&lt;</sp
 <p><strong>process_labels</strong>: Similar to <code>process_images</code> function, this function returns a vector of Tensors (labels). This function calls <code>read_label</code> function which takes an <code>int</code> as a parameter (label: 0 or 1) and returns a Tensor.</p>
 </li>
 </ol>
-<p>Let&rsquo;s now go ahead and see how we load the data. For this, we first need to define the <code>Dataset</code> class. This class should initialize two variables: one for images and one for labels. As discussed <!-- raw HTML omitted -->before<!-- raw HTML omitted -->, we&rsquo;ll also define <code>get()</code> and <code>size()</code> functions.</p>
+<p>Let&rsquo;s now go ahead and see how we load the data. For this, we first need to define the <code>Dataset</code> class. This class should initialize two variables: one for images and one for labels. As discussed <a href="https://krshrimali.github.io/posts/2019/07/custom-data-loading-using-pytorch-c-api/">here</a>, we&rsquo;ll also define <code>get()</code> and <code>size()</code> functions.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CustomDataset</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> torch<span style="color:#f92672">::</span>data<span style="color:#f92672">::</span>Dataset<span style="color:#f92672">&lt;</span>CustomDataset<span style="color:#f92672">&gt;</span> {
 <span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
 	<span style="color:#75715e">/* data */</span>
@@ -413,7 +413,7 @@ std<span style="color:#f92672">::</span>pair<span style="color:#f92672">&lt;</sp
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// Initialize the Network
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">auto</span> net <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>make_shared<span style="color:#f92672">&lt;</span>NetImpl<span style="color:#f92672">&gt;</span>();
 </code></pre></div><h2 id="training-the-network-on-dogs-vs-cats-dataset">Training the Network on Dogs vs Cats Dataset</h2>
-<p>We had before discussed code for training <!-- raw HTML omitted -->here<!-- raw HTML omitted -->. I suggest the reader to go through that blog in order to train the dataset. I&rsquo;ll give more insights on training in the next blog!</p>
+<p>We had before discussed code for training <a href="https://krshrimali.github.io/posts/2019/07/training-a-network-on-custom-dataset-using-pytorch-c-api/">here</a>. I suggest the reader to go through that blog in order to train the dataset. I&rsquo;ll give more insights on training in the next blog!</p>
 <p>That&rsquo;s it for today. I&rsquo;ll be back with Part-2 of this &ldquo;Dogs vs Cats Classification&rdquo; with training, experimentation and results. We&rsquo;ll also discuss on using different networks, and in the Part-3, we&rsquo;ll discuss using <strong>Transfer Learning</strong> for this classification task.</p>
             </div>
         </article>
@@ -425,7 +425,7 @@ std<span style="color:#f92672">::</span>pair<span style="color:#f92672">&lt;</sp
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://krshrimali.github.io/tags/development">development</a></span><span class="tag"><a href="https://krshrimali.github.io/tags/coding">coding</a></span><span class="tag"><a href="https://krshrimali.github.io/tags/cpp">cpp</a></span><span class="tag"><a href="https://krshrimali.github.io/tags/notes">notes</a></span><span class="tag"><a href="https://krshrimali.github.io/tags/pytorch-cpp">pytorch-cpp</a></span><span class="tag"><a href="https://krshrimali.github.io/tags/libtorch">libtorch</a></span>
                 </p>
 
-            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>1371 Words</p>
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>1373 Words</p>
 
             <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>Posted: <time class="dt-published"> 2019-07-23 05:30 &#43;0530</time></p>
 <a class="resp-sharing-button__link" href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2019%2f07%2fclassifying-dogs-vs-cats-using-pytorch-c-api-part-1%2f" target="_blank" rel="noopener" aria-label="Facebook">

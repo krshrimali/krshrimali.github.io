@@ -109,7 +109,7 @@ Vector Containers are type of sequenced containers in C++ commonly uses as a bet
       <pubDate>Sun, 23 Feb 2020 00:00:00 +0000</pubDate>
       
       <guid>https://krshrimali.github.io/posts/2020/02/training-and-results-deep-convolutional-generative-adversarial-networks-on-celeba-dataset-using-pytorch-c-api/</guid>
-      <description>It&amp;rsquo;s been around 5 months since I released my last blog on DCGAN Review and Implementation using PyTorch C++ APIand I&amp;rsquo;ve missed writing blogs badly! Straight the to the point, I&amp;rsquo;m back!
+      <description>It&amp;rsquo;s been around 5 months since I released my last blog on DCGAN Review and Implementation using PyTorch C++ API and I&amp;rsquo;ve missed writing blogs badly! Straight the to the point, I&amp;rsquo;m back!
 But before we start, the PyTorch C++ Frontend has gone through several changes and thanks to the awesome contributors around the world, it resembles the Python API more than it ever did! Since a lot of things have changed, I have also updated my previous blogs (tested on 1.</description>
     </item>
     
