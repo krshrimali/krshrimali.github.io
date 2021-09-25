@@ -6,7 +6,21 @@
     <description>Recent content in notes on Kushashwa Ravi Shrimali (Kush)</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Wed, 25 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://krshrimali.github.io/tags/notes/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 25 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://krshrimali.github.io/tags/notes/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Declaring Overriding Functions override (Notes)</title>
+      <link>https://krshrimali.github.io/posts/2021/09/declaring-overriding-functions-override-notes/</link>
+      <pubDate>Sat, 25 Sep 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://krshrimali.github.io/posts/2021/09/declaring-overriding-functions-override-notes/</guid>
+      <description>NOTE
+My notes on Chapter 3, Item 9 of Effective Modern C++ written by Scott Meyers.
+Some (or even all) of the text can be similar to what you see in the book, as these are notes: I&amp;rsquo;ve tried not to be unnecessarily creative with my words. :)
+ Overriding != Overloading
+Example of virtual function overriding:
+// Base class class Base { public: virtual void doWork(); // ... }; // Derived class from Base class Derived: public Base { public: // virtual is optional  // this will &amp;#34;override&amp;#34; Base::doWork  virtual void doWork(); // .</description>
+    </item>
+    
     <item>
       <title>Prefer Deleted Functions to Private Undefined Ones (Notes)</title>
       <link>https://krshrimali.github.io/posts/2021/08/prefer-deleted-functions-to-private-undefined-ones-notes/</link>
@@ -102,18 +116,6 @@ But before we start, the PyTorch C++ Frontend has gone through several changes a
       <description>I&amp;rsquo;m pleased to start a series of blogs on GANs and their implementation with PyTorch C++ API. We&amp;rsquo;ll be starting with one of the initial GANs - DCGANs (Deep Convolutional Generative Adversarial Networks).
 The authors (Soumith Chintala, Radford and Luke Metz) in this Seminal Paper on DCGANs introduced DCGANs to the world like this:
  We introduce a class of CNNs called deep convolutional generative adversarial networks (DCGANs), that have certain architectural constraints, and demonstrate that they are a strong candidate for unsupervised learning.</description>
-    </item>
-    
-    <item>
-      <title>Setting up Jupyter Notebook (Xeus Cling) for Libtorch and OpenCV Libraries</title>
-      <link>https://krshrimali.github.io/posts/2019/08/setting-up-jupyter-notebook-xeus-cling-for-libtorch-and-opencv-libraries/</link>
-      <pubDate>Wed, 28 Aug 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://krshrimali.github.io/posts/2019/08/setting-up-jupyter-notebook-xeus-cling-for-libtorch-and-opencv-libraries/</guid>
-      <description>Introduction to Xeus Cling Today, we are going to run our C++ codes in the Jupyter Notebook. Sounds ambitious? Not much. Let&amp;rsquo;s see how we do it using Xeus Cling.
-I&amp;rsquo;ll quote the definition of Xeus Cling on the official documentation website.
- xeus-cling is a Jupyter kernel for C++ based on the C++ interpreter cling and the native implementation of the Jupyter protocol xeus.
- Just like we use Python Kernel in the Jupyter Notebook, we can also use a C++ based interpreter cling combined with a Jupyter protocol called Xeus to reach closer to implementing C++ code in the notebook.</description>
     </item>
     
   </channel>

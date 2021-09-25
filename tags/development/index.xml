@@ -6,7 +6,21 @@
     <description>Recent content in development on Kushashwa Ravi Shrimali (Kush)</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Wed, 25 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://krshrimali.github.io/tags/development/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 25 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://krshrimali.github.io/tags/development/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Declaring Overriding Functions override (Notes)</title>
+      <link>https://krshrimali.github.io/posts/2021/09/declaring-overriding-functions-override-notes/</link>
+      <pubDate>Sat, 25 Sep 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://krshrimali.github.io/posts/2021/09/declaring-overriding-functions-override-notes/</guid>
+      <description>NOTE
+My notes on Chapter 3, Item 9 of Effective Modern C++ written by Scott Meyers.
+Some (or even all) of the text can be similar to what you see in the book, as these are notes: I&amp;rsquo;ve tried not to be unnecessarily creative with my words. :)
+ Overriding != Overloading
+Example of virtual function overriding:
+// Base class class Base { public: virtual void doWork(); // ... }; // Derived class from Base class Derived: public Base { public: // virtual is optional  // this will &amp;#34;override&amp;#34; Base::doWork  virtual void doWork(); // .</description>
+    </item>
+    
     <item>
       <title>Prefer Deleted Functions to Private Undefined Ones (Notes)</title>
       <link>https://krshrimali.github.io/posts/2021/08/prefer-deleted-functions-to-private-undefined-ones-notes/</link>
@@ -101,16 +115,6 @@ Before we start, if you haven&amp;rsquo;t looked at the previous blogs in the C+
       <guid>https://krshrimali.github.io/posts/2020/04/understanding-how-vectors-work-in-c-part-1-how-does-push_back-work/</guid>
       <description>This blog is focused to explain how vectors work in the backend, and we&amp;rsquo;ll specially look at push_back method of the vector container. Looking at the source code helps to understand the implementation, and how vectors can be used efficiently.
 Vector Containers are type of sequenced containers in C++ commonly uses as a better alternative of arrays. They are also known as dynamic arrays, and as the term suggests - it&amp;rsquo;s one of the advantages they hold over native arrays in C++.</description>
-    </item>
-    
-    <item>
-      <title>[Training and Results] Deep Convolutional Generative Adversarial Networks on CelebA Dataset using PyTorch C&#43;&#43; API</title>
-      <link>https://krshrimali.github.io/posts/2020/02/training-and-results-deep-convolutional-generative-adversarial-networks-on-celeba-dataset-using-pytorch-c-api/</link>
-      <pubDate>Sun, 23 Feb 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://krshrimali.github.io/posts/2020/02/training-and-results-deep-convolutional-generative-adversarial-networks-on-celeba-dataset-using-pytorch-c-api/</guid>
-      <description>It&amp;rsquo;s been around 5 months since I released my last blog on DCGAN Review and Implementation using PyTorch C++ API and I&amp;rsquo;ve missed writing blogs badly! Straight the to the point, I&amp;rsquo;m back!
-But before we start, the PyTorch C++ Frontend has gone through several changes and thanks to the awesome contributors around the world, it resembles the Python API more than it ever did! Since a lot of things have changed, I have also updated my previous blogs (tested on 1.</description>
     </item>
     
   </channel>
