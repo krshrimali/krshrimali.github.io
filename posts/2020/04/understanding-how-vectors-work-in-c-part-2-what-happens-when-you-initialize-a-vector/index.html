@@ -141,6 +141,22 @@ That is, we will start from calling a vector constructor and then see how memory
 <script id="MathJax-script" async src="https://unpkg.com/mathjax@3/es5/tex-chtml.js"></script>
 
             
+                
+    <aside class="sidebar">
+        <div class="hideTOC">
+        <button id="tocTog">TOC</button>
+        <div class="sideTOC m-fadeOut">
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#using-initializer-lists">Using Initializer Lists</a></li>
+    <li><a href="#using-similar-value-and-specified-number-of-elements-fill">Using similar value and specified number of elements (fill)</a></li>
+    <li><a href="#using-another-vector-copy">Using another vector (copy)</a></li>
+  </ul>
+</nav>
+        </div>
+        </div>
+    </aside>
+                
     <main class="post">
 
         <div class="post-info">
@@ -160,6 +176,18 @@ That is, we will start from calling a vector constructor and then see how memory
         <div class="post-info"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-pen-tool"><path d="M12 19l7-7 3 3-7 7-3-3z"></path><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path><path d="M2 2l7.586 7.586"></path><circle cx="11" cy="11" r="2"></circle></svg>
                          <span class="author u-author p-author"><a href="https://krshrimali.github.io/author/kushashwa-ravi-shrimali">Kushashwa Ravi Shrimali</a></span>
         </div>
+                <hr />
+                <aside id="toc" class="sidebar">
+                <div class="toc-title">Table of Contents</div>
+                    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#using-initializer-lists">Using Initializer Lists</a></li>
+    <li><a href="#using-similar-value-and-specified-number-of-elements-fill">Using similar value and specified number of elements (fill)</a></li>
+    <li><a href="#using-another-vector-copy">Using another vector (copy)</a></li>
+  </ul>
+</nav>
+                </aside>
+                <hr />
 
             
 
@@ -363,6 +391,54 @@ std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</
 
         
 
+        
+          <div id="comments" class="thin"><div class="pagination__title">
+    <span class="pagination__title-h">Comments</span>
+    <hr />
+</div>
+    
+<div id="remarkbox-div">
+  <noscript>
+    <iframe id=remarkbox-iframe src="https://my.remarkbox.com/embed?nojs=true" style="height:600px;width:100%;border:none!important" tabindex=0></iframe>
+  </noscript>
+</div>
+<script src="https://my.remarkbox.com/static/js/iframe-resizer/iframeResizer.min.js"></script>
+<script>
+  var rb_owner_key = "bd2f6e6d-1c8d-11ec-8ccc-040140774501";
+  var thread_uri = window.location.href;
+  var thread_title = window.document.title;
+  var thread_fragment = window.location.hash;
+
+  
+  var rb_src = "https://my.remarkbox.com/embed" +
+      "?rb_owner_key=" + rb_owner_key +
+      "&thread_title=" + encodeURI(thread_title) +
+      "&thread_uri=" + encodeURIComponent(thread_uri) +
+      thread_fragment;
+
+  function create_remarkbox_iframe() {
+    var ifrm = document.createElement("iframe");
+    ifrm.setAttribute("id", "remarkbox-iframe");
+    ifrm.setAttribute("scrolling", "no");
+    ifrm.setAttribute("src", rb_src);
+    ifrm.setAttribute("frameborder", "0");
+    ifrm.setAttribute("tabindex", "0");
+    ifrm.setAttribute("title", "Remarkbox");
+    ifrm.style.width = "100%";
+    document.getElementById("remarkbox-div").appendChild(ifrm);
+  }
+  create_remarkbox_iframe();
+  iFrameResize(
+    {
+      checkOrigin: ["https://my.remarkbox.com"],
+      inPageLinks: true,
+      initCallback: function(e) {e.iFrameResizer.moveToAnchor(thread_fragment)}
+    },
+    document.getElementById("remarkbox-iframe")
+  );
+</script>
+
+</div>
         
     </main>
 
