@@ -164,7 +164,7 @@
             
 
             <div class="post-content e-content">
-                <!-- raw HTML omitted -->
+                <p><img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/cover-images/Dec_7_2020.jpg" alt=""></p>
 <h1 id="opencv-using-face-detection-for-portrait-bokeh-background-blur-part---1">OpenCV: Using face detection for Portrait Bokeh (Background Blur) (Part - 1)</h1>
 <p>This blog discusses using Face Detection in OpenCV for Portrait Bokeh. We&rsquo;ll be implementing Portrait Bokeh (blurring everything but faces) using 3 different methods in this series:</p>
 <ol>
@@ -186,10 +186,9 @@
 <li>Overlay the cropped faces from step-2 on the output from step-3.</li>
 </ol>
 <h2 id="video-tutorial">Video Tutorial</h2>
-<p>I started a YouTube channel where I go live on the weekends, and upload videos on the week days (not so regularly) about Computer Vision, deploying models into production and more. If you haven&rsquo;t seen it before, please check it out <!-- raw HTML omitted -->here<!-- raw HTML omitted -->. For this blog, I have already uploaded a detailed tutorial. Check it out here:</p>
-<p><a href="https://www.youtube.com/watch?v=Nd3wFiSH-gw"><img src="https://raw.githubusercontent.com/krshrimali/krshrimali.github.io/master/assets/opencv/preview/yt_preview_method1.jpeg" alt="KRSHRIMALI&rsquo;S YT CHANNEL"></a></p>
+<p>I started a YouTube channel where I go live on the weekends, and upload videos on the week days (not so regularly) about Computer Vision, deploying models into production and more. If you haven&rsquo;t seen it before, please check it out <a href="https://youtube.com/c/kushashwaraviShrimali">here</a>. For this blog, I have already uploaded a detailed tutorial. Check it out <a href="https://www.youtube.com/watch?v=Nd3wFiSH-gw">here</a>.</p>
 <h2 id="step-1-detecting-faces-using-haarcascade">Step 1: Detecting Faces using Haarcascade</h2>
-<p>We&rsquo;ll be using haarcascade model files to detect face in the image. To ease the computation and satisfy the input to the model, we need to first convert the image to GrayScale (if it&rsquo;s not already) - that is the image will now have only one channel instead of 3 (Blue, Green, Red). Download the model file to your directory from <!-- raw HTML omitted -->here<!-- raw HTML omitted -->. Let&rsquo;s go ahead and initialize our Face Detector.</p>
+<p>We&rsquo;ll be using haarcascade model files to detect face in the image. To ease the computation and satisfy the input to the model, we need to first convert the image to GrayScale (if it&rsquo;s not already) - that is the image will now have only one channel instead of 3 (Blue, Green, Red). Download the model file to your directory from <a href="https://github.com/opencv/opencv/blob/master/data/haarcascades/haarcascade_frontalface_default.xml">here</a>. Let&rsquo;s go ahead and initialize our Face Detector.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">model_path <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;haarcascade_frontalface_default.xml&#34;</span> <span style="color:#75715e"># Assuming this is in our current directory</span>
 face_detector <span style="color:#f92672">=</span> cv2<span style="color:#f92672">.</span>CascadeClassifier(model_path)
 </code></pre></div><p>Once we have the model loaded, let&rsquo;s go ahead and detect faces from the given image. Remember, that we will also convert the image to grayscale.</p>

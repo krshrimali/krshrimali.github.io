@@ -49,7 +49,7 @@ First question in your mind would be, Why use Docker or Binder?" />
 Before I move on, the credits for creating and maintaining Docker image goes to Vishwesh Ravi Shrimali. He has been working on some cool stuff, please do get in touch with him if you&rsquo;re interested to know.
 First question in your mind would be, Why use Docker or Binder?"><meta itemprop="datePublished" content="2020-09-15T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2020-09-15T00:00:00+00:00" />
-<meta itemprop="wordCount" content="621"><meta itemprop="image" content="https://krshrimali.github.io"/>
+<meta itemprop="wordCount" content="623"><meta itemprop="image" content="https://krshrimali.github.io"/>
 <meta itemprop="keywords" content="development,coding,cpp,notes,pytorch-cpp,libtorch," /><meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://krshrimali.github.io"/>
 
@@ -170,15 +170,15 @@ First question in your mind would be, Why use Docker or Binder?"/>
 
             <div class="post-content e-content">
                 <p>Today, I am elated to share Docker image for <code>OpenCV</code>, <code>Libtorch</code> and <code>Xeus-Cling</code>. We&rsquo;ll discuss how to use the <code>dockerfile</code> and <code>binder</code>.</p>
-<!-- raw HTML omitted -->
-<p>Before I move on, the credits for creating and maintaining Docker image goes to <!-- raw HTML omitted -->Vishwesh Ravi Shrimali<!-- raw HTML omitted -->. He has been working on some cool stuff, please do get in touch with him if you&rsquo;re interested to know.</p>
-<p>First question in your mind would be, <strong>Why use Docker or Binder?</strong> The answer to it lies in the frequency of queries on <!-- raw HTML omitted -->the discussion forum of PyTorch<!-- raw HTML omitted --> and Stackoverflow on <strong>Installation of Libtorch with OpenCV in Windows/Linux/OSX</strong>. I&rsquo;ve had nightmares setting up the Windows system myself for <code>Libtorch</code> and nothing could be better than using <code>Docker</code>. Read on, to know why.</p>
+<p><img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/cover-images/Cover-Docker-Binder.jpg" alt=""></p>
+<p>Before I move on, the credits for creating and maintaining Docker image goes to <a href="https://github.com/vishwesh5">Vishwesh Ravi Shrimali</a>. He has been working on some cool stuff, please do get in touch with him if you&rsquo;re interested to know.</p>
+<p>First question in your mind would be, <strong>Why use Docker or Binder?</strong> The answer to it lies in the frequency of queries on <a href="http://www.discuss.pytorch.org">the discussion forum of PyTorch</a> and Stackoverflow on <strong>Installation of Libtorch with OpenCV in Windows/Linux/OSX</strong>. I&rsquo;ve had nightmares setting up the Windows system myself for <code>Libtorch</code> and nothing could be better than using <code>Docker</code>. Read on, to know why.</p>
 <h2 id="installing-docker-on-mac-os">Installing Docker on Mac OS</h2>
-<p>To install docker (community edition - CE) desktop in Mac OS system, simply navigate to the Stable Channel section <!-- raw HTML omitted -->here<!-- raw HTML omitted -->. Once setup, you can use docker (command line and desktop). Once done, navigate to <!-- raw HTML omitted -->Install and run Docker for Mac<!-- raw HTML omitted --> section and get used to the commands.</p>
+<p>To install docker (community edition - CE) desktop in Mac OS system, simply navigate to the Stable Channel section <a href="https://docs.docker.com/v17.12/docker-for-mac/install/#download-docker-for-mac">here</a>. Once setup, you can use docker (command line and desktop). Once done, navigate to <a href="https://docs.docker.com/v17.12/docker-for-mac/install/#install-and-run-docker-for-mac">Install and run Docker for Mac</a> section and get used to the commands.</p>
 <h2 id="installing-docker-on-ubuntu">Installing Docker on Ubuntu</h2>
-<p>Before moving on, please consider reading the <!-- raw HTML omitted -->requirements to install Docker Community Edition<!-- raw HTML omitted -->. For the steps to install <code>Docker CE</code>, refer <!-- raw HTML omitted -->this<!-- raw HTML omitted -->.</p>
+<p>Before moving on, please consider reading the requirements to install Docker Community Edition](<a href="https://docs.docker.com/v17.12/install/linux/docker-ce/ubuntu/)">https://docs.docker.com/v17.12/install/linux/docker-ce/ubuntu/)</a>. For the steps to install <code>Docker CE</code>, refer <a href="https://docs.docker.com/v17.12/install/linux/docker-ce/ubuntu/#install-docker-ce-1">this</a>.</p>
 <h2 id="installing-docker-on-windows">Installing Docker on Windows</h2>
-<p>To install Docker on Windows, download docker (stable channel) from <!-- raw HTML omitted -->here<!-- raw HTML omitted -->. The installation steps to install <code>Docker Desktop</code> on Windows can be found <!-- raw HTML omitted -->here<!-- raw HTML omitted -->.</p>
+<p>To install Docker on Windows, download docker (stable channel) from <a href="https://docs.docker.com/v17.12/docker-for-windows/install/#download-docker-for-windows">here</a>. The installation steps to install <code>Docker Desktop</code> on Windows can be found <a href="https://docs.docker.com/v17.12/docker-for-windows/install/#install-docker-for-windows-desktop-app">here</a>.</p>
 <h2 id="using-docker-image">Using Docker Image</h2>
 <ol>
 <li>Fetch the docker image: <code>docker pull vishwesh5/libtorch-opencv:opencv-4-1-0</code>. This shall take a lot of time, so sit back and relax.</li>
@@ -198,7 +198,7 @@ First question in your mind would be, Why use Docker or Binder?"/>
 <li>Build the code using <code>make</code> command: <code>make</code>.</li>
 <li>Execute the code, and that&rsquo;s it. Have fun learning.</li>
 </ol>
-<!-- raw HTML omitted -->
+<p><img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/blogs/Docker-Image-2.png" alt=""></p>
 <h2 id="testing-docker-image-with-xeus-cling">Testing Docker Image with Xeus-Cling</h2>
 <p>Let&rsquo;s test the Docker Image with Xeus-Cling.</p>
 <ol>
@@ -216,7 +216,7 @@ First question in your mind would be, Why use Docker or Binder?"/>
 <p>Thanks to Vishwesh Ravi Shrimali, for creating the docker container and binder for this post.</p>
 <h2 id="references">References</h2>
 <ol>
-<li><!-- raw HTML omitted -->Install OpenCV Docker Image on Ubuntu, MacOS or Windows by Vishwesh Ravi Shrimali<!-- raw HTML omitted -->.</li>
+<li><a href="https://www.learnopencv.com/install-opencv-docker-image-ubuntu-macos-windows">Install OpenCV Docker Image on Ubuntu, MacOS or Windows by Vishwesh Ravi Shrimali</a>.</li>
 </ol>
 
             </div>
@@ -229,7 +229,7 @@ First question in your mind would be, Why use Docker or Binder?"/>
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://krshrimali.github.io/tags/development">development</a></span><span class="tag"><a href="https://krshrimali.github.io/tags/coding">coding</a></span><span class="tag"><a href="https://krshrimali.github.io/tags/cpp">cpp</a></span><span class="tag"><a href="https://krshrimali.github.io/tags/notes">notes</a></span><span class="tag"><a href="https://krshrimali.github.io/tags/pytorch-cpp">pytorch-cpp</a></span><span class="tag"><a href="https://krshrimali.github.io/tags/libtorch">libtorch</a></span>
                 </p>
 
-            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>621 Words</p>
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>623 Words</p>
 
             <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>Posted: <time class="dt-published"> 2020-09-15 05:30 &#43;0530</time></p>
 <a class="resp-sharing-button__link" href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2020%2f09%2freleasing-docker-container-and-binder-for-using-xeus-cling-libtorch-and-opencv-in-c-%2f" target="_blank" rel="noopener" aria-label="Facebook">

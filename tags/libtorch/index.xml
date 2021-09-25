@@ -24,7 +24,8 @@ First question in your mind would be, Why use Docker or Binder?</description>
       <pubDate>Sun, 23 Feb 2020 00:00:00 +0000</pubDate>
       
       <guid>https://krshrimali.github.io/posts/2020/02/training-and-results-deep-convolutional-generative-adversarial-networks-on-celeba-dataset-using-pytorch-c-api/</guid>
-      <description>&lt;p&gt;It&amp;rsquo;s been around 5 months since I released my last blog on &lt;!-- raw HTML omitted --&gt;DCGAN Review and Implementation using PyTorch C++ API&lt;!-- raw HTML omitted --&gt; and I&amp;rsquo;ve missed writing blogs badly! Straight the to the point, I&amp;rsquo;m back!&lt;/p&gt;</description>
+      <description>It&amp;rsquo;s been around 5 months since I released my last blog on DCGAN Review and Implementation using PyTorch C++ API and I&amp;rsquo;ve missed writing blogs badly! Straight the to the point, I&amp;rsquo;m back!
+But before we start, the PyTorch C++ Frontend has gone through several changes and thanks to the awesome contributors around the world, it resembles the Python API more than it ever did! Since a lot of things have changed, I have also updated my previous blogs (tested on 1.</description>
     </item>
     
     <item>
@@ -33,7 +34,9 @@ First question in your mind would be, Why use Docker or Binder?</description>
       <pubDate>Sun, 15 Sep 2019 00:00:00 +0000</pubDate>
       
       <guid>https://krshrimali.github.io/posts/2019/09/deep-convolutional-generative-adversarial-networks-review-and-implementation-using-pytorch-c-api/</guid>
-      <description>&lt;p&gt;I&amp;rsquo;m pleased to start a series of blogs on GANs and their implementation with PyTorch C++ API. We&amp;rsquo;ll be starting with one of the initial GANs - DCGANs (Deep Convolutional Generative Adversarial Networks).&lt;/p&gt;</description>
+      <description>I&amp;rsquo;m pleased to start a series of blogs on GANs and their implementation with PyTorch C++ API. We&amp;rsquo;ll be starting with one of the initial GANs - DCGANs (Deep Convolutional Generative Adversarial Networks).
+The authors (Soumith Chintala, Radford and Luke Metz) in this Seminal Paper on DCGANs introduced DCGANs to the world like this:
+ We introduce a class of CNNs called deep convolutional generative adversarial networks (DCGANs), that have certain architectural constraints, and demonstrate that they are a strong candidate for unsupervised learning.</description>
     </item>
     
     <item>
@@ -42,8 +45,10 @@ First question in your mind would be, Why use Docker or Binder?</description>
       <pubDate>Wed, 28 Aug 2019 00:00:00 +0000</pubDate>
       
       <guid>https://krshrimali.github.io/posts/2019/08/setting-up-jupyter-notebook-xeus-cling-for-libtorch-and-opencv-libraries/</guid>
-      <description>&lt;h2 id=&#34;introduction-to-xeus-cling&#34;&gt;Introduction to Xeus Cling&lt;/h2&gt;
-&lt;p&gt;Today, we are going to run our C++ codes in the Jupyter Notebook. Sounds ambitious? Not much. Let&amp;rsquo;s see how we do it using Xeus Cling.&lt;/p&gt;</description>
+      <description>Introduction to Xeus Cling Today, we are going to run our C++ codes in the Jupyter Notebook. Sounds ambitious? Not much. Let&amp;rsquo;s see how we do it using Xeus Cling.
+I&amp;rsquo;ll quote the definition of Xeus Cling on the official documentation website.
+ xeus-cling is a Jupyter kernel for C++ based on the C++ interpreter cling and the native implementation of the Jupyter protocol xeus.
+ Just like we use Python Kernel in the Jupyter Notebook, we can also use a C++ based interpreter cling combined with a Jupyter protocol called Xeus to reach closer to implementing C++ code in the notebook.</description>
     </item>
     
     <item>
@@ -52,9 +57,8 @@ First question in your mind would be, Why use Docker or Binder?</description>
       <pubDate>Fri, 16 Aug 2019 00:00:00 +0000</pubDate>
       
       <guid>https://krshrimali.github.io/posts/2019/08/applying-transfer-learning-on-dogs-vs-cats-dataset-resnet18-using-pytorch-c-api/</guid>
-      <description>&lt;h2 id=&#34;transfer-learning&#34;&gt;Transfer Learning&lt;/h2&gt;
-&lt;p&gt;&amp;ndash;
-Before we go ahead and discuss the &lt;strong&gt;Why&lt;/strong&gt; question of Transfer Learning, let&amp;rsquo;s have a look at &lt;strong&gt;What is Transfer Learning?&lt;/strong&gt; Let&amp;rsquo;s have a look at the &lt;!-- raw HTML omitted --&gt;Notes&lt;!-- raw HTML omitted --&gt; from CS231n on Transfer Learning:&lt;/p&gt;</description>
+      <description>Transfer Learning &amp;ndash; Before we go ahead and discuss the Why question of Transfer Learning, let&amp;rsquo;s have a look at What is Transfer Learning? Let&amp;rsquo;s have a look at the Notes from CS231n on Transfer Learning:
+ In practice, very few people train an entire Convolutional Network from scratch (with random initialization), because it is relatively rare to have a dataset of sufficient size. Instead, it is common to pretrain a ConvNet on a very large dataset (e.</description>
     </item>
     
     <item>
@@ -63,7 +67,8 @@ Before we go ahead and discuss the &lt;strong&gt;Why&lt;/strong&gt; question of 
       <pubDate>Wed, 31 Jul 2019 00:00:00 +0000</pubDate>
       
       <guid>https://krshrimali.github.io/posts/2019/07/classifying-dogs-vs-cats-using-pytorch-c-part-2/</guid>
-      <description>&lt;p&gt;In the last blog, we had discussed all but training and results of our custom CNN network on Dogs vs Cats dataset. Today, we&amp;rsquo;ll be making some small changes in the network and discussing training and results of the task.&lt;/p&gt;</description>
+      <description>In the last blog, we had discussed all but training and results of our custom CNN network on Dogs vs Cats dataset. Today, we&amp;rsquo;ll be making some small changes in the network and discussing training and results of the task.
+I&amp;rsquo;ll start with the network overview again, where we used a network similar to VGG-16 (with one extra Fully Connected Layer in the end). While there are absolutely no problems with that network, but since the dataset contains a lot of images (25000 in training dataset) and we were using (200x200x3) input shape to the network (which is 120,000 floating point numbers), this leads to high memory consumption.</description>
     </item>
     
     <item>
@@ -73,7 +78,8 @@ Before we go ahead and discuss the &lt;strong&gt;Why&lt;/strong&gt; question of 
       
       <guid>https://krshrimali.github.io/posts/2019/07/classifying-dogs-vs-cats-using-pytorch-c-api-part-1/</guid>
       <description>&lt;p&gt;Hi Everyone! So excited to be back with another blog in the series of PyTorch C++ Blogs.&lt;/p&gt;
-&lt;p&gt;Today, we are going to see a practical example of applying a CNN to a Custom Dataset - Dogs vs Cats. This is going to be a short post of showing results and discussion about hyperparameters and loss functions for the task, as code snippets and explanation has been provided &lt;!-- raw HTML omitted --&gt;here&lt;!-- raw HTML omitted --&gt;, &lt;!-- raw HTML omitted --&gt;here&lt;!-- raw HTML omitted --&gt; and &lt;!-- raw HTML omitted --&gt;here&lt;!-- raw HTML omitted --&gt;.&lt;/p&gt;</description>
+&lt;p&gt;Today, we are going to see a practical example of applying a CNN to a Custom Dataset - Dogs vs Cats. This is going to be a short post of showing results and discussion about hyperparameters and loss functions for the task, as code snippets and explanation has been provided &lt;a href=&#34;https://krshrimali.github.io/Training-Network-Using-Custom-Dataset-PyTorch-CPP/&#34;&gt;here&lt;/a&gt;, &lt;a href=&#34;https://krshrimali.github.io/Custom-Data-Loading-Using-PyTorch-CPP-API/&#34;&gt;here&lt;/a&gt; and &lt;a href=&#34;https://krshrimali.github.io/PyTorch-C++-API/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/krshrimali/blog/main/assets/cover-images/Cover-Dogs-Cats.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -92,7 +98,8 @@ Before we go ahead and discuss the &lt;strong&gt;Why&lt;/strong&gt; question of 
       <pubDate>Thu, 04 Jul 2019 00:00:00 +0000</pubDate>
       
       <guid>https://krshrimali.github.io/posts/2019/07/announcing-a-series-of-blogs-on-pytorch-c-api/</guid>
-      <description>&lt;p&gt;Hi everyone! If you&amp;rsquo;ve been following my blog, you would have noticed a couple of PyTorch Blogs (&lt;a href=&#34;https://krshrimali.github.io/PyTorch-C++-API/&#34;&gt;PyTorch C++ API: Installation and MNIST Digit Classification using VGG-16&lt;/a&gt;, &lt;a href=&#34;https://krshrimali.github.io/Custom-Data-Loading-Using-PyTorch-CPP-API/&#34;&gt;PyTorch C++ API: Using Custom Data&lt;/a&gt;). I initially started in a motive to help people getting started with, as there are not a lot of tutorials available on Libtorch (PyTorch C++ API).&lt;/p&gt;</description>
+      <description>I&amp;rsquo;m happy to announce a Series of Blog Posts on PyTorch C++ API. Check out the blogs in the series here.
+Happy Reading!</description>
     </item>
     
     <item>

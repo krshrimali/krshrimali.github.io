@@ -164,8 +164,7 @@
             
 
             <div class="post-content e-content">
-                <!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+                <p><img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/cover-images/Dec_10_2020.jpg" alt=""></p>
 <p>Hi everyone! In the previous blog we implemented Portrait Bokeh using Face Detection in OpenCV. While the results were good for a start, we definitely want to be closer to the output we expect. The end goal is to blur everything except the face. The main problem we noticed was:</p>
 <ul>
 <li>The face cropped was a rectangle, and it was clearly visible in the output result.</li>
@@ -199,10 +198,9 @@ face <span style="color:#f92672">=</span> circle_equation
         <span style="color:#75715e"># This will be visible</span>
 </code></pre></div><p>To have an option to add transparency, you need to convert the BGR input image to BGRA (4 channel image: Blue, Green, Red, Alpha) - here Alpha channel denotes transparency channel. When the transparency is set to 0, that represents opaque and when it&rsquo;s set to 255, it represents transparent value. Let&rsquo;s go ahead and use this for our application.</p>
 <h2 id="video-tutorial">Video Tutorial</h2>
-<p>I started a YouTube channel where I go live on the weekends, and upload videos on the week days (not so regularly) about Computer Vision, deploying models into production and more. If you haven&rsquo;t seen it before, please check it out <!-- raw HTML omitted -->here<!-- raw HTML omitted -->. For this blog, I have already uploaded a detailed tutorial. Check it out here:</p>
-<p><a href="https://www.youtube.com/watch?v=7seEhDVGvn4"><img src="https://raw.githubusercontent.com/krshrimali/krshrimali.github.io/master/assets/opencv/preview/yt_preview_method2.jpg" alt="KRSHRIMALI&rsquo;S YT CHANNEL"></a></p>
+<p>I started a YouTube channel where I go live on the weekends, and upload videos on the week days (not so regularly) about Computer Vision, deploying models into production and more. If you haven&rsquo;t seen it before, please check it out <a href="https://youtube.com/c/kushashwaraviShrimali">here</a>. For this blog, I have already uploaded a detailed tutorial. Check it out <a href="https://www.youtube.com/watch?v=7seEhDVGvn4">here</a>.</p>
 <h2 id="step-1-get-face-from-face-detection">Step 1: Get face from face detection</h2>
-<p>We have discussed this <!-- raw HTML omitted -->before<!-- raw HTML omitted -->, so we won&rsquo;t go in details but for the sake of continuity, I&rsquo;ll add the code for Face Detection.</p>
+<p>We have discussed this <a href="https://krshrimali.github.io/posts/2020/12/implementing-portrait-bokeh-in-opencv-using-face-detection-part-1/">before</a>, so we won&rsquo;t go in details but for the sake of continuity, I&rsquo;ll add the code for Face Detection.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> cv2<span style="color:#f92672">,</span> sys
 
 <span style="color:#75715e"># Get image path and read image</span>
@@ -386,7 +384,7 @@ imgTransp[<span style="color:#f92672">...</span>, <span style="color:#ae81ff">3<
 </code></pre></div><p><strong>Note:</strong> The only reason we used <code>imgTransp</code> here, is to show how to crop a circle. For portrait bokeh, you don&rsquo;t need to have <code>imgTransp</code> and transparency channels.</p>
 <p>Here is how the output looks like. While I understand that there is still some background, but we can definitely be better than this - and this will be our topic for the next blog!</p>
 <!-- raw HTML omitted -->
-<p>This should be it for this blog, and I hope you learnt something new today. If you liked the content, please leave a comment below. I would love to read your feedbacks, suggestions and if this helped you out in any way. I also go live on weekends, and upload videos on weekdays on my <!-- raw HTML omitted -->YouTube channel<!-- raw HTML omitted -->, so make sure to subscribe there and join me in if you find it interesting! Thank you for reading this blog.</p>
+<p>This should be it for this blog, and I hope you learnt something new today. If you liked the content, please leave a comment below. I would love to read your feedbacks, suggestions and if this helped you out in any way. I also go live on weekends, and upload videos on weekdays on my <a href="https://youtube.com/c/kushashwaraviShrimali">YouTube Channel</a>, so make sure to subscribe there and join me in if you find it interesting! Thank you for reading this blog.</p>
 
             </div>
         </article>

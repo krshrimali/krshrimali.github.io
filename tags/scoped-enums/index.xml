@@ -13,11 +13,9 @@
       <pubDate>Sat, 14 Aug 2021 00:00:00 +0000</pubDate>
       
       <guid>https://krshrimali.github.io/posts/2021/08/prefer-scoped-enums-over-unscoped-enums-notes/</guid>
-      <description>&lt;h2 id=&#34;scoped-vs-unscoped-enums&#34;&gt;Scoped vs Unscoped Enums&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;General rule:&lt;/strong&gt; declaring a name inside curly braces is limited to that scope.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Exception:&lt;/strong&gt; C++-98 style Enums&lt;/li&gt;
-&lt;/ul&gt;</description>
+      <description>Scoped vs Unscoped Enums  General rule: declaring a name inside curly braces is limited to that scope. Exception: C++-98 style Enums   NOTE
+My notes on Chapter 3, Item 10 of Effective Modern C++ written by Scott Meyers.
+Some (or even all) of the text can be similar to what you see in the book, as these are notes: I&amp;rsquo;ve tried not to be unnecessarily creative with my words.</description>
     </item>
     
   </channel>

@@ -6,7 +6,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="author" content="map[name:Kushashwa Ravi Shrimali]">
 <meta name="description" content="Prefer deleted functions to private undefined ones This item (11) in the chapter 3 focuses on:
- Why and How to prevent users calling particular functions? C&#43;&#43;-98 and C&#43;&#43;-11 approach What&amp;rsquo;s the difference between deleting a function vs declaring a member function private (and not defining them)? " />
+ Why and How to prevent users calling particular functions? C&#43;&#43;-98 and C&#43;&#43;-11 approach What&amp;rsquo;s the difference between deleting a function vs declaring a member function private (and not defining them)?   NOTE
+These are my notes on Chapter 3, Item 11 of Effective Modern C&#43;&#43; written by Scott Meyers.
+Some (or even all) of the text can be similar to what you see in the book, as these are notes: I&amp;rsquo;ve tried not to be unnecessarily creative with my words." />
 <meta name="keywords" content=", development, coding, cpp, notes, deleted functions" />
 <meta name="robots" content="noodp" />
 <meta name="theme-color" content="#252627" />
@@ -44,26 +46,20 @@
     <meta name="theme-color" content="#252627">
 
 <meta itemprop="name" content="Prefer Deleted Functions to Private Undefined Ones (Notes)">
-<meta itemprop="description" content="Prefer deleted functions to private undefined ones
-This item (11) in the chapter 3 focuses on:
-
-Why and How to prevent users calling particular functions?
-C&#43;&#43;-98 and C&#43;&#43;-11 approach
-What&rsquo;s the difference between deleting a function vs declaring a member function private (and not defining them)?
-"><meta itemprop="datePublished" content="2021-08-25T00:00:00+00:00" />
+<meta itemprop="description" content="Prefer deleted functions to private undefined ones This item (11) in the chapter 3 focuses on:
+ Why and How to prevent users calling particular functions? C&#43;&#43;-98 and C&#43;&#43;-11 approach What&rsquo;s the difference between deleting a function vs declaring a member function private (and not defining them)?   NOTE
+These are my notes on Chapter 3, Item 11 of Effective Modern C&#43;&#43; written by Scott Meyers.
+Some (or even all) of the text can be similar to what you see in the book, as these are notes: I&rsquo;ve tried not to be unnecessarily creative with my words."><meta itemprop="datePublished" content="2021-08-25T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2021-08-25T00:00:00+00:00" />
 <meta itemprop="wordCount" content="927"><meta itemprop="image" content="https://krshrimali.github.io"/>
 <meta itemprop="keywords" content="development,coding,cpp,notes,deleted functions," /><meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://krshrimali.github.io"/>
 
 <meta name="twitter:title" content="Prefer Deleted Functions to Private Undefined Ones (Notes)"/>
-<meta name="twitter:description" content="Prefer deleted functions to private undefined ones
-This item (11) in the chapter 3 focuses on:
-
-Why and How to prevent users calling particular functions?
-C&#43;&#43;-98 and C&#43;&#43;-11 approach
-What&rsquo;s the difference between deleting a function vs declaring a member function private (and not defining them)?
-"/>
+<meta name="twitter:description" content="Prefer deleted functions to private undefined ones This item (11) in the chapter 3 focuses on:
+ Why and How to prevent users calling particular functions? C&#43;&#43;-98 and C&#43;&#43;-11 approach What&rsquo;s the difference between deleting a function vs declaring a member function private (and not defining them)?   NOTE
+These are my notes on Chapter 3, Item 11 of Effective Modern C&#43;&#43; written by Scott Meyers.
+Some (or even all) of the text can be similar to what you see in the book, as these are notes: I&rsquo;ve tried not to be unnecessarily creative with my words."/>
 
 
 
@@ -183,7 +179,7 @@ What&rsquo;s the difference between deleting a function vs declaring a member fu
 <li>C++-98 and C++-11 approach</li>
 <li>What&rsquo;s the difference between deleting a function vs declaring a member function private (and not defining them)?</li>
 </ul>
-<!-- raw HTML omitted -->
+<p><img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/cover-images/Item-11-Notes.png" alt=""></p>
 <hr>
 <p><strong>NOTE</strong></p>
 <p>These are my notes on Chapter 3, Item 11 of Effective Modern C++ written by Scott Meyers.</p>
@@ -341,6 +337,7 @@ main.cpp:<span style="color:#ae81ff">6</span><span style="color:#f92672">:</span
 <span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;&gt;</span>
 <span style="color:#66d9ef">void</span> Sample<span style="color:#f92672">::</span>processPointer<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">void</span><span style="color:#f92672">&gt;</span>(<span style="color:#66d9ef">void</span><span style="color:#f92672">*</span>) <span style="color:#f92672">=</span> <span style="color:#66d9ef">delete</span>;  <span style="color:#75715e">// in public scope, and deleted!
 </span></code></pre></div><p>I hope you liked this blog, thank you for reading! :)</p>
+
             </div>
         </article>
 

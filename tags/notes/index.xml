@@ -13,13 +13,10 @@
       <pubDate>Wed, 25 Aug 2021 00:00:00 +0000</pubDate>
       
       <guid>https://krshrimali.github.io/posts/2021/08/prefer-deleted-functions-to-private-undefined-ones-notes/</guid>
-      <description>&lt;h2 id=&#34;prefer-deleted-functions-to-private-undefined-ones&#34;&gt;Prefer deleted functions to private undefined ones&lt;/h2&gt;
-&lt;p&gt;This item (11) in the chapter 3 focuses on:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Why and How to prevent users calling particular functions?&lt;/li&gt;
-&lt;li&gt;C++-98 and C++-11 approach&lt;/li&gt;
-&lt;li&gt;What&amp;rsquo;s the difference between deleting a function vs declaring a member function private (and not defining them)?&lt;/li&gt;
-&lt;/ul&gt;</description>
+      <description>Prefer deleted functions to private undefined ones This item (11) in the chapter 3 focuses on:
+ Why and How to prevent users calling particular functions? C++-98 and C++-11 approach What&amp;rsquo;s the difference between deleting a function vs declaring a member function private (and not defining them)?   NOTE
+These are my notes on Chapter 3, Item 11 of Effective Modern C++ written by Scott Meyers.
+Some (or even all) of the text can be similar to what you see in the book, as these are notes: I&amp;rsquo;ve tried not to be unnecessarily creative with my words.</description>
     </item>
     
     <item>
@@ -28,11 +25,9 @@
       <pubDate>Sat, 14 Aug 2021 00:00:00 +0000</pubDate>
       
       <guid>https://krshrimali.github.io/posts/2021/08/prefer-scoped-enums-over-unscoped-enums-notes/</guid>
-      <description>&lt;h2 id=&#34;scoped-vs-unscoped-enums&#34;&gt;Scoped vs Unscoped Enums&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;General rule:&lt;/strong&gt; declaring a name inside curly braces is limited to that scope.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Exception:&lt;/strong&gt; C++-98 style Enums&lt;/li&gt;
-&lt;/ul&gt;</description>
+      <description>Scoped vs Unscoped Enums  General rule: declaring a name inside curly braces is limited to that scope. Exception: C++-98 style Enums   NOTE
+My notes on Chapter 3, Item 10 of Effective Modern C++ written by Scott Meyers.
+Some (or even all) of the text can be similar to what you see in the book, as these are notes: I&amp;rsquo;ve tried not to be unnecessarily creative with my words.</description>
     </item>
     
     <item>
@@ -64,7 +59,8 @@ First question in your mind would be, Why use Docker or Binder?</description>
       <pubDate>Sun, 26 Apr 2020 00:00:00 +0000</pubDate>
       
       <guid>https://krshrimali.github.io/posts/2020/04/understanding-how-vectors-work-in-c-part-2-what-happens-when-you-initialize-a-vector/</guid>
-      <description>&lt;p&gt;In the last blog post, I realized there were a lot of methods inherited from the base struct &lt;code&gt;_Vector_base_&lt;/code&gt; and &lt;code&gt;_Vector_impl_data&lt;/code&gt;. Instead of directly going to the source code of these structs, I&amp;rsquo;ll go through their methods and objects by explaining what happens when we initialize a vector.&lt;/p&gt;</description>
+      <description>In the last blog post, I realized there were a lot of methods inherited from the base struct _Vector_base_ and _Vector_impl_data. Instead of directly going to the source code of these structs, I&amp;rsquo;ll go through their methods and objects by explaining what happens when we initialize a vector.
+That is, we will start from calling a vector constructor and then see how memory is allocated. If you haven&amp;rsquo;t looked at the previous blog post, please take a look here.</description>
     </item>
     
     <item>
@@ -73,7 +69,8 @@ First question in your mind would be, Why use Docker or Binder?</description>
       <pubDate>Sun, 26 Apr 2020 00:00:00 +0000</pubDate>
       
       <guid>https://krshrimali.github.io/posts/2020/04/understanding-how-vectors-work-in-c-part-3-diving-deep-into-member-functions-of-vectors/</guid>
-      <description>&lt;p&gt;In this blog, we&amp;rsquo;ll continue diving deep into the source code of Vector Containers in GCC compiler. Today, we will be discussing some of the most commonly used methods of vectors, and how they are implemented.&lt;/p&gt;</description>
+      <description>In this blog, we&amp;rsquo;ll continue diving deep into the source code of Vector Containers in GCC compiler. Today, we will be discussing some of the most commonly used methods of vectors, and how they are implemented.
+Before we start, if you haven&amp;rsquo;t looked at the previous blogs in the C++ series, please take a look here. If you are already familiar with memory allocation in vector containers and vector&amp;rsquo;s base structs, then you can skip reading the previous blogs and continue here.</description>
     </item>
     
     <item>
@@ -82,7 +79,8 @@ First question in your mind would be, Why use Docker or Binder?</description>
       <pubDate>Sat, 18 Apr 2020 00:00:00 +0000</pubDate>
       
       <guid>https://krshrimali.github.io/posts/2020/04/understanding-how-vectors-work-in-c-part-1-how-does-push_back-work/</guid>
-      <description>&lt;p&gt;This blog is focused to explain how vectors work in the backend, and we&amp;rsquo;ll specially look at &lt;code&gt;push_back&lt;/code&gt; method of the vector container. Looking at the source code helps to understand the implementation, and how vectors can be used efficiently.&lt;/p&gt;</description>
+      <description>This blog is focused to explain how vectors work in the backend, and we&amp;rsquo;ll specially look at push_back method of the vector container. Looking at the source code helps to understand the implementation, and how vectors can be used efficiently.
+Vector Containers are type of sequenced containers in C++ commonly uses as a better alternative of arrays. They are also known as dynamic arrays, and as the term suggests - it&amp;rsquo;s one of the advantages they hold over native arrays in C++.</description>
     </item>
     
     <item>
@@ -91,7 +89,8 @@ First question in your mind would be, Why use Docker or Binder?</description>
       <pubDate>Sun, 23 Feb 2020 00:00:00 +0000</pubDate>
       
       <guid>https://krshrimali.github.io/posts/2020/02/training-and-results-deep-convolutional-generative-adversarial-networks-on-celeba-dataset-using-pytorch-c-api/</guid>
-      <description>&lt;p&gt;It&amp;rsquo;s been around 5 months since I released my last blog on &lt;!-- raw HTML omitted --&gt;DCGAN Review and Implementation using PyTorch C++ API&lt;!-- raw HTML omitted --&gt; and I&amp;rsquo;ve missed writing blogs badly! Straight the to the point, I&amp;rsquo;m back!&lt;/p&gt;</description>
+      <description>It&amp;rsquo;s been around 5 months since I released my last blog on DCGAN Review and Implementation using PyTorch C++ API and I&amp;rsquo;ve missed writing blogs badly! Straight the to the point, I&amp;rsquo;m back!
+But before we start, the PyTorch C++ Frontend has gone through several changes and thanks to the awesome contributors around the world, it resembles the Python API more than it ever did! Since a lot of things have changed, I have also updated my previous blogs (tested on 1.</description>
     </item>
     
     <item>
@@ -100,7 +99,9 @@ First question in your mind would be, Why use Docker or Binder?</description>
       <pubDate>Sun, 15 Sep 2019 00:00:00 +0000</pubDate>
       
       <guid>https://krshrimali.github.io/posts/2019/09/deep-convolutional-generative-adversarial-networks-review-and-implementation-using-pytorch-c-api/</guid>
-      <description>&lt;p&gt;I&amp;rsquo;m pleased to start a series of blogs on GANs and their implementation with PyTorch C++ API. We&amp;rsquo;ll be starting with one of the initial GANs - DCGANs (Deep Convolutional Generative Adversarial Networks).&lt;/p&gt;</description>
+      <description>I&amp;rsquo;m pleased to start a series of blogs on GANs and their implementation with PyTorch C++ API. We&amp;rsquo;ll be starting with one of the initial GANs - DCGANs (Deep Convolutional Generative Adversarial Networks).
+The authors (Soumith Chintala, Radford and Luke Metz) in this Seminal Paper on DCGANs introduced DCGANs to the world like this:
+ We introduce a class of CNNs called deep convolutional generative adversarial networks (DCGANs), that have certain architectural constraints, and demonstrate that they are a strong candidate for unsupervised learning.</description>
     </item>
     
     <item>
@@ -109,8 +110,10 @@ First question in your mind would be, Why use Docker or Binder?</description>
       <pubDate>Wed, 28 Aug 2019 00:00:00 +0000</pubDate>
       
       <guid>https://krshrimali.github.io/posts/2019/08/setting-up-jupyter-notebook-xeus-cling-for-libtorch-and-opencv-libraries/</guid>
-      <description>&lt;h2 id=&#34;introduction-to-xeus-cling&#34;&gt;Introduction to Xeus Cling&lt;/h2&gt;
-&lt;p&gt;Today, we are going to run our C++ codes in the Jupyter Notebook. Sounds ambitious? Not much. Let&amp;rsquo;s see how we do it using Xeus Cling.&lt;/p&gt;</description>
+      <description>Introduction to Xeus Cling Today, we are going to run our C++ codes in the Jupyter Notebook. Sounds ambitious? Not much. Let&amp;rsquo;s see how we do it using Xeus Cling.
+I&amp;rsquo;ll quote the definition of Xeus Cling on the official documentation website.
+ xeus-cling is a Jupyter kernel for C++ based on the C++ interpreter cling and the native implementation of the Jupyter protocol xeus.
+ Just like we use Python Kernel in the Jupyter Notebook, we can also use a C++ based interpreter cling combined with a Jupyter protocol called Xeus to reach closer to implementing C++ code in the notebook.</description>
     </item>
     
   </channel>

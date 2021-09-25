@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="author" content="map[name:Kushashwa Ravi Shrimali]">
 <meta name="description" content="In the last blog post, I realized there were a lot of methods inherited from the base struct _Vector_base_ and _Vector_impl_data. Instead of directly going to the source code of these structs, I&amp;rsquo;ll go through their methods and objects by explaining what happens when we initialize a vector.
-" />
+That is, we will start from calling a vector constructor and then see how memory is allocated. If you haven&amp;rsquo;t looked at the previous blog post, please take a look here." />
 <meta name="keywords" content=", development, coding, cpp, notes, vectors" />
 <meta name="robots" content="noodp" />
 <meta name="theme-color" content="#252627" />
@@ -44,14 +44,16 @@
     <meta name="theme-color" content="#252627">
 
 <meta itemprop="name" content="Understanding how Vectors work in C&#43;&#43; (Part-2): What happens when you initialize a vector?">
-<meta itemprop="description" content="In the last blog post, I realized there were a lot of methods inherited from the base struct _Vector_base_ and _Vector_impl_data. Instead of directly going to the source code of these structs, I&rsquo;ll go through their methods and objects by explaining what happens when we initialize a vector."><meta itemprop="datePublished" content="2020-04-26T00:00:00+00:00" />
+<meta itemprop="description" content="In the last blog post, I realized there were a lot of methods inherited from the base struct _Vector_base_ and _Vector_impl_data. Instead of directly going to the source code of these structs, I&rsquo;ll go through their methods and objects by explaining what happens when we initialize a vector.
+That is, we will start from calling a vector constructor and then see how memory is allocated. If you haven&rsquo;t looked at the previous blog post, please take a look here."><meta itemprop="datePublished" content="2020-04-26T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2020-04-26T00:00:00+00:00" />
-<meta itemprop="wordCount" content="1460"><meta itemprop="image" content="https://krshrimali.github.io"/>
+<meta itemprop="wordCount" content="1461"><meta itemprop="image" content="https://krshrimali.github.io"/>
 <meta itemprop="keywords" content="development,coding,cpp,notes,vectors," /><meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://krshrimali.github.io"/>
 
 <meta name="twitter:title" content="Understanding how Vectors work in C&#43;&#43; (Part-2): What happens when you initialize a vector?"/>
-<meta name="twitter:description" content="In the last blog post, I realized there were a lot of methods inherited from the base struct _Vector_base_ and _Vector_impl_data. Instead of directly going to the source code of these structs, I&rsquo;ll go through their methods and objects by explaining what happens when we initialize a vector."/>
+<meta name="twitter:description" content="In the last blog post, I realized there were a lot of methods inherited from the base struct _Vector_base_ and _Vector_impl_data. Instead of directly going to the source code of these structs, I&rsquo;ll go through their methods and objects by explaining what happens when we initialize a vector.
+That is, we will start from calling a vector constructor and then see how memory is allocated. If you haven&rsquo;t looked at the previous blog post, please take a look here."/>
 
 
 
@@ -163,8 +165,8 @@
 
             <div class="post-content e-content">
                 <p>In the last blog post, I realized there were a lot of methods inherited from the base struct <code>_Vector_base_</code> and <code>_Vector_impl_data</code>. Instead of directly going to the source code of these structs, I&rsquo;ll go through their methods and objects by explaining what happens when we initialize a vector.</p>
-<!-- raw HTML omitted -->
-<p>That is, we will start from calling a vector constructor and then see how memory is allocated. If you haven&rsquo;t looked at the previous blog post, please take a look <!-- raw HTML omitted -->here<!-- raw HTML omitted -->. I want to be thorough with the blog post, so I&rsquo;ll divide this into multiple posts. By the end of this post, you&rsquo;ll go through the following structs:</p>
+<p><img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/cover-images/Vector-Part-2.png" alt=""></p>
+<p>That is, we will start from calling a vector constructor and then see how memory is allocated. If you haven&rsquo;t looked at the previous blog post, please take a look <a href="https://krshrimali.github.io/posts/2020/04/understanding-how-vectors-work-in-c-part-1-how-does-push_back-work/">here</a>. I want to be thorough with the blog post, so I&rsquo;ll divide this into multiple posts. By the end of this post, you&rsquo;ll go through the following structs:</p>
 <ol>
 <li><code>_Vector_impl_data</code> struct which contains pointers to memory locations (start, finish and end of storage).</li>
 <li><code>_Vector_impl</code> struct (inherits <code>_Vector_impl_data</code> as well)).</li>
@@ -179,7 +181,7 @@
 }
 </code></pre></div><p>If you are curious what <code>_Base</code> is, <code>_Base</code> is declared as: <code>typedef _Vector_base&lt;_Tp, _Alloc&gt; _Base;</code>. Just so you know, where and how is <code>_Vector_base</code> used. When the constructor is called, it calls the constructor of <code>_Vector_base</code> with <code>__a</code> (allocator type). As you might have noticed, we are calling <code>_M_range_initialize</code> and passing 2 iterators (<code>__l.begin(), __l.end()</code>) and 1 forward iterator tag.</p>
 <p>Note that the iterators are Forward Iterators, that is: we can use these iterators to access elements from begin (accessed using <code>.begin()</code>) till the end (accessed using <code>.end()</code>).</p>
-<p>We are using <code>random_access_iterator_tag</code> as <code>forward_iterator_tag</code>. This tag helps us to categorize the iterator as random-access iterator. Random-access iterators allow accessing elements by passing arbitrary offset position (see: <!-- raw HTML omitted --><a href="http://www.cplusplus.com/reference/iterator/RandomAccessIterator/">http://www.cplusplus.com/reference/iterator/RandomAccessIterator/</a><!-- raw HTML omitted --> for more details).</p>
+<p>We are using <code>random_access_iterator_tag</code> as <code>forward_iterator_tag</code>. This tag helps us to categorize the iterator as random-access iterator. Random-access iterators allow accessing elements by passing arbitrary offset position (see: <a href="http://www.cplusplus.com/reference/iterator/RandomAccessIterator">documentation</a> for more details).</p>
 <p>Let&rsquo;s go ahead and see what <code>_M_range_initialize</code> does.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> _ForwardIterator<span style="color:#f92672">&gt;</span>
 <span style="color:#66d9ef">void</span> _M_range_initialize(_ForwardIterator __first, _ForwardIterator __last, std<span style="color:#f92672">::</span>forward_iterator_tag) {
@@ -280,6 +282,7 @@ std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</
 </code></pre></div><p>Overall, it&rsquo;s the same to what we saw before except that we use the copy of the alloactor of vector <code>__x</code>. The call <code>_M_create_storage(__n)</code> does the same task of setting pointers <code>_M_start, M_end_of_storage, _M_finish</code> as we observed before.</p>
 <p>For today&rsquo;s blog, we discussed 3 popular ways to initialize a vector in C++ and went through how memory is allocated when the constructors are called. As we move forward, we will slowly get familiar with the design patterns and methods used in GCC.</p>
 <p>As always, I would love to hear your feedback on my blogs. Correct me if I was wrong anywhere, no one is perfect afterall. If this helped you, please let me know - it keeps me going! See you all in the next blog!</p>
+
             </div>
         </article>
 
@@ -290,7 +293,7 @@ std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://krshrimali.github.io/tags/development">development</a></span><span class="tag"><a href="https://krshrimali.github.io/tags/coding">coding</a></span><span class="tag"><a href="https://krshrimali.github.io/tags/cpp">cpp</a></span><span class="tag"><a href="https://krshrimali.github.io/tags/notes">notes</a></span><span class="tag"><a href="https://krshrimali.github.io/tags/vectors">vectors</a></span>
                 </p>
 
-            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>1460 Words</p>
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>1461 Words</p>
 
             <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>Posted: <time class="dt-published"> 2020-04-26 05:30 &#43;0530</time></p>
 <a class="resp-sharing-button__link" href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2020%2f04%2funderstanding-how-vectors-work-in-c-part-2-what-happens-when-you-initialize-a-vector%2f" target="_blank" rel="noopener" aria-label="Facebook">

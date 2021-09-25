@@ -48,7 +48,7 @@ Please note that, function objects are commonly referred as functors but we have
 <meta itemprop="description" content="In today&rsquo;s blog, we&rsquo;ll talk about two important concepts in C&#43;&#43;: Function Pointers and Function Objects.
 Please note that, function objects are commonly referred as functors but we have failed to notice any official alias to the name. Hence, we&rsquo;ll restrict ourselves to using Function Objects in this blog."><meta itemprop="datePublished" content="2021-07-18T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2021-07-18T00:00:00+00:00" />
-<meta itemprop="wordCount" content="1861"><meta itemprop="image" content="https://krshrimali.github.io"/>
+<meta itemprop="wordCount" content="1812"><meta itemprop="image" content="https://krshrimali.github.io"/>
 <meta itemprop="keywords" content="development,coding,cpp,function pointers,function objects," /><meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://krshrimali.github.io"/>
 
@@ -167,7 +167,7 @@ Please note that, function objects are commonly referred as functors but we have
             <div class="post-content e-content">
                 <p>In today&rsquo;s blog, we&rsquo;ll talk about two important concepts in C++: Function Pointers and Function Objects.</p>
 <p>Please note that, function objects are commonly referred as <em>functors</em> but we have failed to notice any official alias to the name. Hence, we&rsquo;ll restrict ourselves to using <em>Function Objects</em> in this blog.</p>
-<!-- raw HTML omitted -->
+<p><img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/cover-images/fptr-fobj-cover.png" alt=""></p>
 <h2 id="function-pointers">Function Pointers</h2>
 <p>As the name sounds, a function pointer is simply a pointer to the memory address of a function. Consider a following function:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// A function which returns true if a &gt; b else false
@@ -359,8 +359,6 @@ T sort(T input, ComparatorFunc func) {
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">std<span style="color:#f92672">::</span>sort(input.begin(), input.end(), isGreater);
 std<span style="color:#f92672">::</span>sort(input.begin(), input.end(), isLesser);
 </code></pre></div><p>This is mostly it for this blog, there is a lot to discuss about function pointers and objects, but I guess this should be enough for you to get started and follow us along in future blogs.</p>
-<h2 id="acknowledgement">Acknowledgement</h2>
-<p>Every blog is published after lots of reviews and corrections, and it&rsquo;s not just me but the efforts of the whole team which should be acknowledged. Thanks to <!-- raw HTML omitted -->Kshitij Kalambarkar<!-- raw HTML omitted --> for helping me with the reviews and corrections. Shoutout to the whole malloc(42) team for helping me with this.</p>
 <h2 id="references-and-good-reads">References and Good Reads</h2>
 <ol>
 <li><!-- raw HTML omitted -->Learn CPP&rsquo;s Blog on Function Pointer<!-- raw HTML omitted -->.</li>
@@ -377,7 +375,7 @@ std<span style="color:#f92672">::</span>sort(input.begin(), input.end(), isLesse
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://krshrimali.github.io/tags/development">development</a></span><span class="tag"><a href="https://krshrimali.github.io/tags/coding">coding</a></span><span class="tag"><a href="https://krshrimali.github.io/tags/cpp">cpp</a></span><span class="tag"><a href="https://krshrimali.github.io/tags/function-pointers">function pointers</a></span><span class="tag"><a href="https://krshrimali.github.io/tags/function-objects">function objects</a></span>
                 </p>
 
-            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>1861 Words</p>
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>1812 Words</p>
 
             <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>Posted: <time class="dt-published"> 2021-07-18 05:30 &#43;0530</time></p>
 <a class="resp-sharing-button__link" href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2021%2f07%2ffunction-pointers-and-function-objects-in-c-%2f" target="_blank" rel="noopener" aria-label="Facebook">

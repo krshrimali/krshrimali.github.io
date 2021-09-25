@@ -201,7 +201,7 @@ Before we move on, it&rsquo;s important what we covered in the last blog. We&rsq
 </span><span style="color:#75715e"></span>  <span style="color:#66d9ef">auto</span> custom_dataset <span style="color:#f92672">=</span> CustomDataset(list_images, list_labels).map(torch<span style="color:#f92672">::</span>data<span style="color:#f92672">::</span>transforms<span style="color:#f92672">::</span>Stack<span style="color:#f92672">&lt;&gt;</span>());
 }
 </code></pre></div><p>These were the steps we followed last time:</p>
-<!-- raw HTML omitted -->
+<p><img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/blogs/Steps-Loading-Custom-Data.PNG" alt=""></p>
 <h2 id="overview-how-to-pass-batches-to-our-network">Overview: How to pass batches to our network?</h2>
 <p>Since we have our dataset loaded, let&rsquo;s see how to pass batches of data to our network. Before we go on and see how PyTorch C++ API does it, let&rsquo;s see how it&rsquo;s done in Python.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">dataset_loader <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>utils<span style="color:#f92672">.</span>data<span style="color:#f92672">.</span>DataLoader(custom_dataset,
@@ -213,7 +213,7 @@ Before we move on, it&rsquo;s important what we covered in the last blog. We&rsq
 );
 </code></pre></div><p>In brief, we are loading our data using <code>SequentialSampler</code> class which samples our data in the same order that we provided it with. Have a look at the <code>SequentialSampler</code> class <a href="https://pytorch.org/docs/stable/data.html#torch.utils.data.SequentialSampler">here</a>.</p>
 <p>For the definition of this function: <code>torch::data::make_data_loader</code> <a href="https://pytorch.org/cppdocs/api/function_namespacetorch_1_1data_1a0d29ca9900cae66957c5cc5052ecc122.html#exhale-function-namespacetorch-1-1data-1a0d29ca9900cae66957c5cc5052ecc122">here</a>. A short screenshot from the documentation is given below.</p>
-<!-- raw HTML omitted -->
+<p><img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/blogs/Data-Loader-Function.PNG" alt=""></p>
 <p>Let&rsquo;s go ahead and learn to iterate through our data loader and pass each batch of data and labels to our network. For once, imagine that we have a <code>struct</code> named <code>Net</code> which defines our network and <code>forward()</code> function which parses the data through each layer and returns the output.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span><span style="color:#f92672">&amp;</span> batch: <span style="color:#f92672">*</span>data_loader) {
   <span style="color:#66d9ef">auto</span> data <span style="color:#f92672">=</span> batch.data;
@@ -241,7 +241,7 @@ torch<span style="color:#f92672">::</span>optim<span style="color:#f92672">::</s
 <li><a href="https://pytorch.org/cppdocs/api/classtorch_1_1optim_1_1_loss_closure_optimizer.html#exhale-class-classtorch-1-1optim-1-1-loss-closure-optimizer">LossClosureOptimizer</a></li>
 </ol>
 <p>As mentioned in the documentation of <code>torch.optim</code> package:</p>
-<!-- raw HTML omitted -->
+<p><img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/blogs/Use-Optim.PNG" alt=""></p>
 <p>The documentation is self explanatory, so all we need to do is pass parameters of our Network which will be optimized using our optimizer, and pass in the learning rate like above. To know about parameters we can pass through <code>AdamOptions</code>, check out this <a href="https://pytorch.org/cppdocs/api/structtorch_1_1optim_1_1_adam_options.html#exhale-struct-structtorch-1-1optim-1-1-adam-options">documentation page</a>.</p>
 <p>Let&rsquo;s go ahead and learn to define <strong>Loss Function</strong> in PyTorch C++ API. For an example, we&rsquo;ll define <code>nll_loss</code> (Negative Log Likelihood Loss Function):</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">auto</span> output <span style="color:#f92672">=</span> net<span style="color:#f92672">-&gt;</span>forward(data);
