@@ -53,6 +53,15 @@
     </item>
     
     <item>
+      <title>weekly</title>
+      <link>https://krshrimali.github.io/tags/weekly/</link>
+      <pubDate>Sun, 26 Sep 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://krshrimali.github.io/tags/weekly/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>override</title>
       <link>https://krshrimali.github.io/tags/override/</link>
       <pubDate>Sat, 25 Sep 2021 00:00:00 +0000</pubDate>
@@ -85,15 +94,6 @@
       <pubDate>Sat, 14 Aug 2021 00:00:00 +0000</pubDate>
       
       <guid>https://krshrimali.github.io/tags/scoped-enums/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>union find</title>
-      <link>https://krshrimali.github.io/tags/union-find/</link>
-      <pubDate>Sat, 14 Aug 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://krshrimali.github.io/tags/union-find/</guid>
       <description></description>
     </item>
     
