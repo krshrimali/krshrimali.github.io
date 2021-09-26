@@ -1,6 +1,11 @@
 # We use the generated html to prevent issues involving markdown frontmatter
 
 [[input.files]]
+path = "./posts/2021/09/weekly-progress-report-26-09-2021-1/index.html"
+url = "https://krshrimali.github.io/posts/2021/09/weekly-progress-report-26-09-2021-1/"
+title = "Weekly Progress Report: 26-09-2021, 1"
+
+[[input.files]]
 path = "./posts/2021/09/prefer-const_iterators-to-iterators-notes/index.html"
 url = "https://krshrimali.github.io/posts/2021/09/prefer-const_iterators-to-iterators-notes/"
 title = "Prefer const_iterators to iterators (Notes)"

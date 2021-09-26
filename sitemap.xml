@@ -2,6 +2,9 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://krshrimali.github.io/posts/2021/09/weekly-progress-report-26-09-2021-1/</loc>
+    <lastmod>2021-09-26T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://krshrimali.github.io/posts/2021/09/prefer-const_iterators-to-iterators-notes/</loc>
     <lastmod>2021-09-26T00:00:00+00:00</lastmod>
   </url><url>
@@ -102,6 +105,12 @@
     <lastmod>2021-09-26T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://krshrimali.github.io/tags/</loc>
+    <lastmod>2021-09-26T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://krshrimali.github.io/tags/weekly/</loc>
+    <lastmod>2021-09-26T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://krshrimali.github.io/categories/weekly-updates/</loc>
     <lastmod>2021-09-26T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://krshrimali.github.io/tags/override/</loc>
