@@ -6,7 +6,20 @@
     <description>Recent content on Kushashwa Ravi Shrimali (Kush)</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Sat, 25 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://krshrimali.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 26 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://krshrimali.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Prefer const_iterators to iterators (Notes)</title>
+      <link>https://krshrimali.github.io/posts/2021/09/prefer-const_iterators-to-iterators-notes/</link>
+      <pubDate>Sun, 26 Sep 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://krshrimali.github.io/posts/2021/09/prefer-const_iterators-to-iterators-notes/</guid>
+      <description>NOTE
+My notes on Chapter 3, Item 13 of Effective Modern C++ written by Scott Meyers.
+Some (or even all) of the text can be similar to what you see in the book, as these are notes: I&amp;rsquo;ve tried not to be unnecessarily creative with my words. :)
+ In C++, iterators come handy to point at memory addresses of STL containers. For example,
+// C++11  std::vector&amp;lt;int&amp;gt; x {11, 9, 23, 6}; // begin() member function returns an iterator, which points to the first // memory address of the container x std::vector&amp;lt;int&amp;gt;::iterator it = x.</description>
+    </item>
+    
     <item>
       <title>Declaring Overriding Functions override (Notes)</title>
       <link>https://krshrimali.github.io/posts/2021/09/declaring-overriding-functions-override-notes/</link>
@@ -14,7 +27,7 @@
       
       <guid>https://krshrimali.github.io/posts/2021/09/declaring-overriding-functions-override-notes/</guid>
       <description>NOTE
-My notes on Chapter 3, Item 9 of Effective Modern C++ written by Scott Meyers.
+My notes on Chapter 3, Item 12 of Effective Modern C++ written by Scott Meyers.
 Some (or even all) of the text can be similar to what you see in the book, as these are notes: I&amp;rsquo;ve tried not to be unnecessarily creative with my words. :)
  Overriding != Overloading
 Example of virtual function overriding:
@@ -105,16 +118,6 @@ Some (or even all) of the text can be similar to what you see in the book, as th
       <description>Today, I am elated to share Docker image for OpenCV, Libtorch and Xeus-Cling. We&amp;rsquo;ll discuss how to use the dockerfile and binder.
 Before I move on, the credits for creating and maintaining Docker image goes to Vishwesh Ravi Shrimali. He has been working on some cool stuff, please do get in touch with him if you&amp;rsquo;re interested to know.
 First question in your mind would be, Why use Docker or Binder?</description>
-    </item>
-    
-    <item>
-      <title>Understanding how Vectors work in C&#43;&#43; (Part-2): What happens when you initialize a vector?</title>
-      <link>https://krshrimali.github.io/posts/2020/04/understanding-how-vectors-work-in-c-part-2-what-happens-when-you-initialize-a-vector/</link>
-      <pubDate>Sun, 26 Apr 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://krshrimali.github.io/posts/2020/04/understanding-how-vectors-work-in-c-part-2-what-happens-when-you-initialize-a-vector/</guid>
-      <description>In the last blog post, I realized there were a lot of methods inherited from the base struct _Vector_base_ and _Vector_impl_data. Instead of directly going to the source code of these structs, I&amp;rsquo;ll go through their methods and objects by explaining what happens when we initialize a vector.
-That is, we will start from calling a vector constructor and then see how memory is allocated. If you haven&amp;rsquo;t looked at the previous blog post, please take a look here.</description>
     </item>
     
   </channel>

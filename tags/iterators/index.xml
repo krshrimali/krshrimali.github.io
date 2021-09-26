@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>iterators on Kushashwa Ravi Shrimali (Kush)</title>
+    <link>https://krshrimali.github.io/tags/iterators/</link>
+    <description>Recent content in iterators on Kushashwa Ravi Shrimali (Kush)</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
+    <lastBuildDate>Sun, 26 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://krshrimali.github.io/tags/iterators/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Prefer const_iterators to iterators (Notes)</title>
+      <link>https://krshrimali.github.io/posts/2021/09/prefer-const_iterators-to-iterators-notes/</link>
+      <pubDate>Sun, 26 Sep 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://krshrimali.github.io/posts/2021/09/prefer-const_iterators-to-iterators-notes/</guid>
+      <description>NOTE
+My notes on Chapter 3, Item 13 of Effective Modern C++ written by Scott Meyers.
+Some (or even all) of the text can be similar to what you see in the book, as these are notes: I&amp;rsquo;ve tried not to be unnecessarily creative with my words. :)
+ In C++, iterators come handy to point at memory addresses of STL containers. For example,
+// C++11  std::vector&amp;lt;int&amp;gt; x {11, 9, 23, 6}; // begin() member function returns an iterator, which points to the first // memory address of the container x std::vector&amp;lt;int&amp;gt;::iterator it = x.</description>
+    </item>
+    
+  </channel>
+</rss>
