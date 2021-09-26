@@ -1,6 +1,11 @@
 # We use the generated html to prevent issues involving markdown frontmatter
 
 [[input.files]]
+path = "./posts/2021/09/prefer-const_iterators-to-iterators-notes/index.html"
+url = "https://krshrimali.github.io/posts/2021/09/prefer-const_iterators-to-iterators-notes/"
+title = "Prefer const_iterators to iterators (Notes)"
+
+[[input.files]]
 path = "./posts/2021/09/declaring-overriding-functions-override-notes/index.html"
 url = "https://krshrimali.github.io/posts/2021/09/declaring-overriding-functions-override-notes/"
 title = "Declaring Overriding Functions override (Notes)"
