@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Kushashwa Ravi Shrimali (Kush)</title>
+    <link>https://krshrimali.github.io/</link>
+    <description>Recent content on Kushashwa Ravi Shrimali (Kush)</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
+    <lastBuildDate>Sun, 03 Oct 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://krshrimali.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Weekly Progress Report: 03-10-2021, 2</title>
+      <link>https://krshrimali.github.io/posts/2021/10/weekly-progress-report-03-10-2021-2/</link>
+      <pubDate>Sun, 03 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://krshrimali.github.io/posts/2021/10/weekly-progress-report-03-10-2021-2/</guid>
+      <description>Hi everyone, so this week has been comparatively more productive in terms of learning as well as work! I&amp;rsquo;m happy, so why not share with everyone as well? 🎉
+PyTorch: (ft. Quansight and Facebook)
+ Started working on porting index_add to structured kernels, see the PR I made on my forked repo here, and on upstream here.  This included adding an out= variant to the op. Refining the way it&amp;rsquo;s registered in PyTorch.</description>
+    </item>
+    
+    <item>
+      <title>Weekly Progress Report: 26-09-2021, 1</title>
+      <link>https://krshrimali.github.io/posts/2021/09/weekly-progress-report-26-09-2021-1/</link>
+      <pubDate>Sun, 26 Sep 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://krshrimali.github.io/posts/2021/09/weekly-progress-report-26-09-2021-1/</guid>
+      <description>Hi everyone, before I go ahead and share my progress, I wanted to quickly talk about what this blog is about.
+I am highly passionate with the idea of high performance computing, optimizing deep learning applications, and solving real world problems using deep learning, computer vision, and speech processing. While I&amp;rsquo;m on this path - I would like to document this somewhere. And while I&amp;rsquo;m doing that, why not share it publicly?</description>
+    </item>
+    
+    <item>
+      <title>Prefer const_iterators to iterators (Notes)</title>
+      <link>https://krshrimali.github.io/posts/2021/09/prefer-const_iterators-to-iterators-notes/</link>
+      <pubDate>Sun, 26 Sep 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://krshrimali.github.io/posts/2021/09/prefer-const_iterators-to-iterators-notes/</guid>
+      <description>NOTE
+My notes on Chapter 3, Item 13 of Effective Modern C++ written by Scott Meyers.
+Some (or even all) of the text can be similar to what you see in the book, as these are notes: I&amp;rsquo;ve tried not to be unnecessarily creative with my words. :)
+ In C++, iterators come handy to point at memory addresses of STL containers. For example,
+// C++11  std::vector&amp;lt;int&amp;gt; x {11, 9, 23, 6}; // begin() member function returns an iterator, which points to the first // memory address of the container x std::vector&amp;lt;int&amp;gt;::iterator it = x.</description>
+    </item>
+    
+    <item>
+      <title>Declaring Overriding Functions override (Notes)</title>
+      <link>https://krshrimali.github.io/posts/2021/09/declaring-overriding-functions-override-notes/</link>
+      <pubDate>Sat, 25 Sep 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://krshrimali.github.io/posts/2021/09/declaring-overriding-functions-override-notes/</guid>
+      <description>NOTE
+My notes on Chapter 3, Item 12 of Effective Modern C++ written by Scott Meyers.
+Some (or even all) of the text can be similar to what you see in the book, as these are notes: I&amp;rsquo;ve tried not to be unnecessarily creative with my words. :)
+ Overriding != Overloading
+Example of virtual function overriding:
+// Base class class Base { public: virtual void doWork(); // ... }; // Derived class from Base class Derived: public Base { public: // virtual is optional  // this will &amp;#34;override&amp;#34; Base::doWork  virtual void doWork(); // .</description>
+    </item>
+    
+    <item>
+      <title>Prefer Deleted Functions to Private Undefined Ones (Notes)</title>
+      <link>https://krshrimali.github.io/posts/2021/08/prefer-deleted-functions-to-private-undefined-ones-notes/</link>
+      <pubDate>Wed, 25 Aug 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://krshrimali.github.io/posts/2021/08/prefer-deleted-functions-to-private-undefined-ones-notes/</guid>
+      <description>Prefer deleted functions to private undefined ones This item (11) in the chapter 3 focuses on:
+ Why and How to prevent users calling particular functions? C++-98 and C++-11 approach What&amp;rsquo;s the difference between deleting a function vs declaring a member function private (and not defining them)?   NOTE
+These are my notes on Chapter 3, Item 11 of Effective Modern C++ written by Scott Meyers.
+Some (or even all) of the text can be similar to what you see in the book, as these are notes: I&amp;rsquo;ve tried not to be unnecessarily creative with my words.</description>
+    </item>
+    
+    <item>
+      <title>Prefer Scoped Enums over Unscoped Enums (Notes)</title>
+      <link>https://krshrimali.github.io/posts/2021/08/prefer-scoped-enums-over-unscoped-enums-notes/</link>
+      <pubDate>Sat, 14 Aug 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://krshrimali.github.io/posts/2021/08/prefer-scoped-enums-over-unscoped-enums-notes/</guid>
+      <description>Scoped vs Unscoped Enums  General rule: declaring a name inside curly braces is limited to that scope. Exception: C++-98 style Enums   NOTE
+My notes on Chapter 3, Item 10 of Effective Modern C++ written by Scott Meyers.
+Some (or even all) of the text can be similar to what you see in the book, as these are notes: I&amp;rsquo;ve tried not to be unnecessarily creative with my words.</description>
+    </item>
+    
+    <item>
+      <title>Union Find Problem, and a naive implementation (C&#43;&#43;)</title>
+      <link>https://krshrimali.github.io/posts/2021/08/union-find-problem-and-a-naive-implementation-c-/</link>
+      <pubDate>Sat, 14 Aug 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://krshrimali.github.io/posts/2021/08/union-find-problem-and-a-naive-implementation-c-/</guid>
+      <description>Hi Everyone, today I want to talk about Union Find Problem. This is going to be a series covering:
+ Union Find Problem (this blog) Solutions to Union Find (1): Quick Find Solutions to Union Find (2): Quick Union Solutions to Union Find (3): Weighted Quick Union Applications of Union Find (perculation and more) Cool project using Union Find Solving some competitive programming questions using Union Find  Each blog will try to cover very basic concepts behind the topic, and also what it&amp;rsquo;s all about.</description>
+    </item>
+    
+    <item>
+      <title>Prefer Alias Declarations to Typedefs (Notes)</title>
+      <link>https://krshrimali.github.io/posts/2021/08/prefer-alias-declarations-to-typedefs-notes/</link>
+      <pubDate>Thu, 12 Aug 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://krshrimali.github.io/posts/2021/08/prefer-alias-declarations-to-typedefs-notes/</guid>
+      <description>&lt;p&gt;One solution to avoiding using long type names:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// So C++98 like
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;typedef&lt;/span&gt; std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;unique_ptr&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;unordered_map&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;string, std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;string&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&amp;gt;&lt;/span&gt; UPtrMapSS;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Function Pointers and Function Objects in C&#43;&#43;</title>
+      <link>https://krshrimali.github.io/posts/2021/07/function-pointers-and-function-objects-in-c-/</link>
+      <pubDate>Sun, 18 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://krshrimali.github.io/posts/2021/07/function-pointers-and-function-objects-in-c-/</guid>
+      <description>&lt;p&gt;In today&amp;rsquo;s blog, we&amp;rsquo;ll talk about two important concepts in C++: Function Pointers and Function Objects.&lt;/p&gt;
+&lt;p&gt;Please note that, function objects are commonly referred as &lt;em&gt;functors&lt;/em&gt; but we have failed to notice any official alias to the name. Hence, we&amp;rsquo;ll restrict ourselves to using &lt;em&gt;Function Objects&lt;/em&gt; in this blog.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>How to crop a circle in OpenCV? Implementing Portrait Bokeh - Part 2</title>
+      <link>https://krshrimali.github.io/posts/2020/12/how-to-crop-a-circle-in-opencv-implementing-portrait-bokeh-part-2/</link>
+      <pubDate>Thu, 10 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://krshrimali.github.io/posts/2020/12/how-to-crop-a-circle-in-opencv-implementing-portrait-bokeh-part-2/</guid>
+      <description>Hi everyone! In the previous blog we implemented Portrait Bokeh using Face Detection in OpenCV. While the results were good for a start, we definitely want to be closer to the output we expect. The end goal is to blur everything except the face. The main problem we noticed was:
+ The face cropped was a rectangle, and it was clearly visible in the output result.  To overcome this, we will be talking about cropping a circle in OpenCV today.</description>
+    </item>
+    
+  </channel>
+</rss>

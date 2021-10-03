@@ -1,0 +1,137 @@
+# We use the generated html to prevent issues involving markdown frontmatter
+
+[[input.files]]
+path = "./posts/2021/10/weekly-progress-report-03-10-2021-2/index.html"
+url = "https://krshrimali.github.io/posts/2021/10/weekly-progress-report-03-10-2021-2/"
+title = "Weekly Progress Report: 03-10-2021, 2"
+
+[[input.files]]
+path = "./posts/2021/09/weekly-progress-report-26-09-2021-1/index.html"
+url = "https://krshrimali.github.io/posts/2021/09/weekly-progress-report-26-09-2021-1/"
+title = "Weekly Progress Report: 26-09-2021, 1"
+
+[[input.files]]
+path = "./posts/2021/09/prefer-const_iterators-to-iterators-notes/index.html"
+url = "https://krshrimali.github.io/posts/2021/09/prefer-const_iterators-to-iterators-notes/"
+title = "Prefer const_iterators to iterators (Notes)"
+
+[[input.files]]
+path = "./posts/2021/09/declaring-overriding-functions-override-notes/index.html"
+url = "https://krshrimali.github.io/posts/2021/09/declaring-overriding-functions-override-notes/"
+title = "Declaring Overriding Functions override (Notes)"
+
+[[input.files]]
+path = "./posts/2021/08/prefer-deleted-functions-to-private-undefined-ones-notes/index.html"
+url = "https://krshrimali.github.io/posts/2021/08/prefer-deleted-functions-to-private-undefined-ones-notes/"
+title = "Prefer Deleted Functions to Private Undefined Ones (Notes)"
+
+[[input.files]]
+path = "./posts/2021/08/prefer-scoped-enums-over-unscoped-enums-notes/index.html"
+url = "https://krshrimali.github.io/posts/2021/08/prefer-scoped-enums-over-unscoped-enums-notes/"
+title = "Prefer Scoped Enums over Unscoped Enums (Notes)"
+
+[[input.files]]
+path = "./posts/2021/08/union-find-problem-and-a-naive-implementation-c-/index.html"
+url = "https://krshrimali.github.io/posts/2021/08/union-find-problem-and-a-naive-implementation-c-/"
+title = "Union Find Problem, and a naive implementation (C&#43;&#43;)"
+
+[[input.files]]
+path = "./posts/2021/08/prefer-alias-declarations-to-typedefs-notes/index.html"
+url = "https://krshrimali.github.io/posts/2021/08/prefer-alias-declarations-to-typedefs-notes/"
+title = "Prefer Alias Declarations to Typedefs (Notes)"
+
+[[input.files]]
+path = "./posts/2021/07/function-pointers-and-function-objects-in-c-/index.html"
+url = "https://krshrimali.github.io/posts/2021/07/function-pointers-and-function-objects-in-c-/"
+title = "Function Pointers and Function Objects in C&#43;&#43;"
+
+[[input.files]]
+path = "./posts/2020/12/how-to-crop-a-circle-in-opencv-implementing-portrait-bokeh-part-2/index.html"
+url = "https://krshrimali.github.io/posts/2020/12/how-to-crop-a-circle-in-opencv-implementing-portrait-bokeh-part-2/"
+title = "How to crop a circle in OpenCV? Implementing Portrait Bokeh - Part 2"
+
+[[input.files]]
+path = "./posts/2020/12/implementing-portrait-bokeh-in-opencv-using-face-detection-part-1/index.html"
+url = "https://krshrimali.github.io/posts/2020/12/implementing-portrait-bokeh-in-opencv-using-face-detection-part-1/"
+title = "Implementing Portrait Bokeh in OpenCV using Face Detection (Part-1)"
+
+[[input.files]]
+path = "./posts/2020/09/releasing-docker-container-and-binder-for-using-xeus-cling-libtorch-and-opencv-in-c-/index.html"
+url = "https://krshrimali.github.io/posts/2020/09/releasing-docker-container-and-binder-for-using-xeus-cling-libtorch-and-opencv-in-c-/"
+title = "Releasing Docker Container and Binder for using Xeus-Cling, Libtorch and OpenCV in C&#43;&#43;"
+
+[[input.files]]
+path = "./posts/2020/04/understanding-how-vectors-work-in-c-part-2-what-happens-when-you-initialize-a-vector/index.html"
+url = "https://krshrimali.github.io/posts/2020/04/understanding-how-vectors-work-in-c-part-2-what-happens-when-you-initialize-a-vector/"
+title = "Understanding how Vectors work in C&#43;&#43; (Part-2): What happens when you initialize a vector?"
+
+[[input.files]]
+path = "./posts/2020/04/understanding-how-vectors-work-in-c-part-3-diving-deep-into-member-functions-of-vectors/index.html"
+url = "https://krshrimali.github.io/posts/2020/04/understanding-how-vectors-work-in-c-part-3-diving-deep-into-member-functions-of-vectors/"
+title = "Understanding how Vectors work in C&#43;&#43; (Part-3): Diving deep into member functions of vectors"
+
+[[input.files]]
+path = "./posts/2020/04/understanding-how-vectors-work-in-c-part-1-how-does-push_back-work/index.html"
+url = "https://krshrimali.github.io/posts/2020/04/understanding-how-vectors-work-in-c-part-1-how-does-push_back-work/"
+title = "Understanding how Vectors work in C&#43;&#43; (Part-1): How does push_back work?"
+
+[[input.files]]
+path = "./posts/2020/02/training-and-results-deep-convolutional-generative-adversarial-networks-on-celeba-dataset-using-pytorch-c-api/index.html"
+url = "https://krshrimali.github.io/posts/2020/02/training-and-results-deep-convolutional-generative-adversarial-networks-on-celeba-dataset-using-pytorch-c-api/"
+title = "[Training and Results] Deep Convolutional Generative Adversarial Networks on CelebA Dataset using PyTorch C&#43;&#43; API"
+
+[[input.files]]
+path = "./posts/2019/09/deep-convolutional-generative-adversarial-networks-review-and-implementation-using-pytorch-c-api/index.html"
+url = "https://krshrimali.github.io/posts/2019/09/deep-convolutional-generative-adversarial-networks-review-and-implementation-using-pytorch-c-api/"
+title = "Deep Convolutional Generative Adversarial Networks: Review and Implementation using PyTorch C&#43;&#43; API"
+
+[[input.files]]
+path = "./posts/2019/08/setting-up-jupyter-notebook-xeus-cling-for-libtorch-and-opencv-libraries/index.html"
+url = "https://krshrimali.github.io/posts/2019/08/setting-up-jupyter-notebook-xeus-cling-for-libtorch-and-opencv-libraries/"
+title = "Setting up Jupyter Notebook (Xeus Cling) for Libtorch and OpenCV Libraries"
+
+[[input.files]]
+path = "./posts/2019/08/applying-transfer-learning-on-dogs-vs-cats-dataset-resnet18-using-pytorch-c-api/index.html"
+url = "https://krshrimali.github.io/posts/2019/08/applying-transfer-learning-on-dogs-vs-cats-dataset-resnet18-using-pytorch-c-api/"
+title = "Applying Transfer Learning on Dogs vs Cats Dataset (ResNet18) using PyTorch C&#43;&#43; API"
+
+[[input.files]]
+path = "./posts/2019/07/classifying-dogs-vs-cats-using-pytorch-c-part-2/index.html"
+url = "https://krshrimali.github.io/posts/2019/07/classifying-dogs-vs-cats-using-pytorch-c-part-2/"
+title = "Classifying Dogs vs Cats using PyTorch C&#43;&#43;: Part 2"
+
+[[input.files]]
+path = "./posts/2019/07/classifying-dogs-vs-cats-using-pytorch-c-api-part-1/index.html"
+url = "https://krshrimali.github.io/posts/2019/07/classifying-dogs-vs-cats-using-pytorch-c-api-part-1/"
+title = "Classifying Dogs vs Cats using PyTorch C&#43;&#43; API: Part-1"
+
+[[input.files]]
+path = "./posts/2019/07/training-a-network-on-custom-dataset-using-pytorch-c-api/index.html"
+url = "https://krshrimali.github.io/posts/2019/07/training-a-network-on-custom-dataset-using-pytorch-c-api/"
+title = "Training a Network on Custom Dataset using PyTorch C&#43;&#43; API"
+
+[[input.files]]
+path = "./posts/2019/07/announcing-a-series-of-blogs-on-pytorch-c-api/index.html"
+url = "https://krshrimali.github.io/posts/2019/07/announcing-a-series-of-blogs-on-pytorch-c-api/"
+title = "Announcing a series of blogs on PyTorch C&#43;&#43; API"
+
+[[input.files]]
+path = "./posts/2019/07/custom-data-loading-using-pytorch-c-api/index.html"
+url = "https://krshrimali.github.io/posts/2019/07/custom-data-loading-using-pytorch-c-api/"
+title = "Custom Data Loading using PyTorch C&#43;&#43; API"
+
+[[input.files]]
+path = "./posts/2019/06/introduction-to-pytorch-c-api-mnist-digit-recognition-using-vgg-16-network/index.html"
+url = "https://krshrimali.github.io/posts/2019/06/introduction-to-pytorch-c-api-mnist-digit-recognition-using-vgg-16-network/"
+title = "Introduction to PyTorch C&#43;&#43; API: MNIST Digit Recognition using VGG-16 Network"
+
+[[input.files]]
+path = "./about/index.html"
+url = "https://krshrimali.github.io/about/"
+title = "About"
+
+[[input.files]]
+path = "./categories/index.html"
+url = "https://krshrimali.github.io/categories/"
+title = "Categories"
+
