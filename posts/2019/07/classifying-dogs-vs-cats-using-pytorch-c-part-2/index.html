@@ -15,7 +15,7 @@ I&amp;rsquo;ll start with the network overview again, where we used a network si
 
 <title>
     
-    Classifying Dogs vs Cats using PyTorch C&#43;&#43;: Part 2 :: Kushashwa Ravi Shrimali (Kush)  — Hello Friend NG HZ Theme
+    Classifying Dogs vs Cats using PyTorch C&#43;&#43;: Part 2 :: Kushashwa Ravi Shrimali (Kush)  — Learning never stops!
     
 </title>
 
@@ -26,7 +26,7 @@ I&amp;rsquo;ll start with the network overview again, where we used a network si
 
 
 
-<link rel="stylesheet" href="https://krshrimali.github.io/main.min.b6dbce0fdf6c61563a0c2226e857d5dadd8e5afa2c4f73ec9ea55abd831f9a72.css">
+<link rel="stylesheet" href="https://krshrimali.github.io/main.min.a6eedfdab54db128d627e7063826ffb0d9949ad2ea9424548adb08a272e224c9.css">
 
 
 
@@ -48,10 +48,16 @@ I&amp;rsquo;ll start with the network overview again, where we used a network si
 
 <meta itemprop="name" content="Classifying Dogs vs Cats using PyTorch C&#43;&#43;: Part 2">
 <meta itemprop="description" content="In the last blog, we had discussed all but training and results of our custom CNN network on Dogs vs Cats dataset. Today, we&rsquo;ll be making some small changes in the network and discussing training and results of the task.
-I&rsquo;ll start with the network overview again, where we used a network similar to VGG-16 (with one extra Fully Connected Layer in the end). While there are absolutely no problems with that network, but since the dataset contains a lot of images (25000 in training dataset) and we were using (200x200x3) input shape to the network (which is 120,000 floating point numbers), this leads to high memory consumption."><meta itemprop="datePublished" content="2019-07-31T00:00:00+00:00" />
+I&rsquo;ll start with the network overview again, where we used a network similar to VGG-16 (with one extra Fully Connected Layer in the end). While there are absolutely no problems with that network, but since the dataset contains a lot of images (25000 in training dataset) and we were using (200x200x3) input shape to the network (which is 120,000 floating point numbers), this leads to high memory consumption.">
+<meta itemprop="datePublished" content="2019-07-31T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2019-07-31T00:00:00+00:00" />
-<meta itemprop="wordCount" content="1387"><meta itemprop="image" content="https://krshrimali.github.io"/>
-<meta itemprop="keywords" content="development,coding,cpp,notes,pytorch-cpp,libtorch," /><meta name="twitter:card" content="summary_large_image"/>
+<meta itemprop="wordCount" content="1387">
+<meta itemprop="image" content="https://krshrimali.github.io"/>
+
+
+
+<meta itemprop="keywords" content="development,coding,cpp,notes,pytorch-cpp,libtorch," />
+<meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://krshrimali.github.io"/>
 
 <meta name="twitter:title" content="Classifying Dogs vs Cats using PyTorch C&#43;&#43;: Part 2"/>
@@ -219,7 +225,7 @@ I&rsquo;ll start with the network overview again, where we used a network simila
 <p>Let&rsquo;s go ahead and see what has changed in the Network.</p>
 <h2 id="network-overview">Network Overview</h2>
 <p>If you don&rsquo;t remember from the last time, this is how our network looked.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">NetImpl</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Module {
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">NetImpl</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Module {
     NetImpl() {
         <span style="color:#75715e">// Initialize the network
 </span><span style="color:#75715e"></span>        <span style="color:#75715e">// On how to pass strides and padding: https://github.com/pytorch/pytorch/issues/12649#issuecomment-430156160
@@ -300,7 +306,7 @@ I&rsquo;ll start with the network overview again, where we used a network simila
 };
 </code></pre></div><p>As it&rsquo;s visible, we had 13 Convolutional Layers, 5 Max Pooling Layers and 4 Fully Connected Layers. This leads of a lot of parameters to be trained.</p>
 <p>Therefore, our new network for experimentation purposes will be:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">NetworkImpl</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Module {
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">NetworkImpl</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Module {
 	NetImpl(<span style="color:#66d9ef">int64_t</span> channels, <span style="color:#66d9ef">int64_t</span> height, <span style="color:#66d9ef">int64_t</span> width) {
 		conv1_1 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;conv1&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">50</span>, <span style="color:#ae81ff">5</span>).stride(<span style="color:#ae81ff">2</span>)));
 		conv2_1 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;conv2&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(<span style="color:#ae81ff">50</span>, <span style="color:#ae81ff">100</span>, <span style="color:#ae81ff">7</span>).stride(<span style="color:#ae81ff">2</span>)));
@@ -355,7 +361,7 @@ I&rsquo;ll start with the network overview again, where we used a network simila
 <li>Iterate through every batch of our data loader:
 <ol>
 <li>Extract data and labels using:
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">auto</span> data <span style="color:#f92672">=</span> batch.data;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">auto</span> data <span style="color:#f92672">=</span> batch.data;
 <span style="color:#66d9ef">auto</span> target <span style="color:#f92672">=</span> batch.target.squeeze();
 </code></pre></div><p>``</p>
 </li>
@@ -365,7 +371,7 @@ I&rsquo;ll start with the network overview again, where we used a network simila
 <li>Backpropagate Loss: <code>auto loss = loss.backward()</code></li>
 <li>Update the weights: <code>optimizer.step();</code></li>
 <li>Calculate Training Accuracy and Mean Squared Error:
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">auto</span> acc <span style="color:#f92672">=</span> output.argmax(<span style="color:#ae81ff">1</span>).eq(target).sum();
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">auto</span> acc <span style="color:#f92672">=</span> output.argmax(<span style="color:#ae81ff">1</span>).eq(target).sum();
 mse <span style="color:#f92672">+=</span> loss.<span style="color:#66d9ef">template</span> item<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">float</span><span style="color:#f92672">&gt;</span>();
 </code></pre></div><p>``</p>
 </li>
@@ -374,7 +380,7 @@ mse <span style="color:#f92672">+=</span> loss.<span style="color:#66d9ef">templ
 <li>Save the model using <code>torch::save(net, &quot;model.pt&quot;);</code>.</li>
 </ol>
 <p>Let&rsquo;s try to convert the above steps to a <code>train()</code> function.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">train</span>(ConvNet<span style="color:#f92672">&amp;</span> net, DataLoader<span style="color:#f92672">&amp;</span> data_loader, torch<span style="color:#f92672">::</span>optim<span style="color:#f92672">::</span>Optimizer<span style="color:#f92672">&amp;</span> optimizer, size_t dataset_size, <span style="color:#66d9ef">int</span> epoch) {
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">train</span>(ConvNet<span style="color:#f92672">&amp;</span> net, DataLoader<span style="color:#f92672">&amp;</span> data_loader, torch<span style="color:#f92672">::</span>optim<span style="color:#f92672">::</span>Optimizer<span style="color:#f92672">&amp;</span> optimizer, size_t dataset_size, <span style="color:#66d9ef">int</span> epoch) {
 	<span style="color:#75715e">/*
 </span><span style="color:#75715e">	This function trains the network on our data loader using optimizer for given number of epochs.
 </span><span style="color:#75715e">
@@ -434,7 +440,7 @@ mse <span style="color:#f92672">+=</span> loss.<span style="color:#66d9ef">templ
 <li>Print test loss and accuracy.</li>
 </ol>
 <p>The code for the <code>test()</code> function is below:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">test</span>(ConvNet<span style="color:#f92672">&amp;</span> network, DataLoader<span style="color:#f92672">&amp;</span> loader, size_t data_size) {
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">test</span>(ConvNet<span style="color:#f92672">&amp;</span> network, DataLoader<span style="color:#f92672">&amp;</span> loader, size_t data_size) {
   size_t batch_index <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
   
   network<span style="color:#f92672">-&gt;</span>eval();
@@ -498,7 +504,7 @@ mse <span style="color:#f92672">+=</span> loss.<span style="color:#66d9ef">templ
 </a>
 
 
-<a class="resp-sharing-button__link" href="https://twitter.com/intent/tweet/?text=%22Classifying%20Dogs%20vs%20Cats%20using%20PyTorch%20C%2b%2b%3a%20Part%202%22%20seems%20like%20an%20interesting%20read%20from%20%40kushashwa&amp;url=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2019%2f07%2fclassifying-dogs-vs-cats-using-pytorch-c-part-2%2f" target="_blank" rel="noopener" aria-label="Twitter">
+<a class="resp-sharing-button__link" href="https://twitter.com/intent/tweet/?text=%22Classifying%20Dogs%20vs%20Cats%20using%20PyTorch%20C%2b%2b%3a%20Part%202%22%20seems%20like%20an%20interesting%20read%20from%20%40rg0swami&amp;url=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2019%2f07%2fclassifying-dogs-vs-cats-using-pytorch-c-part-2%2f" target="_blank" rel="noopener" aria-label="Twitter">
   <div class="resp-sharing-button resp-sharing-button--twitter resp-sharing-button--medium"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--circle">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.5 7.4l-2 .2c-.4-.5-1-.8-2-.8C13.3 6.8 12 8 12 9.4v.6c-2 0-4-1-5.4-2.7-.2.4-.3.8-.3 1.3 0 1 .4 1.7 1.2 2.2-.5 0-1 0-1.2-.3 0 1.3 1 2.3 2 2.6-.3.4-.7.4-1 0 .2 1.4 1.2 2 2.3 2-1 1-2.5 1.4-4 1 1.3 1 2.7 1.4 4.2 1.4 4.8 0 7.5-4 7.5-7.5v-.4c.5-.4.8-1.5 1.2-2z"/><circle cx="12" cy="12" r="11.5"/></svg></div>Twitter</div>
 </a>
@@ -623,7 +629,7 @@ mse <span style="color:#f92672">+=</span> loss.<span style="color:#66d9ef">templ
             
                 <footer class="footer">
     <p>
-        &copy; 2021
+        &copy; 2022
             
                 <span><a href="https://krshrimali.github.io">Kushashwa Ravi Shrimali</a></span>
                 
@@ -649,7 +655,7 @@ mse <span style="color:#f92672">+=</span> loss.<span style="color:#66d9ef">templ
 
 
 
-<script src="https://krshrimali.github.io/bundle.min.5fae9992ea406007408dc33b0b3a8376d61e2f1d6ac50ba1dad7580ac50afb5199bcef3bbc3677e77553a9980bf882cf71edc2f755687dd7725f12ece4304ac2.js"></script>
+<script src="https://krshrimali.github.io/bundle.min.0e63d07bc6b25d019f9583b7d5921c8d0cd24d25d02cd4df1e8844fbbf00dbddb131d64e493dd5ac20b3814096d9495bc706574822df5561583386c15a358160.js"></script>
     <script>
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -657,7 +663,7 @@ mse <span style="color:#f92672">+=</span> loss.<span style="color:#66d9ef">templ
         })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
         ga('create', 'UA-146662543-1', 'auto');ga('send', 'pageview');
     </script>
-<script src="https://krshrimali.github.io/js/webmention.min.513a53d009530b21cba09721b6f4dc912e9c20ad2c0adbb5c4e486c4f77774a6e9eca8c2e1e4e8bc9e9e86693aa5ca91e7bf232b50f7f8bee4e64efc874040a7.js" data-id="webmention-container"></script>
+<script src="https://krshrimali.github.io/js/webmention.min.f8e74a199755d9338148ffba6a77e10ea98a46109749cb7088a273c36822534987180c01402b66cd4d1e9cc87ff1891f2f59ce37eccf002ddf25233a4c95e9b2.js" data-id="webmention-container"></script>
 
 
 

@@ -1,6 +1,11 @@
 # We use the generated html to prevent issues involving markdown frontmatter
 
 [[input.files]]
+path = "./posts/2022/01/common-collections-vector-and-strings-in-rust-notes/index.html"
+url = "https://krshrimali.github.io/posts/2022/01/common-collections-vector-and-strings-in-rust-notes/"
+title = "Common Collections (Vector and Strings) in Rust [Notes]"
+
+[[input.files]]
 path = "./posts/2021/10/weekly-progress-report-03-10-2021-2/index.html"
 url = "https://krshrimali.github.io/posts/2021/10/weekly-progress-report-03-10-2021-2/"
 title = "Weekly Progress Report: 03-10-2021, 2"

@@ -6,7 +6,18 @@
     <description>Recent content in Posts on Kushashwa Ravi Shrimali (Kush)</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Sun, 03 Oct 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://krshrimali.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 09 Jan 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://krshrimali.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Common Collections (Vector and Strings) in Rust [Notes]</title>
+      <link>https://krshrimali.github.io/posts/2022/01/common-collections-vector-and-strings-in-rust-notes/</link>
+      <pubDate>Sun, 09 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://krshrimali.github.io/posts/2022/01/common-collections-vector-and-strings-in-rust-notes/</guid>
+      <description>Chapter 8: Common Collections These are my notes from the chapter-8 of rust book. Please scroll down to the bottom (Note) section if you are curious about what this is.
+8.1: Storing Lists of Values with Vectors Vec&amp;lt;T&amp;gt; collection type discussed, aka vector: * By default contiguous. * All values should be of same type.
+// Creation let v: Vec&amp;lt;i32&amp;gt; = Vec::new(); // vec! macro for convenience // default integer type is i32 let v = vec!</description>
+    </item>
+    
     <item>
       <title>Weekly Progress Report: 03-10-2021, 2</title>
       <link>https://krshrimali.github.io/posts/2021/10/weekly-progress-report-03-10-2021-2/</link>
@@ -95,7 +106,7 @@ Some (or even all) of the text can be similar to what you see in the book, as th
       
       <guid>https://krshrimali.github.io/posts/2021/08/prefer-alias-declarations-to-typedefs-notes/</guid>
       <description>&lt;p&gt;One solution to avoiding using long type names:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// So C++98 like
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// So C++98 like
 &lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;typedef&lt;/span&gt; std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;unique_ptr&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;unordered_map&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;string, std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;string&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&amp;gt;&lt;/span&gt; UPtrMapSS;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
     </item>
@@ -108,16 +119,6 @@ Some (or even all) of the text can be similar to what you see in the book, as th
       <guid>https://krshrimali.github.io/posts/2021/07/function-pointers-and-function-objects-in-c-/</guid>
       <description>&lt;p&gt;In today&amp;rsquo;s blog, we&amp;rsquo;ll talk about two important concepts in C++: Function Pointers and Function Objects.&lt;/p&gt;
 &lt;p&gt;Please note that, function objects are commonly referred as &lt;em&gt;functors&lt;/em&gt; but we have failed to notice any official alias to the name. Hence, we&amp;rsquo;ll restrict ourselves to using &lt;em&gt;Function Objects&lt;/em&gt; in this blog.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>How to crop a circle in OpenCV? Implementing Portrait Bokeh - Part 2</title>
-      <link>https://krshrimali.github.io/posts/2020/12/how-to-crop-a-circle-in-opencv-implementing-portrait-bokeh-part-2/</link>
-      <pubDate>Thu, 10 Dec 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://krshrimali.github.io/posts/2020/12/how-to-crop-a-circle-in-opencv-implementing-portrait-bokeh-part-2/</guid>
-      <description>Hi everyone! In the previous blog we implemented Portrait Bokeh using Face Detection in OpenCV. While the results were good for a start, we definitely want to be closer to the output we expect. The end goal is to blur everything except the face. The main problem we noticed was:
- The face cropped was a rectangle, and it was clearly visible in the output result.  To overcome this, we will be talking about cropping a circle in OpenCV today.</description>
     </item>
     
   </channel>

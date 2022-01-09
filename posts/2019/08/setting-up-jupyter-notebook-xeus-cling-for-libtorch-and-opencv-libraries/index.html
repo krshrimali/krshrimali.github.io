@@ -17,7 +17,7 @@ I&amp;rsquo;ll quote the definition of Xeus Cling on the official documentation 
 
 <title>
     
-    Setting up Jupyter Notebook (Xeus Cling) for Libtorch and OpenCV Libraries :: Kushashwa Ravi Shrimali (Kush)  — Hello Friend NG HZ Theme
+    Setting up Jupyter Notebook (Xeus Cling) for Libtorch and OpenCV Libraries :: Kushashwa Ravi Shrimali (Kush)  — Learning never stops!
     
 </title>
 
@@ -28,7 +28,7 @@ I&amp;rsquo;ll quote the definition of Xeus Cling on the official documentation 
 
 
 
-<link rel="stylesheet" href="https://krshrimali.github.io/main.min.b6dbce0fdf6c61563a0c2226e857d5dadd8e5afa2c4f73ec9ea55abd831f9a72.css">
+<link rel="stylesheet" href="https://krshrimali.github.io/main.min.a6eedfdab54db128d627e7063826ffb0d9949ad2ea9424548adb08a272e224c9.css">
 
 
 
@@ -52,10 +52,16 @@ I&amp;rsquo;ll quote the definition of Xeus Cling on the official documentation 
 <meta itemprop="description" content="Introduction to Xeus Cling Today, we are going to run our C&#43;&#43; codes in the Jupyter Notebook. Sounds ambitious? Not much. Let&rsquo;s see how we do it using Xeus Cling.
 I&rsquo;ll quote the definition of Xeus Cling on the official documentation website.
  xeus-cling is a Jupyter kernel for C&#43;&#43; based on the C&#43;&#43; interpreter cling and the native implementation of the Jupyter protocol xeus.
- Just like we use Python Kernel in the Jupyter Notebook, we can also use a C&#43;&#43; based interpreter cling combined with a Jupyter protocol called Xeus to reach closer to implementing C&#43;&#43; code in the notebook."><meta itemprop="datePublished" content="2019-08-28T00:00:00+00:00" />
+ Just like we use Python Kernel in the Jupyter Notebook, we can also use a C&#43;&#43; based interpreter cling combined with a Jupyter protocol called Xeus to reach closer to implementing C&#43;&#43; code in the notebook.">
+<meta itemprop="datePublished" content="2019-08-28T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2019-08-28T00:00:00+00:00" />
-<meta itemprop="wordCount" content="1324"><meta itemprop="image" content="https://krshrimali.github.io"/>
-<meta itemprop="keywords" content="development,coding,cpp,notes,pytorch-cpp,libtorch," /><meta name="twitter:card" content="summary_large_image"/>
+<meta itemprop="wordCount" content="1324">
+<meta itemprop="image" content="https://krshrimali.github.io"/>
+
+
+
+<meta itemprop="keywords" content="development,coding,cpp,notes,pytorch-cpp,libtorch," />
+<meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://krshrimali.github.io"/>
 
 <meta name="twitter:title" content="Setting up Jupyter Notebook (Xeus Cling) for Libtorch and OpenCV Libraries"/>
@@ -237,25 +243,25 @@ I&rsquo;ll quote the definition of Xeus Cling on the official documentation webs
 <h2 id="setting-up-libtorch-in-xeus-cling">Setting up Libtorch in Xeus Cling</h2>
 <p>Just like we need to give path to <code>Libtorch</code> libraries in <code>CMakeLists.txt</code> or while setting up <code>XCode</code> (for OS X users) or <code>Visual Studio</code> (for Windows Users), we will also load the libraries in Xeus Cling.</p>
 <p>We will first give the <code>include_path</code> of Header files and <code>library_path</code> for the libraries. We will also do the same for <code>OpenCV</code> as we need it to load images.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#pragma cling add_library_path(&#34;/Users/krshrimali/Downloads/libtorch/lib/&#34;)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#pragma cling add_library_path(&#34;/Users/krshrimali/Downloads/libtorch/lib/&#34;)
 </span><span style="color:#75715e">#pragma cling add_include_path(&#34;/Users/krshrimali/Downloads/libtorch/include</span><span style="color:#75715e">&#34;)</span><span style="color:#75715e">
 </span><span style="color:#75715e">#pragma cling add_include_path(&#34;/Users/krshrimali/Downloads/libtorch/include</span><span style="color:#75715e">/torch/csrc/api/include/&#34;)</span><span style="color:#75715e">
 </span><span style="color:#75715e">#pragma cling add_library_path(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib&#34;)
 </span><span style="color:#75715e">#pragma cling add_include_path(&#34;/usr/local/Cellar/opencv/4.1.0_2/include</span><span style="color:#75715e">/opencv4&#34;)</span><span style="color:#75715e">
 </span></code></pre></div><p>For OS X, the libtorch libraries will be in the format of <code>.dylib</code>. Ignore the <code>.a</code> files as we only need to load the <code>.dylib</code> files. Similarly for Linux, load the libraries in <code>.so</code> format located in the <code>lib/</code> folder.</p>
 <p><strong>For Mac</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#pragma cling load(&#34;/Users/krshrimali/Downloads/libtorch/lib/libiomp5.dylib&#34;)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#pragma cling load(&#34;/Users/krshrimali/Downloads/libtorch/lib/libiomp5.dylib&#34;)
 </span><span style="color:#75715e">#pragma cling load(&#34;/Users/krshrimali/Downloads/libtorch/lib/libmklml.dylib&#34;)
 </span><span style="color:#75715e">#pragma cling load(&#34;/Users/krshrimali/Downloads/libtorch/lib/libc10.dylib&#34;)
 </span><span style="color:#75715e">#pragma cling load(&#34;/Users/krshrimali/Downloads/libtorch/lib/libtorch.dylib&#34;)
 </span><span style="color:#75715e">#pragma cling load(&#34;/Users/krshrimali/Downloads/libtorch/lib/libshm.dylib&#34;)
 </span></code></pre></div><p><strong>For Linux</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#pragma cling load(&#34;/opt/libtorch/lib/libc10.so&#34;)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#pragma cling load(&#34;/opt/libtorch/lib/libc10.so&#34;)
 </span><span style="color:#75715e">#pragma cling load(&#34;/opt/libtorch/lib/libgomp-4f651535.so.1&#34;)
 </span><span style="color:#75715e">#pragma cling load(&#34;/opt/libtorch/lib/libtorch.so&#34;)
 </span></code></pre></div><p>For OpenCV, the list of libraries is long.</p>
 <p><strong>For Mac</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_datasets.4.1.0.dylib&#34;)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_datasets.4.1.0.dylib&#34;)
 </span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_aruco.4.1.0.dylib&#34;)
 </span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_bgsegm.4.1.0.dylib&#34;)
 </span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_bioinspired.4.1.0.dylib&#34;)
@@ -304,7 +310,7 @@ I&rsquo;ll quote the definition of Xeus Cling on the official documentation webs
 </span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_xobjdetect.4.1.0.dylib&#34;)
 </span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_xphoto.4.1.0.dylib&#34;)
 </span></code></pre></div><p><strong>For Linux</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_aruco.so.4.1.0&#34;)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_aruco.so.4.1.0&#34;)
 </span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_bgsegm.so.4.1.0&#34;)
 </span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_bioinspired.so.4.1.0&#34;)
 </span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_calib3d.so.4.1.0&#34;)
@@ -355,7 +361,7 @@ I&rsquo;ll quote the definition of Xeus Cling on the official documentation webs
 </span></code></pre></div><p>Once done, run the cell and that&rsquo;s it. We have successfully setup the environment for <code>Libtorch</code> and <code>OpenCV</code>.</p>
 <h2 id="testing-xeus-cling-notebook">Testing Xeus Cling Notebook</h2>
 <p>Let&rsquo;s go ahead and include the libraries. I&rsquo;ll be sharing the code snippets as well as the screenshots to make it easy for the readers to reproduce results.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;torch/torch.h&gt;</span><span style="color:#75715e">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;torch/torch.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;torch/script.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;dirent.h&gt;</span><span style="color:#75715e">
@@ -363,7 +369,7 @@ I&rsquo;ll quote the definition of Xeus Cling on the official documentation webs
 </span></code></pre></div><p><img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/blogs/Include-Libraries.png" alt=""></p>
 <p>After successfully importing libraries, we can define functions, write code and use the utilities Jupyter provides. Let&rsquo;s start with playing with Tensors and the code snippets mentioned in the official <a href="https://pytorch.org/cppdocs">PyTorch C++ Frontend Docs</a>.</p>
 <p>Starting with using <code>ATen</code> tensor library. We&rsquo;ll create two tensors and add them together. <code>ATen</code> comes up with functionalities of mathematical operations on the Tensors.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;ATen/ATen.h&gt;</span><span style="color:#75715e">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;ATen/ATen.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span>
 at<span style="color:#f92672">::</span>Tensor a <span style="color:#f92672">=</span> at<span style="color:#f92672">::</span>ones({<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span>}, at<span style="color:#f92672">::</span>kInt);
 at<span style="color:#f92672">::</span>Tensor b <span style="color:#f92672">=</span> at<span style="color:#f92672">::</span>randn({<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span>});
@@ -377,7 +383,7 @@ std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt
 </code></pre></div><p><img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/blogs/ATen-Example.png" alt=""></p>
 <p>One of the reasons why <code>Xeus-Cling</code> is useful is, that you can print the outputs of intermediate steps and debug. Let&rsquo;s go ahead and experiment with <code>Autograd</code> system of PyTorch C++ API.</p>
 <p>For those who don&rsquo;t know, automatic differentiation is the most important function of Deep Learning algorithms to backpropagte the loss we calculate.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;torch/csrc/autograd/variable.h&gt;</span><span style="color:#75715e">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;torch/csrc/autograd/variable.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;torch/csrc/autograd/function.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span>
 torch<span style="color:#f92672">::</span>Tensor a_tensor <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>ones({<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span>}, torch<span style="color:#f92672">::</span>requires_grad());
@@ -393,7 +399,7 @@ std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt
 </code></pre></div><p><img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/blogs/Autograd-Example-1.png" alt="">
 <img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/blogs/Autograd-Example-2.png" alt=""></p>
 <p>How about debugging? As you can see in the figure below, I get an error stating <code>no member named 'size' in namespace 'cv'</code>. This is because namespace <code>cv</code> has member called <code>Size</code> and not <code>size</code>.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">torch<span style="color:#f92672">::</span>Tensor read_images(std<span style="color:#f92672">::</span>string location) {
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">torch<span style="color:#f92672">::</span>Tensor read_images(std<span style="color:#f92672">::</span>string location) {
 	cv<span style="color:#f92672">::</span>Mat img <span style="color:#f92672">=</span> cv<span style="color:#f92672">::</span>imread(location, <span style="color:#ae81ff">1</span>);
 	cv<span style="color:#f92672">::</span>resize(img, img, cv<span style="color:#f92672">::</span>size(<span style="color:#ae81ff">224</span>, <span style="color:#ae81ff">224</span>), cv<span style="color:#f92672">::</span>INTER_CUBIC);
 	torch<span style="color:#f92672">::</span>Tensor img_tensor <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>from_blob(img.data, {img.rows, img.cols, <span style="color:#ae81ff">3</span>}, torch<span style="color:#f92672">::</span>kByte);
@@ -443,7 +449,7 @@ std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt
 </a>
 
 
-<a class="resp-sharing-button__link" href="https://twitter.com/intent/tweet/?text=%22Setting%20up%20Jupyter%20Notebook%20%28Xeus%20Cling%29%20for%20Libtorch%20and%20OpenCV%20Libraries%22%20seems%20like%20an%20interesting%20read%20from%20%40kushashwa&amp;url=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2019%2f08%2fsetting-up-jupyter-notebook-xeus-cling-for-libtorch-and-opencv-libraries%2f" target="_blank" rel="noopener" aria-label="Twitter">
+<a class="resp-sharing-button__link" href="https://twitter.com/intent/tweet/?text=%22Setting%20up%20Jupyter%20Notebook%20%28Xeus%20Cling%29%20for%20Libtorch%20and%20OpenCV%20Libraries%22%20seems%20like%20an%20interesting%20read%20from%20%40rg0swami&amp;url=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2019%2f08%2fsetting-up-jupyter-notebook-xeus-cling-for-libtorch-and-opencv-libraries%2f" target="_blank" rel="noopener" aria-label="Twitter">
   <div class="resp-sharing-button resp-sharing-button--twitter resp-sharing-button--medium"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--circle">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.5 7.4l-2 .2c-.4-.5-1-.8-2-.8C13.3 6.8 12 8 12 9.4v.6c-2 0-4-1-5.4-2.7-.2.4-.3.8-.3 1.3 0 1 .4 1.7 1.2 2.2-.5 0-1 0-1.2-.3 0 1.3 1 2.3 2 2.6-.3.4-.7.4-1 0 .2 1.4 1.2 2 2.3 2-1 1-2.5 1.4-4 1 1.3 1 2.7 1.4 4.2 1.4 4.8 0 7.5-4 7.5-7.5v-.4c.5-.4.8-1.5 1.2-2z"/><circle cx="12" cy="12" r="11.5"/></svg></div>Twitter</div>
 </a>
@@ -568,7 +574,7 @@ std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt
             
                 <footer class="footer">
     <p>
-        &copy; 2021
+        &copy; 2022
             
                 <span><a href="https://krshrimali.github.io">Kushashwa Ravi Shrimali</a></span>
                 
@@ -594,7 +600,7 @@ std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt
 
 
 
-<script src="https://krshrimali.github.io/bundle.min.5fae9992ea406007408dc33b0b3a8376d61e2f1d6ac50ba1dad7580ac50afb5199bcef3bbc3677e77553a9980bf882cf71edc2f755687dd7725f12ece4304ac2.js"></script>
+<script src="https://krshrimali.github.io/bundle.min.0e63d07bc6b25d019f9583b7d5921c8d0cd24d25d02cd4df1e8844fbbf00dbddb131d64e493dd5ac20b3814096d9495bc706574822df5561583386c15a358160.js"></script>
     <script>
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -602,7 +608,7 @@ std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt
         })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
         ga('create', 'UA-146662543-1', 'auto');ga('send', 'pageview');
     </script>
-<script src="https://krshrimali.github.io/js/webmention.min.513a53d009530b21cba09721b6f4dc912e9c20ad2c0adbb5c4e486c4f77774a6e9eca8c2e1e4e8bc9e9e86693aa5ca91e7bf232b50f7f8bee4e64efc874040a7.js" data-id="webmention-container"></script>
+<script src="https://krshrimali.github.io/js/webmention.min.f8e74a199755d9338148ffba6a77e10ea98a46109749cb7088a273c36822534987180c01402b66cd4d1e9cc87ff1891f2f59ce37eccf002ddf25233a4c95e9b2.js" data-id="webmention-container"></script>
 
 
 

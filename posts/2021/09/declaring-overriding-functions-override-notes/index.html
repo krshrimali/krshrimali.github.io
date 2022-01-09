@@ -19,7 +19,7 @@ Example of virtual function overriding:
 
 <title>
     
-    Declaring Overriding Functions override (Notes) :: Kushashwa Ravi Shrimali (Kush)  — Hello Friend NG HZ Theme
+    Declaring Overriding Functions override (Notes) :: Kushashwa Ravi Shrimali (Kush)  — Learning never stops!
     
 </title>
 
@@ -30,7 +30,7 @@ Example of virtual function overriding:
 
 
 
-<link rel="stylesheet" href="https://krshrimali.github.io/main.min.b6dbce0fdf6c61563a0c2226e857d5dadd8e5afa2c4f73ec9ea55abd831f9a72.css">
+<link rel="stylesheet" href="https://krshrimali.github.io/main.min.a6eedfdab54db128d627e7063826ffb0d9949ad2ea9424548adb08a272e224c9.css">
 
 
 
@@ -56,10 +56,16 @@ My notes on Chapter 3, Item 12 of Effective Modern C&#43;&#43; written by Scott 
 Some (or even all) of the text can be similar to what you see in the book, as these are notes: I&rsquo;ve tried not to be unnecessarily creative with my words. :)
  Overriding != Overloading
 Example of virtual function overriding:
-// Base class class Base { public: virtual void doWork(); // ... }; // Derived class from Base class Derived: public Base { public: // virtual is optional  // this will &#34;override&#34; Base::doWork  virtual void doWork(); // ."><meta itemprop="datePublished" content="2021-09-25T00:00:00+00:00" />
+// Base class class Base { public: virtual void doWork(); // ... }; // Derived class from Base class Derived: public Base { public: // virtual is optional  // this will &#34;override&#34; Base::doWork  virtual void doWork(); // .">
+<meta itemprop="datePublished" content="2021-09-25T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2021-09-25T00:00:00+00:00" />
-<meta itemprop="wordCount" content="688"><meta itemprop="image" content="https://krshrimali.github.io"/>
-<meta itemprop="keywords" content="development,coding,cpp,notes,override," /><meta name="twitter:card" content="summary_large_image"/>
+<meta itemprop="wordCount" content="688">
+<meta itemprop="image" content="https://krshrimali.github.io"/>
+
+
+
+<meta itemprop="keywords" content="development,coding,cpp,notes,override," />
+<meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://krshrimali.github.io"/>
 
 <meta name="twitter:title" content="Declaring Overriding Functions override (Notes)"/>
@@ -189,7 +195,7 @@ Example of virtual function overriding:
 <p><img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/cover-images/declaring-overriding-functions-override.png" alt=""></p>
 <p>Overriding != Overloading</p>
 <p><em>Example</em> of virtual function overriding:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// Base class
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// Base class
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Base</span> {
 <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
     <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> doWork();
@@ -222,7 +228,7 @@ Example of virtual function overriding:
 <li>[from C++11] Both functions should have identical reference qualifiers (see below)</li>
 </ol>
 <p>Reference qualifiers were new to me, but the book gives a really good example:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// Useful when you want to limit the calls to lvalues or rvalues only
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// Useful when you want to limit the calls to lvalues or rvalues only
 </span><span style="color:#75715e"></span>
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Widget</span> {
 <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
@@ -246,7 +252,7 @@ Example of virtual function overriding:
 </code></pre></div><p>In case the functions don&rsquo;t have identical reference qualifiers, the derived class will <em>still have</em> the function, but it won&rsquo;t override the base class function.</p>
 <p>Because of a lot of conditions (see 6 <em>requirements</em> above), it&rsquo;s easy to make mistakes or forget a few things while overriding a function. And the book states that it&rsquo;s not worth expecting from compiler to report an error, because the code can still be valid - it&rsquo;s just you expected it to override, but it didn&rsquo;t.</p>
 <p>See an example below:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Base</span> {
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Base</span> {
 <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
     <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> mf1() <span style="color:#66d9ef">const</span>;
     <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">mf2</span>(<span style="color:#66d9ef">int</span> x);
@@ -269,7 +275,7 @@ Example of virtual function overriding:
 <li><code>mf4()</code>: isn&rsquo;t declared <code>virtual</code> in <code>Base</code>.</li>
 </ol>
 <p>To avoid worrying about human mistakes, it&rsquo;s better to let the compiler know explicitly that these functions are expected to override. For that, declare the functions in <code>Derived</code> class <code>override</code>.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Derived</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Base {
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Derived</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Base {
 <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
     <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> mf1() <span style="color:#66d9ef">override</span>;
     <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">mf2</span>(<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span> x) <span style="color:#66d9ef">override</span>;
@@ -280,7 +286,7 @@ Example of virtual function overriding:
 <p>C++-11 introduced  2 contextual keywords: <code>final</code> (see note below), <code>override</code>. These keywords are reserved, but only in certain contexts.</p>
 <p><strong>Note:</strong> In case you want to prevent a function in a base class to be overridden in derived classes, you can declare them <code>final</code>. <code>final</code> can also be declared for a class, in which case it won&rsquo;t be allowed to be used a base class.</p>
 <p>For <code>override</code>: In case your old (legacy) code uses <code>override</code> somewhere else, it&rsquo;s fine - keep it! Only when it&rsquo;s used at the end of a member function declaration, then it&rsquo;s reserved.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Sample</span> {
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Sample</span> {
 <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
     <span style="color:#75715e">// legal
 </span><span style="color:#75715e"></span>    <span style="color:#66d9ef">void</span> <span style="color:#66d9ef">override</span>();
@@ -307,7 +313,7 @@ Example of virtual function overriding:
 </a>
 
 
-<a class="resp-sharing-button__link" href="https://twitter.com/intent/tweet/?text=%22Declaring%20Overriding%20Functions%20override%20%28Notes%29%22%20seems%20like%20an%20interesting%20read%20from%20%40kushashwa&amp;url=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2021%2f09%2fdeclaring-overriding-functions-override-notes%2f" target="_blank" rel="noopener" aria-label="Twitter">
+<a class="resp-sharing-button__link" href="https://twitter.com/intent/tweet/?text=%22Declaring%20Overriding%20Functions%20override%20%28Notes%29%22%20seems%20like%20an%20interesting%20read%20from%20%40rg0swami&amp;url=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2021%2f09%2fdeclaring-overriding-functions-override-notes%2f" target="_blank" rel="noopener" aria-label="Twitter">
   <div class="resp-sharing-button resp-sharing-button--twitter resp-sharing-button--medium"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--circle">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.5 7.4l-2 .2c-.4-.5-1-.8-2-.8C13.3 6.8 12 8 12 9.4v.6c-2 0-4-1-5.4-2.7-.2.4-.3.8-.3 1.3 0 1 .4 1.7 1.2 2.2-.5 0-1 0-1.2-.3 0 1.3 1 2.3 2 2.6-.3.4-.7.4-1 0 .2 1.4 1.2 2 2.3 2-1 1-2.5 1.4-4 1 1.3 1 2.7 1.4 4.2 1.4 4.8 0 7.5-4 7.5-7.5v-.4c.5-.4.8-1.5 1.2-2z"/><circle cx="12" cy="12" r="11.5"/></svg></div>Twitter</div>
 </a>
@@ -432,7 +438,7 @@ Example of virtual function overriding:
             
                 <footer class="footer">
     <p>
-        &copy; 2021
+        &copy; 2022
             
                 <span><a href="https://krshrimali.github.io">Kushashwa Ravi Shrimali</a></span>
                 
@@ -458,7 +464,7 @@ Example of virtual function overriding:
 
 
 
-<script src="https://krshrimali.github.io/bundle.min.5fae9992ea406007408dc33b0b3a8376d61e2f1d6ac50ba1dad7580ac50afb5199bcef3bbc3677e77553a9980bf882cf71edc2f755687dd7725f12ece4304ac2.js"></script>
+<script src="https://krshrimali.github.io/bundle.min.0e63d07bc6b25d019f9583b7d5921c8d0cd24d25d02cd4df1e8844fbbf00dbddb131d64e493dd5ac20b3814096d9495bc706574822df5561583386c15a358160.js"></script>
     <script>
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -466,7 +472,7 @@ Example of virtual function overriding:
         })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
         ga('create', 'UA-146662543-1', 'auto');ga('send', 'pageview');
     </script>
-<script src="https://krshrimali.github.io/js/webmention.min.513a53d009530b21cba09721b6f4dc912e9c20ad2c0adbb5c4e486c4f77774a6e9eca8c2e1e4e8bc9e9e86693aa5ca91e7bf232b50f7f8bee4e64efc874040a7.js" data-id="webmention-container"></script>
+<script src="https://krshrimali.github.io/js/webmention.min.f8e74a199755d9338148ffba6a77e10ea98a46109749cb7088a273c36822534987180c01402b66cd4d1e9cc87ff1891f2f59ce37eccf002ddf25233a4c95e9b2.js" data-id="webmention-container"></script>
 
 
 
