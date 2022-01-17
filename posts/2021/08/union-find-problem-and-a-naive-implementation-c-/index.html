@@ -26,7 +26,7 @@
 
 
 
-<link rel="stylesheet" href="https://krshrimali.github.io/main.min.a6eedfdab54db128d627e7063826ffb0d9949ad2ea9424548adb08a272e224c9.css">
+<link rel="stylesheet" href="https://krshrimali.github.io/main.min.b6dbce0fdf6c61563a0c2226e857d5dadd8e5afa2c4f73ec9ea55abd831f9a72.css">
 
 
 
@@ -48,16 +48,10 @@
 
 <meta itemprop="name" content="Union Find Problem, and a naive implementation (C&#43;&#43;)">
 <meta itemprop="description" content="Hi Everyone, today I want to talk about Union Find Problem. This is going to be a series covering:
- Union Find Problem (this blog) Solutions to Union Find (1): Quick Find Solutions to Union Find (2): Quick Union Solutions to Union Find (3): Weighted Quick Union Applications of Union Find (perculation and more) Cool project using Union Find Solving some competitive programming questions using Union Find  Each blog will try to cover very basic concepts behind the topic, and also what it&rsquo;s all about.">
-<meta itemprop="datePublished" content="2021-08-14T00:00:00+00:00" />
+ Union Find Problem (this blog) Solutions to Union Find (1): Quick Find Solutions to Union Find (2): Quick Union Solutions to Union Find (3): Weighted Quick Union Applications of Union Find (perculation and more) Cool project using Union Find Solving some competitive programming questions using Union Find  Each blog will try to cover very basic concepts behind the topic, and also what it&rsquo;s all about."><meta itemprop="datePublished" content="2021-08-14T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2021-08-14T00:00:00+00:00" />
-<meta itemprop="wordCount" content="1459">
-<meta itemprop="image" content="https://krshrimali.github.io"/>
-
-
-
-<meta itemprop="keywords" content="development,coding,cpp,union find,algorithms," />
-<meta name="twitter:card" content="summary_large_image"/>
+<meta itemprop="wordCount" content="1459"><meta itemprop="image" content="https://krshrimali.github.io"/>
+<meta itemprop="keywords" content="development,coding,cpp,union find,algorithms," /><meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://krshrimali.github.io"/>
 
 <meta name="twitter:title" content="Union Find Problem, and a naive implementation (C&#43;&#43;)"/>
@@ -257,7 +251,7 @@
 <p>All codes are written here in C++ and code is available here: <a href="https://github.com/krshrimali/Algorithms-All-In-One/">https://github.com/krshrimali/Algorithms-All-In-One/</a>.</p>
 <hr>
 <p>Breaking it down to two functions, is really helpful:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// Object is an arbitrary type for now, can be an int, can be a user defined type as well
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// Object is an arbitrary type for now, can be an int, can be a user defined type as well
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">union</span>(Object a, Object b) {
     <span style="color:#75715e">// This function will connect two objects, if:
 </span><span style="color:#75715e"></span>    <span style="color:#75715e">//      * they exist
@@ -265,7 +259,7 @@
 </span><span style="color:#75715e"></span>    <span style="color:#75715e">// ...
 </span><span style="color:#75715e"></span>}
 </code></pre></div><p>Similarly, the <code>find</code> function will try to find whether there is a connection between two objects:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// Object is an arbitrary type for now, can be an int, can be a user defined type as well
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// Object is an arbitrary type for now, can be an int, can be a user defined type as well
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">find</span>(Object a, Object b) {
     <span style="color:#75715e">// returns true if:
 </span><span style="color:#75715e"></span>    <span style="color:#75715e">//      * both objects exist
@@ -300,7 +294,7 @@
 </li>
 </ol>
 <p>So the <code>Graph</code> will be a <code>std::map</code> of <code>Point, std::vector&lt;Point&gt;</code>, which will look something like this:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// This is how graph will look like, in imagination
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// This is how graph will look like, in imagination
 </span><span style="color:#75715e">// Example:
 </span><span style="color:#75715e">// a is connected to b, c, d
 </span><span style="color:#75715e">// b is connected to a
@@ -311,7 +305,7 @@
 <p>Now, the <code>Point</code> can simply be a <code>struct</code> having <code>int x, y</code> as coordinates.</p>
 <h2 id="implementation-skeleton">Implementation: Skeleton</h2>
 <p>Let&rsquo;s create the skeleton now:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">Point</span> {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">Point</span> {
     <span style="color:#75715e">// x and y are the coordinates for each point
 </span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> x, y;
 };
@@ -558,7 +552,7 @@
 
 
 
-<script src="https://krshrimali.github.io/bundle.min.0e63d07bc6b25d019f9583b7d5921c8d0cd24d25d02cd4df1e8844fbbf00dbddb131d64e493dd5ac20b3814096d9495bc706574822df5561583386c15a358160.js"></script>
+<script src="https://krshrimali.github.io/bundle.min.5fae9992ea406007408dc33b0b3a8376d61e2f1d6ac50ba1dad7580ac50afb5199bcef3bbc3677e77553a9980bf882cf71edc2f755687dd7725f12ece4304ac2.js"></script>
     <script>
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -566,7 +560,7 @@
         })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
         ga('create', 'UA-146662543-1', 'auto');ga('send', 'pageview');
     </script>
-<script src="https://krshrimali.github.io/js/webmention.min.f8e74a199755d9338148ffba6a77e10ea98a46109749cb7088a273c36822534987180c01402b66cd4d1e9cc87ff1891f2f59ce37eccf002ddf25233a4c95e9b2.js" data-id="webmention-container"></script>
+<script src="https://krshrimali.github.io/js/webmention.min.513a53d009530b21cba09721b6f4dc912e9c20ad2c0adbb5c4e486c4f77774a6e9eca8c2e1e4e8bc9e9e86693aa5ca91e7bf232b50f7f8bee4e64efc874040a7.js" data-id="webmention-container"></script>
 
 
 

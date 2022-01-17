@@ -26,7 +26,7 @@
 
 
 
-<link rel="stylesheet" href="https://krshrimali.github.io/main.min.a6eedfdab54db128d627e7063826ffb0d9949ad2ea9424548adb08a272e224c9.css">
+<link rel="stylesheet" href="https://krshrimali.github.io/main.min.b6dbce0fdf6c61563a0c2226e857d5dadd8e5afa2c4f73ec9ea55abd831f9a72.css">
 
 
 
@@ -48,16 +48,10 @@
 
 <meta itemprop="name" content="Applying Transfer Learning on Dogs vs Cats Dataset (ResNet18) using PyTorch C&#43;&#43; API">
 <meta itemprop="description" content="Transfer Learning &ndash; Before we go ahead and discuss the Why question of Transfer Learning, let&rsquo;s have a look at What is Transfer Learning? Let&rsquo;s have a look at the Notes from CS231n on Transfer Learning:
- In practice, very few people train an entire Convolutional Network from scratch (with random initialization), because it is relatively rare to have a dataset of sufficient size. Instead, it is common to pretrain a ConvNet on a very large dataset (e.">
-<meta itemprop="datePublished" content="2019-08-16T00:00:00+00:00" />
+ In practice, very few people train an entire Convolutional Network from scratch (with random initialization), because it is relatively rare to have a dataset of sufficient size. Instead, it is common to pretrain a ConvNet on a very large dataset (e."><meta itemprop="datePublished" content="2019-08-16T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2019-08-16T00:00:00+00:00" />
-<meta itemprop="wordCount" content="1518">
-<meta itemprop="image" content="https://krshrimali.github.io"/>
-
-
-
-<meta itemprop="keywords" content="development,coding,cpp,notes,pytorch-cpp,libtorch," />
-<meta name="twitter:card" content="summary_large_image"/>
+<meta itemprop="wordCount" content="1518"><meta itemprop="image" content="https://krshrimali.github.io"/>
+<meta itemprop="keywords" content="development,coding,cpp,notes,pytorch-cpp,libtorch," /><meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://krshrimali.github.io"/>
 
 <meta name="twitter:title" content="Applying Transfer Learning on Dogs vs Cats Dataset (ResNet18) using PyTorch C&#43;&#43; API"/>
@@ -243,13 +237,13 @@ Before we go ahead and discuss the <strong>Why</strong> question of Transfer Lea
 <p><img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/blogs/Steps-Loading-Data-PyTorch.png" alt=""></p>
 <p>Once done, we can initialize the <code>CustomDataset</code> class:</p>
 <p><strong>C++</strong></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// List of images of Dogs and Cats, use load_data_from_folder function explained in previous blogs
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// List of images of Dogs and Cats, use load_data_from_folder function explained in previous blogs
 </span><span style="color:#75715e"></span>std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span>std<span style="color:#f92672">::</span>string<span style="color:#f92672">&gt;</span> list_images; 
 <span style="color:#75715e">// List of labels of the images
 </span><span style="color:#75715e"></span>std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> list_labels; 
 <span style="color:#66d9ef">auto</span> custom_dataset <span style="color:#f92672">=</span> CustomDataset(list_images, list_labels).map(torch<span style="color:#f92672">::</span>data<span style="color:#f92672">::</span>transforms<span style="color:#f92672">::</span>Stack<span style="color:#f92672">&lt;&gt;</span>());
 </code></pre></div><p><strong>Python</strong></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> torchvision <span style="color:#f92672">import</span> datasets, transforms
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> torchvision <span style="color:#f92672">import</span> datasets, transforms
 <span style="color:#f92672">import</span> torch
 
 folder_path <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;/Users/krshrimali/Documents/dataset/train/&#34;</span>
@@ -257,11 +251,11 @@ transform <span style="color:#f92672">=</span> transforms<span style="color:#f92
 data <span style="color:#f92672">=</span> datasets<span style="color:#f92672">.</span>ImageFolder(root <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(folder_path), transform <span style="color:#f92672">=</span> transform)
 </code></pre></div><p>We then use <code>RandomSampler</code> to make our data loader: (Note: it&rsquo;s important to use <code>RandomSampler</code> as we load the images sequentially and we want mixture of images in each batch of data passed to the network in an epoch)</p>
 <p><strong>C++</strong></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">int</span> batch_size <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">int</span> batch_size <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>;
 <span style="color:#66d9ef">auto</span> data_loader <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>data<span style="color:#f92672">::</span>make_data_loader<span style="color:#f92672">&lt;</span>torch<span style="color:#f92672">::</span>data<span style="color:#f92672">::</span>samplers<span style="color:#f92672">::</span>RandomSampler<span style="color:#f92672">&gt;</span>(std<span style="color:#f92672">::</span>move(custom_dataset), batch_size);
 </code></pre></div><p><strong>Python</strong></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">batch_size <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>
-data_loader <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>utils<span style="color:#f92672">.</span>data<span style="color:#f92672">.</span>DataLoader(dataset<span style="color:#f92672">=</span>data, batch_size <span style="color:#f92672">=</span> batch_size, shuffle <span style="color:#f92672">=</span> True)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">batch_size <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>
+data_loader <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>utils<span style="color:#f92672">.</span>data<span style="color:#f92672">.</span>DataLoader(dataset<span style="color:#f92672">=</span>data, batch_size <span style="color:#f92672">=</span> batch_size, shuffle <span style="color:#f92672">=</span> <span style="color:#66d9ef">True</span>)
 </code></pre></div><h2 id="loading-the-pre-trained-model">Loading the pre-trained model</h2>
 <p>The steps to load the pre-trained model and perform Transfer Learning are listed below:</p>
 <ol>
@@ -277,14 +271,14 @@ data_loader <span style="color:#f92672">=</span> torch<span style="color:#f92672
 <p>Thanks to the developers, we do have C++ models available in torchvision
 (<a href="https://github.com/pytorch/vision/pull/728">https://github.com/pytorch/vision/pull/728</a>) but for this tutorial, transferring the pre- trained model from Python to C++ using torch.jit is a good idea, as most PyTorch models in the wild are written in Python right now, and people can use this tutorial to learn how to trace their Python model and transfer it to C++.</p>
 <p>First we download the pre-trained model and save it in the form of <code>torch.jit.trace</code> format to our local drive.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Reference: #TODO- Add Link</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Reference: #TODO- Add Link</span>
 <span style="color:#f92672">from</span> torchvision <span style="color:#f92672">import</span> models
 <span style="color:#75715e"># Download and load the pre-trained model</span>
-model <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>resnet18(pretrained<span style="color:#f92672">=</span>True)
+model <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>resnet18(pretrained<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
 
 <span style="color:#75715e"># Set upgrading the gradients to False</span>
 <span style="color:#66d9ef">for</span> param <span style="color:#f92672">in</span> model<span style="color:#f92672">.</span>parameters():
-	param<span style="color:#f92672">.</span>requires_grad <span style="color:#f92672">=</span> False
+	param<span style="color:#f92672">.</span>requires_grad <span style="color:#f92672">=</span> <span style="color:#66d9ef">False</span>
 
 <span style="color:#75715e"># Save the model except the final FC Layer</span>
 resnet18 <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>nn<span style="color:#f92672">.</span>Sequential(<span style="color:#f92672">*</span>list(resnet18<span style="color:#f92672">.</span>children())[:<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>])
@@ -296,7 +290,7 @@ script_module<span style="color:#f92672">.</span>save(<span style="color:#e6db74
 <h3 id="step-2-load-the-pre-trained-model">Step-2: Load the pre-trained model</h3>
 <p>Let&rsquo;s go ahead and load the pre-trained model using <code>torch::jit</code> module. Note that the reason we have converted <code>torch.nn.Module</code> to <code>torch.jit.ScriptModule</code> type, is because C++ API currently does not support loading Python <code>torch.nn.Module</code> models directly.</p>
 <p><strong>C++</strong>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">torch<span style="color:#f92672">::</span>jit<span style="color:#f92672">::</span>script<span style="color:#f92672">::</span>Module module;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">torch<span style="color:#f92672">::</span>jit<span style="color:#f92672">::</span>script<span style="color:#f92672">::</span>Module module;
 <span style="color:#75715e">// argv[1] should be the path to the model
 </span><span style="color:#75715e"></span>module <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>jit<span style="color:#f92672">::</span>load(argv[<span style="color:#ae81ff">1</span>]); 
 
@@ -306,15 +300,15 @@ torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span
 <span style="color:#75715e">// Define the optimizer on parameters of linear_layer with learning_rate = 1e-3
 </span><span style="color:#75715e"></span>torch<span style="color:#f92672">::</span>optim<span style="color:#f92672">::</span>Adam optimizer(linear_layer<span style="color:#f92672">-&gt;</span>parameters(), torch<span style="color:#f92672">::</span>optim<span style="color:#f92672">::</span>AdamOptions(<span style="color:#ae81ff">1e-3</span>))
 </code></pre></div><p><strong>Python</strong>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># We will directly load the torch.nn pre-trained model</span>
-model <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>resnet18(pretrained <span style="color:#f92672">=</span> True)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># We will directly load the torch.nn pre-trained model</span>
+model <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>resnet18(pretrained <span style="color:#f92672">=</span> <span style="color:#66d9ef">True</span>)
 
 <span style="color:#66d9ef">for</span> param <span style="color:#f92672">in</span> model<span style="color:#f92672">.</span>parameters():
-    param<span style="color:#f92672">.</span>requires_grad <span style="color:#f92672">=</span> False
+    param<span style="color:#f92672">.</span>requires_grad <span style="color:#f92672">=</span> <span style="color:#66d9ef">False</span>
 
 model<span style="color:#f92672">.</span>fc <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>nn<span style="color:#f92672">.</span>Linear(<span style="color:#ae81ff">512</span>, <span style="color:#ae81ff">2</span>)
 <span style="color:#66d9ef">for</span> param <span style="color:#f92672">in</span> model<span style="color:#f92672">.</span>fc<span style="color:#f92672">.</span>parameters():
-	param<span style="color:#f92672">.</span>requires_grad <span style="color:#f92672">=</span> True
+	param<span style="color:#f92672">.</span>requires_grad <span style="color:#f92672">=</span> <span style="color:#66d9ef">True</span>
 
 optimizer <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>optim<span style="color:#f92672">.</span>Adam(model<span style="color:#f92672">.</span>fc<span style="color:#f92672">.</span>parameters())
 cost <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>nn<span style="color:#f92672">.</span>CrossEntropyLoss()
@@ -323,7 +317,7 @@ cost <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</sp
 <p><img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/blogs/ResNet18-Architecture.png" alt="https://www.researchgate.net/figure/ResNet-18-Architecture_tbl1_322476121"></p>
 <p>The final step is to train the Fully Connected layer that we inserted at the end of the network (<code>linear_layer</code>). This one should be pretty straight forward, let&rsquo;s see how to do it.</p>
 <p><strong>C++</strong>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">train</span>(torch<span style="color:#f92672">::</span>jit<span style="color:#f92672">::</span>script<span style="color:#f92672">::</span>Module net, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Linear lin, Dataloader<span style="color:#f92672">&amp;</span> data_loader, torch<span style="color:#f92672">::</span>optim<span style="color:#f92672">::</span>Optimizer<span style="color:#f92672">&amp;</span> optimizer, size_t dataset_size) {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">train</span>(torch<span style="color:#f92672">::</span>jit<span style="color:#f92672">::</span>script<span style="color:#f92672">::</span>Module net, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Linear lin, Dataloader<span style="color:#f92672">&amp;</span> data_loader, torch<span style="color:#f92672">::</span>optim<span style="color:#f92672">::</span>Optimizer<span style="color:#f92672">&amp;</span> optimizer, size_t dataset_size) {
     <span style="color:#75715e">/*
 </span><span style="color:#75715e">     This function trains the network on our data loader using optimizer for given number of epochs.
 </span><span style="color:#75715e">     
@@ -379,7 +373,7 @@ cost <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</sp
     }
 }
 </code></pre></div><p><strong>Python</strong>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">n_epochs <span style="color:#f92672">=</span> <span style="color:#ae81ff">15</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">n_epochs <span style="color:#f92672">=</span> <span style="color:#ae81ff">15</span>
 
 <span style="color:#66d9ef">for</span> epoch <span style="color:#f92672">in</span> range(n_epochs):
     mse <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0</span>
@@ -406,7 +400,7 @@ cost <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</sp
     mse <span style="color:#f92672">=</span> mse<span style="color:#f92672">/</span>len(data)
     acc <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span><span style="color:#f92672">*</span>acc<span style="color:#f92672">/</span>len(data)
     
-    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Epoch: {}/{}, Loss: {:.4f}, Accuracy: {:.4f}&#34;</span><span style="color:#f92672">.</span>format(epoch<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>, n_epochs, mse, acc))
+    print(<span style="color:#e6db74">&#34;Epoch: </span><span style="color:#e6db74">{}</span><span style="color:#e6db74">/</span><span style="color:#e6db74">{}</span><span style="color:#e6db74">, Loss: </span><span style="color:#e6db74">{:.4f}</span><span style="color:#e6db74">, Accuracy: </span><span style="color:#e6db74">{:.4f}</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">.</span>format(epoch<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>, n_epochs, mse, acc))
 </code></pre></div><p>The code to test should also not change much except the need of optimizer.</p>
 <h2 id="results">Results</h2>
 <p><img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/blogs/Training-Results.png" alt="Results using PyTorch C++ API">
@@ -596,7 +590,7 @@ cost <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</sp
 
 
 
-<script src="https://krshrimali.github.io/bundle.min.0e63d07bc6b25d019f9583b7d5921c8d0cd24d25d02cd4df1e8844fbbf00dbddb131d64e493dd5ac20b3814096d9495bc706574822df5561583386c15a358160.js"></script>
+<script src="https://krshrimali.github.io/bundle.min.5fae9992ea406007408dc33b0b3a8376d61e2f1d6ac50ba1dad7580ac50afb5199bcef3bbc3677e77553a9980bf882cf71edc2f755687dd7725f12ece4304ac2.js"></script>
     <script>
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -604,7 +598,7 @@ cost <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</sp
         })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
         ga('create', 'UA-146662543-1', 'auto');ga('send', 'pageview');
     </script>
-<script src="https://krshrimali.github.io/js/webmention.min.f8e74a199755d9338148ffba6a77e10ea98a46109749cb7088a273c36822534987180c01402b66cd4d1e9cc87ff1891f2f59ce37eccf002ddf25233a4c95e9b2.js" data-id="webmention-container"></script>
+<script src="https://krshrimali.github.io/js/webmention.min.513a53d009530b21cba09721b6f4dc912e9c20ad2c0adbb5c4e486c4f77774a6e9eca8c2e1e4e8bc9e9e86693aa5ca91e7bf232b50f7f8bee4e64efc874040a7.js" data-id="webmention-container"></script>
 
 
 

@@ -1,7 +1,7 @@
 {
 	"version": 3,
 	"file": "main.css",
-	"sourceRoot": "/home/krshrimali/Documents/Projects/krshrimali/blog/blog",
+	"sourceRoot": "/Users/krshrimali/Documents/Projects/krshrimali/blog",
 	"sources": [
 		"themes/hello-friend-ng-hz/assets/scss/main.scss",
 		"themes/hello-friend-ng-hz/assets/scss/lib/responsive_type/_vars.scss",

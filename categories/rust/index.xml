@@ -18,5 +18,16 @@
 // Creation let v: Vec&amp;lt;i32&amp;gt; = Vec::new(); // vec! macro for convenience // default integer type is i32 let v = vec!</description>
     </item>
     
+    <item>
+      <title>Common Collections (Vector and Strings) in Rust [Notes]</title>
+      <link>https://krshrimali.github.io/posts/2022/01/common-collections-vector-and-strings-in-rust-notes/</link>
+      <pubDate>Sun, 09 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://krshrimali.github.io/posts/2022/01/common-collections-vector-and-strings-in-rust-notes/</guid>
+      <description>Chapter 8: Common Collections (Hash Maps) In the previous blog, I shared my notes on strings and vectors in Rust, and in this post we&amp;rsquo;ll cover Hash Maps. I personally have found their use in competitive programming, a lot, but hopefully as we move on, we&amp;rsquo;ll see lots of use-cases in real-life problems.
+Hash Maps Hash Maps: HashMap&amp;lt;K, V&amp;gt;
+ You can&amp;rsquo;t access using indices, but through keys. Hash Maps store data on heap.</description>
+    </item>
+    
   </channel>
 </rss>

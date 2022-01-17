@@ -28,7 +28,7 @@ Some (or even all) of the text can be similar to what you see in the book, as th
 
 
 
-<link rel="stylesheet" href="https://krshrimali.github.io/main.min.a6eedfdab54db128d627e7063826ffb0d9949ad2ea9424548adb08a272e224c9.css">
+<link rel="stylesheet" href="https://krshrimali.github.io/main.min.b6dbce0fdf6c61563a0c2226e857d5dadd8e5afa2c4f73ec9ea55abd831f9a72.css">
 
 
 
@@ -52,16 +52,10 @@ Some (or even all) of the text can be similar to what you see in the book, as th
 <meta itemprop="description" content="Prefer deleted functions to private undefined ones This item (11) in the chapter 3 focuses on:
  Why and How to prevent users calling particular functions? C&#43;&#43;-98 and C&#43;&#43;-11 approach What&rsquo;s the difference between deleting a function vs declaring a member function private (and not defining them)?   NOTE
 These are my notes on Chapter 3, Item 11 of Effective Modern C&#43;&#43; written by Scott Meyers.
-Some (or even all) of the text can be similar to what you see in the book, as these are notes: I&rsquo;ve tried not to be unnecessarily creative with my words.">
-<meta itemprop="datePublished" content="2021-08-25T00:00:00+00:00" />
+Some (or even all) of the text can be similar to what you see in the book, as these are notes: I&rsquo;ve tried not to be unnecessarily creative with my words."><meta itemprop="datePublished" content="2021-08-25T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2021-08-25T00:00:00+00:00" />
-<meta itemprop="wordCount" content="927">
-<meta itemprop="image" content="https://krshrimali.github.io"/>
-
-
-
-<meta itemprop="keywords" content="development,coding,cpp,notes,deleted functions," />
-<meta name="twitter:card" content="summary_large_image"/>
+<meta itemprop="wordCount" content="927"><meta itemprop="image" content="https://krshrimali.github.io"/>
+<meta itemprop="keywords" content="development,coding,cpp,notes,deleted functions," /><meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://krshrimali.github.io"/>
 
 <meta name="twitter:title" content="Prefer Deleted Functions to Private Undefined Ones (Notes)"/>
@@ -274,7 +268,7 @@ Some (or even all) of the text can be similar to what you see in the book, as th
 <p>Hence, it&rsquo;s just better to not allow copying <code>istream</code> or <code>ostream</code> objects.</p>
 <h2 id="in-c-98">In C++-98:</h2>
 <p>Reminder (from above): All <code>istream</code> and <code>ostream</code> objects inherit from <code>basic_ios</code> class (possibly) in the C++ standard, and the <code>basic_ios</code> class in C++-98 looks something like this:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">charT</span>, <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">traits</span> <span style="color:#f92672">=</span> char_traits<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> <span style="color:#f92672">&gt;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">charT</span>, <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">traits</span> <span style="color:#f92672">=</span> char_traits<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> <span style="color:#f92672">&gt;</span>
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">basic_ios</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> ios_base {
 <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
     <span style="color:#75715e">// ...
@@ -296,7 +290,7 @@ Some (or even all) of the text can be similar to what you see in the book, as th
 </ul>
 <h2 id="in-c-11">In C++-11</h2>
 <p>In C++-11, the above can be done using <code>= delete</code> to mark the copy constructor and the copy assignment operator as <em>deleted</em> functions.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">charT</span>, <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">traits</span> <span style="color:#f92672">=</span> char_traits<span style="color:#f92672">&lt;</span>charT<span style="color:#f92672">&gt;</span> <span style="color:#f92672">&gt;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">charT</span>, <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">traits</span> <span style="color:#f92672">=</span> char_traits<span style="color:#f92672">&lt;</span>charT<span style="color:#f92672">&gt;</span> <span style="color:#f92672">&gt;</span>
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">basic_ios</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> ios_base {
 <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
     <span style="color:#75715e">// ...
@@ -307,7 +301,7 @@ Some (or even all) of the text can be similar to what you see in the book, as th
 </code></pre></div><p>It&rsquo;s a convention to declare <em>deleted</em> functions <code>public</code>, but why? Better error messages.</p>
 <p>In case you declare your <em>deleted</em> functions <code>private</code>, some compilers will probably complain about the function being <code>private</code> and can hide the error message of it not being usable (because it being <code>deleted</code>). Hence, it&rsquo;s a <em>good practice</em> to make them <code>public</code>:</p>
 <p>From my experience though, Apple&rsquo;s clang compiler (v 12.0.5) doesn&rsquo;t complain about it being <code>private</code>, but then - it can vary from compiler to compiler, so better to play safe. Here is an example of how the error message looks like:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span>
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Sample</span> {
 <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
@@ -323,7 +317,7 @@ Some (or even all) of the text can be similar to what you see in the book, as th
     <span style="color:#66d9ef">int</span> x;
 };
 </code></pre></div><p>Compiling the above code fails with the following error:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">main.cpp:<span style="color:#ae81ff">10</span><span style="color:#f92672">:</span><span style="color:#ae81ff">16</span><span style="color:#f92672">:</span> error: call to deleted constructor of <span style="color:#960050;background-color:#1e0010">&#39;</span>Sample<span style="color:#960050;background-color:#1e0010">&#39;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">main.cpp:<span style="color:#ae81ff">10</span><span style="color:#f92672">:</span><span style="color:#ae81ff">16</span><span style="color:#f92672">:</span> error: call to deleted constructor of <span style="color:#960050;background-color:#1e0010">&#39;</span>Sample<span style="color:#960050;background-color:#1e0010">&#39;</span>
         Sample new_object(s);
                <span style="color:#f92672">^</span>          <span style="color:#f92672">~</span>
 main.cpp:<span style="color:#ae81ff">6</span><span style="color:#f92672">:</span><span style="color:#ae81ff">5</span><span style="color:#f92672">:</span> note: <span style="color:#960050;background-color:#1e0010">&#39;</span>Sample<span style="color:#960050;background-color:#1e0010">&#39;</span> has been explicitly marked deleted here
@@ -337,20 +331,20 @@ main.cpp:<span style="color:#ae81ff">6</span><span style="color:#f92672">:</span
 </ul>
 <p>Let&rsquo;s discuss the last point in detail:</p>
 <p>Consider the case where you have:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T<span style="color:#f92672">&gt;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T<span style="color:#f92672">&gt;</span>
 <span style="color:#66d9ef">void</span> processPointer(T<span style="color:#f92672">*</span> ptr);
 </code></pre></div><p>And:</p>
 <ul>
 <li>You need a template that works with built-in pointers. You want to reject calls with <code>void*</code> and <code>char*</code> pointers (more on this later, these deserve special handling at times).</li>
 <li>Ideal way? Delete these instantiations (with <code>void*</code> or <code>char*</code> input pointers).</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;&gt;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;&gt;</span>
 <span style="color:#66d9ef">void</span> processPointer<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">void</span><span style="color:#f92672">&gt;</span>(<span style="color:#66d9ef">void</span><span style="color:#f92672">*</span>) <span style="color:#f92672">=</span> <span style="color:#66d9ef">delete</span>;
 
 <span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;&gt;</span>
 <span style="color:#66d9ef">void</span> processPointer<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">char</span><span style="color:#f92672">&gt;</span>(<span style="color:#66d9ef">char</span><span style="color:#f92672">*</span>) <span style="color:#f92672">=</span> <span style="color:#66d9ef">delete</span>;
 </code></pre></div><p>But, with C++-98 way, it&rsquo;s not possible within the class scope. That is, you can not give template specialization to your member function within the class scope (it should be done in the namespace scope):</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Sample</span> {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Sample</span> {
 <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
     <span style="color:#75715e">// ...
 </span><span style="color:#75715e"></span>    <span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T<span style="color:#f92672">&gt;</span>
@@ -364,7 +358,7 @@ main.cpp:<span style="color:#ae81ff">6</span><span style="color:#f92672">:</span
     <span style="color:#66d9ef">void</span> processPointer<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">void</span><span style="color:#f92672">&gt;</span>(<span style="color:#66d9ef">void</span><span style="color:#f92672">*</span>);  <span style="color:#75715e">// error
 </span><span style="color:#75715e"></span>};
 </code></pre></div><p>While with the C++-11 way, you can delete function outside the <code>class</code> scope:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Sample</span> {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Sample</span> {
 <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
     <span style="color:#75715e">// ...
 </span><span style="color:#75715e"></span>    <span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T<span style="color:#f92672">&gt;</span>
@@ -547,7 +541,7 @@ main.cpp:<span style="color:#ae81ff">6</span><span style="color:#f92672">:</span
 
 
 
-<script src="https://krshrimali.github.io/bundle.min.0e63d07bc6b25d019f9583b7d5921c8d0cd24d25d02cd4df1e8844fbbf00dbddb131d64e493dd5ac20b3814096d9495bc706574822df5561583386c15a358160.js"></script>
+<script src="https://krshrimali.github.io/bundle.min.5fae9992ea406007408dc33b0b3a8376d61e2f1d6ac50ba1dad7580ac50afb5199bcef3bbc3677e77553a9980bf882cf71edc2f755687dd7725f12ece4304ac2.js"></script>
     <script>
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -555,7 +549,7 @@ main.cpp:<span style="color:#ae81ff">6</span><span style="color:#f92672">:</span
         })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
         ga('create', 'UA-146662543-1', 'auto');ga('send', 'pageview');
     </script>
-<script src="https://krshrimali.github.io/js/webmention.min.f8e74a199755d9338148ffba6a77e10ea98a46109749cb7088a273c36822534987180c01402b66cd4d1e9cc87ff1891f2f59ce37eccf002ddf25233a4c95e9b2.js" data-id="webmention-container"></script>
+<script src="https://krshrimali.github.io/js/webmention.min.513a53d009530b21cba09721b6f4dc912e9c20ad2c0adbb5c4e486c4f77774a6e9eca8c2e1e4e8bc9e9e86693aa5ca91e7bf232b50f7f8bee4e64efc874040a7.js" data-id="webmention-container"></script>
 
 
 
