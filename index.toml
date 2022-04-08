@@ -1,9 +1,9 @@
 # We use the generated html to prevent issues involving markdown frontmatter
 
 [[input.files]]
-path = "./posts/2022/01/hash-maps-in-rust-notes/index.html"
-url = "https://krshrimali.github.io/posts/2022/01/hash-maps-in-rust-notes/"
-title = "Hash Maps in Rust [Notes]"
+path = "./posts/2022/01/common-collections-vector-and-strings-in-rust-notes/index.html"
+url = "https://krshrimali.github.io/posts/2022/01/common-collections-vector-and-strings-in-rust-notes/"
+title = "Common Collections (Vector and Strings) in Rust [Notes]"
 
 [[input.files]]
 path = "./posts/2022/01/common-collections-vector-and-strings-in-rust-notes/index.html"

@@ -27,7 +27,7 @@ Today, we are going to see a practical example of applying a CNN to a Custom Dat
 
 
 
-<link rel="stylesheet" href="https://krshrimali.github.io/main.min.b6dbce0fdf6c61563a0c2226e857d5dadd8e5afa2c4f73ec9ea55abd831f9a72.css">
+<link rel="stylesheet" href="https://krshrimali.github.io/main.min.a6eedfdab54db128d627e7063826ffb0d9949ad2ea9424548adb08a272e224c9.css">
 
 
 
@@ -50,10 +50,16 @@ Today, we are going to see a practical example of applying a CNN to a Custom Dat
 <meta itemprop="name" content="Classifying Dogs vs Cats using PyTorch C&#43;&#43; API: Part-1">
 <meta itemprop="description" content="Hi Everyone! So excited to be back with another blog in the series of PyTorch C&#43;&#43; Blogs.
 Today, we are going to see a practical example of applying a CNN to a Custom Dataset - Dogs vs Cats. This is going to be a short post of showing results and discussion about hyperparameters and loss functions for the task, as code snippets and explanation has been provided here, here and here.
-"><meta itemprop="datePublished" content="2019-07-23T00:00:00+00:00" />
+">
+<meta itemprop="datePublished" content="2019-07-23T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2019-07-23T00:00:00+00:00" />
-<meta itemprop="wordCount" content="1373"><meta itemprop="image" content="https://krshrimali.github.io"/>
-<meta itemprop="keywords" content="development,coding,cpp,notes,pytorch-cpp,libtorch," /><meta name="twitter:card" content="summary_large_image"/>
+<meta itemprop="wordCount" content="1373">
+<meta itemprop="image" content="https://krshrimali.github.io"/>
+
+
+
+<meta itemprop="keywords" content="development,coding,cpp,notes,pytorch-cpp,libtorch," />
+<meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://krshrimali.github.io"/>
 
 <meta name="twitter:title" content="Classifying Dogs vs Cats using PyTorch C&#43;&#43; API: Part-1"/>
@@ -225,7 +231,7 @@ Today, we are going to see a practical example of applying a CNN to a Custom Dat
 <li><code>number</code> represents the count of the sample.</li>
 </ul>
 <p>For example: <code>cat.100.jpg</code> and <code>dog.1.jpg</code>. In order to load the data, we will move the cat images to <code>train/cat</code> folder and dog images to <code>train/dog</code> folder. You can accomplish this using <code>shutil</code> module:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># This code moves cat and dog images to train/cat and train/dog folders respectively</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># This code moves cat and dog images to train/cat and train/dog folders respectively</span>
 <span style="color:#f92672">import</span> shutil<span style="color:#f92672">,</span> os
 
 files <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>listdir(<span style="color:#e6db74">&#39;train/&#39;</span>)
@@ -241,7 +247,7 @@ count_dog <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</sp
 		count_dog <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
 		shutil<span style="color:#f92672">.</span>copy(<span style="color:#e6db74">&#39;test/&#39;</span> <span style="color:#f92672">+</span> file, <span style="color:#e6db74">&#39;train/dog/&#39;</span> <span style="color:#f92672">+</span> str(count_dog) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;.jpg&#39;</span>)
 </code></pre></div><p>Once done, let&rsquo;s go ahead and load this data. Since we have discussed this <a href="https://krshrimali.github.io/posts/2019/07/custom-data-loading-using-pytorch-c-api/">before</a>, I&rsquo;ll just paste the snippet here.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">torch<span style="color:#f92672">::</span>Tensor read_data(std<span style="color:#f92672">::</span>string loc) {
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">torch<span style="color:#f92672">::</span>Tensor read_data(std<span style="color:#f92672">::</span>string loc) {
 	<span style="color:#75715e">// Read Image from the location of image
 </span><span style="color:#75715e"></span>	cv<span style="color:#f92672">::</span>Mat img <span style="color:#f92672">=</span> cv<span style="color:#f92672">::</span>imread(loc, <span style="color:#ae81ff">0</span>);
 	cv<span style="color:#f92672">::</span>resize(img, img, cv<span style="color:#f92672">::</span>Size(<span style="color:#ae81ff">200</span>, <span style="color:#ae81ff">200</span>), cv<span style="color:#f92672">::</span>INTER_CUBIC);
@@ -323,7 +329,7 @@ std<span style="color:#f92672">::</span>pair<span style="color:#f92672">&lt;</sp
 </li>
 </ol>
 <p>Let&rsquo;s now go ahead and see how we load the data. For this, we first need to define the <code>Dataset</code> class. This class should initialize two variables: one for images and one for labels. As discussed <a href="https://krshrimali.github.io/posts/2019/07/custom-data-loading-using-pytorch-c-api/">here</a>, we&rsquo;ll also define <code>get()</code> and <code>size()</code> functions.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CustomDataset</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> torch<span style="color:#f92672">::</span>data<span style="color:#f92672">::</span>Dataset<span style="color:#f92672">&lt;</span>CustomDataset<span style="color:#f92672">&gt;</span> {
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CustomDataset</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> torch<span style="color:#f92672">::</span>data<span style="color:#f92672">::</span>Dataset<span style="color:#f92672">&lt;</span>CustomDataset<span style="color:#f92672">&gt;</span> {
 <span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
 	<span style="color:#75715e">/* data */</span>
 	<span style="color:#75715e">// Should be 2 tensors
@@ -346,7 +352,7 @@ std<span style="color:#f92672">::</span>pair<span style="color:#f92672">&lt;</sp
   };
 };
 </code></pre></div><p>Once done, we can go ahead and initialize the Dataset in our <code>main()</code> function.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">int</span> argc, <span style="color:#66d9ef">char</span> <span style="color:#66d9ef">const</span> <span style="color:#f92672">*</span>argv[]) {
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">int</span> argc, <span style="color:#66d9ef">char</span> <span style="color:#66d9ef">const</span> <span style="color:#f92672">*</span>argv[]) {
   <span style="color:#75715e">// Load the model.
 </span><span style="color:#75715e"></span>  <span style="color:#75715e">// Read Data
 </span><span style="color:#75715e"></span>  vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> folders_name;
@@ -362,7 +368,7 @@ std<span style="color:#f92672">::</span>pair<span style="color:#f92672">&lt;</sp
 }
 </code></pre></div><h2 id="network-overview">Network Overview</h2>
 <p>To make things easy to read (a programmer&rsquo;s mantra), we define our network in a header file. We will use a CNN network initially for this binary classification task. Since I&rsquo;m not using a GPU, the training is slow and that&rsquo;s why I experimented it only for 10 epochs. The whole objective is to discuss and show how to use PyTorch C++ API for this. You can always run it for more epochs or change the network parameters.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">NetImpl</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Module {
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">NetImpl</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Module {
     NetImpl() {
         <span style="color:#75715e">// Initialize the network
 </span><span style="color:#75715e"></span>        <span style="color:#75715e">// On how to pass strides and padding: https://github.com/pytorch/pytorch/issues/12649#issuecomment-430156160
@@ -443,7 +449,7 @@ std<span style="color:#f92672">::</span>pair<span style="color:#f92672">&lt;</sp
     torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Linear fc1{<span style="color:#66d9ef">nullptr</span>}, fc2{<span style="color:#66d9ef">nullptr</span>}, fc3{<span style="color:#66d9ef">nullptr</span>}, fc4{<span style="color:#66d9ef">nullptr</span>};
 };
 </code></pre></div><p>We will initialize this network and pass each batch of our data once in an epoch.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// Initialize the Network
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// Initialize the Network
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">auto</span> net <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>make_shared<span style="color:#f92672">&lt;</span>NetImpl<span style="color:#f92672">&gt;</span>();
 </code></pre></div><h2 id="training-the-network-on-dogs-vs-cats-dataset">Training the Network on Dogs vs Cats Dataset</h2>
 <p>We had before discussed code for training <a href="https://krshrimali.github.io/posts/2019/07/training-a-network-on-custom-dataset-using-pytorch-c-api/">here</a>. I suggest the reader to go through that blog in order to train the dataset. I&rsquo;ll give more insights on training in the next blog!</p>
@@ -618,7 +624,7 @@ std<span style="color:#f92672">::</span>pair<span style="color:#f92672">&lt;</sp
 
 
 
-<script src="https://krshrimali.github.io/bundle.min.5fae9992ea406007408dc33b0b3a8376d61e2f1d6ac50ba1dad7580ac50afb5199bcef3bbc3677e77553a9980bf882cf71edc2f755687dd7725f12ece4304ac2.js"></script>
+<script src="https://krshrimali.github.io/bundle.min.0e63d07bc6b25d019f9583b7d5921c8d0cd24d25d02cd4df1e8844fbbf00dbddb131d64e493dd5ac20b3814096d9495bc706574822df5561583386c15a358160.js"></script>
     <script>
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -626,7 +632,7 @@ std<span style="color:#f92672">::</span>pair<span style="color:#f92672">&lt;</sp
         })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
         ga('create', 'UA-146662543-1', 'auto');ga('send', 'pageview');
     </script>
-<script src="https://krshrimali.github.io/js/webmention.min.513a53d009530b21cba09721b6f4dc912e9c20ad2c0adbb5c4e486c4f77774a6e9eca8c2e1e4e8bc9e9e86693aa5ca91e7bf232b50f7f8bee4e64efc874040a7.js" data-id="webmention-container"></script>
+<script src="https://krshrimali.github.io/js/webmention.min.f8e74a199755d9338148ffba6a77e10ea98a46109749cb7088a273c36822534987180c01402b66cd4d1e9cc87ff1891f2f59ce37eccf002ddf25233a4c95e9b2.js" data-id="webmention-container"></script>
 
 
 
