@@ -13,8 +13,98 @@
       <pubDate>Sat, 23 Jul 2022 00:00:00 +0000</pubDate>
       
       <guid>https://krshrimali.github.io/posts/2022/07/porting-a-tiling-window-manager-extenstion-to-c-bismuth-part-1/</guid>
-      <description>Hi everyone! I understand it&amp;rsquo;s been a long time, and I&amp;rsquo;m so excited to be writing this blog today. In today&amp;rsquo;s blog, I wanted to talk about my journey (so far) on contributing to Bismuth (a KDE&amp;rsquo;s Tiling Window Manager Extension), mainly how and why I started, and where I am right now.
-The Story: Why KDE Plasma and Why Bismuth? For the last few months (close to a year), I&amp;rsquo;ve been using Pop OS (a linux distribution by System 76) which had this amazing automatic tiling window extension called pop-shell, and it was close to what I always needed:</description>
+      <description>
+          
+            &lt;h4&gt;Porting a Tiling Window Manager Extenstion to C++ (Bismuth): Part-1&lt;/h4&gt;
+          
+          &lt;p&gt;Hi everyone! I understand it&amp;rsquo;s been a long time, and I&amp;rsquo;m so excited to be writing this blog today. In today&amp;rsquo;s blog, I wanted to talk about my journey (so far) on contributing to &lt;a href=&#34;https://github.com/Bismuth-Forge/bismuth/&#34;&gt;Bismuth (a KDE&amp;rsquo;s Tiling Window Manager Extension)&lt;/a&gt;, mainly how and why I started, and where I am right now.&lt;/p&gt;
+&lt;h2 id=&#34;the-story-why-kde-plasma-and-why-bismuth&#34;&gt;The Story: Why KDE Plasma and Why Bismuth?&lt;/h2&gt;
+&lt;p&gt;For the last few months (close to a year), I&amp;rsquo;ve been using Pop OS (a linux distribution by System 76) which had this amazing automatic tiling window extension called &lt;a href=&#34;https://github.com/pop-os/shell&#34;&gt;&lt;code&gt;pop-shell&lt;/code&gt;&lt;/a&gt;, and it was close to what I always needed:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Tiling.&lt;/li&gt;
+&lt;li&gt;A desktop environment.&lt;/li&gt;
+&lt;li&gt;Ability to configure keyboard shortcuts.&lt;/li&gt;
+&lt;li&gt;Ability to turn-off tiling to floating.&lt;/li&gt;
+&lt;li&gt;An option to launch specific windows as floating windows. (example: Steam)&lt;/li&gt;
+&lt;li&gt;An active community to seek help or suggestions from.&lt;/li&gt;
+&lt;li&gt;Open-Sourced!&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Now some would say that there is a possibility to install tiling window managers on desktop environments (I&amp;rsquo;m aware &lt;a href=&#34;https://github.com/heckelson/i3-and-kde-plasma&#34;&gt;i3 on KDE Plasma&lt;/a&gt;), but that just felt&amp;hellip; &lt;em&gt;odd&lt;/em&gt; for some reason. So I stuck with Pop OS, until &lt;a href=&#34;https://github.com/pop-os/shell/issues/1470&#34;&gt;this happened&lt;/a&gt;, oh and also &lt;a href=&#34;https://github.com/pop-os/pop/issues/2444&#34;&gt;this&lt;/a&gt;. The second issue where there was a lag while dragging windows, was unfortunately not a Pop OS bug but was mostly related to upstream (mutter if I&amp;rsquo;m not wrong). And when they say that it only happened with NVIDIA drivers, I knew that it&amp;rsquo;s something that will probably take some time to resolve (I would rather prefer not to get into the details here).&lt;/p&gt;
+&lt;p&gt;That&amp;rsquo;s when I decided to explore KDE Plasma. KDE Plasma 5.25 was just announced, and oh man - it seemed to have impressed a lot of people out there. However, what impressed me the most was that it had no such issues with NVIDIA drivers, at least no lag while dragging windows. I also liked their zoom accessibility feature, much much much better than what GNOME had. Needless to say, that I had decided to stick to KDE Plasma after that.&lt;/p&gt;
+&lt;p&gt;Just to give some context, I use multiple monitors and while people happily survive without a tiling window manager, I was the opposite - I felt the need of tiling, specially when I started streaming or sharing my work with others. And then I saw &lt;a href=&#34;https://www.youtube.com/watch?v=TQzaDrmsE9A&#34;&gt;this video: &amp;ldquo;TILING comes to KDE Kwin? ;)&amp;rdquo;&lt;/a&gt;! I was wow-ed (is that a word BTW?). I was introduced to this amazing KDE Tiling Window Manager Extension named &lt;strong&gt;Bismuth&lt;/strong&gt; (&lt;a href=&#34;https://github.com/Bismuth-Forge/bismuth/)&#34;&gt;https://github.com/Bismuth-Forge/bismuth/)&lt;/a&gt;. I didn&amp;rsquo;t waste any time in installing and setting up the extension on my machine&amp;hellip;&lt;/p&gt;
+&lt;h2 id=&#34;the-motivation-why-contribute&#34;&gt;The Motivation: Why contribute?&lt;/h2&gt;
+&lt;p&gt;Of course, with great power comes great responsibility, and in the Linux ecosystem, &lt;em&gt;with more users, comes more bugs&lt;/em&gt;. The same happened with Bismuth, lots of users started trying it, and it had good amount of issues, interestingly, less were bugs and more were about features. However, I got stuck with one of the most important feature I needed, and it was &amp;ldquo;Move window to the next/previous screen/monitor&amp;rdquo; with a keyboard-shortcut. Now, do note that Bismuth did promise that it comes with the feature, so it was a bug. And as any other user would do, I thought of raising an issue but there was one already: &lt;a href=&#34;https://github.com/Bismuth-Forge/bismuth/issues/370&#34;&gt;here&lt;/a&gt;. I regularly move my windows from one screen to another with keyboard shortcuts, and with this bug, I started facing issues. But as they say, in open-source, the community is everything. A guy with username: &lt;a href=&#34;https://github.com/benemorius&#34;&gt;benemorius&lt;/a&gt; came up with a solution, and even though it took me some time to get it working, but it was eventually fixed. I started realizing how much I love this process, but more than that - I wanted to dive into the source code, and understand how it works. That was the time I realized I will look at the issues, found many opened, but since the maintainer of the library had a goal of porting it from typescript to C++, which meant that new features were essentially blocked till then (unless and until they are small with respect to the number of lines of code).&lt;/p&gt;
+&lt;p&gt;That was the time I realized that I should stop complaining, and instead start helping. I found an opened issue &lt;a href=&#34;https://github.com/Bismuth-Forge/bismuth/issues/335#issuecomment-1159362257&#34;&gt;here&lt;/a&gt; and left a comment. The maintainer was very kind to respond, and guide through the process. And that&amp;rsquo;s where I started contributing to Bismuth.&lt;/p&gt;
+&lt;p&gt;To a lot of people, and even to me, porting looks like an onboarding task, you have got things baked in for yourself, all you have to do is port it to another language. This was different though, I realized that I might have to write my own code at some places (&lt;a href=&#34;https://github.com/Bismuth-Forge/bismuth/issues/335#issuecomment-1159993392)&#34;&gt;https://github.com/Bismuth-Forge/bismuth/issues/335#issuecomment-1159993392)&lt;/a&gt;, it was a re-write from ground up.&lt;/p&gt;
+&lt;p&gt;One thing I missed writing so far, was how much I loved developing tools and libraries. It&amp;rsquo;s something that comes naturally to me, and Bismuth seemed to be an amazing place to continue my passion.&lt;/p&gt;
+&lt;h2 id=&#34;contributions&#34;&gt;Contributions&lt;/h2&gt;
+&lt;p&gt;For those who might be unaware, I did all my contributions (so far) live on my Twitch channel: &lt;a href=&#34;https://twitch.tv/buffetcodes&#34;&gt;buffetcodes&lt;/a&gt;, and have uploaded all the recordings on my &lt;a href=&#34;https://youtube.com/c/kushashwaraviShrimali&#34;&gt;YouTube channel&lt;/a&gt;. There is a &lt;a href=&#34;https://www.youtube.com/playlist?list=PLfjzHJeA53gTMjuPI1YaQ9jjZx_E8mqJZ&#34;&gt;playlist if you are interested&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Honestly speaking, I had no clue when I started that how the journey will be, how easy/difficult it will be! To me, it was just fun. I don&amp;rsquo;t know if it was easy, or if it was difficult, it was just something very fun to do! Plus, came with a lot of learning. So far, when I&amp;rsquo;m writing this blog, I&amp;rsquo;ve 2 opened PRs:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/Bismuth-Forge/bismuth/pull/387&#34;&gt;C++ Port: &lt;code&gt;focusWindowByDirection&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/Bismuth-Forge/bismuth/pull/393&#34;&gt;C++ Port: &lt;code&gt;ThreeColumn&lt;/code&gt; layout&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;To give you a glimpse, here is how the code looks when you do press a keyboard shortcut to focus window to your left/right/up/down:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; Engine&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;focusWindowByDirection(FocusDirection direction)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;auto&lt;/span&gt; windowsToChoseFrom &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; m_windows.visibleWindowsOn(activeSurface());
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (windowsToChoseFrom.empty()) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;// If there is no current window, select the first one.
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;auto&lt;/span&gt; activeWindow &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; m_windows.activeWindow();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (&lt;span style=&#34;color:#f92672&#34;&gt;!&lt;/span&gt;activeWindow.has_value()) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        activeWindow &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; windowsToChoseFrom.front();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;auto&lt;/span&gt; window &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; windowNeighbor(direction, activeWindow.value());
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (window.has_value()) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        window&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;activate();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Let&amp;rsquo;s consider that you are trying to focus right from your current window, so the parameter &lt;code&gt;direction&lt;/code&gt; will have a value of &lt;code&gt;FocusDirection::Right&lt;/code&gt; (it&amp;rsquo;s an &lt;code&gt;enum&lt;/code&gt;). The current state of Bismuth only allowed you to move right/left/top/bottom on the current screen, that means if you want to move to the next monitor - you can&amp;rsquo;t use the same keyboard shortcuts. Hence the first line in the body of the function:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// This gets all the visible windows (not hidden) on the active screen/montior/surface
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;auto&lt;/span&gt; windowsToChoseFrom &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; m_windows.visible(activeSurface());
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Now of-course there is a possibility that you have no windows visible on the surface, in that case it will just return (which is what the next 3 lines do):&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// Early return if no window is visible on the current surface
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (windowsToChoseFrom.empty()) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Okay, now comes the serious part. Whenever you think of &lt;code&gt;focusWindowByDirection&lt;/code&gt;, there are 2 possibilities (apart from those listed above):&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;You have an active window, that means your mouse is already focused on a window on the current screen.&lt;/li&gt;
+&lt;li&gt;You don&amp;rsquo;t have an active window, that means your focus can be on the panel, or maybe on an icon or wherever except a window on the current surface.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;These two cases need to be handled, and that&amp;rsquo;s what the next few lines do:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// If there is no current window, select the first one.
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;auto&lt;/span&gt; activeWindow &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; m_windows.activeWindow();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (&lt;span style=&#34;color:#f92672&#34;&gt;!&lt;/span&gt;activeWindow.has_value()) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    activeWindow &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; windowsToChoseFrom.front();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Once the extension knows what &lt;code&gt;activeWindow&lt;/code&gt; is, it&amp;rsquo;s comparatively easier to figure out which window to focus on (only if it&amp;rsquo;s possible). Time to talk about the function that does the magic.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;/* This function returns the closest window (if any) from the current window for the given direction */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;optional&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;Window&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; Engine&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;windowNeighbor(Engine&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;FocusDirection direction, &lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; Window &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;basisWindow);
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Above is the declaration of the function, and hopefully the comment describes it well. You will definitely need to know the window relative to which you&amp;rsquo;ll return the output window, and the direction is a must. Note the return type, &lt;code&gt;std::optional&amp;lt;Window&amp;gt;&lt;/code&gt;. As I said, it is possible that there is a window to the right, it&amp;rsquo;s also possible that there are no more windows to the right direction. Hence &lt;a href=&#34;https://en.cppreference.com/w/cpp/utility/optional&#34;&gt;&lt;code&gt;std::optional&lt;/code&gt;&lt;/a&gt; there.&lt;/p&gt;
+&lt;p&gt;Let me quickly talk about the algorithm that Bismuth follows for this feature:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Get all possible candidates in the neighborhood of the active window &lt;em&gt;for the given direction&lt;/em&gt;:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;If the direction is right, you need to know how many &lt;em&gt;tiled&lt;/em&gt; windows are on the right to the active window.&lt;/li&gt;
+&lt;li&gt;These neighbor candidates can also be on the top-right if the given direction is right.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;Get the &lt;em&gt;closest&lt;/em&gt; relative window from the candidates selected in the step-1.&lt;/li&gt;
+&lt;li&gt;If there are multiple windows from step-2, return the window which was used recently (this means that we need each window to have &amp;ldquo;the time it was last used&amp;rdquo; as a meta-data).&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;I&amp;rsquo;ll be diving deep into the code for each of these steps in my next blog.&lt;/p&gt;
+&lt;p&gt;Do note that I&amp;rsquo;m not doing this full-time, so this will obviously look slow to a lot of people, but I see a motivation behind doing this. I also believe that it is worth to mention &lt;a href=&#34;https://github.com/benemorius/bismuth/&#34;&gt;benemorius&amp;rsquo;s work&lt;/a&gt; on Bismuth, where has fixed a lot of the issues + added new features to Bismuth, and that is amazing! Shoutout to him on what he has been doing for the community.&lt;/p&gt;
+&lt;p&gt;Thank you for reading this blog, and if you are interested, feel free to check out &lt;a href=&#34;https://github.com/Bismuth-Forge/bismuth/&#34;&gt;Bismuth&lt;/a&gt;. 😄❤️&lt;/p&gt;
+
+      </description>
     </item>
     
   </channel>

@@ -13,7 +13,12 @@
       <pubDate>Sat, 23 Jul 2022 00:00:00 +0000</pubDate>
       
       <guid>https://krshrimali.github.io/categories/cpp/</guid>
-      <description></description>
+      <description>
+          
+            &lt;h4&gt;cpp&lt;/h4&gt;
+          
+          
+      </description>
     </item>
     
     <item>
@@ -22,7 +27,12 @@
       <pubDate>Sat, 23 Jul 2022 00:00:00 +0000</pubDate>
       
       <guid>https://krshrimali.github.io/categories/kde/</guid>
-      <description></description>
+      <description>
+          
+            &lt;h4&gt;kde&lt;/h4&gt;
+          
+          
+      </description>
     </item>
     
     <item>
@@ -31,7 +41,12 @@
       <pubDate>Sat, 23 Jul 2022 00:00:00 +0000</pubDate>
       
       <guid>https://krshrimali.github.io/categories/open-source/</guid>
-      <description></description>
+      <description>
+          
+            &lt;h4&gt;open-source&lt;/h4&gt;
+          
+          
+      </description>
     </item>
     
     <item>
@@ -40,7 +55,12 @@
       <pubDate>Sat, 23 Jul 2022 00:00:00 +0000</pubDate>
       
       <guid>https://krshrimali.github.io/categories/projects/</guid>
-      <description></description>
+      <description>
+          
+            &lt;h4&gt;projects&lt;/h4&gt;
+          
+          
+      </description>
     </item>
     
     <item>
@@ -49,7 +69,12 @@
       <pubDate>Sun, 09 Jan 2022 00:00:00 +0000</pubDate>
       
       <guid>https://krshrimali.github.io/categories/rust/</guid>
-      <description></description>
+      <description>
+          
+            &lt;h4&gt;rust&lt;/h4&gt;
+          
+          
+      </description>
     </item>
     
     <item>
@@ -58,7 +83,12 @@
       <pubDate>Sun, 03 Oct 2021 00:00:00 +0000</pubDate>
       
       <guid>https://krshrimali.github.io/categories/weekly-updates/</guid>
-      <description></description>
+      <description>
+          
+            &lt;h4&gt;weekly updates&lt;/h4&gt;
+          
+          
+      </description>
     </item>
     
     <item>
@@ -67,7 +97,12 @@
       <pubDate>Sun, 26 Sep 2021 00:00:00 +0000</pubDate>
       
       <guid>https://krshrimali.github.io/categories/book-reading/</guid>
-      <description></description>
+      <description>
+          
+            &lt;h4&gt;book reading&lt;/h4&gt;
+          
+          
+      </description>
     </item>
     
     <item>
@@ -76,7 +111,12 @@
       <pubDate>Sat, 14 Aug 2021 00:00:00 +0000</pubDate>
       
       <guid>https://krshrimali.github.io/categories/algorithms/</guid>
-      <description></description>
+      <description>
+          
+            &lt;h4&gt;algorithms&lt;/h4&gt;
+          
+          
+      </description>
     </item>
     
     <item>
@@ -85,7 +125,12 @@
       <pubDate>Thu, 10 Dec 2020 00:00:00 +0000</pubDate>
       
       <guid>https://krshrimali.github.io/categories/opencv/</guid>
-      <description></description>
+      <description>
+          
+            &lt;h4&gt;opencv&lt;/h4&gt;
+          
+          
+      </description>
     </item>
     
     <item>
@@ -94,7 +139,26 @@
       <pubDate>Tue, 15 Sep 2020 00:00:00 +0000</pubDate>
       
       <guid>https://krshrimali.github.io/categories/deep-learning/</guid>
-      <description></description>
+      <description>
+          
+            &lt;h4&gt;Deep Learning&lt;/h4&gt;
+          
+          
+      </description>
+    </item>
+    
+    <item>
+      <title>pytorch</title>
+      <link>https://krshrimali.github.io/categories/pytorch/</link>
+      <pubDate>Tue, 15 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://krshrimali.github.io/categories/pytorch/</guid>
+      <description>
+          
+            &lt;h4&gt;pytorch&lt;/h4&gt;
+          
+          
+      </description>
     </item>
     
   </channel>
