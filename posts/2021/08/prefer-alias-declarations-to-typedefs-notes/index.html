@@ -26,7 +26,7 @@
 
 
 
-<link rel="stylesheet" href="https://krshrimali.github.io/main.min.a6eedfdab54db128d627e7063826ffb0d9949ad2ea9424548adb08a272e224c9.css">
+<link rel="stylesheet" href="https://krshrimali.github.io/main.min.b6dbce0fdf6c61563a0c2226e857d5dadd8e5afa2c4f73ec9ea55abd831f9a72.css">
 
 
 
@@ -50,16 +50,10 @@
 <meta itemprop="description" content="One solution to avoiding using long type names:
 // So C&#43;&#43;98 like
 typedef std::unique_ptr&lt;std::unordered_map&lt;std::string, std::string&gt;&gt; UPtrMapSS;
-">
-<meta itemprop="datePublished" content="2021-08-12T00:00:00+00:00" />
+"><meta itemprop="datePublished" content="2021-08-12T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2021-08-12T00:00:00+00:00" />
-<meta itemprop="wordCount" content="433">
-<meta itemprop="image" content="https://krshrimali.github.io"/>
-
-
-
-<meta itemprop="keywords" content="development,coding,cpp,notes,aliases,typedefs," />
-<meta name="twitter:card" content="summary_large_image"/>
+<meta itemprop="wordCount" content="433"><meta itemprop="image" content="https://krshrimali.github.io"/>
+<meta itemprop="keywords" content="development,coding,cpp,notes,aliases,typedefs," /><meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://krshrimali.github.io"/>
 
 <meta name="twitter:title" content="Prefer Alias Declarations to Typedefs (Notes)"/>
@@ -196,64 +190,64 @@ typedef std::unique_ptr&lt;std::unordered_map&lt;std::string, std::string&gt;&gt
 
             <div class="post-content e-content">
                 <p>One solution to avoiding using long type names:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// So C++98 like
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">typedef</span> std<span style="color:#f92672">::</span>unique_ptr<span style="color:#f92672">&lt;</span>std<span style="color:#f92672">::</span>unordered_map<span style="color:#f92672">&lt;</span>std<span style="color:#f92672">::</span>string, std<span style="color:#f92672">::</span>string<span style="color:#f92672">&gt;&gt;</span> UPtrMapSS;
-</code></pre></div><p><img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/cover-images/alias-declarations-typedefs.png" alt=""></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">// So C++98 like
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">typedef</span> std<span style="color:#f92672">::</span>unique_ptr<span style="color:#f92672">&lt;</span>std<span style="color:#f92672">::</span>unordered_map<span style="color:#f92672">&lt;</span>std<span style="color:#f92672">::</span>string, std<span style="color:#f92672">::</span>string<span style="color:#f92672">&gt;&gt;</span> UPtrMapSS;
+</span></span></code></pre></div><p><img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/cover-images/alias-declarations-typedefs.png" alt=""></p>
 <hr>
 <p><strong>NOTE</strong></p>
 <p>My notes on Chapter 3, Item 9 of Effective Modern C++ written by Scott Meyers.</p>
 <p>Some (or even all) of the text can be similar to what you see in the book, as these are notes: I&rsquo;ve tried not to be unnecessarily creative with my words. :)</p>
 <hr>
 <p>C++11 also offers alias declarations:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">using</span> UPtrMapSS <span style="color:#f92672">=</span> <span style="color:#66d9ef">typedef</span> std<span style="color:#f92672">::</span>unique_ptr<span style="color:#f92672">&lt;</span>std<span style="color:#f92672">::</span>unordered_map<span style="color:#f92672">&lt;</span>std<span style="color:#f92672">::</span>string, std<span style="color:#f92672">::</span>string<span style="color:#f92672">&gt;&gt;</span>;
-</code></pre></div><p>Advantages of alias declarations over typedefs:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">using</span> UPtrMapSS <span style="color:#f92672">=</span> <span style="color:#66d9ef">typedef</span> std<span style="color:#f92672">::</span>unique_ptr<span style="color:#f92672">&lt;</span>std<span style="color:#f92672">::</span>unordered_map<span style="color:#f92672">&lt;</span>std<span style="color:#f92672">::</span>string, std<span style="color:#f92672">::</span>string<span style="color:#f92672">&gt;&gt;</span>;
+</span></span></code></pre></div><p>Advantages of alias declarations over typedefs:</p>
 <ol>
 <li>
 <p>For types involving function pointers, aliases are easier to read (for some people):</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// typedef
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">typedef</span> <span style="color:#a6e22e">void</span> (<span style="color:#f92672">*</span>FP)(<span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">const</span> std<span style="color:#f92672">::</span>string<span style="color:#f92672">&amp;</span>);
-
-<span style="color:#75715e">// alias declaration
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> FP <span style="color:#f92672">=</span> <span style="color:#66d9ef">void</span> (<span style="color:#f92672">*</span>)(<span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">const</span> std<span style="color:#f92672">::</span>string<span style="color:#f92672">&amp;</span>);
-</code></pre></div></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">// typedef
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">typedef</span> <span style="color:#a6e22e">void</span> (<span style="color:#f92672">*</span>FP)(<span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">const</span> std<span style="color:#f92672">::</span>string<span style="color:#f92672">&amp;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// alias declaration
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> FP <span style="color:#f92672">=</span> <span style="color:#66d9ef">void</span> (<span style="color:#f92672">*</span>)(<span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">const</span> std<span style="color:#f92672">::</span>string<span style="color:#f92672">&amp;</span>);
+</span></span></code></pre></div></li>
 <li>
 <p>Alias declarations can be templatized, but typedefs can not.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// MyAlloc is a custom allocator
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T<span style="color:#f92672">&gt;</span>
-<span style="color:#66d9ef">using</span> MyAllocList <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>list<span style="color:#f92672">&lt;</span>T, MyAlloc<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;&gt;</span>;
-
-MyAllocList<span style="color:#f92672">&lt;</span>Widget<span style="color:#f92672">&gt;</span> lw; <span style="color:#75715e">// will create std::list&lt;Widget, MyAlloc&lt;Widget&gt;&gt;
-</span></code></pre></div><p>vs: typedef, a hack way:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// templatized struct here
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T<span style="color:#f92672">&gt;</span>
-<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">MyAllocList</span> {
-    <span style="color:#66d9ef">typedef</span> std<span style="color:#f92672">::</span>list<span style="color:#f92672">&lt;</span>T, MyAlloc<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;&gt;</span> type;
-};
-
-MyAllocList<span style="color:#f92672">&lt;</span>Widget<span style="color:#f92672">&gt;::</span>type lw;
-</code></pre></div></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">// MyAlloc is a custom allocator
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> MyAllocList <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>list<span style="color:#f92672">&lt;</span>T, MyAlloc<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;&gt;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>MyAllocList<span style="color:#f92672">&lt;</span>Widget<span style="color:#f92672">&gt;</span> lw; <span style="color:#75715e">// will create std::list&lt;Widget, MyAlloc&lt;Widget&gt;&gt;
+</span></span></span></code></pre></div><p>vs: typedef, a hack way:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">// templatized struct here
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">MyAllocList</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">typedef</span> std<span style="color:#f92672">::</span>list<span style="color:#f92672">&lt;</span>T, MyAlloc<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;&gt;</span> type;
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>MyAllocList<span style="color:#f92672">&lt;</span>Widget<span style="color:#f92672">&gt;::</span>type lw;
+</span></span></code></pre></div></li>
 <li>
 <p>In case you want to use a type specified by template parameter, with typedefs it gets complex:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// MyAllocList is defined as mentioned in 2nd point
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T<span style="color:#f92672">&gt;</span>
-<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Widget</span> {
-<span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
-    <span style="color:#66d9ef">typename</span> MyAllocList<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;::</span>type list;
-    <span style="color:#75715e">// ...
-</span><span style="color:#75715e"></span>};
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">// MyAllocList is defined as mentioned in 2nd point
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Widget</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">typename</span> MyAllocList<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;::</span>type list;
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// ...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>};
+</span></span></code></pre></div><ul>
 <li>Here <code>MyAllocList&lt;T&gt;::type</code> is now a dependent type (dependent on type <code>T</code> from template paramater).</li>
 <li>C++ Rule: need to use <code>typename</code> before name of a dependent type.</li>
 </ul>
 <p>With alias declaration of <code>MyAllocList</code>, no need to use <code>typename</code> and <code>::type</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T<span style="color:#f92672">&gt;</span>
-<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Widget</span> {
-<span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
-    <span style="color:#75715e">// no typename and ::type
-</span><span style="color:#75715e"></span>    MyAllocList<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> list;
-    <span style="color:#75715e">// ...
-</span><span style="color:#75715e"></span>}
-</code></pre></div></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Widget</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// no typename and ::type
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    MyAllocList<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> list;
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// ...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div></li>
 </ol>
 <p>Explanation on the 3rd point:</p>
 <ol>
@@ -262,16 +256,16 @@ MyAllocList<span style="color:#f92672">&lt;</span>Widget<span style="color:#f926
 </ol>
 <p>Creating revised types from template type paramaeters is a common practice in Template Meta Programming (TMP). A few important points to note:</p>
 <p>In C++11 (in header: <code>&lt;type_traits&gt;</code>):</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">std<span style="color:#f92672">::</span>remove_const<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;::</span>type <span style="color:#75715e">// yields T from const T
-</span><span style="color:#75715e"></span>std<span style="color:#f92672">::</span>remove_reference<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;::</span>type <span style="color:#75715e">// yields T from T&amp; and T&amp;&amp;
-</span><span style="color:#75715e"></span>std<span style="color:#f92672">::</span>add_lvalue_reference<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;::</span>type <span style="color:#75715e">// yields T&amp; from T
-</span></code></pre></div><p>In case you are applying the above transformations inside a template to a type parameter, you&rsquo;ll have to use <code>typename</code>. This is because they have been implemented as typedefs inside templatized structs.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>std<span style="color:#f92672">::</span>remove_const<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;::</span>type <span style="color:#75715e">// yields T from const T
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>std<span style="color:#f92672">::</span>remove_reference<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;::</span>type <span style="color:#75715e">// yields T from T&amp; and T&amp;&amp;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>std<span style="color:#f92672">::</span>add_lvalue_reference<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;::</span>type <span style="color:#75715e">// yields T&amp; from T
+</span></span></span></code></pre></div><p>In case you are applying the above transformations inside a template to a type parameter, you&rsquo;ll have to use <code>typename</code>. This is because they have been implemented as typedefs inside templatized structs.</p>
 <p>In C++14, their alias equivalent were added which do not require you to prefix <code>typename</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// equivalents to the above 3 transformations 
-</span><span style="color:#75715e"></span>std<span style="color:#f92672">::</span>remove_const_t<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span>
-std<span style="color:#f92672">::</span>remove_reference_t<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span>
-std<span style="color:#f92672">::</span>add_lvalue_reference<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span>
-</code></pre></div><p><strong>Acknowledgement</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">// equivalents to the above 3 transformations 
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>std<span style="color:#f92672">::</span>remove_const_t<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>std<span style="color:#f92672">::</span>remove_reference_t<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>std<span style="color:#f92672">::</span>add_lvalue_reference<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span>
+</span></span></code></pre></div><p><strong>Acknowledgement</strong></p>
 <ul>
 <li>Thanks to <a href="https://kshitij12345.github.io/">Kshitij Kalambarkar</a> for reviewing this blog.</li>
 </ul>
@@ -447,7 +441,7 @@ std<span style="color:#f92672">::</span>add_lvalue_reference<span style="color:#
 
 
 
-<script src="https://krshrimali.github.io/bundle.min.0e63d07bc6b25d019f9583b7d5921c8d0cd24d25d02cd4df1e8844fbbf00dbddb131d64e493dd5ac20b3814096d9495bc706574822df5561583386c15a358160.js"></script>
+<script src="https://krshrimali.github.io/bundle.min.5fae9992ea406007408dc33b0b3a8376d61e2f1d6ac50ba1dad7580ac50afb5199bcef3bbc3677e77553a9980bf882cf71edc2f755687dd7725f12ece4304ac2.js"></script>
     <script>
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -455,7 +449,7 @@ std<span style="color:#f92672">::</span>add_lvalue_reference<span style="color:#
         })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
         ga('create', 'UA-146662543-1', 'auto');ga('send', 'pageview');
     </script>
-<script src="https://krshrimali.github.io/js/webmention.min.f8e74a199755d9338148ffba6a77e10ea98a46109749cb7088a273c36822534987180c01402b66cd4d1e9cc87ff1891f2f59ce37eccf002ddf25233a4c95e9b2.js" data-id="webmention-container"></script>
+<script src="https://krshrimali.github.io/js/webmention.min.6449166fb6247d260b345e03c5f06a3244983fddd12b71b6a2529977bc85ea15390dbd3f200f32d2714e42a4c48178194c9909733037057f6dd34eedd03e2496.js" data-id="webmention-container"></script>
 
 
 

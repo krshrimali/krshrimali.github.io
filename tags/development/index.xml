@@ -6,7 +6,17 @@
     <description>Recent content in development on Kushashwa Ravi Shrimali (Kush)</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Sun, 09 Jan 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://krshrimali.github.io/tags/development/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 23 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://krshrimali.github.io/tags/development/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Porting a Tiling Window Manager Extenstion to C&#43;&#43; (Bismuth): Part-1</title>
+      <link>https://krshrimali.github.io/posts/2022/07/porting-a-tiling-window-manager-extenstion-to-c-bismuth-part-1/</link>
+      <pubDate>Sat, 23 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://krshrimali.github.io/posts/2022/07/porting-a-tiling-window-manager-extenstion-to-c-bismuth-part-1/</guid>
+      <description>Porting a KDE Tiling Window Manager Extension from TypeScript to C++ [Bismuth]: Part-1 (Introduction) Hi everyone! I understand it&amp;rsquo;s been a long time, and I&amp;rsquo;m so excited to be writing this blog today. In today&amp;rsquo;s blog, I wanted to talk about my journey (so far) on contributing to Bismuth (a KDE&amp;rsquo;s Tiling Window Manager Extension), mainly how and why I started, and where I am right now.
+The Story: Why KDE Plasma and Why Bismuth?</description>
+    </item>
+    
     <item>
       <title>Common Collections (Vector and Strings) in Rust [Notes]</title>
       <link>https://krshrimali.github.io/posts/2022/01/common-collections-vector-and-strings-in-rust-notes/</link>
@@ -26,7 +36,7 @@
       <guid>https://krshrimali.github.io/posts/2022/01/common-collections-vector-and-strings-in-rust-notes/</guid>
       <description>Chapter 8: Common Collections (Hash Maps) In the previous blog, I shared my notes on strings and vectors in Rust, and in this post we&amp;rsquo;ll cover Hash Maps. I personally have found their use in competitive programming, a lot, but hopefully as we move on, we&amp;rsquo;ll see lots of use-cases in real-life problems.
 Hash Maps Hash Maps: HashMap&amp;lt;K, V&amp;gt;
- You can&amp;rsquo;t access using indices, but through keys. Hash Maps store data on heap.</description>
+You can&amp;rsquo;t access using indices, but through keys. Hash Maps store data on heap.</description>
     </item>
     
     <item>
@@ -38,8 +48,8 @@ Hash Maps Hash Maps: HashMap&amp;lt;K, V&amp;gt;
       <description>NOTE
 My notes on Chapter 3, Item 13 of Effective Modern C++ written by Scott Meyers.
 Some (or even all) of the text can be similar to what you see in the book, as these are notes: I&amp;rsquo;ve tried not to be unnecessarily creative with my words. :)
- In C++, iterators come handy to point at memory addresses of STL containers. For example,
-// C++11  std::vector&amp;lt;int&amp;gt; x {11, 9, 23, 6}; // begin() member function returns an iterator, which points to the first // memory address of the container x std::vector&amp;lt;int&amp;gt;::iterator it = x.</description>
+In C++, iterators come handy to point at memory addresses of STL containers. For example,
+// C++11 std::vector&amp;lt;int&amp;gt; x {11, 9, 23, 6}; // begin() member function returns an iterator, which points to the first // memory address of the container x std::vector&amp;lt;int&amp;gt;::iterator it = x.</description>
     </item>
     
     <item>
@@ -51,9 +61,9 @@ Some (or even all) of the text can be similar to what you see in the book, as th
       <description>NOTE
 My notes on Chapter 3, Item 12 of Effective Modern C++ written by Scott Meyers.
 Some (or even all) of the text can be similar to what you see in the book, as these are notes: I&amp;rsquo;ve tried not to be unnecessarily creative with my words. :)
- Overriding != Overloading
+Overriding != Overloading
 Example of virtual function overriding:
-// Base class class Base { public: virtual void doWork(); // ... }; // Derived class from Base class Derived: public Base { public: // virtual is optional  // this will &amp;#34;override&amp;#34; Base::doWork  virtual void doWork(); // .</description>
+// Base class class Base { public: virtual void doWork(); // ... }; // Derived class from Base class Derived: public Base { public: // virtual is optional // this will &amp;#34;override&amp;#34; Base::doWork virtual void doWork(); // .</description>
     </item>
     
     <item>
@@ -63,7 +73,7 @@ Example of virtual function overriding:
       
       <guid>https://krshrimali.github.io/posts/2021/08/prefer-deleted-functions-to-private-undefined-ones-notes/</guid>
       <description>Prefer deleted functions to private undefined ones This item (11) in the chapter 3 focuses on:
- Why and How to prevent users calling particular functions? C++-98 and C++-11 approach What&amp;rsquo;s the difference between deleting a function vs declaring a member function private (and not defining them)?   NOTE
+Why and How to prevent users calling particular functions? C++-98 and C++-11 approach What&amp;rsquo;s the difference between deleting a function vs declaring a member function private (and not defining them)? NOTE
 These are my notes on Chapter 3, Item 11 of Effective Modern C++ written by Scott Meyers.
 Some (or even all) of the text can be similar to what you see in the book, as these are notes: I&amp;rsquo;ve tried not to be unnecessarily creative with my words.</description>
     </item>
@@ -74,9 +84,10 @@ Some (or even all) of the text can be similar to what you see in the book, as th
       <pubDate>Sat, 14 Aug 2021 00:00:00 +0000</pubDate>
       
       <guid>https://krshrimali.github.io/posts/2021/08/prefer-scoped-enums-over-unscoped-enums-notes/</guid>
-      <description>Scoped vs Unscoped Enums  General rule: declaring a name inside curly braces is limited to that scope. Exception: C++-98 style Enums   NOTE
+      <description>Scoped vs Unscoped Enums General rule: declaring a name inside curly braces is limited to that scope. Exception: C++-98 style Enums NOTE
 My notes on Chapter 3, Item 10 of Effective Modern C++ written by Scott Meyers.
-Some (or even all) of the text can be similar to what you see in the book, as these are notes: I&amp;rsquo;ve tried not to be unnecessarily creative with my words.</description>
+Some (or even all) of the text can be similar to what you see in the book, as these are notes: I&amp;rsquo;ve tried not to be unnecessarily creative with my words. :)
+// You can&amp;#39;t declare black, white, red in the scope containing the enum Color enum Color { black, white, red; }; auto white = false; // error: white already declared in this scope Unscoped Enums have implicit type conversions for their enumerators.</description>
     </item>
     
     <item>
@@ -86,7 +97,7 @@ Some (or even all) of the text can be similar to what you see in the book, as th
       
       <guid>https://krshrimali.github.io/posts/2021/08/union-find-problem-and-a-naive-implementation-c-/</guid>
       <description>Hi Everyone, today I want to talk about Union Find Problem. This is going to be a series covering:
- Union Find Problem (this blog) Solutions to Union Find (1): Quick Find Solutions to Union Find (2): Quick Union Solutions to Union Find (3): Weighted Quick Union Applications of Union Find (perculation and more) Cool project using Union Find Solving some competitive programming questions using Union Find  Each blog will try to cover very basic concepts behind the topic, and also what it&amp;rsquo;s all about.</description>
+Union Find Problem (this blog) Solutions to Union Find (1): Quick Find Solutions to Union Find (2): Quick Union Solutions to Union Find (3): Weighted Quick Union Applications of Union Find (perculation and more) Cool project using Union Find Solving some competitive programming questions using Union Find Each blog will try to cover very basic concepts behind the topic, and also what it&amp;rsquo;s all about.</description>
     </item>
     
     <item>
@@ -96,9 +107,9 @@ Some (or even all) of the text can be similar to what you see in the book, as th
       
       <guid>https://krshrimali.github.io/posts/2021/08/prefer-alias-declarations-to-typedefs-notes/</guid>
       <description>&lt;p&gt;One solution to avoiding using long type names:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// So C++98 like
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;typedef&lt;/span&gt; std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;unique_ptr&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;unordered_map&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;string, std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;string&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&amp;gt;&lt;/span&gt; UPtrMapSS;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// So C++98 like
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;typedef&lt;/span&gt; std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;unique_ptr&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;unordered_map&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;string, std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;string&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&amp;gt;&lt;/span&gt; UPtrMapSS;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
     </item>
     
     <item>
@@ -109,17 +120,6 @@ Some (or even all) of the text can be similar to what you see in the book, as th
       <guid>https://krshrimali.github.io/posts/2021/07/function-pointers-and-function-objects-in-c-/</guid>
       <description>&lt;p&gt;In today&amp;rsquo;s blog, we&amp;rsquo;ll talk about two important concepts in C++: Function Pointers and Function Objects.&lt;/p&gt;
 &lt;p&gt;Please note that, function objects are commonly referred as &lt;em&gt;functors&lt;/em&gt; but we have failed to notice any official alias to the name. Hence, we&amp;rsquo;ll restrict ourselves to using &lt;em&gt;Function Objects&lt;/em&gt; in this blog.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Releasing Docker Container and Binder for using Xeus-Cling, Libtorch and OpenCV in C&#43;&#43;</title>
-      <link>https://krshrimali.github.io/posts/2020/09/releasing-docker-container-and-binder-for-using-xeus-cling-libtorch-and-opencv-in-c-/</link>
-      <pubDate>Tue, 15 Sep 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://krshrimali.github.io/posts/2020/09/releasing-docker-container-and-binder-for-using-xeus-cling-libtorch-and-opencv-in-c-/</guid>
-      <description>Today, I am elated to share Docker image for OpenCV, Libtorch and Xeus-Cling. We&amp;rsquo;ll discuss how to use the dockerfile and binder.
-Before I move on, the credits for creating and maintaining Docker image goes to Vishwesh Ravi Shrimali. He has been working on some cool stuff, please do get in touch with him if you&amp;rsquo;re interested to know.
-First question in your mind would be, Why use Docker or Binder?</description>
     </item>
     
   </channel>

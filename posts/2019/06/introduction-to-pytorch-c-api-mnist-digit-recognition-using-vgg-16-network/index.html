@@ -5,11 +5,12 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="author" content="map[name:Kushashwa Ravi Shrimali]">
-<meta name="description" content="Environment Setup Note: If you have already finished installing LibTorch binaries, please skip this section.
-  Download libtorch from the official website. Make sure that you select the right options (CPU/GPU depending on the hardware, also the CUDA versions)
-  Unzip the downloaded zip file:
- unzip &amp;lt;filename&amp;gt;    Notes:
- For this blog, we&amp;rsquo;ll assume that the extracted folder&amp;rsquo;s name is libtorch. We&amp;rsquo;ll use the absolute path of extracted directory (libtorch) later on." />
+<meta name="description" content="Environment Setup [Ubuntu 16.04, 18.04] Note: If you have already finished installing PyTorch C&#43;&#43; API, please skip this section.
+Download libtorch:
+CPU Version: wget https://download.pytorch.org/libtorch/cpu/libtorch-shared-with-deps-latest.zip -O libtorch.zip GPU Version (CUDA 9.0): wget https://download.pytorch.org/libtorch/cu90/libtorch-shared-with-deps-latest.zip -O libtorch.zip GPU Version (CUDA 10.0): wget https://download.pytorch.org/libtorch/cu100/libtorch-shared-with-deps-latest.zip Unzip libtorch.zip:
+unzip libtorch.zip We&amp;rsquo;ll use the absolute path of extracted directory (libtorch) later on.
+Implementation The VGG-16 Network is shown in the Figure below.
+We&amp;rsquo;ll start of by first including libtorch header file." />
 <meta name="keywords" content=", development, coding, cpp, notes, pytorch-cpp, libtorch" />
 <meta name="robots" content="noodp" />
 <meta name="theme-color" content="#252627" />
@@ -29,7 +30,7 @@
 
 
 
-<link rel="stylesheet" href="https://krshrimali.github.io/main.min.a6eedfdab54db128d627e7063826ffb0d9949ad2ea9424548adb08a272e224c9.css">
+<link rel="stylesheet" href="https://krshrimali.github.io/main.min.b6dbce0fdf6c61563a0c2226e857d5dadd8e5afa2c4f73ec9ea55abd831f9a72.css">
 
 
 
@@ -50,28 +51,24 @@
     <meta name="theme-color" content="#252627">
 
 <meta itemprop="name" content="Introduction to PyTorch C&#43;&#43; API: MNIST Digit Recognition using VGG-16 Network">
-<meta itemprop="description" content="Environment Setup Note: If you have already finished installing LibTorch binaries, please skip this section.
-  Download libtorch from the official website. Make sure that you select the right options (CPU/GPU depending on the hardware, also the CUDA versions)
-  Unzip the downloaded zip file:
- unzip &lt;filename&gt;    Notes:
- For this blog, we&rsquo;ll assume that the extracted folder&rsquo;s name is libtorch. We&rsquo;ll use the absolute path of extracted directory (libtorch) later on.">
-<meta itemprop="datePublished" content="2019-06-07T00:00:00+00:00" />
+<meta itemprop="description" content="Environment Setup [Ubuntu 16.04, 18.04] Note: If you have already finished installing PyTorch C&#43;&#43; API, please skip this section.
+Download libtorch:
+CPU Version: wget https://download.pytorch.org/libtorch/cpu/libtorch-shared-with-deps-latest.zip -O libtorch.zip GPU Version (CUDA 9.0): wget https://download.pytorch.org/libtorch/cu90/libtorch-shared-with-deps-latest.zip -O libtorch.zip GPU Version (CUDA 10.0): wget https://download.pytorch.org/libtorch/cu100/libtorch-shared-with-deps-latest.zip Unzip libtorch.zip:
+unzip libtorch.zip We&rsquo;ll use the absolute path of extracted directory (libtorch) later on.
+Implementation The VGG-16 Network is shown in the Figure below.
+We&rsquo;ll start of by first including libtorch header file."><meta itemprop="datePublished" content="2019-06-07T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2019-06-07T00:00:00+00:00" />
-<meta itemprop="wordCount" content="614">
-<meta itemprop="image" content="https://krshrimali.github.io"/>
-
-
-
-<meta itemprop="keywords" content="development,coding,cpp,notes,pytorch-cpp,libtorch," />
-<meta name="twitter:card" content="summary_large_image"/>
+<meta itemprop="wordCount" content="615"><meta itemprop="image" content="https://krshrimali.github.io"/>
+<meta itemprop="keywords" content="development,coding,cpp,notes,pytorch-cpp,libtorch," /><meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://krshrimali.github.io"/>
 
 <meta name="twitter:title" content="Introduction to PyTorch C&#43;&#43; API: MNIST Digit Recognition using VGG-16 Network"/>
-<meta name="twitter:description" content="Environment Setup Note: If you have already finished installing LibTorch binaries, please skip this section.
-  Download libtorch from the official website. Make sure that you select the right options (CPU/GPU depending on the hardware, also the CUDA versions)
-  Unzip the downloaded zip file:
- unzip &lt;filename&gt;    Notes:
- For this blog, we&rsquo;ll assume that the extracted folder&rsquo;s name is libtorch. We&rsquo;ll use the absolute path of extracted directory (libtorch) later on."/>
+<meta name="twitter:description" content="Environment Setup [Ubuntu 16.04, 18.04] Note: If you have already finished installing PyTorch C&#43;&#43; API, please skip this section.
+Download libtorch:
+CPU Version: wget https://download.pytorch.org/libtorch/cpu/libtorch-shared-with-deps-latest.zip -O libtorch.zip GPU Version (CUDA 9.0): wget https://download.pytorch.org/libtorch/cu90/libtorch-shared-with-deps-latest.zip -O libtorch.zip GPU Version (CUDA 10.0): wget https://download.pytorch.org/libtorch/cu100/libtorch-shared-with-deps-latest.zip Unzip libtorch.zip:
+unzip libtorch.zip We&rsquo;ll use the absolute path of extracted directory (libtorch) later on.
+Implementation The VGG-16 Network is shown in the Figure below.
+We&rsquo;ll start of by first including libtorch header file."/>
 
 
 
@@ -200,154 +197,156 @@
             
 
             <div class="post-content e-content">
-                <h1 id="environment-setup">Environment Setup</h1>
-<p><em>Note: If you have already finished installing LibTorch binaries, please skip this section.</em></p>
+                <h1 id="environment-setup-ubuntu-1604-1804">Environment Setup [Ubuntu 16.04, 18.04]</h1>
+<p><em>Note: If you have already finished installing PyTorch C++ API, please skip this section.</em></p>
 <ol>
 <li>
-<p>Download <code>libtorch</code> from <a href="https://pytorch.org">the official website</a>. Make sure that you select the right options (CPU/GPU depending on the hardware, also the CUDA versions)</p>
+<p>Download <code>libtorch</code>:</p>
+<ul>
+<li>CPU Version: <code>wget https://download.pytorch.org/libtorch/cpu/libtorch-shared-with-deps-latest.zip -O libtorch.zip</code></li>
+<li>GPU Version (CUDA 9.0): <code>wget https://download.pytorch.org/libtorch/cu90/libtorch-shared-with-deps-latest.zip -O libtorch.zip</code></li>
+<li>GPU Version (CUDA 10.0): <code>wget https://download.pytorch.org/libtorch/cu100/libtorch-shared-with-deps-latest.zip</code></li>
+</ul>
 </li>
 <li>
-<p>Unzip the downloaded <code>zip</code> file:</p>
+<p>Unzip <code>libtorch.zip</code>:</p>
 <ul>
-<li><code>unzip &lt;filename&gt;</code></li>
+<li><code>unzip libtorch.zip</code></li>
 </ul>
 </li>
 </ol>
-<p><strong>Notes</strong>:</p>
-<ol>
-<li>For this blog, we&rsquo;ll assume that the extracted folder&rsquo;s name is <code>libtorch</code>.</li>
-<li>We&rsquo;ll use the <code>absolute</code> path of extracted directory (<code>libtorch</code>) later on.</li>
-</ol>
+<p>We&rsquo;ll use the <code>absolute</code> path of extracted directory (<code>libtorch</code>) later on.</p>
 <h1 id="implementation">Implementation</h1>
 <p>The VGG-16 Network is shown in the Figure below.</p>
 <p><img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/blogs/VGG-16-Architecture-resized.png" alt=""></p>
 <p>We&rsquo;ll start of by first including <code>libtorch</code> header file.</p>
 <p><code>#include &lt;torch/torch.h&gt;</code></p>
 <p>We&rsquo;ll then go ahead and define the network. We&rsquo;ll inherit layers from <code>torch::nn::Module</code>.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">/* Sample code for training a FCN on MNIST dataset using PyTorch C++ API */</span>
-<span style="color:#75715e">/* This code uses VGG-16 Layer Network */</span>
-
-<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">Net</span><span style="color:#f92672">:</span> torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Module {
-    <span style="color:#75715e">// VGG-16 Layer
-</span><span style="color:#75715e"></span>    <span style="color:#75715e">// conv1_1 - conv1_2 - pool 1 - conv2_1 - conv2_2 - pool 2 - conv3_1 - conv3_2 - conv3_3 - pool 3 -
-</span><span style="color:#75715e"></span>    <span style="color:#75715e">// conv4_1 - conv4_2 - conv4_3 - pool 4 - conv5_1 - conv5_2 - conv5_3 - pool 5 - fc6 - fc7 - fc8
-</span><span style="color:#75715e"></span>    
-    <span style="color:#75715e">// Note: pool 5 not implemented as no need for MNIST dataset
-</span><span style="color:#75715e"></span>    Net() {
-        <span style="color:#75715e">// Initialize VGG-16
-</span><span style="color:#75715e"></span>        <span style="color:#75715e">// On how to pass strides and padding: https://github.com/pytorch/pytorch/issues/12649#issuecomment-430156160
-</span><span style="color:#75715e"></span>        conv1_1 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;conv1_1&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">3</span>).padding(<span style="color:#ae81ff">1</span>)));
-        conv1_2 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;conv1_2&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">3</span>).padding(<span style="color:#ae81ff">1</span>)));
-        <span style="color:#75715e">// Insert pool layer
-</span><span style="color:#75715e"></span>        conv2_1 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;conv2_1&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(<span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">30</span>, <span style="color:#ae81ff">3</span>).padding(<span style="color:#ae81ff">1</span>)));
-        conv2_2 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;conv2_2&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(<span style="color:#ae81ff">30</span>, <span style="color:#ae81ff">40</span>, <span style="color:#ae81ff">3</span>).padding(<span style="color:#ae81ff">1</span>)));
-        <span style="color:#75715e">// Insert pool layer
-</span><span style="color:#75715e"></span>        conv3_1 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;conv3_1&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(<span style="color:#ae81ff">40</span>, <span style="color:#ae81ff">50</span>, <span style="color:#ae81ff">3</span>).padding(<span style="color:#ae81ff">1</span>)));
-        conv3_2 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;conv3_2&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(<span style="color:#ae81ff">50</span>, <span style="color:#ae81ff">60</span>, <span style="color:#ae81ff">3</span>).padding(<span style="color:#ae81ff">1</span>)));
-        conv3_3 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;conv3_3&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(<span style="color:#ae81ff">60</span>, <span style="color:#ae81ff">70</span>, <span style="color:#ae81ff">3</span>).padding(<span style="color:#ae81ff">1</span>)));
-        <span style="color:#75715e">// Insert pool layer
-</span><span style="color:#75715e"></span>        conv4_1 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;conv4_1&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(<span style="color:#ae81ff">70</span>, <span style="color:#ae81ff">80</span>, <span style="color:#ae81ff">3</span>).padding(<span style="color:#ae81ff">1</span>)));
-        conv4_2 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;conv4_2&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(<span style="color:#ae81ff">80</span>, <span style="color:#ae81ff">90</span>, <span style="color:#ae81ff">3</span>).padding(<span style="color:#ae81ff">1</span>)));
-        conv4_3 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;conv4_3&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(<span style="color:#ae81ff">90</span>, <span style="color:#ae81ff">100</span>, <span style="color:#ae81ff">3</span>).padding(<span style="color:#ae81ff">1</span>)));
-        <span style="color:#75715e">// Insert pool layer
-</span><span style="color:#75715e"></span>        conv5_1 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;conv5_1&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(<span style="color:#ae81ff">100</span>, <span style="color:#ae81ff">110</span>, <span style="color:#ae81ff">3</span>).padding(<span style="color:#ae81ff">1</span>)));
-        conv5_2 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;conv5_2&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(<span style="color:#ae81ff">110</span>, <span style="color:#ae81ff">120</span>, <span style="color:#ae81ff">3</span>).padding(<span style="color:#ae81ff">1</span>)));
-        conv5_3 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;conv5_3&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(<span style="color:#ae81ff">120</span>, <span style="color:#ae81ff">130</span>, <span style="color:#ae81ff">3</span>).padding(<span style="color:#ae81ff">1</span>)));
-        <span style="color:#75715e">// Insert pool layer
-</span><span style="color:#75715e"></span>        fc1 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;fc1&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Linear(<span style="color:#ae81ff">130</span>, <span style="color:#ae81ff">50</span>));
-        fc2 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;fc2&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Linear(<span style="color:#ae81ff">50</span>, <span style="color:#ae81ff">20</span>));
-        fc3 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;fc3&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Linear(<span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">10</span>));
-    }
-
-    <span style="color:#75715e">// Implement Algorithm
-</span><span style="color:#75715e"></span>    torch<span style="color:#f92672">::</span>Tensor forward(torch<span style="color:#f92672">::</span>Tensor x) {
-        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(conv1_1<span style="color:#f92672">-&gt;</span>forward(x));
-        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(conv1_2<span style="color:#f92672">-&gt;</span>forward(x));
-        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>max_pool2d(x, <span style="color:#ae81ff">2</span>);
-
-        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(conv2_1<span style="color:#f92672">-&gt;</span>forward(x));
-        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(conv2_2<span style="color:#f92672">-&gt;</span>forward(x));
-        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>max_pool2d(x, <span style="color:#ae81ff">2</span>);
-
-        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(conv3_1<span style="color:#f92672">-&gt;</span>forward(x));
-        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(conv3_2<span style="color:#f92672">-&gt;</span>forward(x));
-        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(conv3_3<span style="color:#f92672">-&gt;</span>forward(x));
-        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>max_pool2d(x, <span style="color:#ae81ff">2</span>);
-
-        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(conv4_1<span style="color:#f92672">-&gt;</span>forward(x));
-        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(conv4_2<span style="color:#f92672">-&gt;</span>forward(x));
-        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(conv4_3<span style="color:#f92672">-&gt;</span>forward(x));
-        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>max_pool2d(x, <span style="color:#ae81ff">2</span>);
-
-        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(conv5_1<span style="color:#f92672">-&gt;</span>forward(x));
-        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(conv5_2<span style="color:#f92672">-&gt;</span>forward(x));
-        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(conv5_3<span style="color:#f92672">-&gt;</span>forward(x));
-
-        x <span style="color:#f92672">=</span> x.view({<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">130</span>});
-
-        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(fc1<span style="color:#f92672">-&gt;</span>forward(x));
-        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(fc2<span style="color:#f92672">-&gt;</span>forward(x));
-        x <span style="color:#f92672">=</span> fc3<span style="color:#f92672">-&gt;</span>forward(x);
-
-        <span style="color:#66d9ef">return</span> torch<span style="color:#f92672">::</span>log_softmax(x, <span style="color:#ae81ff">1</span>);
-    }
-
-    <span style="color:#75715e">// Declare layers
-</span><span style="color:#75715e"></span>    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d conv1_1{<span style="color:#66d9ef">nullptr</span>};
-    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d conv1_2{<span style="color:#66d9ef">nullptr</span>};
-    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d conv2_1{<span style="color:#66d9ef">nullptr</span>};
-    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d conv2_2{<span style="color:#66d9ef">nullptr</span>};
-    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d conv3_1{<span style="color:#66d9ef">nullptr</span>};
-    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d conv3_2{<span style="color:#66d9ef">nullptr</span>};
-    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d conv3_3{<span style="color:#66d9ef">nullptr</span>};
-    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d conv4_1{<span style="color:#66d9ef">nullptr</span>};
-    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d conv4_2{<span style="color:#66d9ef">nullptr</span>};
-    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d conv4_3{<span style="color:#66d9ef">nullptr</span>};
-    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d conv5_1{<span style="color:#66d9ef">nullptr</span>};
-    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d conv5_2{<span style="color:#66d9ef">nullptr</span>};
-    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d conv5_3{<span style="color:#66d9ef">nullptr</span>};
-
-    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Linear fc1{<span style="color:#66d9ef">nullptr</span>}, fc2{<span style="color:#66d9ef">nullptr</span>}, fc3{<span style="color:#66d9ef">nullptr</span>};
-};
-</code></pre></div><p>Once done, we can go ahead and test the network on our sample dataset (here <a href="http://yann.lecun.com/exdb/mnist/">MNIST</a>). Let&rsquo;s go ahead and load data first. We&rsquo;ll be using 10 epochs, learning rate (0.01), and <code>nll_loss</code> as loss functio.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
-	<span style="color:#75715e">// Create multi-threaded data loader for MNIST data
-</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">auto</span> data_loader <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>data<span style="color:#f92672">::</span>make_data_loader<span style="color:#f92672">&lt;</span>torch<span style="color:#f92672">::</span>data<span style="color:#f92672">::</span>samplers<span style="color:#f92672">::</span>SequentialSampler<span style="color:#f92672">&gt;</span>(
-			std<span style="color:#f92672">::</span>move(torch<span style="color:#f92672">::</span>data<span style="color:#f92672">::</span>datasets<span style="color:#f92672">::</span>MNIST(<span style="color:#e6db74">&#34;/absolute/path/to/data&#34;</span>).map(torch<span style="color:#f92672">::</span>data<span style="color:#f92672">::</span>transforms<span style="color:#f92672">::</span>Normalize<span style="color:#f92672">&lt;&gt;</span>(<span style="color:#ae81ff">0.13707</span>, <span style="color:#ae81ff">0.3081</span>)).map(
-				torch<span style="color:#f92672">::</span>data<span style="color:#f92672">::</span>transforms<span style="color:#f92672">::</span>Stack<span style="color:#f92672">&lt;&gt;</span>())), <span style="color:#ae81ff">64</span>);
-	
-  <span style="color:#75715e">// Build VGG-16 Network
-</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">auto</span> net <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>make_shared<span style="color:#f92672">&lt;</span>Net<span style="color:#f92672">&gt;</span>();
-
-  torch<span style="color:#f92672">::</span>optim<span style="color:#f92672">::</span>SGD optimizer(net<span style="color:#f92672">-&gt;</span>parameters(), <span style="color:#ae81ff">0.01</span>); <span style="color:#75715e">// Learning Rate 0.01
-</span><span style="color:#75715e"></span>
-	<span style="color:#75715e">// net.train();
-</span><span style="color:#75715e"></span>
-	<span style="color:#66d9ef">for</span>(size_t epoch<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>; epoch<span style="color:#f92672">&lt;=</span><span style="color:#ae81ff">10</span>; <span style="color:#f92672">++</span>epoch) {
-		size_t batch_index <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-		<span style="color:#75715e">// Iterate data loader to yield batches from the dataset
-</span><span style="color:#75715e"></span>		<span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span><span style="color:#f92672">&amp;</span> batch: <span style="color:#f92672">*</span>data_loader) {
-			<span style="color:#75715e">// Reset gradients
-</span><span style="color:#75715e"></span>			optimizer.zero_grad();
-			<span style="color:#75715e">// Execute the model
-</span><span style="color:#75715e"></span>			torch<span style="color:#f92672">::</span>Tensor prediction <span style="color:#f92672">=</span> net<span style="color:#f92672">-&gt;</span>forward(batch.data);
-			<span style="color:#75715e">// Compute loss value
-</span><span style="color:#75715e"></span>			torch<span style="color:#f92672">::</span>Tensor loss <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>nll_loss(prediction, batch.target);
-			<span style="color:#75715e">// Compute gradients
-</span><span style="color:#75715e"></span>			loss.backward();
-			<span style="color:#75715e">// Update the parameters
-</span><span style="color:#75715e"></span>			optimizer.step();
-
-			<span style="color:#75715e">// Output the loss and checkpoint every 100 batches
-</span><span style="color:#75715e"></span>			<span style="color:#66d9ef">if</span> (<span style="color:#f92672">++</span>batch_index <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
-				std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Epoch: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> epoch <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34; | Batch: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> batch_index 
-					<span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34; | Loss: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> loss.item<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">float</span><span style="color:#f92672">&gt;</span>() <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
-				torch<span style="color:#f92672">::</span>save(net, <span style="color:#e6db74">&#34;net.pt&#34;</span>);
-			}
-		}
-	}
-}
-</code></pre></div><p>For code, check out my repo <a href="https://github.com/krshrimali/Digit-Recognition-MNIST-SVHN-PyTorch-CPP">here</a>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">/* Sample code for training a FCN on MNIST dataset using PyTorch C++ API */</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/* This code uses VGG-16 Layer Network */</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">Net</span><span style="color:#f92672">:</span> torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Module {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// VGG-16 Layer
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// conv1_1 - conv1_2 - pool 1 - conv2_1 - conv2_2 - pool 2 - conv3_1 - conv3_2 - conv3_3 - pool 3 -
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// conv4_1 - conv4_2 - conv4_3 - pool 4 - conv5_1 - conv5_2 - conv5_3 - pool 5 - fc6 - fc7 - fc8
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Note: pool 5 not implemented as no need for MNIST dataset
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    Net() {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Initialize VGG-16
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">// On how to pass strides and padding: https://github.com/pytorch/pytorch/issues/12649#issuecomment-430156160
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        conv1_1 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;conv1_1&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">3</span>).padding(<span style="color:#ae81ff">1</span>)));
+</span></span><span style="display:flex;"><span>        conv1_2 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;conv1_2&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">3</span>).padding(<span style="color:#ae81ff">1</span>)));
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Insert pool layer
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        conv2_1 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;conv2_1&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(<span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">30</span>, <span style="color:#ae81ff">3</span>).padding(<span style="color:#ae81ff">1</span>)));
+</span></span><span style="display:flex;"><span>        conv2_2 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;conv2_2&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(<span style="color:#ae81ff">30</span>, <span style="color:#ae81ff">40</span>, <span style="color:#ae81ff">3</span>).padding(<span style="color:#ae81ff">1</span>)));
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Insert pool layer
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        conv3_1 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;conv3_1&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(<span style="color:#ae81ff">40</span>, <span style="color:#ae81ff">50</span>, <span style="color:#ae81ff">3</span>).padding(<span style="color:#ae81ff">1</span>)));
+</span></span><span style="display:flex;"><span>        conv3_2 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;conv3_2&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(<span style="color:#ae81ff">50</span>, <span style="color:#ae81ff">60</span>, <span style="color:#ae81ff">3</span>).padding(<span style="color:#ae81ff">1</span>)));
+</span></span><span style="display:flex;"><span>        conv3_3 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;conv3_3&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(<span style="color:#ae81ff">60</span>, <span style="color:#ae81ff">70</span>, <span style="color:#ae81ff">3</span>).padding(<span style="color:#ae81ff">1</span>)));
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Insert pool layer
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        conv4_1 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;conv4_1&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(<span style="color:#ae81ff">70</span>, <span style="color:#ae81ff">80</span>, <span style="color:#ae81ff">3</span>).padding(<span style="color:#ae81ff">1</span>)));
+</span></span><span style="display:flex;"><span>        conv4_2 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;conv4_2&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(<span style="color:#ae81ff">80</span>, <span style="color:#ae81ff">90</span>, <span style="color:#ae81ff">3</span>).padding(<span style="color:#ae81ff">1</span>)));
+</span></span><span style="display:flex;"><span>        conv4_3 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;conv4_3&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(<span style="color:#ae81ff">90</span>, <span style="color:#ae81ff">100</span>, <span style="color:#ae81ff">3</span>).padding(<span style="color:#ae81ff">1</span>)));
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Insert pool layer
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        conv5_1 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;conv5_1&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(<span style="color:#ae81ff">100</span>, <span style="color:#ae81ff">110</span>, <span style="color:#ae81ff">3</span>).padding(<span style="color:#ae81ff">1</span>)));
+</span></span><span style="display:flex;"><span>        conv5_2 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;conv5_2&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(<span style="color:#ae81ff">110</span>, <span style="color:#ae81ff">120</span>, <span style="color:#ae81ff">3</span>).padding(<span style="color:#ae81ff">1</span>)));
+</span></span><span style="display:flex;"><span>        conv5_3 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;conv5_3&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(<span style="color:#ae81ff">120</span>, <span style="color:#ae81ff">130</span>, <span style="color:#ae81ff">3</span>).padding(<span style="color:#ae81ff">1</span>)));
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Insert pool layer
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        fc1 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;fc1&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Linear(<span style="color:#ae81ff">130</span>, <span style="color:#ae81ff">50</span>));
+</span></span><span style="display:flex;"><span>        fc2 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;fc2&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Linear(<span style="color:#ae81ff">50</span>, <span style="color:#ae81ff">20</span>));
+</span></span><span style="display:flex;"><span>        fc3 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;fc3&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Linear(<span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">10</span>));
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Implement Algorithm
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    torch<span style="color:#f92672">::</span>Tensor forward(torch<span style="color:#f92672">::</span>Tensor x) {
+</span></span><span style="display:flex;"><span>        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(conv1_1<span style="color:#f92672">-&gt;</span>forward(x));
+</span></span><span style="display:flex;"><span>        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(conv1_2<span style="color:#f92672">-&gt;</span>forward(x));
+</span></span><span style="display:flex;"><span>        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>max_pool2d(x, <span style="color:#ae81ff">2</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(conv2_1<span style="color:#f92672">-&gt;</span>forward(x));
+</span></span><span style="display:flex;"><span>        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(conv2_2<span style="color:#f92672">-&gt;</span>forward(x));
+</span></span><span style="display:flex;"><span>        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>max_pool2d(x, <span style="color:#ae81ff">2</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(conv3_1<span style="color:#f92672">-&gt;</span>forward(x));
+</span></span><span style="display:flex;"><span>        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(conv3_2<span style="color:#f92672">-&gt;</span>forward(x));
+</span></span><span style="display:flex;"><span>        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(conv3_3<span style="color:#f92672">-&gt;</span>forward(x));
+</span></span><span style="display:flex;"><span>        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>max_pool2d(x, <span style="color:#ae81ff">2</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(conv4_1<span style="color:#f92672">-&gt;</span>forward(x));
+</span></span><span style="display:flex;"><span>        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(conv4_2<span style="color:#f92672">-&gt;</span>forward(x));
+</span></span><span style="display:flex;"><span>        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(conv4_3<span style="color:#f92672">-&gt;</span>forward(x));
+</span></span><span style="display:flex;"><span>        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>max_pool2d(x, <span style="color:#ae81ff">2</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(conv5_1<span style="color:#f92672">-&gt;</span>forward(x));
+</span></span><span style="display:flex;"><span>        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(conv5_2<span style="color:#f92672">-&gt;</span>forward(x));
+</span></span><span style="display:flex;"><span>        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(conv5_3<span style="color:#f92672">-&gt;</span>forward(x));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        x <span style="color:#f92672">=</span> x.view({<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">130</span>});
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(fc1<span style="color:#f92672">-&gt;</span>forward(x));
+</span></span><span style="display:flex;"><span>        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(fc2<span style="color:#f92672">-&gt;</span>forward(x));
+</span></span><span style="display:flex;"><span>        x <span style="color:#f92672">=</span> fc3<span style="color:#f92672">-&gt;</span>forward(x);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> torch<span style="color:#f92672">::</span>log_softmax(x, <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Declare layers
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d conv1_1{<span style="color:#66d9ef">nullptr</span>};
+</span></span><span style="display:flex;"><span>    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d conv1_2{<span style="color:#66d9ef">nullptr</span>};
+</span></span><span style="display:flex;"><span>    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d conv2_1{<span style="color:#66d9ef">nullptr</span>};
+</span></span><span style="display:flex;"><span>    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d conv2_2{<span style="color:#66d9ef">nullptr</span>};
+</span></span><span style="display:flex;"><span>    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d conv3_1{<span style="color:#66d9ef">nullptr</span>};
+</span></span><span style="display:flex;"><span>    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d conv3_2{<span style="color:#66d9ef">nullptr</span>};
+</span></span><span style="display:flex;"><span>    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d conv3_3{<span style="color:#66d9ef">nullptr</span>};
+</span></span><span style="display:flex;"><span>    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d conv4_1{<span style="color:#66d9ef">nullptr</span>};
+</span></span><span style="display:flex;"><span>    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d conv4_2{<span style="color:#66d9ef">nullptr</span>};
+</span></span><span style="display:flex;"><span>    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d conv4_3{<span style="color:#66d9ef">nullptr</span>};
+</span></span><span style="display:flex;"><span>    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d conv5_1{<span style="color:#66d9ef">nullptr</span>};
+</span></span><span style="display:flex;"><span>    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d conv5_2{<span style="color:#66d9ef">nullptr</span>};
+</span></span><span style="display:flex;"><span>    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d conv5_3{<span style="color:#66d9ef">nullptr</span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Linear fc1{<span style="color:#66d9ef">nullptr</span>}, fc2{<span style="color:#66d9ef">nullptr</span>}, fc3{<span style="color:#66d9ef">nullptr</span>};
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><p>Once done, we can go ahead and test the network on our sample dataset. Let&rsquo;s go ahead and load data first. We&rsquo;ll be using 10 epochs, learning rate (0.01), and <code>nll_loss</code> as loss functio.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// Create multi-threaded data loader for MNIST data
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">auto</span> data_loader <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>data<span style="color:#f92672">::</span>make_data_loader<span style="color:#f92672">&lt;</span>torch<span style="color:#f92672">::</span>data<span style="color:#f92672">::</span>samplers<span style="color:#f92672">::</span>SequentialSampler<span style="color:#f92672">&gt;</span>(
+</span></span><span style="display:flex;"><span>			std<span style="color:#f92672">::</span>move(torch<span style="color:#f92672">::</span>data<span style="color:#f92672">::</span>datasets<span style="color:#f92672">::</span>MNIST(<span style="color:#e6db74">&#34;/absolute/path/to/data&#34;</span>).map(torch<span style="color:#f92672">::</span>data<span style="color:#f92672">::</span>transforms<span style="color:#f92672">::</span>Normalize<span style="color:#f92672">&lt;&gt;</span>(<span style="color:#ae81ff">0.13707</span>, <span style="color:#ae81ff">0.3081</span>)).map(
+</span></span><span style="display:flex;"><span>				torch<span style="color:#f92672">::</span>data<span style="color:#f92672">::</span>transforms<span style="color:#f92672">::</span>Stack<span style="color:#f92672">&lt;&gt;</span>())), <span style="color:#ae81ff">64</span>);
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Build VGG-16 Network
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">auto</span> net <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>make_shared<span style="color:#f92672">&lt;</span>Net<span style="color:#f92672">&gt;</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    torch<span style="color:#f92672">::</span>optim<span style="color:#f92672">::</span>SGD optimizer(net<span style="color:#f92672">-&gt;</span>parameters(), <span style="color:#ae81ff">0.01</span>); <span style="color:#75715e">// Learning Rate 0.01
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// net.train();
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span>(size_t epoch<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>; epoch<span style="color:#f92672">&lt;=</span><span style="color:#ae81ff">10</span>; <span style="color:#f92672">++</span>epoch) {
+</span></span><span style="display:flex;"><span>		size_t batch_index <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>		<span style="color:#75715e">// Iterate data loader to yield batches from the dataset
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>		<span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span><span style="color:#f92672">&amp;</span> batch: <span style="color:#f92672">*</span>data_loader) {
+</span></span><span style="display:flex;"><span>			<span style="color:#75715e">// Reset gradients
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>			optimizer.zero_grad();
+</span></span><span style="display:flex;"><span>			<span style="color:#75715e">// Execute the model
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>			torch<span style="color:#f92672">::</span>Tensor prediction <span style="color:#f92672">=</span> net<span style="color:#f92672">-&gt;</span>forward(batch.data);
+</span></span><span style="display:flex;"><span>			<span style="color:#75715e">// Compute loss value
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>			torch<span style="color:#f92672">::</span>Tensor loss <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>nll_loss(prediction, batch.target);
+</span></span><span style="display:flex;"><span>			<span style="color:#75715e">// Compute gradients
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>			loss.backward();
+</span></span><span style="display:flex;"><span>			<span style="color:#75715e">// Update the parameters
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>			optimizer.step();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>			<span style="color:#75715e">// Output the loss and checkpoint every 100 batches
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>			<span style="color:#66d9ef">if</span> (<span style="color:#f92672">++</span>batch_index <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>				std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Epoch: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> epoch <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34; | Batch: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> batch_index 
+</span></span><span style="display:flex;"><span>					<span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34; | Loss: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> loss.item<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">float</span><span style="color:#f92672">&gt;</span>() <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+</span></span><span style="display:flex;"><span>				torch<span style="color:#f92672">::</span>save(net, <span style="color:#e6db74">&#34;net.pt&#34;</span>);
+</span></span><span style="display:flex;"><span>			}
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>For code, check out my repo here: <a href="https://github.com/krshrimali/Digit-Recognition-MNIST-SVHN-PyTorch-CPP">https://github.com/krshrimali/Digit-Recognition-MNIST-SVHN-PyTorch-CPP</a></p>
+<p>In the next blog, we will discuss about another network on MNIST and SVHN Dataset.</p>
 <h1 id="references">References</h1>
 <ol>
 <li><a href="https://pytorch.org/cppdocs/">https://pytorch.org/cppdocs/</a></li>
@@ -364,7 +363,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://krshrimali.github.io/tags/development">development</a></span><span class="tag"><a href="https://krshrimali.github.io/tags/coding">coding</a></span><span class="tag"><a href="https://krshrimali.github.io/tags/cpp">cpp</a></span><span class="tag"><a href="https://krshrimali.github.io/tags/notes">notes</a></span><span class="tag"><a href="https://krshrimali.github.io/tags/pytorch-cpp">pytorch-cpp</a></span><span class="tag"><a href="https://krshrimali.github.io/tags/libtorch">libtorch</a></span>
                 </p>
 
-            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>614 Words</p>
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>615 Words</p>
 
             <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>Posted: <time class="dt-published"> 2019-06-07 05:30 &#43;0530</time></p>
 <a class="resp-sharing-button__link" href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2019%2f06%2fintroduction-to-pytorch-c-api-mnist-digit-recognition-using-vgg-16-network%2f" target="_blank" rel="noopener" aria-label="Facebook">
@@ -517,7 +516,7 @@
 
 
 
-<script src="https://krshrimali.github.io/bundle.min.0e63d07bc6b25d019f9583b7d5921c8d0cd24d25d02cd4df1e8844fbbf00dbddb131d64e493dd5ac20b3814096d9495bc706574822df5561583386c15a358160.js"></script>
+<script src="https://krshrimali.github.io/bundle.min.5fae9992ea406007408dc33b0b3a8376d61e2f1d6ac50ba1dad7580ac50afb5199bcef3bbc3677e77553a9980bf882cf71edc2f755687dd7725f12ece4304ac2.js"></script>
     <script>
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -525,7 +524,7 @@
         })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
         ga('create', 'UA-146662543-1', 'auto');ga('send', 'pageview');
     </script>
-<script src="https://krshrimali.github.io/js/webmention.min.f8e74a199755d9338148ffba6a77e10ea98a46109749cb7088a273c36822534987180c01402b66cd4d1e9cc87ff1891f2f59ce37eccf002ddf25233a4c95e9b2.js" data-id="webmention-container"></script>
+<script src="https://krshrimali.github.io/js/webmention.min.6449166fb6247d260b345e03c5f06a3244983fddd12b71b6a2529977bc85ea15390dbd3f200f32d2714e42a4c48178194c9909733037057f6dd34eedd03e2496.js" data-id="webmention-container"></script>
 
 
 

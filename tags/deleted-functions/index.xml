@@ -14,7 +14,7 @@
       
       <guid>https://krshrimali.github.io/posts/2021/08/prefer-deleted-functions-to-private-undefined-ones-notes/</guid>
       <description>Prefer deleted functions to private undefined ones This item (11) in the chapter 3 focuses on:
- Why and How to prevent users calling particular functions? C++-98 and C++-11 approach What&amp;rsquo;s the difference between deleting a function vs declaring a member function private (and not defining them)?   NOTE
+Why and How to prevent users calling particular functions? C++-98 and C++-11 approach What&amp;rsquo;s the difference between deleting a function vs declaring a member function private (and not defining them)? NOTE
 These are my notes on Chapter 3, Item 11 of Effective Modern C++ written by Scott Meyers.
 Some (or even all) of the text can be similar to what you see in the book, as these are notes: I&amp;rsquo;ve tried not to be unnecessarily creative with my words.</description>
     </item>

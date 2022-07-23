@@ -26,7 +26,7 @@ But before we start, the PyTorch C&#43;&#43; Frontend has gone through several c
 
 
 
-<link rel="stylesheet" href="https://krshrimali.github.io/main.min.a6eedfdab54db128d627e7063826ffb0d9949ad2ea9424548adb08a272e224c9.css">
+<link rel="stylesheet" href="https://krshrimali.github.io/main.min.b6dbce0fdf6c61563a0c2226e857d5dadd8e5afa2c4f73ec9ea55abd831f9a72.css">
 
 
 
@@ -48,16 +48,10 @@ But before we start, the PyTorch C&#43;&#43; Frontend has gone through several c
 
 <meta itemprop="name" content="[Training and Results] Deep Convolutional Generative Adversarial Networks on CelebA Dataset using PyTorch C&#43;&#43; API">
 <meta itemprop="description" content="It&rsquo;s been around 5 months since I released my last blog on DCGAN Review and Implementation using PyTorch C&#43;&#43; API and I&rsquo;ve missed writing blogs badly! Straight the to the point, I&rsquo;m back!
-But before we start, the PyTorch C&#43;&#43; Frontend has gone through several changes and thanks to the awesome contributors around the world, it resembles the Python API more than it ever did! Since a lot of things have changed, I have also updated my previous blogs (tested on 1.">
-<meta itemprop="datePublished" content="2020-02-23T00:00:00+00:00" />
+But before we start, the PyTorch C&#43;&#43; Frontend has gone through several changes and thanks to the awesome contributors around the world, it resembles the Python API more than it ever did! Since a lot of things have changed, I have also updated my previous blogs (tested on 1."><meta itemprop="datePublished" content="2020-02-23T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2020-02-23T00:00:00+00:00" />
-<meta itemprop="wordCount" content="457">
-<meta itemprop="image" content="https://krshrimali.github.io"/>
-
-
-
-<meta itemprop="keywords" content="development,coding,cpp,notes,pytorch-cpp,libtorch," />
-<meta name="twitter:card" content="summary_large_image"/>
+<meta itemprop="wordCount" content="457"><meta itemprop="image" content="https://krshrimali.github.io"/>
+<meta itemprop="keywords" content="development,coding,cpp,notes,pytorch-cpp,libtorch," /><meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://krshrimali.github.io"/>
 
 <meta name="twitter:title" content="[Training and Results] Deep Convolutional Generative Adversarial Networks on CelebA Dataset using PyTorch C&#43;&#43; API"/>
@@ -219,15 +213,15 @@ But before we start, the PyTorch C&#43;&#43; Frontend has gone through several c
 <p>Time to talk about results!</p>
 <h2 id="results">Results</h2>
 <p>The aim of this blog is to get DCGAN running on our celebA dataset using PyTorch C++ Frontend API. I&rsquo;m in no way aiming to produce the best possible results. I trained the DCGAN network on celebA dataset for 10 epochs. In order to visualize results, for every checkpoint (where we save our models), we pass a sample noise image (64 images here) to the generator and save the output:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// equivalent to using torch.no_grad() in Python
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">auto</span> options <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>TensorOptions().device(device).requires_grad(false);
-
-<span style="color:#75715e">// netG is our sequential generator network
-</span><span style="color:#75715e">// args.nz = 100 in my case
-</span><span style="color:#75715e"></span>torch<span style="color:#f92672">::</span>Tensor samples <span style="color:#f92672">=</span> netG<span style="color:#f92672">-&gt;</span>forward(torch<span style="color:#f92672">::</span>randn({<span style="color:#ae81ff">64</span>, args.nz, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>}, options));
-<span style="color:#75715e">// save the output
-</span><span style="color:#75715e"></span>torch<span style="color:#f92672">::</span>save(samples, torch<span style="color:#f92672">::</span>str(<span style="color:#e6db74">&#34;dcgan-sample-&#34;</span>, <span style="color:#f92672">++</span>checkpoint_counter, <span style="color:#e6db74">&#34;.pt&#34;</span>));
-</code></pre></div><p>Once we have the saved output, we can load the file and produce output (find the <code>display_samples.py</code> file in the <a href="https://krshrimali.github.io/posts/2019/09/deep-convolutional-generative-adversarial-networks-review-and-implementation-using-pytorch-c-api/">GitHub repo for this blog</a>). Here is how the output looks like, after 10 epochs of training:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">// equivalent to using torch.no_grad() in Python
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">auto</span> options <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>TensorOptions().device(device).requires_grad(false);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// netG is our sequential generator network
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// args.nz = 100 in my case
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>torch<span style="color:#f92672">::</span>Tensor samples <span style="color:#f92672">=</span> netG<span style="color:#f92672">-&gt;</span>forward(torch<span style="color:#f92672">::</span>randn({<span style="color:#ae81ff">64</span>, args.nz, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>}, options));
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// save the output
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>torch<span style="color:#f92672">::</span>save(samples, torch<span style="color:#f92672">::</span>str(<span style="color:#e6db74">&#34;dcgan-sample-&#34;</span>, <span style="color:#f92672">++</span>checkpoint_counter, <span style="color:#e6db74">&#34;.pt&#34;</span>));
+</span></span></code></pre></div><p>Once we have the saved output, we can load the file and produce output (find the <code>display_samples.py</code> file in the <a href="https://krshrimali.github.io/posts/2019/09/deep-convolutional-generative-adversarial-networks-review-and-implementation-using-pytorch-c-api/">GitHub repo for this blog</a>). Here is how the output looks like, after 10 epochs of training:</p>
 <!-- raw HTML omitted -->
 <p>And how about an animation?</p>
 <!-- raw HTML omitted -->
@@ -404,7 +398,7 @@ But before we start, the PyTorch C&#43;&#43; Frontend has gone through several c
 
 
 
-<script src="https://krshrimali.github.io/bundle.min.0e63d07bc6b25d019f9583b7d5921c8d0cd24d25d02cd4df1e8844fbbf00dbddb131d64e493dd5ac20b3814096d9495bc706574822df5561583386c15a358160.js"></script>
+<script src="https://krshrimali.github.io/bundle.min.5fae9992ea406007408dc33b0b3a8376d61e2f1d6ac50ba1dad7580ac50afb5199bcef3bbc3677e77553a9980bf882cf71edc2f755687dd7725f12ece4304ac2.js"></script>
     <script>
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -412,7 +406,7 @@ But before we start, the PyTorch C&#43;&#43; Frontend has gone through several c
         })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
         ga('create', 'UA-146662543-1', 'auto');ga('send', 'pageview');
     </script>
-<script src="https://krshrimali.github.io/js/webmention.min.f8e74a199755d9338148ffba6a77e10ea98a46109749cb7088a273c36822534987180c01402b66cd4d1e9cc87ff1891f2f59ce37eccf002ddf25233a4c95e9b2.js" data-id="webmention-container"></script>
+<script src="https://krshrimali.github.io/js/webmention.min.6449166fb6247d260b345e03c5f06a3244983fddd12b71b6a2529977bc85ea15390dbd3f200f32d2714e42a4c48178194c9909733037057f6dd34eedd03e2496.js" data-id="webmention-container"></script>
 
 
 

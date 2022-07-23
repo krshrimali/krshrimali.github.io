@@ -27,7 +27,7 @@ Please note that, function objects are commonly referred as functors but we have
 
 
 
-<link rel="stylesheet" href="https://krshrimali.github.io/main.min.a6eedfdab54db128d627e7063826ffb0d9949ad2ea9424548adb08a272e224c9.css">
+<link rel="stylesheet" href="https://krshrimali.github.io/main.min.b6dbce0fdf6c61563a0c2226e857d5dadd8e5afa2c4f73ec9ea55abd831f9a72.css">
 
 
 
@@ -49,16 +49,10 @@ Please note that, function objects are commonly referred as functors but we have
 
 <meta itemprop="name" content="Function Pointers and Function Objects in C&#43;&#43;">
 <meta itemprop="description" content="In today&rsquo;s blog, we&rsquo;ll talk about two important concepts in C&#43;&#43;: Function Pointers and Function Objects.
-Please note that, function objects are commonly referred as functors but we have failed to notice any official alias to the name. Hence, we&rsquo;ll restrict ourselves to using Function Objects in this blog.">
-<meta itemprop="datePublished" content="2021-07-18T00:00:00+00:00" />
+Please note that, function objects are commonly referred as functors but we have failed to notice any official alias to the name. Hence, we&rsquo;ll restrict ourselves to using Function Objects in this blog."><meta itemprop="datePublished" content="2021-07-18T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2021-07-18T00:00:00+00:00" />
-<meta itemprop="wordCount" content="1812">
-<meta itemprop="image" content="https://krshrimali.github.io"/>
-
-
-
-<meta itemprop="keywords" content="development,coding,cpp,function pointers,function objects," />
-<meta name="twitter:card" content="summary_large_image"/>
+<meta itemprop="wordCount" content="1812"><meta itemprop="image" content="https://krshrimali.github.io"/>
+<meta itemprop="keywords" content="development,coding,cpp,function pointers,function objects," /><meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://krshrimali.github.io"/>
 
 <meta name="twitter:title" content="Function Pointers and Function Objects in C&#43;&#43;"/>
@@ -219,67 +213,67 @@ Please note that, function objects are commonly referred as functors but we have
 <p><img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/cover-images/fptr-fobj-cover.png" alt=""></p>
 <h2 id="function-pointers">Function Pointers</h2>
 <p>As the name sounds, a function pointer is simply a pointer to the memory address of a function. Consider a following function:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// A function which returns true if a &gt; b else false
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">isGreater</span>(<span style="color:#66d9ef">int</span> a, <span style="color:#66d9ef">int</span> b) {
-	<span style="color:#66d9ef">return</span> a <span style="color:#f92672">&gt;</span> b;
-}
-</code></pre></div><p>As we would expect, the function is stored in the memory starting with an address. You can print the memory address of a function by doing (we do this using <code>printf</code>, see: <a href="https://stackoverflow.com/a/2064722">https://stackoverflow.com/a/2064722</a>)</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">auto</span> fn_addresss <span style="color:#f92672">=</span> isGreater; <span style="color:#75715e">// get the address of the function
-</span><span style="color:#75715e"></span>printf(<span style="color:#e6db74">&#34;Function address: %p</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, fn_address);
-</code></pre></div><p>And you&rsquo;ll notice a hex value as the output: <code>0x5649d675c139</code> (in my case). The syntax for creating a function pointer looks like this:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">return_type (<span style="color:#f92672">*</span>ptr_name)(arg1_type, arg2_type, ...);
-</code></pre></div><p>So in our case for <code>isGreater</code>, it will be:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">bool</span> (<span style="color:#f92672">*</span>justApointer)(<span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span>);
-</code></pre></div><p>What this means is, the pointer <em>justApointer</em> will point to a function taking 2 integer arguments and returning a boolean value. But note that this doesn&rsquo;t point to any function yet. If you will do:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">bool</span> (<span style="color:#f92672">*</span>justApointer)(<span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span>);
-<span style="color:#75715e">// De-reference the pointer and call 
-</span><span style="color:#75715e"></span>(<span style="color:#f92672">*</span>justApointer)(<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>);
-</code></pre></div><p>This will cause a <code>segmentation fault (core dumped)</code> error because it points to no valid address of an executable code. So let&rsquo;s go ahead and point our pointer to the memory address of <code>isGreater</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">justApointer <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>isGreater;
-</code></pre></div><p>Here we have given the address of the function to the pointer, you can also do:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// Note: It&#39;s a good practice to avoid writing the type of function pointers again if it&#39;s too verbose
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> FnType <span style="color:#f92672">=</span> <span style="color:#66d9ef">bool</span> (<span style="color:#f92672">*</span>)(<span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span>);
-FnType justApointer{ <span style="color:#f92672">&amp;</span>isGreater }; <span style="color:#75715e">// OK
-</span><span style="color:#75715e"></span>FnType yetAnotherPointer <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>isGreater; <span style="color:#75715e">// OK
-</span><span style="color:#75715e"></span>FnType yetAnotherFnPointer <span style="color:#f92672">=</span> isGreater; <span style="color:#75715e">// OK, implicit conversion happens in C++ from function to function pointer, so you don&#39;t need to use &amp; operator
-</span></code></pre></div><p>You could also have declared the pointer first, and then initialized:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// Declararation
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">bool</span> (<span style="color:#f92672">*</span>justApointer)(<span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span>);
-
-<span style="color:#75715e">// Initialization
-</span><span style="color:#75715e"></span>justApointer { <span style="color:#f92672">&amp;</span>isGreater };
-justApointer { isGreater };
-justApointer <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>isGreater;
-justApointer <span style="color:#f92672">=</span> isGreater;
-</code></pre></div><p>All of this is valid and works in C++. If you&rsquo;re coming from Modern C++, you might have realized that it&rsquo;s OK to skip the syntax of a function pointer and use:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">auto</span> justApointer <span style="color:#f92672">=</span> isGreater;
-</code></pre></div><p>Calling a function pointer is fairly straight forward, you can just do:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// Will return 0 since 3 is not greater than 4
-</span><span style="color:#75715e"></span>std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> (<span style="color:#f92672">*</span>justApointer)(<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>);
-</code></pre></div><p>Since it&rsquo;s a pointer, so you have to de-reference it to get to the function address (executable code in the memory) and then call it using the <code>()</code> call operator. C++ does the implicit conversion, and you can skip de-referencing:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// Will also return 0 since 3 is not greater than 4
-</span><span style="color:#75715e"></span>std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> justApointer(<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>);
-</code></pre></div><p>If you are familiar with concepts of <code>const</code> pointers, you can also create a <em>const</em> function pointer, so that once initialized - it can not be pointed to a different function.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">bool</span> (<span style="color:#f92672">*</span><span style="color:#66d9ef">const</span> justApointer)(<span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span>) <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>isGreater;
-
-<span style="color:#75715e">// You can not re-initialize (aka assign) it to point to any other address
-</span><span style="color:#75715e"></span>justApointer <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>isGreater; <span style="color:#75715e">// NOT OK, ERROR: assignment of read-only variable &#39;justApointer&#39;
-</span></code></pre></div><p>If you have noticed, we used <code>*const justApointer</code> - since we wanted to indicate to the compiler - that the pointer is supposed to be <code>const</code>, not the output (<code>const bool (*justApointer)(int, int)</code>). You can play around with different specifiers and see how they work though.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">// A function which returns true if a &gt; b else false
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">isGreater</span>(<span style="color:#66d9ef">int</span> a, <span style="color:#66d9ef">int</span> b) {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> a <span style="color:#f92672">&gt;</span> b;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>As we would expect, the function is stored in the memory starting with an address. You can print the memory address of a function by doing (we do this using <code>printf</code>, see: <a href="https://stackoverflow.com/a/2064722">https://stackoverflow.com/a/2064722</a>)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">auto</span> fn_addresss <span style="color:#f92672">=</span> isGreater; <span style="color:#75715e">// get the address of the function
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>printf(<span style="color:#e6db74">&#34;Function address: %p</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, fn_address);
+</span></span></code></pre></div><p>And you&rsquo;ll notice a hex value as the output: <code>0x5649d675c139</code> (in my case). The syntax for creating a function pointer looks like this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>return_type (<span style="color:#f92672">*</span>ptr_name)(arg1_type, arg2_type, ...);
+</span></span></code></pre></div><p>So in our case for <code>isGreater</code>, it will be:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> (<span style="color:#f92672">*</span>justApointer)(<span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span>);
+</span></span></code></pre></div><p>What this means is, the pointer <em>justApointer</em> will point to a function taking 2 integer arguments and returning a boolean value. But note that this doesn&rsquo;t point to any function yet. If you will do:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> (<span style="color:#f92672">*</span>justApointer)(<span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span>);
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// De-reference the pointer and call 
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>(<span style="color:#f92672">*</span>justApointer)(<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>);
+</span></span></code></pre></div><p>This will cause a <code>segmentation fault (core dumped)</code> error because it points to no valid address of an executable code. So let&rsquo;s go ahead and point our pointer to the memory address of <code>isGreater</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>justApointer <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>isGreater;
+</span></span></code></pre></div><p>Here we have given the address of the function to the pointer, you can also do:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">// Note: It&#39;s a good practice to avoid writing the type of function pointers again if it&#39;s too verbose
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> FnType <span style="color:#f92672">=</span> <span style="color:#66d9ef">bool</span> (<span style="color:#f92672">*</span>)(<span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span>);
+</span></span><span style="display:flex;"><span>FnType justApointer{ <span style="color:#f92672">&amp;</span>isGreater }; <span style="color:#75715e">// OK
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>FnType yetAnotherPointer <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>isGreater; <span style="color:#75715e">// OK
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>FnType yetAnotherFnPointer <span style="color:#f92672">=</span> isGreater; <span style="color:#75715e">// OK, implicit conversion happens in C++ from function to function pointer, so you don&#39;t need to use &amp; operator
+</span></span></span></code></pre></div><p>You could also have declared the pointer first, and then initialized:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">// Declararation
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">bool</span> (<span style="color:#f92672">*</span>justApointer)(<span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Initialization
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>justApointer { <span style="color:#f92672">&amp;</span>isGreater };
+</span></span><span style="display:flex;"><span>justApointer { isGreater };
+</span></span><span style="display:flex;"><span>justApointer <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>isGreater;
+</span></span><span style="display:flex;"><span>justApointer <span style="color:#f92672">=</span> isGreater;
+</span></span></code></pre></div><p>All of this is valid and works in C++. If you&rsquo;re coming from Modern C++, you might have realized that it&rsquo;s OK to skip the syntax of a function pointer and use:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">auto</span> justApointer <span style="color:#f92672">=</span> isGreater;
+</span></span></code></pre></div><p>Calling a function pointer is fairly straight forward, you can just do:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">// Will return 0 since 3 is not greater than 4
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> (<span style="color:#f92672">*</span>justApointer)(<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>);
+</span></span></code></pre></div><p>Since it&rsquo;s a pointer, so you have to de-reference it to get to the function address (executable code in the memory) and then call it using the <code>()</code> call operator. C++ does the implicit conversion, and you can skip de-referencing:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">// Will also return 0 since 3 is not greater than 4
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> justApointer(<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>);
+</span></span></code></pre></div><p>If you are familiar with concepts of <code>const</code> pointers, you can also create a <em>const</em> function pointer, so that once initialized - it can not be pointed to a different function.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> (<span style="color:#f92672">*</span><span style="color:#66d9ef">const</span> justApointer)(<span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span>) <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>isGreater;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// You can not re-initialize (aka assign) it to point to any other address
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>justApointer <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>isGreater; <span style="color:#75715e">// NOT OK, ERROR: assignment of read-only variable &#39;justApointer&#39;
+</span></span></span></code></pre></div><p>If you have noticed, we used <code>*const justApointer</code> - since we wanted to indicate to the compiler - that the pointer is supposed to be <code>const</code>, not the output (<code>const bool (*justApointer)(int, int)</code>). You can play around with different specifiers and see how they work though.</p>
 <p>One of the use-cases of function pointers is to be able to pass a function as an argument (often referred as <strong>Callback Functions</strong>). But well, you might have a question - you can use a global function in another function, right? Yes, that&rsquo;s possible, but consider a case where you want to pass different callback functions depending on your requirement to a more generic function (like sorting).</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">isGreater</span>(<span style="color:#66d9ef">int</span> a, <span style="color:#66d9ef">int</span> b) { <span style="color:#66d9ef">return</span> a <span style="color:#f92672">&gt;</span> b; }
-<span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">isLesser</span>(<span style="color:#66d9ef">int</span> a, <span style="color:#66d9ef">int</span> b) { <span style="color:#66d9ef">return</span> a <span style="color:#f92672">&lt;</span> b; }
-<span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">isEqual</span>(<span style="color:#66d9ef">int</span> a, <span style="color:#66d9ef">int</span> b) { <span style="color:#66d9ef">return</span> a <span style="color:#f92672">==</span> b; }
-</code></pre></div><p>We have these 3 functions but we don&rsquo;t know yet which one we want to use to sort an array, let&rsquo;s say you want to sort an array in descending order, another array in ascending order.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> sample_vec <span style="color:#f92672">=</span> {<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">5</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">9</span>, <span style="color:#ae81ff">2</span>};
-
-<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">a_generic_sorting_function</span>(std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> input_vec, <span style="color:#66d9ef">bool</span> (<span style="color:#f92672">*</span>comparisonFunction)(<span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span>)) {
-	<span style="color:#75715e">// ... sorting algorithm
-</span><span style="color:#75715e"></span>	<span style="color:#75715e">// use comparisonFunction for comparisons
-</span><span style="color:#75715e"></span>}
-
-a_generic_sorting_function(sample_vec, isGreater); <span style="color:#75715e">// sorts in descending order
-</span><span style="color:#75715e"></span>a_generic_sorting_function(sample_vec, isLesser); <span style="color:#75715e">// sorts in ascending order
-</span></code></pre></div><p>Observe that even though we passed a function as an argument, but eventually - that&rsquo;s interpreted as a pointer (since that&rsquo;s what the 3rd argument type is, in <code>a_generic_sorting_function</code>).</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">isGreater</span>(<span style="color:#66d9ef">int</span> a, <span style="color:#66d9ef">int</span> b) { <span style="color:#66d9ef">return</span> a <span style="color:#f92672">&gt;</span> b; }
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">isLesser</span>(<span style="color:#66d9ef">int</span> a, <span style="color:#66d9ef">int</span> b) { <span style="color:#66d9ef">return</span> a <span style="color:#f92672">&lt;</span> b; }
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">isEqual</span>(<span style="color:#66d9ef">int</span> a, <span style="color:#66d9ef">int</span> b) { <span style="color:#66d9ef">return</span> a <span style="color:#f92672">==</span> b; }
+</span></span></code></pre></div><p>We have these 3 functions but we don&rsquo;t know yet which one we want to use to sort an array, let&rsquo;s say you want to sort an array in descending order, another array in ascending order.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> sample_vec <span style="color:#f92672">=</span> {<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">5</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">9</span>, <span style="color:#ae81ff">2</span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">a_generic_sorting_function</span>(std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> input_vec, <span style="color:#66d9ef">bool</span> (<span style="color:#f92672">*</span>comparisonFunction)(<span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span>)) {
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// ... sorting algorithm
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#75715e">// use comparisonFunction for comparisons
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>a_generic_sorting_function(sample_vec, isGreater); <span style="color:#75715e">// sorts in descending order
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>a_generic_sorting_function(sample_vec, isLesser); <span style="color:#75715e">// sorts in ascending order
+</span></span></span></code></pre></div><p>Observe that even though we passed a function as an argument, but eventually - that&rsquo;s interpreted as a pointer (since that&rsquo;s what the 3rd argument type is, in <code>a_generic_sorting_function</code>).</p>
 <h2 id="function-objects">Function Objects</h2>
 <blockquote>
 <p>Function Objects are types that implement call operator ().</p>
@@ -296,118 +290,118 @@ a_generic_sorting_function(sample_vec, isGreater); <span style="color:#75715e">/
 <li><code>std::minus</code> is a <strong>function object</strong> implementing <code>x - y</code>.</li>
 </ul>
 <p>and many more arithmetic operators like <code>/, *, %</code> and negation (<code>-x</code>). See <em>Operator Function Objects</em> section in <a href="https://en.cppreference.com/w/cpp/utility/functional">https://en.cppreference.com/w/cpp/utility/functional</a>.</p>
-<p>There are other comparison, logical and bitwise operations as well which are provided as function objects in C++. Let&rsquo;s take a look at <code>std::greater</code> and <code>std::lesser</code> function objects to maintain the consistency b/w function pointers and objects sections. Going by the documentation (<a href="https://en.cppreference.com/w/cpp/utility/functional/greater),">https://en.cppreference.com/w/cpp/utility/functional/greater),</a> the struct <code>std::greater</code> implements the call operator <code>()</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">operator</span>() (<span style="color:#66d9ef">const</span> T<span style="color:#f92672">&amp;</span> lhs, <span style="color:#66d9ef">const</span> T<span style="color:#f92672">&amp;</span> rhs) <span style="color:#66d9ef">const</span>; <span style="color:#75715e">// (until C++14)
-</span></code></pre></div><p>(source: <a href="https://en.cppreference.com/w/cpp/utility/functional/greater">https://en.cppreference.com/w/cpp/utility/functional/greater</a>)</p>
+<p>There are other comparison, logical and bitwise operations as well which are provided as function objects in C++. Let&rsquo;s take a look at <code>std::greater</code> and <code>std::lesser</code> function objects to maintain the consistency b/w function pointers and objects sections. Going by the documentation (<a href="https://en.cppreference.com/w/cpp/utility/functional/greater)">https://en.cppreference.com/w/cpp/utility/functional/greater)</a>, the struct <code>std::greater</code> implements the call operator <code>()</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">operator</span>() (<span style="color:#66d9ef">const</span> T<span style="color:#f92672">&amp;</span> lhs, <span style="color:#66d9ef">const</span> T<span style="color:#f92672">&amp;</span> rhs) <span style="color:#66d9ef">const</span>; <span style="color:#75715e">// (until C++14)
+</span></span></span></code></pre></div><p>(source: <a href="https://en.cppreference.com/w/cpp/utility/functional/greater">https://en.cppreference.com/w/cpp/utility/functional/greater</a>)</p>
 <p>If we had to define our own function object, something similar to <code>std::greater</code> but only for integer inputs. As mentioned earlier, it&rsquo;s a type with the call operator defined, so let&rsquo;s go ahead and define our own <code>struct</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">greater</span> {
-    <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">operator</span>()(<span style="color:#66d9ef">int</span> a, <span style="color:#66d9ef">int</span> b) {
-        <span style="color:#66d9ef">return</span> a <span style="color:#f92672">&gt;</span> b;
-    }
-};
-
-greater comparison;
-std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> comparison(<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>);  <span style="color:#75715e">// Returns 0
-</span></code></pre></div><p>Now you can ask: this could have been accomplished with a function pointer as well, so why a function object? Well, so the answer boils down to optimization (in this case). A compiler can inline the function if it&rsquo;s possible to optimize the execution - and that&rsquo;s only possible with function objects, while for function pointers - you need to de-reference it to know the address which happens during the runtime (unless there is some real complex optimization - which I&rsquo;m not aware of right now).</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">greater</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">operator</span>()(<span style="color:#66d9ef">int</span> a, <span style="color:#66d9ef">int</span> b) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> a <span style="color:#f92672">&gt;</span> b;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>greater comparison;
+</span></span><span style="display:flex;"><span>std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> comparison(<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>);  <span style="color:#75715e">// Returns 0
+</span></span></span></code></pre></div><p>Now you can ask: this could have been accomplished with a function pointer as well, so why a function object? Well, so the answer boils down to optimization (in this case). A compiler can inline the function if it&rsquo;s possible to optimize the execution - and that&rsquo;s only possible with function objects, while for function pointers - you need to de-reference it to know the address which happens during the runtime (unless there is some real complex optimization - which I&rsquo;m not aware of right now).</p>
 <p>A real example can be to see the compiled code on <a href="https://godbolt.org/">https://godbolt.org/</a> (an amazing compiler explorer). If I compile the following code (on x86-64, gcc 11.1 with no optimization flags):</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
-</span><span style="color:#75715e"></span>
-<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">greater</span> {
-    <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">operator</span>()(<span style="color:#66d9ef">int</span> a, <span style="color:#66d9ef">int</span> b) {
-        <span style="color:#66d9ef">return</span> a <span style="color:#f92672">&gt;</span> b;
-    }
-};
-
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
-    <span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">greater</span> obj;
-    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> obj(<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>);
-}
-</code></pre></div><p>The relevant assembly code of the <code>main</code> function looks like this:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">main:
-        push    rbp
-        mov     rbp, rsp
-        sub     rsp, <span style="color:#ae81ff">16</span>
-        lea     rax, [rbp<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]
-        mov     edx, <span style="color:#ae81ff">4</span>
-        mov     esi, <span style="color:#ae81ff">3</span>
-        mov     rdi, rax
-        call    greater<span style="color:#f92672">::</span><span style="color:#66d9ef">operator</span>()(<span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span>)
-        movzx   eax, al
-        mov     esi, eax
-        mov     edi, OFFSET FLAT:_ZSt4cout
-        call    std<span style="color:#f92672">::</span>basic_ostream<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">char</span>, std<span style="color:#f92672">::</span>char_traits<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">char</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&gt;::</span><span style="color:#66d9ef">operator</span><span style="color:#f92672">&lt;&lt;</span>(<span style="color:#66d9ef">bool</span>)
-        mov     eax, <span style="color:#ae81ff">0</span>
-        leave
-        ret
-</code></pre></div><p>The above assembly code may look overwhelming to some, but the most relevant instruction is: (link to the code: <a href="https://godbolt.org/z/WqYozn7qv">https://godbolt.org/z/WqYozn7qv</a>)</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">call    greater<span style="color:#f92672">::</span><span style="color:#66d9ef">operator</span>(<span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span>)
-</code></pre></div><p>Now if I add the optimization flag, you&rsquo;ll see the operator being inlined:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">main:
-        sub     rsp, <span style="color:#ae81ff">8</span>
-        xor     esi, esi
-        mov     edi, OFFSET FLAT:_ZSt4cout
-        call    std<span style="color:#f92672">::</span>basic_ostream<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">char</span>, std<span style="color:#f92672">::</span>char_traits<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">char</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&gt;&amp;</span> std<span style="color:#f92672">::</span>basic_ostream<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">char</span>, std<span style="color:#f92672">::</span>char_traits<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">char</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&gt;::</span>_M_insert<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">bool</span><span style="color:#f92672">&gt;</span>(<span style="color:#66d9ef">bool</span>)
-        xor     eax, eax
-        add     rsp, <span style="color:#ae81ff">8</span>
-        ret
-_GLOBAL__sub_I_main:
-        sub     rsp, <span style="color:#ae81ff">8</span>
-        mov     edi, OFFSET FLAT:_ZStL8__ioinit
-        call    std<span style="color:#f92672">::</span>ios_base<span style="color:#f92672">::</span>Init<span style="color:#f92672">::</span>Init() [complete object constructor]
-        mov     edx, OFFSET FLAT:__dso_handle
-        mov     esi, OFFSET FLAT:_ZStL8__ioinit
-        mov     edi, OFFSET FLAT:_ZNSt8ios_base4InitD1Ev
-        add     rsp, <span style="color:#ae81ff">8</span>
-        jmp     __cxa_atexit
-</code></pre></div><p>Though, it may not be visible on the first look, but a closer look to the following instruction:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">call    std<span style="color:#f92672">::</span>basic_ostream<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">char</span>, std<span style="color:#f92672">::</span>char_traits<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">char</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&gt;&amp;</span> std<span style="color:#f92672">::</span>basic_ostream<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">char</span>, std<span style="color:#f92672">::</span>char_traits<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">char</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&gt;::</span>_M_insert<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">bool</span><span style="color:#f92672">&gt;</span>(<span style="color:#66d9ef">bool</span>)
-</code></pre></div><p>tells us that it doesn&rsquo;t call the operator of the object of type <code>greater</code> anymore! Instead, the compiler knows that the value is <code>false</code> and hence it inlines the value to the <code>std::cout</code> call. While this is possible for function objects, it&rsquo;s not possible for function pointers (with the <code>-O3</code> flag at least).</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">greater</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">operator</span>()(<span style="color:#66d9ef">int</span> a, <span style="color:#66d9ef">int</span> b) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> a <span style="color:#f92672">&gt;</span> b;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">greater</span> obj;
+</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> obj(<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>The relevant assembly code of the <code>main</code> function looks like this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>main:
+</span></span><span style="display:flex;"><span>        push    rbp
+</span></span><span style="display:flex;"><span>        mov     rbp, rsp
+</span></span><span style="display:flex;"><span>        sub     rsp, <span style="color:#ae81ff">16</span>
+</span></span><span style="display:flex;"><span>        lea     rax, [rbp<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]
+</span></span><span style="display:flex;"><span>        mov     edx, <span style="color:#ae81ff">4</span>
+</span></span><span style="display:flex;"><span>        mov     esi, <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>        mov     rdi, rax
+</span></span><span style="display:flex;"><span>        call    greater<span style="color:#f92672">::</span><span style="color:#66d9ef">operator</span>()(<span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span>)
+</span></span><span style="display:flex;"><span>        movzx   eax, al
+</span></span><span style="display:flex;"><span>        mov     esi, eax
+</span></span><span style="display:flex;"><span>        mov     edi, OFFSET FLAT:_ZSt4cout
+</span></span><span style="display:flex;"><span>        call    std<span style="color:#f92672">::</span>basic_ostream<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">char</span>, std<span style="color:#f92672">::</span>char_traits<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">char</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&gt;::</span><span style="color:#66d9ef">operator</span><span style="color:#f92672">&lt;&lt;</span>(<span style="color:#66d9ef">bool</span>)
+</span></span><span style="display:flex;"><span>        mov     eax, <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>        leave
+</span></span><span style="display:flex;"><span>        ret
+</span></span></code></pre></div><p>The above assembly code may look overwhelming to some, but the most relevant instruction is: (link to the code: <a href="https://godbolt.org/z/WqYozn7qv">https://godbolt.org/z/WqYozn7qv</a>)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>call    greater<span style="color:#f92672">::</span><span style="color:#66d9ef">operator</span>(<span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span>)
+</span></span></code></pre></div><p>Now if I add the optimization flag, you&rsquo;ll see the operator being inlined:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>main:
+</span></span><span style="display:flex;"><span>        sub     rsp, <span style="color:#ae81ff">8</span>
+</span></span><span style="display:flex;"><span>        xor     esi, esi
+</span></span><span style="display:flex;"><span>        mov     edi, OFFSET FLAT:_ZSt4cout
+</span></span><span style="display:flex;"><span>        call    std<span style="color:#f92672">::</span>basic_ostream<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">char</span>, std<span style="color:#f92672">::</span>char_traits<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">char</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&gt;&amp;</span> std<span style="color:#f92672">::</span>basic_ostream<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">char</span>, std<span style="color:#f92672">::</span>char_traits<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">char</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&gt;::</span>_M_insert<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">bool</span><span style="color:#f92672">&gt;</span>(<span style="color:#66d9ef">bool</span>)
+</span></span><span style="display:flex;"><span>        xor     eax, eax
+</span></span><span style="display:flex;"><span>        add     rsp, <span style="color:#ae81ff">8</span>
+</span></span><span style="display:flex;"><span>        ret
+</span></span><span style="display:flex;"><span>_GLOBAL__sub_I_main:
+</span></span><span style="display:flex;"><span>        sub     rsp, <span style="color:#ae81ff">8</span>
+</span></span><span style="display:flex;"><span>        mov     edi, OFFSET FLAT:_ZStL8__ioinit
+</span></span><span style="display:flex;"><span>        call    std<span style="color:#f92672">::</span>ios_base<span style="color:#f92672">::</span>Init<span style="color:#f92672">::</span>Init() [complete object constructor]
+</span></span><span style="display:flex;"><span>        mov     edx, OFFSET FLAT:__dso_handle
+</span></span><span style="display:flex;"><span>        mov     esi, OFFSET FLAT:_ZStL8__ioinit
+</span></span><span style="display:flex;"><span>        mov     edi, OFFSET FLAT:_ZNSt8ios_base4InitD1Ev
+</span></span><span style="display:flex;"><span>        add     rsp, <span style="color:#ae81ff">8</span>
+</span></span><span style="display:flex;"><span>        jmp     __cxa_atexit
+</span></span></code></pre></div><p>Though, it may not be visible on the first look, but a closer look to the following instruction:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>call    std<span style="color:#f92672">::</span>basic_ostream<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">char</span>, std<span style="color:#f92672">::</span>char_traits<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">char</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&gt;&amp;</span> std<span style="color:#f92672">::</span>basic_ostream<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">char</span>, std<span style="color:#f92672">::</span>char_traits<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">char</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&gt;::</span>_M_insert<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">bool</span><span style="color:#f92672">&gt;</span>(<span style="color:#66d9ef">bool</span>)
+</span></span></code></pre></div><p>tells us that it doesn&rsquo;t call the operator of the object of type <code>greater</code> anymore! Instead, the compiler knows that the value is <code>false</code> and hence it inlines the value to the <code>std::cout</code> call. While this is possible for function objects, it&rsquo;s not possible for function pointers (with the <code>-O3</code> flag at least).</p>
 <h3 id="storing-a-state">Storing a state</h3>
 <p>It&rsquo;s more like a property of a class/struct in C++ that you can take arguments in the constructor and have different objects with different values for a member variable. Take an example:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// Usage:
-</span><span style="color:#75715e">// GreaterThan obj(10);
-</span><span style="color:#75715e">// obj(11); // is 11 &gt; 10?
-</span><span style="color:#75715e">//
-</span><span style="color:#75715e">// GreaterThan obj_(-10);
-</span><span style="color:#75715e">// obj_(-9); // is -9 &gt; -10?
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">GreaterThan</span> {
-    <span style="color:#66d9ef">int</span> compare_with;
-<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-    <span style="color:#66d9ef">void</span> greaterThan(<span style="color:#66d9ef">int</span> inp) <span style="color:#f92672">:</span> compare_with(inp) { }
-    <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">operator</span>()(<span style="color:#66d9ef">int</span> another_number) { <span style="color:#66d9ef">return</span> another_number <span style="color:#f92672">&gt;</span> compare_with; }
-};
-
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
-    GreaterThan obj(<span style="color:#ae81ff">10</span>);
-    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> obj(<span style="color:#ae81ff">11</span>) <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#39;\n&#39;</span>;
-
-    GreaterThan obj_(<span style="color:#f92672">-</span><span style="color:#ae81ff">10</span>);
-    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> obj_(<span style="color:#f92672">-</span><span style="color:#ae81ff">9</span>) <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#39;\n&#39;</span>;
-}
-</code></pre></div><p>Here you have a member variable <code>compare_with</code> and you can have different values for each object instantiated. While it&rsquo;s also possible for a function by using a <code>static</code> variable but you can&rsquo;t have multiple values for it on a single run.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">// Usage:
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// GreaterThan obj(10);
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// obj(11); // is 11 &gt; 10?
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">//
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// GreaterThan obj_(-10);
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// obj_(-9); // is -9 &gt; -10?
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">GreaterThan</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> compare_with;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> greaterThan(<span style="color:#66d9ef">int</span> inp) <span style="color:#f92672">:</span> compare_with(inp) { }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">operator</span>()(<span style="color:#66d9ef">int</span> another_number) { <span style="color:#66d9ef">return</span> another_number <span style="color:#f92672">&gt;</span> compare_with; }
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>    GreaterThan obj(<span style="color:#ae81ff">10</span>);
+</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> obj(<span style="color:#ae81ff">11</span>) <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#39;\n&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    GreaterThan obj_(<span style="color:#f92672">-</span><span style="color:#ae81ff">10</span>);
+</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> obj_(<span style="color:#f92672">-</span><span style="color:#ae81ff">9</span>) <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#39;\n&#39;</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Here you have a member variable <code>compare_with</code> and you can have different values for each object instantiated. While it&rsquo;s also possible for a function by using a <code>static</code> variable but you can&rsquo;t have multiple values for it on a single run.</p>
 <h2 id="function-objects-and-function-pointers-in-the-standard-library">Function Objects and Function Pointers in the Standard Library</h2>
 <p>Function Objects and Function Pointers, just like any other type/value can be passed as a type to a template:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T, <span style="color:#66d9ef">typename</span> ComparatorFunc<span style="color:#f92672">&gt;</span>
-<span style="color:#66d9ef">void</span> sort(T vector_input, ComparatorFunc func) {
-    <span style="color:#75715e">// ... sorting logic using given comparator function: func
-</span><span style="color:#75715e"></span>}
-</code></pre></div><p>This allows you to use <code>sort</code> as a generic function with different types of comparators. Let&rsquo;s take a look here, you have 2 function object types: <code>isGreater</code> and <code>isLesser</code>: (the same can be done for function pointers as well)</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">isGreater</span> {
-    <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">operator</span>()(<span style="color:#66d9ef">int</span> a, <span style="color:#66d9ef">int</span> b) { <span style="color:#66d9ef">return</span> a <span style="color:#f92672">&gt;</span> b; }
-}
-
-<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">isLesser</span> {
-    <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">operator</span>()(<span style="color:#66d9ef">int</span> a, <span style="color:#66d9ef">int</span> b) { <span style="color:#66d9ef">return</span> a <span style="color:#f92672">&lt;</span> b; }
-}
-
-<span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T, <span style="color:#66d9ef">typename</span> ComparatorFunc<span style="color:#f92672">&gt;</span>
-T sort(T input, ComparatorFunc func) {
-    <span style="color:#75715e">// use func to decide sorting strategy (descending/ascending)
-</span><span style="color:#75715e"></span>}
-</code></pre></div><p>This is valid in C++, though I&rsquo;ll like to add a disclaimer here, you could have just used <code>std::sort</code> instead of implementing your own sorting strategy (unless you know what you are doing ;)):</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">std<span style="color:#f92672">::</span>sort(input.begin(), input.end(), isGreater);
-std<span style="color:#f92672">::</span>sort(input.begin(), input.end(), isLesser);
-</code></pre></div><p>This is mostly it for this blog, there is a lot to discuss about function pointers and objects, but I guess this should be enough for you to get started and follow us along in future blogs.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T, <span style="color:#66d9ef">typename</span> ComparatorFunc<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> sort(T vector_input, ComparatorFunc func) {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// ... sorting logic using given comparator function: func
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><p>This allows you to use <code>sort</code> as a generic function with different types of comparators. Let&rsquo;s take a look here, you have 2 function object types: <code>isGreater</code> and <code>isLesser</code>: (the same can be done for function pointers as well)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">isGreater</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">operator</span>()(<span style="color:#66d9ef">int</span> a, <span style="color:#66d9ef">int</span> b) { <span style="color:#66d9ef">return</span> a <span style="color:#f92672">&gt;</span> b; }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">isLesser</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">operator</span>()(<span style="color:#66d9ef">int</span> a, <span style="color:#66d9ef">int</span> b) { <span style="color:#66d9ef">return</span> a <span style="color:#f92672">&lt;</span> b; }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T, <span style="color:#66d9ef">typename</span> ComparatorFunc<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>T sort(T input, ComparatorFunc func) {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// use func to decide sorting strategy (descending/ascending)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><p>This is valid in C++, though I&rsquo;ll like to add a disclaimer here, you could have just used <code>std::sort</code> instead of implementing your own sorting strategy (unless you know what you are doing ;)):</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>std<span style="color:#f92672">::</span>sort(input.begin(), input.end(), isGreater);
+</span></span><span style="display:flex;"><span>std<span style="color:#f92672">::</span>sort(input.begin(), input.end(), isLesser);
+</span></span></code></pre></div><p>This is mostly it for this blog, there is a lot to discuss about function pointers and objects, but I guess this should be enough for you to get started and follow us along in future blogs.</p>
 <h2 id="references-and-good-reads">References and Good Reads</h2>
 <ol>
 <li><!-- raw HTML omitted -->Learn CPP&rsquo;s Blog on Function Pointer<!-- raw HTML omitted -->.</li>
@@ -584,7 +578,7 @@ std<span style="color:#f92672">::</span>sort(input.begin(), input.end(), isLesse
 
 
 
-<script src="https://krshrimali.github.io/bundle.min.0e63d07bc6b25d019f9583b7d5921c8d0cd24d25d02cd4df1e8844fbbf00dbddb131d64e493dd5ac20b3814096d9495bc706574822df5561583386c15a358160.js"></script>
+<script src="https://krshrimali.github.io/bundle.min.5fae9992ea406007408dc33b0b3a8376d61e2f1d6ac50ba1dad7580ac50afb5199bcef3bbc3677e77553a9980bf882cf71edc2f755687dd7725f12ece4304ac2.js"></script>
     <script>
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -592,7 +586,7 @@ std<span style="color:#f92672">::</span>sort(input.begin(), input.end(), isLesse
         })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
         ga('create', 'UA-146662543-1', 'auto');ga('send', 'pageview');
     </script>
-<script src="https://krshrimali.github.io/js/webmention.min.f8e74a199755d9338148ffba6a77e10ea98a46109749cb7088a273c36822534987180c01402b66cd4d1e9cc87ff1891f2f59ce37eccf002ddf25233a4c95e9b2.js" data-id="webmention-container"></script>
+<script src="https://krshrimali.github.io/js/webmention.min.6449166fb6247d260b345e03c5f06a3244983fddd12b71b6a2529977bc85ea15390dbd3f200f32d2714e42a4c48178194c9909733037057f6dd34eedd03e2496.js" data-id="webmention-container"></script>
 
 
 
