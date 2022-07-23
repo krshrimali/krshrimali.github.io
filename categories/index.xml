@@ -17,6 +17,15 @@
     </item>
     
     <item>
+      <title>kde</title>
+      <link>https://krshrimali.github.io/categories/kde/</link>
+      <pubDate>Sat, 23 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://krshrimali.github.io/categories/kde/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>open-source</title>
       <link>https://krshrimali.github.io/categories/open-source/</link>
       <pubDate>Sat, 23 Jul 2022 00:00:00 +0000</pubDate>
@@ -85,15 +94,6 @@
       <pubDate>Tue, 15 Sep 2020 00:00:00 +0000</pubDate>
       
       <guid>https://krshrimali.github.io/categories/deep-learning/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>pytorch</title>
-      <link>https://krshrimali.github.io/categories/pytorch/</link>
-      <pubDate>Tue, 15 Sep 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://krshrimali.github.io/categories/pytorch/</guid>
       <description></description>
     </item>
     
