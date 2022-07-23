@@ -13,8 +13,8 @@
       <pubDate>Sat, 23 Jul 2022 00:00:00 +0000</pubDate>
       
       <guid>https://krshrimali.github.io/posts/2022/07/porting-a-tiling-window-manager-extenstion-to-c-bismuth-part-1/</guid>
-      <description>Porting a KDE Tiling Window Manager Extension from TypeScript to C++ [Bismuth]: Part-1 (Introduction) Hi everyone! I understand it&amp;rsquo;s been a long time, and I&amp;rsquo;m so excited to be writing this blog today. In today&amp;rsquo;s blog, I wanted to talk about my journey (so far) on contributing to Bismuth (a KDE&amp;rsquo;s Tiling Window Manager Extension), mainly how and why I started, and where I am right now.
-The Story: Why KDE Plasma and Why Bismuth?</description>
+      <description>Hi everyone! I understand it&amp;rsquo;s been a long time, and I&amp;rsquo;m so excited to be writing this blog today. In today&amp;rsquo;s blog, I wanted to talk about my journey (so far) on contributing to Bismuth (a KDE&amp;rsquo;s Tiling Window Manager Extension), mainly how and why I started, and where I am right now.
+The Story: Why KDE Plasma and Why Bismuth? For the last few months (close to a year), I&amp;rsquo;ve been using Pop OS (a linux distribution by System 76) which had this amazing automatic tiling window extension called pop-shell, and it was close to what I always needed:</description>
     </item>
     
     <item>
