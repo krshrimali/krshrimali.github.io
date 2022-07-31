@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="map[name:Kushashwa Ravi Shrimali]">
+<meta name="description" content="Hi everyone! In this blog, I will be discussing the algorithm used in Bismuth to find the closest relative window to be focused for focusWindowByDirection event. If you haven&amp;rsquo;t read the previous blog, make sure to give it a read here.
+Recap from the previous blog Let&amp;rsquo;s start with a quick recap though, in the previous blog, we discussed:
+focusWindowByDirection requires the following information:
+direction (from the user) - can be one of: right, left, top/up, bottom/down." />
+<meta name="keywords" content=", development, coding, cpp, contributions, open source, KDE, Bismuth" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="#252627" />
+<link rel="canonical" href="https://krshrimali.github.io/posts/2022/07/porting-a-tiling-window-manager-extenstion-to-c-bismuth-part-2-getting-closest-relative-window/" />
+
+
+<title>
+    
+    Porting a Tiling Window Manager Extenstion to C&#43;&#43; (Bismuth): Part-2 (getting closest relative window) :: Kushashwa Ravi Shrimali (Kush)  — Learning never stops!
+    
+</title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+      type="text/css">
+
+
+
+<link rel="stylesheet" href="https://krshrimali.github.io/main.min.b6dbce0fdf6c61563a0c2226e857d5dadd8e5afa2c4f73ec9ea55abd831f9a72.css">
+
+
+
+
+
+    <link rel="webmention" href="https://webmention.io/krshrimali.github.io/webmention" />
+    <link rel="pingback" href="https://webmention.io/krshrimali.github.io/xmlrpc" />
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="https://krshrimali.github.io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://krshrimali.github.io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://krshrimali.github.io/favicon-16x16.png">
+    <link rel="manifest" href="https://krshrimali.github.io/site.webmanifest">
+    <link rel="mask-icon" href="https://krshrimali.github.io/safari-pinned-tab.svg" color="#252627">
+    <link rel="shortcut icon" href="https://krshrimali.github.io/favicon.ico">
+    <meta name="msapplication-TileColor" content="#252627">
+    <meta name="theme-color" content="#252627">
+
+<meta itemprop="name" content="Porting a Tiling Window Manager Extenstion to C&#43;&#43; (Bismuth): Part-2 (getting closest relative window)">
+<meta itemprop="description" content="Hi everyone! In this blog, I will be discussing the algorithm used in Bismuth to find the closest relative window to be focused for focusWindowByDirection event. If you haven&rsquo;t read the previous blog, make sure to give it a read here.
+Recap from the previous blog Let&rsquo;s start with a quick recap though, in the previous blog, we discussed:
+focusWindowByDirection requires the following information:
+direction (from the user) - can be one of: right, left, top/up, bottom/down."><meta itemprop="datePublished" content="2022-07-31T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-07-31T00:00:00+00:00" />
+<meta itemprop="wordCount" content="1101"><meta itemprop="image" content="https://krshrimali.github.io"/>
+<meta itemprop="keywords" content="development,coding,cpp,contributions,open source,KDE,Bismuth," /><meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://krshrimali.github.io"/>
+
+<meta name="twitter:title" content="Porting a Tiling Window Manager Extenstion to C&#43;&#43; (Bismuth): Part-2 (getting closest relative window)"/>
+<meta name="twitter:description" content="Hi everyone! In this blog, I will be discussing the algorithm used in Bismuth to find the closest relative window to be focused for focusWindowByDirection event. If you haven&rsquo;t read the previous blog, make sure to give it a read here.
+Recap from the previous blog Let&rsquo;s start with a quick recap though, in the previous blog, we discussed:
+focusWindowByDirection requires the following information:
+direction (from the user) - can be one of: right, left, top/up, bottom/down."/>
+
+
+
+    <meta property="article:section" content="cpp" />
+
+    <meta property="article:section" content="projects" />
+
+    <meta property="article:section" content="open-source" />
+
+    <meta property="article:section" content="kde" />
+
+
+
+    <meta property="article:published_time" content="2022-07-31 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+    </head>
+
+    <body class="">
+        <div class="container">
+            <header class="header">
+    <div class="header__inner">
+        <div class="header__left">
+        <div class="logo">
+<a href="https://krshrimali.github.io/" style="text-decoration: none;">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">$ cd /home/</span>
+            <span class="logo__cursor" style=
+                  "
+                   
+                   ">
+            </span>
+        
+</a>
+</div>
+
+        </div>
+
+        
+        <div class="header__mid">
+        <button class="button">
+            <div class="button__text">
+        <a href="https://krshrimali.github.io/search" >
+                Search
+        </a>
+            </div>
+        </button>
+        </div>
+       
+
+        <div class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="https://krshrimali.github.io/about">About</a></li><li><a href="https://krshrimali.github.io/posts">Blog</a></li>
+    </ul>
+    <ul class="menu__inner"><li><a href="https://krshrimali.github.io/categories">Categories</a></li><li><a href="https://krshrimali.github.io/tags">Tags</a></li>
+    </ul>
+</nav>
+
+            <button id="toggleMenu">
+                <div class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </div>
+             </button>
+            
+
+            <button class="theme-toggle" id="toggleTheme"><svg class="theme-toggler" width="32" height="32" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+</button>
+        </div>
+    </div>
+</header>
+
+            
+<script src="https://krshrimali.github.io/js/mathjax-config.js"></script>
+
+
+<script id="MathJax-script" async src="https://unpkg.com/mathjax@3/es5/tex-chtml.js"></script>
+
+            
+                
+    <aside class="sidebar">
+        <div class="hideTOC">
+        <button id="tocTog">TOC</button>
+        <div class="sideTOC m-fadeOut">
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#recap-from-the-previous-blog">Recap from the previous blog</a></li>
+    <li><a href="#understanding-the-scenario">Understanding the scenario</a></li>
+    <li><a href="#getting-closest-relative-window-corner">Getting Closest Relative Window Corner</a></li>
+    <li><a href="#getting-closest-relative-window">Getting Closest Relative Window</a></li>
+    <li><a href="#acknowledgement">Acknowledgement</a></li>
+  </ul>
+</nav>
+        </div>
+        </div>
+    </aside>
+                
+    <main class="post">
+
+        <div class="post-info">
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>6 minutes
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>Written: 2022-07-31 00:00 &#43;0000</p>
+
+            
+
+            </p>
+        </div>
+
+        <article class="h-entry">
+            <h1 class="post-title p-name">
+                <a class="u-url" href="https://krshrimali.github.io/posts/2022/07/porting-a-tiling-window-manager-extenstion-to-c-bismuth-part-2-getting-closest-relative-window/">Porting a Tiling Window Manager Extenstion to C++ (Bismuth): Part-2 (getting closest relative window)</a>
+            </h1>
+        <div class="post-info"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-pen-tool"><path d="M12 19l7-7 3 3-7 7-3-3z"></path><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path><path d="M2 2l7.586 7.586"></path><circle cx="11" cy="11" r="2"></circle></svg>
+                         <span class="author u-author p-author"><a href="https://krshrimali.github.io/author/kushashwa-ravi-shrimali">Kushashwa Ravi Shrimali</a></span>
+        </div>
+                <hr />
+                <aside id="toc" class="sidebar">
+                <div class="toc-title">Table of Contents</div>
+                    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#recap-from-the-previous-blog">Recap from the previous blog</a></li>
+    <li><a href="#understanding-the-scenario">Understanding the scenario</a></li>
+    <li><a href="#getting-closest-relative-window-corner">Getting Closest Relative Window Corner</a></li>
+    <li><a href="#getting-closest-relative-window">Getting Closest Relative Window</a></li>
+    <li><a href="#acknowledgement">Acknowledgement</a></li>
+  </ul>
+</nav>
+                </aside>
+                <hr />
+
+            
+
+            <div class="post-content e-content">
+                <p>Hi everyone! In this blog, I will be discussing the algorithm used in Bismuth to find the closest relative window to be focused for <code>focusWindowByDirection</code> event. If you haven&rsquo;t read the previous blog, make sure to give it a read <a href="https://krshrimali.github.io/posts/2022/07/porting-a-tiling-window-manager-extenstion-to-c-bismuth-part-1/">here</a>.</p>
+<h2 id="recap-from-the-previous-blog">Recap from the previous blog</h2>
+<p>Let&rsquo;s start with a quick recap though, in the previous blog, we discussed:</p>
+<p><code>focusWindowByDirection</code> requires the following information:</p>
+<ul>
+<li><code>direction</code> (from the user) - can be one of: <code>right, left, top/up, bottom/down</code>.</li>
+<li><code>activeWindow</code> (from the current session) - this is needed since <code>focusWindowByDirection</code> event is a <em>relative</em> event to your current focused window.</li>
+<li>Neighbor window candidates (<code>neighborCandidates</code>) to your current window (<code>activeWindow</code>) and the given direction (<code>direction</code>).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">// declaration
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span>Window<span style="color:#f92672">&gt;</span> Engine<span style="color:#f92672">::</span>getNeighborCandidates(<span style="color:#66d9ef">const</span> FocusDirection <span style="color:#f92672">&amp;</span>direction, <span style="color:#66d9ef">const</span> Window <span style="color:#f92672">&amp;</span>basisWindow);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// use
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span>Window<span style="color:#f92672">&gt;</span> neighborCandidates <span style="color:#f92672">=</span> getNeighborCandidates(direction, basisWindow);
+</span></span></code></pre></div><ul>
+<li>From these neighbor candidates (<code>neighborCandidates</code>), we will now find the closest relative window corner. To me, it was tricky to understand at first, so we&rsquo;ll be discussing this in detail over in the later sections.</li>
+<li>Once we know the closest relative window corner, we&rsquo;ll try to find the window which satisfies the corner condition.</li>
+<li>If there were multiple found, we&rsquo;ll return the first one based on the time-stamp (last used)</li>
+</ul>
+<h2 id="understanding-the-scenario">Understanding the scenario</h2>
+<p>I want to start off with a visual, took me some time to draw it, but in case it doesn&rsquo;t look good, I&rsquo;m sorry! My drawing teacher in the high school tried his best, but&hellip;</p>
+<!-- raw HTML omitted -->
+<p>Above image is visual of a tiling window layout where there are in total 5 windows opened (just for imagination, no sane person would open these many windows on a 24 inch monitor&hellip; xD): <code>A, B, C, D, E</code>, where as mentioned in the figure above, <code>E</code> is the active window and we are trying to focus <code>UP</code>. A few notes to take from the figure:</p>
+<ol>
+<li><code>A, B, C, D</code> windows are of same height and width <code>w</code> and <code>h</code>. We&rsquo;ll use this information later.</li>
+<li><code>E</code> window is the active window with width: <code>2 * w</code> and height: <code>h</code>.</li>
+<li>We are trying to focus <code>UP</code>.</li>
+</ol>
+<h2 id="getting-closest-relative-window-corner">Getting Closest Relative Window Corner</h2>
+<p>In the <a href="https://krshrimali.github.io/posts/2022/07/porting-a-tiling-window-manager-extenstion-to-c-bismuth-part-1/">previous blog</a>, we had covered <code>getNeighborCandidates</code>, the output here would be windows: <code>A, B, C, D</code>. The order will not matter here for understanding, so don&rsquo;t worry about that.</p>
+<p>The next steps in the code include:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> closestRelativeWindowCorner <span style="color:#f92672">=</span> getClosestRelativeWindowCorner(direction, neighborCandidates);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">auto</span> closestWindows <span style="color:#f92672">=</span> getClosestRelativeWindow(direction, neighborCandidates, getClosestRelativeWindow);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">return</span> <span style="color:#a6e22e">most_recently_used</span>(closestWindows);
+</span></span></code></pre></div><p>I didn&rsquo;t add comments here, because we&rsquo;ll be going through these 2 magic functions below. Let&rsquo;s start with <code>getClosestRelativeWindowCorner</code>. The source code for the definition of this function is:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> Engine<span style="color:#f92672">::</span>getClosestRelativeWindowCorner(<span style="color:#66d9ef">const</span> Engine<span style="color:#f92672">::</span>FocusDirection <span style="color:#f92672">&amp;</span>direction, <span style="color:#66d9ef">const</span> std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span>Window<span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>neighbors)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> std<span style="color:#f92672">::</span>reduce(neighbors.cbegin(),
+</span></span><span style="display:flex;"><span>                       neighbors.cend(),
+</span></span><span style="display:flex;"><span>                       <span style="color:#75715e">/* initial value */</span> direction <span style="color:#f92672">==</span> Engine<span style="color:#f92672">::</span>FocusDirection<span style="color:#f92672">::</span>Up <span style="color:#f92672">||</span> direction <span style="color:#f92672">==</span> Engine<span style="color:#f92672">::</span>FocusDirection<span style="color:#f92672">::</span>Left <span style="color:#f92672">?</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">:</span> INT_MAX,
+</span></span><span style="display:flex;"><span>                       [<span style="color:#f92672">&amp;</span>](<span style="color:#66d9ef">int</span> prevValue, <span style="color:#66d9ef">const</span> Window <span style="color:#f92672">&amp;</span>window) {
+</span></span><span style="display:flex;"><span>                           <span style="color:#66d9ef">switch</span> (direction) {
+</span></span><span style="display:flex;"><span>                           <span style="color:#66d9ef">case</span> Engine<span style="color:#f92672">::</span>FocusDirection<span style="color:#f92672">::</span>Up:
+</span></span><span style="display:flex;"><span>                               <span style="color:#66d9ef">return</span> std<span style="color:#f92672">::</span>max(window.geometry().bottom(), prevValue);
+</span></span><span style="display:flex;"><span>                           <span style="color:#66d9ef">case</span> Engine<span style="color:#f92672">::</span>FocusDirection<span style="color:#f92672">::</span>Down:
+</span></span><span style="display:flex;"><span>                               <span style="color:#66d9ef">return</span> std<span style="color:#f92672">::</span>min(window.geometry().y(), prevValue);
+</span></span><span style="display:flex;"><span>                           <span style="color:#66d9ef">case</span> Engine<span style="color:#f92672">::</span>FocusDirection<span style="color:#f92672">::</span>Left:
+</span></span><span style="display:flex;"><span>                               <span style="color:#66d9ef">return</span> std<span style="color:#f92672">::</span>max(window.geometry().right(), prevValue);
+</span></span><span style="display:flex;"><span>                           <span style="color:#66d9ef">case</span> Engine<span style="color:#f92672">::</span>FocusDirection<span style="color:#f92672">::</span>Right:
+</span></span><span style="display:flex;"><span>                               <span style="color:#66d9ef">return</span> std<span style="color:#f92672">::</span>min(window.geometry().x(), prevValue);
+</span></span><span style="display:flex;"><span>                           }
+</span></span><span style="display:flex;"><span>                       });
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Don&rsquo;t worry about the code if it confuses you, keep in mind that we have the direction as <code>Engine::FocusDirection::Up</code>, and <code>neighbors</code> as <code>{A, B, C, D}</code>. This function gets you the closest window corner relative to the active window or the basis window. How would you do that? Well, it will depend on the direction.</p>
+<p>If the direction is <code>Up</code> or <code>Down</code> &ndash;&gt; you should compare the <code>y</code> coordinate.
+If the direction is <code>Left</code> or <code>Right</code> &ndash;&gt; you should compare the <code>x</code> coordinate.</p>
+<p>Now remember the mathematics lectures you had way back in the high school, if you wanna focus up, which vertex do you really care about? Keep your focus on the window C and E for once, the comparison should definitely be with the bottom right&rsquo;s y coordinate, right? That&rsquo;s what we do here:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">case</span> Engine<span style="color:#f92672">::</span>FocusDirection<span style="color:#f92672">::</span>Up: 
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> std<span style="color:#f92672">::</span>max(window.geometry().bottom(), prevValue);
+</span></span></code></pre></div><p>A quick look at <code>bottom()</code> source code in <code>qrect.h</code> file:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>Q_DECL_CONSTEXPR <span style="color:#66d9ef">inline</span> QRect<span style="color:#f92672">::</span>bottom() <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">noexcept</span> { <span style="color:#66d9ef">return</span> y2; }
+</span></span></code></pre></div><p>Where <code>y2</code> is the bottom right&rsquo;s y coordinate. Since we are going up, and anything above the basis window should have <code>y</code> value &lt; basis window&rsquo;s <code>y</code> value. (The top left of any screen is considered to be <code>(0, 0)</code> in this blog). Hence we set the initial value as <code>0</code>. If we had to go down, we&rsquo;ll set it to <code>INT_MAX</code> as for anything below the basis window, we&rsquo;ll use <code>std::min</code> and hence <code>INT_MAX</code> will fade away with each neighbor window.</p>
+<p>Anyways, enough of theory, so what will be the output of this function for our scenario? Well, this function will give us <code>y_C + h</code> (which is equal to <code>y_D + h</code>, so any of them is fine). Now, we&rsquo;ll go ahead to the next function.</p>
+<h2 id="getting-closest-relative-window">Getting Closest Relative Window</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span>Window<span style="color:#f92672">&gt;</span> getClosestRelativeWindow(<span style="color:#66d9ef">const</span> Engine<span style="color:#f92672">::</span>FocusDirection <span style="color:#f92672">&amp;</span>direction, <span style="color:#66d9ef">const</span> std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span>Window<span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>windowArray, <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> <span style="color:#f92672">&amp;</span>closestPoint)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span>Window<span style="color:#f92672">&gt;</span> result;
+</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>copy_if(windowArray.cbegin(), windowArray.cend(), result.begin(), [<span style="color:#f92672">&amp;</span>](<span style="color:#66d9ef">const</span> Window <span style="color:#f92672">&amp;</span>window) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">switch</span> (direction) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">case</span> Engine<span style="color:#f92672">::</span>FocusDirection<span style="color:#f92672">::</span>Up:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> window.geometry().bottom() <span style="color:#f92672">&gt;</span> closestPoint <span style="color:#f92672">-</span> <span style="color:#ae81ff">5</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">case</span> Engine<span style="color:#f92672">::</span>FocusDirection<span style="color:#f92672">::</span>Down:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> window.geometry().y() <span style="color:#f92672">&lt;</span> closestPoint <span style="color:#f92672">+</span> <span style="color:#ae81ff">5</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">case</span> Engine<span style="color:#f92672">::</span>FocusDirection<span style="color:#f92672">::</span>Left:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> window.geometry().right() <span style="color:#f92672">&gt;</span> closestPoint <span style="color:#f92672">-</span> <span style="color:#ae81ff">5</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">case</span> Engine<span style="color:#f92672">::</span>FocusDirection<span style="color:#f92672">::</span>Right:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> window.geometry().x() <span style="color:#f92672">&lt;</span> closestPoint <span style="color:#f92672">+</span> <span style="color:#ae81ff">5</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    });
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> result;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Again, remember, we have <code>direction</code> as <code>Engine::FocusDirection::Up</code>, <code>windowArray</code> as <code>{A, B, C, D}</code>, and <code>closestPoint</code> as <code>y_C + h</code> value.</p>
+<p>This function only exists to give you <em>all the windows</em> which are <em>close enough</em> to the <code>closestPoint</code>. The output out of this function will be windows <code>C, D</code> (reminder: <code>E</code> is the basis or active window).</p>
+<p>Some will wonder why do we have two functions: <code>getClosestRelativeWindowCorner</code>, and <code>getClosestRelativeWindow</code>? And why this <code>-5, +5</code>? Unfortunately, it&rsquo;s possible that some windows aren&rsquo;t tiled properly, see <a href="https://github.com/Bismuth-Forge/bismuth/issues/102">this</a> issue. I&rsquo;ve attached the screenshot: (credits to the author)</p>
+<!-- raw HTML omitted -->
+<p>Hence we can&rsquo;t be too strict here. I personally believe this number <code>+/- 5</code> should be tinkered better and not hard-coded, but that&rsquo;s for later.</p>
+<p>So from <code>A, B, C, D</code> being the <em>neighbor candidates</em>, we have <code>C, D</code> as the final <em>closest windows</em> to the basis window (<code>E</code>). Now which one to choose? That&rsquo;s where we&rsquo;ll have to store the timestamps for each window. And this timestamp should record the last time it was used or accessed. We just get the most recently used out of these windows, and I&rsquo;ll be discussing in the future blogs. I think we discussed a lot today. So that should be it&hellip;</p>
+<h2 id="acknowledgement">Acknowledgement</h2>
+<p>I don&rsquo;t want to shy away from thanking the main maintainer of Bismuth, <a href="https://github.com/gikari">gikari</a> who has worked pro-actively on Bismuth. Of course, the credits should also go to <a href="https://github.com/esjeon/krohnkite">krohnkite</a> for the hard work they put in.</p>
+<p>In case anyone has a feedback or suggestion, please leave a comment on this blog. I wish everyone good health and success. Thanks for reading &lt;3</p>
+
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+                <p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://krshrimali.github.io/tags/development">development</a></span><span class="tag"><a href="https://krshrimali.github.io/tags/coding">coding</a></span><span class="tag"><a href="https://krshrimali.github.io/tags/cpp">cpp</a></span><span class="tag"><a href="https://krshrimali.github.io/tags/contributions">contributions</a></span><span class="tag"><a href="https://krshrimali.github.io/tags/open-source">open source</a></span><span class="tag"><a href="https://krshrimali.github.io/tags/kde">KDE</a></span><span class="tag"><a href="https://krshrimali.github.io/tags/bismuth">Bismuth</a></span>
+                </p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>1101 Words</p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>Posted: <time class="dt-published"> 2022-07-31 05:30 &#43;0530</time></p>
+<a class="resp-sharing-button__link" href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2022%2f07%2fporting-a-tiling-window-manager-extenstion-to-c-bismuth-part-2-getting-closest-relative-window%2f" target="_blank" rel="noopener" aria-label="Facebook">
+  <div class="resp-sharing-button resp-sharing-button--facebook resp-sharing-button--medium"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--circle">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11.5"/><path d="M15.84 9.5H13.5V8.48c0-.53.35-.65.6-.65h1.4v-2.3h-2.35c-2.3 0-2.65 1.7-2.65 2.8V9.5h-2v2h2v7h3v-7h2.1l.24-2z"/></svg></div>Facebook</div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="https://twitter.com/intent/tweet/?text=%22Porting%20a%20Tiling%20Window%20Manager%20Extenstion%20to%20C%2b%2b%20%28Bismuth%29%3a%20Part-2%20%28getting%20closest%20relative%20window%29%22%20seems%20like%20an%20interesting%20read%20from%20%40rg0swami&amp;url=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2022%2f07%2fporting-a-tiling-window-manager-extenstion-to-c-bismuth-part-2-getting-closest-relative-window%2f" target="_blank" rel="noopener" aria-label="Twitter">
+  <div class="resp-sharing-button resp-sharing-button--twitter resp-sharing-button--medium"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--circle">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.5 7.4l-2 .2c-.4-.5-1-.8-2-.8C13.3 6.8 12 8 12 9.4v.6c-2 0-4-1-5.4-2.7-.2.4-.3.8-.3 1.3 0 1 .4 1.7 1.2 2.2-.5 0-1 0-1.2-.3 0 1.3 1 2.3 2 2.6-.3.4-.7.4-1 0 .2 1.4 1.2 2 2.3 2-1 1-2.5 1.4-4 1 1.3 1 2.7 1.4 4.2 1.4 4.8 0 7.5-4 7.5-7.5v-.4c.5-.4.8-1.5 1.2-2z"/><circle cx="12" cy="12" r="11.5"/></svg></div>Twitter</div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="mailto:?subject=%22Porting%20a%20Tiling%20Window%20Manager%20Extenstion%20to%20C%2b%2b%20%28Bismuth%29%3a%20Part-2%20%28getting%20closest%20relative%20window%29%22%20seems%20interesting...&amp;body=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2022%2f07%2fporting-a-tiling-window-manager-extenstion-to-c-bismuth-part-2-getting-closest-relative-window%2f" target="_self" rel="noopener" aria-label="E-Mail">
+  <div class="resp-sharing-button resp-sharing-button--email resp-sharing-button--medium"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--circle">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19.5 16c0 .8-.7 1.5-1.5 1.5H6c-.8 0-1.5-.7-1.5-1.5V8c0-.8.7-1.5 1.5-1.5h12c.8 0 1.5.7 1.5 1.5v8zm-2-7.5L12 13 6.5 8.5m11 6l-4-2.5m-7 2.5l4-2.5"/><circle cx="12" cy="12" r="11.5"/></svg></div>E-Mail</div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2022%2f07%2fporting-a-tiling-window-manager-extenstion-to-c-bismuth-part-2-getting-closest-relative-window%2f&amp;title=%22Porting%20a%20Tiling%20Window%20Manager%20Extenstion%20to%20C%2b%2b%20%28Bismuth%29%3a%20Part-2%20%28getting%20closest%20relative%20window%29%22%20seems%20interesting...&amp;summary=%22Porting%20a%20Tiling%20Window%20Manager%20Extenstion%20to%20C%2b%2b%20%28Bismuth%29%3a%20Part-2%20%28getting%20closest%20relative%20window%29%22%20seems%20interesting...&amp;source=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2022%2f07%2fporting-a-tiling-window-manager-extenstion-to-c-bismuth-part-2-getting-closest-relative-window%2f" target="_blank" rel="noopener" aria-label="LinkedIn">
+  <div class="resp-sharing-button resp-sharing-button--linkedin resp-sharing-button--medium"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--circle">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11.5"/><path d="M15 12.5c-.28 0-.5.22-.5.5v3.5h-3s.03-6.48 0-7h3v.83s.46-.75 1.7-.75c1.56 0 2.3 1.12 2.3 3.3v3.62h-3V13c0-.28-.23-.5-.5-.5zm-7.5-3h2v7h-2z"/><circle cx="8.5" cy="6.5" r="1"/></svg></div>LinkedIn</div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="https://reddit.com/submit/?url=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2022%2f07%2fporting-a-tiling-window-manager-extenstion-to-c-bismuth-part-2-getting-closest-relative-window%2f&amp;resubmit=true&amp;title=%22Porting%20a%20Tiling%20Window%20Manager%20Extenstion%20to%20C%2b%2b%20%28Bismuth%29%3a%20Part-2%20%28getting%20closest%20relative%20window%29%22%20seems%20interesting..." target="_blank" rel="noopener" aria-label="Reddit">
+  <div class="resp-sharing-button resp-sharing-button--reddit resp-sharing-button--medium"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--circle">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11.5"/><ellipse cx="12" cy="14.37" rx="6.2" ry="4.24"/><path d="M14.3 16.25c-.62.36-1.42.57-2.3.57-.88 0-1.7-.2-2.32-.58"/><circle cx="14.61" cy="13.39" r=".98"/><circle cx="9.39" cy="13.39" r=".98"/><path d="M16.4 11.38c.26-.55.82-.92 1.47-.92.9 0 1.63.73 1.63 1.63 0 .8-.6 1.47-1.38 1.6"/><circle cx="17.22" cy="7.52" r="1.63"/><path d="M7.6 11.38c-.26-.54-.82-.92-1.47-.92-.9 0-1.63.73-1.63 1.63 0 .8.6 1.47 1.38 1.6M12 10.12s-.08-4.82 3.6-2.6"/></svg></div>Reddit</div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="whatsapp://send?text=%22Porting%20a%20Tiling%20Window%20Manager%20Extenstion%20to%20C%2b%2b%20%28Bismuth%29%3a%20Part-2%20%28getting%20closest%20relative%20window%29%22%20seems%20interesting...%20https%3a%2f%2fkrshrimali.github.io%2fposts%2f2022%2f07%2fporting-a-tiling-window-manager-extenstion-to-c-bismuth-part-2-getting-closest-relative-window%2f" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <div class="resp-sharing-button resp-sharing-button--whatsapp resp-sharing-button--medium"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--circle">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle xmlns="http://www.w3.org/2000/svg" cx="12" cy="12" r="11.5"/><path stroke-width="1px" d="M17.6 6.2c-1.5-1.5-3.4-2.3-5.5-2.3-4.3 0-7.8 3.5-7.8 7.8 0 1.4.4 2.7 1 3.9l-1.1 4 4.1-1.1c1.1.6 2.4.9 3.7.9 4.3 0 7.8-3.5 7.8-7.8.1-2-.7-3.9-2.2-5.4zm-5.5 11.9c-1.2 0-2.3-.3-3.3-.9l-.2-.1-2.4.6.7-2.4-.2-.2c-.6-1-1-2.2-1-3.4 0-3.6 2.9-6.5 6.5-6.5 1.7 0 3.3.7 4.6 1.9 1.2 1.2 1.9 2.8 1.9 4.6-.1 3.5-3 6.4-6.6 6.4zm3.5-4.8c-.2-.1-1.1-.6-1.3-.6-.2-.1-.3-.1-.4.1-.1.2-.5.6-.6.8-.1.1-.2.1-.4 0s-.8-.3-1.6-1c-.6-.5-1-1.2-1.1-1.3-.1-.2 0-.3.1-.4l.3-.3s.1-.2.2-.3c.1-.1 0-.2 0-.3s-.4-1.1-.6-1.4c-.2-.4-.3-.3-.4-.3h-.4s-.3 0-.5.2-.7.7-.7 1.6c0 1 .7 1.9.8 2s1.4 2.1 3.3 2.9c.5.2.8.3 1.1.4.5.1.9.1 1.2.1.4-.1 1.1-.5 1.3-.9.2-.5.2-.8.1-.9 0-.2-.2-.3-.4-.4z"/></svg></div>WhatsApp</div>
+</a>
+</div>
+
+        
+            <div class="pagination">
+                <div class="pagination__title">
+                    <span class="pagination__title-h"></span>
+                    <hr />
+                </div>
+
+                <div class="pagination__buttons">
+                    
+
+                    
+                        <span class="button next">
+                            <a href="https://krshrimali.github.io/posts/2022/07/porting-a-tiling-window-manager-extenstion-to-c-bismuth-part-1/">
+                                <span class="button__text">Porting a Tiling Window Manager Extenstion to C&#43;&#43; (Bismuth): Part-1</span>
+                                <span class="button__icon">→</span>
+                            </a>
+                        </span>
+                    
+                </div>
+            </div>
+        
+
+        
+            <div class="webmention-form">
+                <form action="https://webmention.io/krshrimali.github.io/webmention" method="post">
+                    <label>Did you mention this article on your website? Put the URL of your post here:</label><br/>
+                    <input name="source" type="url"/>
+                    <input name="target" value="https://krshrimali.github.io/posts/2022/07/porting-a-tiling-window-manager-extenstion-to-c-bismuth-part-2-getting-closest-relative-window/" type="hidden"/>
+                    <input value="Send Webmention" type="submit"/>
+                </form>
+            </div>
+            <div id="webmention-container"></div>
+        
+
+        
+          <div id="comments" class="thin"><div class="pagination__title">
+    <span class="pagination__title-h">Comments</span>
+    <hr />
+</div>
+    
+<div id="remarkbox-div">
+  <noscript>
+    <iframe id=remarkbox-iframe src="https://my.remarkbox.com/embed?nojs=true" style="height:600px;width:100%;border:none!important" tabindex=0></iframe>
+  </noscript>
+</div>
+<script src="https://my.remarkbox.com/static/js/iframe-resizer/iframeResizer.min.js"></script>
+<script>
+  var rb_owner_key = "bd2f6e6d-1c8d-11ec-8ccc-040140774501";
+  var thread_uri = window.location.href;
+  var thread_title = window.document.title;
+  var thread_fragment = window.location.hash;
+
+  
+  var rb_src = "https://my.remarkbox.com/embed" +
+      "?rb_owner_key=" + rb_owner_key +
+      "&thread_title=" + encodeURI(thread_title) +
+      "&thread_uri=" + encodeURIComponent(thread_uri) +
+      thread_fragment;
+
+  function create_remarkbox_iframe() {
+    var ifrm = document.createElement("iframe");
+    ifrm.setAttribute("id", "remarkbox-iframe");
+    ifrm.setAttribute("scrolling", "no");
+    ifrm.setAttribute("src", rb_src);
+    ifrm.setAttribute("frameborder", "0");
+    ifrm.setAttribute("tabindex", "0");
+    ifrm.setAttribute("title", "Remarkbox");
+    ifrm.style.width = "100%";
+    document.getElementById("remarkbox-div").appendChild(ifrm);
+  }
+  create_remarkbox_iframe();
+  iFrameResize(
+    {
+      checkOrigin: ["https://my.remarkbox.com"],
+      inPageLinks: true,
+      initCallback: function(e) {e.iFrameResizer.moveToAnchor(thread_fragment)}
+    },
+    document.getElementById("remarkbox-iframe")
+  );
+</script>
+
+</div>
+        
+    </main>
+
+            
+                <footer class="footer">
+    <p>
+        &copy; 2022
+            
+                <span><a href="https://krshrimali.github.io">Kushashwa Ravi Shrimali</a></span>
+                
+                 <a href="https://krshrimali.github.io/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
+                <br>
+            <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a>
+                Powered by <a href="http://gohugo.io"><u>Hugo</u></a> and <a href="https://github.com/HaoZeke/hugo-theme-hello-friend-ng-hz"><u>this theme</u></a>.</br>
+                
+                
+                <script src="https://liberapay.com/krshrimali/widgets/button.js"></script>
+<noscript><a href="https://liberapay.com/krshrimali/donate"><img alt="Donate using Liberapay" src="https://liberapay.com/assets/widgets/donate.svg"></a></noscript>
+
+                
+    </p>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+
+
+<script src="https://krshrimali.github.io/bundle.min.5fae9992ea406007408dc33b0b3a8376d61e2f1d6ac50ba1dad7580ac50afb5199bcef3bbc3677e77553a9980bf882cf71edc2f755687dd7725f12ece4304ac2.js"></script>
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-146662543-1', 'auto');ga('send', 'pageview');
+    </script>
+<script src="https://krshrimali.github.io/js/webmention.min.f60cda7d6de39593831ee0d0ef205feaba94d655e344398cbc178b6fd07888eaf8bd1a4d4f15eb77a191e209842937013b9dda76ecc79b4fea6825a7ba53f03e.js" data-id="webmention-container"></script>
+
+
+
+
+    </body>
+</html>
