@@ -38,7 +38,7 @@
 &lt;/ul&gt;
 &lt;h2 id=&#34;understanding-the-scenario&#34;&gt;Understanding the scenario&lt;/h2&gt;
 &lt;p&gt;I want to start off with a visual, took me some time to draw it, but in case it doesn&amp;rsquo;t look good, I&amp;rsquo;m sorry! My drawing teacher in the high school tried his best, but&amp;hellip;&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;&lt;img src=&#34;%22https://raw.githubusercontent.com/krshrimali/blog/main/assets/blogs/bismuth-part-2-window-alignment.png%22&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;p&gt;Above image is visual of a tiling window layout where there are in total 5 windows opened (just for imagination, no sane person would open these many windows on a 24 inch monitor&amp;hellip; xD): &lt;code&gt;A, B, C, D, E&lt;/code&gt;, where as mentioned in the figure above, &lt;code&gt;E&lt;/code&gt; is the active window and we are trying to focus &lt;code&gt;UP&lt;/code&gt;. A few notes to take from the figure:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;code&gt;A, B, C, D&lt;/code&gt; windows are of same height and width &lt;code&gt;w&lt;/code&gt; and &lt;code&gt;h&lt;/code&gt;. We&amp;rsquo;ll use this information later.&lt;/li&gt;
@@ -103,7 +103,7 @@ If the direction is &lt;code&gt;Left&lt;/code&gt; or &lt;code&gt;Right&lt;/code&
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Again, remember, we have &lt;code&gt;direction&lt;/code&gt; as &lt;code&gt;Engine::FocusDirection::Up&lt;/code&gt;, &lt;code&gt;windowArray&lt;/code&gt; as &lt;code&gt;{A, B, C, D}&lt;/code&gt;, and &lt;code&gt;closestPoint&lt;/code&gt; as &lt;code&gt;y_C + h&lt;/code&gt; value.&lt;/p&gt;
 &lt;p&gt;This function only exists to give you &lt;em&gt;all the windows&lt;/em&gt; which are &lt;em&gt;close enough&lt;/em&gt; to the &lt;code&gt;closestPoint&lt;/code&gt;. The output out of this function will be windows &lt;code&gt;C, D&lt;/code&gt; (reminder: &lt;code&gt;E&lt;/code&gt; is the basis or active window).&lt;/p&gt;
 &lt;p&gt;Some will wonder why do we have two functions: &lt;code&gt;getClosestRelativeWindowCorner&lt;/code&gt;, and &lt;code&gt;getClosestRelativeWindow&lt;/code&gt;? And why this &lt;code&gt;-5, +5&lt;/code&gt;? Unfortunately, it&amp;rsquo;s possible that some windows aren&amp;rsquo;t tiled properly, see &lt;a href=&#34;https://github.com/Bismuth-Forge/bismuth/issues/102&#34;&gt;this&lt;/a&gt; issue. I&amp;rsquo;ve attached the screenshot: (credits to the author)&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;&lt;img src=&#34;%22https://raw.githubusercontent.com/krshrimali/blog/main/assets/blogs/bismuth-part-2-not-sized-properly.png%22&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;p&gt;Hence we can&amp;rsquo;t be too strict here. I personally believe this number &lt;code&gt;+/- 5&lt;/code&gt; should be tinkered better and not hard-coded, but that&amp;rsquo;s for later.&lt;/p&gt;
 &lt;p&gt;So from &lt;code&gt;A, B, C, D&lt;/code&gt; being the &lt;em&gt;neighbor candidates&lt;/em&gt;, we have &lt;code&gt;C, D&lt;/code&gt; as the final &lt;em&gt;closest windows&lt;/em&gt; to the basis window (&lt;code&gt;E&lt;/code&gt;). Now which one to choose? That&amp;rsquo;s where we&amp;rsquo;ll have to store the timestamps for each window. And this timestamp should record the last time it was used or accessed. We just get the most recently used out of these windows, and I&amp;rsquo;ll be discussing in the future blogs. I think we discussed a lot today. So that should be it&amp;hellip;&lt;/p&gt;
 &lt;h2 id=&#34;acknowledgement&#34;&gt;Acknowledgement&lt;/h2&gt;

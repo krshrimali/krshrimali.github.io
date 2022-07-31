@@ -232,7 +232,7 @@ direction (from the user) - can be one of: right, left, top/up, bottom/down."/>
 </ul>
 <h2 id="understanding-the-scenario">Understanding the scenario</h2>
 <p>I want to start off with a visual, took me some time to draw it, but in case it doesn&rsquo;t look good, I&rsquo;m sorry! My drawing teacher in the high school tried his best, but&hellip;</p>
-<!-- raw HTML omitted -->
+<p><img src="%22https://raw.githubusercontent.com/krshrimali/blog/main/assets/blogs/bismuth-part-2-window-alignment.png%22" alt=""></p>
 <p>Above image is visual of a tiling window layout where there are in total 5 windows opened (just for imagination, no sane person would open these many windows on a 24 inch monitor&hellip; xD): <code>A, B, C, D, E</code>, where as mentioned in the figure above, <code>E</code> is the active window and we are trying to focus <code>UP</code>. A few notes to take from the figure:</p>
 <ol>
 <li><code>A, B, C, D</code> windows are of same height and width <code>w</code> and <code>h</code>. We&rsquo;ll use this information later.</li>
@@ -297,7 +297,7 @@ If the direction is <code>Left</code> or <code>Right</code> &ndash;&gt; you shou
 </span></span></code></pre></div><p>Again, remember, we have <code>direction</code> as <code>Engine::FocusDirection::Up</code>, <code>windowArray</code> as <code>{A, B, C, D}</code>, and <code>closestPoint</code> as <code>y_C + h</code> value.</p>
 <p>This function only exists to give you <em>all the windows</em> which are <em>close enough</em> to the <code>closestPoint</code>. The output out of this function will be windows <code>C, D</code> (reminder: <code>E</code> is the basis or active window).</p>
 <p>Some will wonder why do we have two functions: <code>getClosestRelativeWindowCorner</code>, and <code>getClosestRelativeWindow</code>? And why this <code>-5, +5</code>? Unfortunately, it&rsquo;s possible that some windows aren&rsquo;t tiled properly, see <a href="https://github.com/Bismuth-Forge/bismuth/issues/102">this</a> issue. I&rsquo;ve attached the screenshot: (credits to the author)</p>
-<!-- raw HTML omitted -->
+<p><img src="%22https://raw.githubusercontent.com/krshrimali/blog/main/assets/blogs/bismuth-part-2-not-sized-properly.png%22" alt=""></p>
 <p>Hence we can&rsquo;t be too strict here. I personally believe this number <code>+/- 5</code> should be tinkered better and not hard-coded, but that&rsquo;s for later.</p>
 <p>So from <code>A, B, C, D</code> being the <em>neighbor candidates</em>, we have <code>C, D</code> as the final <em>closest windows</em> to the basis window (<code>E</code>). Now which one to choose? That&rsquo;s where we&rsquo;ll have to store the timestamps for each window. And this timestamp should record the last time it was used or accessed. We just get the most recently used out of these windows, and I&rsquo;ll be discussing in the future blogs. I think we discussed a lot today. So that should be it&hellip;</p>
 <h2 id="acknowledgement">Acknowledgement</h2>
