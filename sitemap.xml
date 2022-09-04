@@ -2,6 +2,9 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://krshrimali.github.io/posts/2022/09/applying-for-research-internships-universities/</loc>
+    <lastmod>2022-09-04T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://krshrimali.github.io/posts/2022/07/porting-a-tiling-window-manager-extenstion-to-c-bismuth-part-2-getting-closest-relative-window/</loc>
     <lastmod>2022-07-31T00:00:00+00:00</lastmod>
   </url><url>
@@ -89,10 +92,25 @@
     <loc>https://krshrimali.github.io/posts/2019/06/introduction-to-pytorch-c-api-mnist-digit-recognition-using-vgg-16-network/</loc>
     <lastmod>2019-06-07T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://krshrimali.github.io/tags/bismuth/</loc>
-    <lastmod>2022-07-31T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://krshrimali.github.io/categories/</loc>
+    <lastmod>2022-09-04T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://krshrimali.github.io/</loc>
+    <lastmod>2022-09-04T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://krshrimali.github.io/posts/</loc>
+    <lastmod>2022-09-04T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://krshrimali.github.io/tags/suggestion/</loc>
+    <lastmod>2022-09-04T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://krshrimali.github.io/categories/suggestion/</loc>
+    <lastmod>2022-09-04T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://krshrimali.github.io/tags/</loc>
+    <lastmod>2022-09-04T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://krshrimali.github.io/tags/bismuth/</loc>
     <lastmod>2022-07-31T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://krshrimali.github.io/tags/coding/</loc>
@@ -116,22 +134,13 @@
     <loc>https://krshrimali.github.io/tags/kde/</loc>
     <lastmod>2022-07-31T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://krshrimali.github.io/</loc>
-    <lastmod>2022-07-31T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://krshrimali.github.io/tags/open-source/</loc>
     <lastmod>2022-07-31T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://krshrimali.github.io/categories/open-source/</loc>
     <lastmod>2022-07-31T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://krshrimali.github.io/posts/</loc>
-    <lastmod>2022-07-31T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://krshrimali.github.io/categories/projects/</loc>
-    <lastmod>2022-07-31T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://krshrimali.github.io/tags/</loc>
     <lastmod>2022-07-31T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://krshrimali.github.io/tags/notes/</loc>

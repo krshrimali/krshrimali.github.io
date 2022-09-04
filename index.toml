@@ -1,6 +1,11 @@
 # We use the generated html to prevent issues involving markdown frontmatter
 
 [[input.files]]
+path = "./posts/2022/09/applying-for-research-internships-universities/index.html"
+url = "https://krshrimali.github.io/posts/2022/09/applying-for-research-internships-universities/"
+title = "Applying for Research Internships (Universities)"
+
+[[input.files]]
 path = "./posts/2022/07/porting-a-tiling-window-manager-extenstion-to-c-bismuth-part-2-getting-closest-relative-window/index.html"
 url = "https://krshrimali.github.io/posts/2022/07/porting-a-tiling-window-manager-extenstion-to-c-bismuth-part-2-getting-closest-relative-window/"
 title = "Porting a Tiling Window Manager Extenstion to C&#43;&#43; (Bismuth): Part-2 (getting closest relative window)"
