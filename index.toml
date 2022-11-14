@@ -1,6 +1,11 @@
 # We use the generated html to prevent issues involving markdown frontmatter
 
 [[input.files]]
+path = "./posts/2022/11/daily-update-14th-november-2022-day-1/index.html"
+url = "https://krshrimali.github.io/posts/2022/11/daily-update-14th-november-2022-day-1/"
+title = "Daily Update: 14th November 2022 - Day 1"
+
+[[input.files]]
 path = "./posts/2022/09/applying-for-research-internships-universities/index.html"
 url = "https://krshrimali.github.io/posts/2022/09/applying-for-research-internships-universities/"
 title = "Applying for Research Internships (Universities)"
@@ -79,11 +84,6 @@ title = "How to crop a circle in OpenCV? Implementing Portrait Bokeh - Part 2"
 path = "./posts/2020/12/implementing-portrait-bokeh-in-opencv-using-face-detection-part-1/index.html"
 url = "https://krshrimali.github.io/posts/2020/12/implementing-portrait-bokeh-in-opencv-using-face-detection-part-1/"
 title = "Implementing Portrait Bokeh in OpenCV using Face Detection (Part-1)"
-
-[[input.files]]
-path = "./posts/2020/11/daily-update-14th-november-2022-day-1/index.html"
-url = "https://krshrimali.github.io/posts/2020/11/daily-update-14th-november-2022-day-1/"
-title = "Daily Update: 14th November 2022 - Day 1"
 
 [[input.files]]
 path = "./posts/2020/09/releasing-docker-container-and-binder-for-using-xeus-cling-libtorch-and-opencv-in-c-/index.html"
