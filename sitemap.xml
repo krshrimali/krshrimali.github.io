@@ -50,6 +50,9 @@
     <loc>https://krshrimali.github.io/posts/2020/12/implementing-portrait-bokeh-in-opencv-using-face-detection-part-1/</loc>
     <lastmod>2020-12-07T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>https://krshrimali.github.io/posts/2020/11/daily-update-14th-november-2022-day-1/</loc>
+    <lastmod>2020-11-15T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://krshrimali.github.io/posts/2020/09/releasing-docker-container-and-binder-for-using-xeus-cling-libtorch-and-opencv-in-c-/</loc>
     <lastmod>2020-09-15T00:00:00+00:00</lastmod>
   </url><url>
@@ -128,10 +131,10 @@
     <loc>https://krshrimali.github.io/tags/development/</loc>
     <lastmod>2022-07-31T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://krshrimali.github.io/categories/kde/</loc>
+    <loc>https://krshrimali.github.io/tags/kde/</loc>
     <lastmod>2022-07-31T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://krshrimali.github.io/tags/kde/</loc>
+    <loc>https://krshrimali.github.io/categories/kde/</loc>
     <lastmod>2022-07-31T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://krshrimali.github.io/tags/open-source/</loc>
@@ -212,6 +215,15 @@
     <loc>https://krshrimali.github.io/tags/python/</loc>
     <lastmod>2020-12-10T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>https://krshrimali.github.io/tags/blog/</loc>
+    <lastmod>2020-11-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://krshrimali.github.io/categories/daily_updates/</loc>
+    <lastmod>2020-11-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://krshrimali.github.io/tags/updates/</loc>
+    <lastmod>2020-11-15T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://krshrimali.github.io/categories/deep-learning/</loc>
     <lastmod>2020-09-15T00:00:00+00:00</lastmod>
   </url><url>
@@ -229,6 +241,8 @@
   </url><url>
     <loc>https://krshrimali.github.io/about/</loc>
     <lastmod>2014-04-09T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://krshrimali.github.io/posts/1/01/</loc>
   </url><url>
     <loc>https://krshrimali.github.io/author/</loc>
   </url><url>

@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="author" content="map[name:Kushashwa Ravi Shrimali]">
 <meta name="description" content="Transfer Learning &amp;ndash; Before we go ahead and discuss the Why question of Transfer Learning, let&amp;rsquo;s have a look at What is Transfer Learning? Let&amp;rsquo;s have a look at the Notes from CS231n on Transfer Learning:
-In practice, very few people train an entire Convolutional Network from scratch (with random initialization), because it is relatively rare to have a dataset of sufficient size. Instead, it is common to pretrain a ConvNet on a very large dataset (e." />
+ In practice, very few people train an entire Convolutional Network from scratch (with random initialization), because it is relatively rare to have a dataset of sufficient size. Instead, it is common to pretrain a ConvNet on a very large dataset (e." />
 <meta name="keywords" content=", development, coding, cpp, notes, pytorch-cpp, libtorch" />
 <meta name="robots" content="noodp" />
 <meta name="theme-color" content="#252627" />
@@ -48,7 +48,7 @@ In practice, very few people train an entire Convolutional Network from scratch 
 
 <meta itemprop="name" content="Applying Transfer Learning on Dogs vs Cats Dataset (ResNet18) using PyTorch C&#43;&#43; API">
 <meta itemprop="description" content="Transfer Learning &ndash; Before we go ahead and discuss the Why question of Transfer Learning, let&rsquo;s have a look at What is Transfer Learning? Let&rsquo;s have a look at the Notes from CS231n on Transfer Learning:
-In practice, very few people train an entire Convolutional Network from scratch (with random initialization), because it is relatively rare to have a dataset of sufficient size. Instead, it is common to pretrain a ConvNet on a very large dataset (e."><meta itemprop="datePublished" content="2019-08-16T00:00:00+00:00" />
+ In practice, very few people train an entire Convolutional Network from scratch (with random initialization), because it is relatively rare to have a dataset of sufficient size. Instead, it is common to pretrain a ConvNet on a very large dataset (e."><meta itemprop="datePublished" content="2019-08-16T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2019-08-16T00:00:00+00:00" />
 <meta itemprop="wordCount" content="1518"><meta itemprop="image" content="https://krshrimali.github.io"/>
 <meta itemprop="keywords" content="development,coding,cpp,notes,pytorch-cpp,libtorch," /><meta name="twitter:card" content="summary_large_image"/>
@@ -56,7 +56,7 @@ In practice, very few people train an entire Convolutional Network from scratch 
 
 <meta name="twitter:title" content="Applying Transfer Learning on Dogs vs Cats Dataset (ResNet18) using PyTorch C&#43;&#43; API"/>
 <meta name="twitter:description" content="Transfer Learning &ndash; Before we go ahead and discuss the Why question of Transfer Learning, let&rsquo;s have a look at What is Transfer Learning? Let&rsquo;s have a look at the Notes from CS231n on Transfer Learning:
-In practice, very few people train an entire Convolutional Network from scratch (with random initialization), because it is relatively rare to have a dataset of sufficient size. Instead, it is common to pretrain a ConvNet on a very large dataset (e."/>
+ In practice, very few people train an entire Convolutional Network from scratch (with random initialization), because it is relatively rare to have a dataset of sufficient size. Instead, it is common to pretrain a ConvNet on a very large dataset (e."/>
 
 
 
@@ -237,26 +237,26 @@ Before we go ahead and discuss the <strong>Why</strong> question of Transfer Lea
 <p><img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/blogs/Steps-Loading-Data-PyTorch.png" alt=""></p>
 <p>Once done, we can initialize the <code>CustomDataset</code> class:</p>
 <p><strong>C++</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">// List of images of Dogs and Cats, use load_data_from_folder function explained in previous blogs
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span>std<span style="color:#f92672">::</span>string<span style="color:#f92672">&gt;</span> list_images; 
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// List of labels of the images
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> list_labels; 
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">auto</span> custom_dataset <span style="color:#f92672">=</span> CustomDataset(list_images, list_labels).map(torch<span style="color:#f92672">::</span>data<span style="color:#f92672">::</span>transforms<span style="color:#f92672">::</span>Stack<span style="color:#f92672">&lt;&gt;</span>());
-</span></span></code></pre></div><p><strong>Python</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> torchvision <span style="color:#f92672">import</span> datasets, transforms
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> torch
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>folder_path <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;/Users/krshrimali/Documents/dataset/train/&#34;</span>
-</span></span><span style="display:flex;"><span>transform <span style="color:#f92672">=</span> transforms<span style="color:#f92672">.</span>Compose([transforms<span style="color:#f92672">.</span>CenterCrop(<span style="color:#ae81ff">224</span>), transforms<span style="color:#f92672">.</span>ToTensor())
-</span></span><span style="display:flex;"><span>data <span style="color:#f92672">=</span> datasets<span style="color:#f92672">.</span>ImageFolder(root <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(folder_path), transform <span style="color:#f92672">=</span> transform)
-</span></span></code></pre></div><p>We then use <code>RandomSampler</code> to make our data loader: (Note: it&rsquo;s important to use <code>RandomSampler</code> as we load the images sequentially and we want mixture of images in each batch of data passed to the network in an epoch)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// List of images of Dogs and Cats, use load_data_from_folder function explained in previous blogs
+</span><span style="color:#75715e"></span>std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span>std<span style="color:#f92672">::</span>string<span style="color:#f92672">&gt;</span> list_images; 
+<span style="color:#75715e">// List of labels of the images
+</span><span style="color:#75715e"></span>std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> list_labels; 
+<span style="color:#66d9ef">auto</span> custom_dataset <span style="color:#f92672">=</span> CustomDataset(list_images, list_labels).map(torch<span style="color:#f92672">::</span>data<span style="color:#f92672">::</span>transforms<span style="color:#f92672">::</span>Stack<span style="color:#f92672">&lt;&gt;</span>());
+</code></pre></div><p><strong>Python</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> torchvision <span style="color:#f92672">import</span> datasets, transforms
+<span style="color:#f92672">import</span> torch
+
+folder_path <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;/Users/krshrimali/Documents/dataset/train/&#34;</span>
+transform <span style="color:#f92672">=</span> transforms<span style="color:#f92672">.</span>Compose([transforms<span style="color:#f92672">.</span>CenterCrop(<span style="color:#ae81ff">224</span>), transforms<span style="color:#f92672">.</span>ToTensor())
+data <span style="color:#f92672">=</span> datasets<span style="color:#f92672">.</span>ImageFolder(root <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(folder_path), transform <span style="color:#f92672">=</span> transform)
+</code></pre></div><p>We then use <code>RandomSampler</code> to make our data loader: (Note: it&rsquo;s important to use <code>RandomSampler</code> as we load the images sequentially and we want mixture of images in each batch of data passed to the network in an epoch)</p>
 <p><strong>C++</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> batch_size <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">auto</span> data_loader <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>data<span style="color:#f92672">::</span>make_data_loader<span style="color:#f92672">&lt;</span>torch<span style="color:#f92672">::</span>data<span style="color:#f92672">::</span>samplers<span style="color:#f92672">::</span>RandomSampler<span style="color:#f92672">&gt;</span>(std<span style="color:#f92672">::</span>move(custom_dataset), batch_size);
-</span></span></code></pre></div><p><strong>Python</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>batch_size <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>
-</span></span><span style="display:flex;"><span>data_loader <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>utils<span style="color:#f92672">.</span>data<span style="color:#f92672">.</span>DataLoader(dataset<span style="color:#f92672">=</span>data, batch_size <span style="color:#f92672">=</span> batch_size, shuffle <span style="color:#f92672">=</span> <span style="color:#66d9ef">True</span>)
-</span></span></code></pre></div><h2 id="loading-the-pre-trained-model">Loading the pre-trained model</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">int</span> batch_size <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>;
+<span style="color:#66d9ef">auto</span> data_loader <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>data<span style="color:#f92672">::</span>make_data_loader<span style="color:#f92672">&lt;</span>torch<span style="color:#f92672">::</span>data<span style="color:#f92672">::</span>samplers<span style="color:#f92672">::</span>RandomSampler<span style="color:#f92672">&gt;</span>(std<span style="color:#f92672">::</span>move(custom_dataset), batch_size);
+</code></pre></div><p><strong>Python</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">batch_size <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>
+data_loader <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>utils<span style="color:#f92672">.</span>data<span style="color:#f92672">.</span>DataLoader(dataset<span style="color:#f92672">=</span>data, batch_size <span style="color:#f92672">=</span> batch_size, shuffle <span style="color:#f92672">=</span> <span style="color:#66d9ef">True</span>)
+</code></pre></div><h2 id="loading-the-pre-trained-model">Loading the pre-trained model</h2>
 <p>The steps to load the pre-trained model and perform Transfer Learning are listed below:</p>
 <ol>
 <li>Download the pre-trained model of <strong>ResNet18</strong>.</li>
@@ -271,137 +271,137 @@ Before we go ahead and discuss the <strong>Why</strong> question of Transfer Lea
 <p>Thanks to the developers, we do have C++ models available in torchvision
 (<a href="https://github.com/pytorch/vision/pull/728">https://github.com/pytorch/vision/pull/728</a>) but for this tutorial, transferring the pre- trained model from Python to C++ using torch.jit is a good idea, as most PyTorch models in the wild are written in Python right now, and people can use this tutorial to learn how to trace their Python model and transfer it to C++.</p>
 <p>First we download the pre-trained model and save it in the form of <code>torch.jit.trace</code> format to our local drive.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Reference: #TODO- Add Link</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> torchvision <span style="color:#f92672">import</span> models
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Download and load the pre-trained model</span>
-</span></span><span style="display:flex;"><span>model <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>resnet18(pretrained<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Set upgrading the gradients to False</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> param <span style="color:#f92672">in</span> model<span style="color:#f92672">.</span>parameters():
-</span></span><span style="display:flex;"><span>	param<span style="color:#f92672">.</span>requires_grad <span style="color:#f92672">=</span> <span style="color:#66d9ef">False</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Save the model except the final FC Layer</span>
-</span></span><span style="display:flex;"><span>resnet18 <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>nn<span style="color:#f92672">.</span>Sequential(<span style="color:#f92672">*</span>list(resnet18<span style="color:#f92672">.</span>children())[:<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>])
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>example_input <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>rand(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">224</span>, <span style="color:#ae81ff">224</span>)
-</span></span><span style="display:flex;"><span>script_module <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>jit<span style="color:#f92672">.</span>trace(resnet18, example_input)
-</span></span><span style="display:flex;"><span>script_module<span style="color:#f92672">.</span>save(<span style="color:#e6db74">&#39;resnet18_without_last_layer.pt&#39;</span>)
-</span></span></code></pre></div><p>We will be using <code>resnet18_without_last_layer.pt</code> model file as our pre-trained model for transfer learning.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Reference: #TODO- Add Link</span>
+<span style="color:#f92672">from</span> torchvision <span style="color:#f92672">import</span> models
+<span style="color:#75715e"># Download and load the pre-trained model</span>
+model <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>resnet18(pretrained<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+
+<span style="color:#75715e"># Set upgrading the gradients to False</span>
+<span style="color:#66d9ef">for</span> param <span style="color:#f92672">in</span> model<span style="color:#f92672">.</span>parameters():
+	param<span style="color:#f92672">.</span>requires_grad <span style="color:#f92672">=</span> <span style="color:#66d9ef">False</span>
+
+<span style="color:#75715e"># Save the model except the final FC Layer</span>
+resnet18 <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>nn<span style="color:#f92672">.</span>Sequential(<span style="color:#f92672">*</span>list(resnet18<span style="color:#f92672">.</span>children())[:<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>])
+
+example_input <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>rand(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">224</span>, <span style="color:#ae81ff">224</span>)
+script_module <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>jit<span style="color:#f92672">.</span>trace(resnet18, example_input)
+script_module<span style="color:#f92672">.</span>save(<span style="color:#e6db74">&#39;resnet18_without_last_layer.pt&#39;</span>)
+</code></pre></div><p>We will be using <code>resnet18_without_last_layer.pt</code> model file as our pre-trained model for transfer learning.</p>
 <h3 id="step-2-load-the-pre-trained-model">Step-2: Load the pre-trained model</h3>
 <p>Let&rsquo;s go ahead and load the pre-trained model using <code>torch::jit</code> module. Note that the reason we have converted <code>torch.nn.Module</code> to <code>torch.jit.ScriptModule</code> type, is because C++ API currently does not support loading Python <code>torch.nn.Module</code> models directly.</p>
 <p><strong>C++</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>torch<span style="color:#f92672">::</span>jit<span style="color:#f92672">::</span>script<span style="color:#f92672">::</span>Module module;
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// argv[1] should be the path to the model
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>module <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>jit<span style="color:#f92672">::</span>load(argv[<span style="color:#ae81ff">1</span>]); 
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">/* We need to convert last layer input and output features from (512, 1000) to (512, 2) since we only have 2 classes */</span>
-</span></span><span style="display:flex;"><span>torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Linear linear_layer(<span style="color:#ae81ff">512</span>, <span style="color:#ae81ff">2</span>);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// Define the optimizer on parameters of linear_layer with learning_rate = 1e-3
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>torch<span style="color:#f92672">::</span>optim<span style="color:#f92672">::</span>Adam optimizer(linear_layer<span style="color:#f92672">-&gt;</span>parameters(), torch<span style="color:#f92672">::</span>optim<span style="color:#f92672">::</span>AdamOptions(<span style="color:#ae81ff">1e-3</span>))
-</span></span></code></pre></div><p><strong>Python</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># We will directly load the torch.nn pre-trained model</span>
-</span></span><span style="display:flex;"><span>model <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>resnet18(pretrained <span style="color:#f92672">=</span> <span style="color:#66d9ef">True</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> param <span style="color:#f92672">in</span> model<span style="color:#f92672">.</span>parameters():
-</span></span><span style="display:flex;"><span>    param<span style="color:#f92672">.</span>requires_grad <span style="color:#f92672">=</span> <span style="color:#66d9ef">False</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>fc <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>nn<span style="color:#f92672">.</span>Linear(<span style="color:#ae81ff">512</span>, <span style="color:#ae81ff">2</span>)
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> param <span style="color:#f92672">in</span> model<span style="color:#f92672">.</span>fc<span style="color:#f92672">.</span>parameters():
-</span></span><span style="display:flex;"><span>	param<span style="color:#f92672">.</span>requires_grad <span style="color:#f92672">=</span> <span style="color:#66d9ef">True</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>optimizer <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>optim<span style="color:#f92672">.</span>Adam(model<span style="color:#f92672">.</span>fc<span style="color:#f92672">.</span>parameters())
-</span></span><span style="display:flex;"><span>cost <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>nn<span style="color:#f92672">.</span>CrossEntropyLoss()
-</span></span></code></pre></div><h2 id="trainining-the-fc-layer">Trainining the FC Layer</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">torch<span style="color:#f92672">::</span>jit<span style="color:#f92672">::</span>script<span style="color:#f92672">::</span>Module module;
+<span style="color:#75715e">// argv[1] should be the path to the model
+</span><span style="color:#75715e"></span>module <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>jit<span style="color:#f92672">::</span>load(argv[<span style="color:#ae81ff">1</span>]); 
+
+<span style="color:#75715e">/* We need to convert last layer input and output features from (512, 1000) to (512, 2) since we only have 2 classes */</span>
+torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Linear linear_layer(<span style="color:#ae81ff">512</span>, <span style="color:#ae81ff">2</span>);
+
+<span style="color:#75715e">// Define the optimizer on parameters of linear_layer with learning_rate = 1e-3
+</span><span style="color:#75715e"></span>torch<span style="color:#f92672">::</span>optim<span style="color:#f92672">::</span>Adam optimizer(linear_layer<span style="color:#f92672">-&gt;</span>parameters(), torch<span style="color:#f92672">::</span>optim<span style="color:#f92672">::</span>AdamOptions(<span style="color:#ae81ff">1e-3</span>))
+</code></pre></div><p><strong>Python</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># We will directly load the torch.nn pre-trained model</span>
+model <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>resnet18(pretrained <span style="color:#f92672">=</span> <span style="color:#66d9ef">True</span>)
+
+<span style="color:#66d9ef">for</span> param <span style="color:#f92672">in</span> model<span style="color:#f92672">.</span>parameters():
+    param<span style="color:#f92672">.</span>requires_grad <span style="color:#f92672">=</span> <span style="color:#66d9ef">False</span>
+
+model<span style="color:#f92672">.</span>fc <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>nn<span style="color:#f92672">.</span>Linear(<span style="color:#ae81ff">512</span>, <span style="color:#ae81ff">2</span>)
+<span style="color:#66d9ef">for</span> param <span style="color:#f92672">in</span> model<span style="color:#f92672">.</span>fc<span style="color:#f92672">.</span>parameters():
+	param<span style="color:#f92672">.</span>requires_grad <span style="color:#f92672">=</span> <span style="color:#66d9ef">True</span>
+
+optimizer <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>optim<span style="color:#f92672">.</span>Adam(model<span style="color:#f92672">.</span>fc<span style="color:#f92672">.</span>parameters())
+cost <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>nn<span style="color:#f92672">.</span>CrossEntropyLoss()
+</code></pre></div><h2 id="trainining-the-fc-layer">Trainining the FC Layer</h2>
 <p>Let&rsquo;s first have a look at ResNet18 Network Architecture</p>
 <p><img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/blogs/ResNet18-Architecture.png" alt="https://www.researchgate.net/figure/ResNet-18-Architecture_tbl1_322476121"></p>
 <p>The final step is to train the Fully Connected layer that we inserted at the end of the network (<code>linear_layer</code>). This one should be pretty straight forward, let&rsquo;s see how to do it.</p>
 <p><strong>C++</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">train</span>(torch<span style="color:#f92672">::</span>jit<span style="color:#f92672">::</span>script<span style="color:#f92672">::</span>Module net, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Linear lin, Dataloader<span style="color:#f92672">&amp;</span> data_loader, torch<span style="color:#f92672">::</span>optim<span style="color:#f92672">::</span>Optimizer<span style="color:#f92672">&amp;</span> optimizer, size_t dataset_size) {
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/*
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     This function trains the network on our data loader using optimizer for given number of epochs.
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     Parameters
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     ==================
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     torch::jit::script::Module net: Pre-trained model
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     torch::nn::Linear lin: Linear layer
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     DataLoader&amp; data_loader: Training data loader
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     torch::optim::Optimizer&amp; optimizer: Optimizer like Adam, SGD etc.
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     size_t dataset_size: Size of training dataset
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">float</span> batch_index <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>; i<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">15</span>; i<span style="color:#f92672">++</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">float</span> mse <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">float</span> Acc <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0</span>;
-</span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span><span style="color:#f92672">&amp;</span> batch: <span style="color:#f92672">*</span>data_loader) {
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">auto</span> data <span style="color:#f92672">=</span> batch.data;
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">auto</span> target <span style="color:#f92672">=</span> batch.target.squeeze();
-</span></span><span style="display:flex;"><span>            
-</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// Should be of length: batch_size
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            data <span style="color:#f92672">=</span> data.to(torch<span style="color:#f92672">::</span>kF32);
-</span></span><span style="display:flex;"><span>            target <span style="color:#f92672">=</span> target.to(torch<span style="color:#f92672">::</span>kInt64);
-</span></span><span style="display:flex;"><span>            
-</span></span><span style="display:flex;"><span>            std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span>torch<span style="color:#f92672">::</span>jit<span style="color:#f92672">::</span>IValue<span style="color:#f92672">&gt;</span> input;
-</span></span><span style="display:flex;"><span>            input.push_back(data);
-</span></span><span style="display:flex;"><span>            optimizer.zero_grad();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">auto</span> output <span style="color:#f92672">=</span> net.forward(input).toTensor();
-</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// For transfer learning
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            output <span style="color:#f92672">=</span> output.view({output.size(<span style="color:#ae81ff">0</span>), <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>});
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>            output <span style="color:#f92672">=</span> lin(output);
-</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// Explicitly calculate torch::log_softmax of output from the FC Layer
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">auto</span> loss <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>nll_loss(torch<span style="color:#f92672">::</span>log_softmax(output, <span style="color:#ae81ff">1</span>), target);
-</span></span><span style="display:flex;"><span>           	
-</span></span><span style="display:flex;"><span>            loss.backward();
-</span></span><span style="display:flex;"><span>            optimizer.step();
-</span></span><span style="display:flex;"><span>            
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">auto</span> acc <span style="color:#f92672">=</span> output.argmax(<span style="color:#ae81ff">1</span>).eq(target).sum();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>            Acc <span style="color:#f92672">+=</span> acc.<span style="color:#66d9ef">template</span> item<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">float</span><span style="color:#f92672">&gt;</span>();
-</span></span><span style="display:flex;"><span>            mse <span style="color:#f92672">+=</span> loss.<span style="color:#66d9ef">template</span> item<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">float</span><span style="color:#f92672">&gt;</span>();
-</span></span><span style="display:flex;"><span>            
-</span></span><span style="display:flex;"><span>            batch_index <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>;
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        mse <span style="color:#f92672">=</span> mse<span style="color:#f92672">/</span><span style="color:#66d9ef">float</span>(batch_index); <span style="color:#75715e">// Take mean of loss
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Epoch: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> i  <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;, &#34;</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Accuracy: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> Acc<span style="color:#f92672">/</span>dataset_size <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;, &#34;</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;MSE: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> mse <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
-</span></span><span style="display:flex;"><span>        net.save(<span style="color:#e6db74">&#34;model.pt&#34;</span>);
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p><strong>Python</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>n_epochs <span style="color:#f92672">=</span> <span style="color:#ae81ff">15</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> epoch <span style="color:#f92672">in</span> range(n_epochs):
-</span></span><span style="display:flex;"><span>    mse <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0</span>
-</span></span><span style="display:flex;"><span>    acc <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
-</span></span><span style="display:flex;"><span>    batch_index <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> data_batch <span style="color:#f92672">in</span> data_loader:
-</span></span><span style="display:flex;"><span>        batch_index <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
-</span></span><span style="display:flex;"><span>        image, label <span style="color:#f92672">=</span> data_batch
-</span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        optimizer<span style="color:#f92672">.</span>zero_grad()
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        output <span style="color:#f92672">=</span> model(image)
-</span></span><span style="display:flex;"><span>        _, predicted_label <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>max(output<span style="color:#f92672">.</span>data, <span style="color:#ae81ff">1</span>)
-</span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        loss <span style="color:#f92672">=</span> cost(output, label)
-</span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        loss<span style="color:#f92672">.</span>backward()
-</span></span><span style="display:flex;"><span>        optimizer<span style="color:#f92672">.</span>step()
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        mse <span style="color:#f92672">+=</span> loss<span style="color:#f92672">.</span>item() <span style="color:#75715e"># data[0]</span>
-</span></span><span style="display:flex;"><span>        acc <span style="color:#f92672">+=</span> torch<span style="color:#f92672">.</span>sum(predicted_label <span style="color:#f92672">==</span> label<span style="color:#f92672">.</span>data)
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    mse <span style="color:#f92672">=</span> mse<span style="color:#f92672">/</span>len(data)
-</span></span><span style="display:flex;"><span>    acc <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span><span style="color:#f92672">*</span>acc<span style="color:#f92672">/</span>len(data)
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#34;Epoch: </span><span style="color:#e6db74">{}</span><span style="color:#e6db74">/</span><span style="color:#e6db74">{}</span><span style="color:#e6db74">, Loss: </span><span style="color:#e6db74">{:.4f}</span><span style="color:#e6db74">, Accuracy: </span><span style="color:#e6db74">{:.4f}</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">.</span>format(epoch<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>, n_epochs, mse, acc))
-</span></span></code></pre></div><p>The code to test should also not change much except the need of optimizer.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">train</span>(torch<span style="color:#f92672">::</span>jit<span style="color:#f92672">::</span>script<span style="color:#f92672">::</span>Module net, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Linear lin, Dataloader<span style="color:#f92672">&amp;</span> data_loader, torch<span style="color:#f92672">::</span>optim<span style="color:#f92672">::</span>Optimizer<span style="color:#f92672">&amp;</span> optimizer, size_t dataset_size) {
+    <span style="color:#75715e">/*
+</span><span style="color:#75715e">     This function trains the network on our data loader using optimizer for given number of epochs.
+</span><span style="color:#75715e">     
+</span><span style="color:#75715e">     Parameters
+</span><span style="color:#75715e">     ==================
+</span><span style="color:#75715e">     torch::jit::script::Module net: Pre-trained model
+</span><span style="color:#75715e">     torch::nn::Linear lin: Linear layer
+</span><span style="color:#75715e">     DataLoader&amp; data_loader: Training data loader
+</span><span style="color:#75715e">     torch::optim::Optimizer&amp; optimizer: Optimizer like Adam, SGD etc.
+</span><span style="color:#75715e">     size_t dataset_size: Size of training dataset
+</span><span style="color:#75715e">     */</span>
+    
+    <span style="color:#66d9ef">float</span> batch_index <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+    
+    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>; i<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">15</span>; i<span style="color:#f92672">++</span>) {
+        <span style="color:#66d9ef">float</span> mse <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+        <span style="color:#66d9ef">float</span> Acc <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0</span>;
+        
+        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span><span style="color:#f92672">&amp;</span> batch: <span style="color:#f92672">*</span>data_loader) {
+            <span style="color:#66d9ef">auto</span> data <span style="color:#f92672">=</span> batch.data;
+            <span style="color:#66d9ef">auto</span> target <span style="color:#f92672">=</span> batch.target.squeeze();
+            
+            <span style="color:#75715e">// Should be of length: batch_size
+</span><span style="color:#75715e"></span>            data <span style="color:#f92672">=</span> data.to(torch<span style="color:#f92672">::</span>kF32);
+            target <span style="color:#f92672">=</span> target.to(torch<span style="color:#f92672">::</span>kInt64);
+            
+            std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span>torch<span style="color:#f92672">::</span>jit<span style="color:#f92672">::</span>IValue<span style="color:#f92672">&gt;</span> input;
+            input.push_back(data);
+            optimizer.zero_grad();
+
+            <span style="color:#66d9ef">auto</span> output <span style="color:#f92672">=</span> net.forward(input).toTensor();
+            <span style="color:#75715e">// For transfer learning
+</span><span style="color:#75715e"></span>            output <span style="color:#f92672">=</span> output.view({output.size(<span style="color:#ae81ff">0</span>), <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>});
+
+            output <span style="color:#f92672">=</span> lin(output);
+            <span style="color:#75715e">// Explicitly calculate torch::log_softmax of output from the FC Layer
+</span><span style="color:#75715e"></span>            <span style="color:#66d9ef">auto</span> loss <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>nll_loss(torch<span style="color:#f92672">::</span>log_softmax(output, <span style="color:#ae81ff">1</span>), target);
+           	
+            loss.backward();
+            optimizer.step();
+            
+            <span style="color:#66d9ef">auto</span> acc <span style="color:#f92672">=</span> output.argmax(<span style="color:#ae81ff">1</span>).eq(target).sum();
+
+            Acc <span style="color:#f92672">+=</span> acc.<span style="color:#66d9ef">template</span> item<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">float</span><span style="color:#f92672">&gt;</span>();
+            mse <span style="color:#f92672">+=</span> loss.<span style="color:#66d9ef">template</span> item<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">float</span><span style="color:#f92672">&gt;</span>();
+            
+            batch_index <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>;
+        }
+        
+        mse <span style="color:#f92672">=</span> mse<span style="color:#f92672">/</span><span style="color:#66d9ef">float</span>(batch_index); <span style="color:#75715e">// Take mean of loss
+</span><span style="color:#75715e"></span>        std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Epoch: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> i  <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;, &#34;</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Accuracy: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> Acc<span style="color:#f92672">/</span>dataset_size <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;, &#34;</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;MSE: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> mse <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+        net.save(<span style="color:#e6db74">&#34;model.pt&#34;</span>);
+    }
+}
+</code></pre></div><p><strong>Python</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">n_epochs <span style="color:#f92672">=</span> <span style="color:#ae81ff">15</span>
+
+<span style="color:#66d9ef">for</span> epoch <span style="color:#f92672">in</span> range(n_epochs):
+    mse <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0</span>
+    acc <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+    batch_index <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+
+    <span style="color:#66d9ef">for</span> data_batch <span style="color:#f92672">in</span> data_loader:
+        batch_index <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+        image, label <span style="color:#f92672">=</span> data_batch
+        
+        optimizer<span style="color:#f92672">.</span>zero_grad()
+
+        output <span style="color:#f92672">=</span> model(image)
+        _, predicted_label <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>max(output<span style="color:#f92672">.</span>data, <span style="color:#ae81ff">1</span>)
+        
+        loss <span style="color:#f92672">=</span> cost(output, label)
+        
+        loss<span style="color:#f92672">.</span>backward()
+        optimizer<span style="color:#f92672">.</span>step()
+
+        mse <span style="color:#f92672">+=</span> loss<span style="color:#f92672">.</span>item() <span style="color:#75715e"># data[0]</span>
+        acc <span style="color:#f92672">+=</span> torch<span style="color:#f92672">.</span>sum(predicted_label <span style="color:#f92672">==</span> label<span style="color:#f92672">.</span>data)
+    
+    mse <span style="color:#f92672">=</span> mse<span style="color:#f92672">/</span>len(data)
+    acc <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span><span style="color:#f92672">*</span>acc<span style="color:#f92672">/</span>len(data)
+    
+    print(<span style="color:#e6db74">&#34;Epoch: </span><span style="color:#e6db74">{}</span><span style="color:#e6db74">/</span><span style="color:#e6db74">{}</span><span style="color:#e6db74">, Loss: </span><span style="color:#e6db74">{:.4f}</span><span style="color:#e6db74">, Accuracy: </span><span style="color:#e6db74">{:.4f}</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">.</span>format(epoch<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>, n_epochs, mse, acc))
+</code></pre></div><p>The code to test should also not change much except the need of optimizer.</p>
 <h2 id="results">Results</h2>
 <p><img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/blogs/Training-Results.png" alt="Results using PyTorch C++ API">
 <img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/blogs/Training-Results-Python.png" alt="Results using PyTorch in Python"></p>
@@ -598,7 +598,7 @@ Before we go ahead and discuss the <strong>Why</strong> question of Transfer Lea
         })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
         ga('create', 'UA-146662543-1', 'auto');ga('send', 'pageview');
     </script>
-<script src="https://krshrimali.github.io/js/webmention.min.f60cda7d6de39593831ee0d0ef205feaba94d655e344398cbc178b6fd07888eaf8bd1a4d4f15eb77a191e209842937013b9dda76ecc79b4fea6825a7ba53f03e.js" data-id="webmention-container"></script>
+<script src="https://krshrimali.github.io/js/webmention.min.513a53d009530b21cba09721b6f4dc912e9c20ad2c0adbb5c4e486c4f77774a6e9eca8c2e1e4e8bc9e9e86693aa5ca91e7bf232b50f7f8bee4e64efc874040a7.js" data-id="webmention-container"></script>
 
 
 

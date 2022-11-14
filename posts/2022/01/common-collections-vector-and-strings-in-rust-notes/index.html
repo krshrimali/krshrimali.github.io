@@ -212,76 +212,76 @@
 <p><code>Vec&lt;T&gt;</code> collection type discussed, aka vector:
 * By default contiguous.
 * All values should be of same type.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#75715e">// Creation
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> v: Vec<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">i32</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">=</span> Vec::new();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// vec! macro for convenience
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// default integer type is i32
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> v <span style="color:#f92672">=</span> vec![<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>];
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// Modifying
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> v <span style="color:#f92672">=</span> Vec::new();
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// Rust infers the type from the elements pushed here
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>v.push(<span style="color:#ae81ff">5</span>);
-</span></span><span style="display:flex;"><span>v.push(<span style="color:#ae81ff">6</span>);
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// ...
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// Dropping
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// a vector is freed, when it goes out of scope
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>{
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> v <span style="color:#f92672">=</span> vec![<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>];
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// ...
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>} <span style="color:#75715e">// &lt;-- v goes out of scope here, and hence memory is freed as well
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// Reading Elements of Vectors
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> v <span style="color:#f92672">=</span> vec![<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>];
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// First way:
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> third: <span style="color:#66d9ef">&amp;</span><span style="color:#66d9ef">i32</span> <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>v[<span style="color:#ae81ff">2</span>];
-</span></span><span style="display:flex;"><span>println!(<span style="color:#e6db74">&#34;The third element is: {}&#34;</span>, third);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// Second way:
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">match</span> v.get(<span style="color:#ae81ff">2</span>) {
-</span></span><span style="display:flex;"><span>    Some(num) <span style="color:#f92672">=&gt;</span> println!(<span style="color:#e6db74">&#34;The third element is: {}&#34;</span>, num),
-</span></span><span style="display:flex;"><span>    None <span style="color:#f92672">=&gt;</span> println!(<span style="color:#e6db74">&#34;There is no third element.&#34;</span>),
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p><code>.get(&amp;index)</code> method allows you to handle out of range errors.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#75715e">// Creation
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> v: Vec<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">i32</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">=</span> Vec::new();
+
+<span style="color:#75715e">// vec! macro for convenience
+</span><span style="color:#75715e">// default integer type is i32
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> v <span style="color:#f92672">=</span> vec![<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>];
+
+<span style="color:#75715e">// Modifying
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> v <span style="color:#f92672">=</span> Vec::new();
+<span style="color:#75715e">// Rust infers the type from the elements pushed here
+</span><span style="color:#75715e"></span>v.push(<span style="color:#ae81ff">5</span>);
+v.push(<span style="color:#ae81ff">6</span>);
+<span style="color:#75715e">// ...
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">// Dropping
+</span><span style="color:#75715e">// a vector is freed, when it goes out of scope
+</span><span style="color:#75715e"></span>{
+    <span style="color:#66d9ef">let</span> v <span style="color:#f92672">=</span> vec![<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>];
+    <span style="color:#75715e">// ...
+</span><span style="color:#75715e"></span>} <span style="color:#75715e">// &lt;-- v goes out of scope here, and hence memory is freed as well
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">// Reading Elements of Vectors
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> v <span style="color:#f92672">=</span> vec![<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>];
+<span style="color:#75715e">// First way:
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> third: <span style="color:#66d9ef">&amp;</span><span style="color:#66d9ef">i32</span> <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>v[<span style="color:#ae81ff">2</span>];
+println!(<span style="color:#e6db74">&#34;The third element is: {}&#34;</span>, third);
+
+<span style="color:#75715e">// Second way:
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">match</span> v.get(<span style="color:#ae81ff">2</span>) {
+    Some(num) <span style="color:#f92672">=&gt;</span> println!(<span style="color:#e6db74">&#34;The third element is: {}&#34;</span>, num),
+    None <span style="color:#f92672">=&gt;</span> println!(<span style="color:#e6db74">&#34;There is no third element.&#34;</span>),
+}
+</code></pre></div><p><code>.get(&amp;index)</code> method allows you to handle out of range errors.</p>
 <blockquote>
 <p>When a program has a valid reference, the borrow checker enforces the ownership and borrowing rules to ensure this reference and any other references to the contents of the vector remain valid.</p>
 </blockquote>
 <p>Following example will fail:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> v <span style="color:#f92672">=</span> vec![<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>];
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">let</span> first <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>v[<span style="color:#ae81ff">0</span>];
-</span></span><span style="display:flex;"><span>v.push(<span style="color:#ae81ff">6</span>);
-</span></span><span style="display:flex;"><span>println!(<span style="color:#e6db74">&#34;The first element is: {}&#34;</span>, first);
-</span></span></code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> v <span style="color:#f92672">=</span> vec![<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>];
+<span style="color:#66d9ef">let</span> first <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>v[<span style="color:#ae81ff">0</span>];
+v.push(<span style="color:#ae81ff">6</span>);
+println!(<span style="color:#e6db74">&#34;The first element is: {}&#34;</span>, first);
+</code></pre></div><ul>
 <li>Adding an element to a vector may require the old memory chunk to be transferred to a new space, causing old memory disallocation for the object <code>v</code>.</li>
 <li>Accessing <code>&amp;v[0]</code> can thus be dangerous, and hence the borrowing rules prevent programs from ending up in that situation.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#75715e">// Iterating over the values in a vector
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> v <span style="color:#f92672">=</span> vec![<span style="color:#ae81ff">100</span>, <span style="color:#ae81ff">32</span>, <span style="color:#ae81ff">57</span>];
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// get immutable references to each element in a vector v
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">for</span> i <span style="color:#66d9ef">in</span> <span style="color:#f92672">&amp;</span>v {
-</span></span><span style="display:flex;"><span>    println!(<span style="color:#e6db74">&#34;{}&#34;</span>, i);
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// get mutable references to each element in a mutable veector v
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> v <span style="color:#f92672">=</span> vec![<span style="color:#ae81ff">100</span>, <span style="color:#ae81ff">32</span>, <span style="color:#ae81ff">57</span>];
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i <span style="color:#66d9ef">in</span> <span style="color:#f92672">&amp;</span><span style="color:#66d9ef">mut</span> v {
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">*</span>i <span style="color:#f92672">+=</span> <span style="color:#ae81ff">50</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>You can use an <code>enum</code> to store multiple type values in a vector, but indirectly, this is how:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">enum</span> <span style="color:#a6e22e">SpreadsheetCell</span> {
-</span></span><span style="display:flex;"><span>    Int(<span style="color:#66d9ef">i32</span>),
-</span></span><span style="display:flex;"><span>    Float(<span style="color:#66d9ef">f64</span>),
-</span></span><span style="display:flex;"><span>    Text(String),
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">let</span> row <span style="color:#f92672">=</span> vec![
-</span></span><span style="display:flex;"><span>    SpreadsheetCell::Int(<span style="color:#ae81ff">3</span>),
-</span></span><span style="display:flex;"><span>    SpreadsheetCell::Text(String::from(<span style="color:#e6db74">&#34;blue&#34;</span>)),
-</span></span><span style="display:flex;"><span>    SpreadsheetCell::Float(<span style="color:#ae81ff">10.12</span>),
-</span></span><span style="display:flex;"><span>];
-</span></span></code></pre></div><p>Note how <code>row</code> vector still has same types (of <code>enum SpreadsheetCell</code>) but can hold values of multiple types through enums.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#75715e">// Iterating over the values in a vector
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> v <span style="color:#f92672">=</span> vec![<span style="color:#ae81ff">100</span>, <span style="color:#ae81ff">32</span>, <span style="color:#ae81ff">57</span>];
+<span style="color:#75715e">// get immutable references to each element in a vector v
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">for</span> i <span style="color:#66d9ef">in</span> <span style="color:#f92672">&amp;</span>v {
+    println!(<span style="color:#e6db74">&#34;{}&#34;</span>, i);
+}
+
+<span style="color:#75715e">// get mutable references to each element in a mutable veector v
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> v <span style="color:#f92672">=</span> vec![<span style="color:#ae81ff">100</span>, <span style="color:#ae81ff">32</span>, <span style="color:#ae81ff">57</span>];
+<span style="color:#66d9ef">for</span> i <span style="color:#66d9ef">in</span> <span style="color:#f92672">&amp;</span><span style="color:#66d9ef">mut</span> v {
+    <span style="color:#f92672">*</span>i <span style="color:#f92672">+=</span> <span style="color:#ae81ff">50</span>;
+}
+</code></pre></div><p>You can use an <code>enum</code> to store multiple type values in a vector, but indirectly, this is how:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#66d9ef">enum</span> <span style="color:#a6e22e">SpreadsheetCell</span> {
+    Int(<span style="color:#66d9ef">i32</span>),
+    Float(<span style="color:#66d9ef">f64</span>),
+    Text(String),
+}
+
+<span style="color:#66d9ef">let</span> row <span style="color:#f92672">=</span> vec![
+    SpreadsheetCell::Int(<span style="color:#ae81ff">3</span>),
+    SpreadsheetCell::Text(String::from(<span style="color:#e6db74">&#34;blue&#34;</span>)),
+    SpreadsheetCell::Float(<span style="color:#ae81ff">10.12</span>),
+];
+</code></pre></div><p>Note how <code>row</code> vector still has same types (of <code>enum SpreadsheetCell</code>) but can hold values of multiple types through enums.</p>
 <h3 id="82-storing-utf-8-encoded-text-with-strings">8.2: Storing UTF-8 Encoded Text with Strings</h3>
 <p>In Rust, strings are implemented as a collection of bytes + some methods to provide useful functionality when those bytes are interpreted as text.</p>
 <p>(both types listed below are UTF-8 encoded)</p>
@@ -294,71 +294,71 @@
 </li>
 </ul>
 <p>There are other string types included in Rust&rsquo;s standard library: <code>OsString, OsStr, CString, CStr&quot;. Types ending with </code>String<code>refer to owned variants, while types ending with</code>Str` refer to borrowed variants. (not discussed in the book/chapter)</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#75715e">// Creating a new string
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> s <span style="color:#f92672">=</span> String::new();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// If you have some initial data, use to_string method
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// this is available on any type that implements the Display trait
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// Following three methods are valid
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// First
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> data <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;initial contents&#34;</span>; <span style="color:#75715e">// a string literal
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> s <span style="color:#f92672">=</span> data.to_string();
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// Second
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> s <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;initial conents&#34;</span>.to_string();
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// Third
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> s <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;initial contents&#34;</span>);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// Updating a string
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> s <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;foo&#34;</span>);
-</span></span><span style="display:flex;"><span>s.push_str(<span style="color:#e6db74">&#34;bar&#34;</span>); <span style="color:#75715e">// s is now &#34;foobar&#34;
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// Appending to a string
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// using push_str and push
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> s <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;foo&#34;</span>);
-</span></span><span style="display:flex;"><span>s.push_str(<span style="color:#e6db74">&#34;bar&#34;</span>);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> s1 <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;foo&#34;</span>);
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">let</span> s2 <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;bar&#34;</span>;
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// We don&#39;t take ownership of s2 here
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// To ensure that we can still use s2 even after appending contents to s1
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>s1.push_str(s2);
-</span></span><span style="display:flex;"><span>println!(<span style="color:#e6db74">&#34;s2 is {}&#34;</span>, s2);
-</span></span><span style="display:flex;"><span>println!(<span style="color:#e6db74">&#34;s1 is {}&#34;</span>, s1);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// Use push to append single character to the String
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> s <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;lo&#34;</span>);
-</span></span><span style="display:flex;"><span>s.push(<span style="color:#e6db74">&#39;l&#39;</span>); <span style="color:#75715e">// now &#34;lol&#34;
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// Concatenation with + operator or the format! macro
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> s1 <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;Hello, &#34;</span>);
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">let</span> s2 <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;world!&#34;</span>);
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">let</span> s3 <span style="color:#f92672">=</span> s1 <span style="color:#f92672">+</span> <span style="color:#f92672">&amp;</span>s2;
-</span></span></code></pre></div><p>Consider the following script:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">let</span> s1 <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;foo&#34;</span>);
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">let</span> s2 <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34; bar&#34;</span>);
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// The operation takes ownership of s1 here
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> s3 <span style="color:#f92672">=</span> s1 <span style="color:#f92672">+</span> <span style="color:#f92672">&amp;</span>s2;
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// You can not use s1 after the operation above
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>println!(<span style="color:#e6db74">&#34;s3 is: {}&#34;</span>, s3);
-</span></span></code></pre></div><p>Following is the error you&rsquo;ll get:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span>error[E0382]: <span style="color:#a6e22e">borrow</span> of moved value: <span style="color:#960050;background-color:#1e0010">`</span>s1<span style="color:#960050;background-color:#1e0010">`</span>
-</span></span><span style="display:flex;"><span> <span style="color:#f92672">-</span>-&gt; <span style="color:#a6e22e">src</span><span style="color:#f92672">/</span>main.rs:<span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">27</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">|</span>
-</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span> <span style="color:#f92672">|</span>     <span style="color:#66d9ef">let</span> s1 <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;foo&#34;</span>);
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">|</span>         <span style="color:#f92672">--</span> <span style="color:#66d9ef">move</span> occurs because <span style="color:#960050;background-color:#1e0010">`</span>s1<span style="color:#960050;background-color:#1e0010">`</span> has <span style="color:#66d9ef">type</span> <span style="color:#960050;background-color:#1e0010">`</span>String<span style="color:#960050;background-color:#1e0010">`</span>, which does not implement the <span style="color:#960050;background-color:#1e0010">`</span>Copy<span style="color:#960050;background-color:#1e0010">`</span> <span style="color:#66d9ef">trait</span>
-</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span> <span style="color:#f92672">|</span>     <span style="color:#66d9ef">let</span> s2 <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34; bar&#34;</span>);
-</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span> <span style="color:#f92672">|</span>     <span style="color:#66d9ef">let</span> s3 <span style="color:#f92672">=</span> s1 <span style="color:#f92672">+</span> <span style="color:#f92672">&amp;</span>s2;
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">|</span>              <span style="color:#f92672">--</span> value moved here
-</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span> <span style="color:#f92672">|</span>     println!(<span style="color:#e6db74">&#34;s1 is: {}&#34;</span>, s1);
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">|</span>                           <span style="color:#f92672">^^</span> value borrowed here after <span style="color:#66d9ef">move</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>For more information about this error, <span style="color:#66d9ef">try</span> <span style="color:#960050;background-color:#1e0010">`</span>rustc <span style="color:#f92672">--</span>explain E0382<span style="color:#960050;background-color:#1e0010">`</span>
-</span></span></code></pre></div><p>So what&rsquo;s happening? The <code>+</code> operator uses an <code>add</code> method whose signature looks like this for our inputs:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">add</span>(self, s: <span style="color:#66d9ef">&amp;</span><span style="color:#66d9ef">str</span>) -&gt; String {
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// ...
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
-</span></span></code></pre></div><p>A few notes about <code>s</code> parameter:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#75715e">// Creating a new string
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> s <span style="color:#f92672">=</span> String::new();
+
+<span style="color:#75715e">// If you have some initial data, use to_string method
+</span><span style="color:#75715e">// this is available on any type that implements the Display trait
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">// Following three methods are valid
+</span><span style="color:#75715e">// First
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> data <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;initial contents&#34;</span>; <span style="color:#75715e">// a string literal
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> s <span style="color:#f92672">=</span> data.to_string();
+<span style="color:#75715e">// Second
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> s <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;initial conents&#34;</span>.to_string();
+<span style="color:#75715e">// Third
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> s <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;initial contents&#34;</span>);
+
+<span style="color:#75715e">// Updating a string
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> s <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;foo&#34;</span>);
+s.push_str(<span style="color:#e6db74">&#34;bar&#34;</span>); <span style="color:#75715e">// s is now &#34;foobar&#34;
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">// Appending to a string
+</span><span style="color:#75715e">// using push_str and push
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> s <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;foo&#34;</span>);
+s.push_str(<span style="color:#e6db74">&#34;bar&#34;</span>);
+
+<span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> s1 <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;foo&#34;</span>);
+<span style="color:#66d9ef">let</span> s2 <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;bar&#34;</span>;
+<span style="color:#75715e">// We don&#39;t take ownership of s2 here
+</span><span style="color:#75715e">// To ensure that we can still use s2 even after appending contents to s1
+</span><span style="color:#75715e"></span>s1.push_str(s2);
+println!(<span style="color:#e6db74">&#34;s2 is {}&#34;</span>, s2);
+println!(<span style="color:#e6db74">&#34;s1 is {}&#34;</span>, s1);
+
+<span style="color:#75715e">// Use push to append single character to the String
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> s <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;lo&#34;</span>);
+s.push(<span style="color:#e6db74">&#39;l&#39;</span>); <span style="color:#75715e">// now &#34;lol&#34;
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">// Concatenation with + operator or the format! macro
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> s1 <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;Hello, &#34;</span>);
+<span style="color:#66d9ef">let</span> s2 <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;world!&#34;</span>);
+<span style="color:#66d9ef">let</span> s3 <span style="color:#f92672">=</span> s1 <span style="color:#f92672">+</span> <span style="color:#f92672">&amp;</span>s2;
+</code></pre></div><p>Consider the following script:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#66d9ef">let</span> s1 <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;foo&#34;</span>);
+<span style="color:#66d9ef">let</span> s2 <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34; bar&#34;</span>);
+<span style="color:#75715e">// The operation takes ownership of s1 here
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> s3 <span style="color:#f92672">=</span> s1 <span style="color:#f92672">+</span> <span style="color:#f92672">&amp;</span>s2;
+<span style="color:#75715e">// You can not use s1 after the operation above
+</span><span style="color:#75715e"></span>println!(<span style="color:#e6db74">&#34;s3 is: {}&#34;</span>, s3);
+</code></pre></div><p>Following is the error you&rsquo;ll get:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust">error[E0382]: <span style="color:#a6e22e">borrow</span> of moved value: <span style="color:#960050;background-color:#1e0010">`</span>s1<span style="color:#960050;background-color:#1e0010">`</span>
+ <span style="color:#f92672">-</span>-&gt; <span style="color:#a6e22e">src</span><span style="color:#f92672">/</span>main.rs:<span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">27</span>
+  <span style="color:#f92672">|</span>
+<span style="color:#ae81ff">2</span> <span style="color:#f92672">|</span>     <span style="color:#66d9ef">let</span> s1 <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;foo&#34;</span>);
+  <span style="color:#f92672">|</span>         <span style="color:#f92672">--</span> <span style="color:#66d9ef">move</span> occurs because <span style="color:#960050;background-color:#1e0010">`</span>s1<span style="color:#960050;background-color:#1e0010">`</span> has <span style="color:#66d9ef">type</span> <span style="color:#960050;background-color:#1e0010">`</span>String<span style="color:#960050;background-color:#1e0010">`</span>, which does not implement the <span style="color:#960050;background-color:#1e0010">`</span>Copy<span style="color:#960050;background-color:#1e0010">`</span> <span style="color:#66d9ef">trait</span>
+<span style="color:#ae81ff">3</span> <span style="color:#f92672">|</span>     <span style="color:#66d9ef">let</span> s2 <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34; bar&#34;</span>);
+<span style="color:#ae81ff">4</span> <span style="color:#f92672">|</span>     <span style="color:#66d9ef">let</span> s3 <span style="color:#f92672">=</span> s1 <span style="color:#f92672">+</span> <span style="color:#f92672">&amp;</span>s2;
+  <span style="color:#f92672">|</span>              <span style="color:#f92672">--</span> value moved here
+<span style="color:#ae81ff">5</span> <span style="color:#f92672">|</span>     println!(<span style="color:#e6db74">&#34;s1 is: {}&#34;</span>, s1);
+  <span style="color:#f92672">|</span>                           <span style="color:#f92672">^^</span> value borrowed here after <span style="color:#66d9ef">move</span>
+
+For more information about this error, <span style="color:#66d9ef">try</span> <span style="color:#960050;background-color:#1e0010">`</span>rustc <span style="color:#f92672">--</span>explain E0382<span style="color:#960050;background-color:#1e0010">`</span>
+</code></pre></div><p>So what&rsquo;s happening? The <code>+</code> operator uses an <code>add</code> method whose signature looks like this for our inputs:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">add</span>(self, s: <span style="color:#66d9ef">&amp;</span><span style="color:#66d9ef">str</span>) -&gt; String {
+    <span style="color:#75715e">// ...
+</span><span style="color:#75715e"></span>}
+</code></pre></div><p>A few notes about <code>s</code> parameter:</p>
 <ol>
 <li>It&rsquo;s taken by reference. Means you add reference of the second string to the firstt string.</li>
 <li>You can not add 2 <code>String</code> values together, only <code>&amp;str</code> to a <code>String</code>. (Rust compiler, in our case, coerces the <code>&amp;String</code> argument into a <code>&amp;str</code>, more on deref coercion later).</li>
@@ -368,97 +368,97 @@
 <li><code>add</code> method takes ownership of <code>self</code> (it doesn&rsquo;t have an <code>&amp;</code>).</li>
 <li>The point above implies, <code>s1</code> will be moved to the <code>add</code> call and no longer be valid after that.</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">let</span> s3 <span style="color:#f92672">=</span> s1 <span style="color:#f92672">+</span> <span style="color:#f92672">&amp;</span>s2;
-</span></span></code></pre></div><p>The above statement actually:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#66d9ef">let</span> s3 <span style="color:#f92672">=</span> s1 <span style="color:#f92672">+</span> <span style="color:#f92672">&amp;</span>s2;
+</code></pre></div><p>The above statement actually:</p>
 <ol>
 <li>Moves <code>s1</code> into the <code>add</code> call / takes ownership of <code>s1</code> (making it invalid after that)</li>
 <li>Appends a <em>copy</em> of the contents of <code>s2</code>.</li>
 <li>Returns ownership of the result.</li>
 </ol>
 <p>(this process is more efficient than copying).</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#75715e">// Concatenating multiple strings
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> s1 <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;tic&#34;</span>);
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">let</span> s2 <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;tac&#34;</span>);
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">let</span> s2 <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;toe&#34;</span>);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">let</span> s <span style="color:#f92672">=</span> s1 <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;-&#34;</span> <span style="color:#f92672">+</span> <span style="color:#f92672">&amp;</span>s2 <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;-&#34;</span> <span style="color:#f92672">+</span> <span style="color:#f92672">&amp;</span>s3;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// You can also do:
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// Uses reference for all parameters, so no ownership of any here...
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> s <span style="color:#f92672">=</span> format!(<span style="color:#e6db74">&#34;{}-{}-{}&#34;</span>, s1, s2, s3);
-</span></span></code></pre></div><p>Talking about Indexing into Strings:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#75715e">// Concatenating multiple strings
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> s1 <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;tic&#34;</span>);
+<span style="color:#66d9ef">let</span> s2 <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;tac&#34;</span>);
+<span style="color:#66d9ef">let</span> s2 <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;toe&#34;</span>);
+
+<span style="color:#66d9ef">let</span> s <span style="color:#f92672">=</span> s1 <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;-&#34;</span> <span style="color:#f92672">+</span> <span style="color:#f92672">&amp;</span>s2 <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;-&#34;</span> <span style="color:#f92672">+</span> <span style="color:#f92672">&amp;</span>s3;
+
+<span style="color:#75715e">// You can also do:
+</span><span style="color:#75715e">// Uses reference for all parameters, so no ownership of any here...
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> s <span style="color:#f92672">=</span> format!(<span style="color:#e6db74">&#34;{}-{}-{}&#34;</span>, s1, s2, s3);
+</code></pre></div><p>Talking about Indexing into Strings:</p>
 <p>The following will give an error.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#75715e">// Indexing into Strings
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// Not like other languages (C++/Python):
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> s1 <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;hello&#34;</span>);
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">let</span> h <span style="color:#f92672">=</span> s1[<span style="color:#ae81ff">0</span>];
-</span></span></code></pre></div><p>Error:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span>error[E0277]: <span style="color:#a6e22e">the</span> <span style="color:#66d9ef">type</span> <span style="color:#960050;background-color:#1e0010">`</span>String<span style="color:#960050;background-color:#1e0010">`</span> cannot be indexed by <span style="color:#960050;background-color:#1e0010">`</span>{integer}<span style="color:#960050;background-color:#1e0010">`</span>
-</span></span><span style="display:flex;"><span> <span style="color:#f92672">-</span>-&gt; <span style="color:#a6e22e">src</span><span style="color:#f92672">/</span>main.rs:<span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">13</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">|</span>
-</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span> <span style="color:#f92672">|</span>     <span style="color:#66d9ef">let</span> h <span style="color:#f92672">=</span> s1[<span style="color:#ae81ff">0</span>];
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">|</span>             <span style="color:#f92672">^^^^^</span> <span style="color:#960050;background-color:#1e0010">`</span>String<span style="color:#960050;background-color:#1e0010">`</span> cannot be indexed by <span style="color:#960050;background-color:#1e0010">`</span>{integer}<span style="color:#960050;background-color:#1e0010">`</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">|</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">=</span> help: <span style="color:#a6e22e">the</span> <span style="color:#66d9ef">trait</span> <span style="color:#960050;background-color:#1e0010">`</span>Index<span style="color:#f92672">&lt;</span>{integer}<span style="color:#f92672">&gt;</span><span style="color:#960050;background-color:#1e0010">`</span> is not implemented <span style="color:#66d9ef">for</span> <span style="color:#960050;background-color:#1e0010">`</span>String<span style="color:#960050;background-color:#1e0010">`</span>
-</span></span></code></pre></div><p><em>Rust strings don&rsquo;t support indexing</em>. To understand, let&rsquo;s understand how memory storage works for strings in Rust.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#75715e">// Indexing into Strings
+</span><span style="color:#75715e">// Not like other languages (C++/Python):
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> s1 <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;hello&#34;</span>);
+<span style="color:#66d9ef">let</span> h <span style="color:#f92672">=</span> s1[<span style="color:#ae81ff">0</span>];
+</code></pre></div><p>Error:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust">error[E0277]: <span style="color:#a6e22e">the</span> <span style="color:#66d9ef">type</span> <span style="color:#960050;background-color:#1e0010">`</span>String<span style="color:#960050;background-color:#1e0010">`</span> cannot be indexed by <span style="color:#960050;background-color:#1e0010">`</span>{integer}<span style="color:#960050;background-color:#1e0010">`</span>
+ <span style="color:#f92672">-</span>-&gt; <span style="color:#a6e22e">src</span><span style="color:#f92672">/</span>main.rs:<span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">13</span>
+  <span style="color:#f92672">|</span>
+<span style="color:#ae81ff">3</span> <span style="color:#f92672">|</span>     <span style="color:#66d9ef">let</span> h <span style="color:#f92672">=</span> s1[<span style="color:#ae81ff">0</span>];
+  <span style="color:#f92672">|</span>             <span style="color:#f92672">^^^^^</span> <span style="color:#960050;background-color:#1e0010">`</span>String<span style="color:#960050;background-color:#1e0010">`</span> cannot be indexed by <span style="color:#960050;background-color:#1e0010">`</span>{integer}<span style="color:#960050;background-color:#1e0010">`</span>
+  <span style="color:#f92672">|</span>
+  <span style="color:#f92672">=</span> help: <span style="color:#a6e22e">the</span> <span style="color:#66d9ef">trait</span> <span style="color:#960050;background-color:#1e0010">`</span>Index<span style="color:#f92672">&lt;</span>{integer}<span style="color:#f92672">&gt;</span><span style="color:#960050;background-color:#1e0010">`</span> is not implemented <span style="color:#66d9ef">for</span> <span style="color:#960050;background-color:#1e0010">`</span>String<span style="color:#960050;background-color:#1e0010">`</span>
+</code></pre></div><p><em>Rust strings don&rsquo;t support indexing</em>. To understand, let&rsquo;s understand how memory storage works for strings in Rust.</p>
 <p>A <code>String</code> is a wrapper over a <code>Vec&lt;u8&gt;</code>. Consider:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#75715e">// Hola is 4 bytes long (each of the chars take 1 byte when encoded in UTF-8) and len will be 4
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> hello <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;Hola&#34;</span>);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// Now consider:
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> hello <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;Здравствуйте&#34;</span>);
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// Number of bytes stored for hello: 24
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// Each unicode scalar value in the string above takes 2 bytes of storage.
-</span></span></span></code></pre></div><p>Hence, indexing into string&rsquo;s bytes will not always correlate to a valid Unicode scalar value. Hence, no indexing support for strings in Rust.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#75715e">// Hola is 4 bytes long (each of the chars take 1 byte when encoded in UTF-8) and len will be 4
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> hello <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;Hola&#34;</span>);
+
+<span style="color:#75715e">// Now consider:
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> hello <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;Здравствуйте&#34;</span>);
+<span style="color:#75715e">// Number of bytes stored for hello: 24
+</span><span style="color:#75715e">// Each unicode scalar value in the string above takes 2 bytes of storage.
+</span></code></pre></div><p>Hence, indexing into string&rsquo;s bytes will not always correlate to a valid Unicode scalar value. Hence, no indexing support for strings in Rust.</p>
 <blockquote>
 <p>A final reason Rust doesn’t allow us to index into a String to get a character is that indexing operations are expected to always take constant time (O(1)). But it isn’t possible to guarantee that performance with a String, because Rust would have to walk through the contents from the beginning to the index to determine how many valid characters there were.</p>
 </blockquote>
 <p>Slicing strings:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">let</span> hello <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Здравствуйте&#34;</span>;
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// This will give you first 4 bytes of hello string
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> s <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>hello[<span style="color:#ae81ff">0</span><span style="color:#f92672">..</span><span style="color:#ae81ff">4</span>];
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// In hello, every character is of 2 bytes, so s will have Зд
-</span></span></span></code></pre></div><p>With the same <code>hello</code> string, what will be the output if we used <code>let s = &amp;hello[0..1];</code>? Following error will be raised:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span>thread <span style="color:#f92672">&#39;</span><span style="color:#a6e22e">main</span><span style="color:#f92672">&#39;</span> panicked at <span style="color:#f92672">&#39;</span><span style="color:#a6e22e">byte</span> index <span style="color:#ae81ff">1</span> is not a <span style="color:#66d9ef">char</span> boundary; it is inside <span style="color:#e6db74">&#39;З&#39;</span> (bytes <span style="color:#ae81ff">0</span><span style="color:#f92672">..</span><span style="color:#ae81ff">2</span>) of <span style="color:#960050;background-color:#1e0010">`Здравствуйте`</span><span style="color:#f92672">&#39;</span>, src<span style="color:#f92672">/</span>main.rs:<span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">13</span>
-</span></span></code></pre></div><p>Iterating over strings: use the <code>chars</code> method.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> c <span style="color:#66d9ef">in</span> <span style="color:#e6db74">&#34;नमस्ते&#34;</span>.chars() {
-</span></span><span style="display:flex;"><span>    println!(<span style="color:#e6db74">&#34;{}&#34;</span>, c);
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// Output:
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">//  न
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">//  म
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">//  स
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">//   ्
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">//  त
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">//   े
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// bytes method will return each raw byte
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">for</span> b <span style="color:#66d9ef">in</span> <span style="color:#e6db74">&#34;नमस्ते&#34;</span>.bytes() {
-</span></span><span style="display:flex;"><span>    println!(<span style="color:#e6db74">&#34;{}&#34;</span>, b);
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// Output:
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// All 18 bytes that made up this string
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// 224
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// 164
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// 168
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// 224
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// 164
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// 174
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// 224
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// 164
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// 184
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// 224
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// 165
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// 141
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// 224
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// 164
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// 164
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// 224
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// 165
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// 135
-</span></span></span></code></pre></div><p>Note: valid unicode scalar values maybe made up of more than 1 byte, like above.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#66d9ef">let</span> hello <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Здравствуйте&#34;</span>;
+<span style="color:#75715e">// This will give you first 4 bytes of hello string
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> s <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>hello[<span style="color:#ae81ff">0</span><span style="color:#f92672">..</span><span style="color:#ae81ff">4</span>];
+<span style="color:#75715e">// In hello, every character is of 2 bytes, so s will have Зд
+</span></code></pre></div><p>With the same <code>hello</code> string, what will be the output if we used <code>let s = &amp;hello[0..1];</code>? Following error will be raised:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust">thread <span style="color:#f92672">&#39;</span><span style="color:#a6e22e">main</span><span style="color:#f92672">&#39;</span> panicked at <span style="color:#f92672">&#39;</span><span style="color:#a6e22e">byte</span> index <span style="color:#ae81ff">1</span> is not a <span style="color:#66d9ef">char</span> boundary; it is inside <span style="color:#e6db74">&#39;З&#39;</span> (bytes <span style="color:#ae81ff">0</span><span style="color:#f92672">..</span><span style="color:#ae81ff">2</span>) of <span style="color:#960050;background-color:#1e0010">`Здравствуйте`</span><span style="color:#f92672">&#39;</span>, src<span style="color:#f92672">/</span>main.rs:<span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">13</span>
+</code></pre></div><p>Iterating over strings: use the <code>chars</code> method.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#66d9ef">for</span> c <span style="color:#66d9ef">in</span> <span style="color:#e6db74">&#34;नमस्ते&#34;</span>.chars() {
+    println!(<span style="color:#e6db74">&#34;{}&#34;</span>, c);
+}
+
+<span style="color:#75715e">// Output:
+</span><span style="color:#75715e">//  न
+</span><span style="color:#75715e">//  म
+</span><span style="color:#75715e">//  स
+</span><span style="color:#75715e">//   ्
+</span><span style="color:#75715e">//  त
+</span><span style="color:#75715e">//   े
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">// bytes method will return each raw byte
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">for</span> b <span style="color:#66d9ef">in</span> <span style="color:#e6db74">&#34;नमस्ते&#34;</span>.bytes() {
+    println!(<span style="color:#e6db74">&#34;{}&#34;</span>, b);
+}
+
+<span style="color:#75715e">// Output:
+</span><span style="color:#75715e">// All 18 bytes that made up this string
+</span><span style="color:#75715e">// 224
+</span><span style="color:#75715e">// 164
+</span><span style="color:#75715e">// 168
+</span><span style="color:#75715e">// 224
+</span><span style="color:#75715e">// 164
+</span><span style="color:#75715e">// 174
+</span><span style="color:#75715e">// 224
+</span><span style="color:#75715e">// 164
+</span><span style="color:#75715e">// 184
+</span><span style="color:#75715e">// 224
+</span><span style="color:#75715e">// 165
+</span><span style="color:#75715e">// 141
+</span><span style="color:#75715e">// 224
+</span><span style="color:#75715e">// 164
+</span><span style="color:#75715e">// 164
+</span><span style="color:#75715e">// 224
+</span><span style="color:#75715e">// 165
+</span><span style="color:#75715e">// 135
+</span></code></pre></div><p>Note: valid unicode scalar values maybe made up of more than 1 byte, like above.</p>
 <h2 id="note">Note</h2>
 <hr>
 <p><strong>NOTE</strong></p>
@@ -643,7 +643,7 @@
         })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
         ga('create', 'UA-146662543-1', 'auto');ga('send', 'pageview');
     </script>
-<script src="https://krshrimali.github.io/js/webmention.min.f60cda7d6de39593831ee0d0ef205feaba94d655e344398cbc178b6fd07888eaf8bd1a4d4f15eb77a191e209842937013b9dda76ecc79b4fea6825a7ba53f03e.js" data-id="webmention-container"></script>
+<script src="https://krshrimali.github.io/js/webmention.min.513a53d009530b21cba09721b6f4dc912e9c20ad2c0adbb5c4e486c4f77774a6e9eca8c2e1e4e8bc9e9e86693aa5ca91e7bf232b50f7f8bee4e64efc874040a7.js" data-id="webmention-container"></script>
 
 
 

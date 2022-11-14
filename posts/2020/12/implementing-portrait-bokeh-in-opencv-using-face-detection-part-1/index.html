@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="author" content="map[name:Kushashwa Ravi Shrimali]">
 <meta name="description" content="OpenCV: Using face detection for Portrait Bokeh (Background Blur) (Part - 1) This blog discusses using Face Detection in OpenCV for Portrait Bokeh. We&amp;rsquo;ll be implementing Portrait Bokeh (blurring everything but faces) using 3 different methods in this series:
-Using Face Detection (cropping a rectangle) Using Face Detection (cropping a circle) Using Facial Landmark Detection and Convex Hull Don&amp;rsquo;t lose hopes if you are confused. We will be going through each method one by one, and hopefully the road will be crearer from here." />
+ Using Face Detection (cropping a rectangle) Using Face Detection (cropping a circle) Using Facial Landmark Detection and Convex Hull  Don&amp;rsquo;t lose hopes if you are confused. We will be going through each method one by one, and hopefully the road will be crearer from here." />
 <meta name="keywords" content=", computer vision, python, portrait bokeh, image processing" />
 <meta name="robots" content="noodp" />
 <meta name="theme-color" content="#252627" />
@@ -48,7 +48,7 @@ Using Face Detection (cropping a rectangle) Using Face Detection (cropping a cir
 
 <meta itemprop="name" content="Implementing Portrait Bokeh in OpenCV using Face Detection (Part-1)">
 <meta itemprop="description" content="OpenCV: Using face detection for Portrait Bokeh (Background Blur) (Part - 1) This blog discusses using Face Detection in OpenCV for Portrait Bokeh. We&rsquo;ll be implementing Portrait Bokeh (blurring everything but faces) using 3 different methods in this series:
-Using Face Detection (cropping a rectangle) Using Face Detection (cropping a circle) Using Facial Landmark Detection and Convex Hull Don&rsquo;t lose hopes if you are confused. We will be going through each method one by one, and hopefully the road will be crearer from here."><meta itemprop="datePublished" content="2020-12-07T00:00:00+00:00" />
+ Using Face Detection (cropping a rectangle) Using Face Detection (cropping a circle) Using Facial Landmark Detection and Convex Hull  Don&rsquo;t lose hopes if you are confused. We will be going through each method one by one, and hopefully the road will be crearer from here."><meta itemprop="datePublished" content="2020-12-07T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2020-12-07T00:00:00+00:00" />
 <meta itemprop="wordCount" content="882"><meta itemprop="image" content="https://krshrimali.github.io"/>
 <meta itemprop="keywords" content="computer vision,python,portrait bokeh,image processing," /><meta name="twitter:card" content="summary_large_image"/>
@@ -56,7 +56,7 @@ Using Face Detection (cropping a rectangle) Using Face Detection (cropping a cir
 
 <meta name="twitter:title" content="Implementing Portrait Bokeh in OpenCV using Face Detection (Part-1)"/>
 <meta name="twitter:description" content="OpenCV: Using face detection for Portrait Bokeh (Background Blur) (Part - 1) This blog discusses using Face Detection in OpenCV for Portrait Bokeh. We&rsquo;ll be implementing Portrait Bokeh (blurring everything but faces) using 3 different methods in this series:
-Using Face Detection (cropping a rectangle) Using Face Detection (cropping a circle) Using Facial Landmark Detection and Convex Hull Don&rsquo;t lose hopes if you are confused. We will be going through each method one by one, and hopefully the road will be crearer from here."/>
+ Using Face Detection (cropping a rectangle) Using Face Detection (cropping a circle) Using Facial Landmark Detection and Convex Hull  Don&rsquo;t lose hopes if you are confused. We will be going through each method one by one, and hopefully the road will be crearer from here."/>
 
 
 
@@ -231,44 +231,44 @@ Using Face Detection (cropping a rectangle) Using Face Detection (cropping a cir
 
 <h2 id="step-1-detecting-faces-using-haarcascade">Step 1: Detecting Faces using Haarcascade</h2>
 <p>We&rsquo;ll be using haarcascade model files to detect face in the image. To ease the computation and satisfy the input to the model, we need to first convert the image to GrayScale (if it&rsquo;s not already) - that is the image will now have only one channel instead of 3 (Blue, Green, Red). Download the model file to your directory from <a href="https://github.com/opencv/opencv/blob/master/data/haarcascades/haarcascade_frontalface_default.xml">here</a>. Let&rsquo;s go ahead and initialize our Face Detector.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>model_path <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;haarcascade_frontalface_default.xml&#34;</span> <span style="color:#75715e"># Assuming this is in our current directory</span>
-</span></span><span style="display:flex;"><span>face_detector <span style="color:#f92672">=</span> cv2<span style="color:#f92672">.</span>CascadeClassifier(model_path)
-</span></span></code></pre></div><p>Once we have the model loaded, let&rsquo;s go ahead and detect faces from the given image. Remember, that we will also convert the image to grayscale.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Read input image (get image path first from command line, else take sample.png - default)</span>
-</span></span><span style="display:flex;"><span>img_path <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>argv[<span style="color:#ae81ff">1</span>] <span style="color:#66d9ef">if</span> len(sys<span style="color:#f92672">.</span>argv) <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">else</span> <span style="color:#e6db74">&#34;sample.png&#34;</span>
-</span></span><span style="display:flex;"><span>img <span style="color:#f92672">=</span> cv2<span style="color:#f92672">.</span>imread(img_path, <span style="color:#ae81ff">1</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Convert the image to grayscale</span>
-</span></span><span style="display:flex;"><span>gray <span style="color:#f92672">=</span> cv2<span style="color:#f92672">.</span>cvtColor(img, cv2<span style="color:#f92672">.</span>COLOR_BGR2GRAY)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Get faces</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Use default arguments, scaleFactor can be tweaked depending on the image</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># The output will be in format: [ [&lt;top left x coord&gt;, &lt;top left y&gt;, &lt;width&gt;, &lt;height&gt; : for face 1], [ ... : for face 2], ... ]</span>
-</span></span><span style="display:flex;"><span>faces <span style="color:#f92672">=</span> face_detector<span style="color:#f92672">.</span>detectMultiScale(gray, scaleFactor<span style="color:#f92672">=</span><span style="color:#ae81ff">1.1</span>, minNeighbors<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>)
-</span></span></code></pre></div><p>Once we have the faces, we can crop them and use in the Step-4 again. The output from face detection should look like this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">model_path <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;haarcascade_frontalface_default.xml&#34;</span> <span style="color:#75715e"># Assuming this is in our current directory</span>
+face_detector <span style="color:#f92672">=</span> cv2<span style="color:#f92672">.</span>CascadeClassifier(model_path)
+</code></pre></div><p>Once we have the model loaded, let&rsquo;s go ahead and detect faces from the given image. Remember, that we will also convert the image to grayscale.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Read input image (get image path first from command line, else take sample.png - default)</span>
+img_path <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>argv[<span style="color:#ae81ff">1</span>] <span style="color:#66d9ef">if</span> len(sys<span style="color:#f92672">.</span>argv) <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">else</span> <span style="color:#e6db74">&#34;sample.png&#34;</span>
+img <span style="color:#f92672">=</span> cv2<span style="color:#f92672">.</span>imread(img_path, <span style="color:#ae81ff">1</span>)
+
+<span style="color:#75715e"># Convert the image to grayscale</span>
+gray <span style="color:#f92672">=</span> cv2<span style="color:#f92672">.</span>cvtColor(img, cv2<span style="color:#f92672">.</span>COLOR_BGR2GRAY)
+
+<span style="color:#75715e"># Get faces</span>
+<span style="color:#75715e"># Use default arguments, scaleFactor can be tweaked depending on the image</span>
+<span style="color:#75715e"># The output will be in format: [ [&lt;top left x coord&gt;, &lt;top left y&gt;, &lt;width&gt;, &lt;height&gt; : for face 1], [ ... : for face 2], ... ]</span>
+faces <span style="color:#f92672">=</span> face_detector<span style="color:#f92672">.</span>detectMultiScale(gray, scaleFactor<span style="color:#f92672">=</span><span style="color:#ae81ff">1.1</span>, minNeighbors<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>)
+</code></pre></div><p>Once we have the faces, we can crop them and use in the Step-4 again. The output from face detection should look like this:</p>
 <!-- raw HTML omitted -->
 <h2 id="step-2-crop-faces">Step 2: Crop faces</h2>
 <p>To crop them and store in another object:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>cropped_faces <span style="color:#f92672">=</span> []
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> face <span style="color:#f92672">in</span> faces:
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Get points: tlx (top left x), tly (top left y), w (width), h (height)</span>
-</span></span><span style="display:flex;"><span>    tlx, tly, w, h <span style="color:#f92672">=</span> face[<span style="color:#ae81ff">0</span>], face[<span style="color:#ae81ff">1</span>], face[<span style="color:#ae81ff">2</span>], face[<span style="color:#ae81ff">3</span>]
-</span></span><span style="display:flex;"><span>    cropped_faces<span style="color:#f92672">.</span>append(
-</span></span><span style="display:flex;"><span>        face[tly:tly<span style="color:#f92672">+</span>h, tlx:tlx<span style="color:#f92672">+</span>w]
-</span></span><span style="display:flex;"><span>    )
-</span></span></code></pre></div><p>The list <code>cropped_faces</code> will now contain only faces. We can use this list again in Step-4!</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">cropped_faces <span style="color:#f92672">=</span> []
+<span style="color:#66d9ef">for</span> face <span style="color:#f92672">in</span> faces:
+    <span style="color:#75715e"># Get points: tlx (top left x), tly (top left y), w (width), h (height)</span>
+    tlx, tly, w, h <span style="color:#f92672">=</span> face[<span style="color:#ae81ff">0</span>], face[<span style="color:#ae81ff">1</span>], face[<span style="color:#ae81ff">2</span>], face[<span style="color:#ae81ff">3</span>]
+    cropped_faces<span style="color:#f92672">.</span>append(
+        face[tly:tly<span style="color:#f92672">+</span>h, tlx:tlx<span style="color:#f92672">+</span>w]
+    )
+</code></pre></div><p>The list <code>cropped_faces</code> will now contain only faces. We can use this list again in Step-4!</p>
 <h2 id="step-3-and-step-4-blur-the-image-and-overlay-faces">Step 3 and Step 4: Blur the image and overlay faces</h2>
 <p>Let&rsquo;s blur the whole image, and then overlay the images on the top of it. To blur, we will be using Gaussian Blur which works just fine.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>blur <span style="color:#f92672">=</span> cv2<span style="color:#f92672">.</span>GaussianBlur(img, (<span style="color:#ae81ff">11</span>, <span style="color:#ae81ff">11</span>)) <span style="color:#75715e"># Here, (11, 11) is the kernel size</span>
-</span></span></code></pre></div><p>Once the whole image has been blurred, let&rsquo;s overlay the cropped faces from <code>Step 2</code>.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> face_index, cropped_face <span style="color:#f92672">in</span> enumerate(cropped_faces):
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Get face coordinates, to get ROI</span>
-</span></span><span style="display:flex;"><span>    face_coords <span style="color:#f92672">=</span> faces[face_index]
-</span></span><span style="display:flex;"><span>    tlx, tly, w, h <span style="color:#f92672">=</span> face_coords[<span style="color:#ae81ff">0</span>], face_coords[<span style="color:#ae81ff">1</span>], face_coords[<span style="color:#ae81ff">2</span>], face_coords[<span style="color:#ae81ff">3</span>]
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Overlay the ROI of face to the cropped face</span>
-</span></span><span style="display:flex;"><span>    blur[tly:tly<span style="color:#f92672">+</span>h, tlx:tlx<span style="color:#f92672">+</span>w] <span style="color:#f92672">=</span> cropped_face
-</span></span></code></pre></div><p>Following image explains the procedure in details with visualization.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">blur <span style="color:#f92672">=</span> cv2<span style="color:#f92672">.</span>GaussianBlur(img, (<span style="color:#ae81ff">11</span>, <span style="color:#ae81ff">11</span>)) <span style="color:#75715e"># Here, (11, 11) is the kernel size</span>
+</code></pre></div><p>Once the whole image has been blurred, let&rsquo;s overlay the cropped faces from <code>Step 2</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">for</span> face_index, cropped_face <span style="color:#f92672">in</span> enumerate(cropped_faces):
+    <span style="color:#75715e"># Get face coordinates, to get ROI</span>
+    face_coords <span style="color:#f92672">=</span> faces[face_index]
+    tlx, tly, w, h <span style="color:#f92672">=</span> face_coords[<span style="color:#ae81ff">0</span>], face_coords[<span style="color:#ae81ff">1</span>], face_coords[<span style="color:#ae81ff">2</span>], face_coords[<span style="color:#ae81ff">3</span>]
+
+    <span style="color:#75715e"># Overlay the ROI of face to the cropped face</span>
+    blur[tly:tly<span style="color:#f92672">+</span>h, tlx:tlx<span style="color:#f92672">+</span>w] <span style="color:#f92672">=</span> cropped_face
+</code></pre></div><p>Following image explains the procedure in details with visualization.</p>
 <!-- raw HTML omitted -->
 <p>And this is how the output (on the right) will look like (see below).</p>
 <!-- raw HTML omitted -->
@@ -342,8 +342,8 @@ Using Face Detection (cropping a rectangle) Using Face Detection (cropping a cir
 
                     
                         <span class="button next">
-                            <a href="https://krshrimali.github.io/posts/2020/09/releasing-docker-container-and-binder-for-using-xeus-cling-libtorch-and-opencv-in-c-/">
-                                <span class="button__text">Releasing Docker Container and Binder for using Xeus-Cling, Libtorch and OpenCV in C&#43;&#43;</span>
+                            <a href="https://krshrimali.github.io/posts/2020/11/daily-update-14th-november-2022-day-1/">
+                                <span class="button__text">Daily Update: 14th November 2022 - Day 1</span>
                                 <span class="button__icon">→</span>
                             </a>
                         </span>
@@ -452,7 +452,7 @@ Using Face Detection (cropping a rectangle) Using Face Detection (cropping a cir
         })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
         ga('create', 'UA-146662543-1', 'auto');ga('send', 'pageview');
     </script>
-<script src="https://krshrimali.github.io/js/webmention.min.f60cda7d6de39593831ee0d0ef205feaba94d655e344398cbc178b6fd07888eaf8bd1a4d4f15eb77a191e209842937013b9dda76ecc79b4fea6825a7ba53f03e.js" data-id="webmention-container"></script>
+<script src="https://krshrimali.github.io/js/webmention.min.513a53d009530b21cba09721b6f4dc912e9c20ad2c0adbb5c4e486c4f77774a6e9eca8c2e1e4e8bc9e9e86693aa5ca91e7bf232b50f7f8bee4e64efc874040a7.js" data-id="webmention-container"></script>
 
 
 

@@ -225,92 +225,92 @@ Today, we are going to see a practical example of applying a CNN to a Custom Dat
 <li><code>number</code> represents the count of the sample.</li>
 </ul>
 <p>For example: <code>cat.100.jpg</code> and <code>dog.1.jpg</code>. In order to load the data, we will move the cat images to <code>train/cat</code> folder and dog images to <code>train/dog</code> folder. You can accomplish this using <code>shutil</code> module:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># This code moves cat and dog images to train/cat and train/dog folders respectively</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> shutil<span style="color:#f92672">,</span> os
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>files <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>listdir(<span style="color:#e6db74">&#39;train/&#39;</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>count_cat <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span> <span style="color:#75715e"># Number representing count of the cat image</span>
-</span></span><span style="display:flex;"><span>count_dog <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span> <span style="color:#75715e"># Number representing count of the dog image</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> file <span style="color:#f92672">in</span> files:
-</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span>(file<span style="color:#f92672">.</span>startswith(<span style="color:#e6db74">&#39;cat&#39;</span>) <span style="color:#f92672">and</span> file<span style="color:#f92672">.</span>endswith(<span style="color:#e6db74">&#39;jpg&#39;</span>)):
-</span></span><span style="display:flex;"><span>		count_cat <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
-</span></span><span style="display:flex;"><span>		shutil<span style="color:#f92672">.</span>copy(<span style="color:#e6db74">&#39;train/&#39;</span> <span style="color:#f92672">+</span> file, <span style="color:#e6db74">&#39;train/cat/&#39;</span> <span style="color:#f92672">+</span> str(count_cat) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;.jpg&#34;</span>)
-</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">elif</span>(file<span style="color:#f92672">.</span>startswith(<span style="color:#e6db74">&#39;dog&#39;</span>) <span style="color:#f92672">and</span> file<span style="color:#f92672">.</span>endswith(<span style="color:#e6db74">&#39;jpg&#39;</span>)):
-</span></span><span style="display:flex;"><span>		count_dog <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
-</span></span><span style="display:flex;"><span>		shutil<span style="color:#f92672">.</span>copy(<span style="color:#e6db74">&#39;test/&#39;</span> <span style="color:#f92672">+</span> file, <span style="color:#e6db74">&#39;train/dog/&#39;</span> <span style="color:#f92672">+</span> str(count_dog) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;.jpg&#39;</span>)
-</span></span></code></pre></div><p>Once done, let&rsquo;s go ahead and load this data. Since we have discussed this <a href="https://krshrimali.github.io/posts/2019/07/custom-data-loading-using-pytorch-c-api/">before</a>, I&rsquo;ll just paste the snippet here.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>torch<span style="color:#f92672">::</span>Tensor read_data(std<span style="color:#f92672">::</span>string loc) {
-</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// Read Image from the location of image
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	cv<span style="color:#f92672">::</span>Mat img <span style="color:#f92672">=</span> cv<span style="color:#f92672">::</span>imread(loc, <span style="color:#ae81ff">0</span>);
-</span></span><span style="display:flex;"><span>	cv<span style="color:#f92672">::</span>resize(img, img, cv<span style="color:#f92672">::</span>Size(<span style="color:#ae81ff">200</span>, <span style="color:#ae81ff">200</span>), cv<span style="color:#f92672">::</span>INTER_CUBIC);
-</span></span><span style="display:flex;"><span>	std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Sizes: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> img.size() <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
-</span></span><span style="display:flex;"><span>	torch<span style="color:#f92672">::</span>Tensor img_tensor <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>from_blob(img.data, {img.rows, img.cols, <span style="color:#ae81ff">1</span>}, torch<span style="color:#f92672">::</span>kByte);
-</span></span><span style="display:flex;"><span>	img_tensor <span style="color:#f92672">=</span> img_tensor.permute({<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>}); <span style="color:#75715e">// Channels x Height x Width
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> img_tensor.clone();
-</span></span><span style="display:flex;"><span>};
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>torch<span style="color:#f92672">::</span>Tensor read_label(<span style="color:#66d9ef">int</span> label) {
-</span></span><span style="display:flex;"><span>	torch<span style="color:#f92672">::</span>Tensor label_tensor <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>full({<span style="color:#ae81ff">1</span>}, label);
-</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> label_tensor.clone();
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>torch<span style="color:#f92672">::</span>Tensor<span style="color:#f92672">&gt;</span> process_images(vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> list_images) {
-</span></span><span style="display:flex;"><span>	cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Reading images...&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
-</span></span><span style="display:flex;"><span>	vector<span style="color:#f92672">&lt;</span>torch<span style="color:#f92672">::</span>Tensor<span style="color:#f92672">&gt;</span> states;
-</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> (std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;::</span>iterator it <span style="color:#f92672">=</span> list_images.begin(); it <span style="color:#f92672">!=</span> list_images.end(); <span style="color:#f92672">++</span>it) {
-</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Location being read: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#f92672">*</span>it <span style="color:#f92672">&lt;&lt;</span> endl;
-</span></span><span style="display:flex;"><span>		torch<span style="color:#f92672">::</span>Tensor img <span style="color:#f92672">=</span> read_data(<span style="color:#f92672">*</span>it);
-</span></span><span style="display:flex;"><span>		states.push_back(img);
-</span></span><span style="display:flex;"><span>	}
-</span></span><span style="display:flex;"><span>	cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Reading and Processing images done!&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
-</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> states;
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>torch<span style="color:#f92672">::</span>Tensor<span style="color:#f92672">&gt;</span> process_labels(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> list_labels) {
-</span></span><span style="display:flex;"><span>	cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Reading labels...&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
-</span></span><span style="display:flex;"><span>	vector<span style="color:#f92672">&lt;</span>torch<span style="color:#f92672">::</span>Tensor<span style="color:#f92672">&gt;</span> labels;
-</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> (std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;::</span>iterator it <span style="color:#f92672">=</span> list_labels.begin(); it <span style="color:#f92672">!=</span> list_labels.end(); <span style="color:#f92672">++</span>it) {
-</span></span><span style="display:flex;"><span>		torch<span style="color:#f92672">::</span>Tensor label <span style="color:#f92672">=</span> read_label(<span style="color:#f92672">*</span>it);
-</span></span><span style="display:flex;"><span>		labels.push_back(label);
-</span></span><span style="display:flex;"><span>	}
-</span></span><span style="display:flex;"><span>	cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Labels reading done!&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
-</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> labels;
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">/* This function returns a pair of vector of images paths (strings) and labels (integers) */</span>
-</span></span><span style="display:flex;"><span>std<span style="color:#f92672">::</span>pair<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span>,vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> load_data_from_folder(vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> folders_name) {
-</span></span><span style="display:flex;"><span>	vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> list_images;
-</span></span><span style="display:flex;"><span>	vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> list_labels;
-</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> label <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> <span style="color:#66d9ef">const</span><span style="color:#f92672">&amp;</span> value: folders_name) {
-</span></span><span style="display:flex;"><span>		string base_name <span style="color:#f92672">=</span> value <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;/&#34;</span>;
-</span></span><span style="display:flex;"><span>		cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Reading from: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> base_name <span style="color:#f92672">&lt;&lt;</span> endl;
-</span></span><span style="display:flex;"><span>		DIR<span style="color:#f92672">*</span> dir;
-</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">dirent</span> <span style="color:#f92672">*</span>ent;
-</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span>((dir <span style="color:#f92672">=</span> opendir(base_name.c_str())) <span style="color:#f92672">!=</span> NULL) {
-</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">while</span>((ent <span style="color:#f92672">=</span> readdir(dir)) <span style="color:#f92672">!=</span> NULL) {
-</span></span><span style="display:flex;"><span>				string filename <span style="color:#f92672">=</span> ent<span style="color:#f92672">-&gt;</span>d_name;
-</span></span><span style="display:flex;"><span>				<span style="color:#66d9ef">if</span>(filename.length() <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">4</span> <span style="color:#f92672">&amp;&amp;</span> filename.substr(filename.length() <span style="color:#f92672">-</span> <span style="color:#ae81ff">3</span>) <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;jpg&#34;</span>) {
-</span></span><span style="display:flex;"><span>					cout <span style="color:#f92672">&lt;&lt;</span> base_name <span style="color:#f92672">+</span> ent<span style="color:#f92672">-&gt;</span>d_name <span style="color:#f92672">&lt;&lt;</span> endl;
-</span></span><span style="display:flex;"><span>					<span style="color:#75715e">// cv::Mat temp = cv::imread(base_name + &#34;/&#34; + ent-&gt;d_name, 1);
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>					list_images.push_back(base_name <span style="color:#f92672">+</span> ent<span style="color:#f92672">-&gt;</span>d_name);
-</span></span><span style="display:flex;"><span>					list_labels.push_back(label);
-</span></span><span style="display:flex;"><span>				}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>			}
-</span></span><span style="display:flex;"><span>			closedir(dir);
-</span></span><span style="display:flex;"><span>		} <span style="color:#66d9ef">else</span> {
-</span></span><span style="display:flex;"><span>			cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Could not open directory&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
-</span></span><span style="display:flex;"><span>			<span style="color:#75715e">// return EXIT_FAILURE;
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>		}
-</span></span><span style="display:flex;"><span>		label <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>;
-</span></span><span style="display:flex;"><span>	}
-</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> std<span style="color:#f92672">::</span>make_pair(list_images, list_labels);
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>The above snippet has the utility functions we need. Here is a quick summary of what they do:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># This code moves cat and dog images to train/cat and train/dog folders respectively</span>
+<span style="color:#f92672">import</span> shutil<span style="color:#f92672">,</span> os
+
+files <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>listdir(<span style="color:#e6db74">&#39;train/&#39;</span>)
+
+count_cat <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span> <span style="color:#75715e"># Number representing count of the cat image</span>
+count_dog <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span> <span style="color:#75715e"># Number representing count of the dog image</span>
+
+<span style="color:#66d9ef">for</span> file <span style="color:#f92672">in</span> files:
+	<span style="color:#66d9ef">if</span>(file<span style="color:#f92672">.</span>startswith(<span style="color:#e6db74">&#39;cat&#39;</span>) <span style="color:#f92672">and</span> file<span style="color:#f92672">.</span>endswith(<span style="color:#e6db74">&#39;jpg&#39;</span>)):
+		count_cat <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+		shutil<span style="color:#f92672">.</span>copy(<span style="color:#e6db74">&#39;train/&#39;</span> <span style="color:#f92672">+</span> file, <span style="color:#e6db74">&#39;train/cat/&#39;</span> <span style="color:#f92672">+</span> str(count_cat) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;.jpg&#34;</span>)
+	<span style="color:#66d9ef">elif</span>(file<span style="color:#f92672">.</span>startswith(<span style="color:#e6db74">&#39;dog&#39;</span>) <span style="color:#f92672">and</span> file<span style="color:#f92672">.</span>endswith(<span style="color:#e6db74">&#39;jpg&#39;</span>)):
+		count_dog <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+		shutil<span style="color:#f92672">.</span>copy(<span style="color:#e6db74">&#39;test/&#39;</span> <span style="color:#f92672">+</span> file, <span style="color:#e6db74">&#39;train/dog/&#39;</span> <span style="color:#f92672">+</span> str(count_dog) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;.jpg&#39;</span>)
+</code></pre></div><p>Once done, let&rsquo;s go ahead and load this data. Since we have discussed this <a href="https://krshrimali.github.io/posts/2019/07/custom-data-loading-using-pytorch-c-api/">before</a>, I&rsquo;ll just paste the snippet here.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">torch<span style="color:#f92672">::</span>Tensor read_data(std<span style="color:#f92672">::</span>string loc) {
+	<span style="color:#75715e">// Read Image from the location of image
+</span><span style="color:#75715e"></span>	cv<span style="color:#f92672">::</span>Mat img <span style="color:#f92672">=</span> cv<span style="color:#f92672">::</span>imread(loc, <span style="color:#ae81ff">0</span>);
+	cv<span style="color:#f92672">::</span>resize(img, img, cv<span style="color:#f92672">::</span>Size(<span style="color:#ae81ff">200</span>, <span style="color:#ae81ff">200</span>), cv<span style="color:#f92672">::</span>INTER_CUBIC);
+	std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Sizes: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> img.size() <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+	torch<span style="color:#f92672">::</span>Tensor img_tensor <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>from_blob(img.data, {img.rows, img.cols, <span style="color:#ae81ff">1</span>}, torch<span style="color:#f92672">::</span>kByte);
+	img_tensor <span style="color:#f92672">=</span> img_tensor.permute({<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>}); <span style="color:#75715e">// Channels x Height x Width
+</span><span style="color:#75715e"></span>
+	<span style="color:#66d9ef">return</span> img_tensor.clone();
+};
+
+torch<span style="color:#f92672">::</span>Tensor read_label(<span style="color:#66d9ef">int</span> label) {
+	torch<span style="color:#f92672">::</span>Tensor label_tensor <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>full({<span style="color:#ae81ff">1</span>}, label);
+	<span style="color:#66d9ef">return</span> label_tensor.clone();
+}
+
+vector<span style="color:#f92672">&lt;</span>torch<span style="color:#f92672">::</span>Tensor<span style="color:#f92672">&gt;</span> process_images(vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> list_images) {
+	cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Reading images...&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+	vector<span style="color:#f92672">&lt;</span>torch<span style="color:#f92672">::</span>Tensor<span style="color:#f92672">&gt;</span> states;
+	<span style="color:#66d9ef">for</span> (std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;::</span>iterator it <span style="color:#f92672">=</span> list_images.begin(); it <span style="color:#f92672">!=</span> list_images.end(); <span style="color:#f92672">++</span>it) {
+        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Location being read: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#f92672">*</span>it <span style="color:#f92672">&lt;&lt;</span> endl;
+		torch<span style="color:#f92672">::</span>Tensor img <span style="color:#f92672">=</span> read_data(<span style="color:#f92672">*</span>it);
+		states.push_back(img);
+	}
+	cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Reading and Processing images done!&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+	<span style="color:#66d9ef">return</span> states;
+}
+
+vector<span style="color:#f92672">&lt;</span>torch<span style="color:#f92672">::</span>Tensor<span style="color:#f92672">&gt;</span> process_labels(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> list_labels) {
+	cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Reading labels...&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+	vector<span style="color:#f92672">&lt;</span>torch<span style="color:#f92672">::</span>Tensor<span style="color:#f92672">&gt;</span> labels;
+	<span style="color:#66d9ef">for</span> (std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;::</span>iterator it <span style="color:#f92672">=</span> list_labels.begin(); it <span style="color:#f92672">!=</span> list_labels.end(); <span style="color:#f92672">++</span>it) {
+		torch<span style="color:#f92672">::</span>Tensor label <span style="color:#f92672">=</span> read_label(<span style="color:#f92672">*</span>it);
+		labels.push_back(label);
+	}
+	cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Labels reading done!&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+	<span style="color:#66d9ef">return</span> labels;
+}
+
+<span style="color:#75715e">/* This function returns a pair of vector of images paths (strings) and labels (integers) */</span>
+std<span style="color:#f92672">::</span>pair<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span>,vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> load_data_from_folder(vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> folders_name) {
+	vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> list_images;
+	vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> list_labels;
+	<span style="color:#66d9ef">int</span> label <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+	<span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> <span style="color:#66d9ef">const</span><span style="color:#f92672">&amp;</span> value: folders_name) {
+		string base_name <span style="color:#f92672">=</span> value <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;/&#34;</span>;
+		cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Reading from: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> base_name <span style="color:#f92672">&lt;&lt;</span> endl;
+		DIR<span style="color:#f92672">*</span> dir;
+		<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">dirent</span> <span style="color:#f92672">*</span>ent;
+		<span style="color:#66d9ef">if</span>((dir <span style="color:#f92672">=</span> opendir(base_name.c_str())) <span style="color:#f92672">!=</span> NULL) {
+			<span style="color:#66d9ef">while</span>((ent <span style="color:#f92672">=</span> readdir(dir)) <span style="color:#f92672">!=</span> NULL) {
+				string filename <span style="color:#f92672">=</span> ent<span style="color:#f92672">-&gt;</span>d_name;
+				<span style="color:#66d9ef">if</span>(filename.length() <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">4</span> <span style="color:#f92672">&amp;&amp;</span> filename.substr(filename.length() <span style="color:#f92672">-</span> <span style="color:#ae81ff">3</span>) <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;jpg&#34;</span>) {
+					cout <span style="color:#f92672">&lt;&lt;</span> base_name <span style="color:#f92672">+</span> ent<span style="color:#f92672">-&gt;</span>d_name <span style="color:#f92672">&lt;&lt;</span> endl;
+					<span style="color:#75715e">// cv::Mat temp = cv::imread(base_name + &#34;/&#34; + ent-&gt;d_name, 1);
+</span><span style="color:#75715e"></span>					list_images.push_back(base_name <span style="color:#f92672">+</span> ent<span style="color:#f92672">-&gt;</span>d_name);
+					list_labels.push_back(label);
+				}
+
+			}
+			closedir(dir);
+		} <span style="color:#66d9ef">else</span> {
+			cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Could not open directory&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+			<span style="color:#75715e">// return EXIT_FAILURE;
+</span><span style="color:#75715e"></span>		}
+		label <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>;
+	}
+	<span style="color:#66d9ef">return</span> std<span style="color:#f92672">::</span>make_pair(list_images, list_labels);
+}
+</code></pre></div><p>The above snippet has the utility functions we need. Here is a quick summary of what they do:</p>
 <ol>
 <li>
 <p><strong>load_data_from_folder</strong>: This function returns a tuple of list of image paths (string) and list of labels (int). It takes a vector of folders names (string type) as parameter.</p>
@@ -323,129 +323,129 @@ Today, we are going to see a practical example of applying a CNN to a Custom Dat
 </li>
 </ol>
 <p>Let&rsquo;s now go ahead and see how we load the data. For this, we first need to define the <code>Dataset</code> class. This class should initialize two variables: one for images and one for labels. As discussed <a href="https://krshrimali.github.io/posts/2019/07/custom-data-loading-using-pytorch-c-api/">here</a>, we&rsquo;ll also define <code>get()</code> and <code>size()</code> functions.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CustomDataset</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> torch<span style="color:#f92672">::</span>data<span style="color:#f92672">::</span>Dataset<span style="color:#f92672">&lt;</span>CustomDataset<span style="color:#f92672">&gt;</span> {
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>	<span style="color:#75715e">/* data */</span>
-</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// Should be 2 tensors
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	vector<span style="color:#f92672">&lt;</span>torch<span style="color:#f92672">::</span>Tensor<span style="color:#f92672">&gt;</span> states, labels;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>	CustomDataset(vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> list_images, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> list_labels) {
-</span></span><span style="display:flex;"><span>		states <span style="color:#f92672">=</span> process_images(list_images);
-</span></span><span style="display:flex;"><span>		labels <span style="color:#f92672">=</span> process_labels(list_labels);
-</span></span><span style="display:flex;"><span>	};
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>	torch<span style="color:#f92672">::</span>data<span style="color:#f92672">::</span>Example<span style="color:#f92672">&lt;&gt;</span> get(size_t index) <span style="color:#66d9ef">override</span> {
-</span></span><span style="display:flex;"><span>		<span style="color:#75715e">/* This should return {torch::Tensor, torch::Tensor} */</span>
-</span></span><span style="display:flex;"><span>		torch<span style="color:#f92672">::</span>Tensor sample_img <span style="color:#f92672">=</span> states.at(index);
-</span></span><span style="display:flex;"><span>		torch<span style="color:#f92672">::</span>Tensor sample_label <span style="color:#f92672">=</span> labels.at(index);
-</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span> {sample_img.clone(), sample_label.clone()};
-</span></span><span style="display:flex;"><span>	};
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  torch<span style="color:#f92672">::</span>optional<span style="color:#f92672">&lt;</span>size_t<span style="color:#f92672">&gt;</span> size() <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">override</span> {
-</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span> states.size();
-</span></span><span style="display:flex;"><span>  };
-</span></span><span style="display:flex;"><span>};
-</span></span></code></pre></div><p>Once done, we can go ahead and initialize the Dataset in our <code>main()</code> function.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">int</span> argc, <span style="color:#66d9ef">char</span> <span style="color:#66d9ef">const</span> <span style="color:#f92672">*</span>argv[]) {
-</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// Load the model.
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#75715e">// Read Data
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> folders_name;
-</span></span><span style="display:flex;"><span>  folders_name.push_back(<span style="color:#e6db74">&#34;/home/krshrimali/Documents/data-dogs-cats/train/cat&#34;</span>);
-</span></span><span style="display:flex;"><span>  folders_name.push_back(<span style="color:#e6db74">&#34;/home/krshrimali/Documents/data-dogs-cats/train/dog&#34;</span>);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  std<span style="color:#f92672">::</span>pair<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span>, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> pair_images_labels <span style="color:#f92672">=</span> load_data_from_folder(folders_name);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> list_images <span style="color:#f92672">=</span> pair_images_labels.first;
-</span></span><span style="display:flex;"><span>  vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> list_labels <span style="color:#f92672">=</span> pair_images_labels.second;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">auto</span> custom_dataset <span style="color:#f92672">=</span> CustomDataset(list_images, list_labels).map(torch<span style="color:#f92672">::</span>data<span style="color:#f92672">::</span>transforms<span style="color:#f92672">::</span>Stack<span style="color:#f92672">&lt;&gt;</span>());
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><h2 id="network-overview">Network Overview</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CustomDataset</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> torch<span style="color:#f92672">::</span>data<span style="color:#f92672">::</span>Dataset<span style="color:#f92672">&lt;</span>CustomDataset<span style="color:#f92672">&gt;</span> {
+<span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+	<span style="color:#75715e">/* data */</span>
+	<span style="color:#75715e">// Should be 2 tensors
+</span><span style="color:#75715e"></span>	vector<span style="color:#f92672">&lt;</span>torch<span style="color:#f92672">::</span>Tensor<span style="color:#f92672">&gt;</span> states, labels;
+<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+	CustomDataset(vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> list_images, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> list_labels) {
+		states <span style="color:#f92672">=</span> process_images(list_images);
+		labels <span style="color:#f92672">=</span> process_labels(list_labels);
+	};
+
+	torch<span style="color:#f92672">::</span>data<span style="color:#f92672">::</span>Example<span style="color:#f92672">&lt;&gt;</span> get(size_t index) <span style="color:#66d9ef">override</span> {
+		<span style="color:#75715e">/* This should return {torch::Tensor, torch::Tensor} */</span>
+		torch<span style="color:#f92672">::</span>Tensor sample_img <span style="color:#f92672">=</span> states.at(index);
+		torch<span style="color:#f92672">::</span>Tensor sample_label <span style="color:#f92672">=</span> labels.at(index);
+		<span style="color:#66d9ef">return</span> {sample_img.clone(), sample_label.clone()};
+	};
+
+  torch<span style="color:#f92672">::</span>optional<span style="color:#f92672">&lt;</span>size_t<span style="color:#f92672">&gt;</span> size() <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">override</span> {
+		<span style="color:#66d9ef">return</span> states.size();
+  };
+};
+</code></pre></div><p>Once done, we can go ahead and initialize the Dataset in our <code>main()</code> function.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">int</span> argc, <span style="color:#66d9ef">char</span> <span style="color:#66d9ef">const</span> <span style="color:#f92672">*</span>argv[]) {
+  <span style="color:#75715e">// Load the model.
+</span><span style="color:#75715e"></span>  <span style="color:#75715e">// Read Data
+</span><span style="color:#75715e"></span>  vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> folders_name;
+  folders_name.push_back(<span style="color:#e6db74">&#34;/home/krshrimali/Documents/data-dogs-cats/train/cat&#34;</span>);
+  folders_name.push_back(<span style="color:#e6db74">&#34;/home/krshrimali/Documents/data-dogs-cats/train/dog&#34;</span>);
+
+  std<span style="color:#f92672">::</span>pair<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span>, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> pair_images_labels <span style="color:#f92672">=</span> load_data_from_folder(folders_name);
+
+  vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> list_images <span style="color:#f92672">=</span> pair_images_labels.first;
+  vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> list_labels <span style="color:#f92672">=</span> pair_images_labels.second;
+
+  <span style="color:#66d9ef">auto</span> custom_dataset <span style="color:#f92672">=</span> CustomDataset(list_images, list_labels).map(torch<span style="color:#f92672">::</span>data<span style="color:#f92672">::</span>transforms<span style="color:#f92672">::</span>Stack<span style="color:#f92672">&lt;&gt;</span>());
+}
+</code></pre></div><h2 id="network-overview">Network Overview</h2>
 <p>To make things easy to read (a programmer&rsquo;s mantra), we define our network in a header file. We will use a CNN network initially for this binary classification task. Since I&rsquo;m not using a GPU, the training is slow and that&rsquo;s why I experimented it only for 10 epochs. The whole objective is to discuss and show how to use PyTorch C++ API for this. You can always run it for more epochs or change the network parameters.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">NetImpl</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Module {
-</span></span><span style="display:flex;"><span>    NetImpl() {
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Initialize the network
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">// On how to pass strides and padding: https://github.com/pytorch/pytorch/issues/12649#issuecomment-430156160
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        conv1_1 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;conv1_1&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">3</span>).padding(<span style="color:#ae81ff">1</span>)));
-</span></span><span style="display:flex;"><span>        conv1_2 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;conv1_2&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">3</span>).padding(<span style="color:#ae81ff">1</span>)));
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Insert pool layer
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        conv2_1 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;conv2_1&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(<span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">30</span>, <span style="color:#ae81ff">3</span>).padding(<span style="color:#ae81ff">1</span>)));
-</span></span><span style="display:flex;"><span>        conv2_2 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;conv2_2&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(<span style="color:#ae81ff">30</span>, <span style="color:#ae81ff">40</span>, <span style="color:#ae81ff">3</span>).padding(<span style="color:#ae81ff">1</span>)));
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Insert pool layer
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        conv3_1 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;conv3_1&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(<span style="color:#ae81ff">40</span>, <span style="color:#ae81ff">50</span>, <span style="color:#ae81ff">3</span>).padding(<span style="color:#ae81ff">1</span>)));
-</span></span><span style="display:flex;"><span>        conv3_2 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;conv3_2&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(<span style="color:#ae81ff">50</span>, <span style="color:#ae81ff">60</span>, <span style="color:#ae81ff">3</span>).padding(<span style="color:#ae81ff">1</span>)));
-</span></span><span style="display:flex;"><span>        conv3_3 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;conv3_3&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(<span style="color:#ae81ff">60</span>, <span style="color:#ae81ff">70</span>, <span style="color:#ae81ff">3</span>).padding(<span style="color:#ae81ff">1</span>)));
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Insert pool layer
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        conv4_1 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;conv4_1&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(<span style="color:#ae81ff">70</span>, <span style="color:#ae81ff">80</span>, <span style="color:#ae81ff">3</span>).padding(<span style="color:#ae81ff">1</span>)));
-</span></span><span style="display:flex;"><span>        conv4_2 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;conv4_2&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(<span style="color:#ae81ff">80</span>, <span style="color:#ae81ff">90</span>, <span style="color:#ae81ff">3</span>).padding(<span style="color:#ae81ff">1</span>)));
-</span></span><span style="display:flex;"><span>        conv4_3 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;conv4_3&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(<span style="color:#ae81ff">90</span>, <span style="color:#ae81ff">100</span>, <span style="color:#ae81ff">3</span>).padding(<span style="color:#ae81ff">1</span>)));
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Insert pool layer
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        conv5_1 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;conv5_1&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(<span style="color:#ae81ff">100</span>, <span style="color:#ae81ff">110</span>, <span style="color:#ae81ff">3</span>).padding(<span style="color:#ae81ff">1</span>)));
-</span></span><span style="display:flex;"><span>        conv5_2 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;conv5_2&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(<span style="color:#ae81ff">110</span>, <span style="color:#ae81ff">120</span>, <span style="color:#ae81ff">3</span>).padding(<span style="color:#ae81ff">1</span>)));
-</span></span><span style="display:flex;"><span>        conv5_3 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;conv5_3&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(<span style="color:#ae81ff">120</span>, <span style="color:#ae81ff">130</span>, <span style="color:#ae81ff">3</span>).padding(<span style="color:#ae81ff">1</span>)));
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Insert pool layer
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        fc1 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;fc1&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Linear(<span style="color:#ae81ff">130</span><span style="color:#f92672">*</span><span style="color:#ae81ff">6</span><span style="color:#f92672">*</span><span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">2000</span>));
-</span></span><span style="display:flex;"><span>        fc2 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;fc2&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Linear(<span style="color:#ae81ff">2000</span>, <span style="color:#ae81ff">1000</span>));
-</span></span><span style="display:flex;"><span>        fc3 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;fc3&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Linear(<span style="color:#ae81ff">1000</span>, <span style="color:#ae81ff">100</span>));
-</span></span><span style="display:flex;"><span>        fc4 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;fc4&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Linear(<span style="color:#ae81ff">100</span>, <span style="color:#ae81ff">2</span>));
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Implement Algorithm
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    torch<span style="color:#f92672">::</span>Tensor forward(torch<span style="color:#f92672">::</span>Tensor x) {
-</span></span><span style="display:flex;"><span>        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(conv1_1<span style="color:#f92672">-&gt;</span>forward(x));
-</span></span><span style="display:flex;"><span>        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(conv1_2<span style="color:#f92672">-&gt;</span>forward(x));
-</span></span><span style="display:flex;"><span>        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>max_pool2d(x, <span style="color:#ae81ff">2</span>);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(conv2_1<span style="color:#f92672">-&gt;</span>forward(x));
-</span></span><span style="display:flex;"><span>        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(conv2_2<span style="color:#f92672">-&gt;</span>forward(x));
-</span></span><span style="display:flex;"><span>        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>max_pool2d(x, <span style="color:#ae81ff">2</span>);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(conv3_1<span style="color:#f92672">-&gt;</span>forward(x));
-</span></span><span style="display:flex;"><span>        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(conv3_2<span style="color:#f92672">-&gt;</span>forward(x));
-</span></span><span style="display:flex;"><span>        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(conv3_3<span style="color:#f92672">-&gt;</span>forward(x));
-</span></span><span style="display:flex;"><span>        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>max_pool2d(x, <span style="color:#ae81ff">2</span>);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(conv4_1<span style="color:#f92672">-&gt;</span>forward(x));
-</span></span><span style="display:flex;"><span>        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(conv4_2<span style="color:#f92672">-&gt;</span>forward(x));
-</span></span><span style="display:flex;"><span>        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(conv4_3<span style="color:#f92672">-&gt;</span>forward(x));
-</span></span><span style="display:flex;"><span>        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>max_pool2d(x, <span style="color:#ae81ff">2</span>);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(conv5_1<span style="color:#f92672">-&gt;</span>forward(x));
-</span></span><span style="display:flex;"><span>        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(conv5_2<span style="color:#f92672">-&gt;</span>forward(x));
-</span></span><span style="display:flex;"><span>        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(conv5_3<span style="color:#f92672">-&gt;</span>forward(x));
-</span></span><span style="display:flex;"><span>        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>max_pool2d(x, <span style="color:#ae81ff">2</span>);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        x <span style="color:#f92672">=</span> x.view({<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">130</span><span style="color:#f92672">*</span><span style="color:#ae81ff">6</span><span style="color:#f92672">*</span><span style="color:#ae81ff">6</span>});
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(fc1<span style="color:#f92672">-&gt;</span>forward(x));
-</span></span><span style="display:flex;"><span>        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(fc2<span style="color:#f92672">-&gt;</span>forward(x));
-</span></span><span style="display:flex;"><span>        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(fc3<span style="color:#f92672">-&gt;</span>forward(x));
-</span></span><span style="display:flex;"><span>        x <span style="color:#f92672">=</span> fc4<span style="color:#f92672">-&gt;</span>forward(x);
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> torch<span style="color:#f92672">::</span>log_softmax(x, <span style="color:#ae81ff">1</span>);
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Declare layers
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d conv1_1{<span style="color:#66d9ef">nullptr</span>};
-</span></span><span style="display:flex;"><span>    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d conv1_2{<span style="color:#66d9ef">nullptr</span>};
-</span></span><span style="display:flex;"><span>    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d conv2_1{<span style="color:#66d9ef">nullptr</span>};
-</span></span><span style="display:flex;"><span>    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d conv2_2{<span style="color:#66d9ef">nullptr</span>};
-</span></span><span style="display:flex;"><span>    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d conv3_1{<span style="color:#66d9ef">nullptr</span>};
-</span></span><span style="display:flex;"><span>    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d conv3_2{<span style="color:#66d9ef">nullptr</span>};
-</span></span><span style="display:flex;"><span>    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d conv3_3{<span style="color:#66d9ef">nullptr</span>};
-</span></span><span style="display:flex;"><span>    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d conv4_1{<span style="color:#66d9ef">nullptr</span>};
-</span></span><span style="display:flex;"><span>    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d conv4_2{<span style="color:#66d9ef">nullptr</span>};
-</span></span><span style="display:flex;"><span>    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d conv4_3{<span style="color:#66d9ef">nullptr</span>};
-</span></span><span style="display:flex;"><span>    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d conv5_1{<span style="color:#66d9ef">nullptr</span>};
-</span></span><span style="display:flex;"><span>    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d conv5_2{<span style="color:#66d9ef">nullptr</span>};
-</span></span><span style="display:flex;"><span>    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d conv5_3{<span style="color:#66d9ef">nullptr</span>};
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Linear fc1{<span style="color:#66d9ef">nullptr</span>}, fc2{<span style="color:#66d9ef">nullptr</span>}, fc3{<span style="color:#66d9ef">nullptr</span>}, fc4{<span style="color:#66d9ef">nullptr</span>};
-</span></span><span style="display:flex;"><span>};
-</span></span></code></pre></div><p>We will initialize this network and pass each batch of our data once in an epoch.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">// Initialize the Network
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">auto</span> net <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>make_shared<span style="color:#f92672">&lt;</span>NetImpl<span style="color:#f92672">&gt;</span>();
-</span></span></code></pre></div><h2 id="training-the-network-on-dogs-vs-cats-dataset">Training the Network on Dogs vs Cats Dataset</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">NetImpl</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Module {
+    NetImpl() {
+        <span style="color:#75715e">// Initialize the network
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">// On how to pass strides and padding: https://github.com/pytorch/pytorch/issues/12649#issuecomment-430156160
+</span><span style="color:#75715e"></span>        conv1_1 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;conv1_1&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">3</span>).padding(<span style="color:#ae81ff">1</span>)));
+        conv1_2 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;conv1_2&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">3</span>).padding(<span style="color:#ae81ff">1</span>)));
+        <span style="color:#75715e">// Insert pool layer
+</span><span style="color:#75715e"></span>        conv2_1 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;conv2_1&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(<span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">30</span>, <span style="color:#ae81ff">3</span>).padding(<span style="color:#ae81ff">1</span>)));
+        conv2_2 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;conv2_2&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(<span style="color:#ae81ff">30</span>, <span style="color:#ae81ff">40</span>, <span style="color:#ae81ff">3</span>).padding(<span style="color:#ae81ff">1</span>)));
+        <span style="color:#75715e">// Insert pool layer
+</span><span style="color:#75715e"></span>        conv3_1 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;conv3_1&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(<span style="color:#ae81ff">40</span>, <span style="color:#ae81ff">50</span>, <span style="color:#ae81ff">3</span>).padding(<span style="color:#ae81ff">1</span>)));
+        conv3_2 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;conv3_2&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(<span style="color:#ae81ff">50</span>, <span style="color:#ae81ff">60</span>, <span style="color:#ae81ff">3</span>).padding(<span style="color:#ae81ff">1</span>)));
+        conv3_3 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;conv3_3&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(<span style="color:#ae81ff">60</span>, <span style="color:#ae81ff">70</span>, <span style="color:#ae81ff">3</span>).padding(<span style="color:#ae81ff">1</span>)));
+        <span style="color:#75715e">// Insert pool layer
+</span><span style="color:#75715e"></span>        conv4_1 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;conv4_1&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(<span style="color:#ae81ff">70</span>, <span style="color:#ae81ff">80</span>, <span style="color:#ae81ff">3</span>).padding(<span style="color:#ae81ff">1</span>)));
+        conv4_2 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;conv4_2&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(<span style="color:#ae81ff">80</span>, <span style="color:#ae81ff">90</span>, <span style="color:#ae81ff">3</span>).padding(<span style="color:#ae81ff">1</span>)));
+        conv4_3 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;conv4_3&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(<span style="color:#ae81ff">90</span>, <span style="color:#ae81ff">100</span>, <span style="color:#ae81ff">3</span>).padding(<span style="color:#ae81ff">1</span>)));
+        <span style="color:#75715e">// Insert pool layer
+</span><span style="color:#75715e"></span>        conv5_1 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;conv5_1&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(<span style="color:#ae81ff">100</span>, <span style="color:#ae81ff">110</span>, <span style="color:#ae81ff">3</span>).padding(<span style="color:#ae81ff">1</span>)));
+        conv5_2 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;conv5_2&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(<span style="color:#ae81ff">110</span>, <span style="color:#ae81ff">120</span>, <span style="color:#ae81ff">3</span>).padding(<span style="color:#ae81ff">1</span>)));
+        conv5_3 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;conv5_3&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(<span style="color:#ae81ff">120</span>, <span style="color:#ae81ff">130</span>, <span style="color:#ae81ff">3</span>).padding(<span style="color:#ae81ff">1</span>)));
+        <span style="color:#75715e">// Insert pool layer
+</span><span style="color:#75715e"></span>        fc1 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;fc1&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Linear(<span style="color:#ae81ff">130</span><span style="color:#f92672">*</span><span style="color:#ae81ff">6</span><span style="color:#f92672">*</span><span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">2000</span>));
+        fc2 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;fc2&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Linear(<span style="color:#ae81ff">2000</span>, <span style="color:#ae81ff">1000</span>));
+        fc3 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;fc3&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Linear(<span style="color:#ae81ff">1000</span>, <span style="color:#ae81ff">100</span>));
+        fc4 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;fc4&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Linear(<span style="color:#ae81ff">100</span>, <span style="color:#ae81ff">2</span>));
+    }
+
+    <span style="color:#75715e">// Implement Algorithm
+</span><span style="color:#75715e"></span>    torch<span style="color:#f92672">::</span>Tensor forward(torch<span style="color:#f92672">::</span>Tensor x) {
+        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(conv1_1<span style="color:#f92672">-&gt;</span>forward(x));
+        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(conv1_2<span style="color:#f92672">-&gt;</span>forward(x));
+        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>max_pool2d(x, <span style="color:#ae81ff">2</span>);
+
+        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(conv2_1<span style="color:#f92672">-&gt;</span>forward(x));
+        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(conv2_2<span style="color:#f92672">-&gt;</span>forward(x));
+        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>max_pool2d(x, <span style="color:#ae81ff">2</span>);
+
+        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(conv3_1<span style="color:#f92672">-&gt;</span>forward(x));
+        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(conv3_2<span style="color:#f92672">-&gt;</span>forward(x));
+        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(conv3_3<span style="color:#f92672">-&gt;</span>forward(x));
+        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>max_pool2d(x, <span style="color:#ae81ff">2</span>);
+
+        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(conv4_1<span style="color:#f92672">-&gt;</span>forward(x));
+        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(conv4_2<span style="color:#f92672">-&gt;</span>forward(x));
+        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(conv4_3<span style="color:#f92672">-&gt;</span>forward(x));
+        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>max_pool2d(x, <span style="color:#ae81ff">2</span>);
+
+        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(conv5_1<span style="color:#f92672">-&gt;</span>forward(x));
+        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(conv5_2<span style="color:#f92672">-&gt;</span>forward(x));
+        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(conv5_3<span style="color:#f92672">-&gt;</span>forward(x));
+        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>max_pool2d(x, <span style="color:#ae81ff">2</span>);
+
+
+        x <span style="color:#f92672">=</span> x.view({<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">130</span><span style="color:#f92672">*</span><span style="color:#ae81ff">6</span><span style="color:#f92672">*</span><span style="color:#ae81ff">6</span>});
+
+        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(fc1<span style="color:#f92672">-&gt;</span>forward(x));
+        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(fc2<span style="color:#f92672">-&gt;</span>forward(x));
+        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(fc3<span style="color:#f92672">-&gt;</span>forward(x));
+        x <span style="color:#f92672">=</span> fc4<span style="color:#f92672">-&gt;</span>forward(x);
+        <span style="color:#66d9ef">return</span> torch<span style="color:#f92672">::</span>log_softmax(x, <span style="color:#ae81ff">1</span>);
+    }
+
+    <span style="color:#75715e">// Declare layers
+</span><span style="color:#75715e"></span>    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d conv1_1{<span style="color:#66d9ef">nullptr</span>};
+    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d conv1_2{<span style="color:#66d9ef">nullptr</span>};
+    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d conv2_1{<span style="color:#66d9ef">nullptr</span>};
+    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d conv2_2{<span style="color:#66d9ef">nullptr</span>};
+    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d conv3_1{<span style="color:#66d9ef">nullptr</span>};
+    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d conv3_2{<span style="color:#66d9ef">nullptr</span>};
+    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d conv3_3{<span style="color:#66d9ef">nullptr</span>};
+    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d conv4_1{<span style="color:#66d9ef">nullptr</span>};
+    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d conv4_2{<span style="color:#66d9ef">nullptr</span>};
+    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d conv4_3{<span style="color:#66d9ef">nullptr</span>};
+    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d conv5_1{<span style="color:#66d9ef">nullptr</span>};
+    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d conv5_2{<span style="color:#66d9ef">nullptr</span>};
+    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d conv5_3{<span style="color:#66d9ef">nullptr</span>};
+
+    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Linear fc1{<span style="color:#66d9ef">nullptr</span>}, fc2{<span style="color:#66d9ef">nullptr</span>}, fc3{<span style="color:#66d9ef">nullptr</span>}, fc4{<span style="color:#66d9ef">nullptr</span>};
+};
+</code></pre></div><p>We will initialize this network and pass each batch of our data once in an epoch.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// Initialize the Network
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">auto</span> net <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>make_shared<span style="color:#f92672">&lt;</span>NetImpl<span style="color:#f92672">&gt;</span>();
+</code></pre></div><h2 id="training-the-network-on-dogs-vs-cats-dataset">Training the Network on Dogs vs Cats Dataset</h2>
 <p>We had before discussed code for training <a href="https://krshrimali.github.io/posts/2019/07/training-a-network-on-custom-dataset-using-pytorch-c-api/">here</a>. I suggest the reader to go through that blog in order to train the dataset. I&rsquo;ll give more insights on training in the next blog!</p>
 <p>That&rsquo;s it for today. I&rsquo;ll be back with Part-2 of this &ldquo;Dogs vs Cats Classification&rdquo; with training, experimentation and results. We&rsquo;ll also discuss on using different networks, and in the Part-3, we&rsquo;ll discuss using <strong>Transfer Learning</strong> for this classification task.</p>
             </div>
@@ -626,7 +626,7 @@ Today, we are going to see a practical example of applying a CNN to a Custom Dat
         })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
         ga('create', 'UA-146662543-1', 'auto');ga('send', 'pageview');
     </script>
-<script src="https://krshrimali.github.io/js/webmention.min.f60cda7d6de39593831ee0d0ef205feaba94d655e344398cbc178b6fd07888eaf8bd1a4d4f15eb77a191e209842937013b9dda76ecc79b4fea6825a7ba53f03e.js" data-id="webmention-container"></script>
+<script src="https://krshrimali.github.io/js/webmention.min.513a53d009530b21cba09721b6f4dc912e9c20ad2c0adbb5c4e486c4f77774a6e9eca8c2e1e4e8bc9e9e86693aa5ca91e7bf232b50f7f8bee4e64efc874040a7.js" data-id="webmention-container"></script>
 
 
 

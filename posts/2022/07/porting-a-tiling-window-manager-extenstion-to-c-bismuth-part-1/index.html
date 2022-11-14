@@ -215,7 +215,7 @@ The Story: Why KDE Plasma and Why Bismuth? For the last few months (close to a y
 </ol>
 <p>Now some would say that there is a possibility to install tiling window managers on desktop environments (I&rsquo;m aware <a href="https://github.com/heckelson/i3-and-kde-plasma">i3 on KDE Plasma</a>), but that just felt&hellip; <em>odd</em> for some reason. So I stuck with Pop OS, until <a href="https://github.com/pop-os/shell/issues/1470">this happened</a>, oh and also <a href="https://github.com/pop-os/pop/issues/2444">this</a>. The second issue where there was a lag while dragging windows, was unfortunately not a Pop OS bug but was mostly related to upstream (mutter if I&rsquo;m not wrong). And when they say that it only happened with NVIDIA drivers, I knew that it&rsquo;s something that will probably take some time to resolve (I would rather prefer not to get into the details here).</p>
 <p>That&rsquo;s when I decided to explore KDE Plasma. KDE Plasma 5.25 was just announced, and oh man - it seemed to have impressed a lot of people out there. However, what impressed me the most was that it had no such issues with NVIDIA drivers, at least no lag while dragging windows. I also liked their zoom accessibility feature, much much much better than what GNOME had. Needless to say, that I had decided to stick to KDE Plasma after that.</p>
-<p>Just to give some context, I use multiple monitors and while people happily survive without a tiling window manager, I was the opposite - I felt the need of tiling, specially when I started streaming or sharing my work with others. And then I saw <a href="https://www.youtube.com/watch?v=TQzaDrmsE9A">this video: &ldquo;TILING comes to KDE Kwin? ;)&rdquo;</a>! I was wow-ed (is that a word BTW?). I was introduced to this amazing KDE Tiling Window Manager Extension named <strong>Bismuth</strong> (<a href="https://github.com/Bismuth-Forge/bismuth/)">https://github.com/Bismuth-Forge/bismuth/)</a>. I didn&rsquo;t waste any time in installing and setting up the extension on my machine&hellip;</p>
+<p>Just to give some context, I use multiple monitors and while people happily survive without a tiling window manager, I was the opposite - I felt the need of tiling, specially when I started streaming or sharing my work with others. And then I saw <a href="https://www.youtube.com/watch?v=TQzaDrmsE9A">this video: &ldquo;TILING comes to KDE Kwin? ;)&quot;</a>! I was wow-ed (is that a word BTW?). I was introduced to this amazing KDE Tiling Window Manager Extension named <strong>Bismuth</strong> (<a href="https://github.com/Bismuth-Forge/bismuth/)">https://github.com/Bismuth-Forge/bismuth/)</a>. I didn&rsquo;t waste any time in installing and setting up the extension on my machine&hellip;</p>
 <h2 id="the-motivation-why-contribute">The Motivation: Why contribute?</h2>
 <p>Of course, with great power comes great responsibility, and in the Linux ecosystem, <em>with more users, comes more bugs</em>. The same happened with Bismuth, lots of users started trying it, and it had good amount of issues, interestingly, less were bugs and more were about features. However, I got stuck with one of the most important feature I needed, and it was &ldquo;Move window to the next/previous screen/monitor&rdquo; with a keyboard-shortcut. Now, do note that Bismuth did promise that it comes with the feature, so it was a bug. And as any other user would do, I thought of raising an issue but there was one already: <a href="https://github.com/Bismuth-Forge/bismuth/issues/370">here</a>. I regularly move my windows from one screen to another with keyboard shortcuts, and with this bug, I started facing issues. But as they say, in open-source, the community is everything. A guy with username: <a href="https://github.com/benemorius">benemorius</a> came up with a solution, and even though it took me some time to get it working, but it was eventually fixed. I started realizing how much I love this process, but more than that - I wanted to dive into the source code, and understand how it works. That was the time I realized I will look at the issues, found many opened, but since the maintainer of the library had a goal of porting it from typescript to C++, which meant that new features were essentially blocked till then (unless and until they are small with respect to the number of lines of code).</p>
 <p>That was the time I realized that I should stop complaining, and instead start helping. I found an opened issue <a href="https://github.com/Bismuth-Forge/bismuth/issues/335#issuecomment-1159362257">here</a> and left a comment. The maintainer was very kind to respond, and guide through the process. And that&rsquo;s where I started contributing to Bismuth.</p>
@@ -229,49 +229,49 @@ The Story: Why KDE Plasma and Why Bismuth? For the last few months (close to a y
 <li><a href="https://github.com/Bismuth-Forge/bismuth/pull/393">C++ Port: <code>ThreeColumn</code> layout</a></li>
 </ol>
 <p>To give you a glimpse, here is how the code looks when you do press a keyboard shortcut to focus window to your left/right/up/down:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> Engine<span style="color:#f92672">::</span>focusWindowByDirection(FocusDirection direction)
-</span></span><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">auto</span> windowsToChoseFrom <span style="color:#f92672">=</span> m_windows.visibleWindowsOn(activeSurface());
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (windowsToChoseFrom.empty()) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// If there is no current window, select the first one.
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">auto</span> activeWindow <span style="color:#f92672">=</span> m_windows.activeWindow();
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>activeWindow.has_value()) {
-</span></span><span style="display:flex;"><span>        activeWindow <span style="color:#f92672">=</span> windowsToChoseFrom.front();
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">auto</span> window <span style="color:#f92672">=</span> windowNeighbor(direction, activeWindow.value());
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (window.has_value()) {
-</span></span><span style="display:flex;"><span>        window<span style="color:#f92672">-&gt;</span>activate();
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>Let&rsquo;s consider that you are trying to focus right from your current window, so the parameter <code>direction</code> will have a value of <code>FocusDirection::Right</code> (it&rsquo;s an <code>enum</code>). The current state of Bismuth only allowed you to move right/left/top/bottom on the current screen, that means if you want to move to the next monitor - you can&rsquo;t use the same keyboard shortcuts. Hence the first line in the body of the function:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">// This gets all the visible windows (not hidden) on the active screen/montior/surface
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">auto</span> windowsToChoseFrom <span style="color:#f92672">=</span> m_windows.visible(activeSurface());
-</span></span></code></pre></div><p>Now of-course there is a possibility that you have no windows visible on the surface, in that case it will just return (which is what the next 3 lines do):</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">// Early return if no window is visible on the current surface
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">if</span> (windowsToChoseFrom.empty()) {
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>Okay, now comes the serious part. Whenever you think of <code>focusWindowByDirection</code>, there are 2 possibilities (apart from those listed above):</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> Engine<span style="color:#f92672">::</span>focusWindowByDirection(FocusDirection direction)
+{
+    <span style="color:#66d9ef">auto</span> windowsToChoseFrom <span style="color:#f92672">=</span> m_windows.visibleWindowsOn(activeSurface());
+
+    <span style="color:#66d9ef">if</span> (windowsToChoseFrom.empty()) {
+        <span style="color:#66d9ef">return</span>;
+    }
+
+    <span style="color:#75715e">// If there is no current window, select the first one.
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">auto</span> activeWindow <span style="color:#f92672">=</span> m_windows.activeWindow();
+    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>activeWindow.has_value()) {
+        activeWindow <span style="color:#f92672">=</span> windowsToChoseFrom.front();
+    }
+
+    <span style="color:#66d9ef">auto</span> window <span style="color:#f92672">=</span> windowNeighbor(direction, activeWindow.value());
+
+    <span style="color:#66d9ef">if</span> (window.has_value()) {
+        window<span style="color:#f92672">-&gt;</span>activate();
+    }
+}
+</code></pre></div><p>Let&rsquo;s consider that you are trying to focus right from your current window, so the parameter <code>direction</code> will have a value of <code>FocusDirection::Right</code> (it&rsquo;s an <code>enum</code>). The current state of Bismuth only allowed you to move right/left/top/bottom on the current screen, that means if you want to move to the next monitor - you can&rsquo;t use the same keyboard shortcuts. Hence the first line in the body of the function:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// This gets all the visible windows (not hidden) on the active screen/montior/surface
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">auto</span> windowsToChoseFrom <span style="color:#f92672">=</span> m_windows.visible(activeSurface());
+</code></pre></div><p>Now of-course there is a possibility that you have no windows visible on the surface, in that case it will just return (which is what the next 3 lines do):</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// Early return if no window is visible on the current surface
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">if</span> (windowsToChoseFrom.empty()) {
+  <span style="color:#66d9ef">return</span>;
+}
+</code></pre></div><p>Okay, now comes the serious part. Whenever you think of <code>focusWindowByDirection</code>, there are 2 possibilities (apart from those listed above):</p>
 <ol>
 <li>You have an active window, that means your mouse is already focused on a window on the current screen.</li>
 <li>You don&rsquo;t have an active window, that means your focus can be on the panel, or maybe on an icon or wherever except a window on the current surface.</li>
 </ol>
 <p>These two cases need to be handled, and that&rsquo;s what the next few lines do:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">// If there is no current window, select the first one.
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">auto</span> activeWindow <span style="color:#f92672">=</span> m_windows.activeWindow();
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>activeWindow.has_value()) {
-</span></span><span style="display:flex;"><span>    activeWindow <span style="color:#f92672">=</span> windowsToChoseFrom.front();
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>Once the extension knows what <code>activeWindow</code> is, it&rsquo;s comparatively easier to figure out which window to focus on (only if it&rsquo;s possible). Time to talk about the function that does the magic.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">/* This function returns the closest window (if any) from the current window for the given direction */</span>
-</span></span><span style="display:flex;"><span>std<span style="color:#f92672">::</span>optional<span style="color:#f92672">&lt;</span>Window<span style="color:#f92672">&gt;</span> Engine<span style="color:#f92672">::</span>windowNeighbor(Engine<span style="color:#f92672">::</span>FocusDirection direction, <span style="color:#66d9ef">const</span> Window <span style="color:#f92672">&amp;</span>basisWindow);
-</span></span></code></pre></div><p>Above is the declaration of the function, and hopefully the comment describes it well. You will definitely need to know the window relative to which you&rsquo;ll return the output window, and the direction is a must. Note the return type, <code>std::optional&lt;Window&gt;</code>. As I said, it is possible that there is a window to the right, it&rsquo;s also possible that there are no more windows to the right direction. Hence <a href="https://en.cppreference.com/w/cpp/utility/optional"><code>std::optional</code></a> there.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// If there is no current window, select the first one.
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">auto</span> activeWindow <span style="color:#f92672">=</span> m_windows.activeWindow();
+<span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>activeWindow.has_value()) {
+    activeWindow <span style="color:#f92672">=</span> windowsToChoseFrom.front();
+}
+</code></pre></div><p>Once the extension knows what <code>activeWindow</code> is, it&rsquo;s comparatively easier to figure out which window to focus on (only if it&rsquo;s possible). Time to talk about the function that does the magic.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">/* This function returns the closest window (if any) from the current window for the given direction */</span>
+std<span style="color:#f92672">::</span>optional<span style="color:#f92672">&lt;</span>Window<span style="color:#f92672">&gt;</span> Engine<span style="color:#f92672">::</span>windowNeighbor(Engine<span style="color:#f92672">::</span>FocusDirection direction, <span style="color:#66d9ef">const</span> Window <span style="color:#f92672">&amp;</span>basisWindow);
+</code></pre></div><p>Above is the declaration of the function, and hopefully the comment describes it well. You will definitely need to know the window relative to which you&rsquo;ll return the output window, and the direction is a must. Note the return type, <code>std::optional&lt;Window&gt;</code>. As I said, it is possible that there is a window to the right, it&rsquo;s also possible that there are no more windows to the right direction. Hence <a href="https://en.cppreference.com/w/cpp/utility/optional"><code>std::optional</code></a> there.</p>
 <p>Let me quickly talk about the algorithm that Bismuth follows for this feature:</p>
 <ol>
 <li>Get all possible candidates in the neighborhood of the active window <em>for the given direction</em>:</li>
@@ -466,7 +466,7 @@ The Story: Why KDE Plasma and Why Bismuth? For the last few months (close to a y
         })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
         ga('create', 'UA-146662543-1', 'auto');ga('send', 'pageview');
     </script>
-<script src="https://krshrimali.github.io/js/webmention.min.f60cda7d6de39593831ee0d0ef205feaba94d655e344398cbc178b6fd07888eaf8bd1a4d4f15eb77a191e209842937013b9dda76ecc79b4fea6825a7ba53f03e.js" data-id="webmention-container"></script>
+<script src="https://krshrimali.github.io/js/webmention.min.513a53d009530b21cba09721b6f4dc912e9c20ad2c0adbb5c4e486c4f77774a6e9eca8c2e1e4e8bc9e9e86693aa5ca91e7bf232b50f7f8bee4e64efc874040a7.js" data-id="webmention-container"></script>
 
 
 
