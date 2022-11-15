@@ -6,7 +6,18 @@
     <description>Recent content on Kushashwa Ravi Shrimali (Kush)</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Mon, 14 Nov 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://krshrimali.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 15 Nov 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://krshrimali.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Daily Update: 15th November 2022 - Day 2</title>
+      <link>https://krshrimali.github.io/posts/2022/11/daily-update-15th-november-2022-day-2/</link>
+      <pubDate>Tue, 15 Nov 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://krshrimali.github.io/posts/2022/11/daily-update-15th-november-2022-day-2/</guid>
+      <description>Hi everyone, Day 2 of this series of daily updates. Started my day earlier than yesterday, at around 9 AM (work).
+Reading:
+ Watched this nice video from Jason on The Right Way to Write C++ in 2022:  I like when he advocated on using different compilers, or at least verifying that it works for all (and if not, then you&amp;rsquo;re aware). Interest: take warnings seriously. Need to start doing it, I&amp;rsquo;ve been following this with Rust, but C++ never raised Rust-like &amp;ldquo;good enough&amp;rdquo; warnings.</description>
+    </item>
+    
     <item>
       <title>Daily Update: 14th November 2022 - Day 1</title>
       <link>https://krshrimali.github.io/posts/2022/11/daily-update-14th-november-2022-day-1/</link>
@@ -106,20 +117,6 @@ My notes on Chapter 3, Item 13 of Effective Modern C++ written by Scott Meyers.
 Some (or even all) of the text can be similar to what you see in the book, as these are notes: I&amp;rsquo;ve tried not to be unnecessarily creative with my words. :)
  In C++, iterators come handy to point at memory addresses of STL containers. For example,
 // C++11  std::vector&amp;lt;int&amp;gt; x {11, 9, 23, 6}; // begin() member function returns an iterator, which points to the first // memory address of the container x std::vector&amp;lt;int&amp;gt;::iterator it = x.</description>
-    </item>
-    
-    <item>
-      <title>Declaring Overriding Functions override (Notes)</title>
-      <link>https://krshrimali.github.io/posts/2021/09/declaring-overriding-functions-override-notes/</link>
-      <pubDate>Sat, 25 Sep 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://krshrimali.github.io/posts/2021/09/declaring-overriding-functions-override-notes/</guid>
-      <description>NOTE
-My notes on Chapter 3, Item 12 of Effective Modern C++ written by Scott Meyers.
-Some (or even all) of the text can be similar to what you see in the book, as these are notes: I&amp;rsquo;ve tried not to be unnecessarily creative with my words. :)
- Overriding != Overloading
-Example of virtual function overriding:
-// Base class class Base { public: virtual void doWork(); // ... }; // Derived class from Base class Derived: public Base { public: // virtual is optional  // this will &amp;#34;override&amp;#34; Base::doWork  virtual void doWork(); // .</description>
     </item>
     
   </channel>
