@@ -161,6 +161,11 @@ url = "https://krshrimali.github.io/about/"
 title = "About"
 
 [[input.files]]
+path = "./posts/1/01/index.html"
+url = "https://krshrimali.github.io/posts/1/01/"
+title = ""
+
+[[input.files]]
 path = "./categories/index.html"
 url = "https://krshrimali.github.io/categories/"
 title = "Categories"
