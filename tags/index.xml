@@ -6,25 +6,7 @@
     <description>Recent content in Tags on Kushashwa Ravi Shrimali (Kush)</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Mon, 14 Nov 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://krshrimali.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>blog</title>
-      <link>https://krshrimali.github.io/tags/blog/</link>
-      <pubDate>Mon, 14 Nov 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://krshrimali.github.io/tags/blog/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>updates</title>
-      <link>https://krshrimali.github.io/tags/updates/</link>
-      <pubDate>Mon, 14 Nov 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://krshrimali.github.io/tags/updates/</guid>
-      <description></description>
-    </item>
-    
+    <lastBuildDate>Sun, 04 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://krshrimali.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>suggestion</title>
       <link>https://krshrimali.github.io/tags/suggestion/</link>
@@ -94,6 +76,24 @@
       <pubDate>Sun, 31 Jul 2022 00:00:00 +0000</pubDate>
       
       <guid>https://krshrimali.github.io/tags/open-source/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>notes</title>
+      <link>https://krshrimali.github.io/tags/notes/</link>
+      <pubDate>Sun, 09 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://krshrimali.github.io/tags/notes/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>rust</title>
+      <link>https://krshrimali.github.io/tags/rust/</link>
+      <pubDate>Sun, 09 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://krshrimali.github.io/tags/rust/</guid>
       <description></description>
     </item>
     

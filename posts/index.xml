@@ -6,18 +6,7 @@
     <description>Recent content in Posts on Kushashwa Ravi Shrimali (Kush)</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Mon, 14 Nov 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://krshrimali.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Daily Update: 14th November 2022 - Day 1</title>
-      <link>https://krshrimali.github.io/posts/2022/11/daily-update-14th-november-2022-day-1/</link>
-      <pubDate>Mon, 14 Nov 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://krshrimali.github.io/posts/2022/11/daily-update-14th-november-2022-day-1/</guid>
-      <description>Hi everyone, I&amp;rsquo;m back to - writing daily update blogs. Just sharing what I did today, and documenting my progress. Now of course it won&amp;rsquo;t contain everything I do, but yep - everything related to learning and things I&amp;rsquo;m passionate about.
-Reading
- Just In Time Compilation (Wiki):  Wiki: https://en.wikipedia.org/wiki/Just-in-time_compilation Honestly, I wanted to start with a few papers on it, but Wikipedia does give enough background and sets some context.</description>
-    </item>
-    
+    <lastBuildDate>Sun, 04 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://krshrimali.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Applying for Research Internships (Universities)</title>
       <link>https://krshrimali.github.io/posts/2022/09/applying-for-research-internships-universities/</link>
@@ -120,6 +109,18 @@ Some (or even all) of the text can be similar to what you see in the book, as th
  Overriding != Overloading
 Example of virtual function overriding:
 // Base class class Base { public: virtual void doWork(); // ... }; // Derived class from Base class Derived: public Base { public: // virtual is optional  // this will &amp;#34;override&amp;#34; Base::doWork  virtual void doWork(); // .</description>
+    </item>
+    
+    <item>
+      <title>Prefer Deleted Functions to Private Undefined Ones (Notes)</title>
+      <link>https://krshrimali.github.io/posts/2021/08/prefer-deleted-functions-to-private-undefined-ones-notes/</link>
+      <pubDate>Wed, 25 Aug 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://krshrimali.github.io/posts/2021/08/prefer-deleted-functions-to-private-undefined-ones-notes/</guid>
+      <description>Prefer deleted functions to private undefined ones This item (11) in the chapter 3 focuses on:
+ Why and How to prevent users calling particular functions? C++-98 and C++-11 approach What&amp;rsquo;s the difference between deleting a function vs declaring a member function private (and not defining them)?   NOTE
+These are my notes on Chapter 3, Item 11 of Effective Modern C++ written by Scott Meyers.
+Some (or even all) of the text can be similar to what you see in the book, as these are notes: I&amp;rsquo;ve tried not to be unnecessarily creative with my words.</description>
     </item>
     
   </channel>
