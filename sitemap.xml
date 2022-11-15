@@ -2,6 +2,9 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://krshrimali.github.io/posts/2022/11/daily-update-14th-november-2022-day-1/</loc>
+    <lastmod>2022-11-14T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://krshrimali.github.io/posts/2022/09/applying-for-research-internships-universities/</loc>
     <lastmod>2022-09-04T00:00:00+00:00</lastmod>
   </url><url>
@@ -50,9 +53,6 @@
     <loc>https://krshrimali.github.io/posts/2020/12/implementing-portrait-bokeh-in-opencv-using-face-detection-part-1/</loc>
     <lastmod>2020-12-07T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://krshrimali.github.io/posts/2020/11/daily-update-14th-november-2022-day-1/</loc>
-    <lastmod>2020-11-14T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://krshrimali.github.io/posts/2020/09/releasing-docker-container-and-binder-for-using-xeus-cling-libtorch-and-opencv-in-c-/</loc>
     <lastmod>2020-09-15T00:00:00+00:00</lastmod>
   </url><url>
@@ -95,22 +95,31 @@
     <loc>https://krshrimali.github.io/posts/2019/06/introduction-to-pytorch-c-api-mnist-digit-recognition-using-vgg-16-network/</loc>
     <lastmod>2019-06-07T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>https://krshrimali.github.io/tags/blog/</loc>
+    <lastmod>2022-11-14T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://krshrimali.github.io/categories/</loc>
-    <lastmod>2022-09-04T00:00:00+00:00</lastmod>
+    <lastmod>2022-11-14T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://krshrimali.github.io/categories/daily-updates/</loc>
+    <lastmod>2022-11-14T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://krshrimali.github.io/</loc>
-    <lastmod>2022-09-04T00:00:00+00:00</lastmod>
+    <lastmod>2022-11-14T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://krshrimali.github.io/posts/</loc>
-    <lastmod>2022-09-04T00:00:00+00:00</lastmod>
+    <lastmod>2022-11-14T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://krshrimali.github.io/tags/</loc>
+    <lastmod>2022-11-14T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://krshrimali.github.io/tags/updates/</loc>
+    <lastmod>2022-11-14T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://krshrimali.github.io/tags/suggestion/</loc>
     <lastmod>2022-09-04T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://krshrimali.github.io/categories/suggestion/</loc>
-    <lastmod>2022-09-04T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://krshrimali.github.io/tags/</loc>
     <lastmod>2022-09-04T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://krshrimali.github.io/tags/bismuth/</loc>
@@ -214,15 +223,6 @@
   </url><url>
     <loc>https://krshrimali.github.io/tags/python/</loc>
     <lastmod>2020-12-10T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://krshrimali.github.io/tags/blog/</loc>
-    <lastmod>2020-11-14T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://krshrimali.github.io/categories/daily-updates/</loc>
-    <lastmod>2020-11-14T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://krshrimali.github.io/tags/updates/</loc>
-    <lastmod>2020-11-14T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://krshrimali.github.io/categories/deep-learning/</loc>
     <lastmod>2020-09-15T00:00:00+00:00</lastmod>
