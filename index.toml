@@ -1,6 +1,11 @@
 # We use the generated html to prevent issues involving markdown frontmatter
 
 [[input.files]]
+path = "./posts/2022/11/daily-update-16th-november-2022-day-3/index.html"
+url = "https://krshrimali.github.io/posts/2022/11/daily-update-16th-november-2022-day-3/"
+title = "Daily Update: 16th November 2022 - Day 3"
+
+[[input.files]]
 path = "./posts/2022/11/daily-update-15th-november-2022-day-2/index.html"
 url = "https://krshrimali.github.io/posts/2022/11/daily-update-15th-november-2022-day-2/"
 title = "Daily Update: 15th November 2022 - Day 2"
@@ -164,6 +169,11 @@ title = "Introduction to PyTorch C&#43;&#43; API: MNIST Digit Recognition using 
 path = "./about/index.html"
 url = "https://krshrimali.github.io/about/"
 title = "About"
+
+[[input.files]]
+path = "./posts/1/01/index.html"
+url = "https://krshrimali.github.io/posts/1/01/"
+title = ""
 
 [[input.files]]
 path = "./categories/index.html"

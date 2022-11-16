@@ -6,7 +6,18 @@
     <description>Recent content in blog on Kushashwa Ravi Shrimali (Kush)</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Tue, 15 Nov 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://krshrimali.github.io/tags/blog/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 16 Nov 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://krshrimali.github.io/tags/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Daily Update: 16th November 2022 - Day 3</title>
+      <link>https://krshrimali.github.io/posts/2022/11/daily-update-16th-november-2022-day-3/</link>
+      <pubDate>Wed, 16 Nov 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://krshrimali.github.io/posts/2022/11/daily-update-16th-november-2022-day-3/</guid>
+      <description>Hi everyone, Day 3 of this series of daily updates. Woke up fairly early (~6 AM), and started working. Though it seemed productive to me, but you won&amp;rsquo;t see a lot of content here today - just one of those days where I didn&amp;rsquo;t do a lot of different things, I guess. :)
+Projects/Learning:
+ I made my rust-leetcode repository public today. It currently contains 12 solved problems, you&amp;rsquo;ll see huge difference between the first few codes to the last few codes.</description>
+    </item>
+    
     <item>
       <title>Daily Update: 15th November 2022 - Day 2</title>
       <link>https://krshrimali.github.io/posts/2022/11/daily-update-15th-november-2022-day-2/</link>
@@ -14,7 +25,7 @@
       
       <guid>https://krshrimali.github.io/posts/2022/11/daily-update-15th-november-2022-day-2/</guid>
       <description>Hi everyone, Day 2 of this series of daily updates. Started my day earlier than yesterday, at around 9 AM (work).
-Reading:
+Learning:
  Watched this nice video from Jason on The Right Way to Write C++ in 2022:  I like when he advocated on using different compilers, or at least verifying that it works for all (and if not, then you&amp;rsquo;re aware). Interest: take warnings seriously. Need to start doing it, I&amp;rsquo;ve been following this with Rust, but C++ never raised Rust-like &amp;ldquo;good enough&amp;rdquo; warnings.</description>
     </item>
     
