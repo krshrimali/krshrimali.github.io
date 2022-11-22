@@ -8,7 +8,7 @@
 <meta name="description" content="Hi everyone! In this blog, I will be discussing the algorithm used in Bismuth to find the closest relative window to be focused for focusWindowByDirection event. If you haven&amp;rsquo;t read the previous blog, make sure to give it a read here.
 Recap from the previous blog Let&amp;rsquo;s start with a quick recap though, in the previous blog, we discussed:
 focusWindowByDirection requires the following information:
- direction (from the user) - can be one of: right, left, top/up, bottom/down." />
+direction (from the user) - can be one of: right, left, top/up, bottom/down." />
 <meta name="keywords" content=", development, coding, cpp, contributions, open source, KDE, Bismuth" />
 <meta name="robots" content="noodp" />
 <meta name="theme-color" content="#252627" />
@@ -52,7 +52,7 @@ focusWindowByDirection requires the following information:
 <meta itemprop="description" content="Hi everyone! In this blog, I will be discussing the algorithm used in Bismuth to find the closest relative window to be focused for focusWindowByDirection event. If you haven&rsquo;t read the previous blog, make sure to give it a read here.
 Recap from the previous blog Let&rsquo;s start with a quick recap though, in the previous blog, we discussed:
 focusWindowByDirection requires the following information:
- direction (from the user) - can be one of: right, left, top/up, bottom/down."><meta itemprop="datePublished" content="2022-07-31T00:00:00+00:00" />
+direction (from the user) - can be one of: right, left, top/up, bottom/down."><meta itemprop="datePublished" content="2022-07-31T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2022-07-31T00:00:00+00:00" />
 <meta itemprop="wordCount" content="1101"><meta itemprop="image" content="https://krshrimali.github.io"/>
 <meta itemprop="keywords" content="development,coding,cpp,contributions,open source,KDE,Bismuth," /><meta name="twitter:card" content="summary_large_image"/>
@@ -62,7 +62,7 @@ focusWindowByDirection requires the following information:
 <meta name="twitter:description" content="Hi everyone! In this blog, I will be discussing the algorithm used in Bismuth to find the closest relative window to be focused for focusWindowByDirection event. If you haven&rsquo;t read the previous blog, make sure to give it a read here.
 Recap from the previous blog Let&rsquo;s start with a quick recap though, in the previous blog, we discussed:
 focusWindowByDirection requires the following information:
- direction (from the user) - can be one of: right, left, top/up, bottom/down."/>
+direction (from the user) - can be one of: right, left, top/up, bottom/down."/>
 
 
 
@@ -220,12 +220,12 @@ focusWindowByDirection requires the following information:
 <li><code>activeWindow</code> (from the current session) - this is needed since <code>focusWindowByDirection</code> event is a <em>relative</em> event to your current focused window.</li>
 <li>Neighbor window candidates (<code>neighborCandidates</code>) to your current window (<code>activeWindow</code>) and the given direction (<code>direction</code>).</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// declaration
-</span><span style="color:#75715e"></span>std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span>Window<span style="color:#f92672">&gt;</span> Engine<span style="color:#f92672">::</span>getNeighborCandidates(<span style="color:#66d9ef">const</span> FocusDirection <span style="color:#f92672">&amp;</span>direction, <span style="color:#66d9ef">const</span> Window <span style="color:#f92672">&amp;</span>basisWindow);
-
-<span style="color:#75715e">// use
-</span><span style="color:#75715e"></span>std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span>Window<span style="color:#f92672">&gt;</span> neighborCandidates <span style="color:#f92672">=</span> getNeighborCandidates(direction, basisWindow);
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">// declaration
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span>Window<span style="color:#f92672">&gt;</span> Engine<span style="color:#f92672">::</span>getNeighborCandidates(<span style="color:#66d9ef">const</span> FocusDirection <span style="color:#f92672">&amp;</span>direction, <span style="color:#66d9ef">const</span> Window <span style="color:#f92672">&amp;</span>basisWindow);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// use
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span>Window<span style="color:#f92672">&gt;</span> neighborCandidates <span style="color:#f92672">=</span> getNeighborCandidates(direction, basisWindow);
+</span></span></code></pre></div><ul>
 <li>From these neighbor candidates (<code>neighborCandidates</code>), we will now find the closest relative window corner. To me, it was tricky to understand at first, so we&rsquo;ll be discussing this in detail over in the later sections.</li>
 <li>Once we know the closest relative window corner, we&rsquo;ll try to find the window which satisfies the corner condition.</li>
 <li>If there were multiple found, we&rsquo;ll return the first one based on the time-stamp (last used)</li>
@@ -242,59 +242,59 @@ focusWindowByDirection requires the following information:
 <h2 id="getting-closest-relative-window-corner">Getting Closest Relative Window Corner</h2>
 <p>In the <a href="https://krshrimali.github.io/posts/2022/07/porting-a-tiling-window-manager-extenstion-to-c-bismuth-part-1/">previous blog</a>, we had covered <code>getNeighborCandidates</code>, the output here would be windows: <code>A, B, C, D</code>. The order will not matter here for understanding, so don&rsquo;t worry about that.</p>
 <p>The next steps in the code include:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">int</span> closestRelativeWindowCorner <span style="color:#f92672">=</span> getClosestRelativeWindowCorner(direction, neighborCandidates);
-
-<span style="color:#66d9ef">auto</span> closestWindows <span style="color:#f92672">=</span> getClosestRelativeWindow(direction, neighborCandidates, getClosestRelativeWindow);
-
-<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">most_recently_used</span>(closestWindows);
-</code></pre></div><p>I didn&rsquo;t add comments here, because we&rsquo;ll be going through these 2 magic functions below. Let&rsquo;s start with <code>getClosestRelativeWindowCorner</code>. The source code for the definition of this function is:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">int</span> Engine<span style="color:#f92672">::</span>getClosestRelativeWindowCorner(<span style="color:#66d9ef">const</span> Engine<span style="color:#f92672">::</span>FocusDirection <span style="color:#f92672">&amp;</span>direction, <span style="color:#66d9ef">const</span> std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span>Window<span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>neighbors)
-{
-    <span style="color:#66d9ef">return</span> std<span style="color:#f92672">::</span>reduce(neighbors.cbegin(),
-                       neighbors.cend(),
-                       <span style="color:#75715e">/* initial value */</span> direction <span style="color:#f92672">==</span> Engine<span style="color:#f92672">::</span>FocusDirection<span style="color:#f92672">::</span>Up <span style="color:#f92672">||</span> direction <span style="color:#f92672">==</span> Engine<span style="color:#f92672">::</span>FocusDirection<span style="color:#f92672">::</span>Left <span style="color:#f92672">?</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">:</span> INT_MAX,
-                       [<span style="color:#f92672">&amp;</span>](<span style="color:#66d9ef">int</span> prevValue, <span style="color:#66d9ef">const</span> Window <span style="color:#f92672">&amp;</span>window) {
-                           <span style="color:#66d9ef">switch</span> (direction) {
-                           <span style="color:#66d9ef">case</span> Engine<span style="color:#f92672">::</span>FocusDirection<span style="color:#f92672">::</span>Up:
-                               <span style="color:#66d9ef">return</span> std<span style="color:#f92672">::</span>max(window.geometry().bottom(), prevValue);
-                           <span style="color:#66d9ef">case</span> Engine<span style="color:#f92672">::</span>FocusDirection<span style="color:#f92672">::</span>Down:
-                               <span style="color:#66d9ef">return</span> std<span style="color:#f92672">::</span>min(window.geometry().y(), prevValue);
-                           <span style="color:#66d9ef">case</span> Engine<span style="color:#f92672">::</span>FocusDirection<span style="color:#f92672">::</span>Left:
-                               <span style="color:#66d9ef">return</span> std<span style="color:#f92672">::</span>max(window.geometry().right(), prevValue);
-                           <span style="color:#66d9ef">case</span> Engine<span style="color:#f92672">::</span>FocusDirection<span style="color:#f92672">::</span>Right:
-                               <span style="color:#66d9ef">return</span> std<span style="color:#f92672">::</span>min(window.geometry().x(), prevValue);
-                           }
-                       });
-}
-</code></pre></div><p>Don&rsquo;t worry about the code if it confuses you, keep in mind that we have the direction as <code>Engine::FocusDirection::Up</code>, and <code>neighbors</code> as <code>{A, B, C, D}</code>. This function gets you the closest window corner relative to the active window or the basis window. How would you do that? Well, it will depend on the direction.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> closestRelativeWindowCorner <span style="color:#f92672">=</span> getClosestRelativeWindowCorner(direction, neighborCandidates);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">auto</span> closestWindows <span style="color:#f92672">=</span> getClosestRelativeWindow(direction, neighborCandidates, getClosestRelativeWindow);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">return</span> <span style="color:#a6e22e">most_recently_used</span>(closestWindows);
+</span></span></code></pre></div><p>I didn&rsquo;t add comments here, because we&rsquo;ll be going through these 2 magic functions below. Let&rsquo;s start with <code>getClosestRelativeWindowCorner</code>. The source code for the definition of this function is:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> Engine<span style="color:#f92672">::</span>getClosestRelativeWindowCorner(<span style="color:#66d9ef">const</span> Engine<span style="color:#f92672">::</span>FocusDirection <span style="color:#f92672">&amp;</span>direction, <span style="color:#66d9ef">const</span> std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span>Window<span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>neighbors)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> std<span style="color:#f92672">::</span>reduce(neighbors.cbegin(),
+</span></span><span style="display:flex;"><span>                       neighbors.cend(),
+</span></span><span style="display:flex;"><span>                       <span style="color:#75715e">/* initial value */</span> direction <span style="color:#f92672">==</span> Engine<span style="color:#f92672">::</span>FocusDirection<span style="color:#f92672">::</span>Up <span style="color:#f92672">||</span> direction <span style="color:#f92672">==</span> Engine<span style="color:#f92672">::</span>FocusDirection<span style="color:#f92672">::</span>Left <span style="color:#f92672">?</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">:</span> INT_MAX,
+</span></span><span style="display:flex;"><span>                       [<span style="color:#f92672">&amp;</span>](<span style="color:#66d9ef">int</span> prevValue, <span style="color:#66d9ef">const</span> Window <span style="color:#f92672">&amp;</span>window) {
+</span></span><span style="display:flex;"><span>                           <span style="color:#66d9ef">switch</span> (direction) {
+</span></span><span style="display:flex;"><span>                           <span style="color:#66d9ef">case</span> Engine<span style="color:#f92672">::</span>FocusDirection<span style="color:#f92672">::</span>Up:
+</span></span><span style="display:flex;"><span>                               <span style="color:#66d9ef">return</span> std<span style="color:#f92672">::</span>max(window.geometry().bottom(), prevValue);
+</span></span><span style="display:flex;"><span>                           <span style="color:#66d9ef">case</span> Engine<span style="color:#f92672">::</span>FocusDirection<span style="color:#f92672">::</span>Down:
+</span></span><span style="display:flex;"><span>                               <span style="color:#66d9ef">return</span> std<span style="color:#f92672">::</span>min(window.geometry().y(), prevValue);
+</span></span><span style="display:flex;"><span>                           <span style="color:#66d9ef">case</span> Engine<span style="color:#f92672">::</span>FocusDirection<span style="color:#f92672">::</span>Left:
+</span></span><span style="display:flex;"><span>                               <span style="color:#66d9ef">return</span> std<span style="color:#f92672">::</span>max(window.geometry().right(), prevValue);
+</span></span><span style="display:flex;"><span>                           <span style="color:#66d9ef">case</span> Engine<span style="color:#f92672">::</span>FocusDirection<span style="color:#f92672">::</span>Right:
+</span></span><span style="display:flex;"><span>                               <span style="color:#66d9ef">return</span> std<span style="color:#f92672">::</span>min(window.geometry().x(), prevValue);
+</span></span><span style="display:flex;"><span>                           }
+</span></span><span style="display:flex;"><span>                       });
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Don&rsquo;t worry about the code if it confuses you, keep in mind that we have the direction as <code>Engine::FocusDirection::Up</code>, and <code>neighbors</code> as <code>{A, B, C, D}</code>. This function gets you the closest window corner relative to the active window or the basis window. How would you do that? Well, it will depend on the direction.</p>
 <p>If the direction is <code>Up</code> or <code>Down</code> &ndash;&gt; you should compare the <code>y</code> coordinate.
 If the direction is <code>Left</code> or <code>Right</code> &ndash;&gt; you should compare the <code>x</code> coordinate.</p>
 <p>Now remember the mathematics lectures you had way back in the high school, if you wanna focus up, which vertex do you really care about? Keep your focus on the window C and E for once, the comparison should definitely be with the bottom right&rsquo;s y coordinate, right? That&rsquo;s what we do here:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">case</span> Engine<span style="color:#f92672">::</span>FocusDirection<span style="color:#f92672">::</span>Up: 
-  <span style="color:#66d9ef">return</span> std<span style="color:#f92672">::</span>max(window.geometry().bottom(), prevValue);
-</code></pre></div><p>A quick look at <code>bottom()</code> source code in <code>qrect.h</code> file:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">Q_DECL_CONSTEXPR <span style="color:#66d9ef">inline</span> QRect<span style="color:#f92672">::</span>bottom() <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">noexcept</span> { <span style="color:#66d9ef">return</span> y2; }
-</code></pre></div><p>Where <code>y2</code> is the bottom right&rsquo;s y coordinate. Since we are going up, and anything above the basis window should have <code>y</code> value &lt; basis window&rsquo;s <code>y</code> value. (The top left of any screen is considered to be <code>(0, 0)</code> in this blog). Hence we set the initial value as <code>0</code>. If we had to go down, we&rsquo;ll set it to <code>INT_MAX</code> as for anything below the basis window, we&rsquo;ll use <code>std::min</code> and hence <code>INT_MAX</code> will fade away with each neighbor window.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">case</span> Engine<span style="color:#f92672">::</span>FocusDirection<span style="color:#f92672">::</span>Up: 
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> std<span style="color:#f92672">::</span>max(window.geometry().bottom(), prevValue);
+</span></span></code></pre></div><p>A quick look at <code>bottom()</code> source code in <code>qrect.h</code> file:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>Q_DECL_CONSTEXPR <span style="color:#66d9ef">inline</span> QRect<span style="color:#f92672">::</span>bottom() <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">noexcept</span> { <span style="color:#66d9ef">return</span> y2; }
+</span></span></code></pre></div><p>Where <code>y2</code> is the bottom right&rsquo;s y coordinate. Since we are going up, and anything above the basis window should have <code>y</code> value &lt; basis window&rsquo;s <code>y</code> value. (The top left of any screen is considered to be <code>(0, 0)</code> in this blog). Hence we set the initial value as <code>0</code>. If we had to go down, we&rsquo;ll set it to <code>INT_MAX</code> as for anything below the basis window, we&rsquo;ll use <code>std::min</code> and hence <code>INT_MAX</code> will fade away with each neighbor window.</p>
 <p>Anyways, enough of theory, so what will be the output of this function for our scenario? Well, this function will give us <code>y_C + h</code> (which is equal to <code>y_D + h</code>, so any of them is fine). Now, we&rsquo;ll go ahead to the next function.</p>
 <h2 id="getting-closest-relative-window">Getting Closest Relative Window</h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span>Window<span style="color:#f92672">&gt;</span> getClosestRelativeWindow(<span style="color:#66d9ef">const</span> Engine<span style="color:#f92672">::</span>FocusDirection <span style="color:#f92672">&amp;</span>direction, <span style="color:#66d9ef">const</span> std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span>Window<span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>windowArray, <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> <span style="color:#f92672">&amp;</span>closestPoint)
-{
-    std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span>Window<span style="color:#f92672">&gt;</span> result;
-    std<span style="color:#f92672">::</span>copy_if(windowArray.cbegin(), windowArray.cend(), result.begin(), [<span style="color:#f92672">&amp;</span>](<span style="color:#66d9ef">const</span> Window <span style="color:#f92672">&amp;</span>window) {
-        <span style="color:#66d9ef">switch</span> (direction) {
-        <span style="color:#66d9ef">case</span> Engine<span style="color:#f92672">::</span>FocusDirection<span style="color:#f92672">::</span>Up:
-            <span style="color:#66d9ef">return</span> window.geometry().bottom() <span style="color:#f92672">&gt;</span> closestPoint <span style="color:#f92672">-</span> <span style="color:#ae81ff">5</span>;
-        <span style="color:#66d9ef">case</span> Engine<span style="color:#f92672">::</span>FocusDirection<span style="color:#f92672">::</span>Down:
-            <span style="color:#66d9ef">return</span> window.geometry().y() <span style="color:#f92672">&lt;</span> closestPoint <span style="color:#f92672">+</span> <span style="color:#ae81ff">5</span>;
-        <span style="color:#66d9ef">case</span> Engine<span style="color:#f92672">::</span>FocusDirection<span style="color:#f92672">::</span>Left:
-            <span style="color:#66d9ef">return</span> window.geometry().right() <span style="color:#f92672">&gt;</span> closestPoint <span style="color:#f92672">-</span> <span style="color:#ae81ff">5</span>;
-        <span style="color:#66d9ef">case</span> Engine<span style="color:#f92672">::</span>FocusDirection<span style="color:#f92672">::</span>Right:
-            <span style="color:#66d9ef">return</span> window.geometry().x() <span style="color:#f92672">&lt;</span> closestPoint <span style="color:#f92672">+</span> <span style="color:#ae81ff">5</span>;
-        }
-    });
-    <span style="color:#66d9ef">return</span> result;
-}
-</code></pre></div><p>Again, remember, we have <code>direction</code> as <code>Engine::FocusDirection::Up</code>, <code>windowArray</code> as <code>{A, B, C, D}</code>, and <code>closestPoint</code> as <code>y_C + h</code> value.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span>Window<span style="color:#f92672">&gt;</span> getClosestRelativeWindow(<span style="color:#66d9ef">const</span> Engine<span style="color:#f92672">::</span>FocusDirection <span style="color:#f92672">&amp;</span>direction, <span style="color:#66d9ef">const</span> std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span>Window<span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>windowArray, <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> <span style="color:#f92672">&amp;</span>closestPoint)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span>Window<span style="color:#f92672">&gt;</span> result;
+</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>copy_if(windowArray.cbegin(), windowArray.cend(), result.begin(), [<span style="color:#f92672">&amp;</span>](<span style="color:#66d9ef">const</span> Window <span style="color:#f92672">&amp;</span>window) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">switch</span> (direction) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">case</span> Engine<span style="color:#f92672">::</span>FocusDirection<span style="color:#f92672">::</span>Up:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> window.geometry().bottom() <span style="color:#f92672">&gt;</span> closestPoint <span style="color:#f92672">-</span> <span style="color:#ae81ff">5</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">case</span> Engine<span style="color:#f92672">::</span>FocusDirection<span style="color:#f92672">::</span>Down:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> window.geometry().y() <span style="color:#f92672">&lt;</span> closestPoint <span style="color:#f92672">+</span> <span style="color:#ae81ff">5</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">case</span> Engine<span style="color:#f92672">::</span>FocusDirection<span style="color:#f92672">::</span>Left:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> window.geometry().right() <span style="color:#f92672">&gt;</span> closestPoint <span style="color:#f92672">-</span> <span style="color:#ae81ff">5</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">case</span> Engine<span style="color:#f92672">::</span>FocusDirection<span style="color:#f92672">::</span>Right:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> window.geometry().x() <span style="color:#f92672">&lt;</span> closestPoint <span style="color:#f92672">+</span> <span style="color:#ae81ff">5</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    });
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> result;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Again, remember, we have <code>direction</code> as <code>Engine::FocusDirection::Up</code>, <code>windowArray</code> as <code>{A, B, C, D}</code>, and <code>closestPoint</code> as <code>y_C + h</code> value.</p>
 <p>This function only exists to give you <em>all the windows</em> which are <em>close enough</em> to the <code>closestPoint</code>. The output out of this function will be windows <code>C, D</code> (reminder: <code>E</code> is the basis or active window).</p>
 <p>Some will wonder why do we have two functions: <code>getClosestRelativeWindowCorner</code>, and <code>getClosestRelativeWindow</code>? And why this <code>-5, +5</code>? Unfortunately, it&rsquo;s possible that some windows aren&rsquo;t tiled properly, see <a href="https://github.com/Bismuth-Forge/bismuth/issues/102">this</a> issue. I&rsquo;ve attached the screenshot: (credits to the author)</p>
 <p><img src="https://user-images.githubusercontent.com/13597663/136797590-9c525224-6421-4384-ad42-4de54a814cb2.png" alt=""></p>
@@ -482,7 +482,7 @@ If the direction is <code>Left</code> or <code>Right</code> &ndash;&gt; you shou
         })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
         ga('create', 'UA-146662543-1', 'auto');ga('send', 'pageview');
     </script>
-<script src="https://krshrimali.github.io/js/webmention.min.513a53d009530b21cba09721b6f4dc912e9c20ad2c0adbb5c4e486c4f77774a6e9eca8c2e1e4e8bc9e9e86693aa5ca91e7bf232b50f7f8bee4e64efc874040a7.js" data-id="webmention-container"></script>
+<script src="https://krshrimali.github.io/js/webmention.min.8b3a0bd9a45559d02f5c9a0c5201da2ba4c8ed9b9d43bcc2d7951d4e72774e819ade3984c11c3bf2f2a2675050756a2b6f502de6829e5b0ff5fc04ff1f68d089.js" data-id="webmention-container"></script>
 
 
 

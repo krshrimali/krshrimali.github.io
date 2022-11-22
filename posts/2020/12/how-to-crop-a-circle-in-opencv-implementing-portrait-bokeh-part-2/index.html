@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="author" content="map[name:Kushashwa Ravi Shrimali]">
 <meta name="description" content="Hi everyone! In the previous blog we implemented Portrait Bokeh using Face Detection in OpenCV. While the results were good for a start, we definitely want to be closer to the output we expect. The end goal is to blur everything except the face. The main problem we noticed was:
- The face cropped was a rectangle, and it was clearly visible in the output result.  To overcome this, we will be talking about cropping a circle in OpenCV today." />
+The face cropped was a rectangle, and it was clearly visible in the output result. To overcome this, we will be talking about cropping a circle in OpenCV today." />
 <meta name="keywords" content=", computer vision, python, portrait bokeh, image processing" />
 <meta name="robots" content="noodp" />
 <meta name="theme-color" content="#252627" />
@@ -48,7 +48,7 @@
 
 <meta itemprop="name" content="How to crop a circle in OpenCV? Implementing Portrait Bokeh - Part 2">
 <meta itemprop="description" content="Hi everyone! In the previous blog we implemented Portrait Bokeh using Face Detection in OpenCV. While the results were good for a start, we definitely want to be closer to the output we expect. The end goal is to blur everything except the face. The main problem we noticed was:
- The face cropped was a rectangle, and it was clearly visible in the output result.  To overcome this, we will be talking about cropping a circle in OpenCV today."><meta itemprop="datePublished" content="2020-12-10T00:00:00+00:00" />
+The face cropped was a rectangle, and it was clearly visible in the output result. To overcome this, we will be talking about cropping a circle in OpenCV today."><meta itemprop="datePublished" content="2020-12-10T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2020-12-10T00:00:00+00:00" />
 <meta itemprop="wordCount" content="2125"><meta itemprop="image" content="https://krshrimali.github.io"/>
 <meta itemprop="keywords" content="computer vision,python,portrait bokeh,image processing," /><meta name="twitter:card" content="summary_large_image"/>
@@ -56,7 +56,7 @@
 
 <meta name="twitter:title" content="How to crop a circle in OpenCV? Implementing Portrait Bokeh - Part 2"/>
 <meta name="twitter:description" content="Hi everyone! In the previous blog we implemented Portrait Bokeh using Face Detection in OpenCV. While the results were good for a start, we definitely want to be closer to the output we expect. The end goal is to blur everything except the face. The main problem we noticed was:
- The face cropped was a rectangle, and it was clearly visible in the output result.  To overcome this, we will be talking about cropping a circle in OpenCV today."/>
+The face cropped was a rectangle, and it was clearly visible in the output result. To overcome this, we will be talking about cropping a circle in OpenCV today."/>
 
 
 
@@ -225,19 +225,19 @@
 <p>Essentially, the main goal is to get the face cropped as a circle. Once we have that, we can simply overlay this on the blurred image. The trick is to figure out on how we can crop the circle once we know it&rsquo;s coordinates. Let&rsquo;s talk about it&rsquo;s solution in the next section.</p>
 <h2 id="cropping-a-circle">Cropping a circle</h2>
 <p>Usually, our images will have 3 channels (colored image): Blue, Green, Red (BGR). How about we add a transparency channel to our image? The idea behind this is to make all pixels transparent which are NOT in the face, and all the pixels opaque which are within/on the face (circle) boundary. The pseudo code for this should look something like this:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Assuming you got a circle equation representing the face</span>
-face <span style="color:#f92672">=</span> circle_equation
-
-<span style="color:#75715e"># Now iterate through all the pixel values in the imagge</span>
-<span style="color:#75715e"># Check if the pixel is outside the face, if yes - then make it transparent</span>
-<span style="color:#75715e"># Else - opaque</span>
-<span style="color:#66d9ef">for</span> pixel_value <span style="color:#f92672">in</span> image:
-    <span style="color:#66d9ef">if</span> pixel_value <span style="color:#f92672">is</span> outside the face:
-        <span style="color:#75715e"># Make this pixel transparent</span>
-    <span style="color:#66d9ef">else</span>:
-        <span style="color:#75715e"># Make this pixel opaque</span>
-        <span style="color:#75715e"># This will be visible</span>
-</code></pre></div><p>To have an option to add transparency, you need to convert the BGR input image to BGRA (4 channel image: Blue, Green, Red, Alpha) - here Alpha channel denotes transparency channel. When the transparency is set to 0, that represents opaque and when it&rsquo;s set to 255, it represents transparent value. Let&rsquo;s go ahead and use this for our application.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Assuming you got a circle equation representing the face</span>
+</span></span><span style="display:flex;"><span>face <span style="color:#f92672">=</span> circle_equation
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Now iterate through all the pixel values in the imagge</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Check if the pixel is outside the face, if yes - then make it transparent</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Else - opaque</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> pixel_value <span style="color:#f92672">in</span> image:
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> pixel_value <span style="color:#f92672">is</span> outside the face:
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># Make this pixel transparent</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># Make this pixel opaque</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># This will be visible</span>
+</span></span></code></pre></div><p>To have an option to add transparency, you need to convert the BGR input image to BGRA (4 channel image: Blue, Green, Red, Alpha) - here Alpha channel denotes transparency channel. When the transparency is set to 0, that represents opaque and when it&rsquo;s set to 255, it represents transparent value. Let&rsquo;s go ahead and use this for our application.</p>
 <h2 id="video-tutorial">Video Tutorial</h2>
 <p>I started a YouTube channel where I go live on the weekends, and upload videos on the week days (not so regularly) about Computer Vision, deploying models into production and more. If you haven&rsquo;t seen it before, please check it out <a href="https://youtube.com/c/kushashwaraviShrimali">here</a>. For this blog, I have already uploaded a detailed tutorial. Check it out <a href="https://www.youtube.com/watch?v=7seEhDVGvn4">here</a>.</p>
 
@@ -247,38 +247,38 @@ face <span style="color:#f92672">=</span> circle_equation
 
 <h2 id="step-1-get-face-from-face-detection">Step 1: Get face from face detection</h2>
 <p>We have discussed this <a href="https://krshrimali.github.io/posts/2020/12/implementing-portrait-bokeh-in-opencv-using-face-detection-part-1/">before</a>, so we won&rsquo;t go in details but for the sake of continuity, I&rsquo;ll add the code for Face Detection.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> cv2<span style="color:#f92672">,</span> sys
-
-<span style="color:#75715e"># Get image path and read image</span>
-img_path <span style="color:#f92672">=</span> sys<span style="color:#f92672">.</span>argv[<span style="color:#ae81ff">1</span>] <span style="color:#66d9ef">if</span> len(sys<span style="color:#f92672">.</span>argv) <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">else</span> <span style="color:#e6db74">&#34;sample.png&#34;</span>
-img <span style="color:#f92672">=</span> cv2<span style="color:#f92672">.</span>imread(img_path, <span style="color:#ae81ff">1</span>)
-
-<span style="color:#75715e"># Convert to grayscale, since Face Detection takes gray scale image as input</span>
-gray <span style="color:#f92672">=</span> cv2<span style="color:#f92672">.</span>cvtColor(img, cv2<span style="color:#f92672">.</span>COLOR_BGR2GRAY)
-
-<span style="color:#75715e"># Initialize face detector from the model file</span>
-face_detector <span style="color:#f92672">=</span> cv2<span style="color:#f92672">.</span>CascadeClassifier(<span style="color:#e6db74">&#34;haarcascade_frontalface_default.xml&#34;</span>)
-
-<span style="color:#75715e"># Detect faces from gray-scaled image, using default parameters (scaleFactor)</span>
-faces <span style="color:#f92672">=</span> face_detector<span style="color:#f92672">.</span>detectMultiScale(gray, scaleFactor <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.1</span>, minNeighbors <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>)
-
-<span style="color:#75715e"># Note: Format of faces will be: [ [top_left_x, top_left_y, w, h (for face 1)], [... (for face 2)], ... ]</span>
-</code></pre></div><p>Once you have ROI (Region Of Interest) of the faces in the image, we can go ahead and start cropping a circle (yay!).</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> cv2<span style="color:#f92672">,</span> sys
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Get image path and read image</span>
+</span></span><span style="display:flex;"><span>img_path <span style="color:#f92672">=</span> sys<span style="color:#f92672">.</span>argv[<span style="color:#ae81ff">1</span>] <span style="color:#66d9ef">if</span> len(sys<span style="color:#f92672">.</span>argv) <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">else</span> <span style="color:#e6db74">&#34;sample.png&#34;</span>
+</span></span><span style="display:flex;"><span>img <span style="color:#f92672">=</span> cv2<span style="color:#f92672">.</span>imread(img_path, <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Convert to grayscale, since Face Detection takes gray scale image as input</span>
+</span></span><span style="display:flex;"><span>gray <span style="color:#f92672">=</span> cv2<span style="color:#f92672">.</span>cvtColor(img, cv2<span style="color:#f92672">.</span>COLOR_BGR2GRAY)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Initialize face detector from the model file</span>
+</span></span><span style="display:flex;"><span>face_detector <span style="color:#f92672">=</span> cv2<span style="color:#f92672">.</span>CascadeClassifier(<span style="color:#e6db74">&#34;haarcascade_frontalface_default.xml&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Detect faces from gray-scaled image, using default parameters (scaleFactor)</span>
+</span></span><span style="display:flex;"><span>faces <span style="color:#f92672">=</span> face_detector<span style="color:#f92672">.</span>detectMultiScale(gray, scaleFactor <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.1</span>, minNeighbors <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Note: Format of faces will be: [ [top_left_x, top_left_y, w, h (for face 1)], [... (for face 2)], ... ]</span>
+</span></span></code></pre></div><p>Once you have ROI (Region Of Interest) of the faces in the image, we can go ahead and start cropping a circle (yay!).</p>
 <h2 id="step-2-get-circle-circumscribing-the-face">Step 2: Get circle circumscribing the face</h2>
 <p>From Step-1, we got the faces. Let&rsquo;s iterate through each face, and get the equation of the circle circumscribing that face. As we discussed before in the <strong>Intuition</strong> section, we&rsquo;ll have to calculate the radius and center of the face.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Make sure to convert BGR to BGRA image first</span>
-<span style="color:#75715e"># To be used later</span>
-imgTransp <span style="color:#f92672">=</span> cv2<span style="color:#f92672">.</span>cvtColor(img, cv2<span style="color:#f92672">.</span>COLOR_BGR2BGRA)
-
-<span style="color:#75715e"># Iterate through each face one by one</span>
-<span style="color:#66d9ef">for</span> face <span style="color:#f92672">in</span> faces:
-    top_left_x, top_left_y, width, height <span style="color:#f92672">=</span> face[<span style="color:#ae81ff">0</span>], face[<span style="color:#ae81ff">1</span>], face[<span style="color:#ae81ff">2</span>], face[<span style="color:#ae81ff">3</span>]
-
-    radius <span style="color:#f92672">=</span> max(width, height)<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>
-    center <span style="color:#f92672">=</span> (top_left_x <span style="color:#f92672">+</span> width<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>, top_left_y <span style="color:#f92672">+</span> height<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>)
-
-    <span style="color:#75715e"># Cropping circle code will come here</span>
-</code></pre></div><p>Here, we find the circle contained in the rectangle (closest) for each face. Let&rsquo;s go ahead and crop this circle one by one, and see how we can use this for Portrait Bokeh!</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Make sure to convert BGR to BGRA image first</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># To be used later</span>
+</span></span><span style="display:flex;"><span>imgTransp <span style="color:#f92672">=</span> cv2<span style="color:#f92672">.</span>cvtColor(img, cv2<span style="color:#f92672">.</span>COLOR_BGR2BGRA)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Iterate through each face one by one</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> face <span style="color:#f92672">in</span> faces:
+</span></span><span style="display:flex;"><span>    top_left_x, top_left_y, width, height <span style="color:#f92672">=</span> face[<span style="color:#ae81ff">0</span>], face[<span style="color:#ae81ff">1</span>], face[<span style="color:#ae81ff">2</span>], face[<span style="color:#ae81ff">3</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    radius <span style="color:#f92672">=</span> max(width, height)<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>    center <span style="color:#f92672">=</span> (top_left_x <span style="color:#f92672">+</span> width<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>, top_left_y <span style="color:#f92672">+</span> height<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Cropping circle code will come here</span>
+</span></span></code></pre></div><p>Here, we find the circle contained in the rectangle (closest) for each face. Let&rsquo;s go ahead and crop this circle one by one, and see how we can use this for Portrait Bokeh!</p>
 <h2 id="step-3-crop-the-circle-and-store-it-in-different-array">Step 3: Crop the circle and store it in different array</h2>
 <p>We discussed the pseudo code of this in <strong>Cropping a Circle</strong> section of this blog. But before this, we have to figure out: How to find a point is within that circle? Think of this as a simple maths problem where you have to find a given coordinate is inside a circle or not. What would you do?</p>
 <ul>
@@ -294,140 +294,140 @@ imgTransp <span style="color:#f92672">=</span> cv2<span style="color:#f92672">.<
 <li>less than 0 if the point is inside the circle.</li>
 </ul>
 <p>Let&rsquo;s use this concept here:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">is_inside</span>(point, center, radius):
-    <span style="color:#e6db74">&#34;&#34;&#34; This function returns True if point is inside/on the boundary, False otherwise &#34;&#34;&#34;</span>
-    eqn <span style="color:#f92672">=</span> (point[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">-</span> center[<span style="color:#ae81ff">0</span>]) <span style="color:#f92672">**</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> (point[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">-</span> center[<span style="color:#ae81ff">1</span>])<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">-</span> radius<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>
-    <span style="color:#66d9ef">return</span> eqn <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0</span>
-
-<span style="color:#75715e"># Iterate through all the pixels in the image</span>
-<span style="color:#66d9ef">for</span> row <span style="color:#f92672">in</span> range(img<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">0</span>]):
-    <span style="color:#66d9ef">for</span> col <span style="color:#f92672">in</span> range(img<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">1</span>]):
-        <span style="color:#66d9ef">if</span> is_inside(img[row][col], center, radius):
-            <span style="color:#75715e"># Means the point is inside/on the face</span>
-            <span style="color:#75715e"># Make it opaque</span>
-            img[row][col][<span style="color:#ae81ff">3</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
-        <span style="color:#66d9ef">else</span>:
-            <span style="color:#75715e"># Means the point is outside the face</span>
-            <span style="color:#75715e"># Make it transparent</span>
-            img[row][col][<span style="color:#ae81ff">3</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">255</span>
-</code></pre></div><p>We will have to execute the for loop once for each face, which means the code becomes:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Make sure to convert BGR to BGRA image first</span>
-<span style="color:#75715e"># To be used later</span>
-imgTransp <span style="color:#f92672">=</span> cv2<span style="color:#f92672">.</span>cvtColor(img, cv2<span style="color:#f92672">.</span>COLOR_BGR2BGRA)
-<span style="color:#75715e"># Make the whole image transparent, by default</span>
-imgTransp[<span style="color:#f92672">...</span>, <span style="color:#ae81ff">3</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">255</span>
-
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">is_inside</span>(point, center, radius):
-    <span style="color:#e6db74">&#34;&#34;&#34; This function returns True if point is inside/on the boundary, False otherwise &#34;&#34;&#34;</span>
-    eqn <span style="color:#f92672">=</span> (point[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">-</span> center[<span style="color:#ae81ff">0</span>]) <span style="color:#f92672">**</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> (point[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">-</span> center[<span style="color:#ae81ff">1</span>])<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">-</span> radius<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>
-    <span style="color:#66d9ef">return</span> eqn <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0</span>
-
-<span style="color:#75715e"># Iterate through each face one by one</span>
-<span style="color:#66d9ef">for</span> face <span style="color:#f92672">in</span> faces:
-    top_left_x, top_left_y, width, height <span style="color:#f92672">=</span> face[<span style="color:#ae81ff">0</span>], face[<span style="color:#ae81ff">1</span>], face[<span style="color:#ae81ff">2</span>], face[<span style="color:#ae81ff">3</span>]
-
-    radius <span style="color:#f92672">=</span> max(width, height)<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>
-    center <span style="color:#f92672">=</span> (top_left_x <span style="color:#f92672">+</span> width<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>, top_left_y <span style="color:#f92672">+</span> height<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>)
-
-    <span style="color:#75715e"># Cropping circle code will come here</span>
-    <span style="color:#75715e"># Iterate through all the pixels in the image</span>
-    <span style="color:#66d9ef">for</span> row <span style="color:#f92672">in</span> range(img<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">0</span>]):
-        <span style="color:#66d9ef">for</span> col <span style="color:#f92672">in</span> range(img<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">1</span>]):
-            <span style="color:#66d9ef">if</span> is_inside(img[row][col], center, radius):
-                <span style="color:#75715e"># Means the point is inside/on the face</span>
-                <span style="color:#75715e"># Make it opaque</span>
-                imgTransp[row][col][<span style="color:#ae81ff">3</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">255</span>
-            <span style="color:#66d9ef">else</span>:
-                <span style="color:#75715e"># Means the point is outside the face</span>
-                <span style="color:#75715e"># Make it transparent</span>
-                imgTransp[row][col][<span style="color:#ae81ff">3</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
-</code></pre></div><p>If you notice, we have 3 nested for loops, which will result into really non-efficient code for HD Images (1920x1080 images? Think of the number of computations happening in this case). Suppose we have 3 faces detected and our input image is 1920 x 1080 (width x height). Total number of times the function <code>is_inside</code> called will be: 3 x 1920 x 1080, which is 6220800 (approx. 6.2 Million or 62 Lacs). It&rsquo;s a lot!</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">is_inside</span>(point, center, radius):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34; This function returns True if point is inside/on the boundary, False otherwise &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    eqn <span style="color:#f92672">=</span> (point[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">-</span> center[<span style="color:#ae81ff">0</span>]) <span style="color:#f92672">**</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> (point[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">-</span> center[<span style="color:#ae81ff">1</span>])<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">-</span> radius<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> eqn <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Iterate through all the pixels in the image</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> row <span style="color:#f92672">in</span> range(img<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">0</span>]):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> col <span style="color:#f92672">in</span> range(img<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">1</span>]):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> is_inside(img[row][col], center, radius):
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e"># Means the point is inside/on the face</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e"># Make it opaque</span>
+</span></span><span style="display:flex;"><span>            img[row][col][<span style="color:#ae81ff">3</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e"># Means the point is outside the face</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e"># Make it transparent</span>
+</span></span><span style="display:flex;"><span>            img[row][col][<span style="color:#ae81ff">3</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">255</span>
+</span></span></code></pre></div><p>We will have to execute the for loop once for each face, which means the code becomes:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Make sure to convert BGR to BGRA image first</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># To be used later</span>
+</span></span><span style="display:flex;"><span>imgTransp <span style="color:#f92672">=</span> cv2<span style="color:#f92672">.</span>cvtColor(img, cv2<span style="color:#f92672">.</span>COLOR_BGR2BGRA)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Make the whole image transparent, by default</span>
+</span></span><span style="display:flex;"><span>imgTransp[<span style="color:#f92672">...</span>, <span style="color:#ae81ff">3</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">255</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">is_inside</span>(point, center, radius):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34; This function returns True if point is inside/on the boundary, False otherwise &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    eqn <span style="color:#f92672">=</span> (point[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">-</span> center[<span style="color:#ae81ff">0</span>]) <span style="color:#f92672">**</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> (point[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">-</span> center[<span style="color:#ae81ff">1</span>])<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">-</span> radius<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> eqn <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Iterate through each face one by one</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> face <span style="color:#f92672">in</span> faces:
+</span></span><span style="display:flex;"><span>    top_left_x, top_left_y, width, height <span style="color:#f92672">=</span> face[<span style="color:#ae81ff">0</span>], face[<span style="color:#ae81ff">1</span>], face[<span style="color:#ae81ff">2</span>], face[<span style="color:#ae81ff">3</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    radius <span style="color:#f92672">=</span> max(width, height)<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>    center <span style="color:#f92672">=</span> (top_left_x <span style="color:#f92672">+</span> width<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>, top_left_y <span style="color:#f92672">+</span> height<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Cropping circle code will come here</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Iterate through all the pixels in the image</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> row <span style="color:#f92672">in</span> range(img<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">0</span>]):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> col <span style="color:#f92672">in</span> range(img<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">1</span>]):
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> is_inside(img[row][col], center, radius):
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e"># Means the point is inside/on the face</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e"># Make it opaque</span>
+</span></span><span style="display:flex;"><span>                imgTransp[row][col][<span style="color:#ae81ff">3</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">255</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e"># Means the point is outside the face</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e"># Make it transparent</span>
+</span></span><span style="display:flex;"><span>                imgTransp[row][col][<span style="color:#ae81ff">3</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span></code></pre></div><p>If you notice, we have 3 nested for loops, which will result into really non-efficient code for HD Images (1920x1080 images? Think of the number of computations happening in this case). Suppose we have 3 faces detected and our input image is 1920 x 1080 (width x height). Total number of times the function <code>is_inside</code> called will be: 3 x 1920 x 1080, which is 6220800 (approx. 6.2 Million or 62 Lacs). It&rsquo;s a lot!</p>
 <p>We can not avoid these loops though, but why iterate through the whole image when you know the circle is anyways gonna be within that rectangle (face)! Imagine the face is 200 x 200 now, and everything remains same (3 faces, HD input Image: 1920 x 1080). If we only iterate through the face everytime, the computations will be: 3 * 200 * 200, which is 120000 (120 thousand or 1.2 lacs). Much better. All we have to do is, pick the face ROI, and iterate through that region. Everything else remains same:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">for</span> row <span style="color:#f92672">in</span> range(tly, tly <span style="color:#f92672">+</span> height):
-    <span style="color:#66d9ef">for</span> col <span style="color:#f92672">in</span> range(tlx, tlx <span style="color:#f92672">+</span> width):
-        <span style="color:#66d9ef">if</span> is_inside(img[row][col], center, radius):
-            <span style="color:#75715e"># Means the point is inside/on the face</span>
-            <span style="color:#75715e"># Make it opaque</span>
-            imgTransp[row][col][<span style="color:#ae81ff">3</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">255</span>
-        <span style="color:#66d9ef">else</span>:
-            <span style="color:#75715e"># Means the point is outside the face</span>
-            <span style="color:#75715e"># Make it transparent</span>
-            imgTransp[row][col][<span style="color:#ae81ff">3</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
-</code></pre></div><p>So, the code should look like this:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Make sure to convert BGR to BGRA image first</span>
-<span style="color:#75715e"># To be used later</span>
-imgTransp <span style="color:#f92672">=</span> cv2<span style="color:#f92672">.</span>cvtColor(img, cv2<span style="color:#f92672">.</span>COLOR_BGR2BGRA)
-<span style="color:#75715e"># Make the whole image transparent by default</span>
-imgTransp[<span style="color:#f92672">...</span>, <span style="color:#ae81ff">3</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">255</span>
-
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">is_inside</span>(point, center, radius):
-    <span style="color:#e6db74">&#34;&#34;&#34; This function returns True if point is inside/on the boundary, False otherwise &#34;&#34;&#34;</span>
-    eqn <span style="color:#f92672">=</span> (point[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">-</span> center[<span style="color:#ae81ff">0</span>]) <span style="color:#f92672">**</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> (point[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">-</span> center[<span style="color:#ae81ff">1</span>])<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">-</span> radius<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>
-    <span style="color:#66d9ef">return</span> eqn <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0</span>
-
-<span style="color:#75715e"># Iterate through each face one by one</span>
-<span style="color:#66d9ef">for</span> face <span style="color:#f92672">in</span> faces:
-    top_left_x, top_left_y, width, height <span style="color:#f92672">=</span> face[<span style="color:#ae81ff">0</span>], face[<span style="color:#ae81ff">1</span>], face[<span style="color:#ae81ff">2</span>], face[<span style="color:#ae81ff">3</span>]
-
-    radius <span style="color:#f92672">=</span> max(width, height)<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>
-    center <span style="color:#f92672">=</span> (top_left_x <span style="color:#f92672">+</span> width<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>, top_left_y <span style="color:#f92672">+</span> height<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>)
-
-    <span style="color:#75715e"># Cropping circle code will come here</span>
-    <span style="color:#75715e"># Iterate through all the pixels in the image</span>
-    <span style="color:#66d9ef">for</span> row <span style="color:#f92672">in</span> range(tly, tly <span style="color:#f92672">+</span> height):
-        <span style="color:#66d9ef">for</span> col <span style="color:#f92672">in</span> range(tlx, tlx <span style="color:#f92672">+</span> width):
-            <span style="color:#66d9ef">if</span> is_inside((col, row), center, radius):
-                <span style="color:#75715e"># Means the point is inside/on the face</span>
-                <span style="color:#75715e"># Make it opaque</span>
-                imgTransp[row][col][<span style="color:#ae81ff">3</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">255</span>
-            <span style="color:#66d9ef">else</span>:
-                <span style="color:#75715e"># Means the point is outside the face</span>
-                <span style="color:#75715e"># Make it transparent</span>
-                imgTransp[row][col][<span style="color:#ae81ff">3</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
-</code></pre></div><p>Let&rsquo;s try to visualize <code>imgTransp</code> here and see how this looks like:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> row <span style="color:#f92672">in</span> range(tly, tly <span style="color:#f92672">+</span> height):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> col <span style="color:#f92672">in</span> range(tlx, tlx <span style="color:#f92672">+</span> width):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> is_inside(img[row][col], center, radius):
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e"># Means the point is inside/on the face</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e"># Make it opaque</span>
+</span></span><span style="display:flex;"><span>            imgTransp[row][col][<span style="color:#ae81ff">3</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">255</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e"># Means the point is outside the face</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e"># Make it transparent</span>
+</span></span><span style="display:flex;"><span>            imgTransp[row][col][<span style="color:#ae81ff">3</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span></code></pre></div><p>So, the code should look like this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Make sure to convert BGR to BGRA image first</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># To be used later</span>
+</span></span><span style="display:flex;"><span>imgTransp <span style="color:#f92672">=</span> cv2<span style="color:#f92672">.</span>cvtColor(img, cv2<span style="color:#f92672">.</span>COLOR_BGR2BGRA)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Make the whole image transparent by default</span>
+</span></span><span style="display:flex;"><span>imgTransp[<span style="color:#f92672">...</span>, <span style="color:#ae81ff">3</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">255</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">is_inside</span>(point, center, radius):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34; This function returns True if point is inside/on the boundary, False otherwise &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    eqn <span style="color:#f92672">=</span> (point[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">-</span> center[<span style="color:#ae81ff">0</span>]) <span style="color:#f92672">**</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> (point[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">-</span> center[<span style="color:#ae81ff">1</span>])<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">-</span> radius<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> eqn <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Iterate through each face one by one</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> face <span style="color:#f92672">in</span> faces:
+</span></span><span style="display:flex;"><span>    top_left_x, top_left_y, width, height <span style="color:#f92672">=</span> face[<span style="color:#ae81ff">0</span>], face[<span style="color:#ae81ff">1</span>], face[<span style="color:#ae81ff">2</span>], face[<span style="color:#ae81ff">3</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    radius <span style="color:#f92672">=</span> max(width, height)<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>    center <span style="color:#f92672">=</span> (top_left_x <span style="color:#f92672">+</span> width<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>, top_left_y <span style="color:#f92672">+</span> height<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Cropping circle code will come here</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Iterate through all the pixels in the image</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> row <span style="color:#f92672">in</span> range(tly, tly <span style="color:#f92672">+</span> height):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> col <span style="color:#f92672">in</span> range(tlx, tlx <span style="color:#f92672">+</span> width):
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> is_inside((col, row), center, radius):
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e"># Means the point is inside/on the face</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e"># Make it opaque</span>
+</span></span><span style="display:flex;"><span>                imgTransp[row][col][<span style="color:#ae81ff">3</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">255</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e"># Means the point is outside the face</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e"># Make it transparent</span>
+</span></span><span style="display:flex;"><span>                imgTransp[row][col][<span style="color:#ae81ff">3</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span></code></pre></div><p>Let&rsquo;s try to visualize <code>imgTransp</code> here and see how this looks like:</p>
 <!-- raw HTML omitted -->
 <p>This looks good so far! We have cropped the circle (face), and all we need to do now is - overlay this image on a blurred image. Let&rsquo;s head straight to Step 4.</p>
 <h2 id="step-4-blurring-and-overlaying">Step 4: Blurring and overlaying</h2>
 <p>In Step 3, we were able to crop the circle. But think about this, whenever we know the pixel is inside the face, let&rsquo;s just replace the blurred pixel with original image.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Blur the whole image first</span>
-img_blurred <span style="color:#f92672">=</span> cv2<span style="color:#f92672">.</span>GaussianBlur(img, (<span style="color:#ae81ff">11</span>, <span style="color:#ae81ff">11</span>), <span style="color:#ae81ff">0</span>)
-
-<span style="color:#75715e"># Iterate through the faces we were doing before</span>
-<span style="color:#75715e"># Whenever the pixel is inside, replace the point at img_blurred with original img</span>
-
-<span style="color:#75715e"># Make sure to convert BGR to BGRA image first</span>
-<span style="color:#75715e"># To be used later</span>
-imgTransp <span style="color:#f92672">=</span> cv2<span style="color:#f92672">.</span>cvtColor(img, cv2<span style="color:#f92672">.</span>COLOR_BGR2BGRA)
-<span style="color:#75715e"># Make the whole image transparent by default</span>
-imgTransp[<span style="color:#f92672">...</span>, <span style="color:#ae81ff">3</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">255</span>
-
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">is_inside</span>(point, center, radius):
-    <span style="color:#e6db74">&#34;&#34;&#34; This function returns True if point is inside/on the boundary, False otherwise &#34;&#34;&#34;</span>
-    eqn <span style="color:#f92672">=</span> (point[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">-</span> center[<span style="color:#ae81ff">0</span>]) <span style="color:#f92672">**</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> (point[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">-</span> center[<span style="color:#ae81ff">1</span>])<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">-</span> radius<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>
-    <span style="color:#66d9ef">return</span> eqn <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0</span>
-
-<span style="color:#75715e"># Iterate through each face one by one</span>
-<span style="color:#66d9ef">for</span> face <span style="color:#f92672">in</span> faces:
-    top_left_x, top_left_y, width, height <span style="color:#f92672">=</span> face[<span style="color:#ae81ff">0</span>], face[<span style="color:#ae81ff">1</span>], face[<span style="color:#ae81ff">2</span>], face[<span style="color:#ae81ff">3</span>]
-
-    radius <span style="color:#f92672">=</span> max(width, height)<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>
-    center <span style="color:#f92672">=</span> (top_left_x <span style="color:#f92672">+</span> width<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>, top_left_y <span style="color:#f92672">+</span> height<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>)
-
-    <span style="color:#75715e"># Cropping circle code will come here</span>
-    <span style="color:#75715e"># Iterate through all the pixels in the image</span>
-    <span style="color:#66d9ef">for</span> row <span style="color:#f92672">in</span> range(tly, tly <span style="color:#f92672">+</span> height):
-        <span style="color:#66d9ef">for</span> col <span style="color:#f92672">in</span> range(tlx, tlx <span style="color:#f92672">+</span> width):
-            <span style="color:#66d9ef">if</span> is_inside((col, row), center, radius):
-                <span style="color:#75715e"># Means the point is inside/on the face</span>
-                <span style="color:#75715e"># Make it opaque</span>
-                imgTransp[row][col][<span style="color:#ae81ff">3</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">255</span>
-                <span style="color:#75715e"># Replace pixel of blurred image with original image</span>
-                imgBlurred[row][col] <span style="color:#f92672">=</span> img[row][col]
-            <span style="color:#66d9ef">else</span>:
-                <span style="color:#75715e"># Means the point is outside the face</span>
-                <span style="color:#75715e"># Make it transparent</span>
-                imgTransp[row][col][<span style="color:#ae81ff">3</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
-</code></pre></div><p><strong>Note:</strong> The only reason we used <code>imgTransp</code> here, is to show how to crop a circle. For portrait bokeh, you don&rsquo;t need to have <code>imgTransp</code> and transparency channels.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Blur the whole image first</span>
+</span></span><span style="display:flex;"><span>img_blurred <span style="color:#f92672">=</span> cv2<span style="color:#f92672">.</span>GaussianBlur(img, (<span style="color:#ae81ff">11</span>, <span style="color:#ae81ff">11</span>), <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Iterate through the faces we were doing before</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Whenever the pixel is inside, replace the point at img_blurred with original img</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Make sure to convert BGR to BGRA image first</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># To be used later</span>
+</span></span><span style="display:flex;"><span>imgTransp <span style="color:#f92672">=</span> cv2<span style="color:#f92672">.</span>cvtColor(img, cv2<span style="color:#f92672">.</span>COLOR_BGR2BGRA)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Make the whole image transparent by default</span>
+</span></span><span style="display:flex;"><span>imgTransp[<span style="color:#f92672">...</span>, <span style="color:#ae81ff">3</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">255</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">is_inside</span>(point, center, radius):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34; This function returns True if point is inside/on the boundary, False otherwise &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    eqn <span style="color:#f92672">=</span> (point[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">-</span> center[<span style="color:#ae81ff">0</span>]) <span style="color:#f92672">**</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> (point[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">-</span> center[<span style="color:#ae81ff">1</span>])<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">-</span> radius<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> eqn <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Iterate through each face one by one</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> face <span style="color:#f92672">in</span> faces:
+</span></span><span style="display:flex;"><span>    top_left_x, top_left_y, width, height <span style="color:#f92672">=</span> face[<span style="color:#ae81ff">0</span>], face[<span style="color:#ae81ff">1</span>], face[<span style="color:#ae81ff">2</span>], face[<span style="color:#ae81ff">3</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    radius <span style="color:#f92672">=</span> max(width, height)<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>    center <span style="color:#f92672">=</span> (top_left_x <span style="color:#f92672">+</span> width<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>, top_left_y <span style="color:#f92672">+</span> height<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Cropping circle code will come here</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Iterate through all the pixels in the image</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> row <span style="color:#f92672">in</span> range(tly, tly <span style="color:#f92672">+</span> height):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> col <span style="color:#f92672">in</span> range(tlx, tlx <span style="color:#f92672">+</span> width):
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> is_inside((col, row), center, radius):
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e"># Means the point is inside/on the face</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e"># Make it opaque</span>
+</span></span><span style="display:flex;"><span>                imgTransp[row][col][<span style="color:#ae81ff">3</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">255</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e"># Replace pixel of blurred image with original image</span>
+</span></span><span style="display:flex;"><span>                imgBlurred[row][col] <span style="color:#f92672">=</span> img[row][col]
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e"># Means the point is outside the face</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e"># Make it transparent</span>
+</span></span><span style="display:flex;"><span>                imgTransp[row][col][<span style="color:#ae81ff">3</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span></code></pre></div><p><strong>Note:</strong> The only reason we used <code>imgTransp</code> here, is to show how to crop a circle. For portrait bokeh, you don&rsquo;t need to have <code>imgTransp</code> and transparency channels.</p>
 <p>Here is how the output looks like. While I understand that there is still some background, but we can definitely be better than this - and this will be our topic for the next blog!</p>
 <!-- raw HTML omitted -->
 <p>This should be it for this blog, and I hope you learnt something new today. If you liked the content, please leave a comment below. I would love to read your feedbacks, suggestions and if this helped you out in any way. I also go live on weekends, and upload videos on weekdays on my <a href="https://youtube.com/c/kushashwaraviShrimali">YouTube Channel</a>, so make sure to subscribe there and join me in if you find it interesting! Thank you for reading this blog.</p>
@@ -610,7 +610,7 @@ imgTransp[<span style="color:#f92672">...</span>, <span style="color:#ae81ff">3<
         })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
         ga('create', 'UA-146662543-1', 'auto');ga('send', 'pageview');
     </script>
-<script src="https://krshrimali.github.io/js/webmention.min.513a53d009530b21cba09721b6f4dc912e9c20ad2c0adbb5c4e486c4f77774a6e9eca8c2e1e4e8bc9e9e86693aa5ca91e7bf232b50f7f8bee4e64efc874040a7.js" data-id="webmention-container"></script>
+<script src="https://krshrimali.github.io/js/webmention.min.8b3a0bd9a45559d02f5c9a0c5201da2ba4c8ed9b9d43bcc2d7951d4e72774e819ade3984c11c3bf2f2a2675050756a2b6f502de6829e5b0ff5fc04ff1f68d089.js" data-id="webmention-container"></script>
 
 
 

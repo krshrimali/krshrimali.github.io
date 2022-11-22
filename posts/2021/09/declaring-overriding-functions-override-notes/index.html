@@ -8,9 +8,9 @@
 <meta name="description" content="NOTE
 My notes on Chapter 3, Item 12 of Effective Modern C&#43;&#43; written by Scott Meyers.
 Some (or even all) of the text can be similar to what you see in the book, as these are notes: I&amp;rsquo;ve tried not to be unnecessarily creative with my words. :)
- Overriding != Overloading
+Overriding != Overloading
 Example of virtual function overriding:
-// Base class class Base { public: virtual void doWork(); // ... }; // Derived class from Base class Derived: public Base { public: // virtual is optional  // this will &amp;#34;override&amp;#34; Base::doWork  virtual void doWork(); // ." />
+// Base class class Base { public: virtual void doWork(); // ... }; // Derived class from Base class Derived: public Base { public: // virtual is optional // this will &amp;#34;override&amp;#34; Base::doWork virtual void doWork(); // ." />
 <meta name="keywords" content=", development, coding, cpp, notes, override" />
 <meta name="robots" content="noodp" />
 <meta name="theme-color" content="#252627" />
@@ -54,9 +54,9 @@ Example of virtual function overriding:
 <meta itemprop="description" content="NOTE
 My notes on Chapter 3, Item 12 of Effective Modern C&#43;&#43; written by Scott Meyers.
 Some (or even all) of the text can be similar to what you see in the book, as these are notes: I&rsquo;ve tried not to be unnecessarily creative with my words. :)
- Overriding != Overloading
+Overriding != Overloading
 Example of virtual function overriding:
-// Base class class Base { public: virtual void doWork(); // ... }; // Derived class from Base class Derived: public Base { public: // virtual is optional  // this will &#34;override&#34; Base::doWork  virtual void doWork(); // ."><meta itemprop="datePublished" content="2021-09-25T00:00:00+00:00" />
+// Base class class Base { public: virtual void doWork(); // ... }; // Derived class from Base class Derived: public Base { public: // virtual is optional // this will &#34;override&#34; Base::doWork virtual void doWork(); // ."><meta itemprop="datePublished" content="2021-09-25T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2021-09-25T00:00:00+00:00" />
 <meta itemprop="wordCount" content="688"><meta itemprop="image" content="https://krshrimali.github.io"/>
 <meta itemprop="keywords" content="development,coding,cpp,notes,override," /><meta name="twitter:card" content="summary_large_image"/>
@@ -66,9 +66,9 @@ Example of virtual function overriding:
 <meta name="twitter:description" content="NOTE
 My notes on Chapter 3, Item 12 of Effective Modern C&#43;&#43; written by Scott Meyers.
 Some (or even all) of the text can be similar to what you see in the book, as these are notes: I&rsquo;ve tried not to be unnecessarily creative with my words. :)
- Overriding != Overloading
+Overriding != Overloading
 Example of virtual function overriding:
-// Base class class Base { public: virtual void doWork(); // ... }; // Derived class from Base class Derived: public Base { public: // virtual is optional  // this will &#34;override&#34; Base::doWork  virtual void doWork(); // ."/>
+// Base class class Base { public: virtual void doWork(); // ... }; // Derived class from Base class Derived: public Base { public: // virtual is optional // this will &#34;override&#34; Base::doWork virtual void doWork(); // ."/>
 
 
 
@@ -189,29 +189,29 @@ Example of virtual function overriding:
 <p><img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/cover-images/declaring-overriding-functions-override.png" alt=""></p>
 <p>Overriding != Overloading</p>
 <p><em>Example</em> of virtual function overriding:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// Base class
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Base</span> {
-<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-    <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> doWork();
-    <span style="color:#75715e">// ...
-</span><span style="color:#75715e"></span>};
-
-<span style="color:#75715e">// Derived class from Base
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Derived</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Base {
-<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-    <span style="color:#75715e">// virtual is optional
-</span><span style="color:#75715e"></span>    <span style="color:#75715e">// this will &#34;override&#34; Base::doWork
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> doWork();
-    <span style="color:#75715e">// ...
-</span><span style="color:#75715e"></span>};
-
-
-<span style="color:#75715e">// This creates a &#34;Base&#34; class pointer to &#34;Derived&#34; class object
-</span><span style="color:#75715e"></span>std<span style="color:#f92672">::</span>unique_ptr<span style="color:#f92672">&lt;</span>Base<span style="color:#f92672">&gt;</span> upb <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>make_unique<span style="color:#f92672">&lt;</span>Derived<span style="color:#f92672">&gt;</span>();
-
-<span style="color:#75715e">// Derived doWork() function is invoked
-</span><span style="color:#75715e"></span>upb<span style="color:#f92672">-&gt;</span>doWork();
-</code></pre></div><p>This is how virtual function overriding allows to invoke a &ldquo;derived class function&rdquo; from a base class interface.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">// Base class
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Base</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> doWork();
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// ...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Derived class from Base
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Derived</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Base {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// virtual is optional
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// this will &#34;override&#34; Base::doWork
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> doWork();
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// ...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// This creates a &#34;Base&#34; class pointer to &#34;Derived&#34; class object
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>std<span style="color:#f92672">::</span>unique_ptr<span style="color:#f92672">&lt;</span>Base<span style="color:#f92672">&gt;</span> upb <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>make_unique<span style="color:#f92672">&lt;</span>Derived<span style="color:#f92672">&gt;</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Derived doWork() function is invoked
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>upb<span style="color:#f92672">-&gt;</span>doWork();
+</span></span></code></pre></div><p>This is how virtual function overriding allows to invoke a &ldquo;derived class function&rdquo; from a base class interface.</p>
 <p><strong>Requirements for overriding</strong>:</p>
 <ol>
 <li>Base class function must be virtual.</li>
@@ -222,46 +222,46 @@ Example of virtual function overriding:
 <li>[from C++11] Both functions should have identical reference qualifiers (see below)</li>
 </ol>
 <p>Reference qualifiers were new to me, but the book gives a really good example:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// Useful when you want to limit the calls to lvalues or rvalues only
-</span><span style="color:#75715e"></span>
-<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Widget</span> {
-<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-    <span style="color:#75715e">// ...
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">void</span> doWork() <span style="color:#f92672">&amp;</span>; <span style="color:#75715e">// Only when *this is an lvalue
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">doWork</span>() <span style="color:#f92672">&amp;&amp;</span>; <span style="color:#75715e">// Only when *this is an rvalue
-</span><span style="color:#75715e"></span>    <span style="color:#75715e">// ...
-</span><span style="color:#75715e"></span>};
-
-<span style="color:#75715e">// Suppose there is a makeWidget() function that returns an instance of Widget class, this will be an rvalue here
-</span><span style="color:#75715e"></span>Widget <span style="color:#a6e22e">makeWidget</span>();
-
-<span style="color:#75715e">// lvalue
-</span><span style="color:#75715e"></span>Widget w;
-
-<span style="color:#75715e">// this will call void doWork() &amp;;
-</span><span style="color:#75715e"></span>w.doWork();
-
-<span style="color:#75715e">// this will call void doWork() &amp;&amp;;
-</span><span style="color:#75715e"></span>makeWidget().doWork();
-</code></pre></div><p>In case the functions don&rsquo;t have identical reference qualifiers, the derived class will <em>still have</em> the function, but it won&rsquo;t override the base class function.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">// Useful when you want to limit the calls to lvalues or rvalues only
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Widget</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// ...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">void</span> doWork() <span style="color:#f92672">&amp;</span>; <span style="color:#75715e">// Only when *this is an lvalue
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">doWork</span>() <span style="color:#f92672">&amp;&amp;</span>; <span style="color:#75715e">// Only when *this is an rvalue
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// ...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Suppose there is a makeWidget() function that returns an instance of Widget class, this will be an rvalue here
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>Widget <span style="color:#a6e22e">makeWidget</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// lvalue
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>Widget w;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// this will call void doWork() &amp;;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>w.doWork();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// this will call void doWork() &amp;&amp;;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>makeWidget().doWork();
+</span></span></code></pre></div><p>In case the functions don&rsquo;t have identical reference qualifiers, the derived class will <em>still have</em> the function, but it won&rsquo;t override the base class function.</p>
 <p>Because of a lot of conditions (see 6 <em>requirements</em> above), it&rsquo;s easy to make mistakes or forget a few things while overriding a function. And the book states that it&rsquo;s not worth expecting from compiler to report an error, because the code can still be valid - it&rsquo;s just you expected it to override, but it didn&rsquo;t.</p>
 <p>See an example below:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Base</span> {
-<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-    <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> mf1() <span style="color:#66d9ef">const</span>;
-    <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">mf2</span>(<span style="color:#66d9ef">int</span> x);
-    <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">mf3</span>() <span style="color:#f92672">&amp;</span>;
-    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">mf4</span>() <span style="color:#66d9ef">const</span>;
-};
-
-<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Derived</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Base {
-<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-    <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> mf1();
-    <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">mf2</span>(<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span> x);
-    <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">mf3</span>() <span style="color:#f92672">&amp;&amp;</span>;
-    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">mf4</span>() <span style="color:#66d9ef">const</span>;
-};
-</code></pre></div><p>None of the functions in <code>Derived</code> class will override functions in the <code>Base</code> class. Why?</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Base</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> mf1() <span style="color:#66d9ef">const</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">mf2</span>(<span style="color:#66d9ef">int</span> x);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">mf3</span>() <span style="color:#f92672">&amp;</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">mf4</span>() <span style="color:#66d9ef">const</span>;
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Derived</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Base {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> mf1();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">mf2</span>(<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span> x);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">mf3</span>() <span style="color:#f92672">&amp;&amp;</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">mf4</span>() <span style="color:#66d9ef">const</span>;
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><p>None of the functions in <code>Derived</code> class will override functions in the <code>Base</code> class. Why?</p>
 <ol>
 <li><code>mf1()</code>: declared <code>const</code> in <code>Base</code> but not in <code>Derived</code>.</li>
 <li><code>mf2()</code>: arg <code>int</code> in <code>Base</code> but <code>unsigned int</code> in <code>Derived</code>.</li>
@@ -269,23 +269,23 @@ Example of virtual function overriding:
 <li><code>mf4()</code>: isn&rsquo;t declared <code>virtual</code> in <code>Base</code>.</li>
 </ol>
 <p>To avoid worrying about human mistakes, it&rsquo;s better to let the compiler know explicitly that these functions are expected to override. For that, declare the functions in <code>Derived</code> class <code>override</code>.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Derived</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Base {
-<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-    <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> mf1() <span style="color:#66d9ef">override</span>;
-    <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">mf2</span>(<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span> x) <span style="color:#66d9ef">override</span>;
-    <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">mf3</span>() <span style="color:#f92672">&amp;&amp;</span> <span style="color:#66d9ef">override</span>;
-    <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">mf4</span>() <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">override</span>;
-};
-</code></pre></div><p>Now, this won&rsquo;t compile for sure no matter what compiler you are using.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Derived</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Base {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> mf1() <span style="color:#66d9ef">override</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">mf2</span>(<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span> x) <span style="color:#66d9ef">override</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">mf3</span>() <span style="color:#f92672">&amp;&amp;</span> <span style="color:#66d9ef">override</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">mf4</span>() <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">override</span>;
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><p>Now, this won&rsquo;t compile for sure no matter what compiler you are using.</p>
 <p>C++-11 introduced  2 contextual keywords: <code>final</code> (see note below), <code>override</code>. These keywords are reserved, but only in certain contexts.</p>
 <p><strong>Note:</strong> In case you want to prevent a function in a base class to be overridden in derived classes, you can declare them <code>final</code>. <code>final</code> can also be declared for a class, in which case it won&rsquo;t be allowed to be used a base class.</p>
 <p>For <code>override</code>: In case your old (legacy) code uses <code>override</code> somewhere else, it&rsquo;s fine - keep it! Only when it&rsquo;s used at the end of a member function declaration, then it&rsquo;s reserved.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Sample</span> {
-<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-    <span style="color:#75715e">// legal
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">void</span> <span style="color:#66d9ef">override</span>();
-}
-</code></pre></div><p>The chapter (item) ends with a brief about lvalue and rvalue reference member functions, which I would like to cover in another blog. For this blog, I think this should be good! :)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Sample</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// legal
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">void</span> <span style="color:#66d9ef">override</span>();
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>The chapter (item) ends with a brief about lvalue and rvalue reference member functions, which I would like to cover in another blog. For this blog, I think this should be good! :)</p>
 <p>Thank you for reading.</p>
 
             </div>
@@ -466,7 +466,7 @@ Example of virtual function overriding:
         })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
         ga('create', 'UA-146662543-1', 'auto');ga('send', 'pageview');
     </script>
-<script src="https://krshrimali.github.io/js/webmention.min.513a53d009530b21cba09721b6f4dc912e9c20ad2c0adbb5c4e486c4f77774a6e9eca8c2e1e4e8bc9e9e86693aa5ca91e7bf232b50f7f8bee4e64efc874040a7.js" data-id="webmention-container"></script>
+<script src="https://krshrimali.github.io/js/webmention.min.8b3a0bd9a45559d02f5c9a0c5201da2ba4c8ed9b9d43bcc2d7951d4e72774e819ade3984c11c3bf2f2a2675050756a2b6f502de6829e5b0ff5fc04ff1f68d089.js" data-id="webmention-container"></script>
 
 
 
