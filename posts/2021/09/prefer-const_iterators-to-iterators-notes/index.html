@@ -8,8 +8,8 @@
 <meta name="description" content="NOTE
 My notes on Chapter 3, Item 13 of Effective Modern C&#43;&#43; written by Scott Meyers.
 Some (or even all) of the text can be similar to what you see in the book, as these are notes: I&amp;rsquo;ve tried not to be unnecessarily creative with my words. :)
-In C&#43;&#43;, iterators come handy to point at memory addresses of STL containers. For example,
-// C&#43;&#43;11 std::vector&amp;lt;int&amp;gt; x {11, 9, 23, 6}; // begin() member function returns an iterator, which points to the first // memory address of the container x std::vector&amp;lt;int&amp;gt;::iterator it = x." />
+ In C&#43;&#43;, iterators come handy to point at memory addresses of STL containers. For example,
+// C&#43;&#43;11  std::vector&amp;lt;int&amp;gt; x {11, 9, 23, 6}; // begin() member function returns an iterator, which points to the first // memory address of the container x std::vector&amp;lt;int&amp;gt;::iterator it = x." />
 <meta name="keywords" content=", development, coding, cpp, notes, iterators" />
 <meta name="robots" content="noodp" />
 <meta name="theme-color" content="#252627" />
@@ -53,8 +53,8 @@ In C&#43;&#43;, iterators come handy to point at memory addresses of STL contain
 <meta itemprop="description" content="NOTE
 My notes on Chapter 3, Item 13 of Effective Modern C&#43;&#43; written by Scott Meyers.
 Some (or even all) of the text can be similar to what you see in the book, as these are notes: I&rsquo;ve tried not to be unnecessarily creative with my words. :)
-In C&#43;&#43;, iterators come handy to point at memory addresses of STL containers. For example,
-// C&#43;&#43;11 std::vector&lt;int&gt; x {11, 9, 23, 6}; // begin() member function returns an iterator, which points to the first // memory address of the container x std::vector&lt;int&gt;::iterator it = x."><meta itemprop="datePublished" content="2021-09-26T00:00:00+00:00" />
+ In C&#43;&#43;, iterators come handy to point at memory addresses of STL containers. For example,
+// C&#43;&#43;11  std::vector&lt;int&gt; x {11, 9, 23, 6}; // begin() member function returns an iterator, which points to the first // memory address of the container x std::vector&lt;int&gt;::iterator it = x."><meta itemprop="datePublished" content="2021-09-26T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2021-09-26T00:00:00+00:00" />
 <meta itemprop="wordCount" content="885"><meta itemprop="image" content="https://krshrimali.github.io"/>
 <meta itemprop="keywords" content="development,coding,cpp,notes,iterators," /><meta name="twitter:card" content="summary_large_image"/>
@@ -64,8 +64,8 @@ In C&#43;&#43;, iterators come handy to point at memory addresses of STL contain
 <meta name="twitter:description" content="NOTE
 My notes on Chapter 3, Item 13 of Effective Modern C&#43;&#43; written by Scott Meyers.
 Some (or even all) of the text can be similar to what you see in the book, as these are notes: I&rsquo;ve tried not to be unnecessarily creative with my words. :)
-In C&#43;&#43;, iterators come handy to point at memory addresses of STL containers. For example,
-// C&#43;&#43;11 std::vector&lt;int&gt; x {11, 9, 23, 6}; // begin() member function returns an iterator, which points to the first // memory address of the container x std::vector&lt;int&gt;::iterator it = x."/>
+ In C&#43;&#43;, iterators come handy to point at memory addresses of STL containers. For example,
+// C&#43;&#43;11  std::vector&lt;int&gt; x {11, 9, 23, 6}; // begin() member function returns an iterator, which points to the first // memory address of the container x std::vector&lt;int&gt;::iterator it = x."/>
 
 
 
@@ -185,46 +185,46 @@ In C&#43;&#43;, iterators come handy to point at memory addresses of STL contain
 <hr>
 <p><img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/cover-images/prefer-const-iterators-to-iterators.png" alt=""></p>
 <p>In C++, iterators come handy to point at memory addresses of STL containers. For example,</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">// C++11
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span>std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> x {<span style="color:#ae81ff">11</span>, <span style="color:#ae81ff">9</span>, <span style="color:#ae81ff">23</span>, <span style="color:#ae81ff">6</span>};
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// begin() member function returns an iterator, which points to the first
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// memory address of the container x
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;::</span>iterator it <span style="color:#f92672">=</span> x.begin();
-</span></span></code></pre></div><p>While the general practice is to use <code>const</code> whenever possible, but programmers tend to use whenever it&rsquo;s <em>practical</em>. <code>const_iterators</code> is particularly suggested when you want to use iterators, but you don&rsquo;t need to modify what it points to.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// C++11
+</span><span style="color:#75715e"></span>
+std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> x {<span style="color:#ae81ff">11</span>, <span style="color:#ae81ff">9</span>, <span style="color:#ae81ff">23</span>, <span style="color:#ae81ff">6</span>};
+
+<span style="color:#75715e">// begin() member function returns an iterator, which points to the first
+</span><span style="color:#75715e">// memory address of the container x
+</span><span style="color:#75715e"></span>std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;::</span>iterator it <span style="color:#f92672">=</span> x.begin();
+</code></pre></div><p>While the general practice is to use <code>const</code> whenever possible, but programmers tend to use whenever it&rsquo;s <em>practical</em>. <code>const_iterators</code> is particularly suggested when you want to use iterators, but you don&rsquo;t need to modify what it points to.</p>
 <p>Take an example of the code snippet above, you have the iterator <code>it</code> pointing to the beginning position of the container, and if you want to insert a value before this, you just need to pass this iterator to <code>x.insert()</code> along with the value, right? You don&rsquo;t need to modify the iterator. In such cases, <code>const_iterator</code> will be a better choice.</p>
 <p>But, this is all for C++-11 and above. In C++-98, <code>const_iterator</code> wasn&rsquo;t just ready:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">// C++-98
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// Without using const_iterator
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// C++-98, initializing a vector wasn&#39;t that trivial as it is now
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> values[] <span style="color:#f92672">=</span> {<span style="color:#ae81ff">11</span>, <span style="color:#ae81ff">23</span>, <span style="color:#ae81ff">6</span>};
-</span></span><span style="display:flex;"><span>std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> x (values, values<span style="color:#f92672">+</span><span style="color:#ae81ff">3</span>);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// Want to insert 9 before 23 here
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;::</span>iterator it <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>find(x.begin(), x.end(), <span style="color:#ae81ff">23</span>);
-</span></span><span style="display:flex;"><span>x.insert(it, <span style="color:#ae81ff">9</span>);
-</span></span></code></pre></div><p>While this will work in C++-98, but since we don&rsquo;t modify the iterator <code>it</code>, using <code>const_iterators</code> is a better choice:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">// C++-98: this won&#39;t compile
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// Not using aliases here, C++-98 didn&#39;t have the support for aliases
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// (was introduced in C++-11)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// Using these typedefs makes it easier to reuse them
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">typedef</span> std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;::</span>iterator it;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">typedef</span> std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;::</span>const_iterator c_it;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// C++-98, initializing a vector wasn&#39;t that trivial as it is now
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> values[] <span style="color:#f92672">=</span> {<span style="color:#ae81ff">11</span>, <span style="color:#ae81ff">23</span>, <span style="color:#ae81ff">6</span>};
-</span></span><span style="display:flex;"><span>std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> x (values, values<span style="color:#f92672">+</span><span style="color:#ae81ff">3</span>);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>c_it ci <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>find(<span style="color:#66d9ef">static_cast</span><span style="color:#f92672">&lt;</span>c_it<span style="color:#f92672">&gt;</span>(x.begin()), <span style="color:#66d9ef">static_cast</span><span style="color:#f92672">&lt;</span>c_it<span style="color:#f92672">&gt;</span>(x.end()), <span style="color:#ae81ff">23</span>);
-</span></span><span style="display:flex;"><span>x.insert(<span style="color:#66d9ef">static_cast</span><span style="color:#f92672">&lt;</span>it<span style="color:#f92672">&gt;</span>(ci), <span style="color:#ae81ff">9</span>);
-</span></span></code></pre></div><p>If you compile the code snippet above using C++-98 (if you are using <code>g++</code>, use: <code>g++ &lt;filename&gt;.cpp -std=c++-98</code>), you will hopefully get an error similar to:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>main.cpp:<span style="color:#ae81ff">10</span><span style="color:#f92672">:</span><span style="color:#ae81ff">14</span><span style="color:#f92672">:</span> error: no matching conversion <span style="color:#66d9ef">for</span> <span style="color:#66d9ef">static_cast</span> from <span style="color:#960050;background-color:#1e0010">&#39;</span>c_it<span style="color:#960050;background-color:#1e0010">&#39;</span> (aka <span style="color:#960050;background-color:#1e0010">&#39;</span>__wrap_iter<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> <span style="color:#f92672">*&gt;</span><span style="color:#960050;background-color:#1e0010">&#39;</span>) to <span style="color:#960050;background-color:#1e0010">&#39;</span>it<span style="color:#960050;background-color:#1e0010">&#39;</span> (aka <span style="color:#960050;background-color:#1e0010">&#39;</span>__wrap_iter<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span> <span style="color:#f92672">*&gt;</span><span style="color:#960050;background-color:#1e0010">&#39;</span>)
-</span></span><span style="display:flex;"><span>    x.insert(<span style="color:#66d9ef">static_cast</span><span style="color:#f92672">&lt;</span>it<span style="color:#f92672">&gt;</span>(ci), <span style="color:#ae81ff">9</span>);
-</span></span><span style="display:flex;"><span>             <span style="color:#f92672">^~~~~~~~~~~~~~~~~~~</span>
-</span></span></code></pre></div><p>As you can probably notice, it says &ldquo;no matching coversion for <code>static_cast</code> from <code>c_it</code> to <code>it</code>&rdquo;, that means in C++-98 there was no straight forward way to cast <code>const_iterator</code> to <code>iterator</code>. The author does point that there are some reall non-trivial ways to get around, but those are out of the scope of this blog and the book as well.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// C++-98
+</span><span style="color:#75715e">// Without using const_iterator
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">// C++-98, initializing a vector wasn&#39;t that trivial as it is now
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> values[] <span style="color:#f92672">=</span> {<span style="color:#ae81ff">11</span>, <span style="color:#ae81ff">23</span>, <span style="color:#ae81ff">6</span>};
+std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> x (values, values<span style="color:#f92672">+</span><span style="color:#ae81ff">3</span>);
+
+<span style="color:#75715e">// Want to insert 9 before 23 here
+</span><span style="color:#75715e"></span>std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;::</span>iterator it <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>find(x.begin(), x.end(), <span style="color:#ae81ff">23</span>);
+x.insert(it, <span style="color:#ae81ff">9</span>);
+</code></pre></div><p>While this will work in C++-98, but since we don&rsquo;t modify the iterator <code>it</code>, using <code>const_iterators</code> is a better choice:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// C++-98: this won&#39;t compile
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">// Not using aliases here, C++-98 didn&#39;t have the support for aliases
+</span><span style="color:#75715e">// (was introduced in C++-11)
+</span><span style="color:#75715e">// Using these typedefs makes it easier to reuse them
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">typedef</span> std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;::</span>iterator it;
+<span style="color:#66d9ef">typedef</span> std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;::</span>const_iterator c_it;
+
+<span style="color:#75715e">// C++-98, initializing a vector wasn&#39;t that trivial as it is now
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> values[] <span style="color:#f92672">=</span> {<span style="color:#ae81ff">11</span>, <span style="color:#ae81ff">23</span>, <span style="color:#ae81ff">6</span>};
+std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> x (values, values<span style="color:#f92672">+</span><span style="color:#ae81ff">3</span>);
+
+c_it ci <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>find(<span style="color:#66d9ef">static_cast</span><span style="color:#f92672">&lt;</span>c_it<span style="color:#f92672">&gt;</span>(x.begin()), <span style="color:#66d9ef">static_cast</span><span style="color:#f92672">&lt;</span>c_it<span style="color:#f92672">&gt;</span>(x.end()), <span style="color:#ae81ff">23</span>);
+x.insert(<span style="color:#66d9ef">static_cast</span><span style="color:#f92672">&lt;</span>it<span style="color:#f92672">&gt;</span>(ci), <span style="color:#ae81ff">9</span>);
+</code></pre></div><p>If you compile the code snippet above using C++-98 (if you are using <code>g++</code>, use: <code>g++ &lt;filename&gt;.cpp -std=c++-98</code>), you will hopefully get an error similar to:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">main.cpp:<span style="color:#ae81ff">10</span><span style="color:#f92672">:</span><span style="color:#ae81ff">14</span><span style="color:#f92672">:</span> error: no matching conversion <span style="color:#66d9ef">for</span> <span style="color:#66d9ef">static_cast</span> from <span style="color:#960050;background-color:#1e0010">&#39;</span>c_it<span style="color:#960050;background-color:#1e0010">&#39;</span> (aka <span style="color:#960050;background-color:#1e0010">&#39;</span>__wrap_iter<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> <span style="color:#f92672">*&gt;</span><span style="color:#960050;background-color:#1e0010">&#39;</span>) to <span style="color:#960050;background-color:#1e0010">&#39;</span>it<span style="color:#960050;background-color:#1e0010">&#39;</span> (aka <span style="color:#960050;background-color:#1e0010">&#39;</span>__wrap_iter<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span> <span style="color:#f92672">*&gt;</span><span style="color:#960050;background-color:#1e0010">&#39;</span>)
+    x.insert(<span style="color:#66d9ef">static_cast</span><span style="color:#f92672">&lt;</span>it<span style="color:#f92672">&gt;</span>(ci), <span style="color:#ae81ff">9</span>);
+             <span style="color:#f92672">^~~~~~~~~~~~~~~~~~~</span>
+</code></pre></div><p>As you can probably notice, it says &ldquo;no matching coversion for <code>static_cast</code> from <code>c_it</code> to <code>it</code>&rdquo;, that means in C++-98 there was no straight forward way to cast <code>const_iterator</code> to <code>iterator</code>. The author does point that there are some reall non-trivial ways to get around, but those are out of the scope of this blog and the book as well.</p>
 <p>A few observations in the snippet above:</p>
 <ol>
 <li>In <code>std::find</code> we cast <code>x.begin()</code> iterators to <code>const_iterator</code> (<code>c_it</code>) because in C++-98, there was no simple way to get a <code>const_iterator</code> from a non-const container.</li>
@@ -232,39 +232,39 @@ In C&#43;&#43;, iterators come handy to point at memory addresses of STL contain
 </ol>
 <p>In fact, in C++-11, there is no simple way to convert <code>const_iterator</code> to <code>iterator</code>.</p>
 <p>Here comes C++-11 now, they introduced <code>cbegin()</code> which returns a <code>const_iterator</code> instead, similarly <code>cend()</code> member function exists.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">// In C++-11, initializing of a vector got easier
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> x {<span style="color:#ae81ff">11</span>, <span style="color:#ae81ff">23</span>, <span style="color:#ae81ff">6</span>};
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// could have used auto here, but just typing the type for understanding 
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// Notice the use of cbegin(), cend() instead of static_cast&lt;c_it&gt;(x.begin()), ...
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;::</span>const_iterator ci <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>find(x.cbegin(), x.cend(), <span style="color:#ae81ff">23</span>);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>x.insert(ci, <span style="color:#ae81ff">11</span>);
-</span></span></code></pre></div><p>This will compile successfully, make sure to pass <code>-std=c++11</code> flag while compiling if you are using <code>g++</code> to make sure you are using C++-11.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// In C++-11, initializing of a vector got easier
+</span><span style="color:#75715e"></span>std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> x {<span style="color:#ae81ff">11</span>, <span style="color:#ae81ff">23</span>, <span style="color:#ae81ff">6</span>};
+
+<span style="color:#75715e">// could have used auto here, but just typing the type for understanding 
+</span><span style="color:#75715e">// Notice the use of cbegin(), cend() instead of static_cast&lt;c_it&gt;(x.begin()), ...
+</span><span style="color:#75715e"></span>std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;::</span>const_iterator ci <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>find(x.cbegin(), x.cend(), <span style="color:#ae81ff">23</span>);
+
+x.insert(ci, <span style="color:#ae81ff">11</span>);
+</code></pre></div><p>This will compile successfully, make sure to pass <code>-std=c++11</code> flag while compiling if you are using <code>g++</code> to make sure you are using C++-11.</p>
 <p>It&rsquo;s near this time, isn&rsquo;t it?</p>
 <p>Only place where C++-11 comes up a bit short is, when you want to use non-member functions (in case you are writing a generic code for your library, see example below):</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">// This is a generic function which will find targetVal in a container
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// Use of decltype discussed before
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> C, <span style="color:#66d9ef">typename</span> V<span style="color:#f92672">&gt;</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">auto</span> find_value(C<span style="color:#f92672">&amp;</span> container, <span style="color:#66d9ef">const</span> V<span style="color:#f92672">&amp;</span> targetVal) <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">decltype</span>(std<span style="color:#f92672">::</span>begin(container)) {
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Notice the use of non-member cbegin and cend functions here
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// Note: member functions would have looked like: container.cbegin(), container.cend()
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">auto</span> it <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>find(std<span style="color:#f92672">::</span>cbegin(container), std<span style="color:#f92672">::</span>cend(container), targetVal);
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> it;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>If you try to compile this using C++-11 <code>-std=c++11</code> flag, this will fail with an error like:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>main.cpp:<span style="color:#ae81ff">6</span><span style="color:#f92672">:</span><span style="color:#ae81ff">25</span><span style="color:#f92672">:</span> error: no matching function <span style="color:#66d9ef">for</span> call to <span style="color:#960050;background-color:#1e0010">&#39;</span>begin<span style="color:#960050;background-color:#1e0010">&#39;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">auto</span> it <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>find(std<span style="color:#f92672">::</span>cbegin(container), std<span style="color:#f92672">::</span>cend(container), targetVal);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>main.cpp:<span style="color:#ae81ff">6</span><span style="color:#f92672">:</span><span style="color:#ae81ff">49</span><span style="color:#f92672">:</span> error: no matching function <span style="color:#66d9ef">for</span> call to <span style="color:#960050;background-color:#1e0010">&#39;</span>end<span style="color:#960050;background-color:#1e0010">&#39;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">auto</span> it <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>find(std<span style="color:#f92672">::</span>cbegin(container), std<span style="color:#f92672">::</span>cend(container), targetVal);
-</span></span></code></pre></div><p>In C++-11, they failed to add <code>cbegin, cend, rbegin, rend, crbegin, crend</code> as member functions (but <code>begin, end</code> were added). This was later rectified in C++-14, so if you compile the code above using <code>-std=c++14</code>, this won&rsquo;t fail anymore.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// This is a generic function which will find targetVal in a container
+</span><span style="color:#75715e">// Use of decltype discussed before
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> C, <span style="color:#66d9ef">typename</span> V<span style="color:#f92672">&gt;</span>
+<span style="color:#66d9ef">auto</span> find_value(C<span style="color:#f92672">&amp;</span> container, <span style="color:#66d9ef">const</span> V<span style="color:#f92672">&amp;</span> targetVal) <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">decltype</span>(std<span style="color:#f92672">::</span>begin(container)) {
+    <span style="color:#75715e">// Notice the use of non-member cbegin and cend functions here
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// Note: member functions would have looked like: container.cbegin(), container.cend()
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">auto</span> it <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>find(std<span style="color:#f92672">::</span>cbegin(container), std<span style="color:#f92672">::</span>cend(container), targetVal);
+    <span style="color:#66d9ef">return</span> it;
+}
+</code></pre></div><p>If you try to compile this using C++-11 <code>-std=c++11</code> flag, this will fail with an error like:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">main.cpp:<span style="color:#ae81ff">6</span><span style="color:#f92672">:</span><span style="color:#ae81ff">25</span><span style="color:#f92672">:</span> error: no matching function <span style="color:#66d9ef">for</span> call to <span style="color:#960050;background-color:#1e0010">&#39;</span>begin<span style="color:#960050;background-color:#1e0010">&#39;</span>
+    <span style="color:#66d9ef">auto</span> it <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>find(std<span style="color:#f92672">::</span>cbegin(container), std<span style="color:#f92672">::</span>cend(container), targetVal);
+
+main.cpp:<span style="color:#ae81ff">6</span><span style="color:#f92672">:</span><span style="color:#ae81ff">49</span><span style="color:#f92672">:</span> error: no matching function <span style="color:#66d9ef">for</span> call to <span style="color:#960050;background-color:#1e0010">&#39;</span>end<span style="color:#960050;background-color:#1e0010">&#39;</span>
+    <span style="color:#66d9ef">auto</span> it <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>find(std<span style="color:#f92672">::</span>cbegin(container), std<span style="color:#f92672">::</span>cend(container), targetVal);
+</code></pre></div><p>In C++-11, they failed to add <code>cbegin, cend, rbegin, rend, crbegin, crend</code> as member functions (but <code>begin, end</code> were added). This was later rectified in C++-14, so if you compile the code above using <code>-std=c++14</code>, this won&rsquo;t fail anymore.</p>
 <p>If you are using C++-11, you can get around by defining a <code>cbegin()</code> function:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">C</span><span style="color:#f92672">&gt;</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">auto</span> cbegin(<span style="color:#66d9ef">const</span> C<span style="color:#f92672">&amp;</span> container) <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">decltype</span>(std<span style="color:#f92672">::</span>begin(container)) {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> std<span style="color:#f92672">::</span>begin(container);
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>The reason using <code>std::begin</code> works here, because in C++-11, if you pass a reference to <code>const</code> version of the container to <code>std::begin</code>, it will return a <code>const_iterator</code> (notice that we pass <code>const C&amp; container</code> in the arguments).</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">C</span><span style="color:#f92672">&gt;</span>
+<span style="color:#66d9ef">auto</span> cbegin(<span style="color:#66d9ef">const</span> C<span style="color:#f92672">&amp;</span> container) <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">decltype</span>(std<span style="color:#f92672">::</span>begin(container)) {
+    <span style="color:#66d9ef">return</span> std<span style="color:#f92672">::</span>begin(container);
+}
+</code></pre></div><p>The reason using <code>std::begin</code> works here, because in C++-11, if you pass a reference to <code>const</code> version of the container to <code>std::begin</code>, it will return a <code>const_iterator</code> (notice that we pass <code>const C&amp; container</code> in the arguments).</p>
 <p>The whole gist is to use <code>const_iterator</code> whenever possible. C++-14 tidied up the usage, however C++-11 added required support and features.</p>
 <p>Thank you for reading!</p>
 
@@ -446,7 +446,7 @@ In C&#43;&#43;, iterators come handy to point at memory addresses of STL contain
         })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
         ga('create', 'UA-146662543-1', 'auto');ga('send', 'pageview');
     </script>
-<script src="https://krshrimali.github.io/js/webmention.min.8b3a0bd9a45559d02f5c9a0c5201da2ba4c8ed9b9d43bcc2d7951d4e72774e819ade3984c11c3bf2f2a2675050756a2b6f502de6829e5b0ff5fc04ff1f68d089.js" data-id="webmention-container"></script>
+<script src="https://krshrimali.github.io/js/webmention.min.513a53d009530b21cba09721b6f4dc912e9c20ad2c0adbb5c4e486c4f77774a6e9eca8c2e1e4e8bc9e9e86693aa5ca91e7bf232b50f7f8bee4e64efc874040a7.js" data-id="webmention-container"></script>
 
 
 

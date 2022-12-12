@@ -6,7 +6,34 @@
     <description>Recent content in Categories on Kushashwa Ravi Shrimali (Kush)</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Mon, 21 Nov 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://krshrimali.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 12 Dec 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://krshrimali.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>app</title>
+      <link>https://krshrimali.github.io/categories/app/</link>
+      <pubDate>Mon, 12 Dec 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://krshrimali.github.io/categories/app/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>rust</title>
+      <link>https://krshrimali.github.io/categories/rust/</link>
+      <pubDate>Mon, 12 Dec 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://krshrimali.github.io/categories/rust/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>updates</title>
+      <link>https://krshrimali.github.io/categories/updates/</link>
+      <pubDate>Mon, 12 Dec 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://krshrimali.github.io/categories/updates/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>daily updates</title>
       <link>https://krshrimali.github.io/categories/daily-updates/</link>
@@ -62,38 +89,11 @@
     </item>
     
     <item>
-      <title>rust</title>
-      <link>https://krshrimali.github.io/categories/rust/</link>
-      <pubDate>Sun, 09 Jan 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://krshrimali.github.io/categories/rust/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>weekly updates</title>
       <link>https://krshrimali.github.io/categories/weekly-updates/</link>
       <pubDate>Sun, 03 Oct 2021 00:00:00 +0000</pubDate>
       
       <guid>https://krshrimali.github.io/categories/weekly-updates/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>book reading</title>
-      <link>https://krshrimali.github.io/categories/book-reading/</link>
-      <pubDate>Sun, 26 Sep 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://krshrimali.github.io/categories/book-reading/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>algorithms</title>
-      <link>https://krshrimali.github.io/categories/algorithms/</link>
-      <pubDate>Sat, 14 Aug 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://krshrimali.github.io/categories/algorithms/</guid>
       <description></description>
     </item>
     

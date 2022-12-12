@@ -13,10 +13,9 @@
       <pubDate>Sat, 14 Aug 2021 00:00:00 +0000</pubDate>
       
       <guid>https://krshrimali.github.io/posts/2021/08/prefer-scoped-enums-over-unscoped-enums-notes/</guid>
-      <description>Scoped vs Unscoped Enums General rule: declaring a name inside curly braces is limited to that scope. Exception: C++-98 style Enums NOTE
+      <description>Scoped vs Unscoped Enums  General rule: declaring a name inside curly braces is limited to that scope. Exception: C++-98 style Enums   NOTE
 My notes on Chapter 3, Item 10 of Effective Modern C++ written by Scott Meyers.
-Some (or even all) of the text can be similar to what you see in the book, as these are notes: I&amp;rsquo;ve tried not to be unnecessarily creative with my words. :)
-// You can&amp;#39;t declare black, white, red in the scope containing the enum Color enum Color { black, white, red; }; auto white = false; // error: white already declared in this scope Unscoped Enums have implicit type conversions for their enumerators.</description>
+Some (or even all) of the text can be similar to what you see in the book, as these are notes: I&amp;rsquo;ve tried not to be unnecessarily creative with my words.</description>
     </item>
     
   </channel>

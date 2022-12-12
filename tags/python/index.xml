@@ -14,7 +14,7 @@
       
       <guid>https://krshrimali.github.io/posts/2020/12/how-to-crop-a-circle-in-opencv-implementing-portrait-bokeh-part-2/</guid>
       <description>Hi everyone! In the previous blog we implemented Portrait Bokeh using Face Detection in OpenCV. While the results were good for a start, we definitely want to be closer to the output we expect. The end goal is to blur everything except the face. The main problem we noticed was:
-The face cropped was a rectangle, and it was clearly visible in the output result. To overcome this, we will be talking about cropping a circle in OpenCV today.</description>
+ The face cropped was a rectangle, and it was clearly visible in the output result.  To overcome this, we will be talking about cropping a circle in OpenCV today.</description>
     </item>
     
     <item>
@@ -24,7 +24,7 @@ The face cropped was a rectangle, and it was clearly visible in the output resul
       
       <guid>https://krshrimali.github.io/posts/2020/12/implementing-portrait-bokeh-in-opencv-using-face-detection-part-1/</guid>
       <description>OpenCV: Using face detection for Portrait Bokeh (Background Blur) (Part - 1) This blog discusses using Face Detection in OpenCV for Portrait Bokeh. We&amp;rsquo;ll be implementing Portrait Bokeh (blurring everything but faces) using 3 different methods in this series:
-Using Face Detection (cropping a rectangle) Using Face Detection (cropping a circle) Using Facial Landmark Detection and Convex Hull Don&amp;rsquo;t lose hopes if you are confused. We will be going through each method one by one, and hopefully the road will be crearer from here.</description>
+ Using Face Detection (cropping a rectangle) Using Face Detection (cropping a circle) Using Facial Landmark Detection and Convex Hull  Don&amp;rsquo;t lose hopes if you are confused. We will be going through each method one by one, and hopefully the road will be crearer from here.</description>
     </item>
     
   </channel>

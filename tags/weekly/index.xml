@@ -15,7 +15,7 @@
       <guid>https://krshrimali.github.io/posts/2021/10/weekly-progress-report-03-10-2021-2/</guid>
       <description>Hi everyone, so this week has been comparatively more productive in terms of learning as well as work! I&amp;rsquo;m happy, so why not share with everyone as well? 🎉
 PyTorch: (ft. Quansight and Facebook)
-Started working on porting index_add to structured kernels, see the PR I made on my forked repo here, and on upstream here. This included adding an out= variant to the op. Refining the way it&amp;rsquo;s registered in PyTorch.</description>
+ Started working on porting index_add to structured kernels, see the PR I made on my forked repo here, and on upstream here.  This included adding an out= variant to the op. Refining the way it&amp;rsquo;s registered in PyTorch.</description>
     </item>
     
     <item>

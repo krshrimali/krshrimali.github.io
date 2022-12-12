@@ -7,8 +7,8 @@
 <meta name="author" content="map[name:Kushashwa Ravi Shrimali]">
 <meta name="description" content="Introduction to Xeus Cling Today, we are going to run our C&#43;&#43; codes in the Jupyter Notebook. Sounds ambitious? Not much. Let&amp;rsquo;s see how we do it using Xeus Cling.
 I&amp;rsquo;ll quote the definition of Xeus Cling on the official documentation website.
-xeus-cling is a Jupyter kernel for C&#43;&#43; based on the C&#43;&#43; interpreter cling and the native implementation of the Jupyter protocol xeus.
-Just like we use Python Kernel in the Jupyter Notebook, we can also use a C&#43;&#43; based interpreter cling combined with a Jupyter protocol called Xeus to reach closer to implementing C&#43;&#43; code in the notebook." />
+ xeus-cling is a Jupyter kernel for C&#43;&#43; based on the C&#43;&#43; interpreter cling and the native implementation of the Jupyter protocol xeus.
+ Just like we use Python Kernel in the Jupyter Notebook, we can also use a C&#43;&#43; based interpreter cling combined with a Jupyter protocol called Xeus to reach closer to implementing C&#43;&#43; code in the notebook." />
 <meta name="keywords" content=", development, coding, cpp, notes, pytorch-cpp, libtorch" />
 <meta name="robots" content="noodp" />
 <meta name="theme-color" content="#252627" />
@@ -51,18 +51,18 @@ Just like we use Python Kernel in the Jupyter Notebook, we can also use a C&#43;
 <meta itemprop="name" content="Setting up Jupyter Notebook (Xeus Cling) for Libtorch and OpenCV Libraries">
 <meta itemprop="description" content="Introduction to Xeus Cling Today, we are going to run our C&#43;&#43; codes in the Jupyter Notebook. Sounds ambitious? Not much. Let&rsquo;s see how we do it using Xeus Cling.
 I&rsquo;ll quote the definition of Xeus Cling on the official documentation website.
-xeus-cling is a Jupyter kernel for C&#43;&#43; based on the C&#43;&#43; interpreter cling and the native implementation of the Jupyter protocol xeus.
-Just like we use Python Kernel in the Jupyter Notebook, we can also use a C&#43;&#43; based interpreter cling combined with a Jupyter protocol called Xeus to reach closer to implementing C&#43;&#43; code in the notebook."><meta itemprop="datePublished" content="2019-08-28T00:00:00+00:00" />
+ xeus-cling is a Jupyter kernel for C&#43;&#43; based on the C&#43;&#43; interpreter cling and the native implementation of the Jupyter protocol xeus.
+ Just like we use Python Kernel in the Jupyter Notebook, we can also use a C&#43;&#43; based interpreter cling combined with a Jupyter protocol called Xeus to reach closer to implementing C&#43;&#43; code in the notebook."><meta itemprop="datePublished" content="2019-08-28T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2019-08-28T00:00:00+00:00" />
-<meta itemprop="wordCount" content="1333"><meta itemprop="image" content="https://krshrimali.github.io"/>
+<meta itemprop="wordCount" content="1324"><meta itemprop="image" content="https://krshrimali.github.io"/>
 <meta itemprop="keywords" content="development,coding,cpp,notes,pytorch-cpp,libtorch," /><meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://krshrimali.github.io"/>
 
 <meta name="twitter:title" content="Setting up Jupyter Notebook (Xeus Cling) for Libtorch and OpenCV Libraries"/>
 <meta name="twitter:description" content="Introduction to Xeus Cling Today, we are going to run our C&#43;&#43; codes in the Jupyter Notebook. Sounds ambitious? Not much. Let&rsquo;s see how we do it using Xeus Cling.
 I&rsquo;ll quote the definition of Xeus Cling on the official documentation website.
-xeus-cling is a Jupyter kernel for C&#43;&#43; based on the C&#43;&#43; interpreter cling and the native implementation of the Jupyter protocol xeus.
-Just like we use Python Kernel in the Jupyter Notebook, we can also use a C&#43;&#43; based interpreter cling combined with a Jupyter protocol called Xeus to reach closer to implementing C&#43;&#43; code in the notebook."/>
+ xeus-cling is a Jupyter kernel for C&#43;&#43; based on the C&#43;&#43; interpreter cling and the native implementation of the Jupyter protocol xeus.
+ Just like we use Python Kernel in the Jupyter Notebook, we can also use a C&#43;&#43; based interpreter cling combined with a Jupyter protocol called Xeus to reach closer to implementing C&#43;&#43; code in the notebook."/>
 
 
 
@@ -237,170 +237,170 @@ Just like we use Python Kernel in the Jupyter Notebook, we can also use a C&#43;
 <h2 id="setting-up-libtorch-in-xeus-cling">Setting up Libtorch in Xeus Cling</h2>
 <p>Just like we need to give path to <code>Libtorch</code> libraries in <code>CMakeLists.txt</code> or while setting up <code>XCode</code> (for OS X users) or <code>Visual Studio</code> (for Windows Users), we will also load the libraries in Xeus Cling.</p>
 <p>We will first give the <code>include_path</code> of Header files and <code>library_path</code> for the libraries. We will also do the same for <code>OpenCV</code> as we need it to load images.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">#pragma cling add_library_path(&#34;/Users/krshrimali/Downloads/libtorch/lib/&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling add_include_path(&#34;/Users/krshrimali/Downloads/libtorch/include</span><span style="color:#75715e">&#34;)</span><span style="color:#75715e">
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling add_include_path(&#34;/Users/krshrimali/Downloads/libtorch/include</span><span style="color:#75715e">/torch/csrc/api/include/&#34;)</span><span style="color:#75715e">
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling add_library_path(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling add_include_path(&#34;/usr/local/Cellar/opencv/4.1.0_2/include</span><span style="color:#75715e">/opencv4&#34;)</span><span style="color:#75715e">
-</span></span></span></code></pre></div><p>For OS X, the libtorch libraries will be in the format of <code>.dylib</code>. Ignore the <code>.a</code> files as we only need to load the <code>.dylib</code> files. Similarly for Linux, load the libraries in <code>.so</code> format located in the <code>lib/</code> folder.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#pragma cling add_library_path(&#34;/Users/krshrimali/Downloads/libtorch/lib/&#34;)
+</span><span style="color:#75715e">#pragma cling add_include_path(&#34;/Users/krshrimali/Downloads/libtorch/include</span><span style="color:#75715e">&#34;)</span><span style="color:#75715e">
+</span><span style="color:#75715e">#pragma cling add_include_path(&#34;/Users/krshrimali/Downloads/libtorch/include</span><span style="color:#75715e">/torch/csrc/api/include/&#34;)</span><span style="color:#75715e">
+</span><span style="color:#75715e">#pragma cling add_library_path(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib&#34;)
+</span><span style="color:#75715e">#pragma cling add_include_path(&#34;/usr/local/Cellar/opencv/4.1.0_2/include</span><span style="color:#75715e">/opencv4&#34;)</span><span style="color:#75715e">
+</span></code></pre></div><p>For OS X, the libtorch libraries will be in the format of <code>.dylib</code>. Ignore the <code>.a</code> files as we only need to load the <code>.dylib</code> files. Similarly for Linux, load the libraries in <code>.so</code> format located in the <code>lib/</code> folder.</p>
 <p><strong>For Mac</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/Users/krshrimali/Downloads/libtorch/lib/libiomp5.dylib&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/Users/krshrimali/Downloads/libtorch/lib/libmklml.dylib&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/Users/krshrimali/Downloads/libtorch/lib/libc10.dylib&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/Users/krshrimali/Downloads/libtorch/lib/libtorch.dylib&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/Users/krshrimali/Downloads/libtorch/lib/libshm.dylib&#34;)
-</span></span></span></code></pre></div><p><strong>For Linux</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/opt/libtorch/lib/libc10.so&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/opt/libtorch/lib/libgomp-4f651535.so.1&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/opt/libtorch/lib/libtorch.so&#34;)
-</span></span></span></code></pre></div><p>For OpenCV, the list of libraries is long.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#pragma cling load(&#34;/Users/krshrimali/Downloads/libtorch/lib/libiomp5.dylib&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/Users/krshrimali/Downloads/libtorch/lib/libmklml.dylib&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/Users/krshrimali/Downloads/libtorch/lib/libc10.dylib&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/Users/krshrimali/Downloads/libtorch/lib/libtorch.dylib&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/Users/krshrimali/Downloads/libtorch/lib/libshm.dylib&#34;)
+</span></code></pre></div><p><strong>For Linux</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#pragma cling load(&#34;/opt/libtorch/lib/libc10.so&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/opt/libtorch/lib/libgomp-4f651535.so.1&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/opt/libtorch/lib/libtorch.so&#34;)
+</span></code></pre></div><p>For OpenCV, the list of libraries is long.</p>
 <p><strong>For Mac</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_datasets.4.1.0.dylib&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_aruco.4.1.0.dylib&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_bgsegm.4.1.0.dylib&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_bioinspired.4.1.0.dylib&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_calib3d.4.1.0.dylib&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_ccalib.4.1.0.dylib&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_core.4.1.0.dylib&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_dnn_objdetect.4.1.0.dylib&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_dnn.4.1.0.dylib&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_dpm.4.1.0.dylib&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_face.4.1.0.dylib&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_features2d.4.1.0.dylib&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_flann.4.1.0.dylib&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_freetype.4.1.0.dylib&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_fuzzy.4.1.0.dylib&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_gapi.4.1.0.dylib&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_hfs.4.1.0.dylib&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_highgui.4.1.0.dylib&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_img_hash.4.1.0.dylib&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_imgcodecs.4.1.0.dylib&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_imgproc.4.1.0.dylib&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_line_descriptor.4.1.0.dylib&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_ml.4.1.0.dylib&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_objdetect.4.1.0.dylib&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_optflow.4.1.0.dylib&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_phase_unwrapping.4.1.0.dylib&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_photo.4.1.0.dylib&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_plot.4.1.0.dylib&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_quality.4.1.0.dylib&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_reg.4.1.0.dylib&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_rgbd.4.1.0.dylib&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_saliency.4.1.0.dylib&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_sfm.4.1.0.dylib&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_shape.4.1.0.dylib&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_stereo.4.1.0.dylib&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_stitching.4.1.0.dylib&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_structured_light.4.1.0.dylib&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_superres.4.1.0.dylib&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_surface_matching.4.1.0.dylib&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_text.4.1.0.dylib&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_tracking.4.1.0.dylib&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_video.4.1.0.dylib&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_videoio.4.1.0.dylib&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_videostab.4.1.0.dylib&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_xfeatures2d.4.1.0.dylib&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_ximgproc.4.1.0.dylib&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_xobjdetect.4.1.0.dylib&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_xphoto.4.1.0.dylib&#34;)
-</span></span></span></code></pre></div><p><strong>For Linux</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_aruco.so.4.1.0&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_bgsegm.so.4.1.0&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_bioinspired.so.4.1.0&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_calib3d.so.4.1.0&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_ccalib.so.4.1.0&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_core.so.4.1.0&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_datasets.so.4.1.0&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_dnn_objdetect.so.4.1.0&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_dnn.so.4.1.0&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_dpm.so.4.1.0&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_face.so.4.1.0&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_features2d.so.4.1.0&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_flann.so.4.1.0&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_freetype.so.4.1.0&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_fuzzy.so.4.1.0&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_gapi.so.4.1.0&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_hdf.so.4.1.0&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_hfs.so.4.1.0&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_highgui.so.4.1.0&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_imgcodecs.so.4.1.0&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_img_hash.so.4.1.0&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_imgproc.so.4.1.0&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_line_descriptor.so.4.1.0&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_ml.so.4.1.0&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_objdetect.so.4.1.0&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_optflow.so.4.1.0&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_phase_unwrapping.so.4.1.0&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_photo.so.4.1.0&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_plot.so.4.1.0&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_reg.so.4.1.0&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_rgbd.so.4.1.0&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_saliency.so.4.1.0&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_sfm.so.4.1.0&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_shape.so.4.1.0&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_stereo.so.4.1.0&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_stitching.so.4.1.0&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_structured_light.so.4.1.0&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_superres.so.4.1.0&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_surface_matching.so.4.1.0&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_text.so.4.1.0&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_tracking.so.4.1.0&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_videoio.so.4.1.0&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_video.so.4.1.0&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_videostab.so.4.1.0&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_xfeatures2d.so.4.1.0&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_ximgproc.so.4.1.0&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_xobjdetect.so.4.1.0&#34;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_xphoto.so.4.1.0&#34;)
-</span></span></span></code></pre></div><p>Once done, run the cell and that&rsquo;s it. We have successfully setup the environment for <code>Libtorch</code> and <code>OpenCV</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_datasets.4.1.0.dylib&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_aruco.4.1.0.dylib&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_bgsegm.4.1.0.dylib&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_bioinspired.4.1.0.dylib&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_calib3d.4.1.0.dylib&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_ccalib.4.1.0.dylib&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_core.4.1.0.dylib&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_dnn_objdetect.4.1.0.dylib&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_dnn.4.1.0.dylib&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_dpm.4.1.0.dylib&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_face.4.1.0.dylib&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_features2d.4.1.0.dylib&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_flann.4.1.0.dylib&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_freetype.4.1.0.dylib&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_fuzzy.4.1.0.dylib&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_gapi.4.1.0.dylib&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_hfs.4.1.0.dylib&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_highgui.4.1.0.dylib&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_img_hash.4.1.0.dylib&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_imgcodecs.4.1.0.dylib&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_imgproc.4.1.0.dylib&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_line_descriptor.4.1.0.dylib&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_ml.4.1.0.dylib&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_objdetect.4.1.0.dylib&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_optflow.4.1.0.dylib&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_phase_unwrapping.4.1.0.dylib&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_photo.4.1.0.dylib&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_plot.4.1.0.dylib&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_quality.4.1.0.dylib&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_reg.4.1.0.dylib&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_rgbd.4.1.0.dylib&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_saliency.4.1.0.dylib&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_sfm.4.1.0.dylib&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_shape.4.1.0.dylib&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_stereo.4.1.0.dylib&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_stitching.4.1.0.dylib&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_structured_light.4.1.0.dylib&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_superres.4.1.0.dylib&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_surface_matching.4.1.0.dylib&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_text.4.1.0.dylib&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_tracking.4.1.0.dylib&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_video.4.1.0.dylib&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_videoio.4.1.0.dylib&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_videostab.4.1.0.dylib&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_xfeatures2d.4.1.0.dylib&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_ximgproc.4.1.0.dylib&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_xobjdetect.4.1.0.dylib&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/Cellar/opencv/4.1.0_2/lib/libopencv_xphoto.4.1.0.dylib&#34;)
+</span></code></pre></div><p><strong>For Linux</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_aruco.so.4.1.0&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_bgsegm.so.4.1.0&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_bioinspired.so.4.1.0&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_calib3d.so.4.1.0&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_ccalib.so.4.1.0&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_core.so.4.1.0&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_datasets.so.4.1.0&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_dnn_objdetect.so.4.1.0&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_dnn.so.4.1.0&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_dpm.so.4.1.0&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_face.so.4.1.0&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_features2d.so.4.1.0&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_flann.so.4.1.0&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_freetype.so.4.1.0&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_fuzzy.so.4.1.0&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_gapi.so.4.1.0&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_hdf.so.4.1.0&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_hfs.so.4.1.0&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_highgui.so.4.1.0&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_imgcodecs.so.4.1.0&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_img_hash.so.4.1.0&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_imgproc.so.4.1.0&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_line_descriptor.so.4.1.0&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_ml.so.4.1.0&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_objdetect.so.4.1.0&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_optflow.so.4.1.0&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_phase_unwrapping.so.4.1.0&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_photo.so.4.1.0&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_plot.so.4.1.0&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_reg.so.4.1.0&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_rgbd.so.4.1.0&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_saliency.so.4.1.0&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_sfm.so.4.1.0&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_shape.so.4.1.0&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_stereo.so.4.1.0&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_stitching.so.4.1.0&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_structured_light.so.4.1.0&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_superres.so.4.1.0&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_surface_matching.so.4.1.0&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_text.so.4.1.0&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_tracking.so.4.1.0&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_videoio.so.4.1.0&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_video.so.4.1.0&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_videostab.so.4.1.0&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_xfeatures2d.so.4.1.0&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_ximgproc.so.4.1.0&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_xobjdetect.so.4.1.0&#34;)
+</span><span style="color:#75715e">#pragma cling load(&#34;/usr/local/lib/libopencv_xphoto.so.4.1.0&#34;)
+</span></code></pre></div><p>Once done, run the cell and that&rsquo;s it. We have successfully setup the environment for <code>Libtorch</code> and <code>OpenCV</code>.</p>
 <h2 id="testing-xeus-cling-notebook">Testing Xeus Cling Notebook</h2>
 <p>Let&rsquo;s go ahead and include the libraries. I&rsquo;ll be sharing the code snippets as well as the screenshots to make it easy for the readers to reproduce results.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;torch/torch.h&gt;</span><span style="color:#75715e">
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;torch/script.h&gt;</span><span style="color:#75715e">
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;dirent.h&gt;</span><span style="color:#75715e">
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;opencv2/opencv.hpp&gt;</span><span style="color:#75715e">
-</span></span></span></code></pre></div><p><img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/blogs/Include-Libraries.png" alt=""></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;torch/torch.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;torch/script.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;dirent.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;opencv2/opencv.hpp&gt;</span><span style="color:#75715e">
+</span></code></pre></div><p><img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/blogs/Include-Libraries.png" alt=""></p>
 <p>After successfully importing libraries, we can define functions, write code and use the utilities Jupyter provides. Let&rsquo;s start with playing with Tensors and the code snippets mentioned in the official <a href="https://pytorch.org/cppdocs">PyTorch C++ Frontend Docs</a>.</p>
 <p>Starting with using <code>ATen</code> tensor library. We&rsquo;ll create two tensors and add them together. <code>ATen</code> comes up with functionalities of mathematical operations on the Tensors.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;ATen/ATen.h&gt;</span><span style="color:#75715e">
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span>at<span style="color:#f92672">::</span>Tensor a <span style="color:#f92672">=</span> at<span style="color:#f92672">::</span>ones({<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span>}, at<span style="color:#f92672">::</span>kInt);
-</span></span><span style="display:flex;"><span>at<span style="color:#f92672">::</span>Tensor b <span style="color:#f92672">=</span> at<span style="color:#f92672">::</span>randn({<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span>});
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">auto</span> c <span style="color:#f92672">=</span> a <span style="color:#f92672">+</span> b.to(at<span style="color:#f92672">::</span>kInt);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;a: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> a <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
-</span></span><span style="display:flex;"><span>std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
-</span></span><span style="display:flex;"><span>std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;b: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> b <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
-</span></span><span style="display:flex;"><span>std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
-</span></span><span style="display:flex;"><span>std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;c: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> c <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
-</span></span></code></pre></div><p><img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/blogs/ATen-Example.png" alt=""></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;ATen/ATen.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+at<span style="color:#f92672">::</span>Tensor a <span style="color:#f92672">=</span> at<span style="color:#f92672">::</span>ones({<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span>}, at<span style="color:#f92672">::</span>kInt);
+at<span style="color:#f92672">::</span>Tensor b <span style="color:#f92672">=</span> at<span style="color:#f92672">::</span>randn({<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span>});
+<span style="color:#66d9ef">auto</span> c <span style="color:#f92672">=</span> a <span style="color:#f92672">+</span> b.to(at<span style="color:#f92672">::</span>kInt);
+
+std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;a: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> a <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;b: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> b <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;c: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> c <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+</code></pre></div><p><img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/blogs/ATen-Example.png" alt=""></p>
 <p>One of the reasons why <code>Xeus-Cling</code> is useful is, that you can print the outputs of intermediate steps and debug. Let&rsquo;s go ahead and experiment with <code>Autograd</code> system of PyTorch C++ API.</p>
 <p>For those who don&rsquo;t know, automatic differentiation is the most important function of Deep Learning algorithms to backpropagte the loss we calculate.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;torch/csrc/autograd/variable.h&gt;</span><span style="color:#75715e">
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;torch/csrc/autograd/function.h&gt;</span><span style="color:#75715e">
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span>torch<span style="color:#f92672">::</span>Tensor a_tensor <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>ones({<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span>}, torch<span style="color:#f92672">::</span>requires_grad());
-</span></span><span style="display:flex;"><span>torch<span style="color:#f92672">::</span>Tensor b_tensor <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>randn({<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span>});
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> a_tensor <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
-</span></span><span style="display:flex;"><span>std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> b_tensor <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">auto</span> c_tensor <span style="color:#f92672">=</span> a_tensor <span style="color:#f92672">+</span> b_tensor;
-</span></span><span style="display:flex;"><span>c_tensor.backward(); <span style="color:#75715e">// a.grad() will now hold the gradient of c w.r.t a
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span>std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> c_tensor <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
-</span></span></code></pre></div><p><img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/blogs/Autograd-Example-1.png" alt="">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;torch/csrc/autograd/variable.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;torch/csrc/autograd/function.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+torch<span style="color:#f92672">::</span>Tensor a_tensor <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>ones({<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span>}, torch<span style="color:#f92672">::</span>requires_grad());
+torch<span style="color:#f92672">::</span>Tensor b_tensor <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>randn({<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span>});
+
+std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> a_tensor <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> b_tensor <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+
+<span style="color:#66d9ef">auto</span> c_tensor <span style="color:#f92672">=</span> a_tensor <span style="color:#f92672">+</span> b_tensor;
+c_tensor.backward(); <span style="color:#75715e">// a.grad() will now hold the gradient of c w.r.t a
+</span><span style="color:#75715e"></span>
+std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> c_tensor <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+</code></pre></div><p><img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/blogs/Autograd-Example-1.png" alt="">
 <img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/blogs/Autograd-Example-2.png" alt=""></p>
 <p>How about debugging? As you can see in the figure below, I get an error stating <code>no member named 'size' in namespace 'cv'</code>. This is because namespace <code>cv</code> has member called <code>Size</code> and not <code>size</code>.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>torch<span style="color:#f92672">::</span>Tensor read_images(std<span style="color:#f92672">::</span>string location) {
-</span></span><span style="display:flex;"><span>	cv<span style="color:#f92672">::</span>Mat img <span style="color:#f92672">=</span> cv<span style="color:#f92672">::</span>imread(location, <span style="color:#ae81ff">1</span>);
-</span></span><span style="display:flex;"><span>	cv<span style="color:#f92672">::</span>resize(img, img, cv<span style="color:#f92672">::</span>size(<span style="color:#ae81ff">224</span>, <span style="color:#ae81ff">224</span>), cv<span style="color:#f92672">::</span>INTER_CUBIC);
-</span></span><span style="display:flex;"><span>	torch<span style="color:#f92672">::</span>Tensor img_tensor <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>from_blob(img.data, {img.rows, img.cols, <span style="color:#ae81ff">3</span>}, torch<span style="color:#f92672">::</span>kByte);
-</span></span><span style="display:flex;"><span>	img_tensor <span style="color:#f92672">=</span> img_tensor.permute({<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>});
-</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> img_tensor.clone();
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p><img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/blogs/Debug-Example.png" alt=""></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">torch<span style="color:#f92672">::</span>Tensor read_images(std<span style="color:#f92672">::</span>string location) {
+	cv<span style="color:#f92672">::</span>Mat img <span style="color:#f92672">=</span> cv<span style="color:#f92672">::</span>imread(location, <span style="color:#ae81ff">1</span>);
+	cv<span style="color:#f92672">::</span>resize(img, img, cv<span style="color:#f92672">::</span>size(<span style="color:#ae81ff">224</span>, <span style="color:#ae81ff">224</span>), cv<span style="color:#f92672">::</span>INTER_CUBIC);
+	torch<span style="color:#f92672">::</span>Tensor img_tensor <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>from_blob(img.data, {img.rows, img.cols, <span style="color:#ae81ff">3</span>}, torch<span style="color:#f92672">::</span>kByte);
+	img_tensor <span style="color:#f92672">=</span> img_tensor.permute({<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>});
+	<span style="color:#66d9ef">return</span> img_tensor.clone();
+}
+</code></pre></div><p><img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/blogs/Debug-Example.png" alt=""></p>
 <p>To solve, we can simply change the member from <code>size</code> to <code>Size</code>. One important point to consider is, that since this works on the top of Jupyter Interface, so whenever you re-run a cell, the variable names need to be changed as it will return an error of re-defining the variables which have already been defined.</p>
 <p>For testing, I have implemented Transfer Learning example that we discussed in the <a href="https://krshrimali.github.io/posts/2019/08/applying-transfer-learning-on-dogs-vs-cats-dataset-resnet18-using-pytorch-c-api/">previous blog</a>. This comes handy as I don&rsquo;t need to load the dataset again and again.</p>
 <p><img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/blogs/Training-Image.png" alt=""></p>
@@ -434,7 +434,7 @@ Just like we use Python Kernel in the Jupyter Notebook, we can also use a C&#43;
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://krshrimali.github.io/tags/development">development</a></span><span class="tag"><a href="https://krshrimali.github.io/tags/coding">coding</a></span><span class="tag"><a href="https://krshrimali.github.io/tags/cpp">cpp</a></span><span class="tag"><a href="https://krshrimali.github.io/tags/notes">notes</a></span><span class="tag"><a href="https://krshrimali.github.io/tags/pytorch-cpp">pytorch-cpp</a></span><span class="tag"><a href="https://krshrimali.github.io/tags/libtorch">libtorch</a></span>
                 </p>
 
-            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>1333 Words</p>
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>1324 Words</p>
 
             <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>Posted: <time class="dt-published"> 2019-08-28 05:30 &#43;0530</time></p>
 <a class="resp-sharing-button__link" href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2019%2f08%2fsetting-up-jupyter-notebook-xeus-cling-for-libtorch-and-opencv-libraries%2f" target="_blank" rel="noopener" aria-label="Facebook">
@@ -602,7 +602,7 @@ Just like we use Python Kernel in the Jupyter Notebook, we can also use a C&#43;
         })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
         ga('create', 'UA-146662543-1', 'auto');ga('send', 'pageview');
     </script>
-<script src="https://krshrimali.github.io/js/webmention.min.8b3a0bd9a45559d02f5c9a0c5201da2ba4c8ed9b9d43bcc2d7951d4e72774e819ade3984c11c3bf2f2a2675050756a2b6f502de6829e5b0ff5fc04ff1f68d089.js" data-id="webmention-container"></script>
+<script src="https://krshrimali.github.io/js/webmention.min.513a53d009530b21cba09721b6f4dc912e9c20ad2c0adbb5c4e486c4f77774a6e9eca8c2e1e4e8bc9e9e86693aa5ca91e7bf232b50f7f8bee4e64efc874040a7.js" data-id="webmention-container"></script>
 
 
 

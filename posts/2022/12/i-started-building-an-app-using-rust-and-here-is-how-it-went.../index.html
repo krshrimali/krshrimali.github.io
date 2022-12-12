@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="map[name:Kushashwa Ravi Shrimali]">
+<meta name="description" content="Hi everyone!! I&amp;rsquo;ve an update, on what I&amp;rsquo;ve been up to - and I&amp;rsquo;m excited. It&amp;rsquo;s a rusty update 😉. As always, I would love to tell you a story (this will help set some context), but if you want to skip and go directly to the update, please scroll to: # THE Update section.
+The Story I&amp;rsquo;ve been through, possibly, the best and the worst time of my life. I use these contrasting words because everything went wrong - and that&amp;rsquo;s where you get an opportunity to shine." />
+<meta name="keywords" content=", development, coding, rust, app, updates" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="#252627" />
+<link rel="canonical" href="https://krshrimali.github.io/posts/2022/12/i-started-building-an-app-using-rust-and-here-is-how-it-went.../" />
+
+
+<title>
+    
+    I started building an app using Rust and here is how it went... :: Kushashwa Ravi Shrimali (Kush)  — Learning never stops!
+    
+</title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+      type="text/css">
+
+
+
+<link rel="stylesheet" href="https://krshrimali.github.io/main.min.b6dbce0fdf6c61563a0c2226e857d5dadd8e5afa2c4f73ec9ea55abd831f9a72.css">
+
+
+
+
+
+    <link rel="webmention" href="https://webmention.io/krshrimali.github.io/webmention" />
+    <link rel="pingback" href="https://webmention.io/krshrimali.github.io/xmlrpc" />
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="https://krshrimali.github.io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://krshrimali.github.io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://krshrimali.github.io/favicon-16x16.png">
+    <link rel="manifest" href="https://krshrimali.github.io/site.webmanifest">
+    <link rel="mask-icon" href="https://krshrimali.github.io/safari-pinned-tab.svg" color="#252627">
+    <link rel="shortcut icon" href="https://krshrimali.github.io/favicon.ico">
+    <meta name="msapplication-TileColor" content="#252627">
+    <meta name="theme-color" content="#252627">
+
+<meta itemprop="name" content="I started building an app using Rust and here is how it went...">
+<meta itemprop="description" content="Hi everyone!! I&rsquo;ve an update, on what I&rsquo;ve been up to - and I&rsquo;m excited. It&rsquo;s a rusty update 😉. As always, I would love to tell you a story (this will help set some context), but if you want to skip and go directly to the update, please scroll to: # THE Update section.
+The Story I&rsquo;ve been through, possibly, the best and the worst time of my life. I use these contrasting words because everything went wrong - and that&rsquo;s where you get an opportunity to shine."><meta itemprop="datePublished" content="2022-12-12T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-12-12T00:00:00+00:00" />
+<meta itemprop="wordCount" content="1934"><meta itemprop="image" content="https://krshrimali.github.io"/>
+<meta itemprop="keywords" content="development,coding,rust,app,updates," /><meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://krshrimali.github.io"/>
+
+<meta name="twitter:title" content="I started building an app using Rust and here is how it went..."/>
+<meta name="twitter:description" content="Hi everyone!! I&rsquo;ve an update, on what I&rsquo;ve been up to - and I&rsquo;m excited. It&rsquo;s a rusty update 😉. As always, I would love to tell you a story (this will help set some context), but if you want to skip and go directly to the update, please scroll to: # THE Update section.
+The Story I&rsquo;ve been through, possibly, the best and the worst time of my life. I use these contrasting words because everything went wrong - and that&rsquo;s where you get an opportunity to shine."/>
+
+
+
+    <meta property="article:section" content="rust" />
+
+    <meta property="article:section" content="app" />
+
+    <meta property="article:section" content="updates" />
+
+
+
+    <meta property="article:published_time" content="2022-12-12 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+    </head>
+
+    <body class="">
+        <div class="container">
+            <header class="header">
+    <div class="header__inner">
+        <div class="header__left">
+        <div class="logo">
+<a href="https://krshrimali.github.io/" style="text-decoration: none;">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">$ cd /home/</span>
+            <span class="logo__cursor" style=
+                  "
+                   
+                   ">
+            </span>
+        
+</a>
+</div>
+
+        </div>
+
+        
+        <div class="header__mid">
+        <button class="button">
+            <div class="button__text">
+        <a href="https://krshrimali.github.io/search" >
+                Search
+        </a>
+            </div>
+        </button>
+        </div>
+       
+
+        <div class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="https://krshrimali.github.io/about">About</a></li><li><a href="https://krshrimali.github.io/posts">Blog</a></li>
+    </ul>
+    <ul class="menu__inner"><li><a href="https://krshrimali.github.io/categories">Categories</a></li><li><a href="https://krshrimali.github.io/tags">Tags</a></li>
+    </ul>
+</nav>
+
+            <button id="toggleMenu">
+                <div class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </div>
+             </button>
+            
+
+            <button class="theme-toggle" id="toggleTheme"><svg class="theme-toggler" width="32" height="32" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+</button>
+        </div>
+    </div>
+</header>
+
+            
+<script src="https://krshrimali.github.io/js/mathjax-config.js"></script>
+
+
+<script id="MathJax-script" async src="https://unpkg.com/mathjax@3/es5/tex-chtml.js"></script>
+
+            
+                
+    <aside class="sidebar">
+        <div class="hideTOC">
+        <button id="tocTog">TOC</button>
+        <div class="sideTOC m-fadeOut">
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#the-story">The Story</a></li>
+    <li><a href="#the-update">THE Update</a></li>
+  </ul>
+</nav>
+        </div>
+        </div>
+    </aside>
+                
+    <main class="post">
+
+        <div class="post-info">
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>10 minutes
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>Written: 2022-12-12 00:00 &#43;0000</p>
+
+            
+
+            </p>
+        </div>
+
+        <article class="h-entry">
+            <h1 class="post-title p-name">
+                <a class="u-url" href="https://krshrimali.github.io/posts/2022/12/i-started-building-an-app-using-rust-and-here-is-how-it-went.../">I started building an app using Rust and here is how it went&hellip;</a>
+            </h1>
+        <div class="post-info"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-pen-tool"><path d="M12 19l7-7 3 3-7 7-3-3z"></path><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path><path d="M2 2l7.586 7.586"></path><circle cx="11" cy="11" r="2"></circle></svg>
+                         <span class="author u-author p-author"><a href="https://krshrimali.github.io/author/kushashwa-ravi-shrimali">Kushashwa Ravi Shrimali</a></span>
+        </div>
+                <hr />
+                <aside id="toc" class="sidebar">
+                <div class="toc-title">Table of Contents</div>
+                    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#the-story">The Story</a></li>
+    <li><a href="#the-update">THE Update</a></li>
+  </ul>
+</nav>
+                </aside>
+                <hr />
+
+            
+
+            <div class="post-content e-content">
+                <p>Hi everyone!! I&rsquo;ve an update, on what I&rsquo;ve been up to - and I&rsquo;m excited. It&rsquo;s a <em>rusty</em> update 😉. As always, I would love to tell you a story (this will help set some context), but if you want to skip and go directly to the update, please scroll to: <code># THE Update</code> section.</p>
+<h2 id="the-story">The Story</h2>
+<p>I&rsquo;ve been through, possibly, the best and the worst time of my life. I use these contrasting words because everything went wrong - and that&rsquo;s where you get an opportunity to shine. I think I fairly enjoyed resisting the pain and fighting through the odds, hopefully you&rsquo;ll learn about it very soon on my blog (just need the courage to say it out loud :)).</p>
+<p>Anyways, just when the life hit extreme low, I had two options:</p>
+<ol>
+<li>Cry about it, not for a day, but keep crying about it.</li>
+<li>Accept, and do something that I enjoy.</li>
+</ol>
+<p>I chose a mix of both 1 and 2. Cried for a day or two, but then accepted and started diverting my energy to the things I imagined myself doing. One of those, which I can share here, was finishing up my dream side projects. To name a few:</p>
+<ol>
+<li><a href="https://github.com/krshrimali/interpreter-go">Completing the book: Writing Interpreter in Go</a>.</li>
+<li><a href="https://github.com/krshrimali/rust-leetcode">Do some leetcode to gain confidence</a>.</li>
+<li><a href="https://github.com/krshrimali/CPP-File-Manager">Release the next version of C++ File Manager</a>.</li>
+<li><strong>Write an App in Rust</strong>
+and more&hellip;</li>
+</ol>
+<p>The 4th point you&rsquo;re looking at, is exactly what we are going to cover today. But before that, let me say it loud:</p>
+<blockquote>
+<p>Dear all, never take a decision when you are on your highs. You&rsquo;ll end up being in a mud later on, hold everything together when you reach a high. STAY! RIGHT! THERE!</p>
+</blockquote>
+<h2 id="the-update">THE Update</h2>
+<p>Here it comes! For those who (very kindly) follow <a href="https://youtube.com/c/kushashwaraviShrimali">my YouTube channel</a>, know already that I&rsquo;ve been learning Rust for a while. And while I was at it, I found it a good time to start building something. Pop! OS, the best Linux distribution I&rsquo;ve ever come across, announced their new Cosmic Desktop Environment a while back (it&rsquo;s a work in progress). I like reading source codes, and have been following what they were doing with Cosmic and remembered that they were using <a href="https://github.com/iced-rs/iced">Iced Library</a> for the development (GUI). I thought to give it a try, and the best place to start with, was the <a href="https://github.com/krshrimali/youtuber-monitoring-app">YouTube Monitoring App</a> which I was building earlier with Python and Electron JS. Porting the idea to Rust was comparatively easier than to think of another project.</p>
+<p>So the journey took off, started with going through the examples, and the <a href="https://github.com/iced-rs/iced/tree/master/examples/styling"><code>styling</code></a> example. Seeing how theme is switched, was mesmerizing.</p>
+<p>That&rsquo;s where I started, taking the first steps, just replicating the <code>styling</code> example to see if I can reproduce and understand what they were doing. As the time passed by, things started to take a good look:</p>
+<ol>
+<li>Theme switching was enabled.</li>
+<li>Each user had a card (but not aligned 😢).</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/blogs/rust_app_stage_first.png" alt="Stage - 1"></p>
+<p><img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/blogs/rust_app_stage_first_light.png" alt="Stage - 1 (Light Theme)"></p>
+<p>The ideal stage would be to see the YouTube API collect details, create the JSON file, and show it to the user. I knew I was not even close to the final goal, but why give up?</p>
+<p>Anyways, my next target was to figure out having a grid - multiple rows and multiple columns. From what I know, there isn&rsquo;t a <code>grid</code> like implementation within Iced, so I had to use <code>Column</code> and <code>Row</code> classes from Iced. It was tricky, if I have to be very honest, but finally worked out. Had to ask a couple of questions on the discord channel of Iced, they were very kind and quick to help me with my queries.</p>
+<p>I also had to choose an image for each user, as an avatar was necessary. Once added, I knew it will start looking better. A header and a footer were also required, to give the user some info about what they are seeing on the screen. However, when the grid wasn&rsquo;t full, the image wouldn&rsquo;t align and that was an issue to resolve for the next stage.</p>
+<p>Adding the avatar was very interesting, I wanted a link to work (for the avatar). But for now, I thought I&rsquo;ll suffice to using an image path to see if it really works (spoiler: it did 😄):</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">profile_pic</span><span style="color:#f92672">&lt;&#39;</span><span style="color:#a6e22e">a</span><span style="color:#f92672">&gt;</span>(width: <span style="color:#66d9ef">u16</span>) -&gt; <span style="color:#a6e22e">Container</span><span style="color:#f92672">&lt;&#39;</span><span style="color:#a6e22e">a</span>, Message<span style="color:#f92672">&gt;</span> {
+    container(
+        <span style="color:#75715e">// This should go away once we unify resource loading on native
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">// platforms
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span> cfg!(target_arch <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;wasm32&#34;</span>) {
+            image(<span style="color:#e6db74">&#34;profile_images/Noddy.jpeg&#34;</span>)
+        } <span style="color:#66d9ef">else</span> {
+            image(format!(
+                <span style="color:#e6db74">&#34;{}/profile_images/Noddy.jpeg&#34;</span>,
+                env!(<span style="color:#e6db74">&#34;CARGO_MANIFEST_DIR&#34;</span>)
+            ))
+        }
+        .height(Length::Units(width))
+        .width(Length::Units(width)),
+    )
+    .width(Length::Fill)
+    .center_x()
+}
+</code></pre></div><p><img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/blogs/rust_app_stage_second.png" alt="Stage - 2"></p>
+<p>As I knew things were starting to take place, the next important step was to fix the alignment, and enable JSON parsing. Let me show you the issue we had with alignment:</p>
+<p><img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/blogs/rust_app_stage_second_alignment_issue.png" alt="Stage - 2 (alignment issue)"></p>
+<p>The alignment issue was fixed with using <code>align_items</code> and also avoiding <code>width(Length::Fill)</code> with the user cards. We&rsquo;ll discuss these details in the next blog, for now, I just shared to give you a hint.</p>
+<p>For JSON parsing, to start with, I created a <a href="https://github.com/krshrimali/YouTube-Monitoring-App-Rust-Iced/blob/main/list_users.json">sample JSON file</a>, and used <a href="https://github.com/serde-rs/json"><code>serde</code></a> crate to parse JSON file. The way a JSON can be deserialized into a JSON class, was amazing to see - very intuitive.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">read_json</span>(file_path: <span style="color:#66d9ef">&amp;</span><span style="color:#66d9ef">str</span>) -&gt; Result<span style="color:#f92672">&lt;</span>YTCreator, Box<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">dyn</span> Error<span style="color:#f92672">&gt;&gt;</span> {
+    <span style="color:#66d9ef">let</span> file <span style="color:#f92672">=</span> File::open(file_path)<span style="color:#f92672">?</span>;
+    <span style="color:#66d9ef">let</span> reader <span style="color:#f92672">=</span> BufReader::new(file);
+
+    <span style="color:#75715e">// Read the JSON contents of the file as an instance of `YTCreator`.
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> u: <span style="color:#a6e22e">YTCreator</span> <span style="color:#f92672">=</span> serde_json::from_reader(reader)<span style="color:#f92672">?</span>;
+    <span style="color:#66d9ef">if</span> u.size() <span style="color:#f92672">&gt;</span> MAX_EXPECTED_ITEMS {
+        Ok(u.slice_to(MAX_EXPECTED_ITEMS))
+    } <span style="color:#66d9ef">else</span> {
+        Ok(u)
+    }
+}
+</code></pre></div><p>The implementation of <code>YTCreator</code> had the fields that were useful for the user:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#75715e">#[derive(Deserialize, Debug, Default, Clone)]</span>
+<span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">YTCreator</span> {
+    names: Vec<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span>,
+    avatar_links: Vec<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span>,
+    descriptions: Vec<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span>,
+    is_live_status: Vec<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span>,
+    subscribers: Vec<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span>
+}
+</code></pre></div><p>If you have not noticed already, focus on the <code>u.slice_to(MAX_EXPECTED_ITEMS)</code> expression. While this isn&rsquo;t really useful right now (more on this later), but it was a good practice to implement. This basically answers: &ldquo;What if there is more data then the grid limit?&rdquo;. Let&rsquo;s say the JSON file contains the data for 13 users, but our grid could only have 12 users' data -&gt; in this case, <code>.slice_to</code> will make sure that we only use maximum of 12 users on the grid:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">slice_to</span>(<span style="color:#f92672">&amp;</span>self, count_items: <span style="color:#66d9ef">usize</span>) -&gt; <span style="color:#a6e22e">YTCreator</span> {
+    <span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> new_obj <span style="color:#f92672">=</span> YTCreator {
+        names: Vec::new(),
+        avatar_links: Vec::new(),
+        descriptions: Vec::new(),
+        is_live_status: Vec::new(),
+        subscribers: Vec::new(),
+    };
+    new_obj.names <span style="color:#f92672">=</span> self.names.get(<span style="color:#ae81ff">0</span><span style="color:#f92672">..</span>count_items).unwrap().to_vec();
+    new_obj.avatar_links <span style="color:#f92672">=</span> self.avatar_links.get(<span style="color:#ae81ff">0</span><span style="color:#f92672">..</span>count_items).unwrap().to_vec();
+    new_obj.descriptions <span style="color:#f92672">=</span> self.descriptions.get(<span style="color:#ae81ff">0</span><span style="color:#f92672">..</span>count_items).unwrap().to_vec();
+    new_obj.is_live_status <span style="color:#f92672">=</span> self.is_live_status.get(<span style="color:#ae81ff">0</span><span style="color:#f92672">..</span>count_items).unwrap().to_vec();
+    new_obj.subscribers <span style="color:#f92672">=</span> self.subscribers.get(<span style="color:#ae81ff">0</span><span style="color:#f92672">..</span>count_items).unwrap().to_vec();
+    new_obj
+}
+</code></pre></div><p>The implementation of <code>slice_to</code> method is fairly simple, just creating another <code>YTCreator</code> object but with stripped count.</p>
+<p>One of the very important step was to enable passing a link for the image/avatar. This was made possible using <code>reqwest</code> crate, getting the image in a form of bytes array and then converting it to an <code>image::Handle</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">profile_pic</span><span style="color:#f92672">&lt;&#39;</span><span style="color:#a6e22e">a</span><span style="color:#f92672">&gt;</span>(width: <span style="color:#66d9ef">u16</span>, link: String) -&gt; <span style="color:#a6e22e">Container</span><span style="color:#f92672">&lt;&#39;</span><span style="color:#a6e22e">a</span>, Message<span style="color:#f92672">&gt;</span> {
+    <span style="color:#66d9ef">let</span> img_obj <span style="color:#f92672">=</span> reqwest::blocking::get(link).ok();
+    <span style="color:#66d9ef">let</span> img_bytes <span style="color:#f92672">=</span> <span style="color:#66d9ef">match</span> img_obj {
+        Some(bytes) <span style="color:#f92672">=&gt;</span> {
+            bytes.bytes().ok()
+        },
+        None <span style="color:#f92672">=&gt;</span> None
+    }.unwrap();
+
+    <span style="color:#66d9ef">let</span> out_img: <span style="color:#a6e22e">image</span>::Handle <span style="color:#f92672">=</span> image::Handle::from_memory(img_bytes.to_vec());
+
+    container(
+        image(out_img)
+        .height(Length::Units(width))
+        .width(Length::Units(width)),
+    )
+    .width(Length::Fill)
+    .center_x()
+}
+</code></pre></div><p>While I was very happy that:</p>
+<ul>
+<li>The alignment was fixed</li>
+<li>Image links were working</li>
+<li>JSON parsing was done correctly</li>
+</ul>
+<p><strong>BUT</strong> there was a small but significantly major mistake I made. Let&rsquo;s keep it for later though, keep reading ❤️</p>
+<p><img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/blogs/rust_app_stage_third.png" alt="Stage - 3"></p>
+<p>Starting from here, you&rsquo;ll understand how important development is. In this stage, the UI won&rsquo;t change <em>BUT</em> we&rsquo;ll be significantly improving the performance.</p>
+<p>So, while I was very happy about the project progress so far, I thought I&rsquo;ll ask my friend to open it up on his system. He had Windows, but fortunately he also had WSL. Thanks to him, he didn&rsquo;t give up on trying to run GUI on his WSL - and when finally the app loaded, it was <em>LAGGING</em>. 😢</p>
+<p>I was surprised, because on my Mac - it was working fine. I opened up my Linux system, and guess what? It lagged there as well. I immediately knew I was doing something wrong. Now, as developers, we generally try to get to the bottleneck of the issue, and I had an instinct about it.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">view</span>(<span style="color:#f92672">&amp;</span>self) -&gt; <span style="color:#a6e22e">iced</span>::Element<span style="color:#f92672">&lt;&#39;</span>_, Self::Message<span style="color:#f92672">&gt;</span> {
+    <span style="color:#66d9ef">let</span> choose_theme <span style="color:#f92672">=</span> <span style="color:#f92672">..</span>.;
+
+    <span style="color:#66d9ef">let</span> content <span style="color:#f92672">=</span> container(column![choose_theme].spacing(<span style="color:#ae81ff">20</span>).padding(<span style="color:#ae81ff">20</span>).max_width(<span style="color:#ae81ff">600</span>))
+        .width(Length::Fill)
+        .center_x();
+
+    <span style="color:#66d9ef">let</span> footer <span style="color:#f92672">=</span> <span style="color:#f92672">..</span>.;
+    <span style="color:#66d9ef">let</span> title_header <span style="color:#f92672">=</span> <span style="color:#f92672">..</span>.;
+
+    <span style="color:#66d9ef">let</span> all_cards <span style="color:#f92672">=</span> render_cards::create_list_of_cards(<span style="color:#f92672">&amp;</span>self.json_obj);
+    <span style="color:#66d9ef">let</span> binding <span style="color:#f92672">=</span> render_cards::ListOfCards::default();
+    <span style="color:#75715e">// RELEVANT...
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> first_row <span style="color:#f92672">=</span> render_cards::create_row(all_cards.get(<span style="color:#ae81ff">0</span>).unwrap_or(<span style="color:#f92672">&amp;</span>binding));
+    <span style="color:#66d9ef">let</span> second_row <span style="color:#f92672">=</span> render_cards::create_row(all_cards.get(<span style="color:#ae81ff">1</span>).unwrap_or(<span style="color:#f92672">&amp;</span>binding));
+    <span style="color:#66d9ef">let</span> third_row <span style="color:#f92672">=</span> render_cards::create_row(all_cards.get(<span style="color:#ae81ff">2</span>).unwrap_or(<span style="color:#f92672">&amp;</span>binding));
+
+    container(column![
+        content,
+        horizontal_rule(<span style="color:#ae81ff">10</span>),
+        title_header,
+        horizontal_rule(<span style="color:#ae81ff">10</span>),
+        first_row,
+        second_row,
+        third_row,
+        horizontal_rule(<span style="color:#ae81ff">10</span>),
+        footer,
+        horizontal_rule(<span style="color:#ae81ff">10</span>),
+    ])
+    .height(Length::Shrink)
+    .into()
+}
+</code></pre></div><p>The <code>view</code> method above was running every time I switched the theme (whenever anything changed), and this was the problem. Let me show you the <code>create_row</code> method, which will give you an idea why it&rsquo;s slow:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">create_row</span>(cards: <span style="color:#66d9ef">&amp;</span><span style="color:#a6e22e">ListOfCards</span>) -&gt; <span style="color:#a6e22e">Row</span><span style="color:#f92672">&lt;&#39;</span>static, Message<span style="color:#f92672">&gt;</span> {
+    Row::with_children(
+        cards
+            .cards
+            .iter()
+            .map(<span style="color:#f92672">|</span>each_card<span style="color:#f92672">|</span> {
+                container(
+                    row<span style="color:#f92672">!</span>[
+                        column![create_card(each_card)].spacing(<span style="color:#ae81ff">50</span>).padding(<span style="color:#ae81ff">20</span>),
+                        column![profile_pic(<span style="color:#ae81ff">130</span>, each_card.avatar_link.to_owned())]
+                            .width(Length::Units(<span style="color:#ae81ff">130</span>))
+                            .height(Length::Units(<span style="color:#ae81ff">150</span>))
+                            .padding(<span style="color:#ae81ff">20</span>)
+                    ]
+                    .align_items(iced::Alignment::End)
+                    .height(Length::Fill),
+                )
+                .width(Length::Fill)
+                .center_y()
+                .style(theme::Container::Box)
+                .into()
+            })
+            .collect(),
+    )
+}
+</code></pre></div><p>Just observe, that I was calling <code>profile_pic</code> method with the avatar link - which means that every time the theme is switched, the images will be fetched again. Wow! That&rsquo;s the only bottleneck? Nope!</p>
+<p>Surprise! There is one more, we were actually reading the JSON file in the <code>view</code> function as well. Which was bad! So we finally have 2 bottlenecks for the performance:</p>
+<ol>
+<li>Downloading avatar link to an image handle.</li>
+<li>Parsing and deserializing the JSON file to <code>YTCreator</code> struct.</li>
+</ol>
+<p>(Also thanks to the iced community on discord, who helped with the first point above. They were really helpful.)</p>
+<p>Solving both bottlenecks above was intuitive to me. We could parse the JSON file as well as download the avatars when the app is created, for now. Later on, we&rsquo;ll do it when the user has changed inputs for the YT users they want to monitor. Here is how I solved it:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">new</span>() -&gt; <span style="color:#a6e22e">YTMonitor</span> {
+    <span style="color:#66d9ef">let</span> json_obj <span style="color:#f92672">=</span> render_cards::get_json_data();
+    <span style="color:#66d9ef">let</span> image_handles <span style="color:#f92672">=</span> render_cards::get_all_avatars(<span style="color:#f92672">&amp;</span>json_obj);
+    <span style="color:#75715e">// Because dark as default is cool :D
+</span><span style="color:#75715e"></span>    YTMonitor {
+        theme: <span style="color:#a6e22e">Theme</span>::Dark,
+        json_obj,
+        loaded_photos: <span style="color:#a6e22e">image_handles</span>,
+    }
+}
+</code></pre></div><p>As you can see above^, we have <code>json_obj, loaded_photos</code> as two added fields to the <code>YTMonitor</code> struct. We parsed the JSON file as well as downloaded all the avatars (we already know the avatar links from the JSON file). Later on, I would just use these as <code>self.json_obj</code> and <code>self.image_handles</code> in the <code>view</code> function, so no more performance degradation!</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">view</span>(<span style="color:#f92672">&amp;</span>self) -&gt; <span style="color:#a6e22e">iced</span>::Element<span style="color:#f92672">&lt;&#39;</span>_, Self::Message<span style="color:#f92672">&gt;</span> {
+    <span style="color:#75715e">// ...
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> all_cards <span style="color:#f92672">=</span> render_cards::create_list_of_cards(<span style="color:#f92672">&amp;</span>self.json_obj);
+    <span style="color:#66d9ef">let</span> binding <span style="color:#f92672">=</span> render_cards::ListOfCards::default();
+    <span style="color:#66d9ef">let</span> all_photos <span style="color:#f92672">=</span> self.loaded_photos.to_owned();
+
+    <span style="color:#66d9ef">let</span> first_row <span style="color:#f92672">=</span>
+        render_cards::create_row(all_cards.get(<span style="color:#ae81ff">0</span>).unwrap_or(<span style="color:#f92672">&amp;</span>binding), <span style="color:#f92672">&amp;</span>all_photos, <span style="color:#ae81ff">0</span>);
+    <span style="color:#66d9ef">let</span> second_row <span style="color:#f92672">=</span>
+        render_cards::create_row(all_cards.get(<span style="color:#ae81ff">1</span>).unwrap_or(<span style="color:#f92672">&amp;</span>binding), <span style="color:#f92672">&amp;</span>all_photos, <span style="color:#ae81ff">4</span>);
+    <span style="color:#66d9ef">let</span> third_row <span style="color:#f92672">=</span>
+        render_cards::create_row(all_cards.get(<span style="color:#ae81ff">2</span>).unwrap_or(<span style="color:#f92672">&amp;</span>binding), <span style="color:#f92672">&amp;</span>all_photos, <span style="color:#ae81ff">8</span>);
+}
+</code></pre></div><p>As you can see above, I am passing the <code>all_photos</code> variable to <code>create_row</code> this time (along with the offset). The <code>profile_pic</code> method just takes the image handle now:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">profile_pic</span><span style="color:#f92672">&lt;&#39;</span><span style="color:#a6e22e">a</span><span style="color:#f92672">&gt;</span>(width: <span style="color:#66d9ef">u16</span>, img_handle: <span style="color:#a6e22e">image</span>::Handle) -&gt; <span style="color:#a6e22e">Container</span><span style="color:#f92672">&lt;&#39;</span><span style="color:#a6e22e">a</span>, Message<span style="color:#f92672">&gt;</span> {
+    container(
+        image(img_handle)
+            .height(Length::Units(width))
+            .width(Length::Units(width)),
+    )
+    .width(Length::Fill)
+    .center_x()
+}
+</code></pre></div><p>^^ This makes it much faster now! And yes, it did solve the problem. While doing this, of course, I learnt a lot of Rust, and Iced. So many things to learn, and I&rsquo;m already enjoying the challenges.</p>
+<p>I know this doesn&rsquo;t look the best yet, there are so many good apps out there built on the top of Iced, but I&rsquo;m getting started. Once this is done, I know at least - I - would love it. ❤️</p>
+<p>Here is how the app looks like, right now (featuring my friend Mohit Wankhade 😃):</p>
+<p><img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/blogs/rust_app_stage_fourth.png" alt="Stage - 4"></p>
+<p>We aren&rsquo;t done yet by the way, I have to cover some macros I built, but I&rsquo;ll keep it for my next blog. Until then, I hope you continue grinding whatever you love, and make the best out of the time you have. Take care, and thank you for being here. 💗</p>
+
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+                <p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://krshrimali.github.io/tags/development">development</a></span><span class="tag"><a href="https://krshrimali.github.io/tags/coding">coding</a></span><span class="tag"><a href="https://krshrimali.github.io/tags/rust">rust</a></span><span class="tag"><a href="https://krshrimali.github.io/tags/app">app</a></span><span class="tag"><a href="https://krshrimali.github.io/tags/updates">updates</a></span>
+                </p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>1934 Words</p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>Posted: <time class="dt-published"> 2022-12-12 05:30 &#43;0530</time></p>
+<a class="resp-sharing-button__link" href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2022%2f12%2fi-started-building-an-app-using-rust-and-here-is-how-it-went...%2f" target="_blank" rel="noopener" aria-label="Facebook">
+  <div class="resp-sharing-button resp-sharing-button--facebook resp-sharing-button--medium"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--circle">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11.5"/><path d="M15.84 9.5H13.5V8.48c0-.53.35-.65.6-.65h1.4v-2.3h-2.35c-2.3 0-2.65 1.7-2.65 2.8V9.5h-2v2h2v7h3v-7h2.1l.24-2z"/></svg></div>Facebook</div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="https://twitter.com/intent/tweet/?text=%22I%20started%20building%20an%20app%20using%20Rust%20and%20here%20is%20how%20it%20went...%22%20seems%20like%20an%20interesting%20read%20from%20%40rg0swami&amp;url=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2022%2f12%2fi-started-building-an-app-using-rust-and-here-is-how-it-went...%2f" target="_blank" rel="noopener" aria-label="Twitter">
+  <div class="resp-sharing-button resp-sharing-button--twitter resp-sharing-button--medium"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--circle">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.5 7.4l-2 .2c-.4-.5-1-.8-2-.8C13.3 6.8 12 8 12 9.4v.6c-2 0-4-1-5.4-2.7-.2.4-.3.8-.3 1.3 0 1 .4 1.7 1.2 2.2-.5 0-1 0-1.2-.3 0 1.3 1 2.3 2 2.6-.3.4-.7.4-1 0 .2 1.4 1.2 2 2.3 2-1 1-2.5 1.4-4 1 1.3 1 2.7 1.4 4.2 1.4 4.8 0 7.5-4 7.5-7.5v-.4c.5-.4.8-1.5 1.2-2z"/><circle cx="12" cy="12" r="11.5"/></svg></div>Twitter</div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="mailto:?subject=%22I%20started%20building%20an%20app%20using%20Rust%20and%20here%20is%20how%20it%20went...%22%20seems%20interesting...&amp;body=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2022%2f12%2fi-started-building-an-app-using-rust-and-here-is-how-it-went...%2f" target="_self" rel="noopener" aria-label="E-Mail">
+  <div class="resp-sharing-button resp-sharing-button--email resp-sharing-button--medium"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--circle">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19.5 16c0 .8-.7 1.5-1.5 1.5H6c-.8 0-1.5-.7-1.5-1.5V8c0-.8.7-1.5 1.5-1.5h12c.8 0 1.5.7 1.5 1.5v8zm-2-7.5L12 13 6.5 8.5m11 6l-4-2.5m-7 2.5l4-2.5"/><circle cx="12" cy="12" r="11.5"/></svg></div>E-Mail</div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2022%2f12%2fi-started-building-an-app-using-rust-and-here-is-how-it-went...%2f&amp;title=%22I%20started%20building%20an%20app%20using%20Rust%20and%20here%20is%20how%20it%20went...%22%20seems%20interesting...&amp;summary=%22I%20started%20building%20an%20app%20using%20Rust%20and%20here%20is%20how%20it%20went...%22%20seems%20interesting...&amp;source=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2022%2f12%2fi-started-building-an-app-using-rust-and-here-is-how-it-went...%2f" target="_blank" rel="noopener" aria-label="LinkedIn">
+  <div class="resp-sharing-button resp-sharing-button--linkedin resp-sharing-button--medium"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--circle">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11.5"/><path d="M15 12.5c-.28 0-.5.22-.5.5v3.5h-3s.03-6.48 0-7h3v.83s.46-.75 1.7-.75c1.56 0 2.3 1.12 2.3 3.3v3.62h-3V13c0-.28-.23-.5-.5-.5zm-7.5-3h2v7h-2z"/><circle cx="8.5" cy="6.5" r="1"/></svg></div>LinkedIn</div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="https://reddit.com/submit/?url=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2022%2f12%2fi-started-building-an-app-using-rust-and-here-is-how-it-went...%2f&amp;resubmit=true&amp;title=%22I%20started%20building%20an%20app%20using%20Rust%20and%20here%20is%20how%20it%20went...%22%20seems%20interesting..." target="_blank" rel="noopener" aria-label="Reddit">
+  <div class="resp-sharing-button resp-sharing-button--reddit resp-sharing-button--medium"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--circle">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11.5"/><ellipse cx="12" cy="14.37" rx="6.2" ry="4.24"/><path d="M14.3 16.25c-.62.36-1.42.57-2.3.57-.88 0-1.7-.2-2.32-.58"/><circle cx="14.61" cy="13.39" r=".98"/><circle cx="9.39" cy="13.39" r=".98"/><path d="M16.4 11.38c.26-.55.82-.92 1.47-.92.9 0 1.63.73 1.63 1.63 0 .8-.6 1.47-1.38 1.6"/><circle cx="17.22" cy="7.52" r="1.63"/><path d="M7.6 11.38c-.26-.54-.82-.92-1.47-.92-.9 0-1.63.73-1.63 1.63 0 .8.6 1.47 1.38 1.6M12 10.12s-.08-4.82 3.6-2.6"/></svg></div>Reddit</div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="whatsapp://send?text=%22I%20started%20building%20an%20app%20using%20Rust%20and%20here%20is%20how%20it%20went...%22%20seems%20interesting...%20https%3a%2f%2fkrshrimali.github.io%2fposts%2f2022%2f12%2fi-started-building-an-app-using-rust-and-here-is-how-it-went...%2f" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <div class="resp-sharing-button resp-sharing-button--whatsapp resp-sharing-button--medium"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--circle">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle xmlns="http://www.w3.org/2000/svg" cx="12" cy="12" r="11.5"/><path stroke-width="1px" d="M17.6 6.2c-1.5-1.5-3.4-2.3-5.5-2.3-4.3 0-7.8 3.5-7.8 7.8 0 1.4.4 2.7 1 3.9l-1.1 4 4.1-1.1c1.1.6 2.4.9 3.7.9 4.3 0 7.8-3.5 7.8-7.8.1-2-.7-3.9-2.2-5.4zm-5.5 11.9c-1.2 0-2.3-.3-3.3-.9l-.2-.1-2.4.6.7-2.4-.2-.2c-.6-1-1-2.2-1-3.4 0-3.6 2.9-6.5 6.5-6.5 1.7 0 3.3.7 4.6 1.9 1.2 1.2 1.9 2.8 1.9 4.6-.1 3.5-3 6.4-6.6 6.4zm3.5-4.8c-.2-.1-1.1-.6-1.3-.6-.2-.1-.3-.1-.4.1-.1.2-.5.6-.6.8-.1.1-.2.1-.4 0s-.8-.3-1.6-1c-.6-.5-1-1.2-1.1-1.3-.1-.2 0-.3.1-.4l.3-.3s.1-.2.2-.3c.1-.1 0-.2 0-.3s-.4-1.1-.6-1.4c-.2-.4-.3-.3-.4-.3h-.4s-.3 0-.5.2-.7.7-.7 1.6c0 1 .7 1.9.8 2s1.4 2.1 3.3 2.9c.5.2.8.3 1.1.4.5.1.9.1 1.2.1.4-.1 1.1-.5 1.3-.9.2-.5.2-.8.1-.9 0-.2-.2-.3-.4-.4z"/></svg></div>WhatsApp</div>
+</a>
+</div>
+
+        
+            <div class="pagination">
+                <div class="pagination__title">
+                    <span class="pagination__title-h"></span>
+                    <hr />
+                </div>
+
+                <div class="pagination__buttons">
+                    
+
+                    
+                        <span class="button next">
+                            <a href="https://krshrimali.github.io/posts/2022/11/daily-update-19th-20th-21st-november-2022-day-5-to-day-7-inclusive/">
+                                <span class="button__text">Daily Update: 19th 20th 21st November 2022 - Day 5 to Day 7 (inclusive)</span>
+                                <span class="button__icon">→</span>
+                            </a>
+                        </span>
+                    
+                </div>
+            </div>
+        
+
+        
+            <div class="webmention-form">
+                <form action="https://webmention.io/krshrimali.github.io/webmention" method="post">
+                    <label>Did you mention this article on your website? Put the URL of your post here:</label><br/>
+                    <input name="source" type="url"/>
+                    <input name="target" value="https://krshrimali.github.io/posts/2022/12/i-started-building-an-app-using-rust-and-here-is-how-it-went.../" type="hidden"/>
+                    <input value="Send Webmention" type="submit"/>
+                </form>
+            </div>
+            <div id="webmention-container"></div>
+        
+
+        
+          <div id="comments" class="thin"><div class="pagination__title">
+    <span class="pagination__title-h">Comments</span>
+    <hr />
+</div>
+    
+<div id="remarkbox-div">
+  <noscript>
+    <iframe id=remarkbox-iframe src="https://my.remarkbox.com/embed?nojs=true" style="height:600px;width:100%;border:none!important" tabindex=0></iframe>
+  </noscript>
+</div>
+<script src="https://my.remarkbox.com/static/js/iframe-resizer/iframeResizer.min.js"></script>
+<script>
+  var rb_owner_key = "bd2f6e6d-1c8d-11ec-8ccc-040140774501";
+  var thread_uri = window.location.href;
+  var thread_title = window.document.title;
+  var thread_fragment = window.location.hash;
+
+  
+  var rb_src = "https://my.remarkbox.com/embed" +
+      "?rb_owner_key=" + rb_owner_key +
+      "&thread_title=" + encodeURI(thread_title) +
+      "&thread_uri=" + encodeURIComponent(thread_uri) +
+      thread_fragment;
+
+  function create_remarkbox_iframe() {
+    var ifrm = document.createElement("iframe");
+    ifrm.setAttribute("id", "remarkbox-iframe");
+    ifrm.setAttribute("scrolling", "no");
+    ifrm.setAttribute("src", rb_src);
+    ifrm.setAttribute("frameborder", "0");
+    ifrm.setAttribute("tabindex", "0");
+    ifrm.setAttribute("title", "Remarkbox");
+    ifrm.style.width = "100%";
+    document.getElementById("remarkbox-div").appendChild(ifrm);
+  }
+  create_remarkbox_iframe();
+  iFrameResize(
+    {
+      checkOrigin: ["https://my.remarkbox.com"],
+      inPageLinks: true,
+      initCallback: function(e) {e.iFrameResizer.moveToAnchor(thread_fragment)}
+    },
+    document.getElementById("remarkbox-iframe")
+  );
+</script>
+
+</div>
+        
+    </main>
+
+            
+                <footer class="footer">
+    <p>
+        &copy; 2022
+            
+                <span><a href="https://krshrimali.github.io">Kushashwa Ravi Shrimali</a></span>
+                
+                 <a href="https://krshrimali.github.io/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
+                <br>
+            <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a>
+                Powered by <a href="http://gohugo.io"><u>Hugo</u></a> and <a href="https://github.com/HaoZeke/hugo-theme-hello-friend-ng-hz"><u>this theme</u></a>.</br>
+                
+                
+                <script src="https://liberapay.com/krshrimali/widgets/button.js"></script>
+<noscript><a href="https://liberapay.com/krshrimali/donate"><img alt="Donate using Liberapay" src="https://liberapay.com/assets/widgets/donate.svg"></a></noscript>
+
+                
+    </p>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+
+
+<script src="https://krshrimali.github.io/bundle.min.5fae9992ea406007408dc33b0b3a8376d61e2f1d6ac50ba1dad7580ac50afb5199bcef3bbc3677e77553a9980bf882cf71edc2f755687dd7725f12ece4304ac2.js"></script>
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-146662543-1', 'auto');ga('send', 'pageview');
+    </script>
+<script src="https://krshrimali.github.io/js/webmention.min.513a53d009530b21cba09721b6f4dc912e9c20ad2c0adbb5c4e486c4f77774a6e9eca8c2e1e4e8bc9e9e86693aa5ca91e7bf232b50f7f8bee4e64efc874040a7.js" data-id="webmention-container"></script>
+
+
+
+
+    </body>
+</html>

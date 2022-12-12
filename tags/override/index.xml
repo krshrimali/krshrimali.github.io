@@ -16,9 +16,9 @@
       <description>NOTE
 My notes on Chapter 3, Item 12 of Effective Modern C++ written by Scott Meyers.
 Some (or even all) of the text can be similar to what you see in the book, as these are notes: I&amp;rsquo;ve tried not to be unnecessarily creative with my words. :)
-Overriding != Overloading
+ Overriding != Overloading
 Example of virtual function overriding:
-// Base class class Base { public: virtual void doWork(); // ... }; // Derived class from Base class Derived: public Base { public: // virtual is optional // this will &amp;#34;override&amp;#34; Base::doWork virtual void doWork(); // .</description>
+// Base class class Base { public: virtual void doWork(); // ... }; // Derived class from Base class Derived: public Base { public: // virtual is optional  // this will &amp;#34;override&amp;#34; Base::doWork  virtual void doWork(); // .</description>
     </item>
     
   </channel>
