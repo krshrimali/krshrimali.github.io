@@ -202,57 +202,57 @@ Before we move on, it&rsquo;s important what we covered in the last blog. We&rsq
                 <h2 id="recap-of-the-last-blog">Recap of the last blog</h2>
 <p>Before we move on, it&rsquo;s important what we covered in the last blog. We&rsquo;ll be going forward from loading Custom Dataset to now using the dataset to train our VGG-16 Network. Previously, we were able to load our custom dataset using the following template:</p>
 <p><strong>Note</strong>: Those who are already aware of loading a custom dataset can skip this section.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CustomDataset</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> torch<span style="color:#f92672">::</span>data<span style="color:#f92672">::</span>dataset<span style="color:#f92672">&lt;</span>CustomDataset<span style="color:#f92672">&gt;</span> {
-<span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
-  <span style="color:#75715e">// Declare 2 vectors of tensors for images and labels
-</span><span style="color:#75715e"></span>  vector<span style="color:#f92672">&lt;</span>torch<span style="color:#f92672">::</span>Tensor<span style="color:#f92672">&gt;</span> images, labels;
-<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-  <span style="color:#75715e">// Constructor
-</span><span style="color:#75715e"></span>  CustomDataset(vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> list_images, vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> list_labels) {
-    images <span style="color:#f92672">=</span> process_images(list_images);
-    labels <span style="color:#f92672">=</span> process_labels(list_labels);
-  };
-
-  <span style="color:#75715e">// Override get() function to return tensor at location index
-</span><span style="color:#75715e"></span>  torch<span style="color:#f92672">::</span>data<span style="color:#f92672">::</span>Example<span style="color:#f92672">&lt;&gt;</span> get(size_t index) <span style="color:#66d9ef">override</span> {
-    torch<span style="color:#f92672">::</span>Tensor sample_img <span style="color:#f92672">=</span> images.at(index);
-    torch<span style="color:#f92672">::</span>Tensor sample_label <span style="color:#f92672">=</span> labels.at(index);
-    <span style="color:#66d9ef">return</span> {sample_img.clone(), sample_label.clone()};
-  };
-
-  <span style="color:#75715e">// Return the length of data
-</span><span style="color:#75715e"></span>  torch<span style="color:#f92672">::</span>optional<span style="color:#f92672">&lt;</span>size_t<span style="color:#f92672">&gt;</span> size() <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">override</span> {
-    <span style="color:#66d9ef">return</span> labels.size();
-  };
-};
-
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">int</span> argc, <span style="color:#66d9ef">char</span><span style="color:#f92672">**</span> argv) {
-  vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> list_images; <span style="color:#75715e">// list of path of images
-</span><span style="color:#75715e"></span>  vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> list_labels; <span style="color:#75715e">// list of integer labels
-</span><span style="color:#75715e"></span>
-  <span style="color:#75715e">// Dataset init and apply transforms - None!
-</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">auto</span> custom_dataset <span style="color:#f92672">=</span> CustomDataset(list_images, list_labels).map(torch<span style="color:#f92672">::</span>data<span style="color:#f92672">::</span>transforms<span style="color:#f92672">::</span>Stack<span style="color:#f92672">&lt;&gt;</span>());
-}
-</code></pre></div><p>These were the steps we followed last time:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CustomDataset</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> torch<span style="color:#f92672">::</span>data<span style="color:#f92672">::</span>dataset<span style="color:#f92672">&lt;</span>CustomDataset<span style="color:#f92672">&gt;</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// Declare 2 vectors of tensors for images and labels
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  vector<span style="color:#f92672">&lt;</span>torch<span style="color:#f92672">::</span>Tensor<span style="color:#f92672">&gt;</span> images, labels;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// Constructor
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  CustomDataset(vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> list_images, vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> list_labels) {
+</span></span><span style="display:flex;"><span>    images <span style="color:#f92672">=</span> process_images(list_images);
+</span></span><span style="display:flex;"><span>    labels <span style="color:#f92672">=</span> process_labels(list_labels);
+</span></span><span style="display:flex;"><span>  };
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// Override get() function to return tensor at location index
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  torch<span style="color:#f92672">::</span>data<span style="color:#f92672">::</span>Example<span style="color:#f92672">&lt;&gt;</span> get(size_t index) <span style="color:#66d9ef">override</span> {
+</span></span><span style="display:flex;"><span>    torch<span style="color:#f92672">::</span>Tensor sample_img <span style="color:#f92672">=</span> images.at(index);
+</span></span><span style="display:flex;"><span>    torch<span style="color:#f92672">::</span>Tensor sample_label <span style="color:#f92672">=</span> labels.at(index);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> {sample_img.clone(), sample_label.clone()};
+</span></span><span style="display:flex;"><span>  };
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// Return the length of data
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  torch<span style="color:#f92672">::</span>optional<span style="color:#f92672">&lt;</span>size_t<span style="color:#f92672">&gt;</span> size() <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">override</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> labels.size();
+</span></span><span style="display:flex;"><span>  };
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">int</span> argc, <span style="color:#66d9ef">char</span><span style="color:#f92672">**</span> argv) {
+</span></span><span style="display:flex;"><span>  vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> list_images; <span style="color:#75715e">// list of path of images
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> list_labels; <span style="color:#75715e">// list of integer labels
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// Dataset init and apply transforms - None!
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">auto</span> custom_dataset <span style="color:#f92672">=</span> CustomDataset(list_images, list_labels).map(torch<span style="color:#f92672">::</span>data<span style="color:#f92672">::</span>transforms<span style="color:#f92672">::</span>Stack<span style="color:#f92672">&lt;&gt;</span>());
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>These were the steps we followed last time:</p>
 <p><img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/blogs/Steps-Loading-Custom-Data.PNG" alt=""></p>
 <h2 id="overview-how-to-pass-batches-to-our-network">Overview: How to pass batches to our network?</h2>
 <p>Since we have our dataset loaded, let&rsquo;s see how to pass batches of data to our network. Before we go on and see how PyTorch C++ API does it, let&rsquo;s see how it&rsquo;s done in Python.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">dataset_loader <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>utils<span style="color:#f92672">.</span>data<span style="color:#f92672">.</span>DataLoader(custom_dataset,
-                                             batch_size<span style="color:#f92672">=</span><span style="color:#ae81ff">4</span>, shuffle<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
-</code></pre></div><p>Just a short review of what <code>DataLoader()</code> class does: It loads the data and returns single or multiple iterators over the dataset. We pass in our object from <code>Dataset</code> class (here, <code>custom_dataset</code>). We will do the same process in C++ using the following template:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">auto</span> data_loader <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>data<span style="color:#f92672">::</span>make_data_loader<span style="color:#f92672">&lt;</span>torch<span style="color:#f92672">::</span>data<span style="color:#f92672">::</span>samplers<span style="color:#f92672">::</span>SequentialSampler<span style="color:#f92672">&gt;</span>(
-  std<span style="color:#f92672">::</span>move(custom_dataset),
-  batch_size
-);
-</code></pre></div><p>In brief, we are loading our data using <code>SequentialSampler</code> class which samples our data in the same order that we provided it with. Have a look at the <code>SequentialSampler</code> class <a href="https://pytorch.org/docs/stable/data.html#torch.utils.data.SequentialSampler">here</a>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>dataset_loader <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>utils<span style="color:#f92672">.</span>data<span style="color:#f92672">.</span>DataLoader(custom_dataset,
+</span></span><span style="display:flex;"><span>                                             batch_size<span style="color:#f92672">=</span><span style="color:#ae81ff">4</span>, shuffle<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+</span></span></code></pre></div><p>Just a short review of what <code>DataLoader()</code> class does: It loads the data and returns single or multiple iterators over the dataset. We pass in our object from <code>Dataset</code> class (here, <code>custom_dataset</code>). We will do the same process in C++ using the following template:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">auto</span> data_loader <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>data<span style="color:#f92672">::</span>make_data_loader<span style="color:#f92672">&lt;</span>torch<span style="color:#f92672">::</span>data<span style="color:#f92672">::</span>samplers<span style="color:#f92672">::</span>SequentialSampler<span style="color:#f92672">&gt;</span>(
+</span></span><span style="display:flex;"><span>  std<span style="color:#f92672">::</span>move(custom_dataset),
+</span></span><span style="display:flex;"><span>  batch_size
+</span></span><span style="display:flex;"><span>);
+</span></span></code></pre></div><p>In brief, we are loading our data using <code>SequentialSampler</code> class which samples our data in the same order that we provided it with. Have a look at the <code>SequentialSampler</code> class <a href="https://pytorch.org/docs/stable/data.html#torch.utils.data.SequentialSampler">here</a>.</p>
 <p>For the definition of this function: <code>torch::data::make_data_loader</code> <a href="https://pytorch.org/cppdocs/api/function_namespacetorch_1_1data_1a0d29ca9900cae66957c5cc5052ecc122.html#exhale-function-namespacetorch-1-1data-1a0d29ca9900cae66957c5cc5052ecc122">here</a>. A short screenshot from the documentation is given below.</p>
 <p><img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/blogs/Data-Loader-Function.PNG" alt=""></p>
 <p>Let&rsquo;s go ahead and learn to iterate through our data loader and pass each batch of data and labels to our network. For once, imagine that we have a <code>struct</code> named <code>Net</code> which defines our network and <code>forward()</code> function which parses the data through each layer and returns the output.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span><span style="color:#f92672">&amp;</span> batch: <span style="color:#f92672">*</span>data_loader) {
-  <span style="color:#66d9ef">auto</span> data <span style="color:#f92672">=</span> batch.data;
-  <span style="color:#66d9ef">auto</span> target <span style="color:#f92672">=</span> batch.target.squeeze();
-}
-</code></pre></div><p>So we have retrieved our <code>data</code> and label (<code>target</code>) - which also depends on the batch size. If you have <code>batch_size</code> as 4 in the <code>torch::data::make_data_loader()</code> function, then size of the target and data will be 4.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span><span style="color:#f92672">&amp;</span> batch: <span style="color:#f92672">*</span>data_loader) {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">auto</span> data <span style="color:#f92672">=</span> batch.data;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">auto</span> target <span style="color:#f92672">=</span> batch.target.squeeze();
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>So we have retrieved our <code>data</code> and label (<code>target</code>) - which also depends on the batch size. If you have <code>batch_size</code> as 4 in the <code>torch::data::make_data_loader()</code> function, then size of the target and data will be 4.</p>
 <h2 id="defining-the-hyperparameters-in-libtorch">Defining the Hyperparameters in Libtorch</h2>
 <p>Remember the Hyperparameters we need to define for training? Let&rsquo;s take a quick review of what they are:</p>
 <ol>
@@ -261,10 +261,10 @@ Before we move on, it&rsquo;s important what we covered in the last blog. We&rsq
 <li><strong>Loss Function</strong></li>
 </ol>
 <p>We have used <code>batch_size</code> parameter above while making the data loader. For defining optimizer, we&rsquo;ll go for <code>Adam</code> Optimizer here:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// We need to define the network first
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">auto</span> net <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>make_shared<span style="color:#f92672">&lt;</span>Net<span style="color:#f92672">&gt;</span>();
-torch<span style="color:#f92672">::</span>optim<span style="color:#f92672">::</span>Adam optimizer(net<span style="color:#f92672">-&gt;</span>parameters(), torch<span style="color:#f92672">::</span>optim<span style="color:#f92672">::</span>AdamOptions(<span style="color:#ae81ff">1e-3</span>));
-</code></pre></div><p><strong>Note that the PyTorch C++ API supports below listed optimizers:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">// We need to define the network first
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">auto</span> net <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>make_shared<span style="color:#f92672">&lt;</span>Net<span style="color:#f92672">&gt;</span>();
+</span></span><span style="display:flex;"><span>torch<span style="color:#f92672">::</span>optim<span style="color:#f92672">::</span>Adam optimizer(net<span style="color:#f92672">-&gt;</span>parameters(), torch<span style="color:#f92672">::</span>optim<span style="color:#f92672">::</span>AdamOptions(<span style="color:#ae81ff">1e-3</span>));
+</span></span></code></pre></div><p><strong>Note that the PyTorch C++ API supports below listed optimizers:</strong></p>
 <ol>
 <li><a href="https://pytorch.org/cppdocs/api/classtorch_1_1optim_1_1_r_m_sprop.html#exhale-class-classtorch-1-1optim-1-1-r-m-sprop">RMSprop</a></li>
 <li><a href="https://pytorch.org/cppdocs/api/classtorch_1_1optim_1_1_s_g_d.html#exhale-class-classtorch-1-1optim-1-1-s-g-d">SGD</a></li>
@@ -277,45 +277,45 @@ torch<span style="color:#f92672">::</span>optim<span style="color:#f92672">::</s
 <p><img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/blogs/Use-Optim.PNG" alt=""></p>
 <p>The documentation is self explanatory, so all we need to do is pass parameters of our Network which will be optimized using our optimizer, and pass in the learning rate like above. To know about parameters we can pass through <code>AdamOptions</code>, check out this <a href="https://pytorch.org/cppdocs/api/structtorch_1_1optim_1_1_adam_options.html#exhale-struct-structtorch-1-1optim-1-1-adam-options">documentation page</a>.</p>
 <p>Let&rsquo;s go ahead and learn to define <strong>Loss Function</strong> in PyTorch C++ API. For an example, we&rsquo;ll define <code>nll_loss</code> (Negative Log Likelihood Loss Function):</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">auto</span> output <span style="color:#f92672">=</span> net<span style="color:#f92672">-&gt;</span>forward(data);
-<span style="color:#66d9ef">auto</span> loss <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>nll_loss(output, target);
-
-<span style="color:#75715e">// To backpropagate loss
-</span><span style="color:#75715e"></span>loss.backward()
-</code></pre></div><p>If you need to output the loss, use: <code>loss.item&lt;float&gt;()</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">auto</span> output <span style="color:#f92672">=</span> net<span style="color:#f92672">-&gt;</span>forward(data);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">auto</span> loss <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>nll_loss(output, target);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// To backpropagate loss
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>loss.backward()
+</span></span></code></pre></div><p>If you need to output the loss, use: <code>loss.item&lt;float&gt;()</code>.</p>
 <h2 id="training-the-network">Training the Network</h2>
 <p>We are close to our last step! Training the network is almost similar to the way we do in Python. That&rsquo;s why, I&rsquo;ll include the code snippet here which should be self explanatory (since we have already discussed the core parts of it).</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">dataset_size <span style="color:#f92672">=</span> custom_dataset.size().value();
-<span style="color:#66d9ef">int</span> n_epochs <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>; <span style="color:#75715e">// Number of epochs
-</span><span style="color:#75715e"></span>
-<span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> epoch<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>; epoch<span style="color:#f92672">&lt;=</span>n_epochs; epoch<span style="color:#f92672">++</span>) {
-  <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span><span style="color:#f92672">&amp;</span> batch: <span style="color:#f92672">*</span>data_loader) {
-    <span style="color:#66d9ef">auto</span> data <span style="color:#f92672">=</span> batch.data;
-    <span style="color:#66d9ef">auto</span> target <span style="color:#f92672">=</span> batch.target.squeeze();
-
-    <span style="color:#75715e">// Convert data to float32 format and target to Int64 format
-</span><span style="color:#75715e"></span>    <span style="color:#75715e">// Assuming you have labels as integers
-</span><span style="color:#75715e"></span>    data <span style="color:#f92672">=</span> data.to(torch<span style="color:#f92672">::</span>kF2);
-    target <span style="color:#f92672">=</span> target.to(torch<span style="color:#f92672">::</span>kInt64);
-
-    <span style="color:#75715e">// Clear the optimizer parameters
-</span><span style="color:#75715e"></span>    optimizer.zero_grad();
-
-    <span style="color:#66d9ef">auto</span> output <span style="color:#f92672">=</span> net<span style="color:#f92672">-&gt;</span>forward(data);
-    <span style="color:#66d9ef">auto</span> loss <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>nll_loss(output, target);
-
-    <span style="color:#75715e">// Backpropagate the loss
-</span><span style="color:#75715e"></span>    loss.backward();
-    <span style="color:#75715e">// Update the parameters
-</span><span style="color:#75715e"></span>    optimizer.step();
-
-    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Train Epoch: %d/%ld [%5ld/%5d] Loss: %.4f&#34;</span> <span style="color:#f92672">&lt;&lt;</span> epoch <span style="color:#f92672">&lt;&lt;</span> n_epochs <span style="color:#f92672">&lt;&lt;</span> batch_index <span style="color:#f92672">*</span> batch.data.size(<span style="color:#ae81ff">0</span>) <span style="color:#f92672">&lt;&lt;</span> dataset_size <span style="color:#f92672">&lt;&lt;</span> loss.item<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">float</span><span style="color:#f92672">&gt;</span>() <span style="color:#f92672">&lt;&lt;</span> endl;
-  }
-}
-
-<span style="color:#75715e">// Save the model
-</span><span style="color:#75715e"></span>torch<span style="color:#f92672">::</span>save(net, <span style="color:#e6db74">&#34;best_model.pt&#34;</span>);
-</code></pre></div><p>In the next blog (<strong>coming soon</strong>), we&rsquo;ll be discussing about <strong>Making Predictions</strong> using our network and will also show an example of training our network on a benchmark dataset.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>dataset_size <span style="color:#f92672">=</span> custom_dataset.size().value();
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n_epochs <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>; <span style="color:#75715e">// Number of epochs
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> epoch<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>; epoch<span style="color:#f92672">&lt;=</span>n_epochs; epoch<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span><span style="color:#f92672">&amp;</span> batch: <span style="color:#f92672">*</span>data_loader) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">auto</span> data <span style="color:#f92672">=</span> batch.data;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">auto</span> target <span style="color:#f92672">=</span> batch.target.squeeze();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Convert data to float32 format and target to Int64 format
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// Assuming you have labels as integers
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    data <span style="color:#f92672">=</span> data.to(torch<span style="color:#f92672">::</span>kF2);
+</span></span><span style="display:flex;"><span>    target <span style="color:#f92672">=</span> target.to(torch<span style="color:#f92672">::</span>kInt64);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Clear the optimizer parameters
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    optimizer.zero_grad();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">auto</span> output <span style="color:#f92672">=</span> net<span style="color:#f92672">-&gt;</span>forward(data);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">auto</span> loss <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>nll_loss(output, target);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Backpropagate the loss
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    loss.backward();
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Update the parameters
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    optimizer.step();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Train Epoch: %d/%ld [%5ld/%5d] Loss: %.4f&#34;</span> <span style="color:#f92672">&lt;&lt;</span> epoch <span style="color:#f92672">&lt;&lt;</span> n_epochs <span style="color:#f92672">&lt;&lt;</span> batch_index <span style="color:#f92672">*</span> batch.data.size(<span style="color:#ae81ff">0</span>) <span style="color:#f92672">&lt;&lt;</span> dataset_size <span style="color:#f92672">&lt;&lt;</span> loss.item<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">float</span><span style="color:#f92672">&gt;</span>() <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Save the model
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>torch<span style="color:#f92672">::</span>save(net, <span style="color:#e6db74">&#34;best_model.pt&#34;</span>);
+</span></span></code></pre></div><p>In the next blog (<strong>coming soon</strong>), we&rsquo;ll be discussing about <strong>Making Predictions</strong> using our network and will also show an example of training our network on a benchmark dataset.</p>
             </div>
         </article>
 
@@ -494,7 +494,7 @@ torch<span style="color:#f92672">::</span>optim<span style="color:#f92672">::</s
         })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
         ga('create', 'UA-146662543-1', 'auto');ga('send', 'pageview');
     </script>
-<script src="https://krshrimali.github.io/js/webmention.min.513a53d009530b21cba09721b6f4dc912e9c20ad2c0adbb5c4e486c4f77774a6e9eca8c2e1e4e8bc9e9e86693aa5ca91e7bf232b50f7f8bee4e64efc874040a7.js" data-id="webmention-container"></script>
+<script src="https://krshrimali.github.io/js/webmention.min.8b3a0bd9a45559d02f5c9a0c5201da2ba4c8ed9b9d43bcc2d7951d4e72774e819ade3984c11c3bf2f2a2675050756a2b6f502de6829e5b0ff5fc04ff1f68d089.js" data-id="webmention-container"></script>
 
 
 

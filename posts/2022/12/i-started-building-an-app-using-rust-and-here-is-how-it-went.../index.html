@@ -50,7 +50,7 @@ The Story I&amp;rsquo;ve been through, possibly, the best and the worst time of 
 <meta itemprop="description" content="Hi everyone!! I&rsquo;ve an update, on what I&rsquo;ve been up to - and I&rsquo;m excited. It&rsquo;s a rusty update 😉. As always, I would love to tell you a story (this will help set some context), but if you want to skip and go directly to the update, please scroll to: # THE Update section.
 The Story I&rsquo;ve been through, possibly, the best and the worst time of my life. I use these contrasting words because everything went wrong - and that&rsquo;s where you get an opportunity to shine."><meta itemprop="datePublished" content="2022-12-12T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2022-12-12T00:00:00+00:00" />
-<meta itemprop="wordCount" content="1934"><meta itemprop="image" content="https://krshrimali.github.io"/>
+<meta itemprop="wordCount" content="1894"><meta itemprop="image" content="https://krshrimali.github.io"/>
 <meta itemprop="keywords" content="development,coding,rust,app,updates," /><meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://krshrimali.github.io"/>
 
@@ -166,7 +166,7 @@ The Story I&rsquo;ve been through, possibly, the best and the worst time of my l
     <main class="post">
 
         <div class="post-info">
-            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>10 minutes
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>9 minutes
 
             <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>Written: 2022-12-12 00:00 &#43;0000</p>
 
@@ -213,10 +213,7 @@ The Story I&rsquo;ve been through, possibly, the best and the worst time of my l
 <li><strong>Write an App in Rust</strong>
 and more&hellip;</li>
 </ol>
-<p>The 4th point you&rsquo;re looking at, is exactly what we are going to cover today. But before that, let me say it loud:</p>
-<blockquote>
-<p>Dear all, never take a decision when you are on your highs. You&rsquo;ll end up being in a mud later on, hold everything together when you reach a high. STAY! RIGHT! THERE!</p>
-</blockquote>
+<p>The 4th point you&rsquo;re looking at, is exactly what we are going to cover today.</p>
 <h2 id="the-update">THE Update</h2>
 <p>Here it comes! For those who (very kindly) follow <a href="https://youtube.com/c/kushashwaraviShrimali">my YouTube channel</a>, know already that I&rsquo;ve been learning Rust for a while. And while I was at it, I found it a good time to start building something. Pop! OS, the best Linux distribution I&rsquo;ve ever come across, announced their new Cosmic Desktop Environment a while back (it&rsquo;s a work in progress). I like reading source codes, and have been following what they were doing with Cosmic and remembered that they were using <a href="https://github.com/iced-rs/iced">Iced Library</a> for the development (GUI). I thought to give it a try, and the best place to start with, was the <a href="https://github.com/krshrimali/youtuber-monitoring-app">YouTube Monitoring App</a> which I was building earlier with Python and Electron JS. Porting the idea to Rust was comparatively easier than to think of another project.</p>
 <p>So the journey took off, started with going through the examples, and the <a href="https://github.com/iced-rs/iced/tree/master/examples/styling"><code>styling</code></a> example. Seeing how theme is switched, was mesmerizing.</p>
@@ -231,88 +228,88 @@ and more&hellip;</li>
 <p>Anyways, my next target was to figure out having a grid - multiple rows and multiple columns. From what I know, there isn&rsquo;t a <code>grid</code> like implementation within Iced, so I had to use <code>Column</code> and <code>Row</code> classes from Iced. It was tricky, if I have to be very honest, but finally worked out. Had to ask a couple of questions on the discord channel of Iced, they were very kind and quick to help me with my queries.</p>
 <p>I also had to choose an image for each user, as an avatar was necessary. Once added, I knew it will start looking better. A header and a footer were also required, to give the user some info about what they are seeing on the screen. However, when the grid wasn&rsquo;t full, the image wouldn&rsquo;t align and that was an issue to resolve for the next stage.</p>
 <p>Adding the avatar was very interesting, I wanted a link to work (for the avatar). But for now, I thought I&rsquo;ll suffice to using an image path to see if it really works (spoiler: it did 😄):</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">profile_pic</span><span style="color:#f92672">&lt;&#39;</span><span style="color:#a6e22e">a</span><span style="color:#f92672">&gt;</span>(width: <span style="color:#66d9ef">u16</span>) -&gt; <span style="color:#a6e22e">Container</span><span style="color:#f92672">&lt;&#39;</span><span style="color:#a6e22e">a</span>, Message<span style="color:#f92672">&gt;</span> {
-    container(
-        <span style="color:#75715e">// This should go away once we unify resource loading on native
-</span><span style="color:#75715e"></span>        <span style="color:#75715e">// platforms
-</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span> cfg!(target_arch <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;wasm32&#34;</span>) {
-            image(<span style="color:#e6db74">&#34;profile_images/Noddy.jpeg&#34;</span>)
-        } <span style="color:#66d9ef">else</span> {
-            image(format!(
-                <span style="color:#e6db74">&#34;{}/profile_images/Noddy.jpeg&#34;</span>,
-                env!(<span style="color:#e6db74">&#34;CARGO_MANIFEST_DIR&#34;</span>)
-            ))
-        }
-        .height(Length::Units(width))
-        .width(Length::Units(width)),
-    )
-    .width(Length::Fill)
-    .center_x()
-}
-</code></pre></div><p><img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/blogs/rust_app_stage_second.png" alt="Stage - 2"></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">profile_pic</span><span style="color:#f92672">&lt;&#39;</span><span style="color:#a6e22e">a</span><span style="color:#f92672">&gt;</span>(width: <span style="color:#66d9ef">u16</span>) -&gt; <span style="color:#a6e22e">Container</span><span style="color:#f92672">&lt;&#39;</span><span style="color:#a6e22e">a</span>, Message<span style="color:#f92672">&gt;</span> {
+</span></span><span style="display:flex;"><span>    container(
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// This should go away once we unify resource loading on native
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">// platforms
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span> cfg!(target_arch <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;wasm32&#34;</span>) {
+</span></span><span style="display:flex;"><span>            image(<span style="color:#e6db74">&#34;profile_images/Noddy.jpeg&#34;</span>)
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>            image(format!(
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;{}/profile_images/Noddy.jpeg&#34;</span>,
+</span></span><span style="display:flex;"><span>                env!(<span style="color:#e6db74">&#34;CARGO_MANIFEST_DIR&#34;</span>)
+</span></span><span style="display:flex;"><span>            ))
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        .height(Length::Units(width))
+</span></span><span style="display:flex;"><span>        .width(Length::Units(width)),
+</span></span><span style="display:flex;"><span>    )
+</span></span><span style="display:flex;"><span>    .width(Length::Fill)
+</span></span><span style="display:flex;"><span>    .center_x()
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/blogs/rust_app_stage_second.png" alt="Stage - 2"></p>
 <p>As I knew things were starting to take place, the next important step was to fix the alignment, and enable JSON parsing. Let me show you the issue we had with alignment:</p>
 <p><img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/blogs/rust_app_stage_second_alignment_issue.png" alt="Stage - 2 (alignment issue)"></p>
 <p>The alignment issue was fixed with using <code>align_items</code> and also avoiding <code>width(Length::Fill)</code> with the user cards. We&rsquo;ll discuss these details in the next blog, for now, I just shared to give you a hint.</p>
 <p>For JSON parsing, to start with, I created a <a href="https://github.com/krshrimali/YouTube-Monitoring-App-Rust-Iced/blob/main/list_users.json">sample JSON file</a>, and used <a href="https://github.com/serde-rs/json"><code>serde</code></a> crate to parse JSON file. The way a JSON can be deserialized into a JSON class, was amazing to see - very intuitive.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">read_json</span>(file_path: <span style="color:#66d9ef">&amp;</span><span style="color:#66d9ef">str</span>) -&gt; Result<span style="color:#f92672">&lt;</span>YTCreator, Box<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">dyn</span> Error<span style="color:#f92672">&gt;&gt;</span> {
-    <span style="color:#66d9ef">let</span> file <span style="color:#f92672">=</span> File::open(file_path)<span style="color:#f92672">?</span>;
-    <span style="color:#66d9ef">let</span> reader <span style="color:#f92672">=</span> BufReader::new(file);
-
-    <span style="color:#75715e">// Read the JSON contents of the file as an instance of `YTCreator`.
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> u: <span style="color:#a6e22e">YTCreator</span> <span style="color:#f92672">=</span> serde_json::from_reader(reader)<span style="color:#f92672">?</span>;
-    <span style="color:#66d9ef">if</span> u.size() <span style="color:#f92672">&gt;</span> MAX_EXPECTED_ITEMS {
-        Ok(u.slice_to(MAX_EXPECTED_ITEMS))
-    } <span style="color:#66d9ef">else</span> {
-        Ok(u)
-    }
-}
-</code></pre></div><p>The implementation of <code>YTCreator</code> had the fields that were useful for the user:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#75715e">#[derive(Deserialize, Debug, Default, Clone)]</span>
-<span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">YTCreator</span> {
-    names: Vec<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span>,
-    avatar_links: Vec<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span>,
-    descriptions: Vec<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span>,
-    is_live_status: Vec<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span>,
-    subscribers: Vec<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span>
-}
-</code></pre></div><p>If you have not noticed already, focus on the <code>u.slice_to(MAX_EXPECTED_ITEMS)</code> expression. While this isn&rsquo;t really useful right now (more on this later), but it was a good practice to implement. This basically answers: &ldquo;What if there is more data then the grid limit?&rdquo;. Let&rsquo;s say the JSON file contains the data for 13 users, but our grid could only have 12 users' data -&gt; in this case, <code>.slice_to</code> will make sure that we only use maximum of 12 users on the grid:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">slice_to</span>(<span style="color:#f92672">&amp;</span>self, count_items: <span style="color:#66d9ef">usize</span>) -&gt; <span style="color:#a6e22e">YTCreator</span> {
-    <span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> new_obj <span style="color:#f92672">=</span> YTCreator {
-        names: Vec::new(),
-        avatar_links: Vec::new(),
-        descriptions: Vec::new(),
-        is_live_status: Vec::new(),
-        subscribers: Vec::new(),
-    };
-    new_obj.names <span style="color:#f92672">=</span> self.names.get(<span style="color:#ae81ff">0</span><span style="color:#f92672">..</span>count_items).unwrap().to_vec();
-    new_obj.avatar_links <span style="color:#f92672">=</span> self.avatar_links.get(<span style="color:#ae81ff">0</span><span style="color:#f92672">..</span>count_items).unwrap().to_vec();
-    new_obj.descriptions <span style="color:#f92672">=</span> self.descriptions.get(<span style="color:#ae81ff">0</span><span style="color:#f92672">..</span>count_items).unwrap().to_vec();
-    new_obj.is_live_status <span style="color:#f92672">=</span> self.is_live_status.get(<span style="color:#ae81ff">0</span><span style="color:#f92672">..</span>count_items).unwrap().to_vec();
-    new_obj.subscribers <span style="color:#f92672">=</span> self.subscribers.get(<span style="color:#ae81ff">0</span><span style="color:#f92672">..</span>count_items).unwrap().to_vec();
-    new_obj
-}
-</code></pre></div><p>The implementation of <code>slice_to</code> method is fairly simple, just creating another <code>YTCreator</code> object but with stripped count.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">read_json</span>(file_path: <span style="color:#66d9ef">&amp;</span><span style="color:#66d9ef">str</span>) -&gt; Result<span style="color:#f92672">&lt;</span>YTCreator, Box<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">dyn</span> Error<span style="color:#f92672">&gt;&gt;</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> file <span style="color:#f92672">=</span> File::open(file_path)<span style="color:#f92672">?</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> reader <span style="color:#f92672">=</span> BufReader::new(file);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Read the JSON contents of the file as an instance of `YTCreator`.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> u: <span style="color:#a6e22e">YTCreator</span> <span style="color:#f92672">=</span> serde_json::from_reader(reader)<span style="color:#f92672">?</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> u.size() <span style="color:#f92672">&gt;</span> MAX_EXPECTED_ITEMS {
+</span></span><span style="display:flex;"><span>        Ok(u.slice_to(MAX_EXPECTED_ITEMS))
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        Ok(u)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>The implementation of <code>YTCreator</code> had the fields that were useful for the user:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#75715e">#[derive(Deserialize, Debug, Default, Clone)]</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">YTCreator</span> {
+</span></span><span style="display:flex;"><span>    names: Vec<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span>,
+</span></span><span style="display:flex;"><span>    avatar_links: Vec<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span>,
+</span></span><span style="display:flex;"><span>    descriptions: Vec<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span>,
+</span></span><span style="display:flex;"><span>    is_live_status: Vec<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span>,
+</span></span><span style="display:flex;"><span>    subscribers: Vec<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>If you have not noticed already, focus on the <code>u.slice_to(MAX_EXPECTED_ITEMS)</code> expression. While this isn&rsquo;t really useful right now (more on this later), but it was a good practice to implement. This basically answers: &ldquo;What if there is more data then the grid limit?&rdquo;. Let&rsquo;s say the JSON file contains the data for 13 users, but our grid could only have 12 users&rsquo; data -&gt; in this case, <code>.slice_to</code> will make sure that we only use maximum of 12 users on the grid:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">slice_to</span>(<span style="color:#f92672">&amp;</span>self, count_items: <span style="color:#66d9ef">usize</span>) -&gt; <span style="color:#a6e22e">YTCreator</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> new_obj <span style="color:#f92672">=</span> YTCreator {
+</span></span><span style="display:flex;"><span>        names: Vec::new(),
+</span></span><span style="display:flex;"><span>        avatar_links: Vec::new(),
+</span></span><span style="display:flex;"><span>        descriptions: Vec::new(),
+</span></span><span style="display:flex;"><span>        is_live_status: Vec::new(),
+</span></span><span style="display:flex;"><span>        subscribers: Vec::new(),
+</span></span><span style="display:flex;"><span>    };
+</span></span><span style="display:flex;"><span>    new_obj.names <span style="color:#f92672">=</span> self.names.get(<span style="color:#ae81ff">0</span><span style="color:#f92672">..</span>count_items).unwrap().to_vec();
+</span></span><span style="display:flex;"><span>    new_obj.avatar_links <span style="color:#f92672">=</span> self.avatar_links.get(<span style="color:#ae81ff">0</span><span style="color:#f92672">..</span>count_items).unwrap().to_vec();
+</span></span><span style="display:flex;"><span>    new_obj.descriptions <span style="color:#f92672">=</span> self.descriptions.get(<span style="color:#ae81ff">0</span><span style="color:#f92672">..</span>count_items).unwrap().to_vec();
+</span></span><span style="display:flex;"><span>    new_obj.is_live_status <span style="color:#f92672">=</span> self.is_live_status.get(<span style="color:#ae81ff">0</span><span style="color:#f92672">..</span>count_items).unwrap().to_vec();
+</span></span><span style="display:flex;"><span>    new_obj.subscribers <span style="color:#f92672">=</span> self.subscribers.get(<span style="color:#ae81ff">0</span><span style="color:#f92672">..</span>count_items).unwrap().to_vec();
+</span></span><span style="display:flex;"><span>    new_obj
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>The implementation of <code>slice_to</code> method is fairly simple, just creating another <code>YTCreator</code> object but with stripped count.</p>
 <p>One of the very important step was to enable passing a link for the image/avatar. This was made possible using <code>reqwest</code> crate, getting the image in a form of bytes array and then converting it to an <code>image::Handle</code>.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">profile_pic</span><span style="color:#f92672">&lt;&#39;</span><span style="color:#a6e22e">a</span><span style="color:#f92672">&gt;</span>(width: <span style="color:#66d9ef">u16</span>, link: String) -&gt; <span style="color:#a6e22e">Container</span><span style="color:#f92672">&lt;&#39;</span><span style="color:#a6e22e">a</span>, Message<span style="color:#f92672">&gt;</span> {
-    <span style="color:#66d9ef">let</span> img_obj <span style="color:#f92672">=</span> reqwest::blocking::get(link).ok();
-    <span style="color:#66d9ef">let</span> img_bytes <span style="color:#f92672">=</span> <span style="color:#66d9ef">match</span> img_obj {
-        Some(bytes) <span style="color:#f92672">=&gt;</span> {
-            bytes.bytes().ok()
-        },
-        None <span style="color:#f92672">=&gt;</span> None
-    }.unwrap();
-
-    <span style="color:#66d9ef">let</span> out_img: <span style="color:#a6e22e">image</span>::Handle <span style="color:#f92672">=</span> image::Handle::from_memory(img_bytes.to_vec());
-
-    container(
-        image(out_img)
-        .height(Length::Units(width))
-        .width(Length::Units(width)),
-    )
-    .width(Length::Fill)
-    .center_x()
-}
-</code></pre></div><p>While I was very happy that:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">profile_pic</span><span style="color:#f92672">&lt;&#39;</span><span style="color:#a6e22e">a</span><span style="color:#f92672">&gt;</span>(width: <span style="color:#66d9ef">u16</span>, link: String) -&gt; <span style="color:#a6e22e">Container</span><span style="color:#f92672">&lt;&#39;</span><span style="color:#a6e22e">a</span>, Message<span style="color:#f92672">&gt;</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> img_obj <span style="color:#f92672">=</span> reqwest::blocking::get(link).ok();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> img_bytes <span style="color:#f92672">=</span> <span style="color:#66d9ef">match</span> img_obj {
+</span></span><span style="display:flex;"><span>        Some(bytes) <span style="color:#f92672">=&gt;</span> {
+</span></span><span style="display:flex;"><span>            bytes.bytes().ok()
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>        None <span style="color:#f92672">=&gt;</span> None
+</span></span><span style="display:flex;"><span>    }.unwrap();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> out_img: <span style="color:#a6e22e">image</span>::Handle <span style="color:#f92672">=</span> image::Handle::from_memory(img_bytes.to_vec());
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    container(
+</span></span><span style="display:flex;"><span>        image(out_img)
+</span></span><span style="display:flex;"><span>        .height(Length::Units(width))
+</span></span><span style="display:flex;"><span>        .width(Length::Units(width)),
+</span></span><span style="display:flex;"><span>    )
+</span></span><span style="display:flex;"><span>    .width(Length::Fill)
+</span></span><span style="display:flex;"><span>    .center_x()
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>While I was very happy that:</p>
 <ul>
 <li>The alignment was fixed</li>
 <li>Image links were working</li>
@@ -323,65 +320,65 @@ and more&hellip;</li>
 <p>Starting from here, you&rsquo;ll understand how important development is. In this stage, the UI won&rsquo;t change <em>BUT</em> we&rsquo;ll be significantly improving the performance.</p>
 <p>So, while I was very happy about the project progress so far, I thought I&rsquo;ll ask my friend to open it up on his system. He had Windows, but fortunately he also had WSL. Thanks to him, he didn&rsquo;t give up on trying to run GUI on his WSL - and when finally the app loaded, it was <em>LAGGING</em>. 😢</p>
 <p>I was surprised, because on my Mac - it was working fine. I opened up my Linux system, and guess what? It lagged there as well. I immediately knew I was doing something wrong. Now, as developers, we generally try to get to the bottleneck of the issue, and I had an instinct about it.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">view</span>(<span style="color:#f92672">&amp;</span>self) -&gt; <span style="color:#a6e22e">iced</span>::Element<span style="color:#f92672">&lt;&#39;</span>_, Self::Message<span style="color:#f92672">&gt;</span> {
-    <span style="color:#66d9ef">let</span> choose_theme <span style="color:#f92672">=</span> <span style="color:#f92672">..</span>.;
-
-    <span style="color:#66d9ef">let</span> content <span style="color:#f92672">=</span> container(column![choose_theme].spacing(<span style="color:#ae81ff">20</span>).padding(<span style="color:#ae81ff">20</span>).max_width(<span style="color:#ae81ff">600</span>))
-        .width(Length::Fill)
-        .center_x();
-
-    <span style="color:#66d9ef">let</span> footer <span style="color:#f92672">=</span> <span style="color:#f92672">..</span>.;
-    <span style="color:#66d9ef">let</span> title_header <span style="color:#f92672">=</span> <span style="color:#f92672">..</span>.;
-
-    <span style="color:#66d9ef">let</span> all_cards <span style="color:#f92672">=</span> render_cards::create_list_of_cards(<span style="color:#f92672">&amp;</span>self.json_obj);
-    <span style="color:#66d9ef">let</span> binding <span style="color:#f92672">=</span> render_cards::ListOfCards::default();
-    <span style="color:#75715e">// RELEVANT...
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> first_row <span style="color:#f92672">=</span> render_cards::create_row(all_cards.get(<span style="color:#ae81ff">0</span>).unwrap_or(<span style="color:#f92672">&amp;</span>binding));
-    <span style="color:#66d9ef">let</span> second_row <span style="color:#f92672">=</span> render_cards::create_row(all_cards.get(<span style="color:#ae81ff">1</span>).unwrap_or(<span style="color:#f92672">&amp;</span>binding));
-    <span style="color:#66d9ef">let</span> third_row <span style="color:#f92672">=</span> render_cards::create_row(all_cards.get(<span style="color:#ae81ff">2</span>).unwrap_or(<span style="color:#f92672">&amp;</span>binding));
-
-    container(column![
-        content,
-        horizontal_rule(<span style="color:#ae81ff">10</span>),
-        title_header,
-        horizontal_rule(<span style="color:#ae81ff">10</span>),
-        first_row,
-        second_row,
-        third_row,
-        horizontal_rule(<span style="color:#ae81ff">10</span>),
-        footer,
-        horizontal_rule(<span style="color:#ae81ff">10</span>),
-    ])
-    .height(Length::Shrink)
-    .into()
-}
-</code></pre></div><p>The <code>view</code> method above was running every time I switched the theme (whenever anything changed), and this was the problem. Let me show you the <code>create_row</code> method, which will give you an idea why it&rsquo;s slow:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">create_row</span>(cards: <span style="color:#66d9ef">&amp;</span><span style="color:#a6e22e">ListOfCards</span>) -&gt; <span style="color:#a6e22e">Row</span><span style="color:#f92672">&lt;&#39;</span>static, Message<span style="color:#f92672">&gt;</span> {
-    Row::with_children(
-        cards
-            .cards
-            .iter()
-            .map(<span style="color:#f92672">|</span>each_card<span style="color:#f92672">|</span> {
-                container(
-                    row<span style="color:#f92672">!</span>[
-                        column![create_card(each_card)].spacing(<span style="color:#ae81ff">50</span>).padding(<span style="color:#ae81ff">20</span>),
-                        column![profile_pic(<span style="color:#ae81ff">130</span>, each_card.avatar_link.to_owned())]
-                            .width(Length::Units(<span style="color:#ae81ff">130</span>))
-                            .height(Length::Units(<span style="color:#ae81ff">150</span>))
-                            .padding(<span style="color:#ae81ff">20</span>)
-                    ]
-                    .align_items(iced::Alignment::End)
-                    .height(Length::Fill),
-                )
-                .width(Length::Fill)
-                .center_y()
-                .style(theme::Container::Box)
-                .into()
-            })
-            .collect(),
-    )
-}
-</code></pre></div><p>Just observe, that I was calling <code>profile_pic</code> method with the avatar link - which means that every time the theme is switched, the images will be fetched again. Wow! That&rsquo;s the only bottleneck? Nope!</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">view</span>(<span style="color:#f92672">&amp;</span>self) -&gt; <span style="color:#a6e22e">iced</span>::Element<span style="color:#f92672">&lt;&#39;</span>_, Self::Message<span style="color:#f92672">&gt;</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> choose_theme <span style="color:#f92672">=</span> <span style="color:#f92672">..</span>.;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> content <span style="color:#f92672">=</span> container(column![choose_theme].spacing(<span style="color:#ae81ff">20</span>).padding(<span style="color:#ae81ff">20</span>).max_width(<span style="color:#ae81ff">600</span>))
+</span></span><span style="display:flex;"><span>        .width(Length::Fill)
+</span></span><span style="display:flex;"><span>        .center_x();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> footer <span style="color:#f92672">=</span> <span style="color:#f92672">..</span>.;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> title_header <span style="color:#f92672">=</span> <span style="color:#f92672">..</span>.;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> all_cards <span style="color:#f92672">=</span> render_cards::create_list_of_cards(<span style="color:#f92672">&amp;</span>self.json_obj);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> binding <span style="color:#f92672">=</span> render_cards::ListOfCards::default();
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// RELEVANT...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> first_row <span style="color:#f92672">=</span> render_cards::create_row(all_cards.get(<span style="color:#ae81ff">0</span>).unwrap_or(<span style="color:#f92672">&amp;</span>binding));
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> second_row <span style="color:#f92672">=</span> render_cards::create_row(all_cards.get(<span style="color:#ae81ff">1</span>).unwrap_or(<span style="color:#f92672">&amp;</span>binding));
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> third_row <span style="color:#f92672">=</span> render_cards::create_row(all_cards.get(<span style="color:#ae81ff">2</span>).unwrap_or(<span style="color:#f92672">&amp;</span>binding));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    container(column![
+</span></span><span style="display:flex;"><span>        content,
+</span></span><span style="display:flex;"><span>        horizontal_rule(<span style="color:#ae81ff">10</span>),
+</span></span><span style="display:flex;"><span>        title_header,
+</span></span><span style="display:flex;"><span>        horizontal_rule(<span style="color:#ae81ff">10</span>),
+</span></span><span style="display:flex;"><span>        first_row,
+</span></span><span style="display:flex;"><span>        second_row,
+</span></span><span style="display:flex;"><span>        third_row,
+</span></span><span style="display:flex;"><span>        horizontal_rule(<span style="color:#ae81ff">10</span>),
+</span></span><span style="display:flex;"><span>        footer,
+</span></span><span style="display:flex;"><span>        horizontal_rule(<span style="color:#ae81ff">10</span>),
+</span></span><span style="display:flex;"><span>    ])
+</span></span><span style="display:flex;"><span>    .height(Length::Shrink)
+</span></span><span style="display:flex;"><span>    .into()
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>The <code>view</code> method above was running every time I switched the theme (whenever anything changed), and this was the problem. Let me show you the <code>create_row</code> method, which will give you an idea why it&rsquo;s slow:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">create_row</span>(cards: <span style="color:#66d9ef">&amp;</span><span style="color:#a6e22e">ListOfCards</span>) -&gt; <span style="color:#a6e22e">Row</span><span style="color:#f92672">&lt;&#39;</span>static, Message<span style="color:#f92672">&gt;</span> {
+</span></span><span style="display:flex;"><span>    Row::with_children(
+</span></span><span style="display:flex;"><span>        cards
+</span></span><span style="display:flex;"><span>            .cards
+</span></span><span style="display:flex;"><span>            .iter()
+</span></span><span style="display:flex;"><span>            .map(<span style="color:#f92672">|</span>each_card<span style="color:#f92672">|</span> {
+</span></span><span style="display:flex;"><span>                container(
+</span></span><span style="display:flex;"><span>                    row<span style="color:#f92672">!</span>[
+</span></span><span style="display:flex;"><span>                        column![create_card(each_card)].spacing(<span style="color:#ae81ff">50</span>).padding(<span style="color:#ae81ff">20</span>),
+</span></span><span style="display:flex;"><span>                        column![profile_pic(<span style="color:#ae81ff">130</span>, each_card.avatar_link.to_owned())]
+</span></span><span style="display:flex;"><span>                            .width(Length::Units(<span style="color:#ae81ff">130</span>))
+</span></span><span style="display:flex;"><span>                            .height(Length::Units(<span style="color:#ae81ff">150</span>))
+</span></span><span style="display:flex;"><span>                            .padding(<span style="color:#ae81ff">20</span>)
+</span></span><span style="display:flex;"><span>                    ]
+</span></span><span style="display:flex;"><span>                    .align_items(iced::Alignment::End)
+</span></span><span style="display:flex;"><span>                    .height(Length::Fill),
+</span></span><span style="display:flex;"><span>                )
+</span></span><span style="display:flex;"><span>                .width(Length::Fill)
+</span></span><span style="display:flex;"><span>                .center_y()
+</span></span><span style="display:flex;"><span>                .style(theme::Container::Box)
+</span></span><span style="display:flex;"><span>                .into()
+</span></span><span style="display:flex;"><span>            })
+</span></span><span style="display:flex;"><span>            .collect(),
+</span></span><span style="display:flex;"><span>    )
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Just observe, that I was calling <code>profile_pic</code> method with the avatar link - which means that every time the theme is switched, the images will be fetched again. Wow! That&rsquo;s the only bottleneck? Nope!</p>
 <p>Surprise! There is one more, we were actually reading the JSON file in the <code>view</code> function as well. Which was bad! So we finally have 2 bottlenecks for the performance:</p>
 <ol>
 <li>Downloading avatar link to an image handle.</li>
@@ -389,41 +386,41 @@ and more&hellip;</li>
 </ol>
 <p>(Also thanks to the iced community on discord, who helped with the first point above. They were really helpful.)</p>
 <p>Solving both bottlenecks above was intuitive to me. We could parse the JSON file as well as download the avatars when the app is created, for now. Later on, we&rsquo;ll do it when the user has changed inputs for the YT users they want to monitor. Here is how I solved it:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">new</span>() -&gt; <span style="color:#a6e22e">YTMonitor</span> {
-    <span style="color:#66d9ef">let</span> json_obj <span style="color:#f92672">=</span> render_cards::get_json_data();
-    <span style="color:#66d9ef">let</span> image_handles <span style="color:#f92672">=</span> render_cards::get_all_avatars(<span style="color:#f92672">&amp;</span>json_obj);
-    <span style="color:#75715e">// Because dark as default is cool :D
-</span><span style="color:#75715e"></span>    YTMonitor {
-        theme: <span style="color:#a6e22e">Theme</span>::Dark,
-        json_obj,
-        loaded_photos: <span style="color:#a6e22e">image_handles</span>,
-    }
-}
-</code></pre></div><p>As you can see above^, we have <code>json_obj, loaded_photos</code> as two added fields to the <code>YTMonitor</code> struct. We parsed the JSON file as well as downloaded all the avatars (we already know the avatar links from the JSON file). Later on, I would just use these as <code>self.json_obj</code> and <code>self.image_handles</code> in the <code>view</code> function, so no more performance degradation!</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">view</span>(<span style="color:#f92672">&amp;</span>self) -&gt; <span style="color:#a6e22e">iced</span>::Element<span style="color:#f92672">&lt;&#39;</span>_, Self::Message<span style="color:#f92672">&gt;</span> {
-    <span style="color:#75715e">// ...
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> all_cards <span style="color:#f92672">=</span> render_cards::create_list_of_cards(<span style="color:#f92672">&amp;</span>self.json_obj);
-    <span style="color:#66d9ef">let</span> binding <span style="color:#f92672">=</span> render_cards::ListOfCards::default();
-    <span style="color:#66d9ef">let</span> all_photos <span style="color:#f92672">=</span> self.loaded_photos.to_owned();
-
-    <span style="color:#66d9ef">let</span> first_row <span style="color:#f92672">=</span>
-        render_cards::create_row(all_cards.get(<span style="color:#ae81ff">0</span>).unwrap_or(<span style="color:#f92672">&amp;</span>binding), <span style="color:#f92672">&amp;</span>all_photos, <span style="color:#ae81ff">0</span>);
-    <span style="color:#66d9ef">let</span> second_row <span style="color:#f92672">=</span>
-        render_cards::create_row(all_cards.get(<span style="color:#ae81ff">1</span>).unwrap_or(<span style="color:#f92672">&amp;</span>binding), <span style="color:#f92672">&amp;</span>all_photos, <span style="color:#ae81ff">4</span>);
-    <span style="color:#66d9ef">let</span> third_row <span style="color:#f92672">=</span>
-        render_cards::create_row(all_cards.get(<span style="color:#ae81ff">2</span>).unwrap_or(<span style="color:#f92672">&amp;</span>binding), <span style="color:#f92672">&amp;</span>all_photos, <span style="color:#ae81ff">8</span>);
-}
-</code></pre></div><p>As you can see above, I am passing the <code>all_photos</code> variable to <code>create_row</code> this time (along with the offset). The <code>profile_pic</code> method just takes the image handle now:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">profile_pic</span><span style="color:#f92672">&lt;&#39;</span><span style="color:#a6e22e">a</span><span style="color:#f92672">&gt;</span>(width: <span style="color:#66d9ef">u16</span>, img_handle: <span style="color:#a6e22e">image</span>::Handle) -&gt; <span style="color:#a6e22e">Container</span><span style="color:#f92672">&lt;&#39;</span><span style="color:#a6e22e">a</span>, Message<span style="color:#f92672">&gt;</span> {
-    container(
-        image(img_handle)
-            .height(Length::Units(width))
-            .width(Length::Units(width)),
-    )
-    .width(Length::Fill)
-    .center_x()
-}
-</code></pre></div><p>^^ This makes it much faster now! And yes, it did solve the problem. While doing this, of course, I learnt a lot of Rust, and Iced. So many things to learn, and I&rsquo;m already enjoying the challenges.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">new</span>() -&gt; <span style="color:#a6e22e">YTMonitor</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> json_obj <span style="color:#f92672">=</span> render_cards::get_json_data();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> image_handles <span style="color:#f92672">=</span> render_cards::get_all_avatars(<span style="color:#f92672">&amp;</span>json_obj);
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Because dark as default is cool :D
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    YTMonitor {
+</span></span><span style="display:flex;"><span>        theme: <span style="color:#a6e22e">Theme</span>::Dark,
+</span></span><span style="display:flex;"><span>        json_obj,
+</span></span><span style="display:flex;"><span>        loaded_photos: <span style="color:#a6e22e">image_handles</span>,
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>As you can see above^, we have <code>json_obj, loaded_photos</code> as two added fields to the <code>YTMonitor</code> struct. We parsed the JSON file as well as downloaded all the avatars (we already know the avatar links from the JSON file). Later on, I would just use these as <code>self.json_obj</code> and <code>self.image_handles</code> in the <code>view</code> function, so no more performance degradation!</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">view</span>(<span style="color:#f92672">&amp;</span>self) -&gt; <span style="color:#a6e22e">iced</span>::Element<span style="color:#f92672">&lt;&#39;</span>_, Self::Message<span style="color:#f92672">&gt;</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// ...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> all_cards <span style="color:#f92672">=</span> render_cards::create_list_of_cards(<span style="color:#f92672">&amp;</span>self.json_obj);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> binding <span style="color:#f92672">=</span> render_cards::ListOfCards::default();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> all_photos <span style="color:#f92672">=</span> self.loaded_photos.to_owned();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> first_row <span style="color:#f92672">=</span>
+</span></span><span style="display:flex;"><span>        render_cards::create_row(all_cards.get(<span style="color:#ae81ff">0</span>).unwrap_or(<span style="color:#f92672">&amp;</span>binding), <span style="color:#f92672">&amp;</span>all_photos, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> second_row <span style="color:#f92672">=</span>
+</span></span><span style="display:flex;"><span>        render_cards::create_row(all_cards.get(<span style="color:#ae81ff">1</span>).unwrap_or(<span style="color:#f92672">&amp;</span>binding), <span style="color:#f92672">&amp;</span>all_photos, <span style="color:#ae81ff">4</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> third_row <span style="color:#f92672">=</span>
+</span></span><span style="display:flex;"><span>        render_cards::create_row(all_cards.get(<span style="color:#ae81ff">2</span>).unwrap_or(<span style="color:#f92672">&amp;</span>binding), <span style="color:#f92672">&amp;</span>all_photos, <span style="color:#ae81ff">8</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>As you can see above, I am passing the <code>all_photos</code> variable to <code>create_row</code> this time (along with the offset). The <code>profile_pic</code> method just takes the image handle now:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">profile_pic</span><span style="color:#f92672">&lt;&#39;</span><span style="color:#a6e22e">a</span><span style="color:#f92672">&gt;</span>(width: <span style="color:#66d9ef">u16</span>, img_handle: <span style="color:#a6e22e">image</span>::Handle) -&gt; <span style="color:#a6e22e">Container</span><span style="color:#f92672">&lt;&#39;</span><span style="color:#a6e22e">a</span>, Message<span style="color:#f92672">&gt;</span> {
+</span></span><span style="display:flex;"><span>    container(
+</span></span><span style="display:flex;"><span>        image(img_handle)
+</span></span><span style="display:flex;"><span>            .height(Length::Units(width))
+</span></span><span style="display:flex;"><span>            .width(Length::Units(width)),
+</span></span><span style="display:flex;"><span>    )
+</span></span><span style="display:flex;"><span>    .width(Length::Fill)
+</span></span><span style="display:flex;"><span>    .center_x()
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>^^ This makes it much faster now! And yes, it did solve the problem. While doing this, of course, I learnt a lot of Rust, and Iced. So many things to learn, and I&rsquo;m already enjoying the challenges.</p>
 <p>I know this doesn&rsquo;t look the best yet, there are so many good apps out there built on the top of Iced, but I&rsquo;m getting started. Once this is done, I know at least - I - would love it. ❤️</p>
 <p>Here is how the app looks like, right now (featuring my friend Mohit Wankhade 😃):</p>
 <p><img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/blogs/rust_app_stage_fourth.png" alt="Stage - 4"></p>
@@ -439,7 +436,7 @@ and more&hellip;</li>
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://krshrimali.github.io/tags/development">development</a></span><span class="tag"><a href="https://krshrimali.github.io/tags/coding">coding</a></span><span class="tag"><a href="https://krshrimali.github.io/tags/rust">rust</a></span><span class="tag"><a href="https://krshrimali.github.io/tags/app">app</a></span><span class="tag"><a href="https://krshrimali.github.io/tags/updates">updates</a></span>
                 </p>
 
-            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>1934 Words</p>
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>1894 Words</p>
 
             <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>Posted: <time class="dt-published"> 2022-12-12 05:30 &#43;0530</time></p>
 <a class="resp-sharing-button__link" href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2022%2f12%2fi-started-building-an-app-using-rust-and-here-is-how-it-went...%2f" target="_blank" rel="noopener" aria-label="Facebook">
@@ -600,7 +597,7 @@ and more&hellip;</li>
         })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
         ga('create', 'UA-146662543-1', 'auto');ga('send', 'pageview');
     </script>
-<script src="https://krshrimali.github.io/js/webmention.min.513a53d009530b21cba09721b6f4dc912e9c20ad2c0adbb5c4e486c4f77774a6e9eca8c2e1e4e8bc9e9e86693aa5ca91e7bf232b50f7f8bee4e64efc874040a7.js" data-id="webmention-container"></script>
+<script src="https://krshrimali.github.io/js/webmention.min.8b3a0bd9a45559d02f5c9a0c5201da2ba4c8ed9b9d43bcc2d7951d4e72774e819ade3984c11c3bf2f2a2675050756a2b6f502de6829e5b0ff5fc04ff1f68d089.js" data-id="webmention-container"></script>
 
 
 

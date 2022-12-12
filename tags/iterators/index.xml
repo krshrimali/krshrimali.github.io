@@ -16,8 +16,8 @@
       <description>NOTE
 My notes on Chapter 3, Item 13 of Effective Modern C++ written by Scott Meyers.
 Some (or even all) of the text can be similar to what you see in the book, as these are notes: I&amp;rsquo;ve tried not to be unnecessarily creative with my words. :)
- In C++, iterators come handy to point at memory addresses of STL containers. For example,
-// C++11  std::vector&amp;lt;int&amp;gt; x {11, 9, 23, 6}; // begin() member function returns an iterator, which points to the first // memory address of the container x std::vector&amp;lt;int&amp;gt;::iterator it = x.</description>
+In C++, iterators come handy to point at memory addresses of STL containers. For example,
+// C++11 std::vector&amp;lt;int&amp;gt; x {11, 9, 23, 6}; // begin() member function returns an iterator, which points to the first // memory address of the container x std::vector&amp;lt;int&amp;gt;::iterator it = x.</description>
     </item>
     
   </channel>

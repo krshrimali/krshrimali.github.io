@@ -36,7 +36,7 @@ The Story I&amp;rsquo;ve been through, possibly, the best and the worst time of 
       <guid>https://krshrimali.github.io/posts/2022/01/common-collections-vector-and-strings-in-rust-notes/</guid>
       <description>Chapter 8: Common Collections (Hash Maps) In the previous blog, I shared my notes on strings and vectors in Rust, and in this post we&amp;rsquo;ll cover Hash Maps. I personally have found their use in competitive programming, a lot, but hopefully as we move on, we&amp;rsquo;ll see lots of use-cases in real-life problems.
 Hash Maps Hash Maps: HashMap&amp;lt;K, V&amp;gt;
- You can&amp;rsquo;t access using indices, but through keys. Hash Maps store data on heap.</description>
+You can&amp;rsquo;t access using indices, but through keys. Hash Maps store data on heap.</description>
     </item>
     
   </channel>

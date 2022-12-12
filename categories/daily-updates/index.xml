@@ -17,6 +17,15 @@
     </item>
     
     <item>
+      <title>Daily Update: 19th 20th 21st November 2022 - Day 5 to Day 7 (inclusive)</title>
+      <link>https://krshrimali.github.io/posts/2022/11/daily-update-19th-20th-21st-november-2022-day-5-to-day-7-inclusive/</link>
+      <pubDate>Mon, 21 Nov 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://krshrimali.github.io/posts/2022/11/daily-update-19th-20th-21st-november-2022-day-5-to-day-7-inclusive/</guid>
+      <description>Hi everyone! Sorry for missing out on publishing individual blogs for 19th, 20th and 21st November, but it has been very hectic for me, and I decided to give leetcode a break and explore System Design (a lot). Turns out, I had some idea about it already, one of the advantages of working with startups (CareAI/Dukaan). But in any case, quite a few interesting things I learnt. I can&amp;rsquo;t share all the links, as it will be just better to share the playlists or YT channels I referred:</description>
+    </item>
+    
+    <item>
       <title>Daily Update: 18th November 2022 - Day 5</title>
       <link>https://krshrimali.github.io/posts/2022/11/daily-update-18th-november-2022-day-5/</link>
       <pubDate>Fri, 18 Nov 2022 00:00:00 +0000</pubDate>
@@ -42,7 +51,7 @@
       <guid>https://krshrimali.github.io/posts/2022/11/daily-update-16th-november-2022-day-3/</guid>
       <description>Hi everyone, Day 3 of this series of daily updates. Woke up fairly early (~6 AM), and started working. Though it seemed productive to me, but you won&amp;rsquo;t see a lot of content here today - just one of those days where I didn&amp;rsquo;t do a lot of different things, I guess. :)
 Projects/Learning:
- I made my rust-leetcode repository public today. It currently contains 12 solved problems, you&amp;rsquo;ll see huge difference between the first few codes to the last few codes.</description>
+I made my rust-leetcode repository public today. It currently contains 12 solved problems, you&amp;rsquo;ll see huge difference between the first few codes to the last few codes.</description>
     </item>
     
     <item>
@@ -53,7 +62,7 @@ Projects/Learning:
       <guid>https://krshrimali.github.io/posts/2022/11/daily-update-15th-november-2022-day-2/</guid>
       <description>Hi everyone, Day 2 of this series of daily updates. Started my day earlier than yesterday, at around 9 AM (work).
 Learning:
- Watched this nice video from Jason on The Right Way to Write C++ in 2022:  I like when he advocated on using different compilers, or at least verifying that it works for all (and if not, then you&amp;rsquo;re aware). Interest: take warnings seriously. Need to start doing it, I&amp;rsquo;ve been following this with Rust, but C++ never raised Rust-like &amp;ldquo;good enough&amp;rdquo; warnings.</description>
+Watched this nice video from Jason on The Right Way to Write C++ in 2022: I like when he advocated on using different compilers, or at least verifying that it works for all (and if not, then you&amp;rsquo;re aware). Interest: take warnings seriously. Need to start doing it, I&amp;rsquo;ve been following this with Rust, but C++ never raised Rust-like &amp;ldquo;good enough&amp;rdquo; warnings.</description>
     </item>
     
     <item>
@@ -64,7 +73,7 @@ Learning:
       <guid>https://krshrimali.github.io/posts/2022/11/daily-update-14th-november-2022-day-1/</guid>
       <description>Hi everyone, I&amp;rsquo;m back to - writing daily update blogs. Just sharing what I did today, and documenting my progress. Now of course it won&amp;rsquo;t contain everything I do, but yep - everything related to learning and things I&amp;rsquo;m passionate about.
 Reading
- Just In Time Compilation (Wiki):  Wiki: https://en.wikipedia.org/wiki/Just-in-time_compilation Honestly, I wanted to start with a few papers on it, but Wikipedia does give enough background and sets some context.</description>
+Just In Time Compilation (Wiki): Wiki: https://en.wikipedia.org/wiki/Just-in-time_compilation Honestly, I wanted to start with a few papers on it, but Wikipedia does give enough background and sets some context. Leetcode problems</description>
     </item>
     
   </channel>
