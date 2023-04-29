@@ -229,7 +229,7 @@ and more&hellip;</li>
 <p>Anyways, my next target was to figure out having a grid - multiple rows and multiple columns. From what I know, there isn&rsquo;t a <code>grid</code> like implementation within Iced, so I had to use <code>Column</code> and <code>Row</code> classes from Iced. It was tricky, if I have to be very honest, but finally worked out. Had to ask a couple of questions on the discord channel of Iced, they were very kind and quick to help me with my queries.</p>
 <p>I also had to choose an image for each user, as an avatar was necessary. Once added, I knew it will start looking better. A header and a footer were also required, to give the user some info about what they are seeing on the screen. However, when the grid wasn&rsquo;t full, the image wouldn&rsquo;t align and that was an issue to resolve for the next stage.</p>
 <p>Adding the avatar was very interesting, I wanted a link to work (for the avatar). But for now, I thought I&rsquo;ll suffice to using an image path to see if it really works (spoiler: it did 😄):</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">profile_pic</span><span style="color:#f92672">&lt;&#39;</span><span style="color:#a6e22e">a</span><span style="color:#f92672">&gt;</span>(width: <span style="color:#66d9ef">u16</span>) -&gt; <span style="color:#a6e22e">Container</span><span style="color:#f92672">&lt;&#39;</span><span style="color:#a6e22e">a</span>, Message<span style="color:#f92672">&gt;</span> {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">profile_pic</span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">&#39;a</span><span style="color:#f92672">&gt;</span>(width: <span style="color:#66d9ef">u16</span>) -&gt; <span style="color:#a6e22e">Container</span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">&#39;a</span>, Message<span style="color:#f92672">&gt;</span> {
 </span></span><span style="display:flex;"><span>    container(
 </span></span><span style="display:flex;"><span>        <span style="color:#75715e">// This should go away once we unify resource loading on native
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">// platforms
@@ -237,7 +237,7 @@ and more&hellip;</li>
 </span></span><span style="display:flex;"><span>            image(<span style="color:#e6db74">&#34;profile_images/Noddy.jpeg&#34;</span>)
 </span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">else</span> {
 </span></span><span style="display:flex;"><span>            image(format!(
-</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;{}/profile_images/Noddy.jpeg&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{}</span><span style="color:#e6db74">/profile_images/Noddy.jpeg&#34;</span>,
 </span></span><span style="display:flex;"><span>                env!(<span style="color:#e6db74">&#34;CARGO_MANIFEST_DIR&#34;</span>)
 </span></span><span style="display:flex;"><span>            ))
 </span></span><span style="display:flex;"><span>        }
@@ -258,8 +258,8 @@ and more&hellip;</li>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Read the JSON contents of the file as an instance of `YTCreator`.
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> u: <span style="color:#a6e22e">YTCreator</span> <span style="color:#f92672">=</span> serde_json::from_reader(reader)<span style="color:#f92672">?</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> u.size() <span style="color:#f92672">&gt;</span> MAX_EXPECTED_ITEMS {
-</span></span><span style="display:flex;"><span>        Ok(u.slice_to(MAX_EXPECTED_ITEMS))
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> u.size() <span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">MAX_EXPECTED_ITEMS</span> {
+</span></span><span style="display:flex;"><span>        Ok(u.slice_to(<span style="color:#66d9ef">MAX_EXPECTED_ITEMS</span>))
 </span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
 </span></span><span style="display:flex;"><span>        Ok(u)
 </span></span><span style="display:flex;"><span>    }
@@ -291,7 +291,7 @@ and more&hellip;</li>
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>The implementation of <code>slice_to</code> method is fairly simple, just creating another <code>YTCreator</code> object but with stripped count.</p>
 <p>One of the very important step was to enable passing a link for the image/avatar. This was made possible using <code>reqwest</code> crate, getting the image in a form of bytes array and then converting it to an <code>image::Handle</code>.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">profile_pic</span><span style="color:#f92672">&lt;&#39;</span><span style="color:#a6e22e">a</span><span style="color:#f92672">&gt;</span>(width: <span style="color:#66d9ef">u16</span>, link: String) -&gt; <span style="color:#a6e22e">Container</span><span style="color:#f92672">&lt;&#39;</span><span style="color:#a6e22e">a</span>, Message<span style="color:#f92672">&gt;</span> {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">profile_pic</span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">&#39;a</span><span style="color:#f92672">&gt;</span>(width: <span style="color:#66d9ef">u16</span>, link: String) -&gt; <span style="color:#a6e22e">Container</span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">&#39;a</span>, Message<span style="color:#f92672">&gt;</span> {
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> img_obj <span style="color:#f92672">=</span> reqwest::blocking::get(link).ok();
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> img_bytes <span style="color:#f92672">=</span> <span style="color:#66d9ef">match</span> img_obj {
 </span></span><span style="display:flex;"><span>        Some(bytes) <span style="color:#f92672">=&gt;</span> {
@@ -321,7 +321,7 @@ and more&hellip;</li>
 <p>Starting from here, you&rsquo;ll understand how important development is. In this stage, the UI won&rsquo;t change <em>BUT</em> we&rsquo;ll be significantly improving the performance.</p>
 <p>So, while I was very happy about the project progress so far, I thought I&rsquo;ll ask my friend to open it up on his system. He had Windows, but fortunately he also had WSL. Thanks to him, he didn&rsquo;t give up on trying to run GUI on his WSL - and when finally the app loaded, it was <em>LAGGING</em>. 😢</p>
 <p>I was surprised, because on my Mac - it was working fine. I opened up my Linux system, and guess what? It lagged there as well. I immediately knew I was doing something wrong. Now, as developers, we generally try to get to the bottleneck of the issue, and I had an instinct about it.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">view</span>(<span style="color:#f92672">&amp;</span>self) -&gt; <span style="color:#a6e22e">iced</span>::Element<span style="color:#f92672">&lt;&#39;</span>_, Self::Message<span style="color:#f92672">&gt;</span> {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">view</span>(<span style="color:#f92672">&amp;</span>self) -&gt; <span style="color:#a6e22e">iced</span>::Element<span style="color:#f92672">&lt;</span>&#39;_, Self::Message<span style="color:#f92672">&gt;</span> {
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> choose_theme <span style="color:#f92672">=</span> <span style="color:#f92672">..</span>.;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> content <span style="color:#f92672">=</span> container(column![choose_theme].spacing(<span style="color:#ae81ff">20</span>).padding(<span style="color:#ae81ff">20</span>).max_width(<span style="color:#ae81ff">600</span>))
@@ -354,14 +354,14 @@ and more&hellip;</li>
 </span></span><span style="display:flex;"><span>    .into()
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>The <code>view</code> method above was running every time I switched the theme (whenever anything changed), and this was the problem. Let me show you the <code>create_row</code> method, which will give you an idea why it&rsquo;s slow:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">create_row</span>(cards: <span style="color:#66d9ef">&amp;</span><span style="color:#a6e22e">ListOfCards</span>) -&gt; <span style="color:#a6e22e">Row</span><span style="color:#f92672">&lt;&#39;</span>static, Message<span style="color:#f92672">&gt;</span> {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">create_row</span>(cards: <span style="color:#66d9ef">&amp;</span><span style="color:#a6e22e">ListOfCards</span>) -&gt; <span style="color:#a6e22e">Row</span><span style="color:#f92672">&lt;</span>&#39;static, Message<span style="color:#f92672">&gt;</span> {
 </span></span><span style="display:flex;"><span>    Row::with_children(
 </span></span><span style="display:flex;"><span>        cards
 </span></span><span style="display:flex;"><span>            .cards
 </span></span><span style="display:flex;"><span>            .iter()
 </span></span><span style="display:flex;"><span>            .map(<span style="color:#f92672">|</span>each_card<span style="color:#f92672">|</span> {
 </span></span><span style="display:flex;"><span>                container(
-</span></span><span style="display:flex;"><span>                    row<span style="color:#f92672">!</span>[
+</span></span><span style="display:flex;"><span>                    row![
 </span></span><span style="display:flex;"><span>                        column![create_card(each_card)].spacing(<span style="color:#ae81ff">50</span>).padding(<span style="color:#ae81ff">20</span>),
 </span></span><span style="display:flex;"><span>                        column![profile_pic(<span style="color:#ae81ff">130</span>, each_card.avatar_link.to_owned())]
 </span></span><span style="display:flex;"><span>                            .width(Length::Units(<span style="color:#ae81ff">130</span>))
@@ -398,7 +398,7 @@ and more&hellip;</li>
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>As you can see above^, we have <code>json_obj, loaded_photos</code> as two added fields to the <code>YTMonitor</code> struct. We parsed the JSON file as well as downloaded all the avatars (we already know the avatar links from the JSON file). Later on, I would just use these as <code>self.json_obj</code> and <code>self.image_handles</code> in the <code>view</code> function, so no more performance degradation!</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">view</span>(<span style="color:#f92672">&amp;</span>self) -&gt; <span style="color:#a6e22e">iced</span>::Element<span style="color:#f92672">&lt;&#39;</span>_, Self::Message<span style="color:#f92672">&gt;</span> {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">view</span>(<span style="color:#f92672">&amp;</span>self) -&gt; <span style="color:#a6e22e">iced</span>::Element<span style="color:#f92672">&lt;</span>&#39;_, Self::Message<span style="color:#f92672">&gt;</span> {
 </span></span><span style="display:flex;"><span>    <span style="color:#75715e">// ...
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> all_cards <span style="color:#f92672">=</span> render_cards::create_list_of_cards(<span style="color:#f92672">&amp;</span>self.json_obj);
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> binding <span style="color:#f92672">=</span> render_cards::ListOfCards::default();
@@ -412,7 +412,7 @@ and more&hellip;</li>
 </span></span><span style="display:flex;"><span>        render_cards::create_row(all_cards.get(<span style="color:#ae81ff">2</span>).unwrap_or(<span style="color:#f92672">&amp;</span>binding), <span style="color:#f92672">&amp;</span>all_photos, <span style="color:#ae81ff">8</span>);
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>As you can see above, I am passing the <code>all_photos</code> variable to <code>create_row</code> this time (along with the offset). The <code>profile_pic</code> method just takes the image handle now:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">profile_pic</span><span style="color:#f92672">&lt;&#39;</span><span style="color:#a6e22e">a</span><span style="color:#f92672">&gt;</span>(width: <span style="color:#66d9ef">u16</span>, img_handle: <span style="color:#a6e22e">image</span>::Handle) -&gt; <span style="color:#a6e22e">Container</span><span style="color:#f92672">&lt;&#39;</span><span style="color:#a6e22e">a</span>, Message<span style="color:#f92672">&gt;</span> {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">profile_pic</span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">&#39;a</span><span style="color:#f92672">&gt;</span>(width: <span style="color:#66d9ef">u16</span>, img_handle: <span style="color:#a6e22e">image</span>::Handle) -&gt; <span style="color:#a6e22e">Container</span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">&#39;a</span>, Message<span style="color:#f92672">&gt;</span> {
 </span></span><span style="display:flex;"><span>    container(
 </span></span><span style="display:flex;"><span>        image(img_handle)
 </span></span><span style="display:flex;"><span>            .height(Length::Units(width))
@@ -484,6 +484,13 @@ and more&hellip;</li>
                 </div>
 
                 <div class="pagination__buttons">
+                    
+                        <span class="button previous">
+                            <a href="https://krshrimali.github.io/posts/2023/04/daily-update-28th-april-2023/">
+                                <span class="button__icon">←</span>
+                                <span class="button__text">Daily Update: 28th April 2023</span>
+                            </a>
+                        </span>
                     
 
                     
@@ -564,7 +571,7 @@ and more&hellip;</li>
             
                 <footer class="footer">
     <p>
-        &copy; 2022
+        &copy; 2023
             
                 <span><a href="https://krshrimali.github.io">Kushashwa Ravi Shrimali</a></span>
                 

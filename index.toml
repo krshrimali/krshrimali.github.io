@@ -1,14 +1,14 @@
 # We use the generated html to prevent issues involving markdown frontmatter
 
 [[input.files]]
+path = "./posts/2023/04/daily-update-28th-april-2023/index.html"
+url = "https://krshrimali.github.io/posts/2023/04/daily-update-28th-april-2023/"
+title = "Daily Update: 28th April 2023"
+
+[[input.files]]
 path = "./posts/2022/12/i-started-building-an-app-using-rust-and-here-is-how-it-went.../index.html"
 url = "https://krshrimali.github.io/posts/2022/12/i-started-building-an-app-using-rust-and-here-is-how-it-went.../"
 title = "I started building an app using Rust and here is how it went..."
-
-[[input.files]]
-path = "./posts/2022/11/daily-update-19th-20th-21st-november-2022-day-5-to-day-7-inclusive/index.html"
-url = "https://krshrimali.github.io/posts/2022/11/daily-update-19th-20th-21st-november-2022-day-5-to-day-7-inclusive/"
-title = "Daily Update: 19th 20th 21st November 2022 - Day 5 to Day 7 (inclusive)"
 
 [[input.files]]
 path = "./posts/2022/11/daily-update-19th-20th-21st-november-2022-day-5-to-day-7-inclusive/index.html"
@@ -194,26 +194,6 @@ title = "Introduction to PyTorch C&#43;&#43; API: MNIST Digit Recognition using 
 path = "./about/index.html"
 url = "https://krshrimali.github.io/about/"
 title = "About"
-
-[[input.files]]
-path = "./posts/1/01/index.html"
-url = "https://krshrimali.github.io/posts/1/01/"
-title = ""
-
-[[input.files]]
-path = "./posts/1/01/index.html"
-url = "https://krshrimali.github.io/posts/1/01/"
-title = ""
-
-[[input.files]]
-path = "./posts/1/01/index.html"
-url = "https://krshrimali.github.io/posts/1/01/"
-title = ""
-
-[[input.files]]
-path = "./posts/1/01/index.html"
-url = "https://krshrimali.github.io/posts/1/01/"
-title = ""
 
 [[input.files]]
 path = "./categories/index.html"
