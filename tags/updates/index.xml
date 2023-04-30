@@ -6,7 +6,17 @@
     <description>Recent content in updates on Kushashwa Ravi Shrimali (Kush)</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Fri, 28 Apr 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://krshrimali.github.io/tags/updates/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 29 Apr 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://krshrimali.github.io/tags/updates/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Daily Update: 29th April 2023</title>
+      <link>https://krshrimali.github.io/posts/2023/04/daily-update-29th-april-2023/</link>
+      <pubDate>Sat, 29 Apr 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://krshrimali.github.io/posts/2023/04/daily-update-29th-april-2023/</guid>
+      <description>Alright, we are back. It&amp;rsquo;s Saturday, so I spent a lot of time cleaning up my flat and my setup. Bengaluru is quite a dusty city, so yep, gotta clean regularly. Anyways, in terms of learning, my goals of today were to read some source code and papers/official documentation. It&amp;rsquo;s been some time since I didn&amp;rsquo;t do any Rust, so today I&amp;rsquo;ll just touch upon that as well.
+Rust - building a UI to plot a sensor in real time Why this?</description>
+    </item>
+    
     <item>
       <title>Daily Update: 28th April 2023</title>
       <link>https://krshrimali.github.io/posts/2023/04/daily-update-28th-april-2023/</link>
