@@ -6,7 +6,17 @@
     <description>Recent content in Posts on Kushashwa Ravi Shrimali (Kush)</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Sat, 29 Apr 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://krshrimali.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 30 Apr 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://krshrimali.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Daily Update: 30th April 2023</title>
+      <link>https://krshrimali.github.io/posts/2023/04/daily-update-30th-april-2023/</link>
+      <pubDate>Sun, 30 Apr 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://krshrimali.github.io/posts/2023/04/daily-update-30th-april-2023/</guid>
+      <description>Lovely day, had my friend imsrbh come over and we were talking about the project I wanted to do. He had some ideas and of course some experience with Kafka, so he helped me setup Kafka and docker on my machine, and that&amp;rsquo;s how it all started.
+Setting up Kafka and Docker on my machine: Refer to this blog for Kafka setup. We verified by running a sample producer-consumer app in Python and it worked.</description>
+    </item>
+    
     <item>
       <title>Daily Update: 29th April 2023</title>
       <link>https://krshrimali.github.io/posts/2023/04/daily-update-29th-april-2023/</link>
@@ -95,18 +105,6 @@ Watched this nice video from Jason on The Right Way to Write C++ in 2022: I like
       <description>Hi everyone, I&amp;rsquo;m back to - writing daily update blogs. Just sharing what I did today, and documenting my progress. Now of course it won&amp;rsquo;t contain everything I do, but yep - everything related to learning and things I&amp;rsquo;m passionate about.
 Reading
 Just In Time Compilation (Wiki): Wiki: https://en.wikipedia.org/wiki/Just-in-time_compilation Honestly, I wanted to start with a few papers on it, but Wikipedia does give enough background and sets some context. Leetcode problems</description>
-    </item>
-    
-    <item>
-      <title>Applying for Research Internships (Universities)</title>
-      <link>https://krshrimali.github.io/posts/2022/09/applying-for-research-internships-universities/</link>
-      <pubDate>Sun, 04 Sep 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://krshrimali.github.io/posts/2022/09/applying-for-research-internships-universities/</guid>
-      <description>Hi everyone! Over the last few months, I&amp;rsquo;ve received a lot of queries regarding applying to research internships. And I wanted to answer them shortly, in this blog, with a disclaimer to begin with.
-DISCLAIMER
-I did only one research internship (NTU Singapore, ROSE Labs), and there are people who are more qualified than me to answer this, but I&amp;rsquo;ll make my best attempt.
-Here is how I will suggest to apply:</description>
     </item>
     
   </channel>
