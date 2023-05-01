@@ -1,6 +1,11 @@
 # We use the generated html to prevent issues involving markdown frontmatter
 
 [[input.files]]
+path = "./posts/2023/05/daily-update-1st-may-2023/index.html"
+url = "https://krshrimali.github.io/posts/2023/05/daily-update-1st-may-2023/"
+title = "Daily Update: 1st May 2023"
+
+[[input.files]]
 path = "./posts/2023/04/daily-update-30th-april-2023/index.html"
 url = "https://krshrimali.github.io/posts/2023/04/daily-update-30th-april-2023/"
 title = "Daily Update: 30th April 2023"

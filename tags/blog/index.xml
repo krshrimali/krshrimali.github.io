@@ -6,7 +6,17 @@
     <description>Recent content in blog on Kushashwa Ravi Shrimali (Kush)</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Sun, 30 Apr 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://krshrimali.github.io/tags/blog/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 01 May 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://krshrimali.github.io/tags/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Daily Update: 1st May 2023</title>
+      <link>https://krshrimali.github.io/posts/2023/05/daily-update-1st-may-2023/</link>
+      <pubDate>Mon, 01 May 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://krshrimali.github.io/posts/2023/05/daily-update-1st-may-2023/</guid>
+      <description>Interesting day, lots of design stuff for the project we&amp;rsquo;ve been working on.
+Designing flow for the word combinator service This is actually tricky, as we are figuring out how we&amp;rsquo;ll figure out the keystrokes into words/phrases (I&amp;rsquo;d like to call them entities at one point of time). The algorithm is close, and I&amp;rsquo;m particularly hopeful about it: It considers some edge cases of mouse events, sitting idle, and gives user the control what they would like to choose.</description>
+    </item>
+    
     <item>
       <title>Daily Update: 30th April 2023</title>
       <link>https://krshrimali.github.io/posts/2023/04/daily-update-30th-april-2023/</link>
