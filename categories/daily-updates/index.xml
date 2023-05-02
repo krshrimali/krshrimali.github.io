@@ -6,7 +6,17 @@
     <description>Recent content in daily updates on Kushashwa Ravi Shrimali (Kush)</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Mon, 01 May 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://krshrimali.github.io/categories/daily-updates/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 02 May 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://krshrimali.github.io/categories/daily-updates/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Daily Update: 2nd May 2023</title>
+      <link>https://krshrimali.github.io/posts/2023/05/daily-update-2nd-may-2023/</link>
+      <pubDate>Tue, 02 May 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://krshrimali.github.io/posts/2023/05/daily-update-2nd-may-2023/</guid>
+      <description>Today was more like a reading/learning day. Here are the things I&amp;rsquo;ve been watching:
+Which Database Model to choose?: Why this? Going to be useful for the project I&amp;rsquo;ve been working on. Thinking on directions of storing in-memory, using key-value model but let&amp;rsquo;s see. I made every sentry page 300 ms faster (intermediate) anthony explains #540 Why this? Always enjoy watching Anthony. Came on my YT recommendation, thought I&amp;rsquo;ll watch. Looks like a CDN config fix, also learnt a few things on watching the type of network calls (cached or not) from this video.</description>
+    </item>
+    
     <item>
       <title>Daily Update: 1st May 2023</title>
       <link>https://krshrimali.github.io/posts/2023/05/daily-update-1st-may-2023/</link>
@@ -94,17 +104,6 @@ I made my rust-leetcode repository public today. It currently contains 12 solved
       <description>Hi everyone, Day 2 of this series of daily updates. Started my day earlier than yesterday, at around 9 AM (work).
 Learning:
 Watched this nice video from Jason on The Right Way to Write C++ in 2022: I like when he advocated on using different compilers, or at least verifying that it works for all (and if not, then you&amp;rsquo;re aware). Interest: take warnings seriously. Need to start doing it, I&amp;rsquo;ve been following this with Rust, but C++ never raised Rust-like &amp;ldquo;good enough&amp;rdquo; warnings.</description>
-    </item>
-    
-    <item>
-      <title>Daily Update: 14th November 2022 - Day 1</title>
-      <link>https://krshrimali.github.io/posts/2022/11/daily-update-14th-november-2022-day-1/</link>
-      <pubDate>Mon, 14 Nov 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://krshrimali.github.io/posts/2022/11/daily-update-14th-november-2022-day-1/</guid>
-      <description>Hi everyone, I&amp;rsquo;m back to - writing daily update blogs. Just sharing what I did today, and documenting my progress. Now of course it won&amp;rsquo;t contain everything I do, but yep - everything related to learning and things I&amp;rsquo;m passionate about.
-Reading
-Just In Time Compilation (Wiki): Wiki: https://en.wikipedia.org/wiki/Just-in-time_compilation Honestly, I wanted to start with a few papers on it, but Wikipedia does give enough background and sets some context. Leetcode problems</description>
     </item>
     
   </channel>
