@@ -6,7 +6,17 @@
     <description>Recent content in updates on Kushashwa Ravi Shrimali (Kush)</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Tue, 02 May 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://krshrimali.github.io/tags/updates/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 03 May 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://krshrimali.github.io/tags/updates/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Daily Update: 3rd May 2023</title>
+      <link>https://krshrimali.github.io/posts/2023/05/daily-update-3rd-may-2023/</link>
+      <pubDate>Wed, 03 May 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://krshrimali.github.io/posts/2023/05/daily-update-3rd-may-2023/</guid>
+      <description>Okay, I think I should just accept this, while at work, it will be very hard for me to go and actually code something. And it makes sense, honestly at this stage - I feel like giving 50% of the time to reading + thinking, and 20% to implementing + 30% on iterating and feedback. So you&amp;rsquo;ll see more links about reading etc. over here.
+Design a basic search engine (Google or Bing) | System Design Interview Prep Design a Payment System - System Design Interview That would be it, to be honest - not a lot.</description>
+    </item>
+    
     <item>
       <title>Daily Update: 2nd May 2023</title>
       <link>https://krshrimali.github.io/posts/2023/05/daily-update-2nd-may-2023/</link>
@@ -92,17 +102,6 @@ The Story I&amp;rsquo;ve been through, possibly, the best and the worst time of 
       
       <guid>https://krshrimali.github.io/posts/2022/11/daily-update-17th-november-2022-day-4/</guid>
       <description>Hi everyone, Day 4 of this series of daily updates. I don&amp;rsquo;t have a lot to share today, just one of those days where I spent a lot of time going through whatever I&amp;rsquo;ve done already. I take some time to look at the things I learned so far, and see if I could be more intuitive back then. I&amp;rsquo;m going to continue doing the same for the next day, though this time for the problems I&amp;rsquo;ve solved on Leetcode.</description>
-    </item>
-    
-    <item>
-      <title>Daily Update: 16th November 2022 - Day 3</title>
-      <link>https://krshrimali.github.io/posts/2022/11/daily-update-16th-november-2022-day-3/</link>
-      <pubDate>Wed, 16 Nov 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://krshrimali.github.io/posts/2022/11/daily-update-16th-november-2022-day-3/</guid>
-      <description>Hi everyone, Day 3 of this series of daily updates. Woke up fairly early (~6 AM), and started working. Though it seemed productive to me, but you won&amp;rsquo;t see a lot of content here today - just one of those days where I didn&amp;rsquo;t do a lot of different things, I guess. :)
-Projects/Learning:
-I made my rust-leetcode repository public today. It currently contains 12 solved problems, you&amp;rsquo;ll see huge difference between the first few codes to the last few codes.</description>
     </item>
     
   </channel>
