@@ -6,37 +6,29 @@
     <description>Recent content in vectors on Kushashwa Ravi Shrimali (Kush)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Sun, 26 Apr 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://krshrimali.github.io/tags/vectors/index.xml" rel="self" type="application/rss+xml" />
+    <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
+    <lastBuildDate>Sun, 26 Apr 2020 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://krshrimali.github.io/tags/vectors/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Understanding how Vectors work in C&#43;&#43; (Part-2): What happens when you initialize a vector?</title>
       <link>https://krshrimali.github.io/posts/2020/04/understanding-how-vectors-work-in-c-part-2-what-happens-when-you-initialize-a-vector/</link>
       <pubDate>Sun, 26 Apr 2020 00:00:00 +0000</pubDate>
-      
       <guid>https://krshrimali.github.io/posts/2020/04/understanding-how-vectors-work-in-c-part-2-what-happens-when-you-initialize-a-vector/</guid>
-      <description>In the last blog post, I realized there were a lot of methods inherited from the base struct _Vector_base_ and _Vector_impl_data. Instead of directly going to the source code of these structs, I&amp;rsquo;ll go through their methods and objects by explaining what happens when we initialize a vector.
-That is, we will start from calling a vector constructor and then see how memory is allocated. If you haven&amp;rsquo;t looked at the previous blog post, please take a look here.</description>
+      <description>In the last blog post, I realized there were a lot of methods inherited from the base struct _Vector_base_ and _Vector_impl_data. Instead of directly going to the source code of these structs, I&amp;rsquo;ll go through their methods and objects by explaining what happens when we initialize a vector.&#xA;That is, we will start from calling a vector constructor and then see how memory is allocated. If you haven&amp;rsquo;t looked at the previous blog post, please take a look here.</description>
     </item>
-    
     <item>
       <title>Understanding how Vectors work in C&#43;&#43; (Part-3): Diving deep into member functions of vectors</title>
       <link>https://krshrimali.github.io/posts/2020/04/understanding-how-vectors-work-in-c-part-3-diving-deep-into-member-functions-of-vectors/</link>
       <pubDate>Sun, 26 Apr 2020 00:00:00 +0000</pubDate>
-      
       <guid>https://krshrimali.github.io/posts/2020/04/understanding-how-vectors-work-in-c-part-3-diving-deep-into-member-functions-of-vectors/</guid>
-      <description>In this blog, we&amp;rsquo;ll continue diving deep into the source code of Vector Containers in GCC compiler. Today, we will be discussing some of the most commonly used methods of vectors, and how they are implemented.
-Before we start, if you haven&amp;rsquo;t looked at the previous blogs in the C++ series, please take a look here. If you are already familiar with memory allocation in vector containers and vector&amp;rsquo;s base structs, then you can skip reading the previous blogs and continue here.</description>
+      <description>In this blog, we&amp;rsquo;ll continue diving deep into the source code of Vector Containers in GCC compiler. Today, we will be discussing some of the most commonly used methods of vectors, and how they are implemented.&#xA;Before we start, if you haven&amp;rsquo;t looked at the previous blogs in the C++ series, please take a look here. If you are already familiar with memory allocation in vector containers and vector&amp;rsquo;s base structs, then you can skip reading the previous blogs and continue here.</description>
     </item>
-    
     <item>
       <title>Understanding how Vectors work in C&#43;&#43; (Part-1): How does push_back work?</title>
       <link>https://krshrimali.github.io/posts/2020/04/understanding-how-vectors-work-in-c-part-1-how-does-push_back-work/</link>
       <pubDate>Sat, 18 Apr 2020 00:00:00 +0000</pubDate>
-      
       <guid>https://krshrimali.github.io/posts/2020/04/understanding-how-vectors-work-in-c-part-1-how-does-push_back-work/</guid>
-      <description>This blog is focused to explain how vectors work in the backend, and we&amp;rsquo;ll specially look at push_back method of the vector container. Looking at the source code helps to understand the implementation, and how vectors can be used efficiently.
-Vector Containers are type of sequenced containers in C++ commonly uses as a better alternative of arrays. They are also known as dynamic arrays, and as the term suggests - it&amp;rsquo;s one of the advantages they hold over native arrays in C++.</description>
+      <description>This blog is focused to explain how vectors work in the backend, and we&amp;rsquo;ll specially look at push_back method of the vector container. Looking at the source code helps to understand the implementation, and how vectors can be used efficiently.&#xA;Vector Containers are type of sequenced containers in C++ commonly uses as a better alternative of arrays. They are also known as dynamic arrays, and as the term suggests - it&amp;rsquo;s one of the advantages they hold over native arrays in C++.</description>
     </item>
-    
   </channel>
 </rss>

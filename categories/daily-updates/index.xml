@@ -6,105 +6,78 @@
     <description>Recent content in daily updates on Kushashwa Ravi Shrimali (Kush)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Wed, 03 May 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://krshrimali.github.io/categories/daily-updates/index.xml" rel="self" type="application/rss+xml" />
+    <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
+    <lastBuildDate>Wed, 03 May 2023 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://krshrimali.github.io/categories/daily-updates/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Daily Update: 3rd May 2023</title>
       <link>https://krshrimali.github.io/posts/2023/05/daily-update-3rd-may-2023/</link>
       <pubDate>Wed, 03 May 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://krshrimali.github.io/posts/2023/05/daily-update-3rd-may-2023/</guid>
-      <description>Okay, I think I should just accept this, while at work, it will be very hard for me to go and actually code something. And it makes sense, honestly at this stage - I feel like giving 50% of the time to reading + thinking, and 20% to implementing + 30% on iterating and feedback. So you&amp;rsquo;ll see more links about reading etc. over here.
-Design a basic search engine (Google or Bing) | System Design Interview Prep Design a Payment System - System Design Interview That would be it, to be honest - not a lot.</description>
+      <description>Okay, I think I should just accept this, while at work, it will be very hard for me to go and actually code something. And it makes sense, honestly at this stage - I feel like giving 50% of the time to reading + thinking, and 20% to implementing + 30% on iterating and feedback. So you&amp;rsquo;ll see more links about reading etc. over here.&#xA;Design a basic search engine (Google or Bing) | System Design Interview Prep Design a Payment System - System Design Interview That would be it, to be honest - not a lot.</description>
     </item>
-    
     <item>
       <title>Daily Update: 2nd May 2023</title>
       <link>https://krshrimali.github.io/posts/2023/05/daily-update-2nd-may-2023/</link>
       <pubDate>Tue, 02 May 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://krshrimali.github.io/posts/2023/05/daily-update-2nd-may-2023/</guid>
-      <description>Today was more like a reading/learning day. Here are the things I&amp;rsquo;ve been watching:
-Which Database Model to choose?: Why this? Going to be useful for the project I&amp;rsquo;ve been working on. Thinking on directions of storing in-memory, using key-value model but let&amp;rsquo;s see. I made every sentry page 300 ms faster (intermediate) anthony explains #540 Why this? Always enjoy watching Anthony. Came on my YT recommendation, thought I&amp;rsquo;ll watch. Looks like a CDN config fix, also learnt a few things on watching the type of network calls (cached or not) from this video.</description>
+      <description>Today was more like a reading/learning day. Here are the things I&amp;rsquo;ve been watching:&#xA;Which Database Model to choose?: Why this? Going to be useful for the project I&amp;rsquo;ve been working on. Thinking on directions of storing in-memory, using key-value model but let&amp;rsquo;s see. I made every sentry page 300 ms faster (intermediate) anthony explains #540 Why this? Always enjoy watching Anthony. Came on my YT recommendation, thought I&amp;rsquo;ll watch. Looks like a CDN config fix, also learnt a few things on watching the type of network calls (cached or not) from this video.</description>
     </item>
-    
     <item>
       <title>Daily Update: 1st May 2023</title>
       <link>https://krshrimali.github.io/posts/2023/05/daily-update-1st-may-2023/</link>
       <pubDate>Mon, 01 May 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://krshrimali.github.io/posts/2023/05/daily-update-1st-may-2023/</guid>
-      <description>Interesting day, lots of design stuff for the project we&amp;rsquo;ve been working on.
-Designing flow for the word combinator service This is actually tricky, as we are figuring out how we&amp;rsquo;ll figure out the keystrokes into words/phrases (I&amp;rsquo;d like to call them entities at one point of time). The algorithm is close, and I&amp;rsquo;m particularly hopeful about it: It considers some edge cases of mouse events, sitting idle, and gives user the control what they would like to choose.</description>
+      <description>Interesting day, lots of design stuff for the project we&amp;rsquo;ve been working on.&#xA;Designing flow for the word combinator service This is actually tricky, as we are figuring out how we&amp;rsquo;ll figure out the keystrokes into words/phrases (I&amp;rsquo;d like to call them entities at one point of time). The algorithm is close, and I&amp;rsquo;m particularly hopeful about it: It considers some edge cases of mouse events, sitting idle, and gives user the control what they would like to choose.</description>
     </item>
-    
     <item>
       <title>Daily Update: 30th April 2023</title>
       <link>https://krshrimali.github.io/posts/2023/04/daily-update-30th-april-2023/</link>
       <pubDate>Sun, 30 Apr 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://krshrimali.github.io/posts/2023/04/daily-update-30th-april-2023/</guid>
-      <description>Lovely day, had my friend imsrbh come over and we were talking about the project I wanted to do. He had some ideas and of course some experience with Kafka, so he helped me setup Kafka and docker on my machine, and that&amp;rsquo;s how it all started.
-Setting up Kafka and Docker on my machine: Refer to this blog for Kafka setup. We verified by running a sample producer-consumer app in Python and it worked.</description>
+      <description>Lovely day, had my friend imsrbh come over and we were talking about the project I wanted to do. He had some ideas and of course some experience with Kafka, so he helped me setup Kafka and docker on my machine, and that&amp;rsquo;s how it all started.&#xA;Setting up Kafka and Docker on my machine: Refer to this blog for Kafka setup. We verified by running a sample producer-consumer app in Python and it worked.</description>
     </item>
-    
     <item>
       <title>Daily Update: 29th April 2023</title>
       <link>https://krshrimali.github.io/posts/2023/04/daily-update-29th-april-2023/</link>
       <pubDate>Sat, 29 Apr 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://krshrimali.github.io/posts/2023/04/daily-update-29th-april-2023/</guid>
-      <description>Alright, we are back. It&amp;rsquo;s Saturday, so I spent a lot of time cleaning up my flat and my setup. Bengaluru is quite a dusty city, so yep, gotta clean regularly. Anyways, in terms of learning, my goals of today were to read some source code and papers/official documentation. It&amp;rsquo;s been some time since I didn&amp;rsquo;t do any Rust, so today I&amp;rsquo;ll just touch upon that as well.
-Rust - building a UI to plot a sensor in real time Why this?</description>
+      <description>Alright, we are back. It&amp;rsquo;s Saturday, so I spent a lot of time cleaning up my flat and my setup. Bengaluru is quite a dusty city, so yep, gotta clean regularly. Anyways, in terms of learning, my goals of today were to read some source code and papers/official documentation. It&amp;rsquo;s been some time since I didn&amp;rsquo;t do any Rust, so today I&amp;rsquo;ll just touch upon that as well.&#xA;Rust - building a UI to plot a sensor in real time Why this?</description>
     </item>
-    
     <item>
       <title>Daily Update: 28th April 2023</title>
       <link>https://krshrimali.github.io/posts/2023/04/daily-update-28th-april-2023/</link>
       <pubDate>Fri, 28 Apr 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://krshrimali.github.io/posts/2023/04/daily-update-28th-april-2023/</guid>
-      <description>Started my day with talking to my family, and then kicking off work after getting ready. (Note: these blogs are mostly around my personal learning updates, so I&amp;rsquo;ll mostly miss anything that I do at work as that&amp;rsquo;s confidential)
-What is OSI Model | Real World Examples Why this? The answer to: &amp;ldquo;How does the communication work from client to server&amp;rdquo; is very important in backend. I wanted to see if I missed anything from my graduate studies, but nothing much.</description>
+      <description>Started my day with talking to my family, and then kicking off work after getting ready. (Note: these blogs are mostly around my personal learning updates, so I&amp;rsquo;ll mostly miss anything that I do at work as that&amp;rsquo;s confidential)&#xA;What is OSI Model | Real World Examples Why this? The answer to: &amp;ldquo;How does the communication work from client to server&amp;rdquo; is very important in backend. I wanted to see if I missed anything from my graduate studies, but nothing much.</description>
     </item>
-    
     <item>
       <title>Daily Update: 19th 20th 21st November 2022 - Day 5 to Day 7 (inclusive)</title>
       <link>https://krshrimali.github.io/posts/2022/11/daily-update-19th-20th-21st-november-2022-day-5-to-day-7-inclusive/</link>
       <pubDate>Mon, 21 Nov 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://krshrimali.github.io/posts/2022/11/daily-update-19th-20th-21st-november-2022-day-5-to-day-7-inclusive/</guid>
       <description>Hi everyone! Sorry for missing out on publishing individual blogs for 19th, 20th and 21st November, but it has been very hectic for me, and I decided to give leetcode a break and explore System Design (a lot). Turns out, I had some idea about it already, one of the advantages of working with startups (CareAI/Dukaan). But in any case, quite a few interesting things I learnt. I can&amp;rsquo;t share all the links, as it will be just better to share the playlists or YT channels I referred:</description>
     </item>
-    
     <item>
       <title>Daily Update: 18th November 2022 - Day 5</title>
       <link>https://krshrimali.github.io/posts/2022/11/daily-update-18th-november-2022-day-5/</link>
       <pubDate>Fri, 18 Nov 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://krshrimali.github.io/posts/2022/11/daily-update-18th-november-2022-day-5/</guid>
       <description>Hi everyone, Day 5 of this series of daily updates. Started my day, fairly early but was feeling unwell. In any case, I did make some progress with my learning of the Interpreter. One of motivation to learn about Interpreter is to learn the whole process, from the code we write to the object files / executables. Of course, in this goal, my next step would be to read the &amp;ldquo;Write a compiler in Go&amp;rdquo; book.</description>
     </item>
-    
     <item>
       <title>Daily Update: 17th November 2022 - Day 4</title>
       <link>https://krshrimali.github.io/posts/2022/11/daily-update-17th-november-2022-day-4/</link>
       <pubDate>Thu, 17 Nov 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://krshrimali.github.io/posts/2022/11/daily-update-17th-november-2022-day-4/</guid>
       <description>Hi everyone, Day 4 of this series of daily updates. I don&amp;rsquo;t have a lot to share today, just one of those days where I spent a lot of time going through whatever I&amp;rsquo;ve done already. I take some time to look at the things I learned so far, and see if I could be more intuitive back then. I&amp;rsquo;m going to continue doing the same for the next day, though this time for the problems I&amp;rsquo;ve solved on Leetcode.</description>
     </item>
-    
     <item>
       <title>Daily Update: 16th November 2022 - Day 3</title>
       <link>https://krshrimali.github.io/posts/2022/11/daily-update-16th-november-2022-day-3/</link>
       <pubDate>Wed, 16 Nov 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://krshrimali.github.io/posts/2022/11/daily-update-16th-november-2022-day-3/</guid>
-      <description>Hi everyone, Day 3 of this series of daily updates. Woke up fairly early (~6 AM), and started working. Though it seemed productive to me, but you won&amp;rsquo;t see a lot of content here today - just one of those days where I didn&amp;rsquo;t do a lot of different things, I guess. :)
-Projects/Learning:
-I made my rust-leetcode repository public today. It currently contains 12 solved problems, you&amp;rsquo;ll see huge difference between the first few codes to the last few codes.</description>
+      <description>Hi everyone, Day 3 of this series of daily updates. Woke up fairly early (~6 AM), and started working. Though it seemed productive to me, but you won&amp;rsquo;t see a lot of content here today - just one of those days where I didn&amp;rsquo;t do a lot of different things, I guess. :)&#xA;Projects/Learning:&#xA;I made my rust-leetcode repository public today. It currently contains 12 solved problems, you&amp;rsquo;ll see huge difference between the first few codes to the last few codes.</description>
     </item>
-    
   </channel>
 </rss>

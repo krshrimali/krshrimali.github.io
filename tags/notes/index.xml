@@ -6,123 +6,78 @@
     <description>Recent content in notes on Kushashwa Ravi Shrimali (Kush)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Sun, 09 Jan 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://krshrimali.github.io/tags/notes/index.xml" rel="self" type="application/rss+xml" />
+    <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
+    <lastBuildDate>Sun, 09 Jan 2022 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://krshrimali.github.io/tags/notes/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Common Collections (Vector and Strings) in Rust [Notes]</title>
       <link>https://krshrimali.github.io/posts/2022/01/common-collections-vector-and-strings-in-rust-notes/</link>
       <pubDate>Sun, 09 Jan 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://krshrimali.github.io/posts/2022/01/common-collections-vector-and-strings-in-rust-notes/</guid>
-      <description>Chapter 8: Common Collections These are my notes from the chapter-8 of rust book. Please scroll down to the bottom (Note) section if you are curious about what this is.
-8.1: Storing Lists of Values with Vectors Vec&amp;lt;T&amp;gt; collection type discussed, aka vector: * By default contiguous. * All values should be of same type.
-// Creation let v: Vec&amp;lt;i32&amp;gt; = Vec::new(); // vec! macro for convenience // default integer type is i32 let v = vec!</description>
+      <description>Chapter 8: Common Collections These are my notes from the chapter-8 of rust book. Please scroll down to the bottom (Note) section if you are curious about what this is.&#xA;8.1: Storing Lists of Values with Vectors Vec&amp;lt;T&amp;gt; collection type discussed, aka vector: * By default contiguous. * All values should be of same type.&#xA;// Creation let v: Vec&amp;lt;i32&amp;gt; = Vec::new(); // vec! macro for convenience // default integer type is i32 let v = vec!</description>
     </item>
-    
     <item>
       <title>Common Collections (Vector and Strings) in Rust [Notes]</title>
       <link>https://krshrimali.github.io/posts/2022/01/common-collections-vector-and-strings-in-rust-notes/</link>
       <pubDate>Sun, 09 Jan 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://krshrimali.github.io/posts/2022/01/common-collections-vector-and-strings-in-rust-notes/</guid>
-      <description>Chapter 8: Common Collections (Hash Maps) In the previous blog, I shared my notes on strings and vectors in Rust, and in this post we&amp;rsquo;ll cover Hash Maps. I personally have found their use in competitive programming, a lot, but hopefully as we move on, we&amp;rsquo;ll see lots of use-cases in real-life problems.
-Hash Maps Hash Maps: HashMap&amp;lt;K, V&amp;gt;
-You can&amp;rsquo;t access using indices, but through keys. Hash Maps store data on heap.</description>
+      <description>Chapter 8: Common Collections (Hash Maps) In the previous blog, I shared my notes on strings and vectors in Rust, and in this post we&amp;rsquo;ll cover Hash Maps. I personally have found their use in competitive programming, a lot, but hopefully as we move on, we&amp;rsquo;ll see lots of use-cases in real-life problems.&#xA;Hash Maps Hash Maps: HashMap&amp;lt;K, V&amp;gt;&#xA;You can&amp;rsquo;t access using indices, but through keys. Hash Maps store data on heap.</description>
     </item>
-    
     <item>
       <title>Prefer const_iterators to iterators (Notes)</title>
       <link>https://krshrimali.github.io/posts/2021/09/prefer-const_iterators-to-iterators-notes/</link>
       <pubDate>Sun, 26 Sep 2021 00:00:00 +0000</pubDate>
-      
       <guid>https://krshrimali.github.io/posts/2021/09/prefer-const_iterators-to-iterators-notes/</guid>
-      <description>NOTE
-My notes on Chapter 3, Item 13 of Effective Modern C++ written by Scott Meyers.
-Some (or even all) of the text can be similar to what you see in the book, as these are notes: I&amp;rsquo;ve tried not to be unnecessarily creative with my words. :)
-In C++, iterators come handy to point at memory addresses of STL containers. For example,
-// C++11 std::vector&amp;lt;int&amp;gt; x {11, 9, 23, 6}; // begin() member function returns an iterator, which points to the first // memory address of the container x std::vector&amp;lt;int&amp;gt;::iterator it = x.</description>
+      <description>NOTE&#xA;My notes on Chapter 3, Item 13 of Effective Modern C++ written by Scott Meyers.&#xA;Some (or even all) of the text can be similar to what you see in the book, as these are notes: I&amp;rsquo;ve tried not to be unnecessarily creative with my words. :)&#xA;In C++, iterators come handy to point at memory addresses of STL containers. For example,&#xA;// C++11 std::vector&amp;lt;int&amp;gt; x {11, 9, 23, 6}; // begin() member function returns an iterator, which points to the first // memory address of the container x std::vector&amp;lt;int&amp;gt;::iterator it = x.</description>
     </item>
-    
     <item>
       <title>Declaring Overriding Functions override (Notes)</title>
       <link>https://krshrimali.github.io/posts/2021/09/declaring-overriding-functions-override-notes/</link>
       <pubDate>Sat, 25 Sep 2021 00:00:00 +0000</pubDate>
-      
       <guid>https://krshrimali.github.io/posts/2021/09/declaring-overriding-functions-override-notes/</guid>
-      <description>NOTE
-My notes on Chapter 3, Item 12 of Effective Modern C++ written by Scott Meyers.
-Some (or even all) of the text can be similar to what you see in the book, as these are notes: I&amp;rsquo;ve tried not to be unnecessarily creative with my words. :)
-Overriding != Overloading
-Example of virtual function overriding:
-// Base class class Base { public: virtual void doWork(); // ... }; // Derived class from Base class Derived: public Base { public: // virtual is optional // this will &amp;#34;override&amp;#34; Base::doWork virtual void doWork(); // .</description>
+      <description>NOTE&#xA;My notes on Chapter 3, Item 12 of Effective Modern C++ written by Scott Meyers.&#xA;Some (or even all) of the text can be similar to what you see in the book, as these are notes: I&amp;rsquo;ve tried not to be unnecessarily creative with my words. :)&#xA;Overriding != Overloading&#xA;Example of virtual function overriding:&#xA;// Base class class Base { public: virtual void doWork(); // ... }; // Derived class from Base class Derived: public Base { public: // virtual is optional // this will &amp;#34;override&amp;#34; Base::doWork virtual void doWork(); // .</description>
     </item>
-    
     <item>
       <title>Prefer Deleted Functions to Private Undefined Ones (Notes)</title>
       <link>https://krshrimali.github.io/posts/2021/08/prefer-deleted-functions-to-private-undefined-ones-notes/</link>
       <pubDate>Wed, 25 Aug 2021 00:00:00 +0000</pubDate>
-      
       <guid>https://krshrimali.github.io/posts/2021/08/prefer-deleted-functions-to-private-undefined-ones-notes/</guid>
-      <description>Prefer deleted functions to private undefined ones This item (11) in the chapter 3 focuses on:
-Why and How to prevent users calling particular functions? C++-98 and C++-11 approach What&amp;rsquo;s the difference between deleting a function vs declaring a member function private (and not defining them)? NOTE
-These are my notes on Chapter 3, Item 11 of Effective Modern C++ written by Scott Meyers.
-Some (or even all) of the text can be similar to what you see in the book, as these are notes: I&amp;rsquo;ve tried not to be unnecessarily creative with my words.</description>
+      <description>Prefer deleted functions to private undefined ones This item (11) in the chapter 3 focuses on:&#xA;Why and How to prevent users calling particular functions? C++-98 and C++-11 approach What&amp;rsquo;s the difference between deleting a function vs declaring a member function private (and not defining them)? NOTE&#xA;These are my notes on Chapter 3, Item 11 of Effective Modern C++ written by Scott Meyers.&#xA;Some (or even all) of the text can be similar to what you see in the book, as these are notes: I&amp;rsquo;ve tried not to be unnecessarily creative with my words.</description>
     </item>
-    
     <item>
       <title>Prefer Scoped Enums over Unscoped Enums (Notes)</title>
       <link>https://krshrimali.github.io/posts/2021/08/prefer-scoped-enums-over-unscoped-enums-notes/</link>
       <pubDate>Sat, 14 Aug 2021 00:00:00 +0000</pubDate>
-      
       <guid>https://krshrimali.github.io/posts/2021/08/prefer-scoped-enums-over-unscoped-enums-notes/</guid>
-      <description>Scoped vs Unscoped Enums General rule: declaring a name inside curly braces is limited to that scope. Exception: C++-98 style Enums NOTE
-My notes on Chapter 3, Item 10 of Effective Modern C++ written by Scott Meyers.
-Some (or even all) of the text can be similar to what you see in the book, as these are notes: I&amp;rsquo;ve tried not to be unnecessarily creative with my words. :)
-// You can&amp;#39;t declare black, white, red in the scope containing the enum Color enum Color { black, white, red; }; auto white = false; // error: white already declared in this scope Unscoped Enums have implicit type conversions for their enumerators.</description>
+      <description>Scoped vs Unscoped Enums General rule: declaring a name inside curly braces is limited to that scope. Exception: C++-98 style Enums NOTE&#xA;My notes on Chapter 3, Item 10 of Effective Modern C++ written by Scott Meyers.&#xA;Some (or even all) of the text can be similar to what you see in the book, as these are notes: I&amp;rsquo;ve tried not to be unnecessarily creative with my words. :)&#xA;// You can&amp;#39;t declare black, white, red in the scope containing the enum Color enum Color { black, white, red; }; auto white = false; // error: white already declared in this scope Unscoped Enums have implicit type conversions for their enumerators.</description>
     </item>
-    
     <item>
       <title>Prefer Alias Declarations to Typedefs (Notes)</title>
       <link>https://krshrimali.github.io/posts/2021/08/prefer-alias-declarations-to-typedefs-notes/</link>
       <pubDate>Thu, 12 Aug 2021 00:00:00 +0000</pubDate>
-      
       <guid>https://krshrimali.github.io/posts/2021/08/prefer-alias-declarations-to-typedefs-notes/</guid>
-      <description>&lt;p&gt;One solution to avoiding using long type names:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// So C++98 like
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;typedef&lt;/span&gt; std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;unique_ptr&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;unordered_map&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;string, std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;string&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&amp;gt;&lt;/span&gt; UPtrMapSS;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+      <description>&lt;p&gt;One solution to avoiding using long type names:&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// So C++98 like&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;typedef&lt;/span&gt; std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;unique_ptr&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;unordered_map&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;string, std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;string&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&amp;gt;&lt;/span&gt; UPtrMapSS;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
     </item>
-    
     <item>
       <title>Releasing Docker Container and Binder for using Xeus-Cling, Libtorch and OpenCV in C&#43;&#43;</title>
       <link>https://krshrimali.github.io/posts/2020/09/releasing-docker-container-and-binder-for-using-xeus-cling-libtorch-and-opencv-in-c-/</link>
       <pubDate>Tue, 15 Sep 2020 00:00:00 +0000</pubDate>
-      
       <guid>https://krshrimali.github.io/posts/2020/09/releasing-docker-container-and-binder-for-using-xeus-cling-libtorch-and-opencv-in-c-/</guid>
-      <description>Today, I am elated to share Docker image for OpenCV, Libtorch and Xeus-Cling. We&amp;rsquo;ll discuss how to use the dockerfile and binder.
-Before I move on, the credits for creating and maintaining Docker image goes to Vishwesh Ravi Shrimali. He has been working on some cool stuff, please do get in touch with him if you&amp;rsquo;re interested to know.
-First question in your mind would be, Why use Docker or Binder?</description>
+      <description>Today, I am elated to share Docker image for OpenCV, Libtorch and Xeus-Cling. We&amp;rsquo;ll discuss how to use the dockerfile and binder.&#xA;Before I move on, the credits for creating and maintaining Docker image goes to Vishwesh Ravi Shrimali. He has been working on some cool stuff, please do get in touch with him if you&amp;rsquo;re interested to know.&#xA;First question in your mind would be, Why use Docker or Binder?</description>
     </item>
-    
     <item>
       <title>Understanding how Vectors work in C&#43;&#43; (Part-2): What happens when you initialize a vector?</title>
       <link>https://krshrimali.github.io/posts/2020/04/understanding-how-vectors-work-in-c-part-2-what-happens-when-you-initialize-a-vector/</link>
       <pubDate>Sun, 26 Apr 2020 00:00:00 +0000</pubDate>
-      
       <guid>https://krshrimali.github.io/posts/2020/04/understanding-how-vectors-work-in-c-part-2-what-happens-when-you-initialize-a-vector/</guid>
-      <description>In the last blog post, I realized there were a lot of methods inherited from the base struct _Vector_base_ and _Vector_impl_data. Instead of directly going to the source code of these structs, I&amp;rsquo;ll go through their methods and objects by explaining what happens when we initialize a vector.
-That is, we will start from calling a vector constructor and then see how memory is allocated. If you haven&amp;rsquo;t looked at the previous blog post, please take a look here.</description>
+      <description>In the last blog post, I realized there were a lot of methods inherited from the base struct _Vector_base_ and _Vector_impl_data. Instead of directly going to the source code of these structs, I&amp;rsquo;ll go through their methods and objects by explaining what happens when we initialize a vector.&#xA;That is, we will start from calling a vector constructor and then see how memory is allocated. If you haven&amp;rsquo;t looked at the previous blog post, please take a look here.</description>
     </item>
-    
     <item>
       <title>Understanding how Vectors work in C&#43;&#43; (Part-3): Diving deep into member functions of vectors</title>
       <link>https://krshrimali.github.io/posts/2020/04/understanding-how-vectors-work-in-c-part-3-diving-deep-into-member-functions-of-vectors/</link>
       <pubDate>Sun, 26 Apr 2020 00:00:00 +0000</pubDate>
-      
       <guid>https://krshrimali.github.io/posts/2020/04/understanding-how-vectors-work-in-c-part-3-diving-deep-into-member-functions-of-vectors/</guid>
-      <description>In this blog, we&amp;rsquo;ll continue diving deep into the source code of Vector Containers in GCC compiler. Today, we will be discussing some of the most commonly used methods of vectors, and how they are implemented.
-Before we start, if you haven&amp;rsquo;t looked at the previous blogs in the C++ series, please take a look here. If you are already familiar with memory allocation in vector containers and vector&amp;rsquo;s base structs, then you can skip reading the previous blogs and continue here.</description>
+      <description>In this blog, we&amp;rsquo;ll continue diving deep into the source code of Vector Containers in GCC compiler. Today, we will be discussing some of the most commonly used methods of vectors, and how they are implemented.&#xA;Before we start, if you haven&amp;rsquo;t looked at the previous blogs in the C++ series, please take a look here. If you are already familiar with memory allocation in vector containers and vector&amp;rsquo;s base structs, then you can skip reading the previous blogs and continue here.</description>
     </item>
-    
   </channel>
 </rss>

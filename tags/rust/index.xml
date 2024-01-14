@@ -6,39 +6,29 @@
     <description>Recent content in rust on Kushashwa Ravi Shrimali (Kush)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Mon, 12 Dec 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://krshrimali.github.io/tags/rust/index.xml" rel="self" type="application/rss+xml" />
+    <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
+    <lastBuildDate>Mon, 12 Dec 2022 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://krshrimali.github.io/tags/rust/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>I started building an app using Rust and here is how it went...</title>
       <link>https://krshrimali.github.io/posts/2022/12/i-started-building-an-app-using-rust-and-here-is-how-it-went.../</link>
       <pubDate>Mon, 12 Dec 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://krshrimali.github.io/posts/2022/12/i-started-building-an-app-using-rust-and-here-is-how-it-went.../</guid>
-      <description>Hi everyone!! I&amp;rsquo;ve an update, on what I&amp;rsquo;ve been up to - and I&amp;rsquo;m excited. It&amp;rsquo;s a rusty update 😉. As always, I would love to tell you a story (this will help set some context), but if you want to skip and go directly to the update, please scroll to: # THE Update section.
-The Story I&amp;rsquo;ve been through, possibly, the best and the worst time of my life. I use these contrasting words because everything went wrong - and that&amp;rsquo;s where you get an opportunity to shine.</description>
+      <description>Hi everyone!! I&amp;rsquo;ve an update, on what I&amp;rsquo;ve been up to - and I&amp;rsquo;m excited. It&amp;rsquo;s a rusty update 😉. As always, I would love to tell you a story (this will help set some context), but if you want to skip and go directly to the update, please scroll to: # THE Update section.&#xA;The Story I&amp;rsquo;ve been through, possibly, the best and the worst time of my life. I use these contrasting words because everything went wrong - and that&amp;rsquo;s where you get an opportunity to shine.</description>
     </item>
-    
     <item>
       <title>Common Collections (Vector and Strings) in Rust [Notes]</title>
       <link>https://krshrimali.github.io/posts/2022/01/common-collections-vector-and-strings-in-rust-notes/</link>
       <pubDate>Sun, 09 Jan 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://krshrimali.github.io/posts/2022/01/common-collections-vector-and-strings-in-rust-notes/</guid>
-      <description>Chapter 8: Common Collections These are my notes from the chapter-8 of rust book. Please scroll down to the bottom (Note) section if you are curious about what this is.
-8.1: Storing Lists of Values with Vectors Vec&amp;lt;T&amp;gt; collection type discussed, aka vector: * By default contiguous. * All values should be of same type.
-// Creation let v: Vec&amp;lt;i32&amp;gt; = Vec::new(); // vec! macro for convenience // default integer type is i32 let v = vec!</description>
+      <description>Chapter 8: Common Collections These are my notes from the chapter-8 of rust book. Please scroll down to the bottom (Note) section if you are curious about what this is.&#xA;8.1: Storing Lists of Values with Vectors Vec&amp;lt;T&amp;gt; collection type discussed, aka vector: * By default contiguous. * All values should be of same type.&#xA;// Creation let v: Vec&amp;lt;i32&amp;gt; = Vec::new(); // vec! macro for convenience // default integer type is i32 let v = vec!</description>
     </item>
-    
     <item>
       <title>Common Collections (Vector and Strings) in Rust [Notes]</title>
       <link>https://krshrimali.github.io/posts/2022/01/common-collections-vector-and-strings-in-rust-notes/</link>
       <pubDate>Sun, 09 Jan 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://krshrimali.github.io/posts/2022/01/common-collections-vector-and-strings-in-rust-notes/</guid>
-      <description>Chapter 8: Common Collections (Hash Maps) In the previous blog, I shared my notes on strings and vectors in Rust, and in this post we&amp;rsquo;ll cover Hash Maps. I personally have found their use in competitive programming, a lot, but hopefully as we move on, we&amp;rsquo;ll see lots of use-cases in real-life problems.
-Hash Maps Hash Maps: HashMap&amp;lt;K, V&amp;gt;
-You can&amp;rsquo;t access using indices, but through keys. Hash Maps store data on heap.</description>
+      <description>Chapter 8: Common Collections (Hash Maps) In the previous blog, I shared my notes on strings and vectors in Rust, and in this post we&amp;rsquo;ll cover Hash Maps. I personally have found their use in competitive programming, a lot, but hopefully as we move on, we&amp;rsquo;ll see lots of use-cases in real-life problems.&#xA;Hash Maps Hash Maps: HashMap&amp;lt;K, V&amp;gt;&#xA;You can&amp;rsquo;t access using indices, but through keys. Hash Maps store data on heap.</description>
     </item>
-    
   </channel>
 </rss>

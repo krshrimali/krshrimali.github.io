@@ -6,17 +6,15 @@
     <description>Recent content in app on Kushashwa Ravi Shrimali (Kush)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Mon, 12 Dec 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://krshrimali.github.io/categories/app/index.xml" rel="self" type="application/rss+xml" />
+    <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
+    <lastBuildDate>Mon, 12 Dec 2022 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://krshrimali.github.io/categories/app/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>I started building an app using Rust and here is how it went...</title>
       <link>https://krshrimali.github.io/posts/2022/12/i-started-building-an-app-using-rust-and-here-is-how-it-went.../</link>
       <pubDate>Mon, 12 Dec 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://krshrimali.github.io/posts/2022/12/i-started-building-an-app-using-rust-and-here-is-how-it-went.../</guid>
-      <description>Hi everyone!! I&amp;rsquo;ve an update, on what I&amp;rsquo;ve been up to - and I&amp;rsquo;m excited. It&amp;rsquo;s a rusty update 😉. As always, I would love to tell you a story (this will help set some context), but if you want to skip and go directly to the update, please scroll to: # THE Update section.
-The Story I&amp;rsquo;ve been through, possibly, the best and the worst time of my life. I use these contrasting words because everything went wrong - and that&amp;rsquo;s where you get an opportunity to shine.</description>
+      <description>Hi everyone!! I&amp;rsquo;ve an update, on what I&amp;rsquo;ve been up to - and I&amp;rsquo;m excited. It&amp;rsquo;s a rusty update 😉. As always, I would love to tell you a story (this will help set some context), but if you want to skip and go directly to the update, please scroll to: # THE Update section.&#xA;The Story I&amp;rsquo;ve been through, possibly, the best and the worst time of my life. I use these contrasting words because everything went wrong - and that&amp;rsquo;s where you get an opportunity to shine.</description>
     </item>
-    
   </channel>
 </rss>
