@@ -5,8 +5,19 @@
     <link>https://krshrimali.github.io/tags/blog/</link>
     <description>Recent content in blog on Kushashwa Ravi Shrimali (Kush)</description>
     <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Wed, 03 May 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://krshrimali.github.io/tags/blog/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 14 Jan 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://krshrimali.github.io/tags/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Bring back the old times - celebrate your wins!</title>
+      <link>https://krshrimali.github.io/posts/2024/01/bring-back-the-old-times-celebrate-your-wins/</link>
+      <pubDate>Sun, 14 Jan 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://krshrimali.github.io/posts/2024/01/bring-back-the-old-times-celebrate-your-wins/</guid>
+      <description>Hi everyone! Happy to be back, in case y&amp;rsquo;all have been wondering - where have you been Kush? Well, a lot of things have been happening on my YouTube channel and Twitch Channel - buffetcodes. But in any case, I wanted to write something out - so here it is.
+Disclaimer: this is more on a personal level rather than on an educational level, I&amp;rsquo;m sorry to disappoint if you were expecting a detailed tech blog today.</description>
+    </item>
+    
     <item>
       <title>Daily Update: 3rd May 2023</title>
       <link>https://krshrimali.github.io/posts/2023/05/daily-update-3rd-may-2023/</link>
@@ -92,17 +103,6 @@ What is OSI Model | Real World Examples Why this? The answer to: &amp;ldquo;How 
       
       <guid>https://krshrimali.github.io/posts/2022/11/daily-update-17th-november-2022-day-4/</guid>
       <description>Hi everyone, Day 4 of this series of daily updates. I don&amp;rsquo;t have a lot to share today, just one of those days where I spent a lot of time going through whatever I&amp;rsquo;ve done already. I take some time to look at the things I learned so far, and see if I could be more intuitive back then. I&amp;rsquo;m going to continue doing the same for the next day, though this time for the problems I&amp;rsquo;ve solved on Leetcode.</description>
-    </item>
-    
-    <item>
-      <title>Daily Update: 16th November 2022 - Day 3</title>
-      <link>https://krshrimali.github.io/posts/2022/11/daily-update-16th-november-2022-day-3/</link>
-      <pubDate>Wed, 16 Nov 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://krshrimali.github.io/posts/2022/11/daily-update-16th-november-2022-day-3/</guid>
-      <description>Hi everyone, Day 3 of this series of daily updates. Woke up fairly early (~6 AM), and started working. Though it seemed productive to me, but you won&amp;rsquo;t see a lot of content here today - just one of those days where I didn&amp;rsquo;t do a lot of different things, I guess. :)
-Projects/Learning:
-I made my rust-leetcode repository public today. It currently contains 12 solved problems, you&amp;rsquo;ll see huge difference between the first few codes to the last few codes.</description>
     </item>
     
   </channel>
