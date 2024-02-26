@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>project on Kushashwa Ravi Shrimali (Kush)</title>
+    <link>https://krshrimali.github.io/tags/project/</link>
+    <description>Recent content in project on Kushashwa Ravi Shrimali (Kush)</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
+    <lastBuildDate>Mon, 26 Feb 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://krshrimali.github.io/tags/project/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Building a ChatBot from your Documentation Website | DocsGPT</title>
+      <link>https://krshrimali.github.io/posts/2024/02/building-a-chatbot-from-your-documentation-website-docsgpt/</link>
+      <pubDate>Mon, 26 Feb 2024 00:00:00 +0000</pubDate>
+      <guid>https://krshrimali.github.io/posts/2024/02/building-a-chatbot-from-your-documentation-website-docsgpt/</guid>
+      <description>Hi everyone! Been a long time, thought I should talk about an ongoing project I&amp;rsquo;m working on.&#xA;Introduction - What are we trying to do here? Lemme start with some context and disclaimer first:&#xA;This was a part of an interview process in one of the amazing startups, and I wanted to extend it to an end-to-end project (kinda out of scope from the requirement of that interview process). I won&amp;rsquo;t be naming the startup here to help keep them anonymous and candid for their future candidates.</description>
+    </item>
+  </channel>
+</rss>

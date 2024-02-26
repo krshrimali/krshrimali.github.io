@@ -7,8 +7,22 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Sun, 14 Jan 2024 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 26 Feb 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://krshrimali.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>projects</title>
+      <link>https://krshrimali.github.io/categories/projects/</link>
+      <pubDate>Mon, 26 Feb 2024 00:00:00 +0000</pubDate>
+      <guid>https://krshrimali.github.io/categories/projects/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>rust</title>
+      <link>https://krshrimali.github.io/categories/rust/</link>
+      <pubDate>Mon, 26 Feb 2024 00:00:00 +0000</pubDate>
+      <guid>https://krshrimali.github.io/categories/rust/</guid>
+      <description></description>
+    </item>
     <item>
       <title>thoughts</title>
       <link>https://krshrimali.github.io/categories/thoughts/</link>
@@ -28,13 +42,6 @@
       <link>https://krshrimali.github.io/categories/app/</link>
       <pubDate>Mon, 12 Dec 2022 00:00:00 +0000</pubDate>
       <guid>https://krshrimali.github.io/categories/app/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>rust</title>
-      <link>https://krshrimali.github.io/categories/rust/</link>
-      <pubDate>Mon, 12 Dec 2022 00:00:00 +0000</pubDate>
-      <guid>https://krshrimali.github.io/categories/rust/</guid>
       <description></description>
     </item>
     <item>
@@ -70,13 +77,6 @@
       <link>https://krshrimali.github.io/categories/open-source/</link>
       <pubDate>Sun, 31 Jul 2022 00:00:00 +0000</pubDate>
       <guid>https://krshrimali.github.io/categories/open-source/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>projects</title>
-      <link>https://krshrimali.github.io/categories/projects/</link>
-      <pubDate>Sun, 31 Jul 2022 00:00:00 +0000</pubDate>
-      <guid>https://krshrimali.github.io/categories/projects/</guid>
       <description></description>
     </item>
   </channel>

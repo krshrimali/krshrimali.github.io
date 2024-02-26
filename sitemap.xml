@@ -2,6 +2,9 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://krshrimali.github.io/posts/2024/02/building-a-chatbot-from-your-documentation-website-docsgpt/</loc>
+    <lastmod>2024-02-26T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://krshrimali.github.io/posts/2024/01/bring-back-the-old-times-celebrate-your-wins/</loc>
     <lastmod>2024-01-14T00:00:00+00:00</lastmod>
   </url><url>
@@ -134,19 +137,37 @@
     <loc>https://krshrimali.github.io/posts/2019/06/introduction-to-pytorch-c-api-mnist-digit-recognition-using-vgg-16-network/</loc>
     <lastmod>2019-06-07T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://krshrimali.github.io/tags/blog/</loc>
-    <lastmod>2024-01-14T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://krshrimali.github.io/categories/</loc>
-    <lastmod>2024-01-14T00:00:00+00:00</lastmod>
+    <lastmod>2024-02-26T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://krshrimali.github.io/tags/deep-learning/</loc>
+    <lastmod>2024-02-26T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://krshrimali.github.io/</loc>
-    <lastmod>2024-01-14T00:00:00+00:00</lastmod>
+    <lastmod>2024-02-26T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://krshrimali.github.io/tags/llm/</loc>
+    <lastmod>2024-02-26T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://krshrimali.github.io/posts/</loc>
-    <lastmod>2024-01-14T00:00:00+00:00</lastmod>
+    <lastmod>2024-02-26T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://krshrimali.github.io/tags/project/</loc>
+    <lastmod>2024-02-26T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://krshrimali.github.io/categories/projects/</loc>
+    <lastmod>2024-02-26T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://krshrimali.github.io/tags/rust/</loc>
+    <lastmod>2024-02-26T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://krshrimali.github.io/categories/rust/</loc>
+    <lastmod>2024-02-26T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://krshrimali.github.io/tags/</loc>
+    <lastmod>2024-02-26T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://krshrimali.github.io/tags/blog/</loc>
     <lastmod>2024-01-14T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://krshrimali.github.io/categories/thoughts/</loc>
@@ -168,12 +189,6 @@
     <lastmod>2022-12-12T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://krshrimali.github.io/tags/development/</loc>
-    <lastmod>2022-12-12T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://krshrimali.github.io/tags/rust/</loc>
-    <lastmod>2022-12-12T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://krshrimali.github.io/categories/rust/</loc>
     <lastmod>2022-12-12T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://krshrimali.github.io/categories/updates/</loc>
@@ -207,9 +222,6 @@
     <lastmod>2022-07-31T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://krshrimali.github.io/categories/open-source/</loc>
-    <lastmod>2022-07-31T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://krshrimali.github.io/categories/projects/</loc>
     <lastmod>2022-07-31T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://krshrimali.github.io/tags/notes/</loc>
