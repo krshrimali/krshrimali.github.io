@@ -17,6 +17,13 @@
       <description>Hi everyone! Been a long time, thought I should talk about an ongoing project I&amp;rsquo;m working on.&#xA;Introduction - What are we trying to do here? Lemme start with some context and disclaimer first:&#xA;This was a part of an interview process in one of the amazing startups, and I wanted to extend it to an end-to-end project (kinda out of scope from the requirement of that interview process). I won&amp;rsquo;t be naming the startup here to help keep them anonymous and candid for their future candidates.</description>
     </item>
     <item>
+      <title>Data Scrapping for ChatBot Model in Rust | DocsGPT | Part-2</title>
+      <link>https://krshrimali.github.io/posts/2024/02/data-scrapping-for-chatbot-model-in-rust-docsgpt-part-2/</link>
+      <pubDate>Mon, 26 Feb 2024 00:00:00 +0000</pubDate>
+      <guid>https://krshrimali.github.io/posts/2024/02/data-scrapping-for-chatbot-model-in-rust-docsgpt-part-2/</guid>
+      <description>Alright everyone, we are back. Just FYI, we&amp;rsquo;ve had a blog on introduction to DocsGPT before: https://krshrimali.github.io/posts/2024/02/building-a-chatbot-from-your-documentation-website-docsgpt/. This is a follow up blog where we&amp;rsquo;ll discuss data scraping and preprocessing to be able to finetune our model for ChatBot use-case.&#xA;Quick recap?&#xA;Input is going to be a single link to documentation page (index page). Need to fetch data for &amp;ldquo;all the internal pages&amp;rdquo;. Preprocess (and/or clean) and transform the data to be able to finetune the model.</description>
+    </item>
+    <item>
       <title>I started building an app using Rust and here is how it went...</title>
       <link>https://krshrimali.github.io/posts/2022/12/i-started-building-an-app-using-rust-and-here-is-how-it-went.../</link>
       <pubDate>Mon, 12 Dec 2022 00:00:00 +0000</pubDate>

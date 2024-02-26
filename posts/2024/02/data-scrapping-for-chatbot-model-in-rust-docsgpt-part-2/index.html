@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="map[name:Kushashwa Ravi Shrimali]">
+<meta name="description" content="Alright everyone, we are back. Just FYI, we&amp;rsquo;ve had a blog on introduction to DocsGPT before: https://krshrimali.github.io/posts/2024/02/building-a-chatbot-from-your-documentation-website-docsgpt/. This is a follow up blog where we&amp;rsquo;ll discuss data scraping and preprocessing to be able to finetune our model for ChatBot use-case.
+Quick recap?
+Input is going to be a single link to documentation page (index page). Need to fetch data for &amp;ldquo;all the internal pages&amp;rdquo;. Preprocess (and/or clean) and transform the data to be able to finetune the model." />
+<meta name="keywords" content=", project, deep learning, LLM, rust" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="#252627" />
+<link rel="canonical" href="https://krshrimali.github.io/posts/2024/02/data-scrapping-for-chatbot-model-in-rust-docsgpt-part-2/" />
+
+
+    <title>
+        
+            Data Scrapping for ChatBot Model in Rust | DocsGPT | Part-2 :: Kushashwa Ravi Shrimali (Kush)  — Learning never stops!
+        
+    </title>
+
+
+
+
+
+<link rel="stylesheet" href="https://krshrimali.github.io/main.949191c1dcc9c4a887997048b240354e47152016d821198f89448496ba42e491.css" integrity="sha256-lJGRwdzJxKiHmXBIskA1TkcVIBbYIRmPiUSElrpC5JE=">
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="https://krshrimali.github.io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://krshrimali.github.io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://krshrimali.github.io/favicon-16x16.png">
+    <link rel="manifest" href="https://krshrimali.github.io/site.webmanifest">
+    <link rel="mask-icon" href="https://krshrimali.github.io/safari-pinned-tab.svg" color="">
+    <link rel="shortcut icon" href="https://krshrimali.github.io/favicon.ico">
+    <meta name="msapplication-TileColor" content="">
+
+
+<meta itemprop="name" content="Data Scrapping for ChatBot Model in Rust | DocsGPT | Part-2">
+<meta itemprop="description" content="Alright everyone, we are back. Just FYI, we&rsquo;ve had a blog on introduction to DocsGPT before: https://krshrimali.github.io/posts/2024/02/building-a-chatbot-from-your-documentation-website-docsgpt/. This is a follow up blog where we&rsquo;ll discuss data scraping and preprocessing to be able to finetune our model for ChatBot use-case.
+Quick recap?
+Input is going to be a single link to documentation page (index page). Need to fetch data for &ldquo;all the internal pages&rdquo;. Preprocess (and/or clean) and transform the data to be able to finetune the model."><meta itemprop="datePublished" content="2024-02-26T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2024-02-26T00:00:00+00:00" />
+<meta itemprop="wordCount" content="1144"><meta itemprop="image" content="https://krshrimali.github.io" />
+<meta itemprop="keywords" content="project,deep learning,LLM,rust," />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://krshrimali.github.io" /><meta name="twitter:title" content="Data Scrapping for ChatBot Model in Rust | DocsGPT | Part-2"/>
+<meta name="twitter:description" content="Alright everyone, we are back. Just FYI, we&rsquo;ve had a blog on introduction to DocsGPT before: https://krshrimali.github.io/posts/2024/02/building-a-chatbot-from-your-documentation-website-docsgpt/. This is a follow up blog where we&rsquo;ll discuss data scraping and preprocessing to be able to finetune our model for ChatBot use-case.
+Quick recap?
+Input is going to be a single link to documentation page (index page). Need to fetch data for &ldquo;all the internal pages&rdquo;. Preprocess (and/or clean) and transform the data to be able to finetune the model."/>
+
+
+
+
+
+    <meta property="article:section" content="projects" />
+
+    <meta property="article:section" content="rust" />
+
+
+
+    <meta property="article:published_time" content="2024-02-26 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+
+    
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-146662543-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+    </head>
+
+    
+        <body>
+    
+    
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="https://krshrimali.github.io/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text ">
+                $ cd /home/</span>
+            <span class="logo__cursor" style=
+                  "
+                   
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="https://krshrimali.github.io/about">About</a></li><li><a href="https://krshrimali.github.io/posts">Blog</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+  <main class="post">
+
+    <div class="post-info">
+      <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock">
+          <circle cx="12" cy="12" r="10"></circle>
+          <polyline points="12 6 12 12 16 14"></polyline>
+        </svg>
+        6 minutes
+
+        
+      </p>
+    </div>
+
+    <article>
+      <h1 class="post-title">
+        <a href="https://krshrimali.github.io/posts/2024/02/data-scrapping-for-chatbot-model-in-rust-docsgpt-part-2/">Data Scrapping for ChatBot Model in Rust | DocsGPT | Part-2</a>
+      </h1>
+
+      
+
+      
+
+      
+
+      <div class="post-content">
+        <p>Alright everyone, we are back. Just FYI, we&rsquo;ve had a blog on introduction to DocsGPT before: <a href="https://krshrimali.github.io/posts/2024/02/building-a-chatbot-from-your-documentation-website-docsgpt/">https://krshrimali.github.io/posts/2024/02/building-a-chatbot-from-your-documentation-website-docsgpt/</a>. This is a follow up blog where we&rsquo;ll discuss data scraping and preprocessing to be able to finetune our model for ChatBot use-case.</p>
+<p>Quick recap?</p>
+<ol>
+<li>Input is going to be a <em>single link to documentation page (index page)</em>.</li>
+<li>Need to fetch data for &ldquo;all the internal pages&rdquo;.</li>
+<li>Preprocess (and/or clean) and transform the data to be able to finetune the model.</li>
+<li>Finetune the model and use it for ChatBot use-case.</li>
+</ol>
+<p>In this blog, we&rsquo;ll be covering the first two above, and the rest will be covered in the next blog(s).</p>
+<h2 id="data-scraping">Data Scraping</h2>
+<p>The problem is simple, let&rsquo;s just define our function and it&rsquo;s return type. It kinda sets the tone.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">fetch_data</span>(input_link: <span style="color:#66d9ef">&amp;</span><span style="color:#66d9ef">str</span>) -&gt; Result<span style="color:#f92672">&lt;</span>Vec<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span>, Box<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">dyn</span> std::error::Error<span style="color:#f92672">&gt;&gt;</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// input_link is the link to the index page of the documentation concerned
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><p>Alright, so as it might be clear already, we&rsquo;ll be passing link to the index page of the documentation. For our use-case of PyTorch documentation, we&rsquo;ll use: <a href="https://pytorch.org/docs/stable/index.html">https://pytorch.org/docs/stable/index.html</a>. The return type is <code>Vec&lt;String&gt;</code> where each string is the content of the internal page.</p>
+<p>This is an example function though, we&rsquo;ll be moving to another format as we go ahead. But for now, let&rsquo;s just keep it simple. There are 2 problems we&rsquo;re trying to solve here:</p>
+<ol>
+<li>Fetch &ldquo;all the internal pages&rdquo; through the index page.
+<ul>
+<li>This includes going through all the hyperlinks in each page starting from the index page, and fetching the content of each page.</li>
+<li>We&rsquo;ll include any external page (that is not internal to the documentation, for simplicity).</li>
+</ul>
+</li>
+<li>Getting content of the page</li>
+</ol>
+<p>To be able to solve these problems, we&rsquo;ll use <code>soup</code> crate in Rust: <a href="https://docs.rs/soup/latest/soup/">https://docs.rs/soup/latest/soup/</a>. For those who are used to using <code>beautifulsoup</code> in Python, it&rsquo;s pretty similar.</p>
+<p>Let&rsquo;s start with the first problem. We&rsquo;ll define a function <code>extract_all_hyperlinks</code> which will take the index page link and return all the internal links. (the function won&rsquo;t be recursive)</p>
+<p>Note that, to be able to do this, we&rsquo;ll just make sure to get the content of the index page first.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">fetch_raw_html</span>(main_html_link: String) -&gt; Result<span style="color:#f92672">&lt;</span>String, std::io::Error<span style="color:#f92672">&gt;</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> output <span style="color:#f92672">=</span> reqwest::blocking::get(main_html_link).expect(<span style="color:#e6db74">&#34;Failed to fetch the URL&#34;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> output_text <span style="color:#f92672">=</span> output.text().expect(<span style="color:#e6db74">&#34;Failed to read the response text&#34;</span>);
+</span></span><span style="display:flex;"><span>    Ok(output_text.to_string())
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> main_html_link: String <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;https://pytorch.org/docs/stable/index.html&#34;</span>.to_string();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> raw_data: Result<span style="color:#f92672">&lt;</span>String, std::io::Error<span style="color:#f92672">&gt;</span> <span style="color:#f92672">=</span> fetch_raw_html(main_html_link.clone());
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    env_logger::init();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> all_links: Vec<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> <span style="color:#f92672">=</span> Vec::new();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> all_text: Vec<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> <span style="color:#f92672">=</span> Vec::new();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> if_succeeded <span style="color:#f92672">=</span> extract_all_hyperlinks(raw_data, <span style="color:#f92672">&amp;</span><span style="color:#66d9ef">mut</span> all_links, <span style="color:#f92672">&amp;</span><span style="color:#66d9ef">mut</span> all_text);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>If you&rsquo;re wondering, why fetch raw HTML separately and then extract hyperlinks from the content? Rust is naturally a functional language, and following the practice to keep a single function limited to one single action, we&rsquo;re doing this. Will help testing efforts in the future.</p>
+<p>Alright, so - so far, we got the raw HTML content (used <code>reqwest</code> crate for fetching the content), and then we&rsquo;re passing it to <code>extract_all_hyperlinks</code> function. The function will look something like this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">extract_all_hyperlinks</span>(
+</span></span><span style="display:flex;"><span>    raw_data: Result<span style="color:#f92672">&lt;</span>String, std::io::Error<span style="color:#f92672">&gt;</span>,
+</span></span><span style="display:flex;"><span>    all_links: <span style="color:#66d9ef">&amp;</span><span style="color:#a6e22e">mut</span> Vec<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span>,
+</span></span><span style="display:flex;"><span>    all_text: <span style="color:#66d9ef">&amp;</span><span style="color:#a6e22e">mut</span> Vec<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span>,
+</span></span><span style="display:flex;"><span>) -&gt; Result<span style="color:#f92672">&lt;</span>(), std::io::Error<span style="color:#f92672">&gt;</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">match</span> raw_data {
+</span></span><span style="display:flex;"><span>        Ok(content) <span style="color:#f92672">=&gt;</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">let</span> soup <span style="color:#f92672">=</span> Soup::new(<span style="color:#f92672">&amp;</span>content);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">let</span> text <span style="color:#f92672">=</span> soup.text();
+</span></span><span style="display:flex;"><span>            all_text.push(text);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">let</span> all_tags_a_href <span style="color:#f92672">=</span> soup.tag(<span style="color:#e6db74">&#34;a&#34;</span>).find_all();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            all_tags_a_href.enumerate().for_each(<span style="color:#f92672">|</span>(_, tag)<span style="color:#f92672">|</span> {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">let</span> href <span style="color:#f92672">=</span> tag.get(<span style="color:#e6db74">&#34;href&#34;</span>);
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">match</span> href {
+</span></span><span style="display:flex;"><span>                    Some(href) <span style="color:#f92672">=&gt;</span> {
+</span></span><span style="display:flex;"><span>                        <span style="color:#75715e">// NOTE: Can you think of a better way to differentiate b/w internal and external links?
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                        <span style="color:#66d9ef">if</span> href.starts_with(<span style="color:#e6db74">&#34;http&#34;</span>)
+</span></span><span style="display:flex;"><span>                            <span style="color:#f92672">||</span> href.starts_with(<span style="color:#e6db74">&#39;_&#39;</span>)
+</span></span><span style="display:flex;"><span>                            <span style="color:#f92672">||</span> href.starts_with(<span style="color:#e6db74">&#39;#&#39;</span>)
+</span></span><span style="display:flex;"><span>                            <span style="color:#f92672">||</span> href.starts_with(<span style="color:#e6db74">&#39;.&#39;</span>)
+</span></span><span style="display:flex;"><span>                        {
+</span></span><span style="display:flex;"><span>                            log::info!(<span style="color:#e6db74">&#34;Skipping: {:?}&#34;</span>, href);
+</span></span><span style="display:flex;"><span>                            <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>                        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                        all_links.push(href);
+</span></span><span style="display:flex;"><span>                    }
+</span></span><span style="display:flex;"><span>                    None <span style="color:#f92672">=&gt;</span> log::warn!(<span style="color:#e6db74">&#34;No href attribute found&#34;</span>),
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            });
+</span></span><span style="display:flex;"><span>            Ok(())
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        Err(e) <span style="color:#f92672">=&gt;</span> {
+</span></span><span style="display:flex;"><span>            log::error!(<span style="color:#e6db74">&#34;Error reading file: {:?}&#34;</span>, e,);
+</span></span><span style="display:flex;"><span>            Err(e)
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>What are we doing here?</p>
+<ul>
+<li>We got the content from <code>fetch_raw_html</code>, if valid we&rsquo;ll create a <code>Soup</code> object from it and get the text.</li>
+<li>Once we have the text, we&rsquo;ll get all the <code>a</code> tags and their <code>href</code> attributes.</li>
+<li>We&rsquo;ll skip the external links (for simplicity) and add the internal links to <code>all_links</code> vector.
+<ul>
+<li>I&rsquo;m open to ideas on differentiating b/w external and internal links. For now, anything that starts with <code>http</code>, <code>_</code>, <code>#</code>, or <code>.</code> is considered external (please note that <code>https</code> automatically comes in this because it&rsquo;s a superset of <code>http</code>).</li>
+</ul>
+</li>
+<li>We&rsquo;ll also add the text to <code>all_text</code> vector.</li>
+</ul>
+<p>It&rsquo;s comparatively easier to test these functions now, thanks to the original idea of keeping their jobs separate.</p>
+<p>Alright, now we have the hyperlinks, but we haven&rsquo;t fetched all the content of those hyperlinks and their hyperlinks and their hyperlinks&hellip; (nested hyperlinks xD).</p>
+<p>It&rsquo;s easy if you think about it:</p>
+<ol>
+<li>Iterate through all the hyperlinks, for each link - get the data and store it.</li>
+</ol>
+<p>^^ Hmm, sounds very easy, duh? Well, we are missing one part. What if the link is repeated? Which is quite possible in any documentation. Let&rsquo;s revise our list above:</p>
+<ol>
+<li>Iterate through all the hyperlinks, for each link - get the data and store it.</li>
+<li>If the link is already in a HashSet, skip it. Otherwise, add it to the HashSet and store the data.</li>
+</ol>
+<p>Here&rsquo;s where we&rsquo;ll just re-use our functions defined above:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// ...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> visited_set: <span style="color:#a6e22e">HashSet</span><span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> <span style="color:#f92672">=</span> HashSet::new();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> link <span style="color:#66d9ef">in</span> all_links.iter() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> visited_set.contains(link) {
+</span></span><span style="display:flex;"><span>            log::info!(<span style="color:#e6db74">&#34;Skipping link because it&#39;s alr visited: {:?}&#34;</span>, link);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">continue</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// NOTE: Guess what we are doing here?
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">let</span> modified_link <span style="color:#f92672">=</span> Path::new(<span style="color:#f92672">&amp;</span>main_html_link).parent().unwrap().join(link);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">let</span> content <span style="color:#f92672">=</span> fetch_raw_html(modified_link.display().to_string());
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">let</span> success <span style="color:#f92672">=</span> extract_all_hyperlinks(content, <span style="color:#f92672">&amp;</span><span style="color:#66d9ef">mut</span> nested_links, <span style="color:#f92672">&amp;</span><span style="color:#66d9ef">mut</span> all_text);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        visited_set.insert(link.clone());
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> success.is_ok() {
+</span></span><span style="display:flex;"><span>            log::info!(<span style="color:#e6db74">&#34;Success for link: {:?}&#34;</span>, link);
+</span></span><span style="display:flex;"><span>            log::debug!(<span style="color:#e6db74">&#34;Nested links: {:?}&#34;</span>, nested_links);
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>            log::info!(<span style="color:#e6db74">&#34;Failed for link: {:?}&#34;</span>, link);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// ...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><p>If you saw the code above, there is a note which says:</p>
+<blockquote>
+<p>// NOTE: Guess what we are doing here?</p>
+</blockquote>
+<p>Alright, so for any internal link, which would look like this: <code>/docs/stable/tensors.html</code>, we&rsquo;ll just join it with the parent link and fetch the content. This is a very simple way to do it, and it&rsquo;s not the best way to do it. But for now, it&rsquo;s good enough. Do note that, the parent link comes from the initial link the user passes to this flow, which was: <code>https://pytorch.org/docs/stable/index.html</code> in this case. So we&rsquo;ll just replace <code>/index.html</code> with <code>/docs/stable/tensors.html</code> and fetch the content.</p>
+<p>Once this is done, the next task would be to understand what data we got - how we can transform it - what kind of cleaning methods are needed etc. That&rsquo;s going to be a good exercise for the next blog. For now, I think, this is a good start! Right? :)</p>
+<h2 id="youtube">YouTube!</h2>
+<p>As always, a shameless plug, I do have a YouTube channel guys! Please consider referring to the channel if there&rsquo;s anything that interests you there. Here&rsquo;s the link: <a href="https://www.youtube.com/c/kushashwaraviShrimali">https://www.youtube.com/c/kushashwaraviShrimali</a>.</p>
+<h2 id="discord">Discord!</h2>
+<p>Oh, and yes, we do have a discord channel. Please consider joining the channel for any discussions, or if you need any help. Here&rsquo;s the link: <a href="https://discord.gg/nh2KuAX3V8">https://discord.gg/nh2KuAX3V8</a>.</p>
+<p>Alright then 🤝, I&rsquo;ll see you soon in the next blog. Thank you all, bye! ❤️</p>
+
+      </div>
+    </article>
+
+    <hr />
+
+    <div class="post-info">
+      
+    <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg>
+
+        <span class="tag"><a href="https://krshrimali.github.io/tags/project/">project</a></span>
+        <span class="tag"><a href="https://krshrimali.github.io/tags/deep-learning/">deep learning</a></span>
+        <span class="tag"><a href="https://krshrimali.github.io/tags/llm/">LLM</a></span>
+        <span class="tag"><a href="https://krshrimali.github.io/tags/rust/">rust</a></span>
+        
+    </p>
+
+      
+    <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-folder meta-icon"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+
+        <span class="tag"><a href="https://krshrimali.github.io/categories/projects/">projects</a></span>
+        <span class="tag"><a href="https://krshrimali.github.io/categories/rust/">rust</a></span>
+        
+    </p>
+
+
+      <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+          <polyline points="14 2 14 8 20 8"></polyline>
+          <line x1="16" y1="13" x2="8" y2="13"></line>
+          <line x1="16" y1="17" x2="8" y2="17"></line>
+          <polyline points="10 9 9 9 8 9"></polyline>
+        </svg>
+        1144 Words
+      </p>
+
+      <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+          <line x1="16" y1="2" x2="16" y2="6"></line>
+          <line x1="8" y1="2" x2="8" y2="6"></line>
+          <line x1="3" y1="10" x2="21" y2="10"></line>
+        </svg>
+        
+          2024-02-26 05:30 &#43;0530
+        
+
+         
+          
+        
+      </p>
+    </div>
+
+    
+    <div class="pagination">
+        
+
+        <div class="pagination__buttons">
+            
+            <span class="button previous">
+                <a href="https://krshrimali.github.io/posts/2024/02/building-a-chatbot-from-your-documentation-website-docsgpt/">
+                    <span class="button__icon">←</span>
+                    <span class="button__text">Building a ChatBot from your Documentation Website | DocsGPT</span>
+                </a>
+            </span>
+            
+
+            
+            <span class="button next">
+                <a href="https://krshrimali.github.io/posts/2024/01/bring-back-the-old-times-celebrate-your-wins/">
+                    <span class="button__text">Bring back the old times - celebrate your wins!</span>
+                    <span class="button__icon">→</span>
+                </a>
+            </span>
+            
+        </div>
+    </div>
+
+
+    
+
+    
+
+    
+
+  </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    
+    
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+<script type="text/javascript" src="https://krshrimali.github.io/bundle.min.46e438bd2eca7eb6358c700b40f6f56b22ab0b92503ecc11a2d8e4bcc610b8b4da83e5ea3d3e84fdb5f3c3c765744b9f5bbaf43cf5a027910be07ee39a9c12a1.js" integrity="sha512-RuQ4vS7KfrY1jHALQPb1ayKrC5JQPswRotjkvMYQuLTag&#43;XqPT6E/bXzw8dldEufW7r0PPWgJ5EL4H7jmpwSoQ=="></script>
+
+
+
+
+    </body>
+</html>
