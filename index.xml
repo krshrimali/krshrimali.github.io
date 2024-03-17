@@ -7,8 +7,15 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Mon, 26 Feb 2024 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 17 Mar 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://krshrimali.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>What typing taught me in life?</title>
+      <link>https://krshrimali.github.io/posts/2024/03/what-typing-taught-me-in-life/</link>
+      <pubDate>Sun, 17 Mar 2024 00:00:00 +0000</pubDate>
+      <guid>https://krshrimali.github.io/posts/2024/03/what-typing-taught-me-in-life/</guid>
+      <description>So this happened today, I was attempting a typing speed test on monkeytype and quickly realised a few things that kind of related in my personal life. Thought I&amp;rsquo;ll share with y&amp;rsquo;all and I&amp;rsquo;m confident you all will relate!&#xA;For context, I&amp;rsquo;ve been at around 120 wpm (avg) to 135 wpm (max) in a 30 seconds speed test for quite some time now (maybe more than a year at least). And very honestly, I&amp;rsquo;m happy about it, I don&amp;rsquo;t wwant to grow my typing speed further - in fact I never planned it before as well.</description>
+    </item>
     <item>
       <title>Building a ChatBot from your Documentation Website | DocsGPT</title>
       <link>https://krshrimali.github.io/posts/2024/02/building-a-chatbot-from-your-documentation-website-docsgpt/</link>
@@ -71,13 +78,6 @@
       <pubDate>Fri, 28 Apr 2023 00:00:00 +0000</pubDate>
       <guid>https://krshrimali.github.io/posts/2023/04/daily-update-28th-april-2023/</guid>
       <description>Started my day with talking to my family, and then kicking off work after getting ready. (Note: these blogs are mostly around my personal learning updates, so I&amp;rsquo;ll mostly miss anything that I do at work as that&amp;rsquo;s confidential)&#xA;What is OSI Model | Real World Examples Why this? The answer to: &amp;ldquo;How does the communication work from client to server&amp;rdquo; is very important in backend. I wanted to see if I missed anything from my graduate studies, but nothing much.</description>
-    </item>
-    <item>
-      <title>I started building an app using Rust and here is how it went...</title>
-      <link>https://krshrimali.github.io/posts/2022/12/i-started-building-an-app-using-rust-and-here-is-how-it-went.../</link>
-      <pubDate>Mon, 12 Dec 2022 00:00:00 +0000</pubDate>
-      <guid>https://krshrimali.github.io/posts/2022/12/i-started-building-an-app-using-rust-and-here-is-how-it-went.../</guid>
-      <description>Hi everyone!! I&amp;rsquo;ve an update, on what I&amp;rsquo;ve been up to - and I&amp;rsquo;m excited. It&amp;rsquo;s a rusty update 😉. As always, I would love to tell you a story (this will help set some context), but if you want to skip and go directly to the update, please scroll to: # THE Update section.&#xA;The Story I&amp;rsquo;ve been through, possibly, the best and the worst time of my life. I use these contrasting words because everything went wrong - and that&amp;rsquo;s where you get an opportunity to shine.</description>
     </item>
   </channel>
 </rss>

@@ -7,8 +7,15 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Sun, 31 Jul 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 17 Mar 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://krshrimali.github.io/categories/cpp/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>What typing taught me in life?</title>
+      <link>https://krshrimali.github.io/posts/2024/03/what-typing-taught-me-in-life/</link>
+      <pubDate>Sun, 17 Mar 2024 00:00:00 +0000</pubDate>
+      <guid>https://krshrimali.github.io/posts/2024/03/what-typing-taught-me-in-life/</guid>
+      <description>So this happened today, I was attempting a typing speed test on monkeytype and quickly realised a few things that kind of related in my personal life. Thought I&amp;rsquo;ll share with y&amp;rsquo;all and I&amp;rsquo;m confident you all will relate!&#xA;For context, I&amp;rsquo;ve been at around 120 wpm (avg) to 135 wpm (max) in a 30 seconds speed test for quite some time now (maybe more than a year at least). And very honestly, I&amp;rsquo;m happy about it, I don&amp;rsquo;t wwant to grow my typing speed further - in fact I never planned it before as well.</description>
+    </item>
     <item>
       <title>Porting a Tiling Window Manager Extenstion to C&#43;&#43; (Bismuth): Part-2 (getting closest relative window)</title>
       <link>https://krshrimali.github.io/posts/2022/07/porting-a-tiling-window-manager-extenstion-to-c-bismuth-part-2-getting-closest-relative-window/</link>
@@ -71,13 +78,6 @@
       <pubDate>Sun, 18 Jul 2021 00:00:00 +0000</pubDate>
       <guid>https://krshrimali.github.io/posts/2021/07/function-pointers-and-function-objects-in-c-/</guid>
       <description>&lt;p&gt;In today&amp;rsquo;s blog, we&amp;rsquo;ll talk about two important concepts in C++: Function Pointers and Function Objects.&lt;/p&gt;&#xA;&lt;p&gt;Please note that, function objects are commonly referred as &lt;em&gt;functors&lt;/em&gt; but we have failed to notice any official alias to the name. Hence, we&amp;rsquo;ll restrict ourselves to using &lt;em&gt;Function Objects&lt;/em&gt; in this blog.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Understanding how Vectors work in C&#43;&#43; (Part-2): What happens when you initialize a vector?</title>
-      <link>https://krshrimali.github.io/posts/2020/04/understanding-how-vectors-work-in-c-part-2-what-happens-when-you-initialize-a-vector/</link>
-      <pubDate>Sun, 26 Apr 2020 00:00:00 +0000</pubDate>
-      <guid>https://krshrimali.github.io/posts/2020/04/understanding-how-vectors-work-in-c-part-2-what-happens-when-you-initialize-a-vector/</guid>
-      <description>In the last blog post, I realized there were a lot of methods inherited from the base struct _Vector_base_ and _Vector_impl_data. Instead of directly going to the source code of these structs, I&amp;rsquo;ll go through their methods and objects by explaining what happens when we initialize a vector.&#xA;That is, we will start from calling a vector constructor and then see how memory is allocated. If you haven&amp;rsquo;t looked at the previous blog post, please take a look here.</description>
     </item>
   </channel>
 </rss>

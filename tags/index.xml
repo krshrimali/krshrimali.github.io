@@ -7,8 +7,22 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Mon, 26 Feb 2024 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 17 Mar 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://krshrimali.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>motivation</title>
+      <link>https://krshrimali.github.io/tags/motivation/</link>
+      <pubDate>Sun, 17 Mar 2024 00:00:00 +0000</pubDate>
+      <guid>https://krshrimali.github.io/tags/motivation/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>personal</title>
+      <link>https://krshrimali.github.io/tags/personal/</link>
+      <pubDate>Sun, 17 Mar 2024 00:00:00 +0000</pubDate>
+      <guid>https://krshrimali.github.io/tags/personal/</guid>
+      <description></description>
+    </item>
     <item>
       <title>deep learning</title>
       <link>https://krshrimali.github.io/tags/deep-learning/</link>
@@ -63,20 +77,6 @@
       <link>https://krshrimali.github.io/tags/coding/</link>
       <pubDate>Mon, 12 Dec 2022 00:00:00 +0000</pubDate>
       <guid>https://krshrimali.github.io/tags/coding/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>development</title>
-      <link>https://krshrimali.github.io/tags/development/</link>
-      <pubDate>Mon, 12 Dec 2022 00:00:00 +0000</pubDate>
-      <guid>https://krshrimali.github.io/tags/development/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>suggestion</title>
-      <link>https://krshrimali.github.io/tags/suggestion/</link>
-      <pubDate>Sun, 04 Sep 2022 00:00:00 +0000</pubDate>
-      <guid>https://krshrimali.github.io/tags/suggestion/</guid>
       <description></description>
     </item>
   </channel>

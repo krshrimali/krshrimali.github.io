@@ -2,6 +2,9 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://krshrimali.github.io/posts/2024/03/what-typing-taught-me-in-life/</loc>
+    <lastmod>2024-03-17T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://krshrimali.github.io/posts/2024/02/building-a-chatbot-from-your-documentation-website-docsgpt/</loc>
     <lastmod>2024-02-26T00:00:00+00:00</lastmod>
   </url><url>
@@ -141,18 +144,30 @@
     <lastmod>2019-06-07T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://krshrimali.github.io/categories/</loc>
-    <lastmod>2024-02-26T00:00:00+00:00</lastmod>
+    <lastmod>2024-03-17T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://krshrimali.github.io/categories/cpp/</loc>
+    <lastmod>2024-03-17T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://krshrimali.github.io/</loc>
+    <lastmod>2024-03-17T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://krshrimali.github.io/tags/motivation/</loc>
+    <lastmod>2024-03-17T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://krshrimali.github.io/tags/personal/</loc>
+    <lastmod>2024-03-17T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://krshrimali.github.io/posts/</loc>
+    <lastmod>2024-03-17T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://krshrimali.github.io/tags/</loc>
+    <lastmod>2024-03-17T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://krshrimali.github.io/tags/deep-learning/</loc>
     <lastmod>2024-02-26T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://krshrimali.github.io/</loc>
-    <lastmod>2024-02-26T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://krshrimali.github.io/tags/llm/</loc>
-    <lastmod>2024-02-26T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://krshrimali.github.io/posts/</loc>
     <lastmod>2024-02-26T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://krshrimali.github.io/tags/project/</loc>
@@ -165,9 +180,6 @@
     <lastmod>2024-02-26T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://krshrimali.github.io/categories/rust/</loc>
-    <lastmod>2024-02-26T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://krshrimali.github.io/tags/</loc>
     <lastmod>2024-02-26T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://krshrimali.github.io/tags/blog/</loc>
@@ -210,9 +222,6 @@
     <lastmod>2022-07-31T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://krshrimali.github.io/tags/cpp/</loc>
-    <lastmod>2022-07-31T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://krshrimali.github.io/categories/cpp/</loc>
     <lastmod>2022-07-31T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://krshrimali.github.io/categories/kde/</loc>
