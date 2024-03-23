@@ -10,10 +10,10 @@
     <lastBuildDate>Sun, 17 Mar 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://krshrimali.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>cpp</title>
-      <link>https://krshrimali.github.io/categories/cpp/</link>
+      <title>personal</title>
+      <link>https://krshrimali.github.io/categories/personal/</link>
       <pubDate>Sun, 17 Mar 2024 00:00:00 +0000</pubDate>
-      <guid>https://krshrimali.github.io/categories/cpp/</guid>
+      <guid>https://krshrimali.github.io/categories/personal/</guid>
       <description></description>
     </item>
     <item>
@@ -66,17 +66,17 @@
       <description></description>
     </item>
     <item>
+      <title>cpp</title>
+      <link>https://krshrimali.github.io/categories/cpp/</link>
+      <pubDate>Sun, 31 Jul 2022 00:00:00 +0000</pubDate>
+      <guid>https://krshrimali.github.io/categories/cpp/</guid>
+      <description></description>
+    </item>
+    <item>
       <title>kde</title>
       <link>https://krshrimali.github.io/categories/kde/</link>
       <pubDate>Sun, 31 Jul 2022 00:00:00 +0000</pubDate>
       <guid>https://krshrimali.github.io/categories/kde/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>open-source</title>
-      <link>https://krshrimali.github.io/categories/open-source/</link>
-      <pubDate>Sun, 31 Jul 2022 00:00:00 +0000</pubDate>
-      <guid>https://krshrimali.github.io/categories/open-source/</guid>
       <description></description>
     </item>
   </channel>
