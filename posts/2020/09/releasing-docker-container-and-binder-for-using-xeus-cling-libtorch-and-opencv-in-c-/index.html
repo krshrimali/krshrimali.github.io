@@ -3,11 +3,13 @@
     <head>
         <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="author" content="map[name:Kushashwa Ravi Shrimali]">
-<meta name="description" content="Today, I am elated to share Docker image for OpenCV, Libtorch and Xeus-Cling. We&amp;rsquo;ll discuss how to use the dockerfile and binder.
-Before I move on, the credits for creating and maintaining Docker image goes to Vishwesh Ravi Shrimali. He has been working on some cool stuff, please do get in touch with him if you&amp;rsquo;re interested to know.
-First question in your mind would be, Why use Docker or Binder?" />
+<meta name="description" content="Today, I am elated to share Docker image for OpenCV, Libtorch and Xeus-Cling. We&rsquo;ll discuss how to use the dockerfile and binder.
+Before I move on, the credits for creating and maintaining Docker image goes to Vishwesh Ravi Shrimali. He has been working on some cool stuff, please do get in touch with him if you&rsquo;re interested to know.
+First question in your mind would be, Why use Docker or Binder? The answer to it lies in the frequency of queries on the discussion forum of PyTorch and Stackoverflow on Installation of Libtorch with OpenCV in Windows/Linux/OSX. I&rsquo;ve had nightmares setting up the Windows system myself for Libtorch and nothing could be better than using Docker. Read on, to know why.
+" />
 <meta name="keywords" content=", development, coding, cpp, notes, pytorch-cpp, libtorch" />
 <meta name="robots" content="noodp" />
 <meta name="theme-color" content="#252627" />
@@ -24,7 +26,9 @@ First question in your mind would be, Why use Docker or Binder?" />
 
 
 
-<link rel="stylesheet" href="https://krshrimali.github.io/main.949191c1dcc9c4a887997048b240354e47152016d821198f89448496ba42e491.css" integrity="sha256-lJGRwdzJxKiHmXBIskA1TkcVIBbYIRmPiUSElrpC5JE=">
+  <link rel="stylesheet" href="https://krshrimali.github.io/main.min.244183cde1a38e0b08f82c11791181288f9aac1cc9618cd6f4e9e7710c5768ba.css" integrity="sha256-JEGDzeGjjgsI&#43;CwReRGBKI&#43;arBzJYYzW9OnncQxXaLo=" crossorigin="anonymous">
+
+
 
 
 
@@ -37,18 +41,23 @@ First question in your mind would be, Why use Docker or Binder?" />
     <meta name="msapplication-TileColor" content="">
 
 
-<meta itemprop="name" content="Releasing Docker Container and Binder for using Xeus-Cling, Libtorch and OpenCV in C&#43;&#43;">
-<meta itemprop="description" content="Today, I am elated to share Docker image for OpenCV, Libtorch and Xeus-Cling. We&rsquo;ll discuss how to use the dockerfile and binder.
-Before I move on, the credits for creating and maintaining Docker image goes to Vishwesh Ravi Shrimali. He has been working on some cool stuff, please do get in touch with him if you&rsquo;re interested to know.
-First question in your mind would be, Why use Docker or Binder?"><meta itemprop="datePublished" content="2020-09-15T00:00:00+00:00" />
-<meta itemprop="dateModified" content="2020-09-15T00:00:00+00:00" />
-<meta itemprop="wordCount" content="623"><meta itemprop="image" content="https://krshrimali.github.io" />
-<meta itemprop="keywords" content="development,coding,cpp,notes,pytorch-cpp,libtorch," />
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="https://krshrimali.github.io" /><meta name="twitter:title" content="Releasing Docker Container and Binder for using Xeus-Cling, Libtorch and OpenCV in C&#43;&#43;"/>
-<meta name="twitter:description" content="Today, I am elated to share Docker image for OpenCV, Libtorch and Xeus-Cling. We&rsquo;ll discuss how to use the dockerfile and binder.
-Before I move on, the credits for creating and maintaining Docker image goes to Vishwesh Ravi Shrimali. He has been working on some cool stuff, please do get in touch with him if you&rsquo;re interested to know.
-First question in your mind would be, Why use Docker or Binder?"/>
+
+  <meta itemprop="name" content="Releasing Docker Container and Binder for using Xeus-Cling, Libtorch and OpenCV in C&#43;&#43;">
+  <meta itemprop="description" content="Today, I am elated to share Docker image for OpenCV, Libtorch and Xeus-Cling. We’ll discuss how to use the dockerfile and binder.
+Before I move on, the credits for creating and maintaining Docker image goes to Vishwesh Ravi Shrimali. He has been working on some cool stuff, please do get in touch with him if you’re interested to know.
+First question in your mind would be, Why use Docker or Binder? The answer to it lies in the frequency of queries on the discussion forum of PyTorch and Stackoverflow on Installation of Libtorch with OpenCV in Windows/Linux/OSX. I’ve had nightmares setting up the Windows system myself for Libtorch and nothing could be better than using Docker. Read on, to know why.">
+  <meta itemprop="datePublished" content="2020-09-15T00:00:00+00:00">
+  <meta itemprop="dateModified" content="2020-09-15T00:00:00+00:00">
+  <meta itemprop="wordCount" content="623">
+  <meta itemprop="image" content="https://krshrimali.github.io/">
+  <meta itemprop="keywords" content="Development,Coding,Cpp,Notes,Pytorch-Cpp,Libtorch">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://krshrimali.github.io/">
+  <meta name="twitter:title" content="Releasing Docker Container and Binder for using Xeus-Cling, Libtorch and OpenCV in C&#43;&#43;">
+  <meta name="twitter:description" content="Today, I am elated to share Docker image for OpenCV, Libtorch and Xeus-Cling. We’ll discuss how to use the dockerfile and binder.
+Before I move on, the credits for creating and maintaining Docker image goes to Vishwesh Ravi Shrimali. He has been working on some cool stuff, please do get in touch with him if you’re interested to know.
+First question in your mind would be, Why use Docker or Binder? The answer to it lies in the frequency of queries on the discussion forum of PyTorch and Stackoverflow on Installation of Libtorch with OpenCV in Windows/Linux/OSX. I’ve had nightmares setting up the Windows system myself for Libtorch and nothing could be better than using Docker. Read on, to know why.">
 
 
 
@@ -71,18 +80,7 @@ First question in your mind would be, Why use Docker or Binder?"/>
 
 
     
-<script>
-var doNotTrack = false;
-if (!doNotTrack) {
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-	ga('create', 'UA-146662543-1', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
+
 
 
     </head>
@@ -111,7 +109,6 @@ if (!doNotTrack) {
 
 
         <span class="header__right">
-            
                 <nav class="menu">
     <ul class="menu__inner"><li><a href="https://krshrimali.github.io/about">About</a></li><li><a href="https://krshrimali.github.io/posts">Blog</a></li>
     </ul>
@@ -123,7 +120,6 @@ if (!doNotTrack) {
                         <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
                     </svg>
                 </span>
-            
         </span>
     </span>
 </header>
@@ -176,7 +172,7 @@ if (!doNotTrack) {
 
       <div class="post-content">
         <p>Today, I am elated to share Docker image for <code>OpenCV</code>, <code>Libtorch</code> and <code>Xeus-Cling</code>. We&rsquo;ll discuss how to use the <code>dockerfile</code> and <code>binder</code>.</p>
-<p><img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/cover-images/Cover-Docker-Binder.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/cover-images/Cover-Docker-Binder.jpg"></p>
 <p>Before I move on, the credits for creating and maintaining Docker image goes to <a href="https://github.com/vishwesh5">Vishwesh Ravi Shrimali</a>. He has been working on some cool stuff, please do get in touch with him if you&rsquo;re interested to know.</p>
 <p>First question in your mind would be, <strong>Why use Docker or Binder?</strong> The answer to it lies in the frequency of queries on <a href="http://www.discuss.pytorch.org">the discussion forum of PyTorch</a> and Stackoverflow on <strong>Installation of Libtorch with OpenCV in Windows/Linux/OSX</strong>. I&rsquo;ve had nightmares setting up the Windows system myself for <code>Libtorch</code> and nothing could be better than using <code>Docker</code>. Read on, to know why.</p>
 <h2 id="installing-docker-on-mac-os">Installing Docker on Mac OS</h2>
@@ -204,7 +200,7 @@ if (!doNotTrack) {
 <li>Build the code using <code>make</code> command: <code>make</code>.</li>
 <li>Execute the code, and that&rsquo;s it. Have fun learning.</li>
 </ol>
-<p><img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/blogs/Docker-Image-2.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/blogs/Docker-Image-2.png"></p>
 <h2 id="testing-docker-image-with-xeus-cling">Testing Docker Image with Xeus-Cling</h2>
 <p>Let&rsquo;s test the Docker Image with Xeus-Cling.</p>
 <ol>
@@ -331,7 +327,7 @@ if (!doNotTrack) {
 
 
 
-<script type="text/javascript" src="https://krshrimali.github.io/bundle.min.46e438bd2eca7eb6358c700b40f6f56b22ab0b92503ecc11a2d8e4bcc610b8b4da83e5ea3d3e84fdb5f3c3c765744b9f5bbaf43cf5a027910be07ee39a9c12a1.js" integrity="sha512-RuQ4vS7KfrY1jHALQPb1ayKrC5JQPswRotjkvMYQuLTag&#43;XqPT6E/bXzw8dldEufW7r0PPWgJ5EL4H7jmpwSoQ=="></script>
+<script type="text/javascript" src="https://krshrimali.github.io/bundle.min.e89fda0f29b95d33f6f4224dd9e5cf69d84aff3818be2b0d73e731689cc374261b016d17d46f8381962fb4a1577ba3017b1f23509d894f6e66431f988c00889e.js" integrity="sha512-6J/aDym5XTP29CJN2eXPadhK/zgYvisNc&#43;cxaJzDdCYbAW0X1G&#43;DgZYvtKFXe6MBex8jUJ2JT25mQx&#43;YjACIng=="></script>
 
 
 

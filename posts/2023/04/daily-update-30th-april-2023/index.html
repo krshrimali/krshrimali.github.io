@@ -3,10 +3,12 @@
     <head>
         <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="author" content="map[name:Kushashwa Ravi Shrimali]">
-<meta name="description" content="Lovely day, had my friend imsrbh come over and we were talking about the project I wanted to do. He had some ideas and of course some experience with Kafka, so he helped me setup Kafka and docker on my machine, and that&amp;rsquo;s how it all started.
-Setting up Kafka and Docker on my machine: Refer to this blog for Kafka setup. We verified by running a sample producer-consumer app in Python and it worked." />
+<meta name="description" content="Lovely day, had my friend imsrbh come over and we were talking about the project I wanted to do. He had some ideas and of course some experience with Kafka, so he helped me setup Kafka and docker on my machine, and that&rsquo;s how it all started.
+Setting up Kafka and Docker on my machine: Refer to this blog for Kafka setup. We verified by running a sample producer-consumer app in Python and it worked. Starting to implement the core logic of getting key strokes in Rust I&rsquo;m using rdev library for this, it was decent. Was wondering how I can convert the keystrokes to strings, apparently it was a Rust Enum. Fortunately, they had a feature serialize which would help me do just that. Now it&rsquo;s quite smooth. Implementing Kafka Producer-Consumer in Rust Kafka has a client in Rust, cargo add kafka will help. Wrote Kafka Producer and Consumer referring to their official documentation. It works flawlessly. We were sending the keys as &amp;[u8] and had to convert these to strings back at consumer (need to proper error checking there) Producer repo: https://github.com/krshrimali/keystroke-store-rs Consumer repo: https://github.com/krshrimali/keystroke-consumer-rs Quick learning on why we didn&rsquo;t go for Redis (mostly because we wanted to learn Kafka in Rust lol, can try Redis one day but I like reliability of Kafka): https://stackoverflow.com/a/37993809 A lot of TODOs from yesterday are left, I&rsquo;ll move them to tomorrow, yay! Procrastination, let&rsquo;s go 😆🎉
+" />
 <meta name="keywords" content=", blog, updates" />
 <meta name="robots" content="noodp" />
 <meta name="theme-color" content="#252627" />
@@ -23,7 +25,9 @@ Setting up Kafka and Docker on my machine: Refer to this blog for Kafka setup. W
 
 
 
-<link rel="stylesheet" href="https://krshrimali.github.io/main.949191c1dcc9c4a887997048b240354e47152016d821198f89448496ba42e491.css" integrity="sha256-lJGRwdzJxKiHmXBIskA1TkcVIBbYIRmPiUSElrpC5JE=">
+  <link rel="stylesheet" href="https://krshrimali.github.io/main.min.244183cde1a38e0b08f82c11791181288f9aac1cc9618cd6f4e9e7710c5768ba.css" integrity="sha256-JEGDzeGjjgsI&#43;CwReRGBKI&#43;arBzJYYzW9OnncQxXaLo=" crossorigin="anonymous">
+
+
 
 
 
@@ -36,16 +40,21 @@ Setting up Kafka and Docker on my machine: Refer to this blog for Kafka setup. W
     <meta name="msapplication-TileColor" content="">
 
 
-<meta itemprop="name" content="Daily Update: 30th April 2023">
-<meta itemprop="description" content="Lovely day, had my friend imsrbh come over and we were talking about the project I wanted to do. He had some ideas and of course some experience with Kafka, so he helped me setup Kafka and docker on my machine, and that&rsquo;s how it all started.
-Setting up Kafka and Docker on my machine: Refer to this blog for Kafka setup. We verified by running a sample producer-consumer app in Python and it worked."><meta itemprop="datePublished" content="2023-04-30T00:00:00+00:00" />
-<meta itemprop="dateModified" content="2023-04-30T00:00:00+00:00" />
-<meta itemprop="wordCount" content="274"><meta itemprop="image" content="https://krshrimali.github.io" />
-<meta itemprop="keywords" content="blog,updates," />
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="https://krshrimali.github.io" /><meta name="twitter:title" content="Daily Update: 30th April 2023"/>
-<meta name="twitter:description" content="Lovely day, had my friend imsrbh come over and we were talking about the project I wanted to do. He had some ideas and of course some experience with Kafka, so he helped me setup Kafka and docker on my machine, and that&rsquo;s how it all started.
-Setting up Kafka and Docker on my machine: Refer to this blog for Kafka setup. We verified by running a sample producer-consumer app in Python and it worked."/>
+
+  <meta itemprop="name" content="Daily Update: 30th April 2023">
+  <meta itemprop="description" content="Lovely day, had my friend imsrbh come over and we were talking about the project I wanted to do. He had some ideas and of course some experience with Kafka, so he helped me setup Kafka and docker on my machine, and that’s how it all started.
+Setting up Kafka and Docker on my machine: Refer to this blog for Kafka setup. We verified by running a sample producer-consumer app in Python and it worked. Starting to implement the core logic of getting key strokes in Rust I’m using rdev library for this, it was decent. Was wondering how I can convert the keystrokes to strings, apparently it was a Rust Enum. Fortunately, they had a feature serialize which would help me do just that. Now it’s quite smooth. Implementing Kafka Producer-Consumer in Rust Kafka has a client in Rust, cargo add kafka will help. Wrote Kafka Producer and Consumer referring to their official documentation. It works flawlessly. We were sending the keys as &amp;[u8] and had to convert these to strings back at consumer (need to proper error checking there) Producer repo: https://github.com/krshrimali/keystroke-store-rs Consumer repo: https://github.com/krshrimali/keystroke-consumer-rs Quick learning on why we didn’t go for Redis (mostly because we wanted to learn Kafka in Rust lol, can try Redis one day but I like reliability of Kafka): https://stackoverflow.com/a/37993809 A lot of TODOs from yesterday are left, I’ll move them to tomorrow, yay! Procrastination, let’s go 😆🎉">
+  <meta itemprop="datePublished" content="2023-04-30T00:00:00+00:00">
+  <meta itemprop="dateModified" content="2023-04-30T00:00:00+00:00">
+  <meta itemprop="wordCount" content="274">
+  <meta itemprop="image" content="https://krshrimali.github.io/">
+  <meta itemprop="keywords" content="Blog,Updates">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://krshrimali.github.io/">
+  <meta name="twitter:title" content="Daily Update: 30th April 2023">
+  <meta name="twitter:description" content="Lovely day, had my friend imsrbh come over and we were talking about the project I wanted to do. He had some ideas and of course some experience with Kafka, so he helped me setup Kafka and docker on my machine, and that’s how it all started.
+Setting up Kafka and Docker on my machine: Refer to this blog for Kafka setup. We verified by running a sample producer-consumer app in Python and it worked. Starting to implement the core logic of getting key strokes in Rust I’m using rdev library for this, it was decent. Was wondering how I can convert the keystrokes to strings, apparently it was a Rust Enum. Fortunately, they had a feature serialize which would help me do just that. Now it’s quite smooth. Implementing Kafka Producer-Consumer in Rust Kafka has a client in Rust, cargo add kafka will help. Wrote Kafka Producer and Consumer referring to their official documentation. It works flawlessly. We were sending the keys as &amp;[u8] and had to convert these to strings back at consumer (need to proper error checking there) Producer repo: https://github.com/krshrimali/keystroke-store-rs Consumer repo: https://github.com/krshrimali/keystroke-consumer-rs Quick learning on why we didn’t go for Redis (mostly because we wanted to learn Kafka in Rust lol, can try Redis one day but I like reliability of Kafka): https://stackoverflow.com/a/37993809 A lot of TODOs from yesterday are left, I’ll move them to tomorrow, yay! Procrastination, let’s go 😆🎉">
 
 
 
@@ -66,18 +75,7 @@ Setting up Kafka and Docker on my machine: Refer to this blog for Kafka setup. W
 
 
     
-<script>
-var doNotTrack = false;
-if (!doNotTrack) {
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-	ga('create', 'UA-146662543-1', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
+
 
 
     </head>
@@ -106,7 +104,6 @@ if (!doNotTrack) {
 
 
         <span class="header__right">
-            
                 <nav class="menu">
     <ul class="menu__inner"><li><a href="https://krshrimali.github.io/about">About</a></li><li><a href="https://krshrimali.github.io/posts">Blog</a></li>
     </ul>
@@ -118,7 +115,6 @@ if (!doNotTrack) {
                         <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
                     </svg>
                 </span>
-            
         </span>
     </span>
 </header>
@@ -290,7 +286,7 @@ if (!doNotTrack) {
 
 
 
-<script type="text/javascript" src="https://krshrimali.github.io/bundle.min.46e438bd2eca7eb6358c700b40f6f56b22ab0b92503ecc11a2d8e4bcc610b8b4da83e5ea3d3e84fdb5f3c3c765744b9f5bbaf43cf5a027910be07ee39a9c12a1.js" integrity="sha512-RuQ4vS7KfrY1jHALQPb1ayKrC5JQPswRotjkvMYQuLTag&#43;XqPT6E/bXzw8dldEufW7r0PPWgJ5EL4H7jmpwSoQ=="></script>
+<script type="text/javascript" src="https://krshrimali.github.io/bundle.min.e89fda0f29b95d33f6f4224dd9e5cf69d84aff3818be2b0d73e731689cc374261b016d17d46f8381962fb4a1577ba3017b1f23509d894f6e66431f988c00889e.js" integrity="sha512-6J/aDym5XTP29CJN2eXPadhK/zgYvisNc&#43;cxaJzDdCYbAW0X1G&#43;DgZYvtKFXe6MBex8jUJ2JT25mQx&#43;YjACIng=="></script>
 
 
 

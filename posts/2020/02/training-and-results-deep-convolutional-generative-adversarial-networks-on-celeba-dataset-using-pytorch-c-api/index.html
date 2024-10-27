@@ -3,10 +3,12 @@
     <head>
         <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="author" content="map[name:Kushashwa Ravi Shrimali]">
-<meta name="description" content="It&amp;rsquo;s been around 5 months since I released my last blog on DCGAN Review and Implementation using PyTorch C&#43;&#43; API and I&amp;rsquo;ve missed writing blogs badly! Straight the to the point, I&amp;rsquo;m back!
-But before we start, the PyTorch C&#43;&#43; Frontend has gone through several changes and thanks to the awesome contributors around the world, it resembles the Python API more than it ever did! Since a lot of things have changed, I have also updated my previous blogs (tested on 1." />
+<meta name="description" content="It&rsquo;s been around 5 months since I released my last blog on DCGAN Review and Implementation using PyTorch C&#43;&#43; API and I&rsquo;ve missed writing blogs badly! Straight the to the point, I&rsquo;m back!
+But before we start, the PyTorch C&#43;&#43; Frontend has gone through several changes and thanks to the awesome contributors around the world, it resembles the Python API more than it ever did! Since a lot of things have changed, I have also updated my previous blogs (tested on 1.4 Stable build).
+" />
 <meta name="keywords" content=", development, coding, cpp, notes, pytorch-cpp, libtorch" />
 <meta name="robots" content="noodp" />
 <meta name="theme-color" content="#252627" />
@@ -23,7 +25,9 @@ But before we start, the PyTorch C&#43;&#43; Frontend has gone through several c
 
 
 
-<link rel="stylesheet" href="https://krshrimali.github.io/main.949191c1dcc9c4a887997048b240354e47152016d821198f89448496ba42e491.css" integrity="sha256-lJGRwdzJxKiHmXBIskA1TkcVIBbYIRmPiUSElrpC5JE=">
+  <link rel="stylesheet" href="https://krshrimali.github.io/main.min.244183cde1a38e0b08f82c11791181288f9aac1cc9618cd6f4e9e7710c5768ba.css" integrity="sha256-JEGDzeGjjgsI&#43;CwReRGBKI&#43;arBzJYYzW9OnncQxXaLo=" crossorigin="anonymous">
+
+
 
 
 
@@ -36,16 +40,21 @@ But before we start, the PyTorch C&#43;&#43; Frontend has gone through several c
     <meta name="msapplication-TileColor" content="">
 
 
-<meta itemprop="name" content="[Training and Results] Deep Convolutional Generative Adversarial Networks on CelebA Dataset using PyTorch C&#43;&#43; API">
-<meta itemprop="description" content="It&rsquo;s been around 5 months since I released my last blog on DCGAN Review and Implementation using PyTorch C&#43;&#43; API and I&rsquo;ve missed writing blogs badly! Straight the to the point, I&rsquo;m back!
-But before we start, the PyTorch C&#43;&#43; Frontend has gone through several changes and thanks to the awesome contributors around the world, it resembles the Python API more than it ever did! Since a lot of things have changed, I have also updated my previous blogs (tested on 1."><meta itemprop="datePublished" content="2020-02-23T00:00:00+00:00" />
-<meta itemprop="dateModified" content="2020-02-23T00:00:00+00:00" />
-<meta itemprop="wordCount" content="457"><meta itemprop="image" content="https://krshrimali.github.io" />
-<meta itemprop="keywords" content="development,coding,cpp,notes,pytorch-cpp,libtorch," />
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="https://krshrimali.github.io" /><meta name="twitter:title" content="[Training and Results] Deep Convolutional Generative Adversarial Networks on CelebA Dataset using PyTorch C&#43;&#43; API"/>
-<meta name="twitter:description" content="It&rsquo;s been around 5 months since I released my last blog on DCGAN Review and Implementation using PyTorch C&#43;&#43; API and I&rsquo;ve missed writing blogs badly! Straight the to the point, I&rsquo;m back!
-But before we start, the PyTorch C&#43;&#43; Frontend has gone through several changes and thanks to the awesome contributors around the world, it resembles the Python API more than it ever did! Since a lot of things have changed, I have also updated my previous blogs (tested on 1."/>
+
+  <meta itemprop="name" content="[Training and Results] Deep Convolutional Generative Adversarial Networks on CelebA Dataset using PyTorch C&#43;&#43; API">
+  <meta itemprop="description" content="It’s been around 5 months since I released my last blog on DCGAN Review and Implementation using PyTorch C&#43;&#43; API and I’ve missed writing blogs badly! Straight the to the point, I’m back!
+But before we start, the PyTorch C&#43;&#43; Frontend has gone through several changes and thanks to the awesome contributors around the world, it resembles the Python API more than it ever did! Since a lot of things have changed, I have also updated my previous blogs (tested on 1.4 Stable build).">
+  <meta itemprop="datePublished" content="2020-02-23T00:00:00+00:00">
+  <meta itemprop="dateModified" content="2020-02-23T00:00:00+00:00">
+  <meta itemprop="wordCount" content="457">
+  <meta itemprop="image" content="https://krshrimali.github.io/">
+  <meta itemprop="keywords" content="Development,Coding,Cpp,Notes,Pytorch-Cpp,Libtorch">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://krshrimali.github.io/">
+  <meta name="twitter:title" content="[Training and Results] Deep Convolutional Generative Adversarial Networks on CelebA Dataset using PyTorch C&#43;&#43; API">
+  <meta name="twitter:description" content="It’s been around 5 months since I released my last blog on DCGAN Review and Implementation using PyTorch C&#43;&#43; API and I’ve missed writing blogs badly! Straight the to the point, I’m back!
+But before we start, the PyTorch C&#43;&#43; Frontend has gone through several changes and thanks to the awesome contributors around the world, it resembles the Python API more than it ever did! Since a lot of things have changed, I have also updated my previous blogs (tested on 1.4 Stable build).">
 
 
 
@@ -68,18 +77,7 @@ But before we start, the PyTorch C&#43;&#43; Frontend has gone through several c
 
 
     
-<script>
-var doNotTrack = false;
-if (!doNotTrack) {
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-	ga('create', 'UA-146662543-1', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
+
 
 
     </head>
@@ -108,7 +106,6 @@ if (!doNotTrack) {
 
 
         <span class="header__right">
-            
                 <nav class="menu">
     <ul class="menu__inner"><li><a href="https://krshrimali.github.io/about">About</a></li><li><a href="https://krshrimali.github.io/posts">Blog</a></li>
     </ul>
@@ -120,7 +117,6 @@ if (!doNotTrack) {
                         <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
                     </svg>
                 </span>
-            
         </span>
     </span>
 </header>
@@ -166,7 +162,7 @@ if (!doNotTrack) {
 
       <div class="post-content">
         <p>It&rsquo;s been around 5 months since I released my last blog on <a href="https://krshrimali.github.io/posts/2019/09/deep-convolutional-generative-adversarial-networks-review-and-implementation-using-pytorch-c-api/">DCGAN Review and Implementation using PyTorch C++ API</a> and I&rsquo;ve missed writing blogs badly! Straight the to the point, I&rsquo;m back!</p>
-<p><img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/cover-images/Cover-DCGAN-2.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/cover-images/Cover-DCGAN-2.jpg"></p>
 <p>But before we start, the PyTorch C++ Frontend has gone through several changes and thanks to the awesome contributors around the world, it resembles the Python API more than it ever did! Since a lot of things have changed, I have also updated my previous blogs (tested on 1.4 Stable build).</p>
 <h2 id="what-has-changed">What has changed?</h2>
 <p>There have been major changes in the PyTorch C++ Frontend API (Libtorch) and we&rsquo;ll be discussing some of them which were related to our implementation on DCGAN. Let&rsquo;s see, what parts of our code have changed in the recent Libtorch version. Well, the frontend API of PyTorch in C++ resembles closely to Python now:</p>
@@ -304,7 +300,7 @@ if (!doNotTrack) {
 
 
 
-<script type="text/javascript" src="https://krshrimali.github.io/bundle.min.46e438bd2eca7eb6358c700b40f6f56b22ab0b92503ecc11a2d8e4bcc610b8b4da83e5ea3d3e84fdb5f3c3c765744b9f5bbaf43cf5a027910be07ee39a9c12a1.js" integrity="sha512-RuQ4vS7KfrY1jHALQPb1ayKrC5JQPswRotjkvMYQuLTag&#43;XqPT6E/bXzw8dldEufW7r0PPWgJ5EL4H7jmpwSoQ=="></script>
+<script type="text/javascript" src="https://krshrimali.github.io/bundle.min.e89fda0f29b95d33f6f4224dd9e5cf69d84aff3818be2b0d73e731689cc374261b016d17d46f8381962fb4a1577ba3017b1f23509d894f6e66431f988c00889e.js" integrity="sha512-6J/aDym5XTP29CJN2eXPadhK/zgYvisNc&#43;cxaJzDdCYbAW0X1G&#43;DgZYvtKFXe6MBex8jUJ2JT25mQx&#43;YjACIng=="></script>
 
 
 

@@ -3,9 +3,10 @@
     <head>
         <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="author" content="map[name:Kushashwa Ravi Shrimali]">
-<meta name="description" content="Recap of the last blog Before we move on, it&amp;rsquo;s important what we covered in the last blog. We&amp;rsquo;ll be going forward from loading Custom Dataset to now using the dataset to train our VGG-16 Network. Previously, we were able to load our custom dataset using the following template:
+<meta name="description" content="Recap of the last blog Before we move on, it&rsquo;s important what we covered in the last blog. We&rsquo;ll be going forward from loading Custom Dataset to now using the dataset to train our VGG-16 Network. Previously, we were able to load our custom dataset using the following template:
 " />
 <meta name="keywords" content=", development, coding, cpp, notes, pytorch-cpp, libtorch" />
 <meta name="robots" content="noodp" />
@@ -23,7 +24,9 @@
 
 
 
-<link rel="stylesheet" href="https://krshrimali.github.io/main.949191c1dcc9c4a887997048b240354e47152016d821198f89448496ba42e491.css" integrity="sha256-lJGRwdzJxKiHmXBIskA1TkcVIBbYIRmPiUSElrpC5JE=">
+  <link rel="stylesheet" href="https://krshrimali.github.io/main.min.244183cde1a38e0b08f82c11791181288f9aac1cc9618cd6f4e9e7710c5768ba.css" integrity="sha256-JEGDzeGjjgsI&#43;CwReRGBKI&#43;arBzJYYzW9OnncQxXaLo=" crossorigin="anonymous">
+
+
 
 
 
@@ -36,16 +39,19 @@
     <meta name="msapplication-TileColor" content="">
 
 
-<meta itemprop="name" content="Training a Network on Custom Dataset using PyTorch C&#43;&#43; API">
-<meta itemprop="description" content="Recap of the last blog
-Before we move on, it&rsquo;s important what we covered in the last blog. We&rsquo;ll be going forward from loading Custom Dataset to now using the dataset to train our VGG-16 Network. Previously, we were able to load our custom dataset using the following template:"><meta itemprop="datePublished" content="2019-07-05T00:00:00+00:00" />
-<meta itemprop="dateModified" content="2019-07-05T00:00:00+00:00" />
-<meta itemprop="wordCount" content="794"><meta itemprop="image" content="https://krshrimali.github.io" />
-<meta itemprop="keywords" content="development,coding,cpp,notes,pytorch-cpp,libtorch," />
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="https://krshrimali.github.io" /><meta name="twitter:title" content="Training a Network on Custom Dataset using PyTorch C&#43;&#43; API"/>
-<meta name="twitter:description" content="Recap of the last blog
-Before we move on, it&rsquo;s important what we covered in the last blog. We&rsquo;ll be going forward from loading Custom Dataset to now using the dataset to train our VGG-16 Network. Previously, we were able to load our custom dataset using the following template:"/>
+
+  <meta itemprop="name" content="Training a Network on Custom Dataset using PyTorch C&#43;&#43; API">
+  <meta itemprop="description" content="Recap of the last blog Before we move on, it’s important what we covered in the last blog. We’ll be going forward from loading Custom Dataset to now using the dataset to train our VGG-16 Network. Previously, we were able to load our custom dataset using the following template:">
+  <meta itemprop="datePublished" content="2019-07-05T00:00:00+00:00">
+  <meta itemprop="dateModified" content="2019-07-05T00:00:00+00:00">
+  <meta itemprop="wordCount" content="794">
+  <meta itemprop="image" content="https://krshrimali.github.io/">
+  <meta itemprop="keywords" content="Development,Coding,Cpp,Notes,Pytorch-Cpp,Libtorch">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://krshrimali.github.io/">
+  <meta name="twitter:title" content="Training a Network on Custom Dataset using PyTorch C&#43;&#43; API">
+  <meta name="twitter:description" content="Recap of the last blog Before we move on, it’s important what we covered in the last blog. We’ll be going forward from loading Custom Dataset to now using the dataset to train our VGG-16 Network. Previously, we were able to load our custom dataset using the following template:">
 
 
 
@@ -68,18 +74,7 @@ Before we move on, it&rsquo;s important what we covered in the last blog. We&rsq
 
 
     
-<script>
-var doNotTrack = false;
-if (!doNotTrack) {
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-	ga('create', 'UA-146662543-1', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
+
 
 
     </head>
@@ -108,7 +103,6 @@ if (!doNotTrack) {
 
 
         <span class="header__right">
-            
                 <nav class="menu">
     <ul class="menu__inner"><li><a href="https://krshrimali.github.io/about">About</a></li><li><a href="https://krshrimali.github.io/posts">Blog</a></li>
     </ul>
@@ -120,7 +114,6 @@ if (!doNotTrack) {
                         <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
                     </svg>
                 </span>
-            
         </span>
     </span>
 </header>
@@ -202,7 +195,7 @@ if (!doNotTrack) {
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">auto</span> custom_dataset <span style="color:#f92672">=</span> CustomDataset(list_images, list_labels).map(torch<span style="color:#f92672">::</span>data<span style="color:#f92672">::</span>transforms<span style="color:#f92672">::</span>Stack<span style="color:#f92672">&lt;&gt;</span>());
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>These were the steps we followed last time:</p>
-<p><img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/blogs/Steps-Loading-Custom-Data.PNG" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/blogs/Steps-Loading-Custom-Data.PNG"></p>
 <h2 id="overview-how-to-pass-batches-to-our-network">Overview: How to pass batches to our network?</h2>
 <p>Since we have our dataset loaded, let&rsquo;s see how to pass batches of data to our network. Before we go on and see how PyTorch C++ API does it, let&rsquo;s see how it&rsquo;s done in Python.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>dataset_loader <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>utils<span style="color:#f92672">.</span>data<span style="color:#f92672">.</span>DataLoader(custom_dataset,
@@ -214,7 +207,7 @@ if (!doNotTrack) {
 </span></span><span style="display:flex;"><span>);
 </span></span></code></pre></div><p>In brief, we are loading our data using <code>SequentialSampler</code> class which samples our data in the same order that we provided it with. Have a look at the <code>SequentialSampler</code> class <a href="https://pytorch.org/docs/stable/data.html#torch.utils.data.SequentialSampler">here</a>.</p>
 <p>For the definition of this function: <code>torch::data::make_data_loader</code> <a href="https://pytorch.org/cppdocs/api/function_namespacetorch_1_1data_1a0d29ca9900cae66957c5cc5052ecc122.html#exhale-function-namespacetorch-1-1data-1a0d29ca9900cae66957c5cc5052ecc122">here</a>. A short screenshot from the documentation is given below.</p>
-<p><img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/blogs/Data-Loader-Function.PNG" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/blogs/Data-Loader-Function.PNG"></p>
 <p>Let&rsquo;s go ahead and learn to iterate through our data loader and pass each batch of data and labels to our network. For once, imagine that we have a <code>struct</code> named <code>Net</code> which defines our network and <code>forward()</code> function which parses the data through each layer and returns the output.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span><span style="color:#f92672">&amp;</span> batch: <span style="color:#f92672">*</span>data_loader) {
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">auto</span> data <span style="color:#f92672">=</span> batch.data;
@@ -242,7 +235,7 @@ if (!doNotTrack) {
 <li><a href="https://pytorch.org/cppdocs/api/classtorch_1_1optim_1_1_loss_closure_optimizer.html#exhale-class-classtorch-1-1optim-1-1-loss-closure-optimizer">LossClosureOptimizer</a></li>
 </ol>
 <p>As mentioned in the documentation of <code>torch.optim</code> package:</p>
-<p><img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/blogs/Use-Optim.PNG" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/blogs/Use-Optim.PNG"></p>
 <p>The documentation is self explanatory, so all we need to do is pass parameters of our Network which will be optimized using our optimizer, and pass in the learning rate like above. To know about parameters we can pass through <code>AdamOptions</code>, check out this <a href="https://pytorch.org/cppdocs/api/structtorch_1_1optim_1_1_adam_options.html#exhale-struct-structtorch-1-1optim-1-1-adam-options">documentation page</a>.</p>
 <p>Let&rsquo;s go ahead and learn to define <strong>Loss Function</strong> in PyTorch C++ API. For an example, we&rsquo;ll define <code>nll_loss</code> (Negative Log Likelihood Loss Function):</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">auto</span> output <span style="color:#f92672">=</span> net<span style="color:#f92672">-&gt;</span>forward(data);
@@ -390,7 +383,7 @@ if (!doNotTrack) {
 
 
 
-<script type="text/javascript" src="https://krshrimali.github.io/bundle.min.46e438bd2eca7eb6358c700b40f6f56b22ab0b92503ecc11a2d8e4bcc610b8b4da83e5ea3d3e84fdb5f3c3c765744b9f5bbaf43cf5a027910be07ee39a9c12a1.js" integrity="sha512-RuQ4vS7KfrY1jHALQPb1ayKrC5JQPswRotjkvMYQuLTag&#43;XqPT6E/bXzw8dldEufW7r0PPWgJ5EL4H7jmpwSoQ=="></script>
+<script type="text/javascript" src="https://krshrimali.github.io/bundle.min.e89fda0f29b95d33f6f4224dd9e5cf69d84aff3818be2b0d73e731689cc374261b016d17d46f8381962fb4a1577ba3017b1f23509d894f6e66431f988c00889e.js" integrity="sha512-6J/aDym5XTP29CJN2eXPadhK/zgYvisNc&#43;cxaJzDdCYbAW0X1G&#43;DgZYvtKFXe6MBex8jUJ2JT25mQx&#43;YjACIng=="></script>
 
 
 

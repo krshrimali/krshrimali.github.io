@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>union find on Kushashwa Ravi Shrimali (Kush)</title>
+    <title>Union Find on Kushashwa Ravi Shrimali (Kush)</title>
     <link>https://krshrimali.github.io/tags/union-find/</link>
-    <description>Recent content in union find on Kushashwa Ravi Shrimali (Kush)</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in Union Find on Kushashwa Ravi Shrimali (Kush)</description>
+    <generator>Hugo</generator>
     <language>en</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
     <lastBuildDate>Sat, 14 Aug 2021 00:00:00 +0000</lastBuildDate>
@@ -14,7 +14,7 @@
       <link>https://krshrimali.github.io/posts/2021/08/union-find-problem-and-a-naive-implementation-c-/</link>
       <pubDate>Sat, 14 Aug 2021 00:00:00 +0000</pubDate>
       <guid>https://krshrimali.github.io/posts/2021/08/union-find-problem-and-a-naive-implementation-c-/</guid>
-      <description>Hi Everyone, today I want to talk about Union Find Problem. This is going to be a series covering:&#xA;Union Find Problem (this blog) Solutions to Union Find (1): Quick Find Solutions to Union Find (2): Quick Union Solutions to Union Find (3): Weighted Quick Union Applications of Union Find (perculation and more) Cool project using Union Find Solving some competitive programming questions using Union Find Each blog will try to cover very basic concepts behind the topic, and also what it&amp;rsquo;s all about.</description>
+      <description>&lt;p&gt;Hi Everyone, today I want to talk about Union Find Problem. This is going to be a series covering:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Union Find Problem (this blog)&lt;/li&gt;&#xA;&lt;li&gt;Solutions to Union Find (1): Quick Find&lt;/li&gt;&#xA;&lt;li&gt;Solutions to Union Find (2): Quick Union&lt;/li&gt;&#xA;&lt;li&gt;Solutions to Union Find (3): Weighted Quick Union&lt;/li&gt;&#xA;&lt;li&gt;Applications of Union Find (perculation and more)&lt;/li&gt;&#xA;&lt;li&gt;Cool project using Union Find&lt;/li&gt;&#xA;&lt;li&gt;Solving some competitive programming questions using Union Find&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/krshrimali/blog/main/assets/cover-images/Union-Find-Intro.png&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;Each blog will try to cover very basic concepts behind the topic, and also what it&amp;rsquo;s all about.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

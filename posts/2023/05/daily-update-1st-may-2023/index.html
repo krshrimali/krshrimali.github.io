@@ -3,10 +3,12 @@
     <head>
         <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="author" content="map[name:Kushashwa Ravi Shrimali]">
-<meta name="description" content="Interesting day, lots of design stuff for the project we&amp;rsquo;ve been working on.
-Designing flow for the word combinator service This is actually tricky, as we are figuring out how we&amp;rsquo;ll figure out the keystrokes into words/phrases (I&amp;rsquo;d like to call them entities at one point of time). The algorithm is close, and I&amp;rsquo;m particularly hopeful about it: It considers some edge cases of mouse events, sitting idle, and gives user the control what they would like to choose." />
+<meta name="description" content="Interesting day, lots of design stuff for the project we&rsquo;ve been working on.
+Designing flow for the word combinator service This is actually tricky, as we are figuring out how we&rsquo;ll figure out the keystrokes into words/phrases (I&rsquo;d like to call them entities at one point of time). The algorithm is close, and I&rsquo;m particularly hopeful about it: It considers some edge cases of mouse events, sitting idle, and gives user the control what they would like to choose. More on this very soon! Boring nerdy stuff: Exploring fzf I wanted to have fzf previews height changed to 100%, finally changed my zsh config for that. It looks much better now. Then figured out that I&rsquo;m using outdated formula for fzf, and I&rsquo;ll end up going through fzf release notes to see what has changed over the last few releases. It&rsquo;s usually a good practice I believe to go through the release notes, and be aware of the tools you use. Work day tomorrow, so doing some early readings. Of course can&rsquo;t share details, but yep, going to be more occupied now. A lot of TODOs from yesterday day before yesterday are left 🥺, I&rsquo;ll move them to tomorrow, yay! Procrastination, let&rsquo;s go 😆🎉
+" />
 <meta name="keywords" content=", blog, updates" />
 <meta name="robots" content="noodp" />
 <meta name="theme-color" content="#252627" />
@@ -23,7 +25,9 @@ Designing flow for the word combinator service This is actually tricky, as we ar
 
 
 
-<link rel="stylesheet" href="https://krshrimali.github.io/main.949191c1dcc9c4a887997048b240354e47152016d821198f89448496ba42e491.css" integrity="sha256-lJGRwdzJxKiHmXBIskA1TkcVIBbYIRmPiUSElrpC5JE=">
+  <link rel="stylesheet" href="https://krshrimali.github.io/main.min.244183cde1a38e0b08f82c11791181288f9aac1cc9618cd6f4e9e7710c5768ba.css" integrity="sha256-JEGDzeGjjgsI&#43;CwReRGBKI&#43;arBzJYYzW9OnncQxXaLo=" crossorigin="anonymous">
+
+
 
 
 
@@ -36,16 +40,21 @@ Designing flow for the word combinator service This is actually tricky, as we ar
     <meta name="msapplication-TileColor" content="">
 
 
-<meta itemprop="name" content="Daily Update: 1st May 2023">
-<meta itemprop="description" content="Interesting day, lots of design stuff for the project we&rsquo;ve been working on.
-Designing flow for the word combinator service This is actually tricky, as we are figuring out how we&rsquo;ll figure out the keystrokes into words/phrases (I&rsquo;d like to call them entities at one point of time). The algorithm is close, and I&rsquo;m particularly hopeful about it: It considers some edge cases of mouse events, sitting idle, and gives user the control what they would like to choose."><meta itemprop="datePublished" content="2023-05-01T00:00:00+00:00" />
-<meta itemprop="dateModified" content="2023-05-01T00:00:00+00:00" />
-<meta itemprop="wordCount" content="242"><meta itemprop="image" content="https://krshrimali.github.io" />
-<meta itemprop="keywords" content="blog,updates," />
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="https://krshrimali.github.io" /><meta name="twitter:title" content="Daily Update: 1st May 2023"/>
-<meta name="twitter:description" content="Interesting day, lots of design stuff for the project we&rsquo;ve been working on.
-Designing flow for the word combinator service This is actually tricky, as we are figuring out how we&rsquo;ll figure out the keystrokes into words/phrases (I&rsquo;d like to call them entities at one point of time). The algorithm is close, and I&rsquo;m particularly hopeful about it: It considers some edge cases of mouse events, sitting idle, and gives user the control what they would like to choose."/>
+
+  <meta itemprop="name" content="Daily Update: 1st May 2023">
+  <meta itemprop="description" content="Interesting day, lots of design stuff for the project we’ve been working on.
+Designing flow for the word combinator service This is actually tricky, as we are figuring out how we’ll figure out the keystrokes into words/phrases (I’d like to call them entities at one point of time). The algorithm is close, and I’m particularly hopeful about it: It considers some edge cases of mouse events, sitting idle, and gives user the control what they would like to choose. More on this very soon! Boring nerdy stuff: Exploring fzf I wanted to have fzf previews height changed to 100%, finally changed my zsh config for that. It looks much better now. Then figured out that I’m using outdated formula for fzf, and I’ll end up going through fzf release notes to see what has changed over the last few releases. It’s usually a good practice I believe to go through the release notes, and be aware of the tools you use. Work day tomorrow, so doing some early readings. Of course can’t share details, but yep, going to be more occupied now. A lot of TODOs from yesterday day before yesterday are left 🥺, I’ll move them to tomorrow, yay! Procrastination, let’s go 😆🎉">
+  <meta itemprop="datePublished" content="2023-05-01T00:00:00+00:00">
+  <meta itemprop="dateModified" content="2023-05-01T00:00:00+00:00">
+  <meta itemprop="wordCount" content="242">
+  <meta itemprop="image" content="https://krshrimali.github.io/">
+  <meta itemprop="keywords" content="Blog,Updates">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://krshrimali.github.io/">
+  <meta name="twitter:title" content="Daily Update: 1st May 2023">
+  <meta name="twitter:description" content="Interesting day, lots of design stuff for the project we’ve been working on.
+Designing flow for the word combinator service This is actually tricky, as we are figuring out how we’ll figure out the keystrokes into words/phrases (I’d like to call them entities at one point of time). The algorithm is close, and I’m particularly hopeful about it: It considers some edge cases of mouse events, sitting idle, and gives user the control what they would like to choose. More on this very soon! Boring nerdy stuff: Exploring fzf I wanted to have fzf previews height changed to 100%, finally changed my zsh config for that. It looks much better now. Then figured out that I’m using outdated formula for fzf, and I’ll end up going through fzf release notes to see what has changed over the last few releases. It’s usually a good practice I believe to go through the release notes, and be aware of the tools you use. Work day tomorrow, so doing some early readings. Of course can’t share details, but yep, going to be more occupied now. A lot of TODOs from yesterday day before yesterday are left 🥺, I’ll move them to tomorrow, yay! Procrastination, let’s go 😆🎉">
 
 
 
@@ -66,18 +75,7 @@ Designing flow for the word combinator service This is actually tricky, as we ar
 
 
     
-<script>
-var doNotTrack = false;
-if (!doNotTrack) {
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-	ga('create', 'UA-146662543-1', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
+
 
 
     </head>
@@ -106,7 +104,6 @@ if (!doNotTrack) {
 
 
         <span class="header__right">
-            
                 <nav class="menu">
     <ul class="menu__inner"><li><a href="https://krshrimali.github.io/about">About</a></li><li><a href="https://krshrimali.github.io/posts">Blog</a></li>
     </ul>
@@ -118,7 +115,6 @@ if (!doNotTrack) {
                         <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
                     </svg>
                 </span>
-            
         </span>
     </span>
 </header>
@@ -181,7 +177,7 @@ if (!doNotTrack) {
 </ul>
 </li>
 </ol>
-<p>A lot of TODOs from ~yesterday~ day before yesterday are left 🥺, I&rsquo;ll move them to tomorrow, yay! Procrastination, let&rsquo;s go 😆🎉</p>
+<p>A lot of TODOs from <del>yesterday</del> day before yesterday are left 🥺, I&rsquo;ll move them to tomorrow, yay! Procrastination, let&rsquo;s go 😆🎉</p>
 <p>TODOs:</p>
 <ol>
 <li>Explore HVM: <a href="https://github.com/HigherOrderCO/HVM">https://github.com/HigherOrderCO/HVM</a>, looks interesting at least.</li>
@@ -292,7 +288,7 @@ if (!doNotTrack) {
 
 
 
-<script type="text/javascript" src="https://krshrimali.github.io/bundle.min.46e438bd2eca7eb6358c700b40f6f56b22ab0b92503ecc11a2d8e4bcc610b8b4da83e5ea3d3e84fdb5f3c3c765744b9f5bbaf43cf5a027910be07ee39a9c12a1.js" integrity="sha512-RuQ4vS7KfrY1jHALQPb1ayKrC5JQPswRotjkvMYQuLTag&#43;XqPT6E/bXzw8dldEufW7r0PPWgJ5EL4H7jmpwSoQ=="></script>
+<script type="text/javascript" src="https://krshrimali.github.io/bundle.min.e89fda0f29b95d33f6f4224dd9e5cf69d84aff3818be2b0d73e731689cc374261b016d17d46f8381962fb4a1577ba3017b1f23509d894f6e66431f988c00889e.js" integrity="sha512-6J/aDym5XTP29CJN2eXPadhK/zgYvisNc&#43;cxaJzDdCYbAW0X1G&#43;DgZYvtKFXe6MBex8jUJ2JT25mQx&#43;YjACIng=="></script>
 
 
 

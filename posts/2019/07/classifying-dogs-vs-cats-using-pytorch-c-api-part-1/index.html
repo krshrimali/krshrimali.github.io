@@ -3,6 +3,7 @@
     <head>
         <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="author" content="map[name:Kushashwa Ravi Shrimali]">
 <meta name="description" content="Hi Everyone! So excited to be back with another blog in the series of PyTorch C&#43;&#43; Blogs.
@@ -24,7 +25,9 @@ Today, we are going to see a practical example of applying a CNN to a Custom Dat
 
 
 
-<link rel="stylesheet" href="https://krshrimali.github.io/main.949191c1dcc9c4a887997048b240354e47152016d821198f89448496ba42e491.css" integrity="sha256-lJGRwdzJxKiHmXBIskA1TkcVIBbYIRmPiUSElrpC5JE=">
+  <link rel="stylesheet" href="https://krshrimali.github.io/main.min.244183cde1a38e0b08f82c11791181288f9aac1cc9618cd6f4e9e7710c5768ba.css" integrity="sha256-JEGDzeGjjgsI&#43;CwReRGBKI&#43;arBzJYYzW9OnncQxXaLo=" crossorigin="anonymous">
+
+
 
 
 
@@ -37,18 +40,21 @@ Today, we are going to see a practical example of applying a CNN to a Custom Dat
     <meta name="msapplication-TileColor" content="">
 
 
-<meta itemprop="name" content="Classifying Dogs vs Cats using PyTorch C&#43;&#43; API: Part-1">
-<meta itemprop="description" content="Hi Everyone! So excited to be back with another blog in the series of PyTorch C&#43;&#43; Blogs.
-Today, we are going to see a practical example of applying a CNN to a Custom Dataset - Dogs vs Cats. This is going to be a short post of showing results and discussion about hyperparameters and loss functions for the task, as code snippets and explanation has been provided here, here and here.
-"><meta itemprop="datePublished" content="2019-07-23T00:00:00+00:00" />
-<meta itemprop="dateModified" content="2019-07-23T00:00:00+00:00" />
-<meta itemprop="wordCount" content="1373"><meta itemprop="image" content="https://krshrimali.github.io" />
-<meta itemprop="keywords" content="development,coding,cpp,notes,pytorch-cpp,libtorch," />
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="https://krshrimali.github.io" /><meta name="twitter:title" content="Classifying Dogs vs Cats using PyTorch C&#43;&#43; API: Part-1"/>
-<meta name="twitter:description" content="Hi Everyone! So excited to be back with another blog in the series of PyTorch C&#43;&#43; Blogs.
-Today, we are going to see a practical example of applying a CNN to a Custom Dataset - Dogs vs Cats. This is going to be a short post of showing results and discussion about hyperparameters and loss functions for the task, as code snippets and explanation has been provided here, here and here.
-"/>
+
+  <meta itemprop="name" content="Classifying Dogs vs Cats using PyTorch C&#43;&#43; API: Part-1">
+  <meta itemprop="description" content="Hi Everyone! So excited to be back with another blog in the series of PyTorch C&#43;&#43; Blogs.
+Today, we are going to see a practical example of applying a CNN to a Custom Dataset - Dogs vs Cats. This is going to be a short post of showing results and discussion about hyperparameters and loss functions for the task, as code snippets and explanation has been provided here, here and here.">
+  <meta itemprop="datePublished" content="2019-07-23T00:00:00+00:00">
+  <meta itemprop="dateModified" content="2019-07-23T00:00:00+00:00">
+  <meta itemprop="wordCount" content="1373">
+  <meta itemprop="image" content="https://krshrimali.github.io/">
+  <meta itemprop="keywords" content="Development,Coding,Cpp,Notes,Pytorch-Cpp,Libtorch">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://krshrimali.github.io/">
+  <meta name="twitter:title" content="Classifying Dogs vs Cats using PyTorch C&#43;&#43; API: Part-1">
+  <meta name="twitter:description" content="Hi Everyone! So excited to be back with another blog in the series of PyTorch C&#43;&#43; Blogs.
+Today, we are going to see a practical example of applying a CNN to a Custom Dataset - Dogs vs Cats. This is going to be a short post of showing results and discussion about hyperparameters and loss functions for the task, as code snippets and explanation has been provided here, here and here.">
 
 
 
@@ -71,18 +77,7 @@ Today, we are going to see a practical example of applying a CNN to a Custom Dat
 
 
     
-<script>
-var doNotTrack = false;
-if (!doNotTrack) {
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-	ga('create', 'UA-146662543-1', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
+
 
 
     </head>
@@ -111,7 +106,6 @@ if (!doNotTrack) {
 
 
         <span class="header__right">
-            
                 <nav class="menu">
     <ul class="menu__inner"><li><a href="https://krshrimali.github.io/about">About</a></li><li><a href="https://krshrimali.github.io/posts">Blog</a></li>
     </ul>
@@ -123,7 +117,6 @@ if (!doNotTrack) {
                         <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
                     </svg>
                 </span>
-            
         </span>
     </span>
 </header>
@@ -172,14 +165,14 @@ if (!doNotTrack) {
       <div class="post-content">
         <p>Hi Everyone! So excited to be back with another blog in the series of PyTorch C++ Blogs.</p>
 <p>Today, we are going to see a practical example of applying a CNN to a Custom Dataset - Dogs vs Cats. This is going to be a short post of showing results and discussion about hyperparameters and loss functions for the task, as code snippets and explanation has been provided <a href="https://krshrimali.github.io/Training-Network-Using-Custom-Dataset-PyTorch-CPP/">here</a>, <a href="https://krshrimali.github.io/Custom-Data-Loading-Using-PyTorch-CPP-API/">here</a> and <a href="https://krshrimali.github.io/PyTorch-C++-API/">here</a>.</p>
-<p><img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/cover-images/Cover-Dogs-Cats.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/cover-images/Cover-Dogs-Cats.jpg"></p>
 <p><strong>Note</strong>: This is Part-1 of the blog on Dogs vs Cats Classification using PyTorch C++ API.</p>
 <h2 id="dataset-overview">Dataset Overview</h2>
 <p>Let&rsquo;s have a look at the dataset and it&rsquo;s statistics. <strong>Dogs vs Cats</strong> dataset has been taken from the famous <a href="https://www.kaggle.com/c/dogs-vs-cats">Kaggle Competition</a>.</p>
 <p>The training set contains 25k images combined of dogs and cats. The data can be downloaded from <a href="https://www.kaggle.com/c/dogs-vs-cats/data">this</a> link.</p>
 <p>Let&rsquo;s have a look at sample of the data:</p>
-<p><img src="https://raw.githubusercontent.com/krshrimali/krshrimali.github.io/master/assets/dogs-dataset.jpg" alt="Figure 1: Sample of Dog Images in the Dataset"></p>
-<p><img src="https://raw.githubusercontent.com/krshrimali/krshrimali.github.io/master/assets/cats-dataset.jpg" alt="Figure 2: Sample of Cat Images in the Dataset"></p>
+<p><img alt="Figure 1: Sample of Dog Images in the Dataset" src="https://raw.githubusercontent.com/krshrimali/krshrimali.github.io/master/assets/dogs-dataset.jpg"></p>
+<p><img alt="Figure 2: Sample of Cat Images in the Dataset" src="https://raw.githubusercontent.com/krshrimali/krshrimali.github.io/master/assets/cats-dataset.jpg"></p>
 <p>As we can see, the dataset contains images of cats and dogs with multiple instances in the same sample as well.</p>
 <h2 id="loading-data">Loading Data</h2>
 <p>Although we have discussed this before (<a href="https://krshrimali.github.io/Custom-Data-Loading-Using-PyTorch-CPP-API/">here</a>), but let&rsquo;s just see how we load the data. Since this is a binary classification problem (2 classes: Dog and Cat), we will have labels as 0 (for a Cat) and 1 (for a Dog). The data comes in two zip files:</p>
@@ -522,7 +515,7 @@ if (!doNotTrack) {
 
 
 
-<script type="text/javascript" src="https://krshrimali.github.io/bundle.min.46e438bd2eca7eb6358c700b40f6f56b22ab0b92503ecc11a2d8e4bcc610b8b4da83e5ea3d3e84fdb5f3c3c765744b9f5bbaf43cf5a027910be07ee39a9c12a1.js" integrity="sha512-RuQ4vS7KfrY1jHALQPb1ayKrC5JQPswRotjkvMYQuLTag&#43;XqPT6E/bXzw8dldEufW7r0PPWgJ5EL4H7jmpwSoQ=="></script>
+<script type="text/javascript" src="https://krshrimali.github.io/bundle.min.e89fda0f29b95d33f6f4224dd9e5cf69d84aff3818be2b0d73e731689cc374261b016d17d46f8381962fb4a1577ba3017b1f23509d894f6e66431f988c00889e.js" integrity="sha512-6J/aDym5XTP29CJN2eXPadhK/zgYvisNc&#43;cxaJzDdCYbAW0X1G&#43;DgZYvtKFXe6MBex8jUJ2JT25mQx&#43;YjACIng=="></script>
 
 
 

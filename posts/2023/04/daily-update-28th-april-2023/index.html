@@ -3,10 +3,12 @@
     <head>
         <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="author" content="map[name:Kushashwa Ravi Shrimali]">
-<meta name="description" content="Started my day with talking to my family, and then kicking off work after getting ready. (Note: these blogs are mostly around my personal learning updates, so I&amp;rsquo;ll mostly miss anything that I do at work as that&amp;rsquo;s confidential)
-What is OSI Model | Real World Examples Why this? The answer to: &amp;ldquo;How does the communication work from client to server&amp;rdquo; is very important in backend. I wanted to see if I missed anything from my graduate studies, but nothing much." />
+<meta name="description" content="Started my day with talking to my family, and then kicking off work after getting ready. (Note: these blogs are mostly around my personal learning updates, so I&rsquo;ll mostly miss anything that I do at work as that&rsquo;s confidential)
+What is OSI Model | Real World Examples Why this? The answer to: &ldquo;How does the communication work from client to server&rdquo; is very important in backend. I wanted to see if I missed anything from my graduate studies, but nothing much. This was more like a refresher. Notes: Each operating system has their own implementation of TCP protocol. Linux has it&rsquo;s own for example, and it&rsquo;s open sourced. Can take a look at TCP&rsquo;s source code in Linux source code to understand how checksum correction works. Cloud load balancers: L4 Load Balancer (operates at TCP Level), L7 Load Balnacer (operates at Application Protocol Layer - HTTP/HTTPS) Postgres: Architectural Fundamentals Why this? Going through database design and architectural fundamentals is helpful. I plan to explore CockroachDB soon, but wanted to get some idea about the ones I&rsquo;ve used so far (Postgres for example) Notes: Uses client/server model. PostgreSQL session consists following processes: Server: manages DB files, accepts connections to the DB from client apps, performs DB actions on behalf of clients. DB server process is called postgres Client (frontend): app that wants to perform DB operations. Client/server could be on diff hosts: communicate over TCP/IP n/w connection postgres can handle multiple connections from clients: Forks a new process for each connection The new process and client directly communicate No intervention of postgres server Supervisor server process is always running (daemon process), waiting for client connections Client and child server process can come and go PostgreSQL System Architecture Why this? Just wanted to explore another blog on the same topic to see if I missed anything. Tbh, nothing much. Notes: PostgreSQL: process-per-transaction model postgres server process: Managed by postmaster, central coordinating process Responsibilities: Initializing, terminating the server Handling connection requests from the new clients Recovery Run background processes Shared Memory: Reserved for DB caching and Transactional Log Caching Shared Disk Buffer Shared Tables Uses same set of tables to host multiple client data (TODO: how?) Backend Processes: Client interacts with backend processes (submits queries and receiving queries result) Multiple backend servers executing queries concurrently Each backend server: will handle only a single query at a time access data from main memory buffer pool (placed in shared memory) Thank you! :) See y&rsquo;all in the next blog.
+" />
 <meta name="keywords" content=", blog, updates" />
 <meta name="robots" content="noodp" />
 <meta name="theme-color" content="#252627" />
@@ -23,7 +25,9 @@ What is OSI Model | Real World Examples Why this? The answer to: &amp;ldquo;How 
 
 
 
-<link rel="stylesheet" href="https://krshrimali.github.io/main.949191c1dcc9c4a887997048b240354e47152016d821198f89448496ba42e491.css" integrity="sha256-lJGRwdzJxKiHmXBIskA1TkcVIBbYIRmPiUSElrpC5JE=">
+  <link rel="stylesheet" href="https://krshrimali.github.io/main.min.244183cde1a38e0b08f82c11791181288f9aac1cc9618cd6f4e9e7710c5768ba.css" integrity="sha256-JEGDzeGjjgsI&#43;CwReRGBKI&#43;arBzJYYzW9OnncQxXaLo=" crossorigin="anonymous">
+
+
 
 
 
@@ -36,16 +40,21 @@ What is OSI Model | Real World Examples Why this? The answer to: &amp;ldquo;How 
     <meta name="msapplication-TileColor" content="">
 
 
-<meta itemprop="name" content="Daily Update: 28th April 2023">
-<meta itemprop="description" content="Started my day with talking to my family, and then kicking off work after getting ready. (Note: these blogs are mostly around my personal learning updates, so I&rsquo;ll mostly miss anything that I do at work as that&rsquo;s confidential)
-What is OSI Model | Real World Examples Why this? The answer to: &ldquo;How does the communication work from client to server&rdquo; is very important in backend. I wanted to see if I missed anything from my graduate studies, but nothing much."><meta itemprop="datePublished" content="2023-04-28T00:00:00+00:00" />
-<meta itemprop="dateModified" content="2023-04-28T00:00:00+00:00" />
-<meta itemprop="wordCount" content="414"><meta itemprop="image" content="https://krshrimali.github.io" />
-<meta itemprop="keywords" content="blog,updates," />
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="https://krshrimali.github.io" /><meta name="twitter:title" content="Daily Update: 28th April 2023"/>
-<meta name="twitter:description" content="Started my day with talking to my family, and then kicking off work after getting ready. (Note: these blogs are mostly around my personal learning updates, so I&rsquo;ll mostly miss anything that I do at work as that&rsquo;s confidential)
-What is OSI Model | Real World Examples Why this? The answer to: &ldquo;How does the communication work from client to server&rdquo; is very important in backend. I wanted to see if I missed anything from my graduate studies, but nothing much."/>
+
+  <meta itemprop="name" content="Daily Update: 28th April 2023">
+  <meta itemprop="description" content="Started my day with talking to my family, and then kicking off work after getting ready. (Note: these blogs are mostly around my personal learning updates, so I’ll mostly miss anything that I do at work as that’s confidential)
+What is OSI Model | Real World Examples Why this? The answer to: “How does the communication work from client to server” is very important in backend. I wanted to see if I missed anything from my graduate studies, but nothing much. This was more like a refresher. Notes: Each operating system has their own implementation of TCP protocol. Linux has it’s own for example, and it’s open sourced. Can take a look at TCP’s source code in Linux source code to understand how checksum correction works. Cloud load balancers: L4 Load Balancer (operates at TCP Level), L7 Load Balnacer (operates at Application Protocol Layer - HTTP/HTTPS) Postgres: Architectural Fundamentals Why this? Going through database design and architectural fundamentals is helpful. I plan to explore CockroachDB soon, but wanted to get some idea about the ones I’ve used so far (Postgres for example) Notes: Uses client/server model. PostgreSQL session consists following processes: Server: manages DB files, accepts connections to the DB from client apps, performs DB actions on behalf of clients. DB server process is called postgres Client (frontend): app that wants to perform DB operations. Client/server could be on diff hosts: communicate over TCP/IP n/w connection postgres can handle multiple connections from clients: Forks a new process for each connection The new process and client directly communicate No intervention of postgres server Supervisor server process is always running (daemon process), waiting for client connections Client and child server process can come and go PostgreSQL System Architecture Why this? Just wanted to explore another blog on the same topic to see if I missed anything. Tbh, nothing much. Notes: PostgreSQL: process-per-transaction model postgres server process: Managed by postmaster, central coordinating process Responsibilities: Initializing, terminating the server Handling connection requests from the new clients Recovery Run background processes Shared Memory: Reserved for DB caching and Transactional Log Caching Shared Disk Buffer Shared Tables Uses same set of tables to host multiple client data (TODO: how?) Backend Processes: Client interacts with backend processes (submits queries and receiving queries result) Multiple backend servers executing queries concurrently Each backend server: will handle only a single query at a time access data from main memory buffer pool (placed in shared memory) Thank you! :) See y’all in the next blog.">
+  <meta itemprop="datePublished" content="2023-04-28T00:00:00+00:00">
+  <meta itemprop="dateModified" content="2023-04-28T00:00:00+00:00">
+  <meta itemprop="wordCount" content="414">
+  <meta itemprop="image" content="https://krshrimali.github.io/">
+  <meta itemprop="keywords" content="Blog,Updates">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://krshrimali.github.io/">
+  <meta name="twitter:title" content="Daily Update: 28th April 2023">
+  <meta name="twitter:description" content="Started my day with talking to my family, and then kicking off work after getting ready. (Note: these blogs are mostly around my personal learning updates, so I’ll mostly miss anything that I do at work as that’s confidential)
+What is OSI Model | Real World Examples Why this? The answer to: “How does the communication work from client to server” is very important in backend. I wanted to see if I missed anything from my graduate studies, but nothing much. This was more like a refresher. Notes: Each operating system has their own implementation of TCP protocol. Linux has it’s own for example, and it’s open sourced. Can take a look at TCP’s source code in Linux source code to understand how checksum correction works. Cloud load balancers: L4 Load Balancer (operates at TCP Level), L7 Load Balnacer (operates at Application Protocol Layer - HTTP/HTTPS) Postgres: Architectural Fundamentals Why this? Going through database design and architectural fundamentals is helpful. I plan to explore CockroachDB soon, but wanted to get some idea about the ones I’ve used so far (Postgres for example) Notes: Uses client/server model. PostgreSQL session consists following processes: Server: manages DB files, accepts connections to the DB from client apps, performs DB actions on behalf of clients. DB server process is called postgres Client (frontend): app that wants to perform DB operations. Client/server could be on diff hosts: communicate over TCP/IP n/w connection postgres can handle multiple connections from clients: Forks a new process for each connection The new process and client directly communicate No intervention of postgres server Supervisor server process is always running (daemon process), waiting for client connections Client and child server process can come and go PostgreSQL System Architecture Why this? Just wanted to explore another blog on the same topic to see if I missed anything. Tbh, nothing much. Notes: PostgreSQL: process-per-transaction model postgres server process: Managed by postmaster, central coordinating process Responsibilities: Initializing, terminating the server Handling connection requests from the new clients Recovery Run background processes Shared Memory: Reserved for DB caching and Transactional Log Caching Shared Disk Buffer Shared Tables Uses same set of tables to host multiple client data (TODO: how?) Backend Processes: Client interacts with backend processes (submits queries and receiving queries result) Multiple backend servers executing queries concurrently Each backend server: will handle only a single query at a time access data from main memory buffer pool (placed in shared memory) Thank you! :) See y’all in the next blog.">
 
 
 
@@ -66,18 +75,7 @@ What is OSI Model | Real World Examples Why this? The answer to: &ldquo;How does
 
 
     
-<script>
-var doNotTrack = false;
-if (!doNotTrack) {
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-	ga('create', 'UA-146662543-1', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
+
 
 
     </head>
@@ -106,7 +104,6 @@ if (!doNotTrack) {
 
 
         <span class="header__right">
-            
                 <nav class="menu">
     <ul class="menu__inner"><li><a href="https://krshrimali.github.io/about">About</a></li><li><a href="https://krshrimali.github.io/posts">Blog</a></li>
     </ul>
@@ -118,7 +115,6 @@ if (!doNotTrack) {
                         <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
                     </svg>
                 </span>
-            
         </span>
     </span>
 </header>
@@ -360,7 +356,7 @@ if (!doNotTrack) {
 
 
 
-<script type="text/javascript" src="https://krshrimali.github.io/bundle.min.46e438bd2eca7eb6358c700b40f6f56b22ab0b92503ecc11a2d8e4bcc610b8b4da83e5ea3d3e84fdb5f3c3c765744b9f5bbaf43cf5a027910be07ee39a9c12a1.js" integrity="sha512-RuQ4vS7KfrY1jHALQPb1ayKrC5JQPswRotjkvMYQuLTag&#43;XqPT6E/bXzw8dldEufW7r0PPWgJ5EL4H7jmpwSoQ=="></script>
+<script type="text/javascript" src="https://krshrimali.github.io/bundle.min.e89fda0f29b95d33f6f4224dd9e5cf69d84aff3818be2b0d73e731689cc374261b016d17d46f8381962fb4a1577ba3017b1f23509d894f6e66431f988c00889e.js" integrity="sha512-6J/aDym5XTP29CJN2eXPadhK/zgYvisNc&#43;cxaJzDdCYbAW0X1G&#43;DgZYvtKFXe6MBex8jUJ2JT25mQx&#43;YjACIng=="></script>
 
 
 

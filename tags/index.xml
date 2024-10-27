@@ -4,27 +4,34 @@
     <title>Tags on Kushashwa Ravi Shrimali (Kush)</title>
     <link>https://krshrimali.github.io/tags/</link>
     <description>Recent content in Tags on Kushashwa Ravi Shrimali (Kush)</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Sun, 17 Mar 2024 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 27 Oct 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://krshrimali.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>motivation</title>
+      <title>Blog</title>
+      <link>https://krshrimali.github.io/tags/blog/</link>
+      <pubDate>Sun, 27 Oct 2024 00:00:00 +0000</pubDate>
+      <guid>https://krshrimali.github.io/tags/blog/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Motivation</title>
       <link>https://krshrimali.github.io/tags/motivation/</link>
       <pubDate>Sun, 17 Mar 2024 00:00:00 +0000</pubDate>
       <guid>https://krshrimali.github.io/tags/motivation/</guid>
       <description></description>
     </item>
     <item>
-      <title>personal</title>
+      <title>Personal</title>
       <link>https://krshrimali.github.io/tags/personal/</link>
       <pubDate>Sun, 17 Mar 2024 00:00:00 +0000</pubDate>
       <guid>https://krshrimali.github.io/tags/personal/</guid>
       <description></description>
     </item>
     <item>
-      <title>deep learning</title>
+      <title>Deep Learning</title>
       <link>https://krshrimali.github.io/tags/deep-learning/</link>
       <pubDate>Mon, 26 Feb 2024 00:00:00 +0000</pubDate>
       <guid>https://krshrimali.github.io/tags/deep-learning/</guid>
@@ -38,42 +45,35 @@
       <description></description>
     </item>
     <item>
-      <title>project</title>
+      <title>Project</title>
       <link>https://krshrimali.github.io/tags/project/</link>
       <pubDate>Mon, 26 Feb 2024 00:00:00 +0000</pubDate>
       <guid>https://krshrimali.github.io/tags/project/</guid>
       <description></description>
     </item>
     <item>
-      <title>rust</title>
+      <title>Rust</title>
       <link>https://krshrimali.github.io/tags/rust/</link>
       <pubDate>Mon, 26 Feb 2024 00:00:00 +0000</pubDate>
       <guid>https://krshrimali.github.io/tags/rust/</guid>
       <description></description>
     </item>
     <item>
-      <title>blog</title>
-      <link>https://krshrimali.github.io/tags/blog/</link>
-      <pubDate>Sun, 14 Jan 2024 00:00:00 +0000</pubDate>
-      <guid>https://krshrimali.github.io/tags/blog/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>updates</title>
+      <title>Updates</title>
       <link>https://krshrimali.github.io/tags/updates/</link>
       <pubDate>Wed, 03 May 2023 00:00:00 +0000</pubDate>
       <guid>https://krshrimali.github.io/tags/updates/</guid>
       <description></description>
     </item>
     <item>
-      <title>app</title>
+      <title>App</title>
       <link>https://krshrimali.github.io/tags/app/</link>
       <pubDate>Mon, 12 Dec 2022 00:00:00 +0000</pubDate>
       <guid>https://krshrimali.github.io/tags/app/</guid>
       <description></description>
     </item>
     <item>
-      <title>coding</title>
+      <title>Coding</title>
       <link>https://krshrimali.github.io/tags/coding/</link>
       <pubDate>Mon, 12 Dec 2022 00:00:00 +0000</pubDate>
       <guid>https://krshrimali.github.io/tags/coding/</guid>

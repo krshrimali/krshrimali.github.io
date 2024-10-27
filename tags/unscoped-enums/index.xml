@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>unscoped enums on Kushashwa Ravi Shrimali (Kush)</title>
+    <title>Unscoped Enums on Kushashwa Ravi Shrimali (Kush)</title>
     <link>https://krshrimali.github.io/tags/unscoped-enums/</link>
-    <description>Recent content in unscoped enums on Kushashwa Ravi Shrimali (Kush)</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in Unscoped Enums on Kushashwa Ravi Shrimali (Kush)</description>
+    <generator>Hugo</generator>
     <language>en</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
     <lastBuildDate>Sat, 14 Aug 2021 00:00:00 +0000</lastBuildDate>
@@ -14,7 +14,7 @@
       <link>https://krshrimali.github.io/posts/2021/08/prefer-scoped-enums-over-unscoped-enums-notes/</link>
       <pubDate>Sat, 14 Aug 2021 00:00:00 +0000</pubDate>
       <guid>https://krshrimali.github.io/posts/2021/08/prefer-scoped-enums-over-unscoped-enums-notes/</guid>
-      <description>Scoped vs Unscoped Enums General rule: declaring a name inside curly braces is limited to that scope. Exception: C++-98 style Enums NOTE&#xA;My notes on Chapter 3, Item 10 of Effective Modern C++ written by Scott Meyers.&#xA;Some (or even all) of the text can be similar to what you see in the book, as these are notes: I&amp;rsquo;ve tried not to be unnecessarily creative with my words. :)&#xA;// You can&amp;#39;t declare black, white, red in the scope containing the enum Color enum Color { black, white, red; }; auto white = false; // error: white already declared in this scope Unscoped Enums have implicit type conversions for their enumerators.</description>
+      <description>&lt;h2 id=&#34;scoped-vs-unscoped-enums&#34;&gt;Scoped vs Unscoped Enums&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;General rule:&lt;/strong&gt; declaring a name inside curly braces is limited to that scope.&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Exception:&lt;/strong&gt; C++-98 style Enums&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/krshrimali/blog/main/assets/cover-images/Unscoped-Scoped-Enums.png&#34;&gt;&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;p&gt;&lt;strong&gt;NOTE&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;My notes on Chapter 3, Item 10 of Effective Modern C++ written by Scott Meyers.&lt;/p&gt;&#xA;&lt;p&gt;Some (or even all) of the text can be similar to what you see in the book, as these are notes: I&amp;rsquo;ve tried not to be unnecessarily creative with my words. :)&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
