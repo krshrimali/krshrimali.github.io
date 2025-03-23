@@ -7,8 +7,15 @@
     <generator>Hugo</generator>
     <language>en</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Mon, 12 Dec 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 23 Mar 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://krshrimali.github.io/tags/development/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Progress Update: Context Pilot (Revamping)</title>
+      <link>https://krshrimali.github.io/posts/2025/03/progress-update-context-pilot-revamping/</link>
+      <pubDate>Sun, 23 Mar 2025 00:00:00 +0000</pubDate>
+      <guid>https://krshrimali.github.io/posts/2025/03/progress-update-context-pilot-revamping/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;ve had many iterations on this project that I&amp;rsquo;m going to talk about today, over the last 1.5-2 years. There are good and bad things about it. Good is that I&amp;rsquo;m persisting with completing it one day, bad is that I&amp;rsquo;ve not done it yet.&lt;/p&gt;&#xA;&lt;p&gt;In this blog, I&amp;rsquo;ll quickly touch upon why it has taken so much time and what&amp;rsquo;s happening behind the scenes.&lt;/p&gt;&#xA;&lt;h2 id=&#34;about-the-project&#34;&gt;About the project:&lt;/h2&gt;&#xA;&lt;p&gt;For a piece of code, this project is going to help you with questions like:&lt;/p&gt;</description>
+    </item>
     <item>
       <title>I started building an app using Rust and here is how it went...</title>
       <link>https://krshrimali.github.io/posts/2022/12/i-started-building-an-app-using-rust-and-here-is-how-it-went.../</link>
@@ -71,13 +78,6 @@
       <pubDate>Sat, 14 Aug 2021 00:00:00 +0000</pubDate>
       <guid>https://krshrimali.github.io/posts/2021/08/prefer-scoped-enums-over-unscoped-enums-notes/</guid>
       <description>&lt;h2 id=&#34;scoped-vs-unscoped-enums&#34;&gt;Scoped vs Unscoped Enums&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;General rule:&lt;/strong&gt; declaring a name inside curly braces is limited to that scope.&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Exception:&lt;/strong&gt; C++-98 style Enums&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/krshrimali/blog/main/assets/cover-images/Unscoped-Scoped-Enums.png&#34;&gt;&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;p&gt;&lt;strong&gt;NOTE&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;My notes on Chapter 3, Item 10 of Effective Modern C++ written by Scott Meyers.&lt;/p&gt;&#xA;&lt;p&gt;Some (or even all) of the text can be similar to what you see in the book, as these are notes: I&amp;rsquo;ve tried not to be unnecessarily creative with my words. :)&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Union Find Problem, and a naive implementation (C&#43;&#43;)</title>
-      <link>https://krshrimali.github.io/posts/2021/08/union-find-problem-and-a-naive-implementation-c-/</link>
-      <pubDate>Sat, 14 Aug 2021 00:00:00 +0000</pubDate>
-      <guid>https://krshrimali.github.io/posts/2021/08/union-find-problem-and-a-naive-implementation-c-/</guid>
-      <description>&lt;p&gt;Hi Everyone, today I want to talk about Union Find Problem. This is going to be a series covering:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Union Find Problem (this blog)&lt;/li&gt;&#xA;&lt;li&gt;Solutions to Union Find (1): Quick Find&lt;/li&gt;&#xA;&lt;li&gt;Solutions to Union Find (2): Quick Union&lt;/li&gt;&#xA;&lt;li&gt;Solutions to Union Find (3): Weighted Quick Union&lt;/li&gt;&#xA;&lt;li&gt;Applications of Union Find (perculation and more)&lt;/li&gt;&#xA;&lt;li&gt;Cool project using Union Find&lt;/li&gt;&#xA;&lt;li&gt;Solving some competitive programming questions using Union Find&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/krshrimali/blog/main/assets/cover-images/Union-Find-Intro.png&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;Each blog will try to cover very basic concepts behind the topic, and also what it&amp;rsquo;s all about.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

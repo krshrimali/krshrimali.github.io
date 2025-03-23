@@ -6,8 +6,61 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
         <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-        <lastBuildDate>Sun, 27 Oct 2024 00:00:00 +0000</lastBuildDate>
+        <lastBuildDate>Sun, 23 Mar 2025 00:00:00 +0000</lastBuildDate>
         <atom:link href="https://krshrimali.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+        
+        <item>
+            <title>Progress Update: Context Pilot (Revamping)</title>
+            <link>https://krshrimali.github.io/posts/2025/03/progress-update-context-pilot-revamping/</link>
+            <pubDate>Sun, 23 Mar 2025 00:00:00 +0000</pubDate>
+            
+            <guid>https://krshrimali.github.io/posts/2025/03/progress-update-context-pilot-revamping/</guid>
+            <description>&lt;p&gt;I&amp;rsquo;ve had many iterations on this project that I&amp;rsquo;m going to talk about today, over the last 1.5-2 years. There are good and bad things about it. Good is that I&amp;rsquo;m persisting with completing it one day, bad is that I&amp;rsquo;ve not done it yet.&lt;/p&gt;
+&lt;p&gt;In this blog, I&amp;rsquo;ll quickly touch upon why it has taken so much time and what&amp;rsquo;s happening behind the scenes.&lt;/p&gt;
+&lt;h2 id=&#34;about-the-project&#34;&gt;About the project:&lt;/h2&gt;
+&lt;p&gt;For a piece of code, this project is going to help you with questions like:&lt;/p&gt;</description>
+            <content type="html"><![CDATA[<p>I&rsquo;ve had many iterations on this project that I&rsquo;m going to talk about today, over the last 1.5-2 years. There are good and bad things about it. Good is that I&rsquo;m persisting with completing it one day, bad is that I&rsquo;ve not done it yet.</p>
+<p>In this blog, I&rsquo;ll quickly touch upon why it has taken so much time and what&rsquo;s happening behind the scenes.</p>
+<h2 id="about-the-project">About the project:</h2>
+<p>For a piece of code, this project is going to help you with questions like:</p>
+<p>&ldquo;Where is this logic tested?&rdquo;
+&ldquo;Which other features does this logic mostly pair with?&rdquo;
+&ldquo;What other things are dependent on this logic?&rdquo;
+&ldquo;Who is the right person to reach out to, for any queries?&rdquo;</p>
+<p>I hope these points are enough motivation for someone to understand the importance of this project.</p>
+<h2 id="progress">Progress:</h2>
+<p>I&rsquo;ve had a <a href="https://github.com/krshrimali/context-pilot-rs">working model</a> in 2023 when I started, and plugins ready for <a href="https://github.com/krshrimali/context-pilot.nvim">neovim</a> and <a href="https://github.com/krshrimali/context-pilot-vscode">vscode</a> but I realized this project - for a better direction - needs to act like an LSP. Do a lot of async work, like indexing, and make sure results are quicker and reliable.</p>
+<p>Now, converting the initial binary code into server, wasn&rsquo;t easy at all, for several reasons:</p>
+<ol>
+<li>I started with a simple JSON as the DB, for initial PoC. JSON is not scalable, but that wasn&rsquo;t the bottleneck back then. Bottelneck was reading a huge JSON file - so the immediate solution was to use DB Sharding concept - divide your huge file into chunks, and know which one to read when a user queries.</li>
+<li>Making this a proper async server hasn&rsquo;t been easy. Rust (or for that matter, any language) async programming comes with its own debugging issues, and complex code. I&rsquo;ve had to rewrite the codebase several times to make it work.</li>
+</ol>
+<p>And of course, apart from the technical excuses, there has been life:</p>
+<ol>
+<li>Work has kept me very busy, for good. Of course, no excuses but that&rsquo;s what pays me and I like being religious towards it - so yep, I enjoy spending most of my time there.</li>
+<li>Saturation - Of course, working on a single thing for 2 years can get tiring. I&rsquo;ve had some other projects picked up, and targeting physical fitness as well, so yes - I&rsquo;ve not really spent 2 years on this project only :D obviously!</li>
+</ol>
+<p>Anyways, there is some motivation again to help finish this. Mostly for the reasons that I want to use it personally, and I think it is going to be of huge help to me at work and personally as well.</p>
+<h2 id="whats-next">What&rsquo;s next?</h2>
+<p>I&rsquo;m going to revamp this whole project. The way it was designed before, doesn&rsquo;t seem right to me anymore. I think I had too many API details exposed on the Database level for the sake of making it work:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#75715e">#[derive(Default, Clone)]</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">DB</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">pub</span> index: <span style="color:#66d9ef">u32</span>,          <span style="color:#75715e">// The line of code that you are at, right now? TODO:
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">pub</span> folder_path: String, <span style="color:#75715e">// Current folder path that this DB is processing, or the binary is running
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">pub</span> curr_items: <span style="color:#66d9ef">u32</span>,     <span style="color:#75715e">// TODO:
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">pub</span> mapping_file_name: String, <span style="color:#75715e">// This is for storing which file is in which folder/file? &lt;-- TODO:
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">pub</span> current_data: <span style="color:#a6e22e">DBType</span>, <span style="color:#75715e">// The data that we have from the loaded DB into our inhouse member
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">pub</span> db_file_path: String,
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">pub</span> mapping_file_path: String,
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">pub</span> mapping_data: <span style="color:#a6e22e">MappingDBType</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">pub</span> curr_file_path: String,
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">pub</span> workspace_path: String,
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>As you can already see, this is just too much detail for - even me to understand after some time. I know, at some point of time, even if this works, I&rsquo;m going to face the issue of &ldquo;Wait, what does this mean? Why did I write it?&rdquo;. So, better fix it now. It&rsquo;s also a code quality thing I&rsquo;ve in mind that I hate debugging things further. I&rsquo;ve had some luck while fixing <a href="https://github.com/krshrimali/context-pilot-rs/commit/d0aa6bea5c0ed0101c2b37c3ac30b6f959ba8aa7">here</a> where I was at least able to find the bug, but then fixing it would just need me to fix the DB asynchronous writing and reading.</p>
+<p>It&rsquo;s not ergonomic for me and the readers as well to look at the piece of code in the current state and understand what caused what :)</p>
+<p>I&rsquo;ll share more technical details in the next blog, but for now, this would be it.</p>
+]]></content>
+        </item>
         
         <item>
             <title>Where are Linked Lists used?</title>
