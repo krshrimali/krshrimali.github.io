@@ -7,17 +7,45 @@
 <meta name="robots" content="index, follow">
 <title>Common Collections (Vector and Strings) in Rust [Notes] | Kushashwa Ravi Shrimali (Kush)</title>
 <meta name="keywords" content="development, coding, rust, notes">
-<meta name="description" content="Chapter 8: Common Collections (Hash Maps)
-In the previous blog, I shared my notes on strings and vectors in Rust, and in this post we&rsquo;ll cover Hash Maps. I personally have found their use in competitive programming, a lot, but hopefully as we move on, we&rsquo;ll see lots of use-cases in real-life problems.
-Hash Maps
-Hash Maps: HashMap&lt;K, V&gt;
+<meta name="description" content="Chapter 8: Common Collections
+These are my notes from the chapter-8 of rust book. Please scroll down to the bottom (Note) section if you are curious about what this is.
+8.1: Storing Lists of Values with Vectors
+Vec&lt;T&gt; collection type discussed, aka vector:
+* By default contiguous.
+* All values should be of same type.
+// Creation
+let v: Vec&lt;i32&gt; = Vec::new();
 
-You can&rsquo;t access using indices, but through keys.
-Hash Maps store data on heap.
-Hash Maps are homogenous (all keys must have same type, and all values must have same type).
-Use std::collections::HashMap to bring HashMap to scope.
+// vec! macro for convenience
+// default integer type is i32
+let v = vec![1, 2, 3];
 
-Creating a New Hash Map">
+// Modifying
+let mut v = Vec::new();
+// Rust infers the type from the elements pushed here
+v.push(5);
+v.push(6);
+// ...
+
+// Dropping
+// a vector is freed, when it goes out of scope
+{
+    let v = vec![1, 2, 3, 4];
+    // ...
+} // &lt;-- v goes out of scope here, and hence memory is freed as well
+
+// Reading Elements of Vectors
+let v = vec![1, 2, 3, 4, 5];
+// First way:
+let third: &amp;i32 = &amp;v[2];
+println!(&#34;The third element is: {}&#34;, third);
+
+// Second way:
+match v.get(2) {
+    Some(num) =&gt; println!(&#34;The third element is: {}&#34;, num),
+    None =&gt; println!(&#34;There is no third element.&#34;),
+}
+.get(&amp;index) method allows you to handle out of range errors.">
 <meta name="author" content="map[name:Kushashwa Ravi Shrimali]">
 <link rel="canonical" href="https://krshrimali.github.io/posts/2022/01/common-collections-vector-and-strings-in-rust-notes/">
 <link crossorigin="anonymous" href="https://krshrimali.github.io/assets/css/stylesheet.8fe10233a706bc87f2e08b3cf97b8bd4c0a80f10675a143675d59212121037c0.css" integrity="sha256-j&#43;ECM6cGvIfy4Is8&#43;XuL1MCoDxBnWhQ2ddWSEhIQN8A=" rel="preload stylesheet" as="style">
@@ -68,9 +96,9 @@ Creating a New Hash Map">
 </noscript><meta property="og:url" content="https://krshrimali.github.io/posts/2022/01/common-collections-vector-and-strings-in-rust-notes/">
   <meta property="og:site_name" content="Kushashwa Ravi Shrimali (Kush)">
   <meta property="og:title" content="Common Collections (Vector and Strings) in Rust [Notes]">
-  <meta property="og:description" content="Chapter 8: Common Collections (Hash Maps) In the previous blog, I shared my notes on strings and vectors in Rust, and in this post we’ll cover Hash Maps. I personally have found their use in competitive programming, a lot, but hopefully as we move on, we’ll see lots of use-cases in real-life problems.
-Hash Maps Hash Maps: HashMap&lt;K, V&gt;
-You can’t access using indices, but through keys. Hash Maps store data on heap. Hash Maps are homogenous (all keys must have same type, and all values must have same type). Use std::collections::HashMap to bring HashMap to scope. Creating a New Hash Map">
+  <meta property="og:description" content="Chapter 8: Common Collections These are my notes from the chapter-8 of rust book. Please scroll down to the bottom (Note) section if you are curious about what this is.
+8.1: Storing Lists of Values with Vectors Vec&lt;T&gt; collection type discussed, aka vector: * By default contiguous. * All values should be of same type.
+// Creation let v: Vec&lt;i32&gt; = Vec::new(); // vec! macro for convenience // default integer type is i32 let v = vec![1, 2, 3]; // Modifying let mut v = Vec::new(); // Rust infers the type from the elements pushed here v.push(5); v.push(6); // ... // Dropping // a vector is freed, when it goes out of scope { let v = vec![1, 2, 3, 4]; // ... } // &lt;-- v goes out of scope here, and hence memory is freed as well // Reading Elements of Vectors let v = vec![1, 2, 3, 4, 5]; // First way: let third: &amp;i32 = &amp;v[2]; println!(&#34;The third element is: {}&#34;, third); // Second way: match v.get(2) { Some(num) =&gt; println!(&#34;The third element is: {}&#34;, num), None =&gt; println!(&#34;There is no third element.&#34;), } .get(&amp;index) method allows you to handle out of range errors.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -82,17 +110,45 @@ You can’t access using indices, but through keys. Hash Maps store data on heap
     <meta property="article:tag" content="Notes">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Common Collections (Vector and Strings) in Rust [Notes]">
-<meta name="twitter:description" content="Chapter 8: Common Collections (Hash Maps)
-In the previous blog, I shared my notes on strings and vectors in Rust, and in this post we&rsquo;ll cover Hash Maps. I personally have found their use in competitive programming, a lot, but hopefully as we move on, we&rsquo;ll see lots of use-cases in real-life problems.
-Hash Maps
-Hash Maps: HashMap&lt;K, V&gt;
+<meta name="twitter:description" content="Chapter 8: Common Collections
+These are my notes from the chapter-8 of rust book. Please scroll down to the bottom (Note) section if you are curious about what this is.
+8.1: Storing Lists of Values with Vectors
+Vec&lt;T&gt; collection type discussed, aka vector:
+* By default contiguous.
+* All values should be of same type.
+// Creation
+let v: Vec&lt;i32&gt; = Vec::new();
 
-You can&rsquo;t access using indices, but through keys.
-Hash Maps store data on heap.
-Hash Maps are homogenous (all keys must have same type, and all values must have same type).
-Use std::collections::HashMap to bring HashMap to scope.
+// vec! macro for convenience
+// default integer type is i32
+let v = vec![1, 2, 3];
 
-Creating a New Hash Map">
+// Modifying
+let mut v = Vec::new();
+// Rust infers the type from the elements pushed here
+v.push(5);
+v.push(6);
+// ...
+
+// Dropping
+// a vector is freed, when it goes out of scope
+{
+    let v = vec![1, 2, 3, 4];
+    // ...
+} // &lt;-- v goes out of scope here, and hence memory is freed as well
+
+// Reading Elements of Vectors
+let v = vec![1, 2, 3, 4, 5];
+// First way:
+let third: &amp;i32 = &amp;v[2];
+println!(&#34;The third element is: {}&#34;, third);
+
+// Second way:
+match v.get(2) {
+    Some(num) =&gt; println!(&#34;The third element is: {}&#34;, num),
+    None =&gt; println!(&#34;There is no third element.&#34;),
+}
+.get(&amp;index) method allows you to handle out of range errors.">
 
 
 <script type="application/ld+json">
@@ -121,12 +177,12 @@ Creating a New Hash Map">
   "@type": "BlogPosting",
   "headline": "Common Collections (Vector and Strings) in Rust [Notes]",
   "name": "Common Collections (Vector and Strings) in Rust [Notes]",
-  "description": "Chapter 8: Common Collections (Hash Maps) In the previous blog, I shared my notes on strings and vectors in Rust, and in this post we\u0026rsquo;ll cover Hash Maps. I personally have found their use in competitive programming, a lot, but hopefully as we move on, we\u0026rsquo;ll see lots of use-cases in real-life problems.\nHash Maps Hash Maps: HashMap\u0026lt;K, V\u0026gt;\nYou can\u0026rsquo;t access using indices, but through keys. Hash Maps store data on heap. Hash Maps are homogenous (all keys must have same type, and all values must have same type). Use std::collections::HashMap to bring HashMap to scope. Creating a New Hash Map\n",
+  "description": "Chapter 8: Common Collections These are my notes from the chapter-8 of rust book. Please scroll down to the bottom (Note) section if you are curious about what this is.\n8.1: Storing Lists of Values with Vectors Vec\u0026lt;T\u0026gt; collection type discussed, aka vector: * By default contiguous. * All values should be of same type.\n// Creation let v: Vec\u0026lt;i32\u0026gt; = Vec::new(); // vec! macro for convenience // default integer type is i32 let v = vec![1, 2, 3]; // Modifying let mut v = Vec::new(); // Rust infers the type from the elements pushed here v.push(5); v.push(6); // ... // Dropping // a vector is freed, when it goes out of scope { let v = vec![1, 2, 3, 4]; // ... } // \u0026lt;-- v goes out of scope here, and hence memory is freed as well // Reading Elements of Vectors let v = vec![1, 2, 3, 4, 5]; // First way: let third: \u0026amp;i32 = \u0026amp;v[2]; println!(\u0026#34;The third element is: {}\u0026#34;, third); // Second way: match v.get(2) { Some(num) =\u0026gt; println!(\u0026#34;The third element is: {}\u0026#34;, num), None =\u0026gt; println!(\u0026#34;There is no third element.\u0026#34;), } .get(\u0026amp;index) method allows you to handle out of range errors.\n",
   "keywords": [
     "development", "coding", "rust", "notes"
   ],
-  "articleBody": "Chapter 8: Common Collections (Hash Maps) In the previous blog, I shared my notes on strings and vectors in Rust, and in this post we’ll cover Hash Maps. I personally have found their use in competitive programming, a lot, but hopefully as we move on, we’ll see lots of use-cases in real-life problems.\nHash Maps Hash Maps: HashMap\nYou can’t access using indices, but through keys. Hash Maps store data on heap. Hash Maps are homogenous (all keys must have same type, and all values must have same type). Use std::collections::HashMap to bring HashMap to scope. Creating a New Hash Map\nFirst Way:\nuse std::collections::HashMap; let mut scores = HashMap::new(); // Now insert key, val pair scores.insert(\"Kush\", 3); scores.insert(\"Kushashwa\", 10); Second Way: In case you have keys and values stored in two different vectors, and want to generate a hashmap from them, use collect().\nuse std::collections::HashMap; let teams = vec![String::from(\"Blue\"), String::from(\"Yellow\")]; let initial_scores = vec![10, 50]; // Types will be infered by Rust from the data in the vectors let mut scores: HashMap\u003c_, _\u003e = teams.into_iter().zip(initial_scores.into_iter()).collect(); Why HashMap\u003c_, _\u003e? collect() method can store values into different datastructures, and we need to specify the type of scores. For the types of keys and values, Rust can infer the types itself - hence we specify _.\nI was curious what into_iter() does, and here is a very interesting answer to into_iter() vs iter() on Stackoverflow. Someone mentioned this blog post in the comments, I’ve this as a TODO - but from the looks of it, it might be useful.\nIf you are curious what teams.into_iter().zip(initial_scores.into_iter()) do? Great, check this:\nfn main() { let teams = vec![String::from(\"Blue\"), String::from(\"Yellow\")]; let initial_scores = vec![10, 50]; let tuple_output = teams.into_iter().zip(initial_scores.into_iter()); for item in tuple_output { println!(\"{}, {}\" ,item.0, item.1); } } Outputs:\nBlue, 10 Yellow, 50 So clearly, creating a vector of tuples (of a String and Integer). Maybe try passing a vector of different length to .zip() function? ;)\nHash Maps and Ownership Ownership is always the center of discussion when it comes to Rust. When you create a hashmap, and insert String objects, i32 values, the ownership behaves differently:\nFor types that implement Copy trait, like i32, the values will be copied to the hashmap. For String values (owned values), the values are moved into the hashmap and the hashmap will be the owner. See the following example and corresponding error:\nuse std::collections::HashMap; fn main() { let str1 = String::from(\"Kush\"); let str2 = String::from(\"Name\"); let mut map = HashMap::new(); map.insert(str1, str2); println!(\"{}\", str1); } | 4 | let str1 = String::from(\"Kush\"); | ---- move occurs because `str1` has type `String`, which does not implement the `Copy` trait ... 8 | map.insert(str1, str2); | ---- value moved here 9 | 10 | println!(\"{}\", str1); | ^^^^ value borrowed here after move As you can see, value was moved when map.insert(str1, str2) was called. One important point, that I’ll just take from the book:\nIf we insert references to values into the hash map, the values won’t be moved into the hash map. The values that the references point to must be valid for at least as long as the hash map is valid.\n(This is covered in detail in Chapter 10, so let’s save it for later).\nAccessing Values in a Hash Map Use .get() function to get the value corresponding to the key. Please note that it returns Option\u003c\u0026V\u003e where V is the type of the value.\nuse std::collections::HashMap; fn main() { let str1 = String::from(\"Kush\"); let str2 = String::from(\"Name\"); let mut map = HashMap::new(); map.insert(str1, str2); let val = map.get(\u0026String::from(\"Kush\")); println!(\"{}\", val.unwrap()); } Outputs: Name.\nSince map.get(\u0026String::from(\"Kush\")) returns Option\u003c\u0026String\u003e object, we need to unwrap() it in order to print it. Here is an interesting post on why using unwrap() is not the best idea, and what other options we have. I used unwrap() here, since I knew it is not None.\nIterating through a hash map is also easy in Rust:\n// Use the same code as above for (key, value) in \u0026map { println!(\"{}: {}\", key, value); } // Output: // Kush: Name Updating a Hash Map Note that you can only have one value corresponding to a key. Let’s consider our options:\nOverwriting a value: insert() twice, and the new value will replace the old value.\nOnly insert if key has no value:\nUse entry(), it returns an Enum: Empty (represents a value that might or might not exist). Call or_insert on the enum, which inserts a value if key doesn’t exist. or_insert returns a mutable reference to the value present, or to the new value inserted. use std::collections::HashMap; fn main() { let mut scores = HashMap::new(); scores.insert(String::from(\"Blue\"), 10); scores.entry(String::from(\"Yellow\")).or_insert(50); scores.entry(String::from(\"Blue\")).or_insert(50); println!(\"{:?}\", scores); } // Outputs // {\"Blue\": 10, \"Yellow\": 50} Updating a value based on the old value: Comments in the code should help explain the example.\nuse std::collections::HashMap; fn main() { let text = \"hello world wonderful world\"; let mut map = HashMap::new(); // \"hello\", \"world\", \"wonderful\", \"world\" - values of word for word in text.split_whitespace() { // if the map has an entry for word, return the count of it // else, insert 0 and increase the counter by 1 // note that count is mutable reference // so it needs to be de-referenced (in order to use it) let count = map.entry(word).or_insert(0); *count += 1; } println!(\"{:?}\", map); } // Outputs: // {\"world\": 2, \"wonderful\": 1, \"hello\": 1} Hashing Functions By default, Hash Maps in Rust use SipHash hashing function, but you can use your own as well - it should implement BuildHasher trait. More on this is discussed in Chapter 10.\nThat’s it for Chapter 8, thank you for reading. :)\nNote These are just my notes, or things I write down while/after reading the chapters/blogs or going through resources. I like sharing them, for everyone’s and also my memory. At no point I say or mean that these should be preferred or read “over” the original resource mentioned. But as always, I’m open for feedback and/or suggestions, so feel free to comment here on the blog (just be nice, is all I ask for).\n",
-  "wordCount" : "1020",
+  "articleBody": "Chapter 8: Common Collections These are my notes from the chapter-8 of rust book. Please scroll down to the bottom (Note) section if you are curious about what this is.\n8.1: Storing Lists of Values with Vectors Vec collection type discussed, aka vector: * By default contiguous. * All values should be of same type.\n// Creation let v: Vec\u003ci32\u003e = Vec::new(); // vec! macro for convenience // default integer type is i32 let v = vec![1, 2, 3]; // Modifying let mut v = Vec::new(); // Rust infers the type from the elements pushed here v.push(5); v.push(6); // ... // Dropping // a vector is freed, when it goes out of scope { let v = vec![1, 2, 3, 4]; // ... } // \u003c-- v goes out of scope here, and hence memory is freed as well // Reading Elements of Vectors let v = vec![1, 2, 3, 4, 5]; // First way: let third: \u0026i32 = \u0026v[2]; println!(\"The third element is: {}\", third); // Second way: match v.get(2) { Some(num) =\u003e println!(\"The third element is: {}\", num), None =\u003e println!(\"There is no third element.\"), } .get(\u0026index) method allows you to handle out of range errors.\nWhen a program has a valid reference, the borrow checker enforces the ownership and borrowing rules to ensure this reference and any other references to the contents of the vector remain valid.\nFollowing example will fail:\nlet mut v = vec![1, 2, 3, 4, 5]; let first = \u0026v[0]; v.push(6); println!(\"The first element is: {}\", first); Adding an element to a vector may require the old memory chunk to be transferred to a new space, causing old memory disallocation for the object v. Accessing \u0026v[0] can thus be dangerous, and hence the borrowing rules prevent programs from ending up in that situation. // Iterating over the values in a vector let v = vec![100, 32, 57]; // get immutable references to each element in a vector v for i in \u0026v { println!(\"{}\", i); } // get mutable references to each element in a mutable veector v let mut v = vec![100, 32, 57]; for i in \u0026mut v { *i += 50; } You can use an enum to store multiple type values in a vector, but indirectly, this is how:\nenum SpreadsheetCell { Int(i32), Float(f64), Text(String), } let row = vec![ SpreadsheetCell::Int(3), SpreadsheetCell::Text(String::from(\"blue\")), SpreadsheetCell::Float(10.12), ]; Note how row vector still has same types (of enum SpreadsheetCell) but can hold values of multiple types through enums.\n8.2: Storing UTF-8 Encoded Text with Strings In Rust, strings are implemented as a collection of bytes + some methods to provide useful functionality when those bytes are interpreted as text.\n(both types listed below are UTF-8 encoded)\nRust has only one string type in the core language: string slice str (usually seen in borrowed form: \u0026str). Rust’s standard library provides String type: (not coded into the core language): It’s growbable, mutable, and owned UTF-8 encoded string type. There are other string types included in Rust’s standard library: OsString, OsStr, CString, CStr\". Types ending with Stringrefer to owned variants, while types ending withStr` refer to borrowed variants. (not discussed in the book/chapter)\n// Creating a new string let mut s = String::new(); // If you have some initial data, use to_string method // this is available on any type that implements the Display trait // Following three methods are valid // First let data = \"initial contents\"; // a string literal let s = data.to_string(); // Second let s = \"initial conents\".to_string(); // Third let s = String::from(\"initial contents\"); // Updating a string let mut s = String::from(\"foo\"); s.push_str(\"bar\"); // s is now \"foobar\" // Appending to a string // using push_str and push let mut s = String::from(\"foo\"); s.push_str(\"bar\"); let mut s1 = String::from(\"foo\"); let s2 = \"bar\"; // We don't take ownership of s2 here // To ensure that we can still use s2 even after appending contents to s1 s1.push_str(s2); println!(\"s2 is {}\", s2); println!(\"s1 is {}\", s1); // Use push to append single character to the String let mut s = String::from(\"lo\"); s.push('l'); // now \"lol\" // Concatenation with + operator or the format! macro let s1 = String::from(\"Hello, \"); let s2 = String::from(\"world!\"); let s3 = s1 + \u0026s2; Consider the following script:\nlet s1 = String::from(\"foo\"); let s2 = String::from(\" bar\"); // The operation takes ownership of s1 here let s3 = s1 + \u0026s2; // You can not use s1 after the operation above println!(\"s3 is: {}\", s3); Following is the error you’ll get:\nerror[E0382]: borrow of moved value: `s1` --\u003e src/main.rs:5:27 | 2 | let s1 = String::from(\"foo\"); | -- move occurs because `s1` has type `String`, which does not implement the `Copy` trait 3 | let s2 = String::from(\" bar\"); 4 | let s3 = s1 + \u0026s2; | -- value moved here 5 | println!(\"s1 is: {}\", s1); | ^^ value borrowed here after move For more information about this error, try `rustc --explain E0382` So what’s happening? The + operator uses an add method whose signature looks like this for our inputs:\nfn add(self, s: \u0026str) -\u003e String { // ... } A few notes about s parameter:\nIt’s taken by reference. Means you add reference of the second string to the firstt string. You can not add 2 String values together, only \u0026str to a String. (Rust compiler, in our case, coerces the \u0026String argument into a \u0026str, more on deref coercion later). Note about self parameter:\nadd method takes ownership of self (it doesn’t have an \u0026). The point above implies, s1 will be moved to the add call and no longer be valid after that. let s3 = s1 + \u0026s2; The above statement actually:\nMoves s1 into the add call / takes ownership of s1 (making it invalid after that) Appends a copy of the contents of s2. Returns ownership of the result. (this process is more efficient than copying).\n// Concatenating multiple strings let s1 = String::from(\"tic\"); let s2 = String::from(\"tac\"); let s2 = String::from(\"toe\"); let s = s1 + \"-\" + \u0026s2 + \"-\" + \u0026s3; // You can also do: // Uses reference for all parameters, so no ownership of any here... let s = format!(\"{}-{}-{}\", s1, s2, s3); Talking about Indexing into Strings:\nThe following will give an error.\n// Indexing into Strings // Not like other languages (C++/Python): let s1 = String::from(\"hello\"); let h = s1[0]; Error:\nerror[E0277]: the type `String` cannot be indexed by `{integer}` --\u003e src/main.rs:3:13 | 3 | let h = s1[0]; | ^^^^^ `String` cannot be indexed by `{integer}` | = help: the trait `Index\u003c{integer}\u003e` is not implemented for `String` Rust strings don’t support indexing. To understand, let’s understand how memory storage works for strings in Rust.\nA String is a wrapper over a Vec. Consider:\n// Hola is 4 bytes long (each of the chars take 1 byte when encoded in UTF-8) and len will be 4 let hello = String::from(\"Hola\"); // Now consider: let hello = String::from(\"Здравствуйте\"); // Number of bytes stored for hello: 24 // Each unicode scalar value in the string above takes 2 bytes of storage. Hence, indexing into string’s bytes will not always correlate to a valid Unicode scalar value. Hence, no indexing support for strings in Rust.\nA final reason Rust doesn’t allow us to index into a String to get a character is that indexing operations are expected to always take constant time (O(1)). But it isn’t possible to guarantee that performance with a String, because Rust would have to walk through the contents from the beginning to the index to determine how many valid characters there were.\nSlicing strings:\nlet hello = \"Здравствуйте\"; // This will give you first 4 bytes of hello string let s = \u0026hello[0..4]; // In hello, every character is of 2 bytes, so s will have Зд With the same hello string, what will be the output if we used let s = \u0026hello[0..1];? Following error will be raised:\nthread 'main' panicked at 'byte index 1 is not a char boundary; it is inside 'З' (bytes 0..2) of `Здравствуйте`', src/main.rs:3:13 Iterating over strings: use the chars method.\nfor c in \"नमस्ते\".chars() { println!(\"{}\", c); } // Output: // न // म // स // ् // त // े // bytes method will return each raw byte for b in \"नमस्ते\".bytes() { println!(\"{}\", b); } // Output: // All 18 bytes that made up this string // 224 // 164 // 168 // 224 // 164 // 174 // 224 // 164 // 184 // 224 // 165 // 141 // 224 // 164 // 164 // 224 // 165 // 135 Note: valid unicode scalar values maybe made up of more than 1 byte, like above.\nNote NOTE\nThese are just my notes, or things I write down while/after reading the chapters/blogs or going through resources. I like sharing them, for everyone’s and also my memory. At no point I say or mean that these should be preferred or read “over” the original resource mentioned. But as always, I’m open for feedback and/or suggestions, so feel free to comment here on the blog (just be nice, is all I ask for).\n",
+  "wordCount" : "1535",
   "inLanguage": "en",
   "datePublished": "2022-01-09T00:00:00Z",
   "dateModified": "2022-01-09T00:00:00Z",
@@ -191,6 +247,11 @@ Creating a New Hash Map">
         </div>
         <ul id="menu">
             <li>
+                <a href="https://krshrimali.github.io/search/" title="Search">
+                    <span>Search</span>
+                </a>
+            </li>
+            <li>
                 <a href="https://krshrimali.github.io/about" title="About">
                     <span>About</span>
                 </a>
@@ -211,7 +272,7 @@ Creating a New Hash Map">
     <h1 class="post-title entry-hint-parent">
       Common Collections (Vector and Strings) in Rust [Notes]
     </h1>
-    <div class="post-meta"><span title='2022-01-09 00:00:00 +0000 UTC'>January 9, 2022</span>&nbsp;·&nbsp;5 min&nbsp;·&nbsp;map[name:Kushashwa Ravi Shrimali]
+    <div class="post-meta"><span title='2022-01-09 00:00:00 +0000 UTC'>January 9, 2022</span>&nbsp;·&nbsp;8 min&nbsp;·&nbsp;map[name:Kushashwa Ravi Shrimali]
 
 </div>
   </header> <div class="toc">
@@ -222,17 +283,13 @@ Creating a New Hash Map">
 
         <div class="inner"><ul>
                 <li>
-                    <a href="#chapter-8-common-collections-hash-maps" aria-label="Chapter 8: Common Collections (Hash Maps)">Chapter 8: Common Collections (Hash Maps)</a></li>
+                    <a href="#chapter-8-common-collections" aria-label="Chapter 8: Common Collections">Chapter 8: Common Collections</a><ul>
+                        
                 <li>
-                    <a href="#hash-maps" aria-label="Hash Maps">Hash Maps</a></li>
+                    <a href="#81-storing-lists-of-values-with-vectors" aria-label="8.1: Storing Lists of Values with Vectors">8.1: Storing Lists of Values with Vectors</a></li>
                 <li>
-                    <a href="#hash-maps-and-ownership" aria-label="Hash Maps and Ownership">Hash Maps and Ownership</a></li>
-                <li>
-                    <a href="#accessing-values-in-a-hash-map" aria-label="Accessing Values in a Hash Map">Accessing Values in a Hash Map</a></li>
-                <li>
-                    <a href="#updating-a-hash-map" aria-label="Updating a Hash Map">Updating a Hash Map</a></li>
-                <li>
-                    <a href="#hashing-functions" aria-label="Hashing Functions">Hashing Functions</a></li>
+                    <a href="#82-storing-utf-8-encoded-text-with-strings" aria-label="8.2: Storing UTF-8 Encoded Text with Strings">8.2: Storing UTF-8 Encoded Text with Strings</a></li></ul>
+                </li>
                 <li>
                     <a href="#note" aria-label="Note">Note</a>
                 </li>
@@ -241,161 +298,260 @@ Creating a New Hash Map">
     </details>
 </div>
 
-  <div class="post-content"><h2 id="chapter-8-common-collections-hash-maps">Chapter 8: Common Collections (Hash Maps)<a hidden class="anchor" aria-hidden="true" href="#chapter-8-common-collections-hash-maps">#</a></h2>
-<p>In the <a href="https://krshrimali.github.io/posts/2022/01/common-collections-vector-and-strings-in-rust-notes/">previous blog</a>, I shared my notes on strings and vectors in Rust, and in this post we&rsquo;ll cover Hash Maps. I personally have found their use in competitive programming, a lot, but hopefully as we move on, we&rsquo;ll see lots of use-cases in real-life problems.</p>
-<h2 id="hash-maps">Hash Maps<a hidden class="anchor" aria-hidden="true" href="#hash-maps">#</a></h2>
-<p>Hash Maps: <code>HashMap&lt;K, V&gt;</code></p>
-<ul>
-<li>You can&rsquo;t access using indices, but through keys.</li>
-<li>Hash Maps store data on heap.</li>
-<li>Hash Maps are homogenous (all keys must have same type, and all values must have same type).</li>
-<li>Use <code>std::collections::HashMap</code> to bring <code>HashMap</code> to scope.</li>
-</ul>
-<p><strong>Creating a New Hash Map</strong></p>
-<p>First Way:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">use</span> std::collections::HashMap;
+  <div class="post-content"><h2 id="chapter-8-common-collections">Chapter 8: Common Collections<a hidden class="anchor" aria-hidden="true" href="#chapter-8-common-collections">#</a></h2>
+<p>These are my notes from the <a href="https://doc.rust-lang.org/book/ch08-00-common-collections.html">chapter-8</a> of <a href="https://doc.rust-lang.org/book">rust book</a>. Please scroll down to the bottom (<code>Note</code>) section if you are curious about what this is.</p>
+<h3 id="81-storing-lists-of-values-with-vectors">8.1: Storing Lists of Values with Vectors<a hidden class="anchor" aria-hidden="true" href="#81-storing-lists-of-values-with-vectors">#</a></h3>
+<p><code>Vec&lt;T&gt;</code> collection type discussed, aka vector:
+* By default contiguous.
+* All values should be of same type.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#75715e">// Creation
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> v: Vec<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">i32</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">=</span> Vec::new();
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> scores <span style="color:#f92672">=</span> HashMap::new();
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// Now insert key, val pair
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>scores.insert(<span style="color:#e6db74">&#34;Kush&#34;</span>, <span style="color:#ae81ff">3</span>);
-</span></span><span style="display:flex;"><span>scores.insert(<span style="color:#e6db74">&#34;Kushashwa&#34;</span>, <span style="color:#ae81ff">10</span>);
-</span></span></code></pre></div><p>Second Way: In case you have keys and values stored in two different vectors, and want to generate a hashmap from them, use <code>collect()</code>.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">use</span> std::collections::HashMap;
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// vec! macro for convenience
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// default integer type is i32
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> v <span style="color:#f92672">=</span> <span style="color:#a6e22e">vec!</span>[<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>];
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">let</span> teams <span style="color:#f92672">=</span> <span style="color:#a6e22e">vec!</span>[String::from(<span style="color:#e6db74">&#34;Blue&#34;</span>), String::from(<span style="color:#e6db74">&#34;Yellow&#34;</span>)];
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">let</span> initial_scores <span style="color:#f92672">=</span> <span style="color:#a6e22e">vec!</span>[<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">50</span>];
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Modifying
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> v <span style="color:#f92672">=</span> Vec::new();
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Rust infers the type from the elements pushed here
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>v.push(<span style="color:#ae81ff">5</span>);
+</span></span><span style="display:flex;"><span>v.push(<span style="color:#ae81ff">6</span>);
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// ...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Dropping
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// a vector is freed, when it goes out of scope
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> v <span style="color:#f92672">=</span> <span style="color:#a6e22e">vec!</span>[<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>];
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// ...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>} <span style="color:#75715e">// &lt;-- v goes out of scope here, and hence memory is freed as well
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Reading Elements of Vectors
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> v <span style="color:#f92672">=</span> <span style="color:#a6e22e">vec!</span>[<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>];
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// First way:
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> third: <span style="color:#66d9ef">&amp;</span><span style="color:#66d9ef">i32</span> <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>v[<span style="color:#ae81ff">2</span>];
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">println!</span>(<span style="color:#e6db74">&#34;The third element is: </span><span style="color:#e6db74">{}</span><span style="color:#e6db74">&#34;</span>, third);
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// Types will be infered by Rust from the data in the vectors
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> scores: <span style="color:#a6e22e">HashMap</span><span style="color:#f92672">&lt;</span>_, _<span style="color:#f92672">&gt;</span> <span style="color:#f92672">=</span> teams.into_iter().zip(initial_scores.into_iter()).collect();
-</span></span></code></pre></div><p>Why <code>HashMap&lt;_, _&gt;</code>? <code>collect()</code> method can store values into different datastructures, and we need to specify the type of <code>scores</code>. For the types of keys and values, Rust can infer the types itself - hence we specify <code>_</code>.</p>
-<p>I was curious what <code>into_iter()</code> does, and <a href="https://stackoverflow.com/a/34745885">here</a> is a very interesting answer to <code>into_iter()</code> vs <code>iter()</code> on Stackoverflow. Someone mentioned <a href="https://hermanradtke.com/2015/06/22/effectively-using-iterators-in-rust.html/">this blog post</a> in the comments, I&rsquo;ve this as a TODO - but from the looks of it, it might be useful.</p>
-<p>If you are curious what <code>teams.into_iter().zip(initial_scores.into_iter())</code> do? Great, check this:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">main</span>() {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> teams <span style="color:#f92672">=</span> <span style="color:#a6e22e">vec!</span>[String::from(<span style="color:#e6db74">&#34;Blue&#34;</span>), String::from(<span style="color:#e6db74">&#34;Yellow&#34;</span>)];
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> initial_scores <span style="color:#f92672">=</span> <span style="color:#a6e22e">vec!</span>[<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">50</span>];
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> tuple_output <span style="color:#f92672">=</span> teams.into_iter().zip(initial_scores.into_iter());
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> item <span style="color:#66d9ef">in</span> tuple_output {
-</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">println!</span>(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{}</span><span style="color:#e6db74">, </span><span style="color:#e6db74">{}</span><span style="color:#e6db74">&#34;</span> ,item.<span style="color:#ae81ff">0</span>, item.<span style="color:#ae81ff">1</span>);
-</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Second way:
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">match</span> v.get(<span style="color:#ae81ff">2</span>) {
+</span></span><span style="display:flex;"><span>    Some(num) <span style="color:#f92672">=&gt;</span> <span style="color:#a6e22e">println!</span>(<span style="color:#e6db74">&#34;The third element is: </span><span style="color:#e6db74">{}</span><span style="color:#e6db74">&#34;</span>, num),
+</span></span><span style="display:flex;"><span>    None <span style="color:#f92672">=&gt;</span> <span style="color:#a6e22e">println!</span>(<span style="color:#e6db74">&#34;There is no third element.&#34;</span>),
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>Outputs:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span>Blue, <span style="color:#ae81ff">10</span>
-</span></span><span style="display:flex;"><span>Yellow, <span style="color:#ae81ff">50</span>
-</span></span></code></pre></div><p>So clearly, creating a vector of tuples (of a <code>String</code> and <code>Integer</code>). Maybe try passing a vector of different length to <code>.zip()</code> function? ;)</p>
-<h2 id="hash-maps-and-ownership">Hash Maps and Ownership<a hidden class="anchor" aria-hidden="true" href="#hash-maps-and-ownership">#</a></h2>
-<p>Ownership is always the center of discussion when it comes to Rust. When you create a hashmap, and insert <code>String</code> objects, <code>i32</code> values, the ownership behaves differently:</p>
-<ol>
-<li>For types that implement <code>Copy</code> trait, like <code>i32</code>, the values will be copied to the hashmap.</li>
-<li>For <code>String</code> values (owned values), the values are moved into the hashmap and the hashmap will be the owner.</li>
-</ol>
-<p>See the following example and corresponding error:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">use</span> std::collections::HashMap;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">main</span>() {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> str1 <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;Kush&#34;</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> str2 <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;Name&#34;</span>);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> map <span style="color:#f92672">=</span> HashMap::new();
-</span></span><span style="display:flex;"><span>    map.insert(str1, str2);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">println!</span>(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{}</span><span style="color:#e6db74">&#34;</span>, str1);
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span>   <span style="color:#f92672">|</span>
-</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>  <span style="color:#f92672">|</span>     <span style="color:#66d9ef">let</span> str1 <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;Kush&#34;</span>);
-</span></span><span style="display:flex;"><span>   <span style="color:#f92672">|</span>         <span style="color:#f92672">----</span> <span style="color:#66d9ef">move</span> occurs because <span style="color:#960050;background-color:#1e0010">`</span>str1<span style="color:#960050;background-color:#1e0010">`</span> has <span style="color:#66d9ef">type</span> <span style="color:#960050;background-color:#1e0010">`</span>String<span style="color:#960050;background-color:#1e0010">`</span>, which does not implement the <span style="color:#960050;background-color:#1e0010">`</span>Copy<span style="color:#960050;background-color:#1e0010">`</span> <span style="color:#66d9ef">trait</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">..</span>.
-</span></span><span style="display:flex;"><span><span style="color:#ae81ff">8</span>  <span style="color:#f92672">|</span>     map.insert(str1, str2);
-</span></span><span style="display:flex;"><span>   <span style="color:#f92672">|</span>                <span style="color:#f92672">----</span> value moved here
-</span></span><span style="display:flex;"><span><span style="color:#ae81ff">9</span>  <span style="color:#f92672">|</span> 
-</span></span><span style="display:flex;"><span><span style="color:#ae81ff">10</span> <span style="color:#f92672">|</span>     <span style="color:#a6e22e">println!</span>(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{}</span><span style="color:#e6db74">&#34;</span>, str1);
-</span></span><span style="display:flex;"><span>   <span style="color:#f92672">|</span>                    <span style="color:#f92672">^^^^</span> value borrowed here after <span style="color:#66d9ef">move</span>
-</span></span></code></pre></div><p>As you can see, value was moved when <code>map.insert(str1, str2)</code> was called. One important point, that I&rsquo;ll just take from the book:</p>
+</span></span></code></pre></div><p><code>.get(&amp;index)</code> method allows you to handle out of range errors.</p>
 <blockquote>
-<p>If we insert references to values into the hash map, the values won’t be moved into the hash map. The values that the references point to must be valid for at least as long as the hash map is valid.</p></blockquote>
-<p>(This is covered in detail in Chapter 10, so let&rsquo;s save it for later).</p>
-<h2 id="accessing-values-in-a-hash-map">Accessing Values in a Hash Map<a hidden class="anchor" aria-hidden="true" href="#accessing-values-in-a-hash-map">#</a></h2>
-<p>Use <code>&lt;HashMap&gt;.get(&lt;Key&gt;)</code> function to get the value corresponding to the key. Please note that it returns <code>Option&lt;&amp;V&gt;</code> where <code>V</code> is the type of the value.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">use</span> std::collections::HashMap;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">main</span>() {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> str1 <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;Kush&#34;</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> str2 <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;Name&#34;</span>);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> map <span style="color:#f92672">=</span> HashMap::new();
-</span></span><span style="display:flex;"><span>    map.insert(str1, str2);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> val <span style="color:#f92672">=</span> map.get(<span style="color:#f92672">&amp;</span>String::from(<span style="color:#e6db74">&#34;Kush&#34;</span>));
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">println!</span>(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{}</span><span style="color:#e6db74">&#34;</span>, val.unwrap());
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>Outputs: <code>Name</code>.</p>
-<p>Since <code>map.get(&amp;String::from(&quot;Kush&quot;))</code> returns <code>Option&lt;&amp;String&gt;</code> object, we need to <code>unwrap()</code> it in order to print it. Here is <a href="https://www.ameyalokare.com/rust/2017/10/23/rust-options.html">an interesting post</a> on why using <code>unwrap()</code> is not the best idea, and what other options we have. I used <code>unwrap()</code> here, since I knew it is not <code>None</code>.</p>
-<p>Iterating through a hash map is also easy in Rust:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#75715e">// Use the same code as above
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">for</span> (key, value) <span style="color:#66d9ef">in</span> <span style="color:#f92672">&amp;</span>map {
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">println!</span>(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{}</span><span style="color:#e6db74">: </span><span style="color:#e6db74">{}</span><span style="color:#e6db74">&#34;</span>, key, value);
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// Output:
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// Kush: Name
-</span></span></span></code></pre></div><h2 id="updating-a-hash-map">Updating a Hash Map<a hidden class="anchor" aria-hidden="true" href="#updating-a-hash-map">#</a></h2>
-<p>Note that you can only have one value corresponding to a key. Let&rsquo;s consider our options:</p>
-<ol>
-<li>
-<p><strong>Overwriting a value</strong>: <code>insert()</code> twice, and the new value will replace the old value.</p>
-</li>
-<li>
-<p><strong>Only insert if key has no value</strong>:</p>
-<ul>
-<li>Use <code>entry(&lt;Key&gt;)</code>, it returns an <code>Enum</code>: <code>Empty</code> (represents a value that might or might not exist).</li>
-<li>Call <code>or_insert</code> on the enum, which inserts a value if key doesn&rsquo;t exist.</li>
-<li><code>or_insert</code> returns a mutable reference to the value present, or to the new value inserted.</li>
+<p>When a program has a valid reference, the borrow checker enforces the ownership and borrowing rules to ensure this reference and any other references to the contents of the vector remain valid.</p></blockquote>
+<p>Following example will fail:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> v <span style="color:#f92672">=</span> <span style="color:#a6e22e">vec!</span>[<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>];
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">let</span> first <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>v[<span style="color:#ae81ff">0</span>];
+</span></span><span style="display:flex;"><span>v.push(<span style="color:#ae81ff">6</span>);
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">println!</span>(<span style="color:#e6db74">&#34;The first element is: </span><span style="color:#e6db74">{}</span><span style="color:#e6db74">&#34;</span>, first);
+</span></span></code></pre></div><ul>
+<li>Adding an element to a vector may require the old memory chunk to be transferred to a new space, causing old memory disallocation for the object <code>v</code>.</li>
+<li>Accessing <code>&amp;v[0]</code> can thus be dangerous, and hence the borrowing rules prevent programs from ending up in that situation.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">use</span> std::collections::HashMap;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">main</span>() {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> scores <span style="color:#f92672">=</span> HashMap::new();
-</span></span><span style="display:flex;"><span>    scores.insert(String::from(<span style="color:#e6db74">&#34;Blue&#34;</span>), <span style="color:#ae81ff">10</span>);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    scores.entry(String::from(<span style="color:#e6db74">&#34;Yellow&#34;</span>)).or_insert(<span style="color:#ae81ff">50</span>);
-</span></span><span style="display:flex;"><span>    scores.entry(String::from(<span style="color:#e6db74">&#34;Blue&#34;</span>)).or_insert(<span style="color:#ae81ff">50</span>);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">println!</span>(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{:?}</span><span style="color:#e6db74">&#34;</span>, scores);
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// Outputs
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// {&#34;Blue&#34;: 10, &#34;Yellow&#34;: 50}
-</span></span></span></code></pre></div></li>
-<li>
-<p><strong>Updating a value based on the old value</strong>: Comments in the code should help explain the example.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">use</span> std::collections::HashMap;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">main</span>() {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> text <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;hello world wonderful world&#34;</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> map <span style="color:#f92672">=</span> HashMap::new();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// &#34;hello&#34;, &#34;world&#34;, &#34;wonderful&#34;, &#34;world&#34; - values of word
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">for</span> word <span style="color:#66d9ef">in</span> text.split_whitespace() {
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// if the map has an entry for word, return the count of it
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">// else, insert 0 and increase the counter by 1
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">// note that count is mutable reference
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">// so it needs to be de-referenced (in order to use it)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">let</span> count <span style="color:#f92672">=</span> map.entry(word).or_insert(<span style="color:#ae81ff">0</span>);
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">*</span>count <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">println!</span>(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{:?}</span><span style="color:#e6db74">&#34;</span>, map); 
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#75715e">// Iterating over the values in a vector
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> v <span style="color:#f92672">=</span> <span style="color:#a6e22e">vec!</span>[<span style="color:#ae81ff">100</span>, <span style="color:#ae81ff">32</span>, <span style="color:#ae81ff">57</span>];
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// get immutable references to each element in a vector v
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">for</span> i <span style="color:#66d9ef">in</span> <span style="color:#f92672">&amp;</span>v {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">println!</span>(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{}</span><span style="color:#e6db74">&#34;</span>, i);
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// Outputs:
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// {&#34;world&#34;: 2, &#34;wonderful&#34;: 1, &#34;hello&#34;: 1}
-</span></span></span></code></pre></div></li>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// get mutable references to each element in a mutable veector v
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> v <span style="color:#f92672">=</span> <span style="color:#a6e22e">vec!</span>[<span style="color:#ae81ff">100</span>, <span style="color:#ae81ff">32</span>, <span style="color:#ae81ff">57</span>];
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i <span style="color:#66d9ef">in</span> <span style="color:#f92672">&amp;</span><span style="color:#66d9ef">mut</span> v {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">*</span>i <span style="color:#f92672">+=</span> <span style="color:#ae81ff">50</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>You can use an <code>enum</code> to store multiple type values in a vector, but indirectly, this is how:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">enum</span> <span style="color:#a6e22e">SpreadsheetCell</span> {
+</span></span><span style="display:flex;"><span>    Int(<span style="color:#66d9ef">i32</span>),
+</span></span><span style="display:flex;"><span>    Float(<span style="color:#66d9ef">f64</span>),
+</span></span><span style="display:flex;"><span>    Text(String),
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">let</span> row <span style="color:#f92672">=</span> <span style="color:#a6e22e">vec!</span>[
+</span></span><span style="display:flex;"><span>    SpreadsheetCell::Int(<span style="color:#ae81ff">3</span>),
+</span></span><span style="display:flex;"><span>    SpreadsheetCell::Text(String::from(<span style="color:#e6db74">&#34;blue&#34;</span>)),
+</span></span><span style="display:flex;"><span>    SpreadsheetCell::Float(<span style="color:#ae81ff">10.12</span>),
+</span></span><span style="display:flex;"><span>];
+</span></span></code></pre></div><p>Note how <code>row</code> vector still has same types (of <code>enum SpreadsheetCell</code>) but can hold values of multiple types through enums.</p>
+<h3 id="82-storing-utf-8-encoded-text-with-strings">8.2: Storing UTF-8 Encoded Text with Strings<a hidden class="anchor" aria-hidden="true" href="#82-storing-utf-8-encoded-text-with-strings">#</a></h3>
+<p>In Rust, strings are implemented as a collection of bytes + some methods to provide useful functionality when those bytes are interpreted as text.</p>
+<p>(both types listed below are UTF-8 encoded)</p>
+<ul>
+<li>Rust has only one string type in the <strong>core language</strong>: string slice <code>str</code> (usually seen in borrowed form: <code>&amp;str</code>).</li>
+<li>Rust&rsquo;s standard library provides <code>String</code> type: (not coded into the core language):
+<ul>
+<li>It&rsquo;s <em>growbable, mutable, and owned</em> UTF-8 encoded string type.</li>
+</ul>
+</li>
+</ul>
+<p>There are other string types included in Rust&rsquo;s standard library: <code>OsString, OsStr, CString, CStr&quot;. Types ending with </code>String<code>refer to owned variants, while types ending with</code>Str` refer to borrowed variants. (not discussed in the book/chapter)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#75715e">// Creating a new string
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> s <span style="color:#f92672">=</span> String::new();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// If you have some initial data, use to_string method
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// this is available on any type that implements the Display trait
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Following three methods are valid
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// First
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> data <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;initial contents&#34;</span>; <span style="color:#75715e">// a string literal
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> s <span style="color:#f92672">=</span> data.to_string();
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Second
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> s <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;initial conents&#34;</span>.to_string();
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Third
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> s <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;initial contents&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Updating a string
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> s <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;foo&#34;</span>);
+</span></span><span style="display:flex;"><span>s.push_str(<span style="color:#e6db74">&#34;bar&#34;</span>); <span style="color:#75715e">// s is now &#34;foobar&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Appending to a string
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// using push_str and push
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> s <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;foo&#34;</span>);
+</span></span><span style="display:flex;"><span>s.push_str(<span style="color:#e6db74">&#34;bar&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> s1 <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;foo&#34;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">let</span> s2 <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;bar&#34;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// We don&#39;t take ownership of s2 here
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// To ensure that we can still use s2 even after appending contents to s1
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>s1.push_str(s2);
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">println!</span>(<span style="color:#e6db74">&#34;s2 is </span><span style="color:#e6db74">{}</span><span style="color:#e6db74">&#34;</span>, s2);
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">println!</span>(<span style="color:#e6db74">&#34;s1 is </span><span style="color:#e6db74">{}</span><span style="color:#e6db74">&#34;</span>, s1);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Use push to append single character to the String
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> s <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;lo&#34;</span>);
+</span></span><span style="display:flex;"><span>s.push(<span style="color:#e6db74">&#39;l&#39;</span>); <span style="color:#75715e">// now &#34;lol&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Concatenation with + operator or the format! macro
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> s1 <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;Hello, &#34;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">let</span> s2 <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;world!&#34;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">let</span> s3 <span style="color:#f92672">=</span> s1 <span style="color:#f92672">+</span> <span style="color:#f92672">&amp;</span>s2;
+</span></span></code></pre></div><p>Consider the following script:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">let</span> s1 <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;foo&#34;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">let</span> s2 <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34; bar&#34;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// The operation takes ownership of s1 here
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> s3 <span style="color:#f92672">=</span> s1 <span style="color:#f92672">+</span> <span style="color:#f92672">&amp;</span>s2;
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// You can not use s1 after the operation above
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">println!</span>(<span style="color:#e6db74">&#34;s3 is: </span><span style="color:#e6db74">{}</span><span style="color:#e6db74">&#34;</span>, s3);
+</span></span></code></pre></div><p>Following is the error you&rsquo;ll get:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span>error[E0382]: <span style="color:#a6e22e">borrow</span> of moved value: <span style="color:#960050;background-color:#1e0010">`</span>s1<span style="color:#960050;background-color:#1e0010">`</span>
+</span></span><span style="display:flex;"><span> <span style="color:#f92672">-</span>-&gt; <span style="color:#a6e22e">src</span><span style="color:#f92672">/</span>main.rs:<span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">27</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span> <span style="color:#f92672">|</span>     <span style="color:#66d9ef">let</span> s1 <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;foo&#34;</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">|</span>         <span style="color:#f92672">--</span> <span style="color:#66d9ef">move</span> occurs because <span style="color:#960050;background-color:#1e0010">`</span>s1<span style="color:#960050;background-color:#1e0010">`</span> has <span style="color:#66d9ef">type</span> <span style="color:#960050;background-color:#1e0010">`</span>String<span style="color:#960050;background-color:#1e0010">`</span>, which does not implement the <span style="color:#960050;background-color:#1e0010">`</span>Copy<span style="color:#960050;background-color:#1e0010">`</span> <span style="color:#66d9ef">trait</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span> <span style="color:#f92672">|</span>     <span style="color:#66d9ef">let</span> s2 <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34; bar&#34;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span> <span style="color:#f92672">|</span>     <span style="color:#66d9ef">let</span> s3 <span style="color:#f92672">=</span> s1 <span style="color:#f92672">+</span> <span style="color:#f92672">&amp;</span>s2;
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">|</span>              <span style="color:#f92672">--</span> value moved here
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span> <span style="color:#f92672">|</span>     <span style="color:#a6e22e">println!</span>(<span style="color:#e6db74">&#34;s1 is: </span><span style="color:#e6db74">{}</span><span style="color:#e6db74">&#34;</span>, s1);
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">|</span>                           <span style="color:#f92672">^^</span> value borrowed here after <span style="color:#66d9ef">move</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>For more information about this error, <span style="color:#66d9ef">try</span> <span style="color:#960050;background-color:#1e0010">`</span>rustc <span style="color:#f92672">--</span>explain E0382<span style="color:#960050;background-color:#1e0010">`</span>
+</span></span></code></pre></div><p>So what&rsquo;s happening? The <code>+</code> operator uses an <code>add</code> method whose signature looks like this for our inputs:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">add</span>(self, s: <span style="color:#66d9ef">&amp;</span><span style="color:#66d9ef">str</span>) -&gt; String {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// ...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><p>A few notes about <code>s</code> parameter:</p>
+<ol>
+<li>It&rsquo;s taken by reference. Means you add reference of the second string to the firstt string.</li>
+<li>You can not add 2 <code>String</code> values together, only <code>&amp;str</code> to a <code>String</code>. (Rust compiler, in our case, coerces the <code>&amp;String</code> argument into a <code>&amp;str</code>, more on deref coercion later).</li>
 </ol>
-<h2 id="hashing-functions">Hashing Functions<a hidden class="anchor" aria-hidden="true" href="#hashing-functions">#</a></h2>
-<p>By default, Hash Maps in Rust use <a href="https://en.wikipedia.org/wiki/SipHash"><code>SipHash</code></a> hashing function, but you can use your own as well - it should implement <code>BuildHasher</code> trait. More on this is discussed in Chapter 10.</p>
-<p>That&rsquo;s it for Chapter 8, thank you for reading. :)</p>
+<p>Note about <code>self</code> parameter:</p>
+<ol>
+<li><code>add</code> method takes ownership of <code>self</code> (it doesn&rsquo;t have an <code>&amp;</code>).</li>
+<li>The point above implies, <code>s1</code> will be moved to the <code>add</code> call and no longer be valid after that.</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">let</span> s3 <span style="color:#f92672">=</span> s1 <span style="color:#f92672">+</span> <span style="color:#f92672">&amp;</span>s2;
+</span></span></code></pre></div><p>The above statement actually:</p>
+<ol>
+<li>Moves <code>s1</code> into the <code>add</code> call / takes ownership of <code>s1</code> (making it invalid after that)</li>
+<li>Appends a <em>copy</em> of the contents of <code>s2</code>.</li>
+<li>Returns ownership of the result.</li>
+</ol>
+<p>(this process is more efficient than copying).</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#75715e">// Concatenating multiple strings
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> s1 <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;tic&#34;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">let</span> s2 <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;tac&#34;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">let</span> s2 <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;toe&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">let</span> s <span style="color:#f92672">=</span> s1 <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;-&#34;</span> <span style="color:#f92672">+</span> <span style="color:#f92672">&amp;</span>s2 <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;-&#34;</span> <span style="color:#f92672">+</span> <span style="color:#f92672">&amp;</span>s3;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// You can also do:
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// Uses reference for all parameters, so no ownership of any here...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> s <span style="color:#f92672">=</span> <span style="color:#a6e22e">format!</span>(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{}</span><span style="color:#e6db74">-</span><span style="color:#e6db74">{}</span><span style="color:#e6db74">-</span><span style="color:#e6db74">{}</span><span style="color:#e6db74">&#34;</span>, s1, s2, s3);
+</span></span></code></pre></div><p>Talking about Indexing into Strings:</p>
+<p>The following will give an error.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#75715e">// Indexing into Strings
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// Not like other languages (C++/Python):
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> s1 <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;hello&#34;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">let</span> h <span style="color:#f92672">=</span> s1[<span style="color:#ae81ff">0</span>];
+</span></span></code></pre></div><p>Error:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span>error[E0277]: <span style="color:#a6e22e">the</span> <span style="color:#66d9ef">type</span> <span style="color:#960050;background-color:#1e0010">`</span>String<span style="color:#960050;background-color:#1e0010">`</span> cannot be indexed by <span style="color:#960050;background-color:#1e0010">`</span>{integer}<span style="color:#960050;background-color:#1e0010">`</span>
+</span></span><span style="display:flex;"><span> <span style="color:#f92672">-</span>-&gt; <span style="color:#a6e22e">src</span><span style="color:#f92672">/</span>main.rs:<span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">13</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span> <span style="color:#f92672">|</span>     <span style="color:#66d9ef">let</span> h <span style="color:#f92672">=</span> s1[<span style="color:#ae81ff">0</span>];
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">|</span>             <span style="color:#f92672">^^^^^</span> <span style="color:#960050;background-color:#1e0010">`</span>String<span style="color:#960050;background-color:#1e0010">`</span> cannot be indexed by <span style="color:#960050;background-color:#1e0010">`</span>{integer}<span style="color:#960050;background-color:#1e0010">`</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">=</span> help: <span style="color:#a6e22e">the</span> <span style="color:#66d9ef">trait</span> <span style="color:#960050;background-color:#1e0010">`</span>Index<span style="color:#f92672">&lt;</span>{integer}<span style="color:#f92672">&gt;</span><span style="color:#960050;background-color:#1e0010">`</span> is not implemented <span style="color:#66d9ef">for</span> <span style="color:#960050;background-color:#1e0010">`</span>String<span style="color:#960050;background-color:#1e0010">`</span>
+</span></span></code></pre></div><p><em>Rust strings don&rsquo;t support indexing</em>. To understand, let&rsquo;s understand how memory storage works for strings in Rust.</p>
+<p>A <code>String</code> is a wrapper over a <code>Vec&lt;u8&gt;</code>. Consider:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#75715e">// Hola is 4 bytes long (each of the chars take 1 byte when encoded in UTF-8) and len will be 4
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> hello <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;Hola&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Now consider:
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> hello <span style="color:#f92672">=</span> String::from(<span style="color:#e6db74">&#34;Здравствуйте&#34;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Number of bytes stored for hello: 24
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// Each unicode scalar value in the string above takes 2 bytes of storage.
+</span></span></span></code></pre></div><p>Hence, indexing into string&rsquo;s bytes will not always correlate to a valid Unicode scalar value. Hence, no indexing support for strings in Rust.</p>
+<blockquote>
+<p>A final reason Rust doesn’t allow us to index into a String to get a character is that indexing operations are expected to always take constant time (O(1)). But it isn’t possible to guarantee that performance with a String, because Rust would have to walk through the contents from the beginning to the index to determine how many valid characters there were.</p></blockquote>
+<p>Slicing strings:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">let</span> hello <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Здравствуйте&#34;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// This will give you first 4 bytes of hello string
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> s <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>hello[<span style="color:#ae81ff">0</span><span style="color:#f92672">..</span><span style="color:#ae81ff">4</span>];
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// In hello, every character is of 2 bytes, so s will have Зд
+</span></span></span></code></pre></div><p>With the same <code>hello</code> string, what will be the output if we used <code>let s = &amp;hello[0..1];</code>? Following error will be raised:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span>thread <span style="color:#a6e22e">&#39;main&#39;</span> panicked at <span style="color:#a6e22e">&#39;byte</span> index <span style="color:#ae81ff">1</span> is not a <span style="color:#66d9ef">char</span> boundary; it is inside <span style="color:#e6db74">&#39;З&#39;</span> (bytes <span style="color:#ae81ff">0</span><span style="color:#f92672">..</span><span style="color:#ae81ff">2</span>) of <span style="color:#960050;background-color:#1e0010">`Здравствуйте`</span><span style="color:#a6e22e">&#39;</span>, src<span style="color:#f92672">/</span>main.rs:<span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">13</span>
+</span></span></code></pre></div><p>Iterating over strings: use the <code>chars</code> method.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> c <span style="color:#66d9ef">in</span> <span style="color:#e6db74">&#34;नमस्ते&#34;</span>.chars() {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">println!</span>(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{}</span><span style="color:#e6db74">&#34;</span>, c);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Output:
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">//  न
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">//  म
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">//  स
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">//   ्
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">//  त
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">//   े
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// bytes method will return each raw byte
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">for</span> b <span style="color:#66d9ef">in</span> <span style="color:#e6db74">&#34;नमस्ते&#34;</span>.bytes() {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">println!</span>(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{}</span><span style="color:#e6db74">&#34;</span>, b);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Output:
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// All 18 bytes that made up this string
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// 224
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// 164
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// 168
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// 224
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// 164
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// 174
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// 224
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// 164
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// 184
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// 224
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// 165
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// 141
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// 224
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// 164
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// 164
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// 224
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// 165
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// 135
+</span></span></span></code></pre></div><p>Note: valid unicode scalar values maybe made up of more than 1 byte, like above.</p>
 <h2 id="note">Note<a hidden class="anchor" aria-hidden="true" href="#note">#</a></h2>
 <hr>
+<p><strong>NOTE</strong></p>
 <p>These are just my notes, or things I write down while/after reading the chapters/blogs or going through resources. I like sharing them, for everyone&rsquo;s and also my memory. At no point I say or mean that these should be preferred or read &ldquo;over&rdquo; the original resource mentioned. But as always, I&rsquo;m open for feedback and/or suggestions, so feel free to comment here on the blog (just be nice, is all I ask for).</p>
 <hr>
 
@@ -410,15 +566,15 @@ Creating a New Hash Map">
       <li><a href="https://krshrimali.github.io/tags/notes/">Notes</a></li>
     </ul>
 <nav class="paginav">
-  <a class="prev" href="https://krshrimali.github.io/posts/2022/01/common-collections-vector-and-strings-in-rust-notes/">
+  <a class="prev" href="https://krshrimali.github.io/posts/2022/07/porting-a-tiling-window-manager-extenstion-to-c-bismuth-part-1/">
     <span class="title">« Prev</span>
     <br>
-    <span>Common Collections (Vector and Strings) in Rust [Notes]</span>
+    <span>Porting a Tiling Window Manager Extenstion to C&#43;&#43; (Bismuth): Part-1</span>
   </a>
-  <a class="next" href="https://krshrimali.github.io/posts/2021/10/weekly-progress-report-03-10-2021-2/">
+  <a class="next" href="https://krshrimali.github.io/posts/2022/01/common-collections-vector-and-strings-in-rust-notes/">
     <span class="title">Next »</span>
     <br>
-    <span>Weekly Progress Report: 03-10-2021, 2</span>
+    <span>Common Collections (Vector and Strings) in Rust [Notes]</span>
   </a>
 </nav>
 
