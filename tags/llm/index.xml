@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>LLM on Kushashwa Ravi Shrimali (Kush)</title>
     <link>https://krshrimali.github.io/tags/llm/</link>
     <description>Recent content in LLM on Kushashwa Ravi Shrimali (Kush)</description>
-    <generator>Hugo</generator>
+    <generator>Hugo -- 0.147.6</generator>
     <language>en</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
     <lastBuildDate>Mon, 26 Feb 2024 00:00:00 +0000</lastBuildDate>
@@ -14,14 +14,26 @@
       <link>https://krshrimali.github.io/posts/2024/02/building-a-chatbot-from-your-documentation-website-docsgpt/</link>
       <pubDate>Mon, 26 Feb 2024 00:00:00 +0000</pubDate>
       <guid>https://krshrimali.github.io/posts/2024/02/building-a-chatbot-from-your-documentation-website-docsgpt/</guid>
-      <description>&lt;p&gt;Hi everyone! Been a long time, thought I should talk about an ongoing project I&amp;rsquo;m working on.&lt;/p&gt;&#xA;&lt;h2 id=&#34;introduction---what-are-we-trying-to-do-here&#34;&gt;Introduction - What are we trying to do here?&lt;/h2&gt;&#xA;&lt;p&gt;Lemme start with some context and disclaimer first:&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;This was a part of an interview process in one of the amazing startups, and I wanted to extend it to an end-to-end project (kinda out of scope from the requirement of that interview process). I won&amp;rsquo;t be naming the startup here to help keep them anonymous and candid for their future candidates.&lt;/p&gt;</description>
+      <description>&lt;p&gt;Hi everyone! Been a long time, thought I should talk about an ongoing project I&amp;rsquo;m working on.&lt;/p&gt;
+&lt;h2 id=&#34;introduction---what-are-we-trying-to-do-here&#34;&gt;Introduction - What are we trying to do here?&lt;/h2&gt;
+&lt;p&gt;Lemme start with some context and disclaimer first:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;This was a part of an interview process in one of the amazing startups, and I wanted to extend it to an end-to-end project (kinda out of scope from the requirement of that interview process). I won&amp;rsquo;t be naming the startup here to help keep them anonymous and candid for their future candidates.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Data Scrapping for ChatBot Model in Rust | DocsGPT | Part-2</title>
       <link>https://krshrimali.github.io/posts/2024/02/data-scrapping-for-chatbot-model-in-rust-docsgpt-part-2/</link>
       <pubDate>Mon, 26 Feb 2024 00:00:00 +0000</pubDate>
       <guid>https://krshrimali.github.io/posts/2024/02/data-scrapping-for-chatbot-model-in-rust-docsgpt-part-2/</guid>
-      <description>&lt;p&gt;Alright everyone, we are back. Just FYI, we&amp;rsquo;ve had a blog on introduction to DocsGPT before: &lt;a href=&#34;https://krshrimali.github.io/posts/2024/02/building-a-chatbot-from-your-documentation-website-docsgpt/&#34;&gt;https://krshrimali.github.io/posts/2024/02/building-a-chatbot-from-your-documentation-website-docsgpt/&lt;/a&gt;. This is a follow up blog where we&amp;rsquo;ll discuss data scraping and preprocessing to be able to finetune our model for ChatBot use-case.&lt;/p&gt;&#xA;&lt;p&gt;Quick recap?&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;Input is going to be a &lt;em&gt;single link to documentation page (index page)&lt;/em&gt;.&lt;/li&gt;&#xA;&lt;li&gt;Need to fetch data for &amp;ldquo;all the internal pages&amp;rdquo;.&lt;/li&gt;&#xA;&lt;li&gt;Preprocess (and/or clean) and transform the data to be able to finetune the model.&lt;/li&gt;&#xA;&lt;li&gt;Finetune the model and use it for ChatBot use-case.&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;In this blog, we&amp;rsquo;ll be covering the first two above, and the rest will be covered in the next blog(s).&lt;/p&gt;</description>
+      <description>&lt;p&gt;Alright everyone, we are back. Just FYI, we&amp;rsquo;ve had a blog on introduction to DocsGPT before: &lt;a href=&#34;https://krshrimali.github.io/posts/2024/02/building-a-chatbot-from-your-documentation-website-docsgpt/&#34;&gt;https://krshrimali.github.io/posts/2024/02/building-a-chatbot-from-your-documentation-website-docsgpt/&lt;/a&gt;. This is a follow up blog where we&amp;rsquo;ll discuss data scraping and preprocessing to be able to finetune our model for ChatBot use-case.&lt;/p&gt;
+&lt;p&gt;Quick recap?&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Input is going to be a &lt;em&gt;single link to documentation page (index page)&lt;/em&gt;.&lt;/li&gt;
+&lt;li&gt;Need to fetch data for &amp;ldquo;all the internal pages&amp;rdquo;.&lt;/li&gt;
+&lt;li&gt;Preprocess (and/or clean) and transform the data to be able to finetune the model.&lt;/li&gt;
+&lt;li&gt;Finetune the model and use it for ChatBot use-case.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;In this blog, we&amp;rsquo;ll be covering the first two above, and the rest will be covered in the next blog(s).&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

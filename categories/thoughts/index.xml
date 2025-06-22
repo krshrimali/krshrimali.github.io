@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Thoughts on Kushashwa Ravi Shrimali (Kush)</title>
     <link>https://krshrimali.github.io/categories/thoughts/</link>
     <description>Recent content in Thoughts on Kushashwa Ravi Shrimali (Kush)</description>
-    <generator>Hugo</generator>
+    <generator>Hugo -- 0.147.6</generator>
     <language>en</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
     <lastBuildDate>Sun, 14 Jan 2024 00:00:00 +0000</lastBuildDate>
@@ -14,7 +14,8 @@
       <link>https://krshrimali.github.io/posts/2024/01/bring-back-the-old-times-celebrate-your-wins/</link>
       <pubDate>Sun, 14 Jan 2024 00:00:00 +0000</pubDate>
       <guid>https://krshrimali.github.io/posts/2024/01/bring-back-the-old-times-celebrate-your-wins/</guid>
-      <description>&lt;p&gt;Hi everyone! Happy to be back, in case y&amp;rsquo;all have been wondering - where have you been Kush? Well, a lot of things have been happening on my &lt;a href=&#34;https://youtube.com/c/kushashwaraviShrimali&#34;&gt;YouTube channel&lt;/a&gt; and &lt;a href=&#34;https://twitch.tv/buffetcodes&#34;&gt;Twitch Channel - buffetcodes&lt;/a&gt;. But in any case, I wanted to write something out - so here it is.&lt;/p&gt;&#xA;&lt;p&gt;Disclaimer: this is more on a personal level rather than on an educational level, I&amp;rsquo;m sorry to disappoint if you were expecting a detailed tech blog today. I&amp;rsquo;ll come up with something soon. :)&lt;/p&gt;</description>
+      <description>&lt;p&gt;Hi everyone! Happy to be back, in case y&amp;rsquo;all have been wondering - where have you been Kush? Well, a lot of things have been happening on my &lt;a href=&#34;https://youtube.com/c/kushashwaraviShrimali&#34;&gt;YouTube channel&lt;/a&gt; and &lt;a href=&#34;https://twitch.tv/buffetcodes&#34;&gt;Twitch Channel - buffetcodes&lt;/a&gt;. But in any case, I wanted to write something out - so here it is.&lt;/p&gt;
+&lt;p&gt;Disclaimer: this is more on a personal level rather than on an educational level, I&amp;rsquo;m sorry to disappoint if you were expecting a detailed tech blog today. I&amp;rsquo;ll come up with something soon. :)&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Data-Structures on Kushashwa Ravi Shrimali (Kush)</title>
     <link>https://krshrimali.github.io/categories/data-structures/</link>
     <description>Recent content in Data-Structures on Kushashwa Ravi Shrimali (Kush)</description>
-    <generator>Hugo</generator>
+    <generator>Hugo -- 0.147.6</generator>
     <language>en</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
     <lastBuildDate>Sun, 27 Oct 2024 00:00:00 +0000</lastBuildDate>
@@ -14,7 +14,8 @@
       <link>https://krshrimali.github.io/posts/2024/10/where-are-linked-lists-used/</link>
       <pubDate>Sun, 27 Oct 2024 00:00:00 +0000</pubDate>
       <guid>https://krshrimali.github.io/posts/2024/10/where-are-linked-lists-used/</guid>
-      <description>&lt;p&gt;It&amp;rsquo;s the Day-1 of &lt;em&gt;staying&lt;/em&gt; curious. I&amp;rsquo;ll talk more about it towards the end, but first - let&amp;rsquo;s get to the topic.&lt;/p&gt;&#xA;&lt;p&gt;Starting from my college life, I&amp;rsquo;ve always been excited to know the &amp;ldquo;how&amp;rdquo;, &amp;ldquo;why&amp;rdquo;, &amp;ldquo;what&amp;rdquo;, &amp;ldquo;where&amp;rdquo; questions of each data structure we would study. This series is not just about data structures though, anything that you can imagine with Computer Science - I hope to cover some of those in some more blog posts.&lt;/p&gt;</description>
+      <description>&lt;p&gt;It&amp;rsquo;s the Day-1 of &lt;em&gt;staying&lt;/em&gt; curious. I&amp;rsquo;ll talk more about it towards the end, but first - let&amp;rsquo;s get to the topic.&lt;/p&gt;
+&lt;p&gt;Starting from my college life, I&amp;rsquo;ve always been excited to know the &amp;ldquo;how&amp;rdquo;, &amp;ldquo;why&amp;rdquo;, &amp;ldquo;what&amp;rdquo;, &amp;ldquo;where&amp;rdquo; questions of each data structure we would study. This series is not just about data structures though, anything that you can imagine with Computer Science - I hope to cover some of those in some more blog posts.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

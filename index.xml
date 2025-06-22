@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Kushashwa Ravi Shrimali (Kush)</title>
     <link>https://krshrimali.github.io/</link>
     <description>Recent content on Kushashwa Ravi Shrimali (Kush)</description>
-    <generator>Hugo</generator>
+    <generator>Hugo -- 0.147.6</generator>
     <language>en</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
     <lastBuildDate>Sun, 23 Mar 2025 00:00:00 +0000</lastBuildDate>
@@ -14,70 +14,184 @@
       <link>https://krshrimali.github.io/posts/2025/03/progress-update-context-pilot-revamping/</link>
       <pubDate>Sun, 23 Mar 2025 00:00:00 +0000</pubDate>
       <guid>https://krshrimali.github.io/posts/2025/03/progress-update-context-pilot-revamping/</guid>
-      <description>&lt;p&gt;I&amp;rsquo;ve had many iterations on this project that I&amp;rsquo;m going to talk about today, over the last 1.5-2 years. There are good and bad things about it. Good is that I&amp;rsquo;m persisting with completing it one day, bad is that I&amp;rsquo;ve not done it yet.&lt;/p&gt;&#xA;&lt;p&gt;In this blog, I&amp;rsquo;ll quickly touch upon why it has taken so much time and what&amp;rsquo;s happening behind the scenes.&lt;/p&gt;&#xA;&lt;h2 id=&#34;about-the-project&#34;&gt;About the project:&lt;/h2&gt;&#xA;&lt;p&gt;For a piece of code, this project is going to help you with questions like:&lt;/p&gt;</description>
+      <description>&lt;p&gt;I&amp;rsquo;ve had many iterations on this project that I&amp;rsquo;m going to talk about today, over the last 1.5-2 years. There are good and bad things about it. Good is that I&amp;rsquo;m persisting with completing it one day, bad is that I&amp;rsquo;ve not done it yet.&lt;/p&gt;
+&lt;p&gt;In this blog, I&amp;rsquo;ll quickly touch upon why it has taken so much time and what&amp;rsquo;s happening behind the scenes.&lt;/p&gt;
+&lt;h2 id=&#34;about-the-project&#34;&gt;About the project:&lt;/h2&gt;
+&lt;p&gt;For a piece of code, this project is going to help you with questions like:&lt;/p&gt;</description>
     </item>
     <item>
       <title>Where are Linked Lists used?</title>
       <link>https://krshrimali.github.io/posts/2024/10/where-are-linked-lists-used/</link>
       <pubDate>Sun, 27 Oct 2024 00:00:00 +0000</pubDate>
       <guid>https://krshrimali.github.io/posts/2024/10/where-are-linked-lists-used/</guid>
-      <description>&lt;p&gt;It&amp;rsquo;s the Day-1 of &lt;em&gt;staying&lt;/em&gt; curious. I&amp;rsquo;ll talk more about it towards the end, but first - let&amp;rsquo;s get to the topic.&lt;/p&gt;&#xA;&lt;p&gt;Starting from my college life, I&amp;rsquo;ve always been excited to know the &amp;ldquo;how&amp;rdquo;, &amp;ldquo;why&amp;rdquo;, &amp;ldquo;what&amp;rdquo;, &amp;ldquo;where&amp;rdquo; questions of each data structure we would study. This series is not just about data structures though, anything that you can imagine with Computer Science - I hope to cover some of those in some more blog posts.&lt;/p&gt;</description>
+      <description>&lt;p&gt;It&amp;rsquo;s the Day-1 of &lt;em&gt;staying&lt;/em&gt; curious. I&amp;rsquo;ll talk more about it towards the end, but first - let&amp;rsquo;s get to the topic.&lt;/p&gt;
+&lt;p&gt;Starting from my college life, I&amp;rsquo;ve always been excited to know the &amp;ldquo;how&amp;rdquo;, &amp;ldquo;why&amp;rdquo;, &amp;ldquo;what&amp;rdquo;, &amp;ldquo;where&amp;rdquo; questions of each data structure we would study. This series is not just about data structures though, anything that you can imagine with Computer Science - I hope to cover some of those in some more blog posts.&lt;/p&gt;</description>
     </item>
     <item>
       <title>What typing taught me in life?</title>
       <link>https://krshrimali.github.io/posts/2024/03/what-typing-taught-me-in-life/</link>
       <pubDate>Sun, 17 Mar 2024 00:00:00 +0000</pubDate>
       <guid>https://krshrimali.github.io/posts/2024/03/what-typing-taught-me-in-life/</guid>
-      <description>&lt;p&gt;So this happened today, I was attempting a typing speed test on &lt;a href=&#34;https://monkeytype.com&#34;&gt;monkeytype&lt;/a&gt; and quickly realised a few things that kind of related in my personal life. Thought I&amp;rsquo;ll share with y&amp;rsquo;all and I&amp;rsquo;m confident you all will relate!&lt;/p&gt;&#xA;&lt;p&gt;For context, I&amp;rsquo;ve been at around 120 wpm (avg) to 135 wpm (max) in a 30 seconds speed test for quite some time now (maybe more than a year at least). And very honestly, I&amp;rsquo;m happy about it, I don&amp;rsquo;t wwant to grow my typing speed further - in fact I never planned it before as well. I used to just type as fast as my fingers would allow, and turns out it was good enough for me to do my work. Right now, my goal is more towards sustaining my wrists and fingers along with work, as it definitely pains a lot if your positioning is not right.&lt;/p&gt;</description>
+      <description>&lt;p&gt;So this happened today, I was attempting a typing speed test on &lt;a href=&#34;https://monkeytype.com&#34;&gt;monkeytype&lt;/a&gt; and quickly realised a few things that kind of related in my personal life. Thought I&amp;rsquo;ll share with y&amp;rsquo;all and I&amp;rsquo;m confident you all will relate!&lt;/p&gt;
+&lt;p&gt;For context, I&amp;rsquo;ve been at around 120 wpm (avg) to 135 wpm (max) in a 30 seconds speed test for quite some time now (maybe more than a year at least). And very honestly, I&amp;rsquo;m happy about it, I don&amp;rsquo;t wwant to grow my typing speed further - in fact I never planned it before as well. I used to just type as fast as my fingers would allow, and turns out it was good enough for me to do my work. Right now, my goal is more towards sustaining my wrists and fingers along with work, as it definitely pains a lot if your positioning is not right.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Building a ChatBot from your Documentation Website | DocsGPT</title>
       <link>https://krshrimali.github.io/posts/2024/02/building-a-chatbot-from-your-documentation-website-docsgpt/</link>
       <pubDate>Mon, 26 Feb 2024 00:00:00 +0000</pubDate>
       <guid>https://krshrimali.github.io/posts/2024/02/building-a-chatbot-from-your-documentation-website-docsgpt/</guid>
-      <description>&lt;p&gt;Hi everyone! Been a long time, thought I should talk about an ongoing project I&amp;rsquo;m working on.&lt;/p&gt;&#xA;&lt;h2 id=&#34;introduction---what-are-we-trying-to-do-here&#34;&gt;Introduction - What are we trying to do here?&lt;/h2&gt;&#xA;&lt;p&gt;Lemme start with some context and disclaimer first:&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;This was a part of an interview process in one of the amazing startups, and I wanted to extend it to an end-to-end project (kinda out of scope from the requirement of that interview process). I won&amp;rsquo;t be naming the startup here to help keep them anonymous and candid for their future candidates.&lt;/p&gt;</description>
+      <description>&lt;p&gt;Hi everyone! Been a long time, thought I should talk about an ongoing project I&amp;rsquo;m working on.&lt;/p&gt;
+&lt;h2 id=&#34;introduction---what-are-we-trying-to-do-here&#34;&gt;Introduction - What are we trying to do here?&lt;/h2&gt;
+&lt;p&gt;Lemme start with some context and disclaimer first:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;This was a part of an interview process in one of the amazing startups, and I wanted to extend it to an end-to-end project (kinda out of scope from the requirement of that interview process). I won&amp;rsquo;t be naming the startup here to help keep them anonymous and candid for their future candidates.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Data Scrapping for ChatBot Model in Rust | DocsGPT | Part-2</title>
       <link>https://krshrimali.github.io/posts/2024/02/data-scrapping-for-chatbot-model-in-rust-docsgpt-part-2/</link>
       <pubDate>Mon, 26 Feb 2024 00:00:00 +0000</pubDate>
       <guid>https://krshrimali.github.io/posts/2024/02/data-scrapping-for-chatbot-model-in-rust-docsgpt-part-2/</guid>
-      <description>&lt;p&gt;Alright everyone, we are back. Just FYI, we&amp;rsquo;ve had a blog on introduction to DocsGPT before: &lt;a href=&#34;https://krshrimali.github.io/posts/2024/02/building-a-chatbot-from-your-documentation-website-docsgpt/&#34;&gt;https://krshrimali.github.io/posts/2024/02/building-a-chatbot-from-your-documentation-website-docsgpt/&lt;/a&gt;. This is a follow up blog where we&amp;rsquo;ll discuss data scraping and preprocessing to be able to finetune our model for ChatBot use-case.&lt;/p&gt;&#xA;&lt;p&gt;Quick recap?&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;Input is going to be a &lt;em&gt;single link to documentation page (index page)&lt;/em&gt;.&lt;/li&gt;&#xA;&lt;li&gt;Need to fetch data for &amp;ldquo;all the internal pages&amp;rdquo;.&lt;/li&gt;&#xA;&lt;li&gt;Preprocess (and/or clean) and transform the data to be able to finetune the model.&lt;/li&gt;&#xA;&lt;li&gt;Finetune the model and use it for ChatBot use-case.&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;In this blog, we&amp;rsquo;ll be covering the first two above, and the rest will be covered in the next blog(s).&lt;/p&gt;</description>
+      <description>&lt;p&gt;Alright everyone, we are back. Just FYI, we&amp;rsquo;ve had a blog on introduction to DocsGPT before: &lt;a href=&#34;https://krshrimali.github.io/posts/2024/02/building-a-chatbot-from-your-documentation-website-docsgpt/&#34;&gt;https://krshrimali.github.io/posts/2024/02/building-a-chatbot-from-your-documentation-website-docsgpt/&lt;/a&gt;. This is a follow up blog where we&amp;rsquo;ll discuss data scraping and preprocessing to be able to finetune our model for ChatBot use-case.&lt;/p&gt;
+&lt;p&gt;Quick recap?&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Input is going to be a &lt;em&gt;single link to documentation page (index page)&lt;/em&gt;.&lt;/li&gt;
+&lt;li&gt;Need to fetch data for &amp;ldquo;all the internal pages&amp;rdquo;.&lt;/li&gt;
+&lt;li&gt;Preprocess (and/or clean) and transform the data to be able to finetune the model.&lt;/li&gt;
+&lt;li&gt;Finetune the model and use it for ChatBot use-case.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;In this blog, we&amp;rsquo;ll be covering the first two above, and the rest will be covered in the next blog(s).&lt;/p&gt;</description>
     </item>
     <item>
       <title>Bring back the old times - celebrate your wins!</title>
       <link>https://krshrimali.github.io/posts/2024/01/bring-back-the-old-times-celebrate-your-wins/</link>
       <pubDate>Sun, 14 Jan 2024 00:00:00 +0000</pubDate>
       <guid>https://krshrimali.github.io/posts/2024/01/bring-back-the-old-times-celebrate-your-wins/</guid>
-      <description>&lt;p&gt;Hi everyone! Happy to be back, in case y&amp;rsquo;all have been wondering - where have you been Kush? Well, a lot of things have been happening on my &lt;a href=&#34;https://youtube.com/c/kushashwaraviShrimali&#34;&gt;YouTube channel&lt;/a&gt; and &lt;a href=&#34;https://twitch.tv/buffetcodes&#34;&gt;Twitch Channel - buffetcodes&lt;/a&gt;. But in any case, I wanted to write something out - so here it is.&lt;/p&gt;&#xA;&lt;p&gt;Disclaimer: this is more on a personal level rather than on an educational level, I&amp;rsquo;m sorry to disappoint if you were expecting a detailed tech blog today. I&amp;rsquo;ll come up with something soon. :)&lt;/p&gt;</description>
+      <description>&lt;p&gt;Hi everyone! Happy to be back, in case y&amp;rsquo;all have been wondering - where have you been Kush? Well, a lot of things have been happening on my &lt;a href=&#34;https://youtube.com/c/kushashwaraviShrimali&#34;&gt;YouTube channel&lt;/a&gt; and &lt;a href=&#34;https://twitch.tv/buffetcodes&#34;&gt;Twitch Channel - buffetcodes&lt;/a&gt;. But in any case, I wanted to write something out - so here it is.&lt;/p&gt;
+&lt;p&gt;Disclaimer: this is more on a personal level rather than on an educational level, I&amp;rsquo;m sorry to disappoint if you were expecting a detailed tech blog today. I&amp;rsquo;ll come up with something soon. :)&lt;/p&gt;</description>
     </item>
     <item>
       <title>Daily Update: 3rd May 2023</title>
       <link>https://krshrimali.github.io/posts/2023/05/daily-update-3rd-may-2023/</link>
       <pubDate>Wed, 03 May 2023 00:00:00 +0000</pubDate>
       <guid>https://krshrimali.github.io/posts/2023/05/daily-update-3rd-may-2023/</guid>
-      <description>&lt;p&gt;Okay, I think I should just accept this, while at work, it will be very hard for me to go and actually code something. And it makes sense, honestly at this stage - I feel like giving 50% of the time to reading + thinking, and 20% to implementing + 30% on iterating and feedback. So you&amp;rsquo;ll see more links about reading etc. over here.&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=0LTXCcVRQi0&amp;list=LL&amp;index=7&#34;&gt;Design a basic search engine (Google or Bing) | System Design Interview Prep&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=olfaBgJrUBI&amp;list=LL&amp;index=6&#34;&gt;Design a Payment System - System Design Interview&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;That would be it, to be honest - not a lot. I&amp;rsquo;ve started reading through fasterthanlime&amp;rsquo;s videos on Silly Fast Fresh Deploys, I&amp;rsquo;ll share progress on it soon once I&amp;rsquo;ve some learnings.&lt;/p&gt;</description>
+      <description>&lt;p&gt;Okay, I think I should just accept this, while at work, it will be very hard for me to go and actually code something. And it makes sense, honestly at this stage - I feel like giving 50% of the time to reading + thinking, and 20% to implementing + 30% on iterating and feedback. So you&amp;rsquo;ll see more links about reading etc. over here.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=0LTXCcVRQi0&amp;amp;list=LL&amp;amp;index=7&#34;&gt;Design a basic search engine (Google or Bing) | System Design Interview Prep&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=olfaBgJrUBI&amp;amp;list=LL&amp;amp;index=6&#34;&gt;Design a Payment System - System Design Interview&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;That would be it, to be honest - not a lot. I&amp;rsquo;ve started reading through fasterthanlime&amp;rsquo;s videos on Silly Fast Fresh Deploys, I&amp;rsquo;ll share progress on it soon once I&amp;rsquo;ve some learnings.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Daily Update: 2nd May 2023</title>
       <link>https://krshrimali.github.io/posts/2023/05/daily-update-2nd-may-2023/</link>
       <pubDate>Tue, 02 May 2023 00:00:00 +0000</pubDate>
       <guid>https://krshrimali.github.io/posts/2023/05/daily-update-2nd-may-2023/</guid>
-      <description>&lt;p&gt;Today was more like a reading/learning day. Here are the things I&amp;rsquo;ve been watching:&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=9mdadNspP_M&#34;&gt;Which Database Model to choose?&lt;/a&gt;:&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Why this?&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Going to be useful for the &lt;a href=&#34;https://github.com/krshrimali/keystroke-store-rs&#34;&gt;project&lt;/a&gt; I&amp;rsquo;ve been working on. Thinking on directions of storing in-memory, using key-value model but let&amp;rsquo;s see.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=FY7EQwT7QKU&#34;&gt;I made every sentry page 300 ms faster (intermediate) anthony explains &lt;code&gt;#540&lt;/code&gt;&lt;/a&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Why this?&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Always enjoy watching Anthony. Came on my YT recommendation, thought I&amp;rsquo;ll watch. Looks like a CDN config fix, also learnt a few things on watching the type of network calls (cached or not) from this video.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://bertptrs.nl/2023/04/27/how-does-async-rust-work.html&#34;&gt;How does async rust work&lt;/a&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Still reading, not done yet. Will update my learnings when done.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;Update NeoVim Config to use ruff-lsp instead of pyright for most except hover&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Ruff has been there for long, boasts a lot of perf improvements as a linter. Good to see Ruff LSP growing.&lt;/li&gt;&#xA;&lt;li&gt;NeoVim config repository: &lt;a href=&#34;https://github.com/krshrimali/nvim&#34;&gt;https://github.com/krshrimali/nvim&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;It&amp;rsquo;s of course going to take a lot of efforts to catch up to pyright in terms of capabilities, but I&amp;rsquo;m very positive.&lt;/li&gt;&#xA;&lt;li&gt;I love to see code actions finally in my neovim + python code. 🎉&lt;/li&gt;&#xA;&lt;li&gt;It&amp;rsquo;s written in Rust, for those who don&amp;rsquo;t know 😉&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;TODOs:&lt;/p&gt;</description>
+      <description>&lt;p&gt;Today was more like a reading/learning day. Here are the things I&amp;rsquo;ve been watching:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=9mdadNspP_M&#34;&gt;Which Database Model to choose?&lt;/a&gt;:
+&lt;ul&gt;
+&lt;li&gt;Why this?
+&lt;ul&gt;
+&lt;li&gt;Going to be useful for the &lt;a href=&#34;https://github.com/krshrimali/keystroke-store-rs&#34;&gt;project&lt;/a&gt; I&amp;rsquo;ve been working on. Thinking on directions of storing in-memory, using key-value model but let&amp;rsquo;s see.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=FY7EQwT7QKU&#34;&gt;I made every sentry page 300 ms faster (intermediate) anthony explains &lt;code&gt;#540&lt;/code&gt;&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;Why this?
+&lt;ul&gt;
+&lt;li&gt;Always enjoy watching Anthony. Came on my YT recommendation, thought I&amp;rsquo;ll watch. Looks like a CDN config fix, also learnt a few things on watching the type of network calls (cached or not) from this video.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://bertptrs.nl/2023/04/27/how-does-async-rust-work.html&#34;&gt;How does async rust work&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;Still reading, not done yet. Will update my learnings when done.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Update NeoVim Config to use ruff-lsp instead of pyright for most except hover
+&lt;ul&gt;
+&lt;li&gt;Ruff has been there for long, boasts a lot of perf improvements as a linter. Good to see Ruff LSP growing.&lt;/li&gt;
+&lt;li&gt;NeoVim config repository: &lt;a href=&#34;https://github.com/krshrimali/nvim&#34;&gt;https://github.com/krshrimali/nvim&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;It&amp;rsquo;s of course going to take a lot of efforts to catch up to pyright in terms of capabilities, but I&amp;rsquo;m very positive.&lt;/li&gt;
+&lt;li&gt;I love to see code actions finally in my neovim + python code. 🎉&lt;/li&gt;
+&lt;li&gt;It&amp;rsquo;s written in Rust, for those who don&amp;rsquo;t know 😉&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;TODOs:&lt;/p&gt;</description>
     </item>
     <item>
       <title>Daily Update: 1st May 2023</title>
       <link>https://krshrimali.github.io/posts/2023/05/daily-update-1st-may-2023/</link>
       <pubDate>Mon, 01 May 2023 00:00:00 +0000</pubDate>
       <guid>https://krshrimali.github.io/posts/2023/05/daily-update-1st-may-2023/</guid>
-      <description>&lt;p&gt;Interesting day, lots of design stuff for the &lt;a href=&#34;https://github.com/krshrimali/keystroke-store-rs&#34;&gt;project we&amp;rsquo;ve been working on&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;Designing flow for the word combinator service&#xA;&lt;ul&gt;&#xA;&lt;li&gt;This is actually tricky, as we are figuring out how we&amp;rsquo;ll figure out the keystrokes into words/phrases (I&amp;rsquo;d like to call them &lt;em&gt;entities&lt;/em&gt; at one point of time).&lt;/li&gt;&#xA;&lt;li&gt;The algorithm is close, and I&amp;rsquo;m particularly hopeful about it:&#xA;&lt;ul&gt;&#xA;&lt;li&gt;It considers some edge cases of mouse events, sitting idle, and gives user the control what they would like to choose.&lt;/li&gt;&#xA;&lt;li&gt;More on this very soon!&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;Boring nerdy stuff: Exploring fzf&#xA;&lt;ul&gt;&#xA;&lt;li&gt;I wanted to have fzf previews height changed to 100%, finally changed my zsh config for that. It looks much better now.&lt;/li&gt;&#xA;&lt;li&gt;Then figured out that I&amp;rsquo;m using outdated formula for fzf, and I&amp;rsquo;ll end up going through fzf release notes to see what has changed over the last few releases.&#xA;&lt;ul&gt;&#xA;&lt;li&gt;It&amp;rsquo;s usually a good practice I believe to go through the release notes, and be aware of the tools you use.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;Work day tomorrow, so doing some early readings.&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Of course can&amp;rsquo;t share details, but yep, going to be more occupied now.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;A lot of TODOs from &lt;del&gt;yesterday&lt;/del&gt; day before yesterday are left 🥺, I&amp;rsquo;ll move them to tomorrow, yay! Procrastination, let&amp;rsquo;s go 😆🎉&lt;/p&gt;</description>
+      <description>&lt;p&gt;Interesting day, lots of design stuff for the &lt;a href=&#34;https://github.com/krshrimali/keystroke-store-rs&#34;&gt;project we&amp;rsquo;ve been working on&lt;/a&gt;.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Designing flow for the word combinator service
+&lt;ul&gt;
+&lt;li&gt;This is actually tricky, as we are figuring out how we&amp;rsquo;ll figure out the keystrokes into words/phrases (I&amp;rsquo;d like to call them &lt;em&gt;entities&lt;/em&gt; at one point of time).&lt;/li&gt;
+&lt;li&gt;The algorithm is close, and I&amp;rsquo;m particularly hopeful about it:
+&lt;ul&gt;
+&lt;li&gt;It considers some edge cases of mouse events, sitting idle, and gives user the control what they would like to choose.&lt;/li&gt;
+&lt;li&gt;More on this very soon!&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Boring nerdy stuff: Exploring fzf
+&lt;ul&gt;
+&lt;li&gt;I wanted to have fzf previews height changed to 100%, finally changed my zsh config for that. It looks much better now.&lt;/li&gt;
+&lt;li&gt;Then figured out that I&amp;rsquo;m using outdated formula for fzf, and I&amp;rsquo;ll end up going through fzf release notes to see what has changed over the last few releases.
+&lt;ul&gt;
+&lt;li&gt;It&amp;rsquo;s usually a good practice I believe to go through the release notes, and be aware of the tools you use.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Work day tomorrow, so doing some early readings.
+&lt;ul&gt;
+&lt;li&gt;Of course can&amp;rsquo;t share details, but yep, going to be more occupied now.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;A lot of TODOs from &lt;del&gt;yesterday&lt;/del&gt; day before yesterday are left 🥺, I&amp;rsquo;ll move them to tomorrow, yay! Procrastination, let&amp;rsquo;s go 😆🎉&lt;/p&gt;</description>
     </item>
     <item>
       <title>Daily Update: 30th April 2023</title>
       <link>https://krshrimali.github.io/posts/2023/04/daily-update-30th-april-2023/</link>
       <pubDate>Sun, 30 Apr 2023 00:00:00 +0000</pubDate>
       <guid>https://krshrimali.github.io/posts/2023/04/daily-update-30th-april-2023/</guid>
-      <description>&lt;p&gt;Lovely day, had my friend &lt;a href=&#34;https://github.com/imsrbh&#34;&gt;imsrbh&lt;/a&gt; come over and we were talking about the project I wanted to do. He had some ideas and of course some experience with Kafka, so he helped me setup Kafka and docker on my machine, and that&amp;rsquo;s how it all started.&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;Setting up Kafka and Docker on my machine:&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Refer to &lt;a href=&#34;https://medium.com/@fengliplatform/kafka-broker-setup-using-docker-image-33f7a8081a07#:~:text=1%20Setup%20Kafka%20cluster%20on%20Windows%20laptop%201,instance%20...%205%201.5%20Create%20Kafka%20topic%20&#34;&gt;this blog&lt;/a&gt; for Kafka setup.&lt;/li&gt;&#xA;&lt;li&gt;We verified by running a sample producer-consumer app in Python and it worked.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://github.com/krshrimali/keystroke-store-rs&#34;&gt;Starting to implement the core logic of getting key strokes in Rust&lt;/a&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;I&amp;rsquo;m using &lt;code&gt;rdev&lt;/code&gt; library for this, it was decent.&lt;/li&gt;&#xA;&lt;li&gt;Was wondering how I can convert the keystrokes to strings, apparently it was a Rust Enum.&lt;/li&gt;&#xA;&lt;li&gt;Fortunately, they had a feature &lt;code&gt;serialize&lt;/code&gt; which would help me do just that. Now it&amp;rsquo;s quite smooth.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;Implementing Kafka Producer-Consumer in Rust&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Kafka has a client in Rust, &lt;code&gt;cargo add kafka&lt;/code&gt; will help.&lt;/li&gt;&#xA;&lt;li&gt;Wrote Kafka Producer and Consumer referring to their official documentation.&lt;/li&gt;&#xA;&lt;li&gt;It works flawlessly.&lt;/li&gt;&#xA;&lt;li&gt;We were sending the keys as &lt;code&gt;&amp;amp;[u8]&lt;/code&gt; and had to convert these to strings back at consumer (need to proper error checking there)&lt;/li&gt;&#xA;&lt;li&gt;Producer repo: &lt;a href=&#34;https://github.com/krshrimali/keystroke-store-rs&#34;&gt;https://github.com/krshrimali/keystroke-store-rs&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;Consumer repo: &lt;a href=&#34;https://github.com/krshrimali/keystroke-consumer-rs&#34;&gt;https://github.com/krshrimali/keystroke-consumer-rs&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;Quick learning on why we didn&amp;rsquo;t go for Redis (mostly because we wanted to learn Kafka in Rust lol, can try Redis one day but I like reliability of Kafka): &lt;a href=&#34;https://stackoverflow.com/a/37993809&#34;&gt;https://stackoverflow.com/a/37993809&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;A lot of TODOs from yesterday are left, I&amp;rsquo;ll move them to tomorrow, yay! Procrastination, let&amp;rsquo;s go 😆🎉&lt;/p&gt;</description>
+      <description>&lt;p&gt;Lovely day, had my friend &lt;a href=&#34;https://github.com/imsrbh&#34;&gt;imsrbh&lt;/a&gt; come over and we were talking about the project I wanted to do. He had some ideas and of course some experience with Kafka, so he helped me setup Kafka and docker on my machine, and that&amp;rsquo;s how it all started.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Setting up Kafka and Docker on my machine:
+&lt;ul&gt;
+&lt;li&gt;Refer to &lt;a href=&#34;https://medium.com/@fengliplatform/kafka-broker-setup-using-docker-image-33f7a8081a07#:~:text=1%20Setup%20Kafka%20cluster%20on%20Windows%20laptop%201,instance%20...%205%201.5%20Create%20Kafka%20topic%20&#34;&gt;this blog&lt;/a&gt; for Kafka setup.&lt;/li&gt;
+&lt;li&gt;We verified by running a sample producer-consumer app in Python and it worked.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/krshrimali/keystroke-store-rs&#34;&gt;Starting to implement the core logic of getting key strokes in Rust&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;I&amp;rsquo;m using &lt;code&gt;rdev&lt;/code&gt; library for this, it was decent.&lt;/li&gt;
+&lt;li&gt;Was wondering how I can convert the keystrokes to strings, apparently it was a Rust Enum.&lt;/li&gt;
+&lt;li&gt;Fortunately, they had a feature &lt;code&gt;serialize&lt;/code&gt; which would help me do just that. Now it&amp;rsquo;s quite smooth.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Implementing Kafka Producer-Consumer in Rust
+&lt;ul&gt;
+&lt;li&gt;Kafka has a client in Rust, &lt;code&gt;cargo add kafka&lt;/code&gt; will help.&lt;/li&gt;
+&lt;li&gt;Wrote Kafka Producer and Consumer referring to their official documentation.&lt;/li&gt;
+&lt;li&gt;It works flawlessly.&lt;/li&gt;
+&lt;li&gt;We were sending the keys as &lt;code&gt;&amp;amp;[u8]&lt;/code&gt; and had to convert these to strings back at consumer (need to proper error checking there)&lt;/li&gt;
+&lt;li&gt;Producer repo: &lt;a href=&#34;https://github.com/krshrimali/keystroke-store-rs&#34;&gt;https://github.com/krshrimali/keystroke-store-rs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Consumer repo: &lt;a href=&#34;https://github.com/krshrimali/keystroke-consumer-rs&#34;&gt;https://github.com/krshrimali/keystroke-consumer-rs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Quick learning on why we didn&amp;rsquo;t go for Redis (mostly because we wanted to learn Kafka in Rust lol, can try Redis one day but I like reliability of Kafka): &lt;a href=&#34;https://stackoverflow.com/a/37993809&#34;&gt;https://stackoverflow.com/a/37993809&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;A lot of TODOs from yesterday are left, I&amp;rsquo;ll move them to tomorrow, yay! Procrastination, let&amp;rsquo;s go 😆🎉&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
