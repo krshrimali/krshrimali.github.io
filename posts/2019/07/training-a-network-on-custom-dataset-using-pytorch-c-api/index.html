@@ -1,557 +1,89 @@
-<!DOCTYPE html>
-<html lang="en" dir="auto">
-
-<head><meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="index, follow">
-<title>Training a Network on Custom Dataset using PyTorch C&#43;&#43; API | Kushashwa Ravi Shrimali (Kush)</title>
-<meta name="keywords" content="development, coding, cpp, notes, pytorch-cpp, libtorch">
-<meta name="description" content="Recap of the last blog
-Before we move on, it&rsquo;s important what we covered in the last blog. We&rsquo;ll be going forward from loading Custom Dataset to now using the dataset to train our VGG-16 Network. Previously, we were able to load our custom dataset using the following template:">
-<meta name="author" content="map[name:Kushashwa Ravi Shrimali]">
-<link rel="canonical" href="https://krshrimali.github.io/posts/2019/07/training-a-network-on-custom-dataset-using-pytorch-c-api/">
-<link crossorigin="anonymous" href="https://krshrimali.github.io/assets/css/stylesheet.8fe10233a706bc87f2e08b3cf97b8bd4c0a80f10675a143675d59212121037c0.css" integrity="sha256-j&#43;ECM6cGvIfy4Is8&#43;XuL1MCoDxBnWhQ2ddWSEhIQN8A=" rel="preload stylesheet" as="style">
-<link rel="icon" href="https://krshrimali.github.io/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="https://krshrimali.github.io/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://krshrimali.github.io/favicon-32x32.png">
-<link rel="apple-touch-icon" href="https://krshrimali.github.io/apple-touch-icon.png">
-<link rel="mask-icon" href="https://krshrimali.github.io/safari-pinned-tab.svg">
-<meta name="theme-color" content="#2e2e33">
-<meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="https://krshrimali.github.io/posts/2019/07/training-a-network-on-custom-dataset-using-pytorch-c-api/">
-<noscript>
-    <style>
-        #theme-toggle,
-        .top-link {
-            display: none;
-        }
-
-    </style>
-    <style>
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --theme: rgb(29, 30, 32);
-                --entry: rgb(46, 46, 51);
-                --primary: rgb(218, 218, 219);
-                --secondary: rgb(155, 156, 157);
-                --tertiary: rgb(65, 66, 68);
-                --content: rgb(196, 196, 197);
-                --code-block-bg: rgb(46, 46, 51);
-                --code-bg: rgb(55, 56, 62);
-                --border: rgb(51, 51, 51);
-            }
-
-            .list {
-                background: var(--theme);
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-track {
-                background: 0 0;
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-thumb {
-                border-color: var(--theme);
-            }
-        }
-
-    </style>
-</noscript><meta property="og:url" content="https://krshrimali.github.io/posts/2019/07/training-a-network-on-custom-dataset-using-pytorch-c-api/">
-  <meta property="og:site_name" content="Kushashwa Ravi Shrimali (Kush)">
-  <meta property="og:title" content="Training a Network on Custom Dataset using PyTorch C&#43;&#43; API">
-  <meta property="og:description" content="Recap of the last blog Before we move on, it’s important what we covered in the last blog. We’ll be going forward from loading Custom Dataset to now using the dataset to train our VGG-16 Network. Previously, we were able to load our custom dataset using the following template:">
-  <meta property="og:locale" content="en">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2019-07-05T00:00:00+00:00">
-    <meta property="article:modified_time" content="2019-07-05T00:00:00+00:00">
-    <meta property="article:tag" content="Development">
-    <meta property="article:tag" content="Coding">
-    <meta property="article:tag" content="Cpp">
-    <meta property="article:tag" content="Notes">
-    <meta property="article:tag" content="Pytorch-Cpp">
-    <meta property="article:tag" content="Libtorch">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Training a Network on Custom Dataset using PyTorch C&#43;&#43; API">
-<meta name="twitter:description" content="Recap of the last blog
-Before we move on, it&rsquo;s important what we covered in the last blog. We&rsquo;ll be going forward from loading Custom Dataset to now using the dataset to train our VGG-16 Network. Previously, we were able to load our custom dataset using the following template:">
-
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position":  1 ,
-      "name": "Posts",
-      "item": "https://krshrimali.github.io/posts/"
-    }, 
-    {
-      "@type": "ListItem",
-      "position":  2 ,
-      "name": "Training a Network on Custom Dataset using PyTorch C++ API",
-      "item": "https://krshrimali.github.io/posts/2019/07/training-a-network-on-custom-dataset-using-pytorch-c-api/"
-    }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "Training a Network on Custom Dataset using PyTorch C++ API",
-  "name": "Training a Network on Custom Dataset using PyTorch C\u002b\u002b API",
-  "description": "Recap of the last blog Before we move on, it\u0026rsquo;s important what we covered in the last blog. We\u0026rsquo;ll be going forward from loading Custom Dataset to now using the dataset to train our VGG-16 Network. Previously, we were able to load our custom dataset using the following template:\n",
-  "keywords": [
-    "development", "coding", "cpp", "notes", "pytorch-cpp", "libtorch"
-  ],
-  "articleBody": "Recap of the last blog Before we move on, it’s important what we covered in the last blog. We’ll be going forward from loading Custom Dataset to now using the dataset to train our VGG-16 Network. Previously, we were able to load our custom dataset using the following template:\nNote: Those who are already aware of loading a custom dataset can skip this section.\nclass CustomDataset : public torch::data::dataset\u003cCustomDataset\u003e { private: // Declare 2 vectors of tensors for images and labels vector\u003ctorch::Tensor\u003e images, labels; public: // Constructor CustomDataset(vector\u003cstring\u003e list_images, vector\u003cstring\u003e list_labels) { images = process_images(list_images); labels = process_labels(list_labels); }; // Override get() function to return tensor at location index torch::data::Example\u003c\u003e get(size_t index) override { torch::Tensor sample_img = images.at(index); torch::Tensor sample_label = labels.at(index); return {sample_img.clone(), sample_label.clone()}; }; // Return the length of data torch::optional\u003csize_t\u003e size() const override { return labels.size(); }; }; int main(int argc, char** argv) { vector\u003cstring\u003e list_images; // list of path of images vector\u003cint\u003e list_labels; // list of integer labels // Dataset init and apply transforms - None! auto custom_dataset = CustomDataset(list_images, list_labels).map(torch::data::transforms::Stack\u003c\u003e()); } These were the steps we followed last time:\nOverview: How to pass batches to our network? Since we have our dataset loaded, let’s see how to pass batches of data to our network. Before we go on and see how PyTorch C++ API does it, let’s see how it’s done in Python.\ndataset_loader = torch.utils.data.DataLoader(custom_dataset, batch_size=4, shuffle=True) Just a short review of what DataLoader() class does: It loads the data and returns single or multiple iterators over the dataset. We pass in our object from Dataset class (here, custom_dataset). We will do the same process in C++ using the following template:\nauto data_loader = torch::data::make_data_loader\u003ctorch::data::samplers::SequentialSampler\u003e( std::move(custom_dataset), batch_size ); In brief, we are loading our data using SequentialSampler class which samples our data in the same order that we provided it with. Have a look at the SequentialSampler class here.\nFor the definition of this function: torch::data::make_data_loader here. A short screenshot from the documentation is given below.\nLet’s go ahead and learn to iterate through our data loader and pass each batch of data and labels to our network. For once, imagine that we have a struct named Net which defines our network and forward() function which parses the data through each layer and returns the output.\nfor(auto\u0026 batch: *data_loader) { auto data = batch.data; auto target = batch.target.squeeze(); } So we have retrieved our data and label (target) - which also depends on the batch size. If you have batch_size as 4 in the torch::data::make_data_loader() function, then size of the target and data will be 4.\nDefining the Hyperparameters in Libtorch Remember the Hyperparameters we need to define for training? Let’s take a quick review of what they are:\nBatch Size Optimizer Loss Function We have used batch_size parameter above while making the data loader. For defining optimizer, we’ll go for Adam Optimizer here:\n// We need to define the network first auto net = std::make_shared\u003cNet\u003e(); torch::optim::Adam optimizer(net-\u003eparameters(), torch::optim::AdamOptions(1e-3)); Note that the PyTorch C++ API supports below listed optimizers:\nRMSprop SGD Adam Adagrad LBFGS LossClosureOptimizer As mentioned in the documentation of torch.optim package:\nThe documentation is self explanatory, so all we need to do is pass parameters of our Network which will be optimized using our optimizer, and pass in the learning rate like above. To know about parameters we can pass through AdamOptions, check out this documentation page.\nLet’s go ahead and learn to define Loss Function in PyTorch C++ API. For an example, we’ll define nll_loss (Negative Log Likelihood Loss Function):\nauto output = net-\u003eforward(data); auto loss = torch::nll_loss(output, target); // To backpropagate loss loss.backward() If you need to output the loss, use: loss.item().\nTraining the Network We are close to our last step! Training the network is almost similar to the way we do in Python. That’s why, I’ll include the code snippet here which should be self explanatory (since we have already discussed the core parts of it).\ndataset_size = custom_dataset.size().value(); int n_epochs = 10; // Number of epochs for(int epoch=1; epoch\u003c=n_epochs; epoch++) { for(auto\u0026 batch: *data_loader) { auto data = batch.data; auto target = batch.target.squeeze(); // Convert data to float32 format and target to Int64 format // Assuming you have labels as integers data = data.to(torch::kF2); target = target.to(torch::kInt64); // Clear the optimizer parameters optimizer.zero_grad(); auto output = net-\u003eforward(data); auto loss = torch::nll_loss(output, target); // Backpropagate the loss loss.backward(); // Update the parameters optimizer.step(); cout \u003c\u003c \"Train Epoch: %d/%ld [%5ld/%5d] Loss: %.4f\" \u003c\u003c epoch \u003c\u003c n_epochs \u003c\u003c batch_index * batch.data.size(0) \u003c\u003c dataset_size \u003c\u003c loss.item\u003cfloat\u003e() \u003c\u003c endl; } } // Save the model torch::save(net, \"best_model.pt\"); In the next blog (coming soon), we’ll be discussing about Making Predictions using our network and will also show an example of training our network on a benchmark dataset.\n",
-  "wordCount" : "794",
-  "inLanguage": "en",
-  "datePublished": "2019-07-05T00:00:00Z",
-  "dateModified": "2019-07-05T00:00:00Z",
-  "author":{
-    "@type": "Person",
-    "name": {"name":"Kushashwa Ravi Shrimali"}
-  },
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://krshrimali.github.io/posts/2019/07/training-a-network-on-custom-dataset-using-pytorch-c-api/"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "Kushashwa Ravi Shrimali (Kush)",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://krshrimali.github.io/favicon.ico"
-    }
-  }
-}
-</script>
-</head>
-
-<body class="" id="top">
-<script>
-    if (localStorage.getItem("pref-theme") === "dark") {
-        document.body.classList.add('dark');
-    } else if (localStorage.getItem("pref-theme") === "light") {
-        document.body.classList.remove('dark')
-    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        document.body.classList.add('dark');
-    }
-
-</script>
-
-<header class="header">
-    <nav class="nav">
-        <div class="logo">
-            <a href="https://krshrimali.github.io/" accesskey="h" title="Kushashwa Ravi Shrimali (Kush) (Alt + H)">Kushashwa Ravi Shrimali (Kush)</a>
-            <div class="logo-switches">
-                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
-                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                    </svg>
-                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="5"></circle>
-                        <line x1="12" y1="1" x2="12" y2="3"></line>
-                        <line x1="12" y1="21" x2="12" y2="23"></line>
-                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                        <line x1="1" y1="12" x2="3" y2="12"></line>
-                        <line x1="21" y1="12" x2="23" y2="12"></line>
-                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                    </svg>
-                </button>
-            </div>
-        </div>
-        <ul id="menu">
-            <li>
-                <a href="https://krshrimali.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
-                    <span>Search</span>
-                </a>
-            </li>
-            <li>
-                <a href="https://krshrimali.github.io/about" title="About">
-                    <span>About</span>
-                </a>
-            </li>
-            <li>
-                <a href="https://krshrimali.github.io/posts" title="Blog">
-                    <span>Blog</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
-</header>
-<main class="main">
-
-<article class="post-single">
-  <header class="post-header">
-    <div class="breadcrumbs"><a href="https://krshrimali.github.io/">Home</a>&nbsp;»&nbsp;<a href="https://krshrimali.github.io/posts/">Posts</a></div>
-    <h1 class="post-title entry-hint-parent">
-      Training a Network on Custom Dataset using PyTorch C&#43;&#43; API
-    </h1>
-    <div class="post-meta"><span title='2019-07-05 00:00:00 +0000 UTC'>July 5, 2019</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;map[name:Kushashwa Ravi Shrimali]
-
-</div>
-  </header> <div class="toc">
-    <details >
-        <summary accesskey="c" title="(Alt + C)">
-            <span class="details">Table of Contents</span>
-        </summary>
-
-        <div class="inner"><ul>
-                <li>
-                    <a href="#recap-of-the-last-blog" aria-label="Recap of the last blog">Recap of the last blog</a></li>
-                <li>
-                    <a href="#overview-how-to-pass-batches-to-our-network" aria-label="Overview: How to pass batches to our network?">Overview: How to pass batches to our network?</a></li>
-                <li>
-                    <a href="#defining-the-hyperparameters-in-libtorch" aria-label="Defining the Hyperparameters in Libtorch">Defining the Hyperparameters in Libtorch</a></li>
-                <li>
-                    <a href="#training-the-network" aria-label="Training the Network">Training the Network</a>
-                </li>
-            </ul>
-        </div>
-    </details>
-</div>
-
-  <div class="post-content"><h2 id="recap-of-the-last-blog">Recap of the last blog<a hidden class="anchor" aria-hidden="true" href="#recap-of-the-last-blog">#</a></h2>
-<p>Before we move on, it&rsquo;s important what we covered in the last blog. We&rsquo;ll be going forward from loading Custom Dataset to now using the dataset to train our VGG-16 Network. Previously, we were able to load our custom dataset using the following template:</p>
-<p><strong>Note</strong>: Those who are already aware of loading a custom dataset can skip this section.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CustomDataset</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> torch<span style="color:#f92672">::</span>data<span style="color:#f92672">::</span>dataset<span style="color:#f92672">&lt;</span>CustomDataset<span style="color:#f92672">&gt;</span> {
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// Declare 2 vectors of tensors for images and labels
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  vector<span style="color:#f92672">&lt;</span>torch<span style="color:#f92672">::</span>Tensor<span style="color:#f92672">&gt;</span> images, labels;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// Constructor
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  CustomDataset(vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> list_images, vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> list_labels) {
-</span></span><span style="display:flex;"><span>    images <span style="color:#f92672">=</span> process_images(list_images);
-</span></span><span style="display:flex;"><span>    labels <span style="color:#f92672">=</span> process_labels(list_labels);
-</span></span><span style="display:flex;"><span>  };
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// Override get() function to return tensor at location index
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  torch<span style="color:#f92672">::</span>data<span style="color:#f92672">::</span>Example<span style="color:#f92672">&lt;&gt;</span> get(size_t index) <span style="color:#66d9ef">override</span> {
-</span></span><span style="display:flex;"><span>    torch<span style="color:#f92672">::</span>Tensor sample_img <span style="color:#f92672">=</span> images.at(index);
-</span></span><span style="display:flex;"><span>    torch<span style="color:#f92672">::</span>Tensor sample_label <span style="color:#f92672">=</span> labels.at(index);
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> {sample_img.clone(), sample_label.clone()};
-</span></span><span style="display:flex;"><span>  };
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// Return the length of data
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  torch<span style="color:#f92672">::</span>optional<span style="color:#f92672">&lt;</span>size_t<span style="color:#f92672">&gt;</span> size() <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">override</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> labels.size();
-</span></span><span style="display:flex;"><span>  };
-</span></span><span style="display:flex;"><span>};
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">int</span> argc, <span style="color:#66d9ef">char</span><span style="color:#f92672">**</span> argv) {
-</span></span><span style="display:flex;"><span>  vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> list_images; <span style="color:#75715e">// list of path of images
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> list_labels; <span style="color:#75715e">// list of integer labels
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// Dataset init and apply transforms - None!
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">auto</span> custom_dataset <span style="color:#f92672">=</span> CustomDataset(list_images, list_labels).map(torch<span style="color:#f92672">::</span>data<span style="color:#f92672">::</span>transforms<span style="color:#f92672">::</span>Stack<span style="color:#f92672">&lt;&gt;</span>());
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>These were the steps we followed last time:</p>
-<p><img loading="lazy" src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/blogs/Steps-Loading-Custom-Data.PNG"></p>
-<h2 id="overview-how-to-pass-batches-to-our-network">Overview: How to pass batches to our network?<a hidden class="anchor" aria-hidden="true" href="#overview-how-to-pass-batches-to-our-network">#</a></h2>
-<p>Since we have our dataset loaded, let&rsquo;s see how to pass batches of data to our network. Before we go on and see how PyTorch C++ API does it, let&rsquo;s see how it&rsquo;s done in Python.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>dataset_loader <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>utils<span style="color:#f92672">.</span>data<span style="color:#f92672">.</span>DataLoader(custom_dataset,
-</span></span><span style="display:flex;"><span>                                             batch_size<span style="color:#f92672">=</span><span style="color:#ae81ff">4</span>, shuffle<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
-</span></span></code></pre></div><p>Just a short review of what <code>DataLoader()</code> class does: It loads the data and returns single or multiple iterators over the dataset. We pass in our object from <code>Dataset</code> class (here, <code>custom_dataset</code>). We will do the same process in C++ using the following template:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">auto</span> data_loader <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>data<span style="color:#f92672">::</span>make_data_loader<span style="color:#f92672">&lt;</span>torch<span style="color:#f92672">::</span>data<span style="color:#f92672">::</span>samplers<span style="color:#f92672">::</span>SequentialSampler<span style="color:#f92672">&gt;</span>(
-</span></span><span style="display:flex;"><span>  std<span style="color:#f92672">::</span>move(custom_dataset),
-</span></span><span style="display:flex;"><span>  batch_size
-</span></span><span style="display:flex;"><span>);
-</span></span></code></pre></div><p>In brief, we are loading our data using <code>SequentialSampler</code> class which samples our data in the same order that we provided it with. Have a look at the <code>SequentialSampler</code> class <a href="https://pytorch.org/docs/stable/data.html#torch.utils.data.SequentialSampler">here</a>.</p>
-<p>For the definition of this function: <code>torch::data::make_data_loader</code> <a href="https://pytorch.org/cppdocs/api/function_namespacetorch_1_1data_1a0d29ca9900cae66957c5cc5052ecc122.html#exhale-function-namespacetorch-1-1data-1a0d29ca9900cae66957c5cc5052ecc122">here</a>. A short screenshot from the documentation is given below.</p>
-<p><img loading="lazy" src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/blogs/Data-Loader-Function.PNG"></p>
-<p>Let&rsquo;s go ahead and learn to iterate through our data loader and pass each batch of data and labels to our network. For once, imagine that we have a <code>struct</code> named <code>Net</code> which defines our network and <code>forward()</code> function which parses the data through each layer and returns the output.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span><span style="color:#f92672">&amp;</span> batch: <span style="color:#f92672">*</span>data_loader) {
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">auto</span> data <span style="color:#f92672">=</span> batch.data;
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">auto</span> target <span style="color:#f92672">=</span> batch.target.squeeze();
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>So we have retrieved our <code>data</code> and label (<code>target</code>) - which also depends on the batch size. If you have <code>batch_size</code> as 4 in the <code>torch::data::make_data_loader()</code> function, then size of the target and data will be 4.</p>
-<h2 id="defining-the-hyperparameters-in-libtorch">Defining the Hyperparameters in Libtorch<a hidden class="anchor" aria-hidden="true" href="#defining-the-hyperparameters-in-libtorch">#</a></h2>
-<p>Remember the Hyperparameters we need to define for training? Let&rsquo;s take a quick review of what they are:</p>
-<ol>
-<li><strong>Batch Size</strong></li>
-<li><strong>Optimizer</strong></li>
-<li><strong>Loss Function</strong></li>
-</ol>
-<p>We have used <code>batch_size</code> parameter above while making the data loader. For defining optimizer, we&rsquo;ll go for <code>Adam</code> Optimizer here:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">// We need to define the network first
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">auto</span> net <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>make_shared<span style="color:#f92672">&lt;</span>Net<span style="color:#f92672">&gt;</span>();
-</span></span><span style="display:flex;"><span>torch<span style="color:#f92672">::</span>optim<span style="color:#f92672">::</span>Adam optimizer(net<span style="color:#f92672">-&gt;</span>parameters(), torch<span style="color:#f92672">::</span>optim<span style="color:#f92672">::</span>AdamOptions(<span style="color:#ae81ff">1e-3</span>));
-</span></span></code></pre></div><p><strong>Note that the PyTorch C++ API supports below listed optimizers:</strong></p>
-<ol>
-<li><a href="https://pytorch.org/cppdocs/api/classtorch_1_1optim_1_1_r_m_sprop.html#exhale-class-classtorch-1-1optim-1-1-r-m-sprop">RMSprop</a></li>
-<li><a href="https://pytorch.org/cppdocs/api/classtorch_1_1optim_1_1_s_g_d.html#exhale-class-classtorch-1-1optim-1-1-s-g-d">SGD</a></li>
-<li><a href="https://pytorch.org/cppdocs/api/classtorch_1_1optim_1_1_adam.html#exhale-class-classtorch-1-1optim-1-1-adam">Adam</a></li>
-<li><a href="https://pytorch.org/cppdocs/api/classtorch_1_1optim_1_1_adagrad.html#exhale-class-classtorch-1-1optim-1-1-adagrad">Adagrad</a></li>
-<li><a href="https://pytorch.org/cppdocs/api/classtorch_1_1optim_1_1_l_b_f_g_s.html#exhale-class-classtorch-1-1optim-1-1-l-b-f-g-s">LBFGS</a></li>
-<li><a href="https://pytorch.org/cppdocs/api/classtorch_1_1optim_1_1_loss_closure_optimizer.html#exhale-class-classtorch-1-1optim-1-1-loss-closure-optimizer">LossClosureOptimizer</a></li>
-</ol>
-<p>As mentioned in the documentation of <code>torch.optim</code> package:</p>
-<p><img loading="lazy" src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/blogs/Use-Optim.PNG"></p>
-<p>The documentation is self explanatory, so all we need to do is pass parameters of our Network which will be optimized using our optimizer, and pass in the learning rate like above. To know about parameters we can pass through <code>AdamOptions</code>, check out this <a href="https://pytorch.org/cppdocs/api/structtorch_1_1optim_1_1_adam_options.html#exhale-struct-structtorch-1-1optim-1-1-adam-options">documentation page</a>.</p>
-<p>Let&rsquo;s go ahead and learn to define <strong>Loss Function</strong> in PyTorch C++ API. For an example, we&rsquo;ll define <code>nll_loss</code> (Negative Log Likelihood Loss Function):</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">auto</span> output <span style="color:#f92672">=</span> net<span style="color:#f92672">-&gt;</span>forward(data);
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">auto</span> loss <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>nll_loss(output, target);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// To backpropagate loss
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>loss.backward()
-</span></span></code></pre></div><p>If you need to output the loss, use: <code>loss.item&lt;float&gt;()</code>.</p>
-<h2 id="training-the-network">Training the Network<a hidden class="anchor" aria-hidden="true" href="#training-the-network">#</a></h2>
-<p>We are close to our last step! Training the network is almost similar to the way we do in Python. That&rsquo;s why, I&rsquo;ll include the code snippet here which should be self explanatory (since we have already discussed the core parts of it).</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>dataset_size <span style="color:#f92672">=</span> custom_dataset.size().value();
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n_epochs <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>; <span style="color:#75715e">// Number of epochs
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> epoch<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>; epoch<span style="color:#f92672">&lt;=</span>n_epochs; epoch<span style="color:#f92672">++</span>) {
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span><span style="color:#f92672">&amp;</span> batch: <span style="color:#f92672">*</span>data_loader) {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">auto</span> data <span style="color:#f92672">=</span> batch.data;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">auto</span> target <span style="color:#f92672">=</span> batch.target.squeeze();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Convert data to float32 format and target to Int64 format
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// Assuming you have labels as integers
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    data <span style="color:#f92672">=</span> data.to(torch<span style="color:#f92672">::</span>kF2);
-</span></span><span style="display:flex;"><span>    target <span style="color:#f92672">=</span> target.to(torch<span style="color:#f92672">::</span>kInt64);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Clear the optimizer parameters
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    optimizer.zero_grad();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">auto</span> output <span style="color:#f92672">=</span> net<span style="color:#f92672">-&gt;</span>forward(data);
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">auto</span> loss <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>nll_loss(output, target);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Backpropagate the loss
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    loss.backward();
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Update the parameters
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    optimizer.step();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Train Epoch: %d/%ld [%5ld/%5d] Loss: %.4f&#34;</span> <span style="color:#f92672">&lt;&lt;</span> epoch <span style="color:#f92672">&lt;&lt;</span> n_epochs <span style="color:#f92672">&lt;&lt;</span> batch_index <span style="color:#f92672">*</span> batch.data.size(<span style="color:#ae81ff">0</span>) <span style="color:#f92672">&lt;&lt;</span> dataset_size <span style="color:#f92672">&lt;&lt;</span> loss.item<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">float</span><span style="color:#f92672">&gt;</span>() <span style="color:#f92672">&lt;&lt;</span> endl;
-</span></span><span style="display:flex;"><span>  }
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// Save the model
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>torch<span style="color:#f92672">::</span>save(net, <span style="color:#e6db74">&#34;best_model.pt&#34;</span>);
-</span></span></code></pre></div><p>In the next blog (<strong>coming soon</strong>), we&rsquo;ll be discussing about <strong>Making Predictions</strong> using our network and will also show an example of training our network on a benchmark dataset.</p>
-
-  </div>
-
-  <footer class="post-footer">
-    <ul class="post-tags">
-      <li><a href="https://krshrimali.github.io/tags/development/">Development</a></li>
-      <li><a href="https://krshrimali.github.io/tags/coding/">Coding</a></li>
-      <li><a href="https://krshrimali.github.io/tags/cpp/">Cpp</a></li>
-      <li><a href="https://krshrimali.github.io/tags/notes/">Notes</a></li>
-      <li><a href="https://krshrimali.github.io/tags/pytorch-cpp/">Pytorch-Cpp</a></li>
-      <li><a href="https://krshrimali.github.io/tags/libtorch/">Libtorch</a></li>
-    </ul>
-<nav class="paginav">
-  <a class="prev" href="https://krshrimali.github.io/posts/2019/07/classifying-dogs-vs-cats-using-pytorch-c-api-part-1/">
-    <span class="title">« Prev</span>
-    <br>
-    <span>Classifying Dogs vs Cats using PyTorch C&#43;&#43; API: Part-1</span>
-  </a>
-  <a class="next" href="https://krshrimali.github.io/posts/2019/07/announcing-a-series-of-blogs-on-pytorch-c-api/">
-    <span class="title">Next »</span>
-    <br>
-    <span>Announcing a series of blogs on PyTorch C&#43;&#43; API</span>
-  </a>
-</nav>
-
-
-<ul class="share-buttons">
-    <li>
-        <a target="_blank" rel="noopener noreferrer" aria-label="share Training a Network on Custom Dataset using PyTorch C&#43;&#43; API on x"
-            href="https://x.com/intent/tweet/?text=Training%20a%20Network%20on%20Custom%20Dataset%20using%20PyTorch%20C%2b%2b%20API&amp;url=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2019%2f07%2ftraining-a-network-on-custom-dataset-using-pytorch-c-api%2f&amp;hashtags=development%2ccoding%2ccpp%2cnotes%2cpytorch-cpp%2clibtorch">
-            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
-                <path
-                    d="M512 62.554 L 512 449.446 C 512 483.97 483.97 512 449.446 512 L 62.554 512 C 28.03 512 0 483.97 0 449.446 L 0 62.554 C 0 28.03 28.029 0 62.554 0 L 449.446 0 C 483.971 0 512 28.03 512 62.554 Z M 269.951 190.75 L 182.567 75.216 L 56 75.216 L 207.216 272.95 L 63.9 436.783 L 125.266 436.783 L 235.9 310.383 L 332.567 436.783 L 456 436.783 L 298.367 228.367 L 432.367 75.216 L 371.033 75.216 Z M 127.633 110 L 164.101 110 L 383.481 400.065 L 349.5 400.065 Z" />
-            </svg>
-        </a>
-    </li>
-    <li>
-        <a target="_blank" rel="noopener noreferrer" aria-label="share Training a Network on Custom Dataset using PyTorch C&#43;&#43; API on linkedin"
-            href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2019%2f07%2ftraining-a-network-on-custom-dataset-using-pytorch-c-api%2f&amp;title=Training%20a%20Network%20on%20Custom%20Dataset%20using%20PyTorch%20C%2b%2b%20API&amp;summary=Training%20a%20Network%20on%20Custom%20Dataset%20using%20PyTorch%20C%2b%2b%20API&amp;source=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2019%2f07%2ftraining-a-network-on-custom-dataset-using-pytorch-c-api%2f">
-            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
-                <path
-                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-288.985,423.278l0,-225.717l-75.04,0l0,225.717l75.04,0Zm270.539,0l0,-129.439c0,-69.333 -37.018,-101.586 -86.381,-101.586c-39.804,0 -57.634,21.891 -67.617,37.266l0,-31.958l-75.021,0c0.995,21.181 0,225.717 0,225.717l75.02,0l0,-126.056c0,-6.748 0.486,-13.492 2.474,-18.315c5.414,-13.475 17.767,-27.434 38.494,-27.434c27.135,0 38.007,20.707 38.007,51.037l0,120.768l75.024,0Zm-307.552,-334.556c-25.674,0 -42.448,16.879 -42.448,39.002c0,21.658 16.264,39.002 41.455,39.002l0.484,0c26.165,0 42.452,-17.344 42.452,-39.002c-0.485,-22.092 -16.241,-38.954 -41.943,-39.002Z" />
-            </svg>
-        </a>
-    </li>
-    <li>
-        <a target="_blank" rel="noopener noreferrer" aria-label="share Training a Network on Custom Dataset using PyTorch C&#43;&#43; API on reddit"
-            href="https://reddit.com/submit?url=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2019%2f07%2ftraining-a-network-on-custom-dataset-using-pytorch-c-api%2f&title=Training%20a%20Network%20on%20Custom%20Dataset%20using%20PyTorch%20C%2b%2b%20API">
-            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
-                <path
-                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-3.446,265.638c0,-22.964 -18.616,-41.58 -41.58,-41.58c-11.211,0 -21.361,4.457 -28.841,11.666c-28.424,-20.508 -67.586,-33.757 -111.204,-35.278l18.941,-89.121l61.884,13.157c0.756,15.734 13.642,28.29 29.56,28.29c16.407,0 29.706,-13.299 29.706,-29.701c0,-16.403 -13.299,-29.702 -29.706,-29.702c-11.666,0 -21.657,6.792 -26.515,16.578l-69.105,-14.69c-1.922,-0.418 -3.939,-0.042 -5.585,1.036c-1.658,1.073 -2.811,2.761 -3.224,4.686l-21.152,99.438c-44.258,1.228 -84.046,14.494 -112.837,35.232c-7.468,-7.164 -17.589,-11.591 -28.757,-11.591c-22.965,0 -41.585,18.616 -41.585,41.58c0,16.896 10.095,31.41 24.568,37.918c-0.639,4.135 -0.99,8.328 -0.99,12.576c0,63.977 74.469,115.836 166.33,115.836c91.861,0 166.334,-51.859 166.334,-115.836c0,-4.218 -0.347,-8.387 -0.977,-12.493c14.564,-6.47 24.735,-21.034 24.735,-38.001Zm-119.474,108.193c-20.27,20.241 -59.115,21.816 -70.534,21.816c-11.428,0 -50.277,-1.575 -70.522,-21.82c-3.007,-3.008 -3.007,-7.882 0,-10.889c3.003,-2.999 7.882,-3.003 10.885,0c12.777,12.781 40.11,17.317 59.637,17.317c19.522,0 46.86,-4.536 59.657,-17.321c3.016,-2.999 7.886,-2.995 10.885,0.008c3.008,3.011 3.003,7.882 -0.008,10.889Zm-5.23,-48.781c-16.373,0 -29.701,-13.324 -29.701,-29.698c0,-16.381 13.328,-29.714 29.701,-29.714c16.378,0 29.706,13.333 29.706,29.714c0,16.374 -13.328,29.698 -29.706,29.698Zm-160.386,-29.702c0,-16.381 13.328,-29.71 29.714,-29.71c16.369,0 29.689,13.329 29.689,29.71c0,16.373 -13.32,29.693 -29.689,29.693c-16.386,0 -29.714,-13.32 -29.714,-29.693Z" />
-            </svg>
-        </a>
-    </li>
-    <li>
-        <a target="_blank" rel="noopener noreferrer" aria-label="share Training a Network on Custom Dataset using PyTorch C&#43;&#43; API on facebook"
-            href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2019%2f07%2ftraining-a-network-on-custom-dataset-using-pytorch-c-api%2f">
-            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
-                <path
-                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-106.468,0l0,-192.915l66.6,0l12.672,-82.621l-79.272,0l0,-53.617c0,-22.603 11.073,-44.636 46.58,-44.636l36.042,0l0,-70.34c0,0 -32.71,-5.582 -63.982,-5.582c-65.288,0 -107.96,39.569 -107.96,111.204l0,62.971l-72.573,0l0,82.621l72.573,0l0,192.915l-191.104,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Z" />
-            </svg>
-        </a>
-    </li>
-    <li>
-        <a target="_blank" rel="noopener noreferrer" aria-label="share Training a Network on Custom Dataset using PyTorch C&#43;&#43; API on whatsapp"
-            href="https://api.whatsapp.com/send?text=Training%20a%20Network%20on%20Custom%20Dataset%20using%20PyTorch%20C%2b%2b%20API%20-%20https%3a%2f%2fkrshrimali.github.io%2fposts%2f2019%2f07%2ftraining-a-network-on-custom-dataset-using-pytorch-c-api%2f">
-            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
-                <path
-                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-58.673,127.703c-33.842,-33.881 -78.847,-52.548 -126.798,-52.568c-98.799,0 -179.21,80.405 -179.249,179.234c-0.013,31.593 8.241,62.428 23.927,89.612l-25.429,92.884l95.021,-24.925c26.181,14.28 55.659,21.807 85.658,21.816l0.074,0c98.789,0 179.206,-80.413 179.247,-179.243c0.018,-47.895 -18.61,-92.93 -52.451,-126.81Zm-126.797,275.782l-0.06,0c-26.734,-0.01 -52.954,-7.193 -75.828,-20.767l-5.441,-3.229l-56.386,14.792l15.05,-54.977l-3.542,-5.637c-14.913,-23.72 -22.791,-51.136 -22.779,-79.287c0.033,-82.142 66.867,-148.971 149.046,-148.971c39.793,0.014 77.199,15.531 105.329,43.692c28.128,28.16 43.609,65.592 43.594,105.4c-0.034,82.149 -66.866,148.983 -148.983,148.984Zm81.721,-111.581c-4.479,-2.242 -26.499,-13.075 -30.604,-14.571c-4.105,-1.495 -7.091,-2.241 -10.077,2.241c-2.986,4.483 -11.569,14.572 -14.182,17.562c-2.612,2.988 -5.225,3.364 -9.703,1.12c-4.479,-2.241 -18.91,-6.97 -36.017,-22.23c-13.314,-11.876 -22.304,-26.542 -24.916,-31.026c-2.612,-4.484 -0.279,-6.908 1.963,-9.14c2.016,-2.007 4.48,-5.232 6.719,-7.847c2.24,-2.615 2.986,-4.484 4.479,-7.472c1.493,-2.99 0.747,-5.604 -0.374,-7.846c-1.119,-2.241 -10.077,-24.288 -13.809,-33.256c-3.635,-8.733 -7.327,-7.55 -10.077,-7.688c-2.609,-0.13 -5.598,-0.158 -8.583,-0.158c-2.986,0 -7.839,1.121 -11.944,5.604c-4.105,4.484 -15.675,15.32 -15.675,37.364c0,22.046 16.048,43.342 18.287,46.332c2.24,2.99 31.582,48.227 76.511,67.627c10.685,4.615 19.028,7.371 25.533,9.434c10.728,3.41 20.492,2.929 28.209,1.775c8.605,-1.285 26.499,-10.833 30.231,-21.295c3.732,-10.464 3.732,-19.431 2.612,-21.298c-1.119,-1.869 -4.105,-2.99 -8.583,-5.232Z" />
-            </svg>
-        </a>
-    </li>
-    <li>
-        <a target="_blank" rel="noopener noreferrer" aria-label="share Training a Network on Custom Dataset using PyTorch C&#43;&#43; API on telegram"
-            href="https://telegram.me/share/url?text=Training%20a%20Network%20on%20Custom%20Dataset%20using%20PyTorch%20C%2b%2b%20API&amp;url=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2019%2f07%2ftraining-a-network-on-custom-dataset-using-pytorch-c-api%2f">
-            <svg version="1.1" xml:space="preserve" viewBox="2 2 28 28" height="30px" width="30px" fill="currentColor">
-                <path
-                    d="M26.49,29.86H5.5a3.37,3.37,0,0,1-2.47-1,3.35,3.35,0,0,1-1-2.47V5.48A3.36,3.36,0,0,1,3,3,3.37,3.37,0,0,1,5.5,2h21A3.38,3.38,0,0,1,29,3a3.36,3.36,0,0,1,1,2.46V26.37a3.35,3.35,0,0,1-1,2.47A3.38,3.38,0,0,1,26.49,29.86Zm-5.38-6.71a.79.79,0,0,0,.85-.66L24.73,9.24a.55.55,0,0,0-.18-.46.62.62,0,0,0-.41-.17q-.08,0-16.53,6.11a.59.59,0,0,0-.41.59.57.57,0,0,0,.43.52l4,1.24,1.61,4.83a.62.62,0,0,0,.63.43.56.56,0,0,0,.4-.17L16.54,20l4.09,3A.9.9,0,0,0,21.11,23.15ZM13.8,20.71l-1.21-4q8.72-5.55,8.78-5.55c.15,0,.23,0,.23.16a.18.18,0,0,1,0,.06s-2.51,2.3-7.52,6.8Z" />
-            </svg>
-        </a>
-    </li>
-    <li>
-        <a target="_blank" rel="noopener noreferrer" aria-label="share Training a Network on Custom Dataset using PyTorch C&#43;&#43; API on ycombinator"
-            href="https://news.ycombinator.com/submitlink?t=Training%20a%20Network%20on%20Custom%20Dataset%20using%20PyTorch%20C%2b%2b%20API&u=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2019%2f07%2ftraining-a-network-on-custom-dataset-using-pytorch-c-api%2f">
-            <svg version="1.1" xml:space="preserve" width="30px" height="30px" viewBox="0 0 512 512" fill="currentColor"
-                xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape">
-                <path
-                    d="M449.446 0C483.971 0 512 28.03 512 62.554L512 449.446C512 483.97 483.97 512 449.446 512L62.554 512C28.03 512 0 483.97 0 449.446L0 62.554C0 28.03 28.029 0 62.554 0L449.446 0ZM183.8767 87.9921H121.8427L230.6673 292.4508V424.0079H281.3328V292.4508L390.1575 87.9921H328.1233L256 238.2489z" />
-            </svg>
-        </a>
-    </li>
-</ul>
-
-  </footer>
-</article>
-    </main>
-    
-<footer class="footer">
-        <span>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</span> · 
-
-    <span>
-        Powered by
-        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
-        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
-    </span>
-</footer>
-<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
-        <path d="M12 6H0l6-6z" />
-    </svg>
-</a>
-
-<script>
-    let menu = document.getElementById('menu')
-    if (menu) {
-        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
-        menu.onscroll = function () {
-            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
-        }
-    }
-
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener("click", function (e) {
-            e.preventDefault();
-            var id = this.getAttribute("href").substr(1);
-            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
-                    behavior: "smooth"
-                });
-            } else {
-                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
-            }
-            if (id === "top") {
-                history.replaceState(null, null, " ");
-            } else {
-                history.pushState(null, null, `#${id}`);
-            }
-        });
-    });
-
-</script>
-<script>
-    var mybutton = document.getElementById("top-link");
-    window.onscroll = function () {
-        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
-            mybutton.style.visibility = "visible";
-            mybutton.style.opacity = "1";
-        } else {
-            mybutton.style.visibility = "hidden";
-            mybutton.style.opacity = "0";
-        }
-    };
-
-</script>
-<script>
-    document.getElementById("theme-toggle").addEventListener("click", () => {
-        if (document.body.className.includes("dark")) {
-            document.body.classList.remove('dark');
-            localStorage.setItem("pref-theme", 'light');
-        } else {
-            document.body.classList.add('dark');
-            localStorage.setItem("pref-theme", 'dark');
-        }
-    })
-
-</script>
-<script>
-    document.querySelectorAll('pre > code').forEach((codeblock) => {
-        const container = codeblock.parentNode.parentNode;
-
-        const copybutton = document.createElement('button');
-        copybutton.classList.add('copy-code');
-        copybutton.innerHTML = 'copy';
-
-        function copyingDone() {
-            copybutton.innerHTML = 'copied!';
-            setTimeout(() => {
-                copybutton.innerHTML = 'copy';
-            }, 2000);
-        }
-
-        copybutton.addEventListener('click', (cb) => {
-            if ('clipboard' in navigator) {
-                navigator.clipboard.writeText(codeblock.textContent);
-                copyingDone();
-                return;
-            }
-
-            const range = document.createRange();
-            range.selectNodeContents(codeblock);
-            const selection = window.getSelection();
-            selection.removeAllRanges();
-            selection.addRange(range);
-            try {
-                document.execCommand('copy');
-                copyingDone();
-            } catch (e) { };
-            selection.removeRange(range);
-        });
-
-        if (container.classList.contains("highlight")) {
-            container.appendChild(copybutton);
-        } else if (container.parentNode.firstChild == container) {
-            
-        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
-            
-            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
-        } else {
-            
-            codeblock.parentNode.appendChild(copybutton);
-        }
-    });
-</script>
-</body>
-
-</html>
+<!doctype html><html lang=en dir=auto><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>Training a Network on Custom Dataset using PyTorch C++ API | Kushashwa Ravi Shrimali (Kush)</title><meta name=keywords content="development,coding,cpp,notes,pytorch-cpp,libtorch"><meta name=description content="Recap of the last blog
+Before we move on, it&rsquo;s important what we covered in the last blog. We&rsquo;ll be going forward from loading Custom Dataset to now using the dataset to train our VGG-16 Network. Previously, we were able to load our custom dataset using the following template:"><meta name=author content="map[name:Kushashwa Ravi Shrimali]"><link rel=canonical href=https://krshrimali.github.io/posts/2019/07/training-a-network-on-custom-dataset-using-pytorch-c-api/><link crossorigin=anonymous href=https://krshrimali.github.io/assets/css/stylesheet.8fe10233a706bc87f2e08b3cf97b8bd4c0a80f10675a143675d59212121037c0.css integrity="sha256-j+ECM6cGvIfy4Is8+XuL1MCoDxBnWhQ2ddWSEhIQN8A=" rel="preload stylesheet" as=style><link rel=icon href=https://krshrimali.github.io/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://krshrimali.github.io/favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://krshrimali.github.io/favicon-32x32.png><link rel=apple-touch-icon href=https://krshrimali.github.io/apple-touch-icon.png><link rel=mask-icon href=https://krshrimali.github.io/safari-pinned-tab.svg><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><link rel=alternate hreflang=en href=https://krshrimali.github.io/posts/2019/07/training-a-network-on-custom-dataset-using-pytorch-c-api/><noscript><style>#theme-toggle,.top-link{display:none}</style><style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--code-block-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51)}.list{background:var(--theme)}.list:not(.dark)::-webkit-scrollbar-track{background:0 0}.list:not(.dark)::-webkit-scrollbar-thumb{border-color:var(--theme)}}</style></noscript><meta property="og:url" content="https://krshrimali.github.io/posts/2019/07/training-a-network-on-custom-dataset-using-pytorch-c-api/"><meta property="og:site_name" content="Kushashwa Ravi Shrimali (Kush)"><meta property="og:title" content="Training a Network on Custom Dataset using PyTorch C++ API"><meta property="og:description" content="Recap of the last blog Before we move on, it’s important what we covered in the last blog. We’ll be going forward from loading Custom Dataset to now using the dataset to train our VGG-16 Network. Previously, we were able to load our custom dataset using the following template:"><meta property="og:locale" content="en"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2019-07-05T00:00:00+00:00"><meta property="article:modified_time" content="2019-07-05T00:00:00+00:00"><meta property="article:tag" content="Development"><meta property="article:tag" content="Coding"><meta property="article:tag" content="Cpp"><meta property="article:tag" content="Notes"><meta property="article:tag" content="Pytorch-Cpp"><meta property="article:tag" content="Libtorch"><meta name=twitter:card content="summary"><meta name=twitter:title content="Training a Network on Custom Dataset using PyTorch C++ API"><meta name=twitter:description content="Recap of the last blog
+Before we move on, it&rsquo;s important what we covered in the last blog. We&rsquo;ll be going forward from loading Custom Dataset to now using the dataset to train our VGG-16 Network. Previously, we were able to load our custom dataset using the following template:"><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Posts","item":"https://krshrimali.github.io/posts/"},{"@type":"ListItem","position":2,"name":"Training a Network on Custom Dataset using PyTorch C++ API","item":"https://krshrimali.github.io/posts/2019/07/training-a-network-on-custom-dataset-using-pytorch-c-api/"}]}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Training a Network on Custom Dataset using PyTorch C++ API","name":"Training a Network on Custom Dataset using PyTorch C\u002b\u002b API","description":"Recap of the last blog Before we move on, it\u0026rsquo;s important what we covered in the last blog. We\u0026rsquo;ll be going forward from loading Custom Dataset to now using the dataset to train our VGG-16 Network. Previously, we were able to load our custom dataset using the following template:\n","keywords":["development","coding","cpp","notes","pytorch-cpp","libtorch"],"articleBody":"Recap of the last blog Before we move on, it’s important what we covered in the last blog. We’ll be going forward from loading Custom Dataset to now using the dataset to train our VGG-16 Network. Previously, we were able to load our custom dataset using the following template:\nNote: Those who are already aware of loading a custom dataset can skip this section.\nclass CustomDataset : public torch::data::dataset\u003cCustomDataset\u003e { private: // Declare 2 vectors of tensors for images and labels vector\u003ctorch::Tensor\u003e images, labels; public: // Constructor CustomDataset(vector\u003cstring\u003e list_images, vector\u003cstring\u003e list_labels) { images = process_images(list_images); labels = process_labels(list_labels); }; // Override get() function to return tensor at location index torch::data::Example\u003c\u003e get(size_t index) override { torch::Tensor sample_img = images.at(index); torch::Tensor sample_label = labels.at(index); return {sample_img.clone(), sample_label.clone()}; }; // Return the length of data torch::optional\u003csize_t\u003e size() const override { return labels.size(); }; }; int main(int argc, char** argv) { vector\u003cstring\u003e list_images; // list of path of images vector\u003cint\u003e list_labels; // list of integer labels // Dataset init and apply transforms - None! auto custom_dataset = CustomDataset(list_images, list_labels).map(torch::data::transforms::Stack\u003c\u003e()); } These were the steps we followed last time:\nOverview: How to pass batches to our network? Since we have our dataset loaded, let’s see how to pass batches of data to our network. Before we go on and see how PyTorch C++ API does it, let’s see how it’s done in Python.\ndataset_loader = torch.utils.data.DataLoader(custom_dataset, batch_size=4, shuffle=True) Just a short review of what DataLoader() class does: It loads the data and returns single or multiple iterators over the dataset. We pass in our object from Dataset class (here, custom_dataset). We will do the same process in C++ using the following template:\nauto data_loader = torch::data::make_data_loader\u003ctorch::data::samplers::SequentialSampler\u003e( std::move(custom_dataset), batch_size ); In brief, we are loading our data using SequentialSampler class which samples our data in the same order that we provided it with. Have a look at the SequentialSampler class here.\nFor the definition of this function: torch::data::make_data_loader here. A short screenshot from the documentation is given below.\nLet’s go ahead and learn to iterate through our data loader and pass each batch of data and labels to our network. For once, imagine that we have a struct named Net which defines our network and forward() function which parses the data through each layer and returns the output.\nfor(auto\u0026 batch: *data_loader) { auto data = batch.data; auto target = batch.target.squeeze(); } So we have retrieved our data and label (target) - which also depends on the batch size. If you have batch_size as 4 in the torch::data::make_data_loader() function, then size of the target and data will be 4.\nDefining the Hyperparameters in Libtorch Remember the Hyperparameters we need to define for training? Let’s take a quick review of what they are:\nBatch Size Optimizer Loss Function We have used batch_size parameter above while making the data loader. For defining optimizer, we’ll go for Adam Optimizer here:\n// We need to define the network first auto net = std::make_shared\u003cNet\u003e(); torch::optim::Adam optimizer(net-\u003eparameters(), torch::optim::AdamOptions(1e-3)); Note that the PyTorch C++ API supports below listed optimizers:\nRMSprop SGD Adam Adagrad LBFGS LossClosureOptimizer As mentioned in the documentation of torch.optim package:\nThe documentation is self explanatory, so all we need to do is pass parameters of our Network which will be optimized using our optimizer, and pass in the learning rate like above. To know about parameters we can pass through AdamOptions, check out this documentation page.\nLet’s go ahead and learn to define Loss Function in PyTorch C++ API. For an example, we’ll define nll_loss (Negative Log Likelihood Loss Function):\nauto output = net-\u003eforward(data); auto loss = torch::nll_loss(output, target); // To backpropagate loss loss.backward() If you need to output the loss, use: loss.item().\nTraining the Network We are close to our last step! Training the network is almost similar to the way we do in Python. That’s why, I’ll include the code snippet here which should be self explanatory (since we have already discussed the core parts of it).\ndataset_size = custom_dataset.size().value(); int n_epochs = 10; // Number of epochs for(int epoch=1; epoch\u003c=n_epochs; epoch++) { for(auto\u0026 batch: *data_loader) { auto data = batch.data; auto target = batch.target.squeeze(); // Convert data to float32 format and target to Int64 format // Assuming you have labels as integers data = data.to(torch::kF2); target = target.to(torch::kInt64); // Clear the optimizer parameters optimizer.zero_grad(); auto output = net-\u003eforward(data); auto loss = torch::nll_loss(output, target); // Backpropagate the loss loss.backward(); // Update the parameters optimizer.step(); cout \u003c\u003c \"Train Epoch: %d/%ld [%5ld/%5d] Loss: %.4f\" \u003c\u003c epoch \u003c\u003c n_epochs \u003c\u003c batch_index * batch.data.size(0) \u003c\u003c dataset_size \u003c\u003c loss.item\u003cfloat\u003e() \u003c\u003c endl; } } // Save the model torch::save(net, \"best_model.pt\"); In the next blog (coming soon), we’ll be discussing about Making Predictions using our network and will also show an example of training our network on a benchmark dataset.\n","wordCount":"794","inLanguage":"en","datePublished":"2019-07-05T00:00:00Z","dateModified":"2019-07-05T00:00:00Z","author":{"@type":"Person","name":{"name":"Kushashwa Ravi Shrimali"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://krshrimali.github.io/posts/2019/07/training-a-network-on-custom-dataset-using-pytorch-c-api/"},"publisher":{"@type":"Organization","name":"Kushashwa Ravi Shrimali (Kush)","logo":{"@type":"ImageObject","url":"https://krshrimali.github.io/favicon.ico"}}}</script></head><body id=top><script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add("dark"):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove("dark"):window.matchMedia("(prefers-color-scheme: dark)").matches&&document.body.classList.add("dark")</script><header class=header><nav class=nav><div class=logo><a href=https://krshrimali.github.io/ accesskey=h title="Kushashwa Ravi Shrimali (Kush) (Alt + H)">Kushashwa Ravi Shrimali (Kush)</a><div class=logo-switches><button id=theme-toggle accesskey=t title="(Alt + T)" aria-label="Toggle theme">
+<svg id="moon" width="24" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+<svg id="sun" width="24" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></div></div><ul id=menu><li><a href=https://krshrimali.github.io/search/ title="Search (Alt + /)" accesskey=/><span>Search</span></a></li><li><a href=https://krshrimali.github.io/about title=About><span>About</span></a></li><li><a href=https://krshrimali.github.io/posts title=Blog><span>Blog</span></a></li></ul></nav></header><main class=main><article class=post-single><header class=post-header><div class=breadcrumbs><a href=https://krshrimali.github.io/>Home</a>&nbsp;»&nbsp;<a href=https://krshrimali.github.io/posts/>Posts</a></div><h1 class="post-title entry-hint-parent">Training a Network on Custom Dataset using PyTorch C++ API</h1><div class=post-meta><span title='2019-07-05 00:00:00 +0000 UTC'>July 5, 2019</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;map[name:Kushashwa Ravi Shrimali]</div></header><div class=toc><details><summary accesskey=c title="(Alt + C)"><span class=details>Table of Contents</span></summary><div class=inner><ul><li><a href=#recap-of-the-last-blog aria-label="Recap of the last blog">Recap of the last blog</a></li><li><a href=#overview-how-to-pass-batches-to-our-network aria-label="Overview: How to pass batches to our network?">Overview: How to pass batches to our network?</a></li><li><a href=#defining-the-hyperparameters-in-libtorch aria-label="Defining the Hyperparameters in Libtorch">Defining the Hyperparameters in Libtorch</a></li><li><a href=#training-the-network aria-label="Training the Network">Training the Network</a></li></ul></div></details></div><div class=post-content><h2 id=recap-of-the-last-blog>Recap of the last blog<a hidden class=anchor aria-hidden=true href=#recap-of-the-last-blog>#</a></h2><p>Before we move on, it&rsquo;s important what we covered in the last blog. We&rsquo;ll be going forward from loading Custom Dataset to now using the dataset to train our VGG-16 Network. Previously, we were able to load our custom dataset using the following template:</p><p><strong>Note</strong>: Those who are already aware of loading a custom dataset can skip this section.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cpp data-lang=cpp><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>CustomDataset</span> <span style=color:#f92672>:</span> <span style=color:#66d9ef>public</span> torch<span style=color:#f92672>::</span>data<span style=color:#f92672>::</span>dataset<span style=color:#f92672>&lt;</span>CustomDataset<span style=color:#f92672>&gt;</span> {
+</span></span><span style=display:flex><span><span style=color:#66d9ef>private</span><span style=color:#f92672>:</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>// Declare 2 vectors of tensors for images and labels
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>  vector<span style=color:#f92672>&lt;</span>torch<span style=color:#f92672>::</span>Tensor<span style=color:#f92672>&gt;</span> images, labels;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span><span style=color:#f92672>:</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>// Constructor
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>  CustomDataset(vector<span style=color:#f92672>&lt;</span>string<span style=color:#f92672>&gt;</span> list_images, vector<span style=color:#f92672>&lt;</span>string<span style=color:#f92672>&gt;</span> list_labels) {
+</span></span><span style=display:flex><span>    images <span style=color:#f92672>=</span> process_images(list_images);
+</span></span><span style=display:flex><span>    labels <span style=color:#f92672>=</span> process_labels(list_labels);
+</span></span><span style=display:flex><span>  };
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>// Override get() function to return tensor at location index
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>  torch<span style=color:#f92672>::</span>data<span style=color:#f92672>::</span>Example<span style=color:#f92672>&lt;&gt;</span> get(size_t index) <span style=color:#66d9ef>override</span> {
+</span></span><span style=display:flex><span>    torch<span style=color:#f92672>::</span>Tensor sample_img <span style=color:#f92672>=</span> images.at(index);
+</span></span><span style=display:flex><span>    torch<span style=color:#f92672>::</span>Tensor sample_label <span style=color:#f92672>=</span> labels.at(index);
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> {sample_img.clone(), sample_label.clone()};
+</span></span><span style=display:flex><span>  };
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>// Return the length of data
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>  torch<span style=color:#f92672>::</span>optional<span style=color:#f92672>&lt;</span>size_t<span style=color:#f92672>&gt;</span> size() <span style=color:#66d9ef>const</span> <span style=color:#66d9ef>override</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> labels.size();
+</span></span><span style=display:flex><span>  };
+</span></span><span style=display:flex><span>};
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>(<span style=color:#66d9ef>int</span> argc, <span style=color:#66d9ef>char</span><span style=color:#f92672>**</span> argv) {
+</span></span><span style=display:flex><span>  vector<span style=color:#f92672>&lt;</span>string<span style=color:#f92672>&gt;</span> list_images; <span style=color:#75715e>// list of path of images
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>  vector<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;</span> list_labels; <span style=color:#75715e>// list of integer labels
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>// Dataset init and apply transforms - None!
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>  <span style=color:#66d9ef>auto</span> custom_dataset <span style=color:#f92672>=</span> CustomDataset(list_images, list_labels).map(torch<span style=color:#f92672>::</span>data<span style=color:#f92672>::</span>transforms<span style=color:#f92672>::</span>Stack<span style=color:#f92672>&lt;&gt;</span>());
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>These were the steps we followed last time:</p><p><img loading=lazy src=https://raw.githubusercontent.com/krshrimali/blog/main/assets/blogs/Steps-Loading-Custom-Data.PNG></p><h2 id=overview-how-to-pass-batches-to-our-network>Overview: How to pass batches to our network?<a hidden class=anchor aria-hidden=true href=#overview-how-to-pass-batches-to-our-network>#</a></h2><p>Since we have our dataset loaded, let&rsquo;s see how to pass batches of data to our network. Before we go on and see how PyTorch C++ API does it, let&rsquo;s see how it&rsquo;s done in Python.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span>dataset_loader <span style=color:#f92672>=</span> torch<span style=color:#f92672>.</span>utils<span style=color:#f92672>.</span>data<span style=color:#f92672>.</span>DataLoader(custom_dataset,
+</span></span><span style=display:flex><span>                                             batch_size<span style=color:#f92672>=</span><span style=color:#ae81ff>4</span>, shuffle<span style=color:#f92672>=</span><span style=color:#66d9ef>True</span>)
+</span></span></code></pre></div><p>Just a short review of what <code>DataLoader()</code> class does: It loads the data and returns single or multiple iterators over the dataset. We pass in our object from <code>Dataset</code> class (here, <code>custom_dataset</code>). We will do the same process in C++ using the following template:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cpp data-lang=cpp><span style=display:flex><span><span style=color:#66d9ef>auto</span> data_loader <span style=color:#f92672>=</span> torch<span style=color:#f92672>::</span>data<span style=color:#f92672>::</span>make_data_loader<span style=color:#f92672>&lt;</span>torch<span style=color:#f92672>::</span>data<span style=color:#f92672>::</span>samplers<span style=color:#f92672>::</span>SequentialSampler<span style=color:#f92672>&gt;</span>(
+</span></span><span style=display:flex><span>  std<span style=color:#f92672>::</span>move(custom_dataset),
+</span></span><span style=display:flex><span>  batch_size
+</span></span><span style=display:flex><span>);
+</span></span></code></pre></div><p>In brief, we are loading our data using <code>SequentialSampler</code> class which samples our data in the same order that we provided it with. Have a look at the <code>SequentialSampler</code> class <a href=https://pytorch.org/docs/stable/data.html#torch.utils.data.SequentialSampler>here</a>.</p><p>For the definition of this function: <code>torch::data::make_data_loader</code> <a href=https://pytorch.org/cppdocs/api/function_namespacetorch_1_1data_1a0d29ca9900cae66957c5cc5052ecc122.html#exhale-function-namespacetorch-1-1data-1a0d29ca9900cae66957c5cc5052ecc122>here</a>. A short screenshot from the documentation is given below.</p><p><img loading=lazy src=https://raw.githubusercontent.com/krshrimali/blog/main/assets/blogs/Data-Loader-Function.PNG></p><p>Let&rsquo;s go ahead and learn to iterate through our data loader and pass each batch of data and labels to our network. For once, imagine that we have a <code>struct</code> named <code>Net</code> which defines our network and <code>forward()</code> function which parses the data through each layer and returns the output.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cpp data-lang=cpp><span style=display:flex><span><span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>auto</span><span style=color:#f92672>&amp;</span> batch: <span style=color:#f92672>*</span>data_loader) {
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>auto</span> data <span style=color:#f92672>=</span> batch.data;
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>auto</span> target <span style=color:#f92672>=</span> batch.target.squeeze();
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>So we have retrieved our <code>data</code> and label (<code>target</code>) - which also depends on the batch size. If you have <code>batch_size</code> as 4 in the <code>torch::data::make_data_loader()</code> function, then size of the target and data will be 4.</p><h2 id=defining-the-hyperparameters-in-libtorch>Defining the Hyperparameters in Libtorch<a hidden class=anchor aria-hidden=true href=#defining-the-hyperparameters-in-libtorch>#</a></h2><p>Remember the Hyperparameters we need to define for training? Let&rsquo;s take a quick review of what they are:</p><ol><li><strong>Batch Size</strong></li><li><strong>Optimizer</strong></li><li><strong>Loss Function</strong></li></ol><p>We have used <code>batch_size</code> parameter above while making the data loader. For defining optimizer, we&rsquo;ll go for <code>Adam</code> Optimizer here:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cpp data-lang=cpp><span style=display:flex><span><span style=color:#75715e>// We need to define the network first
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>auto</span> net <span style=color:#f92672>=</span> std<span style=color:#f92672>::</span>make_shared<span style=color:#f92672>&lt;</span>Net<span style=color:#f92672>&gt;</span>();
+</span></span><span style=display:flex><span>torch<span style=color:#f92672>::</span>optim<span style=color:#f92672>::</span>Adam optimizer(net<span style=color:#f92672>-&gt;</span>parameters(), torch<span style=color:#f92672>::</span>optim<span style=color:#f92672>::</span>AdamOptions(<span style=color:#ae81ff>1e-3</span>));
+</span></span></code></pre></div><p><strong>Note that the PyTorch C++ API supports below listed optimizers:</strong></p><ol><li><a href=https://pytorch.org/cppdocs/api/classtorch_1_1optim_1_1_r_m_sprop.html#exhale-class-classtorch-1-1optim-1-1-r-m-sprop>RMSprop</a></li><li><a href=https://pytorch.org/cppdocs/api/classtorch_1_1optim_1_1_s_g_d.html#exhale-class-classtorch-1-1optim-1-1-s-g-d>SGD</a></li><li><a href=https://pytorch.org/cppdocs/api/classtorch_1_1optim_1_1_adam.html#exhale-class-classtorch-1-1optim-1-1-adam>Adam</a></li><li><a href=https://pytorch.org/cppdocs/api/classtorch_1_1optim_1_1_adagrad.html#exhale-class-classtorch-1-1optim-1-1-adagrad>Adagrad</a></li><li><a href=https://pytorch.org/cppdocs/api/classtorch_1_1optim_1_1_l_b_f_g_s.html#exhale-class-classtorch-1-1optim-1-1-l-b-f-g-s>LBFGS</a></li><li><a href=https://pytorch.org/cppdocs/api/classtorch_1_1optim_1_1_loss_closure_optimizer.html#exhale-class-classtorch-1-1optim-1-1-loss-closure-optimizer>LossClosureOptimizer</a></li></ol><p>As mentioned in the documentation of <code>torch.optim</code> package:</p><p><img loading=lazy src=https://raw.githubusercontent.com/krshrimali/blog/main/assets/blogs/Use-Optim.PNG></p><p>The documentation is self explanatory, so all we need to do is pass parameters of our Network which will be optimized using our optimizer, and pass in the learning rate like above. To know about parameters we can pass through <code>AdamOptions</code>, check out this <a href=https://pytorch.org/cppdocs/api/structtorch_1_1optim_1_1_adam_options.html#exhale-struct-structtorch-1-1optim-1-1-adam-options>documentation page</a>.</p><p>Let&rsquo;s go ahead and learn to define <strong>Loss Function</strong> in PyTorch C++ API. For an example, we&rsquo;ll define <code>nll_loss</code> (Negative Log Likelihood Loss Function):</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cpp data-lang=cpp><span style=display:flex><span><span style=color:#66d9ef>auto</span> output <span style=color:#f92672>=</span> net<span style=color:#f92672>-&gt;</span>forward(data);
+</span></span><span style=display:flex><span><span style=color:#66d9ef>auto</span> loss <span style=color:#f92672>=</span> torch<span style=color:#f92672>::</span>nll_loss(output, target);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// To backpropagate loss
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>loss.backward()
+</span></span></code></pre></div><p>If you need to output the loss, use: <code>loss.item&lt;float>()</code>.</p><h2 id=training-the-network>Training the Network<a hidden class=anchor aria-hidden=true href=#training-the-network>#</a></h2><p>We are close to our last step! Training the network is almost similar to the way we do in Python. That&rsquo;s why, I&rsquo;ll include the code snippet here which should be self explanatory (since we have already discussed the core parts of it).</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cpp data-lang=cpp><span style=display:flex><span>dataset_size <span style=color:#f92672>=</span> custom_dataset.size().value();
+</span></span><span style=display:flex><span><span style=color:#66d9ef>int</span> n_epochs <span style=color:#f92672>=</span> <span style=color:#ae81ff>10</span>; <span style=color:#75715e>// Number of epochs
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> epoch<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>; epoch<span style=color:#f92672>&lt;=</span>n_epochs; epoch<span style=color:#f92672>++</span>) {
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>auto</span><span style=color:#f92672>&amp;</span> batch: <span style=color:#f92672>*</span>data_loader) {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>auto</span> data <span style=color:#f92672>=</span> batch.data;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>auto</span> target <span style=color:#f92672>=</span> batch.target.squeeze();
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// Convert data to float32 format and target to Int64 format
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>// Assuming you have labels as integers
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    data <span style=color:#f92672>=</span> data.to(torch<span style=color:#f92672>::</span>kF2);
+</span></span><span style=display:flex><span>    target <span style=color:#f92672>=</span> target.to(torch<span style=color:#f92672>::</span>kInt64);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// Clear the optimizer parameters
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    optimizer.zero_grad();
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>auto</span> output <span style=color:#f92672>=</span> net<span style=color:#f92672>-&gt;</span>forward(data);
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>auto</span> loss <span style=color:#f92672>=</span> torch<span style=color:#f92672>::</span>nll_loss(output, target);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// Backpropagate the loss
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    loss.backward();
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// Update the parameters
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    optimizer.step();
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    cout <span style=color:#f92672>&lt;&lt;</span> <span style=color:#e6db74>&#34;Train Epoch: %d/%ld [%5ld/%5d] Loss: %.4f&#34;</span> <span style=color:#f92672>&lt;&lt;</span> epoch <span style=color:#f92672>&lt;&lt;</span> n_epochs <span style=color:#f92672>&lt;&lt;</span> batch_index <span style=color:#f92672>*</span> batch.data.size(<span style=color:#ae81ff>0</span>) <span style=color:#f92672>&lt;&lt;</span> dataset_size <span style=color:#f92672>&lt;&lt;</span> loss.item<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>float</span><span style=color:#f92672>&gt;</span>() <span style=color:#f92672>&lt;&lt;</span> endl;
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// Save the model
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>torch<span style=color:#f92672>::</span>save(net, <span style=color:#e6db74>&#34;best_model.pt&#34;</span>);
+</span></span></code></pre></div><p>In the next blog (<strong>coming soon</strong>), we&rsquo;ll be discussing about <strong>Making Predictions</strong> using our network and will also show an example of training our network on a benchmark dataset.</p></div><footer class=post-footer><ul class=post-tags><li><a href=https://krshrimali.github.io/tags/development/>Development</a></li><li><a href=https://krshrimali.github.io/tags/coding/>Coding</a></li><li><a href=https://krshrimali.github.io/tags/cpp/>Cpp</a></li><li><a href=https://krshrimali.github.io/tags/notes/>Notes</a></li><li><a href=https://krshrimali.github.io/tags/pytorch-cpp/>Pytorch-Cpp</a></li><li><a href=https://krshrimali.github.io/tags/libtorch/>Libtorch</a></li></ul><nav class=paginav><a class=prev href=https://krshrimali.github.io/posts/2019/07/classifying-dogs-vs-cats-using-pytorch-c-api-part-1/><span class=title>« Prev</span><br><span>Classifying Dogs vs Cats using PyTorch C++ API: Part-1</span>
+</a><a class=next href=https://krshrimali.github.io/posts/2019/07/announcing-a-series-of-blogs-on-pytorch-c-api/><span class=title>Next »</span><br><span>Announcing a series of blogs on PyTorch C++ API</span></a></nav><ul class=share-buttons><li><a target=_blank rel="noopener noreferrer" aria-label="share Training a Network on Custom Dataset using PyTorch C++ API on x" href="https://x.com/intent/tweet/?text=Training%20a%20Network%20on%20Custom%20Dataset%20using%20PyTorch%20C%2b%2b%20API&amp;url=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2019%2f07%2ftraining-a-network-on-custom-dataset-using-pytorch-c-api%2f&amp;hashtags=development%2ccoding%2ccpp%2cnotes%2cpytorch-cpp%2clibtorch"><svg viewBox="0 0 512 512" height="30" width="30" fill="currentColor"><path d="M512 62.554V449.446C512 483.97 483.97 512 449.446 512H62.554C28.03 512 0 483.97.0 449.446V62.554C0 28.03 28.029.0 62.554.0H449.446C483.971.0 512 28.03 512 62.554zM269.951 190.75 182.567 75.216H56L207.216 272.95 63.9 436.783h61.366L235.9 310.383l96.667 126.4H456L298.367 228.367l134-153.151H371.033zM127.633 110h36.468l219.38 290.065H349.5z"/></svg></a></li><li><a target=_blank rel="noopener noreferrer" aria-label="share Training a Network on Custom Dataset using PyTorch C++ API on linkedin" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2019%2f07%2ftraining-a-network-on-custom-dataset-using-pytorch-c-api%2f&amp;title=Training%20a%20Network%20on%20Custom%20Dataset%20using%20PyTorch%20C%2b%2b%20API&amp;summary=Training%20a%20Network%20on%20Custom%20Dataset%20using%20PyTorch%20C%2b%2b%20API&amp;source=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2019%2f07%2ftraining-a-network-on-custom-dataset-using-pytorch-c-api%2f"><svg viewBox="0 0 512 512" height="30" width="30" fill="currentColor"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zM160.461 423.278V197.561h-75.04v225.717h75.04zm270.539.0V293.839c0-69.333-37.018-101.586-86.381-101.586-39.804.0-57.634 21.891-67.617 37.266v-31.958h-75.021c.995 21.181.0 225.717.0 225.717h75.02V297.222c0-6.748.486-13.492 2.474-18.315 5.414-13.475 17.767-27.434 38.494-27.434 27.135.0 38.007 20.707 38.007 51.037v120.768H431zM123.448 88.722C97.774 88.722 81 105.601 81 127.724c0 21.658 16.264 39.002 41.455 39.002h.484c26.165.0 42.452-17.344 42.452-39.002-.485-22.092-16.241-38.954-41.943-39.002z"/></svg></a></li><li><a target=_blank rel="noopener noreferrer" aria-label="share Training a Network on Custom Dataset using PyTorch C++ API on reddit" href="https://reddit.com/submit?url=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2019%2f07%2ftraining-a-network-on-custom-dataset-using-pytorch-c-api%2f&title=Training%20a%20Network%20on%20Custom%20Dataset%20using%20PyTorch%20C%2b%2b%20API"><svg viewBox="0 0 512 512" height="30" width="30" fill="currentColor"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zM446 265.638c0-22.964-18.616-41.58-41.58-41.58-11.211.0-21.361 4.457-28.841 11.666-28.424-20.508-67.586-33.757-111.204-35.278l18.941-89.121 61.884 13.157c.756 15.734 13.642 28.29 29.56 28.29 16.407.0 29.706-13.299 29.706-29.701.0-16.403-13.299-29.702-29.706-29.702-11.666.0-21.657 6.792-26.515 16.578l-69.105-14.69c-1.922-.418-3.939-.042-5.585 1.036-1.658 1.073-2.811 2.761-3.224 4.686l-21.152 99.438c-44.258 1.228-84.046 14.494-112.837 35.232-7.468-7.164-17.589-11.591-28.757-11.591-22.965.0-41.585 18.616-41.585 41.58.0 16.896 10.095 31.41 24.568 37.918-.639 4.135-.99 8.328-.99 12.576.0 63.977 74.469 115.836 166.33 115.836s166.334-51.859 166.334-115.836c0-4.218-.347-8.387-.977-12.493 14.564-6.47 24.735-21.034 24.735-38.001zM326.526 373.831c-20.27 20.241-59.115 21.816-70.534 21.816-11.428.0-50.277-1.575-70.522-21.82-3.007-3.008-3.007-7.882.0-10.889 3.003-2.999 7.882-3.003 10.885.0 12.777 12.781 40.11 17.317 59.637 17.317 19.522.0 46.86-4.536 59.657-17.321 3.016-2.999 7.886-2.995 10.885.008 3.008 3.011 3.003 7.882-.008 10.889zm-5.23-48.781c-16.373.0-29.701-13.324-29.701-29.698.0-16.381 13.328-29.714 29.701-29.714 16.378.0 29.706 13.333 29.706 29.714.0 16.374-13.328 29.698-29.706 29.698zM160.91 295.348c0-16.381 13.328-29.71 29.714-29.71 16.369.0 29.689 13.329 29.689 29.71.0 16.373-13.32 29.693-29.689 29.693-16.386.0-29.714-13.32-29.714-29.693z"/></svg></a></li><li><a target=_blank rel="noopener noreferrer" aria-label="share Training a Network on Custom Dataset using PyTorch C++ API on facebook" href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2019%2f07%2ftraining-a-network-on-custom-dataset-using-pytorch-c-api%2f"><svg viewBox="0 0 512 512" height="30" width="30" fill="currentColor"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H342.978V319.085h66.6l12.672-82.621h-79.272v-53.617c0-22.603 11.073-44.636 46.58-44.636H425.6v-70.34s-32.71-5.582-63.982-5.582c-65.288.0-107.96 39.569-107.96 111.204v62.971h-72.573v82.621h72.573V512h-191.104c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892z"/></svg></a></li><li><a target=_blank rel="noopener noreferrer" aria-label="share Training a Network on Custom Dataset using PyTorch C++ API on whatsapp" href="https://api.whatsapp.com/send?text=Training%20a%20Network%20on%20Custom%20Dataset%20using%20PyTorch%20C%2b%2b%20API%20-%20https%3a%2f%2fkrshrimali.github.io%2fposts%2f2019%2f07%2ftraining-a-network-on-custom-dataset-using-pytorch-c-api%2f"><svg viewBox="0 0 512 512" height="30" width="30" fill="currentColor"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zm-58.673 127.703c-33.842-33.881-78.847-52.548-126.798-52.568-98.799.0-179.21 80.405-179.249 179.234-.013 31.593 8.241 62.428 23.927 89.612l-25.429 92.884 95.021-24.925c26.181 14.28 55.659 21.807 85.658 21.816h.074c98.789.0 179.206-80.413 179.247-179.243.018-47.895-18.61-92.93-52.451-126.81zM263.976 403.485h-.06c-26.734-.01-52.954-7.193-75.828-20.767l-5.441-3.229-56.386 14.792 15.05-54.977-3.542-5.637c-14.913-23.72-22.791-51.136-22.779-79.287.033-82.142 66.867-148.971 149.046-148.971 39.793.014 77.199 15.531 105.329 43.692 28.128 28.16 43.609 65.592 43.594 105.4-.034 82.149-66.866 148.983-148.983 148.984zm81.721-111.581c-4.479-2.242-26.499-13.075-30.604-14.571-4.105-1.495-7.091-2.241-10.077 2.241-2.986 4.483-11.569 14.572-14.182 17.562-2.612 2.988-5.225 3.364-9.703 1.12-4.479-2.241-18.91-6.97-36.017-22.23C231.8 264.15 222.81 249.484 220.198 245s-.279-6.908 1.963-9.14c2.016-2.007 4.48-5.232 6.719-7.847 2.24-2.615 2.986-4.484 4.479-7.472 1.493-2.99.747-5.604-.374-7.846-1.119-2.241-10.077-24.288-13.809-33.256-3.635-8.733-7.327-7.55-10.077-7.688-2.609-.13-5.598-.158-8.583-.158-2.986.0-7.839 1.121-11.944 5.604-4.105 4.484-15.675 15.32-15.675 37.364.0 22.046 16.048 43.342 18.287 46.332 2.24 2.99 31.582 48.227 76.511 67.627 10.685 4.615 19.028 7.371 25.533 9.434 10.728 3.41 20.492 2.929 28.209 1.775 8.605-1.285 26.499-10.833 30.231-21.295 3.732-10.464 3.732-19.431 2.612-21.298-1.119-1.869-4.105-2.99-8.583-5.232z"/></svg></a></li><li><a target=_blank rel="noopener noreferrer" aria-label="share Training a Network on Custom Dataset using PyTorch C++ API on telegram" href="https://telegram.me/share/url?text=Training%20a%20Network%20on%20Custom%20Dataset%20using%20PyTorch%20C%2b%2b%20API&amp;url=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2019%2f07%2ftraining-a-network-on-custom-dataset-using-pytorch-c-api%2f"><svg viewBox="2 2 28 28" height="30" width="30" fill="currentColor"><path d="M26.49 29.86H5.5a3.37 3.37.0 01-2.47-1 3.35 3.35.0 01-1-2.47V5.48A3.36 3.36.0 013 3 3.37 3.37.0 015.5 2h21A3.38 3.38.0 0129 3a3.36 3.36.0 011 2.46V26.37a3.35 3.35.0 01-1 2.47 3.38 3.38.0 01-2.51 1.02zm-5.38-6.71a.79.79.0 00.85-.66L24.73 9.24a.55.55.0 00-.18-.46.62.62.0 00-.41-.17q-.08.0-16.53 6.11a.59.59.0 00-.41.59.57.57.0 00.43.52l4 1.24 1.61 4.83a.62.62.0 00.63.43.56.56.0 00.4-.17L16.54 20l4.09 3A.9.9.0 0021.11 23.15zM13.8 20.71l-1.21-4q8.72-5.55 8.78-5.55c.15.0.23.0.23.16a.18.18.0 010 .06s-2.51 2.3-7.52 6.8z"/></svg></a></li><li><a target=_blank rel="noopener noreferrer" aria-label="share Training a Network on Custom Dataset using PyTorch C++ API on ycombinator" href="https://news.ycombinator.com/submitlink?t=Training%20a%20Network%20on%20Custom%20Dataset%20using%20PyTorch%20C%2b%2b%20API&u=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2019%2f07%2ftraining-a-network-on-custom-dataset-using-pytorch-c-api%2f"><svg width="30" height="30" viewBox="0 0 512 512" fill="currentColor"><path d="M449.446.0C483.971.0 512 28.03 512 62.554V449.446C512 483.97 483.97 512 449.446 512H62.554C28.03 512 0 483.97.0 449.446V62.554C0 28.03 28.029.0 62.554.0H449.446zM183.8767 87.9921h-62.034L230.6673 292.4508V424.0079h50.6655V292.4508L390.1575 87.9921H328.1233L256 238.2489z"/></svg></a></li></ul></footer></article></main><footer class=footer><span>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</span> ·
+<span>Powered by
+<a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
+<a href=https://github.com/adityatelange/hugo-PaperMod/ rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top aria-label="go to top" title="Go to Top (Alt + G)" class=top-link id=top-link accesskey=g><svg viewBox="0 0 12 6" fill="currentColor"><path d="M12 6H0l6-6z"/></svg>
+</a><script>let menu=document.getElementById("menu");menu&&(menu.scrollLeft=localStorage.getItem("menu-scroll-position"),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)}),document.querySelectorAll('a[href^="#"]').forEach(e=>{e.addEventListener("click",function(e){e.preventDefault();var t=this.getAttribute("href").substr(1);window.matchMedia("(prefers-reduced-motion: reduce)").matches?document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView({behavior:"smooth"}),t==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${t}`)})})</script><script>var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")}</script><script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove("dark"),localStorage.setItem("pref-theme","light")):(document.body.classList.add("dark"),localStorage.setItem("pref-theme","dark"))})</script><script>document.querySelectorAll("pre > code").forEach(e=>{const n=e.parentNode.parentNode,t=document.createElement("button");t.classList.add("copy-code"),t.innerHTML="copy";function s(){t.innerHTML="copied!",setTimeout(()=>{t.innerHTML="copy"},2e3)}t.addEventListener("click",t=>{if("clipboard"in navigator){navigator.clipboard.writeText(e.textContent),s();return}const n=document.createRange();n.selectNodeContents(e);const o=window.getSelection();o.removeAllRanges(),o.addRange(n);try{document.execCommand("copy"),s()}catch{}o.removeRange(n)}),n.classList.contains("highlight")?n.appendChild(t):n.parentNode.firstChild==n||(e.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName=="TABLE"?e.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(t):e.parentNode.appendChild(t))})</script></body></html>

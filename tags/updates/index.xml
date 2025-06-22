@@ -1,331 +1,249 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
-  <channel>
-    <title>Updates on Kushashwa Ravi Shrimali (Kush)</title>
-    <link>https://krshrimali.github.io/tags/updates/</link>
-    <description>Recent content in Updates on Kushashwa Ravi Shrimali (Kush)</description>
-    <generator>Hugo -- 0.147.6</generator>
-    <language>en</language>
-    <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Wed, 03 May 2023 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://krshrimali.github.io/tags/updates/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Daily Update: 3rd May 2023</title>
-      <link>https://krshrimali.github.io/posts/2023/05/daily-update-3rd-may-2023/</link>
-      <pubDate>Wed, 03 May 2023 00:00:00 +0000</pubDate>
-      <guid>https://krshrimali.github.io/posts/2023/05/daily-update-3rd-may-2023/</guid>
-      <description>&lt;p&gt;Okay, I think I should just accept this, while at work, it will be very hard for me to go and actually code something. And it makes sense, honestly at this stage - I feel like giving 50% of the time to reading + thinking, and 20% to implementing + 30% on iterating and feedback. So you&amp;rsquo;ll see more links about reading etc. over here.&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=0LTXCcVRQi0&amp;amp;list=LL&amp;amp;index=7&#34;&gt;Design a basic search engine (Google or Bing) | System Design Interview Prep&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=olfaBgJrUBI&amp;amp;list=LL&amp;amp;index=6&#34;&gt;Design a Payment System - System Design Interview&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;That would be it, to be honest - not a lot. I&amp;rsquo;ve started reading through fasterthanlime&amp;rsquo;s videos on Silly Fast Fresh Deploys, I&amp;rsquo;ll share progress on it soon once I&amp;rsquo;ve some learnings.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Daily Update: 2nd May 2023</title>
-      <link>https://krshrimali.github.io/posts/2023/05/daily-update-2nd-may-2023/</link>
-      <pubDate>Tue, 02 May 2023 00:00:00 +0000</pubDate>
-      <guid>https://krshrimali.github.io/posts/2023/05/daily-update-2nd-may-2023/</guid>
-      <description>&lt;p&gt;Today was more like a reading/learning day. Here are the things I&amp;rsquo;ve been watching:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=9mdadNspP_M&#34;&gt;Which Database Model to choose?&lt;/a&gt;:
-&lt;ul&gt;
-&lt;li&gt;Why this?
-&lt;ul&gt;
-&lt;li&gt;Going to be useful for the &lt;a href=&#34;https://github.com/krshrimali/keystroke-store-rs&#34;&gt;project&lt;/a&gt; I&amp;rsquo;ve been working on. Thinking on directions of storing in-memory, using key-value model but let&amp;rsquo;s see.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=FY7EQwT7QKU&#34;&gt;I made every sentry page 300 ms faster (intermediate) anthony explains &lt;code&gt;#540&lt;/code&gt;&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;Why this?
-&lt;ul&gt;
-&lt;li&gt;Always enjoy watching Anthony. Came on my YT recommendation, thought I&amp;rsquo;ll watch. Looks like a CDN config fix, also learnt a few things on watching the type of network calls (cached or not) from this video.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://bertptrs.nl/2023/04/27/how-does-async-rust-work.html&#34;&gt;How does async rust work&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;Still reading, not done yet. Will update my learnings when done.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Update NeoVim Config to use ruff-lsp instead of pyright for most except hover
-&lt;ul&gt;
-&lt;li&gt;Ruff has been there for long, boasts a lot of perf improvements as a linter. Good to see Ruff LSP growing.&lt;/li&gt;
-&lt;li&gt;NeoVim config repository: &lt;a href=&#34;https://github.com/krshrimali/nvim&#34;&gt;https://github.com/krshrimali/nvim&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;It&amp;rsquo;s of course going to take a lot of efforts to catch up to pyright in terms of capabilities, but I&amp;rsquo;m very positive.&lt;/li&gt;
-&lt;li&gt;I love to see code actions finally in my neovim + python code. 🎉&lt;/li&gt;
-&lt;li&gt;It&amp;rsquo;s written in Rust, for those who don&amp;rsquo;t know 😉&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;TODOs:&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Daily Update: 1st May 2023</title>
-      <link>https://krshrimali.github.io/posts/2023/05/daily-update-1st-may-2023/</link>
-      <pubDate>Mon, 01 May 2023 00:00:00 +0000</pubDate>
-      <guid>https://krshrimali.github.io/posts/2023/05/daily-update-1st-may-2023/</guid>
-      <description>&lt;p&gt;Interesting day, lots of design stuff for the &lt;a href=&#34;https://github.com/krshrimali/keystroke-store-rs&#34;&gt;project we&amp;rsquo;ve been working on&lt;/a&gt;.&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Designing flow for the word combinator service
-&lt;ul&gt;
-&lt;li&gt;This is actually tricky, as we are figuring out how we&amp;rsquo;ll figure out the keystrokes into words/phrases (I&amp;rsquo;d like to call them &lt;em&gt;entities&lt;/em&gt; at one point of time).&lt;/li&gt;
-&lt;li&gt;The algorithm is close, and I&amp;rsquo;m particularly hopeful about it:
-&lt;ul&gt;
-&lt;li&gt;It considers some edge cases of mouse events, sitting idle, and gives user the control what they would like to choose.&lt;/li&gt;
-&lt;li&gt;More on this very soon!&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Boring nerdy stuff: Exploring fzf
-&lt;ul&gt;
-&lt;li&gt;I wanted to have fzf previews height changed to 100%, finally changed my zsh config for that. It looks much better now.&lt;/li&gt;
-&lt;li&gt;Then figured out that I&amp;rsquo;m using outdated formula for fzf, and I&amp;rsquo;ll end up going through fzf release notes to see what has changed over the last few releases.
-&lt;ul&gt;
-&lt;li&gt;It&amp;rsquo;s usually a good practice I believe to go through the release notes, and be aware of the tools you use.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Work day tomorrow, so doing some early readings.
-&lt;ul&gt;
-&lt;li&gt;Of course can&amp;rsquo;t share details, but yep, going to be more occupied now.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;A lot of TODOs from &lt;del&gt;yesterday&lt;/del&gt; day before yesterday are left 🥺, I&amp;rsquo;ll move them to tomorrow, yay! Procrastination, let&amp;rsquo;s go 😆🎉&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Daily Update: 30th April 2023</title>
-      <link>https://krshrimali.github.io/posts/2023/04/daily-update-30th-april-2023/</link>
-      <pubDate>Sun, 30 Apr 2023 00:00:00 +0000</pubDate>
-      <guid>https://krshrimali.github.io/posts/2023/04/daily-update-30th-april-2023/</guid>
-      <description>&lt;p&gt;Lovely day, had my friend &lt;a href=&#34;https://github.com/imsrbh&#34;&gt;imsrbh&lt;/a&gt; come over and we were talking about the project I wanted to do. He had some ideas and of course some experience with Kafka, so he helped me setup Kafka and docker on my machine, and that&amp;rsquo;s how it all started.&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Setting up Kafka and Docker on my machine:
-&lt;ul&gt;
-&lt;li&gt;Refer to &lt;a href=&#34;https://medium.com/@fengliplatform/kafka-broker-setup-using-docker-image-33f7a8081a07#:~:text=1%20Setup%20Kafka%20cluster%20on%20Windows%20laptop%201,instance%20...%205%201.5%20Create%20Kafka%20topic%20&#34;&gt;this blog&lt;/a&gt; for Kafka setup.&lt;/li&gt;
-&lt;li&gt;We verified by running a sample producer-consumer app in Python and it worked.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/krshrimali/keystroke-store-rs&#34;&gt;Starting to implement the core logic of getting key strokes in Rust&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;I&amp;rsquo;m using &lt;code&gt;rdev&lt;/code&gt; library for this, it was decent.&lt;/li&gt;
-&lt;li&gt;Was wondering how I can convert the keystrokes to strings, apparently it was a Rust Enum.&lt;/li&gt;
-&lt;li&gt;Fortunately, they had a feature &lt;code&gt;serialize&lt;/code&gt; which would help me do just that. Now it&amp;rsquo;s quite smooth.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Implementing Kafka Producer-Consumer in Rust
-&lt;ul&gt;
-&lt;li&gt;Kafka has a client in Rust, &lt;code&gt;cargo add kafka&lt;/code&gt; will help.&lt;/li&gt;
-&lt;li&gt;Wrote Kafka Producer and Consumer referring to their official documentation.&lt;/li&gt;
-&lt;li&gt;It works flawlessly.&lt;/li&gt;
-&lt;li&gt;We were sending the keys as &lt;code&gt;&amp;amp;[u8]&lt;/code&gt; and had to convert these to strings back at consumer (need to proper error checking there)&lt;/li&gt;
-&lt;li&gt;Producer repo: &lt;a href=&#34;https://github.com/krshrimali/keystroke-store-rs&#34;&gt;https://github.com/krshrimali/keystroke-store-rs&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Consumer repo: &lt;a href=&#34;https://github.com/krshrimali/keystroke-consumer-rs&#34;&gt;https://github.com/krshrimali/keystroke-consumer-rs&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Quick learning on why we didn&amp;rsquo;t go for Redis (mostly because we wanted to learn Kafka in Rust lol, can try Redis one day but I like reliability of Kafka): &lt;a href=&#34;https://stackoverflow.com/a/37993809&#34;&gt;https://stackoverflow.com/a/37993809&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;A lot of TODOs from yesterday are left, I&amp;rsquo;ll move them to tomorrow, yay! Procrastination, let&amp;rsquo;s go 😆🎉&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Daily Update: 29th April 2023</title>
-      <link>https://krshrimali.github.io/posts/2023/04/daily-update-29th-april-2023/</link>
-      <pubDate>Sat, 29 Apr 2023 00:00:00 +0000</pubDate>
-      <guid>https://krshrimali.github.io/posts/2023/04/daily-update-29th-april-2023/</guid>
-      <description>&lt;p&gt;Alright, we are back. It&amp;rsquo;s Saturday, so I spent a lot of time cleaning up my flat and my setup. Bengaluru is quite a dusty city, so yep, gotta clean regularly. Anyways, in terms of learning, my goals of today were to read some source code and papers/official documentation. It&amp;rsquo;s been some time since I didn&amp;rsquo;t do any Rust, so today I&amp;rsquo;ll just touch upon that as well.&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=zUvHkkkrmIY&#34;&gt;Rust - building a UI to plot a sensor in real time&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;Why this?
-&lt;ul&gt;
-&lt;li&gt;I&amp;rsquo;ve used Iced library quite a bit so far, so wanted to understand how other UI libraries look like.&lt;/li&gt;
-&lt;li&gt;I&amp;rsquo;m not going for the &amp;ldquo;famous&amp;rdquo; libraries here, just wanted to experience any other library. Plus, this video seemed to be decent and technically focused enough on the implementation.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Setting up PostgreSQL server on my system:
-&lt;ul&gt;
-&lt;li&gt;Why this?
-&lt;ul&gt;
-&lt;li&gt;For me to start working on some projects of my own, it&amp;rsquo;s important to setup stage for them.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Notes:
-&lt;ul&gt;
-&lt;li&gt;I used &lt;a href=&#34;https://www.digitalocean.com/community/tutorials/how-to-install-postgresql-on-ubuntu-20-04-quickstart&#34;&gt;this blog by digital ocean&lt;/a&gt; as reference.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Micro Project: Store all the key presses in a server
-&lt;ul&gt;
-&lt;li&gt;Notes:
-&lt;ul&gt;
-&lt;li&gt;Since I type a lot, everyone does, the DB will have to be good enough.&lt;/li&gt;
-&lt;li&gt;I wanted to see how I can enable indexing and searching, this will help give me an idea.&lt;/li&gt;
-&lt;li&gt;No UI stuff right now. Maybe one day.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;NeoVim Config:
-&lt;ul&gt;
-&lt;li&gt;I was randomly trying a keymap, and I just remembered I had &lt;code&gt;&amp;lt;leader&amp;gt;nf&lt;/code&gt; for &lt;code&gt;SnipRun&lt;/code&gt;. And oh, wow - it finally made sense why it could be useful.&lt;/li&gt;
-&lt;li&gt;Selecting text, code block, displaying output in the command window or as virtual text (different highlight for errors) and even in a vertical split terminal, amazing stuff!&lt;/li&gt;
-&lt;li&gt;Something my &lt;a href=&#34;https://github.com/krshrimali/nvim-autorunner&#34;&gt;nvim-autorunner&lt;/a&gt; was trying to do, cool stuff.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;Oh, and on another note: I watched a movie (after a long long time). Had to find time to relax a bit.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Daily Update: 28th April 2023</title>
-      <link>https://krshrimali.github.io/posts/2023/04/daily-update-28th-april-2023/</link>
-      <pubDate>Fri, 28 Apr 2023 00:00:00 +0000</pubDate>
-      <guid>https://krshrimali.github.io/posts/2023/04/daily-update-28th-april-2023/</guid>
-      <description>&lt;p&gt;Started my day with talking to my family, and then kicking off work after getting ready. (Note: these blogs are mostly around my personal learning updates, so I&amp;rsquo;ll mostly miss anything that I do at work as that&amp;rsquo;s confidential)&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=0y6FtKsg6J4&#34;&gt;What is OSI Model | Real World Examples&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;Why this?
-&lt;ul&gt;
-&lt;li&gt;The answer to: &amp;ldquo;How does the communication work from client to server&amp;rdquo; is very important in backend. I wanted to see if I missed anything from my graduate studies, but nothing much. This was more like a refresher.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Notes:
-&lt;ul&gt;
-&lt;li&gt;Each operating system has their own implementation of TCP protocol. Linux has it&amp;rsquo;s own for example, and it&amp;rsquo;s open sourced.&lt;/li&gt;
-&lt;li&gt;Can take a look at TCP&amp;rsquo;s source code in Linux source code to understand how checksum correction works.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Cloud load balancers: L4 Load Balancer (operates at TCP Level), L7 Load Balnacer (operates at Application Protocol Layer - HTTP/HTTPS)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://www.postgresql.org/docs/current/tutorial-arch.html&#34;&gt;Postgres: Architectural Fundamentals&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;Why this?
-&lt;ul&gt;
-&lt;li&gt;Going through database design and architectural fundamentals is helpful. I plan to explore CockroachDB soon, but wanted to get some idea about the ones I&amp;rsquo;ve used so far (Postgres for example)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Notes:
-&lt;ul&gt;
-&lt;li&gt;Uses client/server model.&lt;/li&gt;
-&lt;li&gt;PostgreSQL session consists following processes:
-&lt;ul&gt;
-&lt;li&gt;Server: manages DB files, accepts connections to the DB from client apps, performs DB actions on behalf of clients. DB server process is called postgres&lt;/li&gt;
-&lt;li&gt;Client (frontend): app that wants to perform DB operations.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Client/server could be on diff hosts: communicate over TCP/IP n/w connection&lt;/li&gt;
-&lt;li&gt;postgres can handle multiple connections from clients:
-&lt;ul&gt;
-&lt;li&gt;Forks a new process for each connection
-&lt;ul&gt;
-&lt;li&gt;The new process and client directly communicate&lt;/li&gt;
-&lt;li&gt;No intervention of postgres server&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Supervisor server process is always running (daemon process), waiting for client connections
-&lt;ul&gt;
-&lt;li&gt;Client and child server process can come and go&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://www.geeksforgeeks.org/postgresql-system-architecture/&#34;&gt;PostgreSQL System Architecture&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;Why this?
-&lt;ul&gt;
-&lt;li&gt;Just wanted to explore another blog on the same topic to see if I missed anything. Tbh, nothing much.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Notes:
-&lt;ul&gt;
-&lt;li&gt;PostgreSQL: process-per-transaction model&lt;/li&gt;
-&lt;li&gt;postgres server process:
-&lt;ul&gt;
-&lt;li&gt;Managed by postmaster, central coordinating process&lt;/li&gt;
-&lt;li&gt;Responsibilities:
-&lt;ul&gt;
-&lt;li&gt;Initializing, terminating the server&lt;/li&gt;
-&lt;li&gt;Handling connection requests from the new clients&lt;/li&gt;
-&lt;li&gt;Recovery&lt;/li&gt;
-&lt;li&gt;Run background processes&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Shared Memory:
-&lt;ul&gt;
-&lt;li&gt;Reserved for DB caching and Transactional Log Caching&lt;/li&gt;
-&lt;li&gt;Shared Disk Buffer&lt;/li&gt;
-&lt;li&gt;Shared Tables
-&lt;ul&gt;
-&lt;li&gt;Uses same set of tables to host multiple client data (TODO: how?)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Backend Processes:
-&lt;ul&gt;
-&lt;li&gt;Client interacts with backend processes (submits queries and receiving queries result)&lt;/li&gt;
-&lt;li&gt;Multiple backend servers executing queries concurrently&lt;/li&gt;
-&lt;li&gt;Each backend server:
-&lt;ul&gt;
-&lt;li&gt;will handle only a single query at a time&lt;/li&gt;
-&lt;li&gt;access data from main memory buffer pool (placed in shared memory)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;Thank you! :) See y&amp;rsquo;all in the next blog.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>I started building an app using Rust and here is how it went...</title>
-      <link>https://krshrimali.github.io/posts/2022/12/i-started-building-an-app-using-rust-and-here-is-how-it-went.../</link>
-      <pubDate>Mon, 12 Dec 2022 00:00:00 +0000</pubDate>
-      <guid>https://krshrimali.github.io/posts/2022/12/i-started-building-an-app-using-rust-and-here-is-how-it-went.../</guid>
-      <description>&lt;p&gt;Hi everyone!! I&amp;rsquo;ve an update, on what I&amp;rsquo;ve been up to - and I&amp;rsquo;m excited. It&amp;rsquo;s a &lt;em&gt;rusty&lt;/em&gt; update 😉. As always, I would love to tell you a story (this will help set some context), but if you want to skip and go directly to the update, please scroll to: &lt;code&gt;# THE Update&lt;/code&gt; section.&lt;/p&gt;
-&lt;h2 id=&#34;the-story&#34;&gt;The Story&lt;/h2&gt;
-&lt;p&gt;I&amp;rsquo;ve been through, possibly, the best and the worst time of my life. I use these contrasting words because everything went wrong - and that&amp;rsquo;s where you get an opportunity to shine. I think I fairly enjoyed resisting the pain and fighting through the odds, hopefully you&amp;rsquo;ll learn about it very soon on my blog (just need the courage to say it out loud :)).&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Daily Update: 19th 20th 21st November 2022 - Day 5 to Day 7 (inclusive)</title>
-      <link>https://krshrimali.github.io/posts/2022/11/daily-update-19th-20th-21st-november-2022-day-5-to-day-7-inclusive/</link>
-      <pubDate>Mon, 21 Nov 2022 00:00:00 +0000</pubDate>
-      <guid>https://krshrimali.github.io/posts/2022/11/daily-update-19th-20th-21st-november-2022-day-5-to-day-7-inclusive/</guid>
-      <description>&lt;p&gt;Hi everyone! Sorry for missing out on publishing individual blogs for 19th, 20th and 21st November, but it has been very hectic for me, and I decided to give leetcode a break and explore System Design (a lot). Turns out, I had some idea about it already, one of the advantages of working with startups (CareAI/Dukaan). But in any case, quite a few interesting things I learnt. I can&amp;rsquo;t share all the links, as it will be just better to share the playlists or YT channels I referred:&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Daily Update: 18th November 2022 - Day 5</title>
-      <link>https://krshrimali.github.io/posts/2022/11/daily-update-18th-november-2022-day-5/</link>
-      <pubDate>Fri, 18 Nov 2022 00:00:00 +0000</pubDate>
-      <guid>https://krshrimali.github.io/posts/2022/11/daily-update-18th-november-2022-day-5/</guid>
-      <description>&lt;p&gt;Hi everyone, Day 5 of this series of daily updates. Started my day, fairly early but was feeling unwell. In any case, I did make some progress with my learning of the Interpreter. One of motivation to learn about Interpreter is to learn the whole process, from the code we write to the object files / executables. Of course, in this goal, my next step would be to read the &amp;ldquo;Write a compiler in Go&amp;rdquo; book. But one step at a time, right?&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Daily Update: 17th November 2022 - Day 4</title>
-      <link>https://krshrimali.github.io/posts/2022/11/daily-update-17th-november-2022-day-4/</link>
-      <pubDate>Thu, 17 Nov 2022 00:00:00 +0000</pubDate>
-      <guid>https://krshrimali.github.io/posts/2022/11/daily-update-17th-november-2022-day-4/</guid>
-      <description>&lt;p&gt;Hi everyone, Day 4 of this series of daily updates. I don&amp;rsquo;t have a lot to share today, just one of those days where I spent a lot of time going through whatever I&amp;rsquo;ve done already. I take some time to look at the things I learned so far, and see if I could be more intuitive back then. I&amp;rsquo;m going to continue doing the same for the next day, though this time for the problems I&amp;rsquo;ve solved on Leetcode.&lt;/p&gt;</description>
-    </item>
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Updates on Kushashwa Ravi Shrimali (Kush)</title><link>https://krshrimali.github.io/tags/updates/</link><description>Recent content in Updates on Kushashwa Ravi Shrimali (Kush)</description><generator>Hugo -- 0.147.8</generator><language>en</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 03 May 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://krshrimali.github.io/tags/updates/index.xml" rel="self" type="application/rss+xml"/><item><title>Daily Update: 3rd May 2023</title><link>https://krshrimali.github.io/posts/2023/05/daily-update-3rd-may-2023/</link><pubDate>Wed, 03 May 2023 00:00:00 +0000</pubDate><guid>https://krshrimali.github.io/posts/2023/05/daily-update-3rd-may-2023/</guid><description>&lt;p>Okay, I think I should just accept this, while at work, it will be very hard for me to go and actually code something. And it makes sense, honestly at this stage - I feel like giving 50% of the time to reading + thinking, and 20% to implementing + 30% on iterating and feedback. So you&amp;rsquo;ll see more links about reading etc. over here.&lt;/p>
+&lt;ol>
+&lt;li>&lt;a href="https://www.youtube.com/watch?v=0LTXCcVRQi0&amp;amp;list=LL&amp;amp;index=7">Design a basic search engine (Google or Bing) | System Design Interview Prep&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://www.youtube.com/watch?v=olfaBgJrUBI&amp;amp;list=LL&amp;amp;index=6">Design a Payment System - System Design Interview&lt;/a>&lt;/li>
+&lt;/ol>
+&lt;p>That would be it, to be honest - not a lot. I&amp;rsquo;ve started reading through fasterthanlime&amp;rsquo;s videos on Silly Fast Fresh Deploys, I&amp;rsquo;ll share progress on it soon once I&amp;rsquo;ve some learnings.&lt;/p></description></item><item><title>Daily Update: 2nd May 2023</title><link>https://krshrimali.github.io/posts/2023/05/daily-update-2nd-may-2023/</link><pubDate>Tue, 02 May 2023 00:00:00 +0000</pubDate><guid>https://krshrimali.github.io/posts/2023/05/daily-update-2nd-may-2023/</guid><description>&lt;p>Today was more like a reading/learning day. Here are the things I&amp;rsquo;ve been watching:&lt;/p>
+&lt;ol>
+&lt;li>&lt;a href="https://www.youtube.com/watch?v=9mdadNspP_M">Which Database Model to choose?&lt;/a>:
+&lt;ul>
+&lt;li>Why this?
+&lt;ul>
+&lt;li>Going to be useful for the &lt;a href="https://github.com/krshrimali/keystroke-store-rs">project&lt;/a> I&amp;rsquo;ve been working on. Thinking on directions of storing in-memory, using key-value model but let&amp;rsquo;s see.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;a href="https://www.youtube.com/watch?v=FY7EQwT7QKU">I made every sentry page 300 ms faster (intermediate) anthony explains &lt;code>#540&lt;/code>&lt;/a>
+&lt;ul>
+&lt;li>Why this?
+&lt;ul>
+&lt;li>Always enjoy watching Anthony. Came on my YT recommendation, thought I&amp;rsquo;ll watch. Looks like a CDN config fix, also learnt a few things on watching the type of network calls (cached or not) from this video.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;a href="https://bertptrs.nl/2023/04/27/how-does-async-rust-work.html">How does async rust work&lt;/a>
+&lt;ul>
+&lt;li>Still reading, not done yet. Will update my learnings when done.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Update NeoVim Config to use ruff-lsp instead of pyright for most except hover
+&lt;ul>
+&lt;li>Ruff has been there for long, boasts a lot of perf improvements as a linter. Good to see Ruff LSP growing.&lt;/li>
+&lt;li>NeoVim config repository: &lt;a href="https://github.com/krshrimali/nvim">https://github.com/krshrimali/nvim&lt;/a>&lt;/li>
+&lt;li>It&amp;rsquo;s of course going to take a lot of efforts to catch up to pyright in terms of capabilities, but I&amp;rsquo;m very positive.&lt;/li>
+&lt;li>I love to see code actions finally in my neovim + python code. 🎉&lt;/li>
+&lt;li>It&amp;rsquo;s written in Rust, for those who don&amp;rsquo;t know 😉&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;p>TODOs:&lt;/p></description></item><item><title>Daily Update: 1st May 2023</title><link>https://krshrimali.github.io/posts/2023/05/daily-update-1st-may-2023/</link><pubDate>Mon, 01 May 2023 00:00:00 +0000</pubDate><guid>https://krshrimali.github.io/posts/2023/05/daily-update-1st-may-2023/</guid><description>&lt;p>Interesting day, lots of design stuff for the &lt;a href="https://github.com/krshrimali/keystroke-store-rs">project we&amp;rsquo;ve been working on&lt;/a>.&lt;/p>
+&lt;ol>
+&lt;li>Designing flow for the word combinator service
+&lt;ul>
+&lt;li>This is actually tricky, as we are figuring out how we&amp;rsquo;ll figure out the keystrokes into words/phrases (I&amp;rsquo;d like to call them &lt;em>entities&lt;/em> at one point of time).&lt;/li>
+&lt;li>The algorithm is close, and I&amp;rsquo;m particularly hopeful about it:
+&lt;ul>
+&lt;li>It considers some edge cases of mouse events, sitting idle, and gives user the control what they would like to choose.&lt;/li>
+&lt;li>More on this very soon!&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Boring nerdy stuff: Exploring fzf
+&lt;ul>
+&lt;li>I wanted to have fzf previews height changed to 100%, finally changed my zsh config for that. It looks much better now.&lt;/li>
+&lt;li>Then figured out that I&amp;rsquo;m using outdated formula for fzf, and I&amp;rsquo;ll end up going through fzf release notes to see what has changed over the last few releases.
+&lt;ul>
+&lt;li>It&amp;rsquo;s usually a good practice I believe to go through the release notes, and be aware of the tools you use.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Work day tomorrow, so doing some early readings.
+&lt;ul>
+&lt;li>Of course can&amp;rsquo;t share details, but yep, going to be more occupied now.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;p>A lot of TODOs from &lt;del>yesterday&lt;/del> day before yesterday are left 🥺, I&amp;rsquo;ll move them to tomorrow, yay! Procrastination, let&amp;rsquo;s go 😆🎉&lt;/p></description></item><item><title>Daily Update: 30th April 2023</title><link>https://krshrimali.github.io/posts/2023/04/daily-update-30th-april-2023/</link><pubDate>Sun, 30 Apr 2023 00:00:00 +0000</pubDate><guid>https://krshrimali.github.io/posts/2023/04/daily-update-30th-april-2023/</guid><description>&lt;p>Lovely day, had my friend &lt;a href="https://github.com/imsrbh">imsrbh&lt;/a> come over and we were talking about the project I wanted to do. He had some ideas and of course some experience with Kafka, so he helped me setup Kafka and docker on my machine, and that&amp;rsquo;s how it all started.&lt;/p>
+&lt;ol>
+&lt;li>Setting up Kafka and Docker on my machine:
+&lt;ul>
+&lt;li>Refer to &lt;a href="https://medium.com/@fengliplatform/kafka-broker-setup-using-docker-image-33f7a8081a07#:~:text=1%20Setup%20Kafka%20cluster%20on%20Windows%20laptop%201,instance%20...%205%201.5%20Create%20Kafka%20topic%20">this blog&lt;/a> for Kafka setup.&lt;/li>
+&lt;li>We verified by running a sample producer-consumer app in Python and it worked.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;a href="https://github.com/krshrimali/keystroke-store-rs">Starting to implement the core logic of getting key strokes in Rust&lt;/a>
+&lt;ul>
+&lt;li>I&amp;rsquo;m using &lt;code>rdev&lt;/code> library for this, it was decent.&lt;/li>
+&lt;li>Was wondering how I can convert the keystrokes to strings, apparently it was a Rust Enum.&lt;/li>
+&lt;li>Fortunately, they had a feature &lt;code>serialize&lt;/code> which would help me do just that. Now it&amp;rsquo;s quite smooth.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Implementing Kafka Producer-Consumer in Rust
+&lt;ul>
+&lt;li>Kafka has a client in Rust, &lt;code>cargo add kafka&lt;/code> will help.&lt;/li>
+&lt;li>Wrote Kafka Producer and Consumer referring to their official documentation.&lt;/li>
+&lt;li>It works flawlessly.&lt;/li>
+&lt;li>We were sending the keys as &lt;code>&amp;amp;[u8]&lt;/code> and had to convert these to strings back at consumer (need to proper error checking there)&lt;/li>
+&lt;li>Producer repo: &lt;a href="https://github.com/krshrimali/keystroke-store-rs">https://github.com/krshrimali/keystroke-store-rs&lt;/a>&lt;/li>
+&lt;li>Consumer repo: &lt;a href="https://github.com/krshrimali/keystroke-consumer-rs">https://github.com/krshrimali/keystroke-consumer-rs&lt;/a>&lt;/li>
+&lt;li>Quick learning on why we didn&amp;rsquo;t go for Redis (mostly because we wanted to learn Kafka in Rust lol, can try Redis one day but I like reliability of Kafka): &lt;a href="https://stackoverflow.com/a/37993809">https://stackoverflow.com/a/37993809&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;p>A lot of TODOs from yesterday are left, I&amp;rsquo;ll move them to tomorrow, yay! Procrastination, let&amp;rsquo;s go 😆🎉&lt;/p></description></item><item><title>Daily Update: 29th April 2023</title><link>https://krshrimali.github.io/posts/2023/04/daily-update-29th-april-2023/</link><pubDate>Sat, 29 Apr 2023 00:00:00 +0000</pubDate><guid>https://krshrimali.github.io/posts/2023/04/daily-update-29th-april-2023/</guid><description>&lt;p>Alright, we are back. It&amp;rsquo;s Saturday, so I spent a lot of time cleaning up my flat and my setup. Bengaluru is quite a dusty city, so yep, gotta clean regularly. Anyways, in terms of learning, my goals of today were to read some source code and papers/official documentation. It&amp;rsquo;s been some time since I didn&amp;rsquo;t do any Rust, so today I&amp;rsquo;ll just touch upon that as well.&lt;/p>
+&lt;ol>
+&lt;li>&lt;a href="https://www.youtube.com/watch?v=zUvHkkkrmIY">Rust - building a UI to plot a sensor in real time&lt;/a>
+&lt;ul>
+&lt;li>Why this?
+&lt;ul>
+&lt;li>I&amp;rsquo;ve used Iced library quite a bit so far, so wanted to understand how other UI libraries look like.&lt;/li>
+&lt;li>I&amp;rsquo;m not going for the &amp;ldquo;famous&amp;rdquo; libraries here, just wanted to experience any other library. Plus, this video seemed to be decent and technically focused enough on the implementation.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Setting up PostgreSQL server on my system:
+&lt;ul>
+&lt;li>Why this?
+&lt;ul>
+&lt;li>For me to start working on some projects of my own, it&amp;rsquo;s important to setup stage for them.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Notes:
+&lt;ul>
+&lt;li>I used &lt;a href="https://www.digitalocean.com/community/tutorials/how-to-install-postgresql-on-ubuntu-20-04-quickstart">this blog by digital ocean&lt;/a> as reference.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Micro Project: Store all the key presses in a server
+&lt;ul>
+&lt;li>Notes:
+&lt;ul>
+&lt;li>Since I type a lot, everyone does, the DB will have to be good enough.&lt;/li>
+&lt;li>I wanted to see how I can enable indexing and searching, this will help give me an idea.&lt;/li>
+&lt;li>No UI stuff right now. Maybe one day.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>NeoVim Config:
+&lt;ul>
+&lt;li>I was randomly trying a keymap, and I just remembered I had &lt;code>&amp;lt;leader&amp;gt;nf&lt;/code> for &lt;code>SnipRun&lt;/code>. And oh, wow - it finally made sense why it could be useful.&lt;/li>
+&lt;li>Selecting text, code block, displaying output in the command window or as virtual text (different highlight for errors) and even in a vertical split terminal, amazing stuff!&lt;/li>
+&lt;li>Something my &lt;a href="https://github.com/krshrimali/nvim-autorunner">nvim-autorunner&lt;/a> was trying to do, cool stuff.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;p>Oh, and on another note: I watched a movie (after a long long time). Had to find time to relax a bit.&lt;/p></description></item><item><title>Daily Update: 28th April 2023</title><link>https://krshrimali.github.io/posts/2023/04/daily-update-28th-april-2023/</link><pubDate>Fri, 28 Apr 2023 00:00:00 +0000</pubDate><guid>https://krshrimali.github.io/posts/2023/04/daily-update-28th-april-2023/</guid><description>&lt;p>Started my day with talking to my family, and then kicking off work after getting ready. (Note: these blogs are mostly around my personal learning updates, so I&amp;rsquo;ll mostly miss anything that I do at work as that&amp;rsquo;s confidential)&lt;/p>
+&lt;ol>
+&lt;li>&lt;a href="https://www.youtube.com/watch?v=0y6FtKsg6J4">What is OSI Model | Real World Examples&lt;/a>
+&lt;ul>
+&lt;li>Why this?
+&lt;ul>
+&lt;li>The answer to: &amp;ldquo;How does the communication work from client to server&amp;rdquo; is very important in backend. I wanted to see if I missed anything from my graduate studies, but nothing much. This was more like a refresher.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Notes:
+&lt;ul>
+&lt;li>Each operating system has their own implementation of TCP protocol. Linux has it&amp;rsquo;s own for example, and it&amp;rsquo;s open sourced.&lt;/li>
+&lt;li>Can take a look at TCP&amp;rsquo;s source code in Linux source code to understand how checksum correction works.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Cloud load balancers: L4 Load Balancer (operates at TCP Level), L7 Load Balnacer (operates at Application Protocol Layer - HTTP/HTTPS)&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;a href="https://www.postgresql.org/docs/current/tutorial-arch.html">Postgres: Architectural Fundamentals&lt;/a>
+&lt;ul>
+&lt;li>Why this?
+&lt;ul>
+&lt;li>Going through database design and architectural fundamentals is helpful. I plan to explore CockroachDB soon, but wanted to get some idea about the ones I&amp;rsquo;ve used so far (Postgres for example)&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Notes:
+&lt;ul>
+&lt;li>Uses client/server model.&lt;/li>
+&lt;li>PostgreSQL session consists following processes:
+&lt;ul>
+&lt;li>Server: manages DB files, accepts connections to the DB from client apps, performs DB actions on behalf of clients. DB server process is called postgres&lt;/li>
+&lt;li>Client (frontend): app that wants to perform DB operations.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Client/server could be on diff hosts: communicate over TCP/IP n/w connection&lt;/li>
+&lt;li>postgres can handle multiple connections from clients:
+&lt;ul>
+&lt;li>Forks a new process for each connection
+&lt;ul>
+&lt;li>The new process and client directly communicate&lt;/li>
+&lt;li>No intervention of postgres server&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Supervisor server process is always running (daemon process), waiting for client connections
+&lt;ul>
+&lt;li>Client and child server process can come and go&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;a href="https://www.geeksforgeeks.org/postgresql-system-architecture/">PostgreSQL System Architecture&lt;/a>
+&lt;ul>
+&lt;li>Why this?
+&lt;ul>
+&lt;li>Just wanted to explore another blog on the same topic to see if I missed anything. Tbh, nothing much.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Notes:
+&lt;ul>
+&lt;li>PostgreSQL: process-per-transaction model&lt;/li>
+&lt;li>postgres server process:
+&lt;ul>
+&lt;li>Managed by postmaster, central coordinating process&lt;/li>
+&lt;li>Responsibilities:
+&lt;ul>
+&lt;li>Initializing, terminating the server&lt;/li>
+&lt;li>Handling connection requests from the new clients&lt;/li>
+&lt;li>Recovery&lt;/li>
+&lt;li>Run background processes&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Shared Memory:
+&lt;ul>
+&lt;li>Reserved for DB caching and Transactional Log Caching&lt;/li>
+&lt;li>Shared Disk Buffer&lt;/li>
+&lt;li>Shared Tables
+&lt;ul>
+&lt;li>Uses same set of tables to host multiple client data (TODO: how?)&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Backend Processes:
+&lt;ul>
+&lt;li>Client interacts with backend processes (submits queries and receiving queries result)&lt;/li>
+&lt;li>Multiple backend servers executing queries concurrently&lt;/li>
+&lt;li>Each backend server:
+&lt;ul>
+&lt;li>will handle only a single query at a time&lt;/li>
+&lt;li>access data from main memory buffer pool (placed in shared memory)&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;p>Thank you! :) See y&amp;rsquo;all in the next blog.&lt;/p></description></item><item><title>I started building an app using Rust and here is how it went...</title><link>https://krshrimali.github.io/posts/2022/12/i-started-building-an-app-using-rust-and-here-is-how-it-went.../</link><pubDate>Mon, 12 Dec 2022 00:00:00 +0000</pubDate><guid>https://krshrimali.github.io/posts/2022/12/i-started-building-an-app-using-rust-and-here-is-how-it-went.../</guid><description>&lt;p>Hi everyone!! I&amp;rsquo;ve an update, on what I&amp;rsquo;ve been up to - and I&amp;rsquo;m excited. It&amp;rsquo;s a &lt;em>rusty&lt;/em> update 😉. As always, I would love to tell you a story (this will help set some context), but if you want to skip and go directly to the update, please scroll to: &lt;code># THE Update&lt;/code> section.&lt;/p>
+&lt;h2 id="the-story">The Story&lt;/h2>
+&lt;p>I&amp;rsquo;ve been through, possibly, the best and the worst time of my life. I use these contrasting words because everything went wrong - and that&amp;rsquo;s where you get an opportunity to shine. I think I fairly enjoyed resisting the pain and fighting through the odds, hopefully you&amp;rsquo;ll learn about it very soon on my blog (just need the courage to say it out loud :)).&lt;/p></description></item><item><title>Daily Update: 19th 20th 21st November 2022 - Day 5 to Day 7 (inclusive)</title><link>https://krshrimali.github.io/posts/2022/11/daily-update-19th-20th-21st-november-2022-day-5-to-day-7-inclusive/</link><pubDate>Mon, 21 Nov 2022 00:00:00 +0000</pubDate><guid>https://krshrimali.github.io/posts/2022/11/daily-update-19th-20th-21st-november-2022-day-5-to-day-7-inclusive/</guid><description>&lt;p>Hi everyone! Sorry for missing out on publishing individual blogs for 19th, 20th and 21st November, but it has been very hectic for me, and I decided to give leetcode a break and explore System Design (a lot). Turns out, I had some idea about it already, one of the advantages of working with startups (CareAI/Dukaan). But in any case, quite a few interesting things I learnt. I can&amp;rsquo;t share all the links, as it will be just better to share the playlists or YT channels I referred:&lt;/p></description></item><item><title>Daily Update: 18th November 2022 - Day 5</title><link>https://krshrimali.github.io/posts/2022/11/daily-update-18th-november-2022-day-5/</link><pubDate>Fri, 18 Nov 2022 00:00:00 +0000</pubDate><guid>https://krshrimali.github.io/posts/2022/11/daily-update-18th-november-2022-day-5/</guid><description>&lt;p>Hi everyone, Day 5 of this series of daily updates. Started my day, fairly early but was feeling unwell. In any case, I did make some progress with my learning of the Interpreter. One of motivation to learn about Interpreter is to learn the whole process, from the code we write to the object files / executables. Of course, in this goal, my next step would be to read the &amp;ldquo;Write a compiler in Go&amp;rdquo; book. But one step at a time, right?&lt;/p></description></item><item><title>Daily Update: 17th November 2022 - Day 4</title><link>https://krshrimali.github.io/posts/2022/11/daily-update-17th-november-2022-day-4/</link><pubDate>Thu, 17 Nov 2022 00:00:00 +0000</pubDate><guid>https://krshrimali.github.io/posts/2022/11/daily-update-17th-november-2022-day-4/</guid><description>&lt;p>Hi everyone, Day 4 of this series of daily updates. I don&amp;rsquo;t have a lot to share today, just one of those days where I spent a lot of time going through whatever I&amp;rsquo;ve done already. I take some time to look at the things I learned so far, and see if I could be more intuitive back then. I&amp;rsquo;m going to continue doing the same for the next day, though this time for the problems I&amp;rsquo;ve solved on Leetcode.&lt;/p></description></item></channel></rss>

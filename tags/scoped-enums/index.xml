@@ -1,29 +1,10 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
-  <channel>
-    <title>Scoped Enums on Kushashwa Ravi Shrimali (Kush)</title>
-    <link>https://krshrimali.github.io/tags/scoped-enums/</link>
-    <description>Recent content in Scoped Enums on Kushashwa Ravi Shrimali (Kush)</description>
-    <generator>Hugo -- 0.147.6</generator>
-    <language>en</language>
-    <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Sat, 14 Aug 2021 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://krshrimali.github.io/tags/scoped-enums/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Prefer Scoped Enums over Unscoped Enums (Notes)</title>
-      <link>https://krshrimali.github.io/posts/2021/08/prefer-scoped-enums-over-unscoped-enums-notes/</link>
-      <pubDate>Sat, 14 Aug 2021 00:00:00 +0000</pubDate>
-      <guid>https://krshrimali.github.io/posts/2021/08/prefer-scoped-enums-over-unscoped-enums-notes/</guid>
-      <description>&lt;h2 id=&#34;scoped-vs-unscoped-enums&#34;&gt;Scoped vs Unscoped Enums&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;General rule:&lt;/strong&gt; declaring a name inside curly braces is limited to that scope.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Exception:&lt;/strong&gt; C++-98 style Enums&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://raw.githubusercontent.com/krshrimali/blog/main/assets/cover-images/Unscoped-Scoped-Enums.png&#34;&gt;&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;&lt;strong&gt;NOTE&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;My notes on Chapter 3, Item 10 of Effective Modern C++ written by Scott Meyers.&lt;/p&gt;
-&lt;p&gt;Some (or even all) of the text can be similar to what you see in the book, as these are notes: I&amp;rsquo;ve tried not to be unnecessarily creative with my words. :)&lt;/p&gt;</description>
-    </item>
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Scoped Enums on Kushashwa Ravi Shrimali (Kush)</title><link>https://krshrimali.github.io/tags/scoped-enums/</link><description>Recent content in Scoped Enums on Kushashwa Ravi Shrimali (Kush)</description><generator>Hugo -- 0.147.8</generator><language>en</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 14 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://krshrimali.github.io/tags/scoped-enums/index.xml" rel="self" type="application/rss+xml"/><item><title>Prefer Scoped Enums over Unscoped Enums (Notes)</title><link>https://krshrimali.github.io/posts/2021/08/prefer-scoped-enums-over-unscoped-enums-notes/</link><pubDate>Sat, 14 Aug 2021 00:00:00 +0000</pubDate><guid>https://krshrimali.github.io/posts/2021/08/prefer-scoped-enums-over-unscoped-enums-notes/</guid><description>&lt;h2 id="scoped-vs-unscoped-enums">Scoped vs Unscoped Enums&lt;/h2>
+&lt;ul>
+&lt;li>&lt;strong>General rule:&lt;/strong> declaring a name inside curly braces is limited to that scope.&lt;/li>
+&lt;li>&lt;strong>Exception:&lt;/strong> C++-98 style Enums&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img loading="lazy" src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/cover-images/Unscoped-Scoped-Enums.png">&lt;/p>
+&lt;hr>
+&lt;p>&lt;strong>NOTE&lt;/strong>&lt;/p>
+&lt;p>My notes on Chapter 3, Item 10 of Effective Modern C++ written by Scott Meyers.&lt;/p>
+&lt;p>Some (or even all) of the text can be similar to what you see in the book, as these are notes: I&amp;rsquo;ve tried not to be unnecessarily creative with my words. :)&lt;/p></description></item></channel></rss>

@@ -1,14 +1,5 @@
-<!DOCTYPE html>
-<html lang="en" dir="auto">
-
-<head><meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="index, follow">
-<title>Introduction to PyTorch C&#43;&#43; API: MNIST Digit Recognition using VGG-16 Network | Kushashwa Ravi Shrimali (Kush)</title>
-<meta name="keywords" content="development, coding, cpp, notes, pytorch-cpp, libtorch">
-<meta name="description" content="Environment Setup [Ubuntu 16.04, 18.04]
-Note: If you have already finished installing PyTorch C&#43;&#43; API, please skip this section.
+<!doctype html><html lang=en dir=auto><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>Introduction to PyTorch C++ API: MNIST Digit Recognition using VGG-16 Network | Kushashwa Ravi Shrimali (Kush)</title><meta name=keywords content="development,coding,cpp,notes,pytorch-cpp,libtorch"><meta name=description content="Environment Setup [Ubuntu 16.04, 18.04]
+Note: If you have already finished installing PyTorch C++ API, please skip this section.
 
 
 Download libtorch:
@@ -29,78 +20,13 @@ We&rsquo;ll use the absolute path of extracted directory (libtorch) later on.
 Implementation
 The VGG-16 Network is shown in the Figure below.
 
-We&rsquo;ll start of by first including libtorch header file.">
-<meta name="author" content="map[name:Kushashwa Ravi Shrimali]">
-<link rel="canonical" href="https://krshrimali.github.io/posts/2019/06/introduction-to-pytorch-c-api-mnist-digit-recognition-using-vgg-16-network/">
-<link crossorigin="anonymous" href="https://krshrimali.github.io/assets/css/stylesheet.8fe10233a706bc87f2e08b3cf97b8bd4c0a80f10675a143675d59212121037c0.css" integrity="sha256-j&#43;ECM6cGvIfy4Is8&#43;XuL1MCoDxBnWhQ2ddWSEhIQN8A=" rel="preload stylesheet" as="style">
-<link rel="icon" href="https://krshrimali.github.io/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="https://krshrimali.github.io/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://krshrimali.github.io/favicon-32x32.png">
-<link rel="apple-touch-icon" href="https://krshrimali.github.io/apple-touch-icon.png">
-<link rel="mask-icon" href="https://krshrimali.github.io/safari-pinned-tab.svg">
-<meta name="theme-color" content="#2e2e33">
-<meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="https://krshrimali.github.io/posts/2019/06/introduction-to-pytorch-c-api-mnist-digit-recognition-using-vgg-16-network/">
-<noscript>
-    <style>
-        #theme-toggle,
-        .top-link {
-            display: none;
-        }
-
-    </style>
-    <style>
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --theme: rgb(29, 30, 32);
-                --entry: rgb(46, 46, 51);
-                --primary: rgb(218, 218, 219);
-                --secondary: rgb(155, 156, 157);
-                --tertiary: rgb(65, 66, 68);
-                --content: rgb(196, 196, 197);
-                --code-block-bg: rgb(46, 46, 51);
-                --code-bg: rgb(55, 56, 62);
-                --border: rgb(51, 51, 51);
-            }
-
-            .list {
-                background: var(--theme);
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-track {
-                background: 0 0;
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-thumb {
-                border-color: var(--theme);
-            }
-        }
-
-    </style>
-</noscript><meta property="og:url" content="https://krshrimali.github.io/posts/2019/06/introduction-to-pytorch-c-api-mnist-digit-recognition-using-vgg-16-network/">
-  <meta property="og:site_name" content="Kushashwa Ravi Shrimali (Kush)">
-  <meta property="og:title" content="Introduction to PyTorch C&#43;&#43; API: MNIST Digit Recognition using VGG-16 Network">
-  <meta property="og:description" content="Environment Setup [Ubuntu 16.04, 18.04] Note: If you have already finished installing PyTorch C&#43;&#43; API, please skip this section.
+We&rsquo;ll start of by first including libtorch header file."><meta name=author content="map[name:Kushashwa Ravi Shrimali]"><link rel=canonical href=https://krshrimali.github.io/posts/2019/06/introduction-to-pytorch-c-api-mnist-digit-recognition-using-vgg-16-network/><link crossorigin=anonymous href=https://krshrimali.github.io/assets/css/stylesheet.8fe10233a706bc87f2e08b3cf97b8bd4c0a80f10675a143675d59212121037c0.css integrity="sha256-j+ECM6cGvIfy4Is8+XuL1MCoDxBnWhQ2ddWSEhIQN8A=" rel="preload stylesheet" as=style><link rel=icon href=https://krshrimali.github.io/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://krshrimali.github.io/favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://krshrimali.github.io/favicon-32x32.png><link rel=apple-touch-icon href=https://krshrimali.github.io/apple-touch-icon.png><link rel=mask-icon href=https://krshrimali.github.io/safari-pinned-tab.svg><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><link rel=alternate hreflang=en href=https://krshrimali.github.io/posts/2019/06/introduction-to-pytorch-c-api-mnist-digit-recognition-using-vgg-16-network/><noscript><style>#theme-toggle,.top-link{display:none}</style><style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--code-block-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51)}.list{background:var(--theme)}.list:not(.dark)::-webkit-scrollbar-track{background:0 0}.list:not(.dark)::-webkit-scrollbar-thumb{border-color:var(--theme)}}</style></noscript><meta property="og:url" content="https://krshrimali.github.io/posts/2019/06/introduction-to-pytorch-c-api-mnist-digit-recognition-using-vgg-16-network/"><meta property="og:site_name" content="Kushashwa Ravi Shrimali (Kush)"><meta property="og:title" content="Introduction to PyTorch C++ API: MNIST Digit Recognition using VGG-16 Network"><meta property="og:description" content="Environment Setup [Ubuntu 16.04, 18.04] Note: If you have already finished installing PyTorch C++ API, please skip this section.
 Download libtorch:
 CPU Version: wget https://download.pytorch.org/libtorch/cpu/libtorch-shared-with-deps-latest.zip -O libtorch.zip GPU Version (CUDA 9.0): wget https://download.pytorch.org/libtorch/cu90/libtorch-shared-with-deps-latest.zip -O libtorch.zip GPU Version (CUDA 10.0): wget https://download.pytorch.org/libtorch/cu100/libtorch-shared-with-deps-latest.zip Unzip libtorch.zip:
 unzip libtorch.zip We’ll use the absolute path of extracted directory (libtorch) later on.
 Implementation The VGG-16 Network is shown in the Figure below.
-We’ll start of by first including libtorch header file.">
-  <meta property="og:locale" content="en">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2019-06-07T00:00:00+00:00">
-    <meta property="article:modified_time" content="2019-06-07T00:00:00+00:00">
-    <meta property="article:tag" content="Development">
-    <meta property="article:tag" content="Coding">
-    <meta property="article:tag" content="Cpp">
-    <meta property="article:tag" content="Notes">
-    <meta property="article:tag" content="Pytorch-Cpp">
-    <meta property="article:tag" content="Libtorch">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Introduction to PyTorch C&#43;&#43; API: MNIST Digit Recognition using VGG-16 Network">
-<meta name="twitter:description" content="Environment Setup [Ubuntu 16.04, 18.04]
-Note: If you have already finished installing PyTorch C&#43;&#43; API, please skip this section.
+We’ll start of by first including libtorch header file."><meta property="og:locale" content="en"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2019-06-07T00:00:00+00:00"><meta property="article:modified_time" content="2019-06-07T00:00:00+00:00"><meta property="article:tag" content="Development"><meta property="article:tag" content="Coding"><meta property="article:tag" content="Cpp"><meta property="article:tag" content="Notes"><meta property="article:tag" content="Pytorch-Cpp"><meta property="article:tag" content="Libtorch"><meta name=twitter:card content="summary"><meta name=twitter:title content="Introduction to PyTorch C++ API: MNIST Digit Recognition using VGG-16 Network"><meta name=twitter:description content="Environment Setup [Ubuntu 16.04, 18.04]
+Note: If you have already finished installing PyTorch C++ API, please skip this section.
 
 
 Download libtorch:
@@ -121,516 +47,132 @@ We&rsquo;ll use the absolute path of extracted directory (libtorch) later on.
 Implementation
 The VGG-16 Network is shown in the Figure below.
 
-We&rsquo;ll start of by first including libtorch header file.">
-
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position":  1 ,
-      "name": "Posts",
-      "item": "https://krshrimali.github.io/posts/"
-    }, 
-    {
-      "@type": "ListItem",
-      "position":  2 ,
-      "name": "Introduction to PyTorch C++ API: MNIST Digit Recognition using VGG-16 Network",
-      "item": "https://krshrimali.github.io/posts/2019/06/introduction-to-pytorch-c-api-mnist-digit-recognition-using-vgg-16-network/"
-    }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "Introduction to PyTorch C++ API: MNIST Digit Recognition using VGG-16 Network",
-  "name": "Introduction to PyTorch C\u002b\u002b API: MNIST Digit Recognition using VGG-16 Network",
-  "description": "Environment Setup [Ubuntu 16.04, 18.04] Note: If you have already finished installing PyTorch C++ API, please skip this section.\nDownload libtorch:\nCPU Version: wget https://download.pytorch.org/libtorch/cpu/libtorch-shared-with-deps-latest.zip -O libtorch.zip GPU Version (CUDA 9.0): wget https://download.pytorch.org/libtorch/cu90/libtorch-shared-with-deps-latest.zip -O libtorch.zip GPU Version (CUDA 10.0): wget https://download.pytorch.org/libtorch/cu100/libtorch-shared-with-deps-latest.zip Unzip libtorch.zip:\nunzip libtorch.zip We\u0026rsquo;ll use the absolute path of extracted directory (libtorch) later on.\nImplementation The VGG-16 Network is shown in the Figure below.\nWe\u0026rsquo;ll start of by first including libtorch header file.\n",
-  "keywords": [
-    "development", "coding", "cpp", "notes", "pytorch-cpp", "libtorch"
-  ],
-  "articleBody": "Environment Setup [Ubuntu 16.04, 18.04] Note: If you have already finished installing PyTorch C++ API, please skip this section.\nDownload libtorch:\nCPU Version: wget https://download.pytorch.org/libtorch/cpu/libtorch-shared-with-deps-latest.zip -O libtorch.zip GPU Version (CUDA 9.0): wget https://download.pytorch.org/libtorch/cu90/libtorch-shared-with-deps-latest.zip -O libtorch.zip GPU Version (CUDA 10.0): wget https://download.pytorch.org/libtorch/cu100/libtorch-shared-with-deps-latest.zip Unzip libtorch.zip:\nunzip libtorch.zip We’ll use the absolute path of extracted directory (libtorch) later on.\nImplementation The VGG-16 Network is shown in the Figure below.\nWe’ll start of by first including libtorch header file.\n#include We’ll then go ahead and define the network. We’ll inherit layers from torch::nn::Module.\n/* Sample code for training a FCN on MNIST dataset using PyTorch C++ API */ /* This code uses VGG-16 Layer Network */ struct Net: torch::nn::Module { // VGG-16 Layer // conv1_1 - conv1_2 - pool 1 - conv2_1 - conv2_2 - pool 2 - conv3_1 - conv3_2 - conv3_3 - pool 3 - // conv4_1 - conv4_2 - conv4_3 - pool 4 - conv5_1 - conv5_2 - conv5_3 - pool 5 - fc6 - fc7 - fc8 // Note: pool 5 not implemented as no need for MNIST dataset Net() { // Initialize VGG-16 // On how to pass strides and padding: https://github.com/pytorch/pytorch/issues/12649#issuecomment-430156160 conv1_1 = register_module(\"conv1_1\", torch::nn::Conv2d(torch::nn::Conv2dOptions(1, 10, 3).padding(1))); conv1_2 = register_module(\"conv1_2\", torch::nn::Conv2d(torch::nn::Conv2dOptions(10, 20, 3).padding(1))); // Insert pool layer conv2_1 = register_module(\"conv2_1\", torch::nn::Conv2d(torch::nn::Conv2dOptions(20, 30, 3).padding(1))); conv2_2 = register_module(\"conv2_2\", torch::nn::Conv2d(torch::nn::Conv2dOptions(30, 40, 3).padding(1))); // Insert pool layer conv3_1 = register_module(\"conv3_1\", torch::nn::Conv2d(torch::nn::Conv2dOptions(40, 50, 3).padding(1))); conv3_2 = register_module(\"conv3_2\", torch::nn::Conv2d(torch::nn::Conv2dOptions(50, 60, 3).padding(1))); conv3_3 = register_module(\"conv3_3\", torch::nn::Conv2d(torch::nn::Conv2dOptions(60, 70, 3).padding(1))); // Insert pool layer conv4_1 = register_module(\"conv4_1\", torch::nn::Conv2d(torch::nn::Conv2dOptions(70, 80, 3).padding(1))); conv4_2 = register_module(\"conv4_2\", torch::nn::Conv2d(torch::nn::Conv2dOptions(80, 90, 3).padding(1))); conv4_3 = register_module(\"conv4_3\", torch::nn::Conv2d(torch::nn::Conv2dOptions(90, 100, 3).padding(1))); // Insert pool layer conv5_1 = register_module(\"conv5_1\", torch::nn::Conv2d(torch::nn::Conv2dOptions(100, 110, 3).padding(1))); conv5_2 = register_module(\"conv5_2\", torch::nn::Conv2d(torch::nn::Conv2dOptions(110, 120, 3).padding(1))); conv5_3 = register_module(\"conv5_3\", torch::nn::Conv2d(torch::nn::Conv2dOptions(120, 130, 3).padding(1))); // Insert pool layer fc1 = register_module(\"fc1\", torch::nn::Linear(130, 50)); fc2 = register_module(\"fc2\", torch::nn::Linear(50, 20)); fc3 = register_module(\"fc3\", torch::nn::Linear(20, 10)); } // Implement Algorithm torch::Tensor forward(torch::Tensor x) { x = torch::relu(conv1_1-\u003eforward(x)); x = torch::relu(conv1_2-\u003eforward(x)); x = torch::max_pool2d(x, 2); x = torch::relu(conv2_1-\u003eforward(x)); x = torch::relu(conv2_2-\u003eforward(x)); x = torch::max_pool2d(x, 2); x = torch::relu(conv3_1-\u003eforward(x)); x = torch::relu(conv3_2-\u003eforward(x)); x = torch::relu(conv3_3-\u003eforward(x)); x = torch::max_pool2d(x, 2); x = torch::relu(conv4_1-\u003eforward(x)); x = torch::relu(conv4_2-\u003eforward(x)); x = torch::relu(conv4_3-\u003eforward(x)); x = torch::max_pool2d(x, 2); x = torch::relu(conv5_1-\u003eforward(x)); x = torch::relu(conv5_2-\u003eforward(x)); x = torch::relu(conv5_3-\u003eforward(x)); x = x.view({-1, 130}); x = torch::relu(fc1-\u003eforward(x)); x = torch::relu(fc2-\u003eforward(x)); x = fc3-\u003eforward(x); return torch::log_softmax(x, 1); } // Declare layers torch::nn::Conv2d conv1_1{nullptr}; torch::nn::Conv2d conv1_2{nullptr}; torch::nn::Conv2d conv2_1{nullptr}; torch::nn::Conv2d conv2_2{nullptr}; torch::nn::Conv2d conv3_1{nullptr}; torch::nn::Conv2d conv3_2{nullptr}; torch::nn::Conv2d conv3_3{nullptr}; torch::nn::Conv2d conv4_1{nullptr}; torch::nn::Conv2d conv4_2{nullptr}; torch::nn::Conv2d conv4_3{nullptr}; torch::nn::Conv2d conv5_1{nullptr}; torch::nn::Conv2d conv5_2{nullptr}; torch::nn::Conv2d conv5_3{nullptr}; torch::nn::Linear fc1{nullptr}, fc2{nullptr}, fc3{nullptr}; }; Once done, we can go ahead and test the network on our sample dataset. Let’s go ahead and load data first. We’ll be using 10 epochs, learning rate (0.01), and nll_loss as loss functio.\nint main() { // Create multi-threaded data loader for MNIST data auto data_loader = torch::data::make_data_loader\u003ctorch::data::samplers::SequentialSampler\u003e( std::move(torch::data::datasets::MNIST(\"/absolute/path/to/data\").map(torch::data::transforms::Normalize\u003c\u003e(0.13707, 0.3081)).map( torch::data::transforms::Stack\u003c\u003e())), 64); // Build VGG-16 Network auto net = std::make_shared\u003cNet\u003e(); torch::optim::SGD optimizer(net-\u003eparameters(), 0.01); // Learning Rate 0.01 // net.train(); for(size_t epoch=1; epoch\u003c=10; ++epoch) { size_t batch_index = 0; // Iterate data loader to yield batches from the dataset for (auto\u0026 batch: *data_loader) { // Reset gradients optimizer.zero_grad(); // Execute the model torch::Tensor prediction = net-\u003eforward(batch.data); // Compute loss value torch::Tensor loss = torch::nll_loss(prediction, batch.target); // Compute gradients loss.backward(); // Update the parameters optimizer.step(); // Output the loss and checkpoint every 100 batches if (++batch_index % 2 == 0) { std::cout \u003c\u003c \"Epoch: \" \u003c\u003c epoch \u003c\u003c \" | Batch: \" \u003c\u003c batch_index \u003c\u003c \" | Loss: \" \u003c\u003c loss.item\u003cfloat\u003e() \u003c\u003c std::endl; torch::save(net, \"net.pt\"); } } } } For code, check out my repo here: https://github.com/krshrimali/Digit-Recognition-MNIST-SVHN-PyTorch-CPP\nIn the next blog, we will discuss about another network on MNIST and SVHN Dataset.\nReferences https://pytorch.org/cppdocs/ http://yann.lecun.com/exdb/mnist/ ",
-  "wordCount" : "615",
-  "inLanguage": "en",
-  "datePublished": "2019-06-07T00:00:00Z",
-  "dateModified": "2019-06-07T00:00:00Z",
-  "author":{
-    "@type": "Person",
-    "name": {"name":"Kushashwa Ravi Shrimali"}
-  },
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://krshrimali.github.io/posts/2019/06/introduction-to-pytorch-c-api-mnist-digit-recognition-using-vgg-16-network/"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "Kushashwa Ravi Shrimali (Kush)",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://krshrimali.github.io/favicon.ico"
-    }
-  }
-}
-</script>
-</head>
-
-<body class="" id="top">
-<script>
-    if (localStorage.getItem("pref-theme") === "dark") {
-        document.body.classList.add('dark');
-    } else if (localStorage.getItem("pref-theme") === "light") {
-        document.body.classList.remove('dark')
-    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        document.body.classList.add('dark');
-    }
-
-</script>
-
-<header class="header">
-    <nav class="nav">
-        <div class="logo">
-            <a href="https://krshrimali.github.io/" accesskey="h" title="Kushashwa Ravi Shrimali (Kush) (Alt + H)">Kushashwa Ravi Shrimali (Kush)</a>
-            <div class="logo-switches">
-                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
-                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                    </svg>
-                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="5"></circle>
-                        <line x1="12" y1="1" x2="12" y2="3"></line>
-                        <line x1="12" y1="21" x2="12" y2="23"></line>
-                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                        <line x1="1" y1="12" x2="3" y2="12"></line>
-                        <line x1="21" y1="12" x2="23" y2="12"></line>
-                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                    </svg>
-                </button>
-            </div>
-        </div>
-        <ul id="menu">
-            <li>
-                <a href="https://krshrimali.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
-                    <span>Search</span>
-                </a>
-            </li>
-            <li>
-                <a href="https://krshrimali.github.io/about" title="About">
-                    <span>About</span>
-                </a>
-            </li>
-            <li>
-                <a href="https://krshrimali.github.io/posts" title="Blog">
-                    <span>Blog</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
-</header>
-<main class="main">
-
-<article class="post-single">
-  <header class="post-header">
-    <div class="breadcrumbs"><a href="https://krshrimali.github.io/">Home</a>&nbsp;»&nbsp;<a href="https://krshrimali.github.io/posts/">Posts</a></div>
-    <h1 class="post-title entry-hint-parent">
-      Introduction to PyTorch C&#43;&#43; API: MNIST Digit Recognition using VGG-16 Network
-    </h1>
-    <div class="post-meta"><span title='2019-06-07 00:00:00 +0000 UTC'>June 7, 2019</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;map[name:Kushashwa Ravi Shrimali]
-
-</div>
-  </header> <div class="toc">
-    <details >
-        <summary accesskey="c" title="(Alt + C)">
-            <span class="details">Table of Contents</span>
-        </summary>
-
-        <div class="inner"><ul>
-                <li>
-                    <a href="#environment-setup-ubuntu-1604-1804" aria-label="Environment Setup [Ubuntu 16.04, 18.04]">Environment Setup [Ubuntu 16.04, 18.04]</a></li>
-                <li>
-                    <a href="#implementation" aria-label="Implementation">Implementation</a></li>
-                <li>
-                    <a href="#references" aria-label="References">References</a>
-                </li>
-            </ul>
-        </div>
-    </details>
-</div>
-
-  <div class="post-content"><h1 id="environment-setup-ubuntu-1604-1804">Environment Setup [Ubuntu 16.04, 18.04]<a hidden class="anchor" aria-hidden="true" href="#environment-setup-ubuntu-1604-1804">#</a></h1>
-<p><em>Note: If you have already finished installing PyTorch C++ API, please skip this section.</em></p>
-<ol>
-<li>
-<p>Download <code>libtorch</code>:</p>
-<ul>
-<li>CPU Version: <code>wget https://download.pytorch.org/libtorch/cpu/libtorch-shared-with-deps-latest.zip -O libtorch.zip</code></li>
-<li>GPU Version (CUDA 9.0): <code>wget https://download.pytorch.org/libtorch/cu90/libtorch-shared-with-deps-latest.zip -O libtorch.zip</code></li>
-<li>GPU Version (CUDA 10.0): <code>wget https://download.pytorch.org/libtorch/cu100/libtorch-shared-with-deps-latest.zip</code></li>
-</ul>
-</li>
-<li>
-<p>Unzip <code>libtorch.zip</code>:</p>
-<ul>
-<li><code>unzip libtorch.zip</code></li>
-</ul>
-</li>
-</ol>
-<p>We&rsquo;ll use the <code>absolute</code> path of extracted directory (<code>libtorch</code>) later on.</p>
-<h1 id="implementation">Implementation<a hidden class="anchor" aria-hidden="true" href="#implementation">#</a></h1>
-<p>The VGG-16 Network is shown in the Figure below.</p>
-<p><img loading="lazy" src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/blogs/VGG-16-Architecture-resized.png"></p>
-<p>We&rsquo;ll start of by first including <code>libtorch</code> header file.</p>
-<p><code>#include &lt;torch/torch.h&gt;</code></p>
-<p>We&rsquo;ll then go ahead and define the network. We&rsquo;ll inherit layers from <code>torch::nn::Module</code>.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">/* Sample code for training a FCN on MNIST dataset using PyTorch C++ API */</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">/* This code uses VGG-16 Layer Network */</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">Net</span><span style="color:#f92672">:</span> torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Module {
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// VGG-16 Layer
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// conv1_1 - conv1_2 - pool 1 - conv2_1 - conv2_2 - pool 2 - conv3_1 - conv3_2 - conv3_3 - pool 3 -
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// conv4_1 - conv4_2 - conv4_3 - pool 4 - conv5_1 - conv5_2 - conv5_3 - pool 5 - fc6 - fc7 - fc8
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Note: pool 5 not implemented as no need for MNIST dataset
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    Net() {
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Initialize VGG-16
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">// On how to pass strides and padding: https://github.com/pytorch/pytorch/issues/12649#issuecomment-430156160
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        conv1_1 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;conv1_1&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">3</span>).padding(<span style="color:#ae81ff">1</span>)));
-</span></span><span style="display:flex;"><span>        conv1_2 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;conv1_2&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">3</span>).padding(<span style="color:#ae81ff">1</span>)));
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Insert pool layer
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        conv2_1 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;conv2_1&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(<span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">30</span>, <span style="color:#ae81ff">3</span>).padding(<span style="color:#ae81ff">1</span>)));
-</span></span><span style="display:flex;"><span>        conv2_2 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;conv2_2&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(<span style="color:#ae81ff">30</span>, <span style="color:#ae81ff">40</span>, <span style="color:#ae81ff">3</span>).padding(<span style="color:#ae81ff">1</span>)));
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Insert pool layer
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        conv3_1 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;conv3_1&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(<span style="color:#ae81ff">40</span>, <span style="color:#ae81ff">50</span>, <span style="color:#ae81ff">3</span>).padding(<span style="color:#ae81ff">1</span>)));
-</span></span><span style="display:flex;"><span>        conv3_2 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;conv3_2&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(<span style="color:#ae81ff">50</span>, <span style="color:#ae81ff">60</span>, <span style="color:#ae81ff">3</span>).padding(<span style="color:#ae81ff">1</span>)));
-</span></span><span style="display:flex;"><span>        conv3_3 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;conv3_3&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(<span style="color:#ae81ff">60</span>, <span style="color:#ae81ff">70</span>, <span style="color:#ae81ff">3</span>).padding(<span style="color:#ae81ff">1</span>)));
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Insert pool layer
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        conv4_1 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;conv4_1&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(<span style="color:#ae81ff">70</span>, <span style="color:#ae81ff">80</span>, <span style="color:#ae81ff">3</span>).padding(<span style="color:#ae81ff">1</span>)));
-</span></span><span style="display:flex;"><span>        conv4_2 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;conv4_2&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(<span style="color:#ae81ff">80</span>, <span style="color:#ae81ff">90</span>, <span style="color:#ae81ff">3</span>).padding(<span style="color:#ae81ff">1</span>)));
-</span></span><span style="display:flex;"><span>        conv4_3 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;conv4_3&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(<span style="color:#ae81ff">90</span>, <span style="color:#ae81ff">100</span>, <span style="color:#ae81ff">3</span>).padding(<span style="color:#ae81ff">1</span>)));
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Insert pool layer
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        conv5_1 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;conv5_1&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(<span style="color:#ae81ff">100</span>, <span style="color:#ae81ff">110</span>, <span style="color:#ae81ff">3</span>).padding(<span style="color:#ae81ff">1</span>)));
-</span></span><span style="display:flex;"><span>        conv5_2 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;conv5_2&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(<span style="color:#ae81ff">110</span>, <span style="color:#ae81ff">120</span>, <span style="color:#ae81ff">3</span>).padding(<span style="color:#ae81ff">1</span>)));
-</span></span><span style="display:flex;"><span>        conv5_3 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;conv5_3&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d(torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2dOptions(<span style="color:#ae81ff">120</span>, <span style="color:#ae81ff">130</span>, <span style="color:#ae81ff">3</span>).padding(<span style="color:#ae81ff">1</span>)));
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Insert pool layer
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        fc1 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;fc1&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Linear(<span style="color:#ae81ff">130</span>, <span style="color:#ae81ff">50</span>));
-</span></span><span style="display:flex;"><span>        fc2 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;fc2&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Linear(<span style="color:#ae81ff">50</span>, <span style="color:#ae81ff">20</span>));
-</span></span><span style="display:flex;"><span>        fc3 <span style="color:#f92672">=</span> register_module(<span style="color:#e6db74">&#34;fc3&#34;</span>, torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Linear(<span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">10</span>));
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Implement Algorithm
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    torch<span style="color:#f92672">::</span>Tensor forward(torch<span style="color:#f92672">::</span>Tensor x) {
-</span></span><span style="display:flex;"><span>        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(conv1_1<span style="color:#f92672">-&gt;</span>forward(x));
-</span></span><span style="display:flex;"><span>        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(conv1_2<span style="color:#f92672">-&gt;</span>forward(x));
-</span></span><span style="display:flex;"><span>        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>max_pool2d(x, <span style="color:#ae81ff">2</span>);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(conv2_1<span style="color:#f92672">-&gt;</span>forward(x));
-</span></span><span style="display:flex;"><span>        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(conv2_2<span style="color:#f92672">-&gt;</span>forward(x));
-</span></span><span style="display:flex;"><span>        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>max_pool2d(x, <span style="color:#ae81ff">2</span>);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(conv3_1<span style="color:#f92672">-&gt;</span>forward(x));
-</span></span><span style="display:flex;"><span>        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(conv3_2<span style="color:#f92672">-&gt;</span>forward(x));
-</span></span><span style="display:flex;"><span>        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(conv3_3<span style="color:#f92672">-&gt;</span>forward(x));
-</span></span><span style="display:flex;"><span>        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>max_pool2d(x, <span style="color:#ae81ff">2</span>);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(conv4_1<span style="color:#f92672">-&gt;</span>forward(x));
-</span></span><span style="display:flex;"><span>        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(conv4_2<span style="color:#f92672">-&gt;</span>forward(x));
-</span></span><span style="display:flex;"><span>        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(conv4_3<span style="color:#f92672">-&gt;</span>forward(x));
-</span></span><span style="display:flex;"><span>        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>max_pool2d(x, <span style="color:#ae81ff">2</span>);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(conv5_1<span style="color:#f92672">-&gt;</span>forward(x));
-</span></span><span style="display:flex;"><span>        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(conv5_2<span style="color:#f92672">-&gt;</span>forward(x));
-</span></span><span style="display:flex;"><span>        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(conv5_3<span style="color:#f92672">-&gt;</span>forward(x));
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        x <span style="color:#f92672">=</span> x.view({<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">130</span>});
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(fc1<span style="color:#f92672">-&gt;</span>forward(x));
-</span></span><span style="display:flex;"><span>        x <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>relu(fc2<span style="color:#f92672">-&gt;</span>forward(x));
-</span></span><span style="display:flex;"><span>        x <span style="color:#f92672">=</span> fc3<span style="color:#f92672">-&gt;</span>forward(x);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> torch<span style="color:#f92672">::</span>log_softmax(x, <span style="color:#ae81ff">1</span>);
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Declare layers
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d conv1_1{<span style="color:#66d9ef">nullptr</span>};
-</span></span><span style="display:flex;"><span>    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d conv1_2{<span style="color:#66d9ef">nullptr</span>};
-</span></span><span style="display:flex;"><span>    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d conv2_1{<span style="color:#66d9ef">nullptr</span>};
-</span></span><span style="display:flex;"><span>    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d conv2_2{<span style="color:#66d9ef">nullptr</span>};
-</span></span><span style="display:flex;"><span>    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d conv3_1{<span style="color:#66d9ef">nullptr</span>};
-</span></span><span style="display:flex;"><span>    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d conv3_2{<span style="color:#66d9ef">nullptr</span>};
-</span></span><span style="display:flex;"><span>    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d conv3_3{<span style="color:#66d9ef">nullptr</span>};
-</span></span><span style="display:flex;"><span>    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d conv4_1{<span style="color:#66d9ef">nullptr</span>};
-</span></span><span style="display:flex;"><span>    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d conv4_2{<span style="color:#66d9ef">nullptr</span>};
-</span></span><span style="display:flex;"><span>    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d conv4_3{<span style="color:#66d9ef">nullptr</span>};
-</span></span><span style="display:flex;"><span>    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d conv5_1{<span style="color:#66d9ef">nullptr</span>};
-</span></span><span style="display:flex;"><span>    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d conv5_2{<span style="color:#66d9ef">nullptr</span>};
-</span></span><span style="display:flex;"><span>    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Conv2d conv5_3{<span style="color:#66d9ef">nullptr</span>};
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    torch<span style="color:#f92672">::</span>nn<span style="color:#f92672">::</span>Linear fc1{<span style="color:#66d9ef">nullptr</span>}, fc2{<span style="color:#66d9ef">nullptr</span>}, fc3{<span style="color:#66d9ef">nullptr</span>};
-</span></span><span style="display:flex;"><span>};
-</span></span></code></pre></div><p>Once done, we can go ahead and test the network on our sample dataset. Let&rsquo;s go ahead and load data first. We&rsquo;ll be using 10 epochs, learning rate (0.01), and <code>nll_loss</code> as loss functio.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
-</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// Create multi-threaded data loader for MNIST data
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">auto</span> data_loader <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>data<span style="color:#f92672">::</span>make_data_loader<span style="color:#f92672">&lt;</span>torch<span style="color:#f92672">::</span>data<span style="color:#f92672">::</span>samplers<span style="color:#f92672">::</span>SequentialSampler<span style="color:#f92672">&gt;</span>(
-</span></span><span style="display:flex;"><span>			std<span style="color:#f92672">::</span>move(torch<span style="color:#f92672">::</span>data<span style="color:#f92672">::</span>datasets<span style="color:#f92672">::</span>MNIST(<span style="color:#e6db74">&#34;/absolute/path/to/data&#34;</span>).map(torch<span style="color:#f92672">::</span>data<span style="color:#f92672">::</span>transforms<span style="color:#f92672">::</span>Normalize<span style="color:#f92672">&lt;&gt;</span>(<span style="color:#ae81ff">0.13707</span>, <span style="color:#ae81ff">0.3081</span>)).map(
-</span></span><span style="display:flex;"><span>				torch<span style="color:#f92672">::</span>data<span style="color:#f92672">::</span>transforms<span style="color:#f92672">::</span>Stack<span style="color:#f92672">&lt;&gt;</span>())), <span style="color:#ae81ff">64</span>);
-</span></span><span style="display:flex;"><span>	
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Build VGG-16 Network
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">auto</span> net <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>make_shared<span style="color:#f92672">&lt;</span>Net<span style="color:#f92672">&gt;</span>();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    torch<span style="color:#f92672">::</span>optim<span style="color:#f92672">::</span>SGD optimizer(net<span style="color:#f92672">-&gt;</span>parameters(), <span style="color:#ae81ff">0.01</span>); <span style="color:#75715e">// Learning Rate 0.01
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// net.train();
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span>(size_t epoch<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>; epoch<span style="color:#f92672">&lt;=</span><span style="color:#ae81ff">10</span>; <span style="color:#f92672">++</span>epoch) {
-</span></span><span style="display:flex;"><span>		size_t batch_index <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>		<span style="color:#75715e">// Iterate data loader to yield batches from the dataset
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>		<span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span><span style="color:#f92672">&amp;</span> batch: <span style="color:#f92672">*</span>data_loader) {
-</span></span><span style="display:flex;"><span>			<span style="color:#75715e">// Reset gradients
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>			optimizer.zero_grad();
-</span></span><span style="display:flex;"><span>			<span style="color:#75715e">// Execute the model
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>			torch<span style="color:#f92672">::</span>Tensor prediction <span style="color:#f92672">=</span> net<span style="color:#f92672">-&gt;</span>forward(batch.data);
-</span></span><span style="display:flex;"><span>			<span style="color:#75715e">// Compute loss value
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>			torch<span style="color:#f92672">::</span>Tensor loss <span style="color:#f92672">=</span> torch<span style="color:#f92672">::</span>nll_loss(prediction, batch.target);
-</span></span><span style="display:flex;"><span>			<span style="color:#75715e">// Compute gradients
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>			loss.backward();
-</span></span><span style="display:flex;"><span>			<span style="color:#75715e">// Update the parameters
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>			optimizer.step();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>			<span style="color:#75715e">// Output the loss and checkpoint every 100 batches
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>			<span style="color:#66d9ef">if</span> (<span style="color:#f92672">++</span>batch_index <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
-</span></span><span style="display:flex;"><span>				std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Epoch: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> epoch <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34; | Batch: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> batch_index 
-</span></span><span style="display:flex;"><span>					<span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34; | Loss: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> loss.item<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">float</span><span style="color:#f92672">&gt;</span>() <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
-</span></span><span style="display:flex;"><span>				torch<span style="color:#f92672">::</span>save(net, <span style="color:#e6db74">&#34;net.pt&#34;</span>);
-</span></span><span style="display:flex;"><span>			}
-</span></span><span style="display:flex;"><span>		}
-</span></span><span style="display:flex;"><span>	}
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>For code, check out my repo here: <a href="https://github.com/krshrimali/Digit-Recognition-MNIST-SVHN-PyTorch-CPP">https://github.com/krshrimali/Digit-Recognition-MNIST-SVHN-PyTorch-CPP</a></p>
-<p>In the next blog, we will discuss about another network on MNIST and SVHN Dataset.</p>
-<h1 id="references">References<a hidden class="anchor" aria-hidden="true" href="#references">#</a></h1>
-<ol>
-<li><a href="https://pytorch.org/cppdocs/">https://pytorch.org/cppdocs/</a></li>
-<li><a href="http://yann.lecun.com/exdb/mnist/">http://yann.lecun.com/exdb/mnist/</a></li>
-</ol>
-
-
-  </div>
-
-  <footer class="post-footer">
-    <ul class="post-tags">
-      <li><a href="https://krshrimali.github.io/tags/development/">Development</a></li>
-      <li><a href="https://krshrimali.github.io/tags/coding/">Coding</a></li>
-      <li><a href="https://krshrimali.github.io/tags/cpp/">Cpp</a></li>
-      <li><a href="https://krshrimali.github.io/tags/notes/">Notes</a></li>
-      <li><a href="https://krshrimali.github.io/tags/pytorch-cpp/">Pytorch-Cpp</a></li>
-      <li><a href="https://krshrimali.github.io/tags/libtorch/">Libtorch</a></li>
-    </ul>
-<nav class="paginav">
-  <a class="prev" href="https://krshrimali.github.io/posts/2019/07/custom-data-loading-using-pytorch-c-api/">
-    <span class="title">« Prev</span>
-    <br>
-    <span>Custom Data Loading using PyTorch C&#43;&#43; API</span>
-  </a>
-</nav>
-
-
-<ul class="share-buttons">
-    <li>
-        <a target="_blank" rel="noopener noreferrer" aria-label="share Introduction to PyTorch C&#43;&#43; API: MNIST Digit Recognition using VGG-16 Network on x"
-            href="https://x.com/intent/tweet/?text=Introduction%20to%20PyTorch%20C%2b%2b%20API%3a%20MNIST%20Digit%20Recognition%20using%20VGG-16%20Network&amp;url=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2019%2f06%2fintroduction-to-pytorch-c-api-mnist-digit-recognition-using-vgg-16-network%2f&amp;hashtags=development%2ccoding%2ccpp%2cnotes%2cpytorch-cpp%2clibtorch">
-            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
-                <path
-                    d="M512 62.554 L 512 449.446 C 512 483.97 483.97 512 449.446 512 L 62.554 512 C 28.03 512 0 483.97 0 449.446 L 0 62.554 C 0 28.03 28.029 0 62.554 0 L 449.446 0 C 483.971 0 512 28.03 512 62.554 Z M 269.951 190.75 L 182.567 75.216 L 56 75.216 L 207.216 272.95 L 63.9 436.783 L 125.266 436.783 L 235.9 310.383 L 332.567 436.783 L 456 436.783 L 298.367 228.367 L 432.367 75.216 L 371.033 75.216 Z M 127.633 110 L 164.101 110 L 383.481 400.065 L 349.5 400.065 Z" />
-            </svg>
-        </a>
-    </li>
-    <li>
-        <a target="_blank" rel="noopener noreferrer" aria-label="share Introduction to PyTorch C&#43;&#43; API: MNIST Digit Recognition using VGG-16 Network on linkedin"
-            href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2019%2f06%2fintroduction-to-pytorch-c-api-mnist-digit-recognition-using-vgg-16-network%2f&amp;title=Introduction%20to%20PyTorch%20C%2b%2b%20API%3a%20MNIST%20Digit%20Recognition%20using%20VGG-16%20Network&amp;summary=Introduction%20to%20PyTorch%20C%2b%2b%20API%3a%20MNIST%20Digit%20Recognition%20using%20VGG-16%20Network&amp;source=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2019%2f06%2fintroduction-to-pytorch-c-api-mnist-digit-recognition-using-vgg-16-network%2f">
-            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
-                <path
-                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-288.985,423.278l0,-225.717l-75.04,0l0,225.717l75.04,0Zm270.539,0l0,-129.439c0,-69.333 -37.018,-101.586 -86.381,-101.586c-39.804,0 -57.634,21.891 -67.617,37.266l0,-31.958l-75.021,0c0.995,21.181 0,225.717 0,225.717l75.02,0l0,-126.056c0,-6.748 0.486,-13.492 2.474,-18.315c5.414,-13.475 17.767,-27.434 38.494,-27.434c27.135,0 38.007,20.707 38.007,51.037l0,120.768l75.024,0Zm-307.552,-334.556c-25.674,0 -42.448,16.879 -42.448,39.002c0,21.658 16.264,39.002 41.455,39.002l0.484,0c26.165,0 42.452,-17.344 42.452,-39.002c-0.485,-22.092 -16.241,-38.954 -41.943,-39.002Z" />
-            </svg>
-        </a>
-    </li>
-    <li>
-        <a target="_blank" rel="noopener noreferrer" aria-label="share Introduction to PyTorch C&#43;&#43; API: MNIST Digit Recognition using VGG-16 Network on reddit"
-            href="https://reddit.com/submit?url=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2019%2f06%2fintroduction-to-pytorch-c-api-mnist-digit-recognition-using-vgg-16-network%2f&title=Introduction%20to%20PyTorch%20C%2b%2b%20API%3a%20MNIST%20Digit%20Recognition%20using%20VGG-16%20Network">
-            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
-                <path
-                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-3.446,265.638c0,-22.964 -18.616,-41.58 -41.58,-41.58c-11.211,0 -21.361,4.457 -28.841,11.666c-28.424,-20.508 -67.586,-33.757 -111.204,-35.278l18.941,-89.121l61.884,13.157c0.756,15.734 13.642,28.29 29.56,28.29c16.407,0 29.706,-13.299 29.706,-29.701c0,-16.403 -13.299,-29.702 -29.706,-29.702c-11.666,0 -21.657,6.792 -26.515,16.578l-69.105,-14.69c-1.922,-0.418 -3.939,-0.042 -5.585,1.036c-1.658,1.073 -2.811,2.761 -3.224,4.686l-21.152,99.438c-44.258,1.228 -84.046,14.494 -112.837,35.232c-7.468,-7.164 -17.589,-11.591 -28.757,-11.591c-22.965,0 -41.585,18.616 -41.585,41.58c0,16.896 10.095,31.41 24.568,37.918c-0.639,4.135 -0.99,8.328 -0.99,12.576c0,63.977 74.469,115.836 166.33,115.836c91.861,0 166.334,-51.859 166.334,-115.836c0,-4.218 -0.347,-8.387 -0.977,-12.493c14.564,-6.47 24.735,-21.034 24.735,-38.001Zm-119.474,108.193c-20.27,20.241 -59.115,21.816 -70.534,21.816c-11.428,0 -50.277,-1.575 -70.522,-21.82c-3.007,-3.008 -3.007,-7.882 0,-10.889c3.003,-2.999 7.882,-3.003 10.885,0c12.777,12.781 40.11,17.317 59.637,17.317c19.522,0 46.86,-4.536 59.657,-17.321c3.016,-2.999 7.886,-2.995 10.885,0.008c3.008,3.011 3.003,7.882 -0.008,10.889Zm-5.23,-48.781c-16.373,0 -29.701,-13.324 -29.701,-29.698c0,-16.381 13.328,-29.714 29.701,-29.714c16.378,0 29.706,13.333 29.706,29.714c0,16.374 -13.328,29.698 -29.706,29.698Zm-160.386,-29.702c0,-16.381 13.328,-29.71 29.714,-29.71c16.369,0 29.689,13.329 29.689,29.71c0,16.373 -13.32,29.693 -29.689,29.693c-16.386,0 -29.714,-13.32 -29.714,-29.693Z" />
-            </svg>
-        </a>
-    </li>
-    <li>
-        <a target="_blank" rel="noopener noreferrer" aria-label="share Introduction to PyTorch C&#43;&#43; API: MNIST Digit Recognition using VGG-16 Network on facebook"
-            href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2019%2f06%2fintroduction-to-pytorch-c-api-mnist-digit-recognition-using-vgg-16-network%2f">
-            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
-                <path
-                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-106.468,0l0,-192.915l66.6,0l12.672,-82.621l-79.272,0l0,-53.617c0,-22.603 11.073,-44.636 46.58,-44.636l36.042,0l0,-70.34c0,0 -32.71,-5.582 -63.982,-5.582c-65.288,0 -107.96,39.569 -107.96,111.204l0,62.971l-72.573,0l0,82.621l72.573,0l0,192.915l-191.104,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Z" />
-            </svg>
-        </a>
-    </li>
-    <li>
-        <a target="_blank" rel="noopener noreferrer" aria-label="share Introduction to PyTorch C&#43;&#43; API: MNIST Digit Recognition using VGG-16 Network on whatsapp"
-            href="https://api.whatsapp.com/send?text=Introduction%20to%20PyTorch%20C%2b%2b%20API%3a%20MNIST%20Digit%20Recognition%20using%20VGG-16%20Network%20-%20https%3a%2f%2fkrshrimali.github.io%2fposts%2f2019%2f06%2fintroduction-to-pytorch-c-api-mnist-digit-recognition-using-vgg-16-network%2f">
-            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
-                <path
-                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-58.673,127.703c-33.842,-33.881 -78.847,-52.548 -126.798,-52.568c-98.799,0 -179.21,80.405 -179.249,179.234c-0.013,31.593 8.241,62.428 23.927,89.612l-25.429,92.884l95.021,-24.925c26.181,14.28 55.659,21.807 85.658,21.816l0.074,0c98.789,0 179.206,-80.413 179.247,-179.243c0.018,-47.895 -18.61,-92.93 -52.451,-126.81Zm-126.797,275.782l-0.06,0c-26.734,-0.01 -52.954,-7.193 -75.828,-20.767l-5.441,-3.229l-56.386,14.792l15.05,-54.977l-3.542,-5.637c-14.913,-23.72 -22.791,-51.136 -22.779,-79.287c0.033,-82.142 66.867,-148.971 149.046,-148.971c39.793,0.014 77.199,15.531 105.329,43.692c28.128,28.16 43.609,65.592 43.594,105.4c-0.034,82.149 -66.866,148.983 -148.983,148.984Zm81.721,-111.581c-4.479,-2.242 -26.499,-13.075 -30.604,-14.571c-4.105,-1.495 -7.091,-2.241 -10.077,2.241c-2.986,4.483 -11.569,14.572 -14.182,17.562c-2.612,2.988 -5.225,3.364 -9.703,1.12c-4.479,-2.241 -18.91,-6.97 -36.017,-22.23c-13.314,-11.876 -22.304,-26.542 -24.916,-31.026c-2.612,-4.484 -0.279,-6.908 1.963,-9.14c2.016,-2.007 4.48,-5.232 6.719,-7.847c2.24,-2.615 2.986,-4.484 4.479,-7.472c1.493,-2.99 0.747,-5.604 -0.374,-7.846c-1.119,-2.241 -10.077,-24.288 -13.809,-33.256c-3.635,-8.733 -7.327,-7.55 -10.077,-7.688c-2.609,-0.13 -5.598,-0.158 -8.583,-0.158c-2.986,0 -7.839,1.121 -11.944,5.604c-4.105,4.484 -15.675,15.32 -15.675,37.364c0,22.046 16.048,43.342 18.287,46.332c2.24,2.99 31.582,48.227 76.511,67.627c10.685,4.615 19.028,7.371 25.533,9.434c10.728,3.41 20.492,2.929 28.209,1.775c8.605,-1.285 26.499,-10.833 30.231,-21.295c3.732,-10.464 3.732,-19.431 2.612,-21.298c-1.119,-1.869 -4.105,-2.99 -8.583,-5.232Z" />
-            </svg>
-        </a>
-    </li>
-    <li>
-        <a target="_blank" rel="noopener noreferrer" aria-label="share Introduction to PyTorch C&#43;&#43; API: MNIST Digit Recognition using VGG-16 Network on telegram"
-            href="https://telegram.me/share/url?text=Introduction%20to%20PyTorch%20C%2b%2b%20API%3a%20MNIST%20Digit%20Recognition%20using%20VGG-16%20Network&amp;url=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2019%2f06%2fintroduction-to-pytorch-c-api-mnist-digit-recognition-using-vgg-16-network%2f">
-            <svg version="1.1" xml:space="preserve" viewBox="2 2 28 28" height="30px" width="30px" fill="currentColor">
-                <path
-                    d="M26.49,29.86H5.5a3.37,3.37,0,0,1-2.47-1,3.35,3.35,0,0,1-1-2.47V5.48A3.36,3.36,0,0,1,3,3,3.37,3.37,0,0,1,5.5,2h21A3.38,3.38,0,0,1,29,3a3.36,3.36,0,0,1,1,2.46V26.37a3.35,3.35,0,0,1-1,2.47A3.38,3.38,0,0,1,26.49,29.86Zm-5.38-6.71a.79.79,0,0,0,.85-.66L24.73,9.24a.55.55,0,0,0-.18-.46.62.62,0,0,0-.41-.17q-.08,0-16.53,6.11a.59.59,0,0,0-.41.59.57.57,0,0,0,.43.52l4,1.24,1.61,4.83a.62.62,0,0,0,.63.43.56.56,0,0,0,.4-.17L16.54,20l4.09,3A.9.9,0,0,0,21.11,23.15ZM13.8,20.71l-1.21-4q8.72-5.55,8.78-5.55c.15,0,.23,0,.23.16a.18.18,0,0,1,0,.06s-2.51,2.3-7.52,6.8Z" />
-            </svg>
-        </a>
-    </li>
-    <li>
-        <a target="_blank" rel="noopener noreferrer" aria-label="share Introduction to PyTorch C&#43;&#43; API: MNIST Digit Recognition using VGG-16 Network on ycombinator"
-            href="https://news.ycombinator.com/submitlink?t=Introduction%20to%20PyTorch%20C%2b%2b%20API%3a%20MNIST%20Digit%20Recognition%20using%20VGG-16%20Network&u=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2019%2f06%2fintroduction-to-pytorch-c-api-mnist-digit-recognition-using-vgg-16-network%2f">
-            <svg version="1.1" xml:space="preserve" width="30px" height="30px" viewBox="0 0 512 512" fill="currentColor"
-                xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape">
-                <path
-                    d="M449.446 0C483.971 0 512 28.03 512 62.554L512 449.446C512 483.97 483.97 512 449.446 512L62.554 512C28.03 512 0 483.97 0 449.446L0 62.554C0 28.03 28.029 0 62.554 0L449.446 0ZM183.8767 87.9921H121.8427L230.6673 292.4508V424.0079H281.3328V292.4508L390.1575 87.9921H328.1233L256 238.2489z" />
-            </svg>
-        </a>
-    </li>
-</ul>
-
-  </footer>
-</article>
-    </main>
-    
-<footer class="footer">
-        <span>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</span> · 
-
-    <span>
-        Powered by
-        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
-        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
-    </span>
-</footer>
-<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
-        <path d="M12 6H0l6-6z" />
-    </svg>
-</a>
-
-<script>
-    let menu = document.getElementById('menu')
-    if (menu) {
-        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
-        menu.onscroll = function () {
-            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
-        }
-    }
-
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener("click", function (e) {
-            e.preventDefault();
-            var id = this.getAttribute("href").substr(1);
-            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
-                    behavior: "smooth"
-                });
-            } else {
-                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
-            }
-            if (id === "top") {
-                history.replaceState(null, null, " ");
-            } else {
-                history.pushState(null, null, `#${id}`);
-            }
-        });
-    });
-
-</script>
-<script>
-    var mybutton = document.getElementById("top-link");
-    window.onscroll = function () {
-        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
-            mybutton.style.visibility = "visible";
-            mybutton.style.opacity = "1";
-        } else {
-            mybutton.style.visibility = "hidden";
-            mybutton.style.opacity = "0";
-        }
-    };
-
-</script>
-<script>
-    document.getElementById("theme-toggle").addEventListener("click", () => {
-        if (document.body.className.includes("dark")) {
-            document.body.classList.remove('dark');
-            localStorage.setItem("pref-theme", 'light');
-        } else {
-            document.body.classList.add('dark');
-            localStorage.setItem("pref-theme", 'dark');
-        }
-    })
-
-</script>
-<script>
-    document.querySelectorAll('pre > code').forEach((codeblock) => {
-        const container = codeblock.parentNode.parentNode;
-
-        const copybutton = document.createElement('button');
-        copybutton.classList.add('copy-code');
-        copybutton.innerHTML = 'copy';
-
-        function copyingDone() {
-            copybutton.innerHTML = 'copied!';
-            setTimeout(() => {
-                copybutton.innerHTML = 'copy';
-            }, 2000);
-        }
-
-        copybutton.addEventListener('click', (cb) => {
-            if ('clipboard' in navigator) {
-                navigator.clipboard.writeText(codeblock.textContent);
-                copyingDone();
-                return;
-            }
-
-            const range = document.createRange();
-            range.selectNodeContents(codeblock);
-            const selection = window.getSelection();
-            selection.removeAllRanges();
-            selection.addRange(range);
-            try {
-                document.execCommand('copy');
-                copyingDone();
-            } catch (e) { };
-            selection.removeRange(range);
-        });
-
-        if (container.classList.contains("highlight")) {
-            container.appendChild(copybutton);
-        } else if (container.parentNode.firstChild == container) {
-            
-        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
-            
-            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
-        } else {
-            
-            codeblock.parentNode.appendChild(copybutton);
-        }
-    });
-</script>
-</body>
-
-</html>
+We&rsquo;ll start of by first including libtorch header file."><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Posts","item":"https://krshrimali.github.io/posts/"},{"@type":"ListItem","position":2,"name":"Introduction to PyTorch C++ API: MNIST Digit Recognition using VGG-16 Network","item":"https://krshrimali.github.io/posts/2019/06/introduction-to-pytorch-c-api-mnist-digit-recognition-using-vgg-16-network/"}]}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Introduction to PyTorch C++ API: MNIST Digit Recognition using VGG-16 Network","name":"Introduction to PyTorch C\u002b\u002b API: MNIST Digit Recognition using VGG-16 Network","description":"Environment Setup [Ubuntu 16.04, 18.04] Note: If you have already finished installing PyTorch C++ API, please skip this section.\nDownload libtorch:\nCPU Version: wget https://download.pytorch.org/libtorch/cpu/libtorch-shared-with-deps-latest.zip -O libtorch.zip GPU Version (CUDA 9.0): wget https://download.pytorch.org/libtorch/cu90/libtorch-shared-with-deps-latest.zip -O libtorch.zip GPU Version (CUDA 10.0): wget https://download.pytorch.org/libtorch/cu100/libtorch-shared-with-deps-latest.zip Unzip libtorch.zip:\nunzip libtorch.zip We\u0026rsquo;ll use the absolute path of extracted directory (libtorch) later on.\nImplementation The VGG-16 Network is shown in the Figure below.\nWe\u0026rsquo;ll start of by first including libtorch header file.\n","keywords":["development","coding","cpp","notes","pytorch-cpp","libtorch"],"articleBody":"Environment Setup [Ubuntu 16.04, 18.04] Note: If you have already finished installing PyTorch C++ API, please skip this section.\nDownload libtorch:\nCPU Version: wget https://download.pytorch.org/libtorch/cpu/libtorch-shared-with-deps-latest.zip -O libtorch.zip GPU Version (CUDA 9.0): wget https://download.pytorch.org/libtorch/cu90/libtorch-shared-with-deps-latest.zip -O libtorch.zip GPU Version (CUDA 10.0): wget https://download.pytorch.org/libtorch/cu100/libtorch-shared-with-deps-latest.zip Unzip libtorch.zip:\nunzip libtorch.zip We’ll use the absolute path of extracted directory (libtorch) later on.\nImplementation The VGG-16 Network is shown in the Figure below.\nWe’ll start of by first including libtorch header file.\n#include We’ll then go ahead and define the network. We’ll inherit layers from torch::nn::Module.\n/* Sample code for training a FCN on MNIST dataset using PyTorch C++ API */ /* This code uses VGG-16 Layer Network */ struct Net: torch::nn::Module { // VGG-16 Layer // conv1_1 - conv1_2 - pool 1 - conv2_1 - conv2_2 - pool 2 - conv3_1 - conv3_2 - conv3_3 - pool 3 - // conv4_1 - conv4_2 - conv4_3 - pool 4 - conv5_1 - conv5_2 - conv5_3 - pool 5 - fc6 - fc7 - fc8 // Note: pool 5 not implemented as no need for MNIST dataset Net() { // Initialize VGG-16 // On how to pass strides and padding: https://github.com/pytorch/pytorch/issues/12649#issuecomment-430156160 conv1_1 = register_module(\"conv1_1\", torch::nn::Conv2d(torch::nn::Conv2dOptions(1, 10, 3).padding(1))); conv1_2 = register_module(\"conv1_2\", torch::nn::Conv2d(torch::nn::Conv2dOptions(10, 20, 3).padding(1))); // Insert pool layer conv2_1 = register_module(\"conv2_1\", torch::nn::Conv2d(torch::nn::Conv2dOptions(20, 30, 3).padding(1))); conv2_2 = register_module(\"conv2_2\", torch::nn::Conv2d(torch::nn::Conv2dOptions(30, 40, 3).padding(1))); // Insert pool layer conv3_1 = register_module(\"conv3_1\", torch::nn::Conv2d(torch::nn::Conv2dOptions(40, 50, 3).padding(1))); conv3_2 = register_module(\"conv3_2\", torch::nn::Conv2d(torch::nn::Conv2dOptions(50, 60, 3).padding(1))); conv3_3 = register_module(\"conv3_3\", torch::nn::Conv2d(torch::nn::Conv2dOptions(60, 70, 3).padding(1))); // Insert pool layer conv4_1 = register_module(\"conv4_1\", torch::nn::Conv2d(torch::nn::Conv2dOptions(70, 80, 3).padding(1))); conv4_2 = register_module(\"conv4_2\", torch::nn::Conv2d(torch::nn::Conv2dOptions(80, 90, 3).padding(1))); conv4_3 = register_module(\"conv4_3\", torch::nn::Conv2d(torch::nn::Conv2dOptions(90, 100, 3).padding(1))); // Insert pool layer conv5_1 = register_module(\"conv5_1\", torch::nn::Conv2d(torch::nn::Conv2dOptions(100, 110, 3).padding(1))); conv5_2 = register_module(\"conv5_2\", torch::nn::Conv2d(torch::nn::Conv2dOptions(110, 120, 3).padding(1))); conv5_3 = register_module(\"conv5_3\", torch::nn::Conv2d(torch::nn::Conv2dOptions(120, 130, 3).padding(1))); // Insert pool layer fc1 = register_module(\"fc1\", torch::nn::Linear(130, 50)); fc2 = register_module(\"fc2\", torch::nn::Linear(50, 20)); fc3 = register_module(\"fc3\", torch::nn::Linear(20, 10)); } // Implement Algorithm torch::Tensor forward(torch::Tensor x) { x = torch::relu(conv1_1-\u003eforward(x)); x = torch::relu(conv1_2-\u003eforward(x)); x = torch::max_pool2d(x, 2); x = torch::relu(conv2_1-\u003eforward(x)); x = torch::relu(conv2_2-\u003eforward(x)); x = torch::max_pool2d(x, 2); x = torch::relu(conv3_1-\u003eforward(x)); x = torch::relu(conv3_2-\u003eforward(x)); x = torch::relu(conv3_3-\u003eforward(x)); x = torch::max_pool2d(x, 2); x = torch::relu(conv4_1-\u003eforward(x)); x = torch::relu(conv4_2-\u003eforward(x)); x = torch::relu(conv4_3-\u003eforward(x)); x = torch::max_pool2d(x, 2); x = torch::relu(conv5_1-\u003eforward(x)); x = torch::relu(conv5_2-\u003eforward(x)); x = torch::relu(conv5_3-\u003eforward(x)); x = x.view({-1, 130}); x = torch::relu(fc1-\u003eforward(x)); x = torch::relu(fc2-\u003eforward(x)); x = fc3-\u003eforward(x); return torch::log_softmax(x, 1); } // Declare layers torch::nn::Conv2d conv1_1{nullptr}; torch::nn::Conv2d conv1_2{nullptr}; torch::nn::Conv2d conv2_1{nullptr}; torch::nn::Conv2d conv2_2{nullptr}; torch::nn::Conv2d conv3_1{nullptr}; torch::nn::Conv2d conv3_2{nullptr}; torch::nn::Conv2d conv3_3{nullptr}; torch::nn::Conv2d conv4_1{nullptr}; torch::nn::Conv2d conv4_2{nullptr}; torch::nn::Conv2d conv4_3{nullptr}; torch::nn::Conv2d conv5_1{nullptr}; torch::nn::Conv2d conv5_2{nullptr}; torch::nn::Conv2d conv5_3{nullptr}; torch::nn::Linear fc1{nullptr}, fc2{nullptr}, fc3{nullptr}; }; Once done, we can go ahead and test the network on our sample dataset. Let’s go ahead and load data first. We’ll be using 10 epochs, learning rate (0.01), and nll_loss as loss functio.\nint main() { // Create multi-threaded data loader for MNIST data auto data_loader = torch::data::make_data_loader\u003ctorch::data::samplers::SequentialSampler\u003e( std::move(torch::data::datasets::MNIST(\"/absolute/path/to/data\").map(torch::data::transforms::Normalize\u003c\u003e(0.13707, 0.3081)).map( torch::data::transforms::Stack\u003c\u003e())), 64); // Build VGG-16 Network auto net = std::make_shared\u003cNet\u003e(); torch::optim::SGD optimizer(net-\u003eparameters(), 0.01); // Learning Rate 0.01 // net.train(); for(size_t epoch=1; epoch\u003c=10; ++epoch) { size_t batch_index = 0; // Iterate data loader to yield batches from the dataset for (auto\u0026 batch: *data_loader) { // Reset gradients optimizer.zero_grad(); // Execute the model torch::Tensor prediction = net-\u003eforward(batch.data); // Compute loss value torch::Tensor loss = torch::nll_loss(prediction, batch.target); // Compute gradients loss.backward(); // Update the parameters optimizer.step(); // Output the loss and checkpoint every 100 batches if (++batch_index % 2 == 0) { std::cout \u003c\u003c \"Epoch: \" \u003c\u003c epoch \u003c\u003c \" | Batch: \" \u003c\u003c batch_index \u003c\u003c \" | Loss: \" \u003c\u003c loss.item\u003cfloat\u003e() \u003c\u003c std::endl; torch::save(net, \"net.pt\"); } } } } For code, check out my repo here: https://github.com/krshrimali/Digit-Recognition-MNIST-SVHN-PyTorch-CPP\nIn the next blog, we will discuss about another network on MNIST and SVHN Dataset.\nReferences https://pytorch.org/cppdocs/ http://yann.lecun.com/exdb/mnist/ ","wordCount":"615","inLanguage":"en","datePublished":"2019-06-07T00:00:00Z","dateModified":"2019-06-07T00:00:00Z","author":{"@type":"Person","name":{"name":"Kushashwa Ravi Shrimali"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://krshrimali.github.io/posts/2019/06/introduction-to-pytorch-c-api-mnist-digit-recognition-using-vgg-16-network/"},"publisher":{"@type":"Organization","name":"Kushashwa Ravi Shrimali (Kush)","logo":{"@type":"ImageObject","url":"https://krshrimali.github.io/favicon.ico"}}}</script></head><body id=top><script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add("dark"):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove("dark"):window.matchMedia("(prefers-color-scheme: dark)").matches&&document.body.classList.add("dark")</script><header class=header><nav class=nav><div class=logo><a href=https://krshrimali.github.io/ accesskey=h title="Kushashwa Ravi Shrimali (Kush) (Alt + H)">Kushashwa Ravi Shrimali (Kush)</a><div class=logo-switches><button id=theme-toggle accesskey=t title="(Alt + T)" aria-label="Toggle theme">
+<svg id="moon" width="24" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+<svg id="sun" width="24" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></div></div><ul id=menu><li><a href=https://krshrimali.github.io/search/ title="Search (Alt + /)" accesskey=/><span>Search</span></a></li><li><a href=https://krshrimali.github.io/about title=About><span>About</span></a></li><li><a href=https://krshrimali.github.io/posts title=Blog><span>Blog</span></a></li></ul></nav></header><main class=main><article class=post-single><header class=post-header><div class=breadcrumbs><a href=https://krshrimali.github.io/>Home</a>&nbsp;»&nbsp;<a href=https://krshrimali.github.io/posts/>Posts</a></div><h1 class="post-title entry-hint-parent">Introduction to PyTorch C++ API: MNIST Digit Recognition using VGG-16 Network</h1><div class=post-meta><span title='2019-06-07 00:00:00 +0000 UTC'>June 7, 2019</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;map[name:Kushashwa Ravi Shrimali]</div></header><div class=toc><details><summary accesskey=c title="(Alt + C)"><span class=details>Table of Contents</span></summary><div class=inner><ul><li><a href=#environment-setup-ubuntu-1604-1804 aria-label="Environment Setup [Ubuntu 16.04, 18.04]">Environment Setup [Ubuntu 16.04, 18.04]</a></li><li><a href=#implementation aria-label=Implementation>Implementation</a></li><li><a href=#references aria-label=References>References</a></li></ul></div></details></div><div class=post-content><h1 id=environment-setup-ubuntu-1604-1804>Environment Setup [Ubuntu 16.04, 18.04]<a hidden class=anchor aria-hidden=true href=#environment-setup-ubuntu-1604-1804>#</a></h1><p><em>Note: If you have already finished installing PyTorch C++ API, please skip this section.</em></p><ol><li><p>Download <code>libtorch</code>:</p><ul><li>CPU Version: <code>wget https://download.pytorch.org/libtorch/cpu/libtorch-shared-with-deps-latest.zip -O libtorch.zip</code></li><li>GPU Version (CUDA 9.0): <code>wget https://download.pytorch.org/libtorch/cu90/libtorch-shared-with-deps-latest.zip -O libtorch.zip</code></li><li>GPU Version (CUDA 10.0): <code>wget https://download.pytorch.org/libtorch/cu100/libtorch-shared-with-deps-latest.zip</code></li></ul></li><li><p>Unzip <code>libtorch.zip</code>:</p><ul><li><code>unzip libtorch.zip</code></li></ul></li></ol><p>We&rsquo;ll use the <code>absolute</code> path of extracted directory (<code>libtorch</code>) later on.</p><h1 id=implementation>Implementation<a hidden class=anchor aria-hidden=true href=#implementation>#</a></h1><p>The VGG-16 Network is shown in the Figure below.</p><p><img loading=lazy src=https://raw.githubusercontent.com/krshrimali/blog/main/assets/blogs/VGG-16-Architecture-resized.png></p><p>We&rsquo;ll start of by first including <code>libtorch</code> header file.</p><p><code>#include &lt;torch/torch.h></code></p><p>We&rsquo;ll then go ahead and define the network. We&rsquo;ll inherit layers from <code>torch::nn::Module</code>.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cpp data-lang=cpp><span style=display:flex><span><span style=color:#75715e>/* Sample code for training a FCN on MNIST dataset using PyTorch C++ API */</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>/* This code uses VGG-16 Layer Network */</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>struct</span> <span style=color:#a6e22e>Net</span><span style=color:#f92672>:</span> torch<span style=color:#f92672>::</span>nn<span style=color:#f92672>::</span>Module {
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// VGG-16 Layer
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>// conv1_1 - conv1_2 - pool 1 - conv2_1 - conv2_2 - pool 2 - conv3_1 - conv3_2 - conv3_3 - pool 3 -
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>// conv4_1 - conv4_2 - conv4_3 - pool 4 - conv5_1 - conv5_2 - conv5_3 - pool 5 - fc6 - fc7 - fc8
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// Note: pool 5 not implemented as no need for MNIST dataset
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    Net() {
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// Initialize VGG-16
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// On how to pass strides and padding: https://github.com/pytorch/pytorch/issues/12649#issuecomment-430156160
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        conv1_1 <span style=color:#f92672>=</span> register_module(<span style=color:#e6db74>&#34;conv1_1&#34;</span>, torch<span style=color:#f92672>::</span>nn<span style=color:#f92672>::</span>Conv2d(torch<span style=color:#f92672>::</span>nn<span style=color:#f92672>::</span>Conv2dOptions(<span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>10</span>, <span style=color:#ae81ff>3</span>).padding(<span style=color:#ae81ff>1</span>)));
+</span></span><span style=display:flex><span>        conv1_2 <span style=color:#f92672>=</span> register_module(<span style=color:#e6db74>&#34;conv1_2&#34;</span>, torch<span style=color:#f92672>::</span>nn<span style=color:#f92672>::</span>Conv2d(torch<span style=color:#f92672>::</span>nn<span style=color:#f92672>::</span>Conv2dOptions(<span style=color:#ae81ff>10</span>, <span style=color:#ae81ff>20</span>, <span style=color:#ae81ff>3</span>).padding(<span style=color:#ae81ff>1</span>)));
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// Insert pool layer
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        conv2_1 <span style=color:#f92672>=</span> register_module(<span style=color:#e6db74>&#34;conv2_1&#34;</span>, torch<span style=color:#f92672>::</span>nn<span style=color:#f92672>::</span>Conv2d(torch<span style=color:#f92672>::</span>nn<span style=color:#f92672>::</span>Conv2dOptions(<span style=color:#ae81ff>20</span>, <span style=color:#ae81ff>30</span>, <span style=color:#ae81ff>3</span>).padding(<span style=color:#ae81ff>1</span>)));
+</span></span><span style=display:flex><span>        conv2_2 <span style=color:#f92672>=</span> register_module(<span style=color:#e6db74>&#34;conv2_2&#34;</span>, torch<span style=color:#f92672>::</span>nn<span style=color:#f92672>::</span>Conv2d(torch<span style=color:#f92672>::</span>nn<span style=color:#f92672>::</span>Conv2dOptions(<span style=color:#ae81ff>30</span>, <span style=color:#ae81ff>40</span>, <span style=color:#ae81ff>3</span>).padding(<span style=color:#ae81ff>1</span>)));
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// Insert pool layer
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        conv3_1 <span style=color:#f92672>=</span> register_module(<span style=color:#e6db74>&#34;conv3_1&#34;</span>, torch<span style=color:#f92672>::</span>nn<span style=color:#f92672>::</span>Conv2d(torch<span style=color:#f92672>::</span>nn<span style=color:#f92672>::</span>Conv2dOptions(<span style=color:#ae81ff>40</span>, <span style=color:#ae81ff>50</span>, <span style=color:#ae81ff>3</span>).padding(<span style=color:#ae81ff>1</span>)));
+</span></span><span style=display:flex><span>        conv3_2 <span style=color:#f92672>=</span> register_module(<span style=color:#e6db74>&#34;conv3_2&#34;</span>, torch<span style=color:#f92672>::</span>nn<span style=color:#f92672>::</span>Conv2d(torch<span style=color:#f92672>::</span>nn<span style=color:#f92672>::</span>Conv2dOptions(<span style=color:#ae81ff>50</span>, <span style=color:#ae81ff>60</span>, <span style=color:#ae81ff>3</span>).padding(<span style=color:#ae81ff>1</span>)));
+</span></span><span style=display:flex><span>        conv3_3 <span style=color:#f92672>=</span> register_module(<span style=color:#e6db74>&#34;conv3_3&#34;</span>, torch<span style=color:#f92672>::</span>nn<span style=color:#f92672>::</span>Conv2d(torch<span style=color:#f92672>::</span>nn<span style=color:#f92672>::</span>Conv2dOptions(<span style=color:#ae81ff>60</span>, <span style=color:#ae81ff>70</span>, <span style=color:#ae81ff>3</span>).padding(<span style=color:#ae81ff>1</span>)));
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// Insert pool layer
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        conv4_1 <span style=color:#f92672>=</span> register_module(<span style=color:#e6db74>&#34;conv4_1&#34;</span>, torch<span style=color:#f92672>::</span>nn<span style=color:#f92672>::</span>Conv2d(torch<span style=color:#f92672>::</span>nn<span style=color:#f92672>::</span>Conv2dOptions(<span style=color:#ae81ff>70</span>, <span style=color:#ae81ff>80</span>, <span style=color:#ae81ff>3</span>).padding(<span style=color:#ae81ff>1</span>)));
+</span></span><span style=display:flex><span>        conv4_2 <span style=color:#f92672>=</span> register_module(<span style=color:#e6db74>&#34;conv4_2&#34;</span>, torch<span style=color:#f92672>::</span>nn<span style=color:#f92672>::</span>Conv2d(torch<span style=color:#f92672>::</span>nn<span style=color:#f92672>::</span>Conv2dOptions(<span style=color:#ae81ff>80</span>, <span style=color:#ae81ff>90</span>, <span style=color:#ae81ff>3</span>).padding(<span style=color:#ae81ff>1</span>)));
+</span></span><span style=display:flex><span>        conv4_3 <span style=color:#f92672>=</span> register_module(<span style=color:#e6db74>&#34;conv4_3&#34;</span>, torch<span style=color:#f92672>::</span>nn<span style=color:#f92672>::</span>Conv2d(torch<span style=color:#f92672>::</span>nn<span style=color:#f92672>::</span>Conv2dOptions(<span style=color:#ae81ff>90</span>, <span style=color:#ae81ff>100</span>, <span style=color:#ae81ff>3</span>).padding(<span style=color:#ae81ff>1</span>)));
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// Insert pool layer
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        conv5_1 <span style=color:#f92672>=</span> register_module(<span style=color:#e6db74>&#34;conv5_1&#34;</span>, torch<span style=color:#f92672>::</span>nn<span style=color:#f92672>::</span>Conv2d(torch<span style=color:#f92672>::</span>nn<span style=color:#f92672>::</span>Conv2dOptions(<span style=color:#ae81ff>100</span>, <span style=color:#ae81ff>110</span>, <span style=color:#ae81ff>3</span>).padding(<span style=color:#ae81ff>1</span>)));
+</span></span><span style=display:flex><span>        conv5_2 <span style=color:#f92672>=</span> register_module(<span style=color:#e6db74>&#34;conv5_2&#34;</span>, torch<span style=color:#f92672>::</span>nn<span style=color:#f92672>::</span>Conv2d(torch<span style=color:#f92672>::</span>nn<span style=color:#f92672>::</span>Conv2dOptions(<span style=color:#ae81ff>110</span>, <span style=color:#ae81ff>120</span>, <span style=color:#ae81ff>3</span>).padding(<span style=color:#ae81ff>1</span>)));
+</span></span><span style=display:flex><span>        conv5_3 <span style=color:#f92672>=</span> register_module(<span style=color:#e6db74>&#34;conv5_3&#34;</span>, torch<span style=color:#f92672>::</span>nn<span style=color:#f92672>::</span>Conv2d(torch<span style=color:#f92672>::</span>nn<span style=color:#f92672>::</span>Conv2dOptions(<span style=color:#ae81ff>120</span>, <span style=color:#ae81ff>130</span>, <span style=color:#ae81ff>3</span>).padding(<span style=color:#ae81ff>1</span>)));
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// Insert pool layer
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        fc1 <span style=color:#f92672>=</span> register_module(<span style=color:#e6db74>&#34;fc1&#34;</span>, torch<span style=color:#f92672>::</span>nn<span style=color:#f92672>::</span>Linear(<span style=color:#ae81ff>130</span>, <span style=color:#ae81ff>50</span>));
+</span></span><span style=display:flex><span>        fc2 <span style=color:#f92672>=</span> register_module(<span style=color:#e6db74>&#34;fc2&#34;</span>, torch<span style=color:#f92672>::</span>nn<span style=color:#f92672>::</span>Linear(<span style=color:#ae81ff>50</span>, <span style=color:#ae81ff>20</span>));
+</span></span><span style=display:flex><span>        fc3 <span style=color:#f92672>=</span> register_module(<span style=color:#e6db74>&#34;fc3&#34;</span>, torch<span style=color:#f92672>::</span>nn<span style=color:#f92672>::</span>Linear(<span style=color:#ae81ff>20</span>, <span style=color:#ae81ff>10</span>));
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// Implement Algorithm
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    torch<span style=color:#f92672>::</span>Tensor forward(torch<span style=color:#f92672>::</span>Tensor x) {
+</span></span><span style=display:flex><span>        x <span style=color:#f92672>=</span> torch<span style=color:#f92672>::</span>relu(conv1_1<span style=color:#f92672>-&gt;</span>forward(x));
+</span></span><span style=display:flex><span>        x <span style=color:#f92672>=</span> torch<span style=color:#f92672>::</span>relu(conv1_2<span style=color:#f92672>-&gt;</span>forward(x));
+</span></span><span style=display:flex><span>        x <span style=color:#f92672>=</span> torch<span style=color:#f92672>::</span>max_pool2d(x, <span style=color:#ae81ff>2</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        x <span style=color:#f92672>=</span> torch<span style=color:#f92672>::</span>relu(conv2_1<span style=color:#f92672>-&gt;</span>forward(x));
+</span></span><span style=display:flex><span>        x <span style=color:#f92672>=</span> torch<span style=color:#f92672>::</span>relu(conv2_2<span style=color:#f92672>-&gt;</span>forward(x));
+</span></span><span style=display:flex><span>        x <span style=color:#f92672>=</span> torch<span style=color:#f92672>::</span>max_pool2d(x, <span style=color:#ae81ff>2</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        x <span style=color:#f92672>=</span> torch<span style=color:#f92672>::</span>relu(conv3_1<span style=color:#f92672>-&gt;</span>forward(x));
+</span></span><span style=display:flex><span>        x <span style=color:#f92672>=</span> torch<span style=color:#f92672>::</span>relu(conv3_2<span style=color:#f92672>-&gt;</span>forward(x));
+</span></span><span style=display:flex><span>        x <span style=color:#f92672>=</span> torch<span style=color:#f92672>::</span>relu(conv3_3<span style=color:#f92672>-&gt;</span>forward(x));
+</span></span><span style=display:flex><span>        x <span style=color:#f92672>=</span> torch<span style=color:#f92672>::</span>max_pool2d(x, <span style=color:#ae81ff>2</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        x <span style=color:#f92672>=</span> torch<span style=color:#f92672>::</span>relu(conv4_1<span style=color:#f92672>-&gt;</span>forward(x));
+</span></span><span style=display:flex><span>        x <span style=color:#f92672>=</span> torch<span style=color:#f92672>::</span>relu(conv4_2<span style=color:#f92672>-&gt;</span>forward(x));
+</span></span><span style=display:flex><span>        x <span style=color:#f92672>=</span> torch<span style=color:#f92672>::</span>relu(conv4_3<span style=color:#f92672>-&gt;</span>forward(x));
+</span></span><span style=display:flex><span>        x <span style=color:#f92672>=</span> torch<span style=color:#f92672>::</span>max_pool2d(x, <span style=color:#ae81ff>2</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        x <span style=color:#f92672>=</span> torch<span style=color:#f92672>::</span>relu(conv5_1<span style=color:#f92672>-&gt;</span>forward(x));
+</span></span><span style=display:flex><span>        x <span style=color:#f92672>=</span> torch<span style=color:#f92672>::</span>relu(conv5_2<span style=color:#f92672>-&gt;</span>forward(x));
+</span></span><span style=display:flex><span>        x <span style=color:#f92672>=</span> torch<span style=color:#f92672>::</span>relu(conv5_3<span style=color:#f92672>-&gt;</span>forward(x));
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        x <span style=color:#f92672>=</span> x.view({<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>130</span>});
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        x <span style=color:#f92672>=</span> torch<span style=color:#f92672>::</span>relu(fc1<span style=color:#f92672>-&gt;</span>forward(x));
+</span></span><span style=display:flex><span>        x <span style=color:#f92672>=</span> torch<span style=color:#f92672>::</span>relu(fc2<span style=color:#f92672>-&gt;</span>forward(x));
+</span></span><span style=display:flex><span>        x <span style=color:#f92672>=</span> fc3<span style=color:#f92672>-&gt;</span>forward(x);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> torch<span style=color:#f92672>::</span>log_softmax(x, <span style=color:#ae81ff>1</span>);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// Declare layers
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    torch<span style=color:#f92672>::</span>nn<span style=color:#f92672>::</span>Conv2d conv1_1{<span style=color:#66d9ef>nullptr</span>};
+</span></span><span style=display:flex><span>    torch<span style=color:#f92672>::</span>nn<span style=color:#f92672>::</span>Conv2d conv1_2{<span style=color:#66d9ef>nullptr</span>};
+</span></span><span style=display:flex><span>    torch<span style=color:#f92672>::</span>nn<span style=color:#f92672>::</span>Conv2d conv2_1{<span style=color:#66d9ef>nullptr</span>};
+</span></span><span style=display:flex><span>    torch<span style=color:#f92672>::</span>nn<span style=color:#f92672>::</span>Conv2d conv2_2{<span style=color:#66d9ef>nullptr</span>};
+</span></span><span style=display:flex><span>    torch<span style=color:#f92672>::</span>nn<span style=color:#f92672>::</span>Conv2d conv3_1{<span style=color:#66d9ef>nullptr</span>};
+</span></span><span style=display:flex><span>    torch<span style=color:#f92672>::</span>nn<span style=color:#f92672>::</span>Conv2d conv3_2{<span style=color:#66d9ef>nullptr</span>};
+</span></span><span style=display:flex><span>    torch<span style=color:#f92672>::</span>nn<span style=color:#f92672>::</span>Conv2d conv3_3{<span style=color:#66d9ef>nullptr</span>};
+</span></span><span style=display:flex><span>    torch<span style=color:#f92672>::</span>nn<span style=color:#f92672>::</span>Conv2d conv4_1{<span style=color:#66d9ef>nullptr</span>};
+</span></span><span style=display:flex><span>    torch<span style=color:#f92672>::</span>nn<span style=color:#f92672>::</span>Conv2d conv4_2{<span style=color:#66d9ef>nullptr</span>};
+</span></span><span style=display:flex><span>    torch<span style=color:#f92672>::</span>nn<span style=color:#f92672>::</span>Conv2d conv4_3{<span style=color:#66d9ef>nullptr</span>};
+</span></span><span style=display:flex><span>    torch<span style=color:#f92672>::</span>nn<span style=color:#f92672>::</span>Conv2d conv5_1{<span style=color:#66d9ef>nullptr</span>};
+</span></span><span style=display:flex><span>    torch<span style=color:#f92672>::</span>nn<span style=color:#f92672>::</span>Conv2d conv5_2{<span style=color:#66d9ef>nullptr</span>};
+</span></span><span style=display:flex><span>    torch<span style=color:#f92672>::</span>nn<span style=color:#f92672>::</span>Conv2d conv5_3{<span style=color:#66d9ef>nullptr</span>};
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    torch<span style=color:#f92672>::</span>nn<span style=color:#f92672>::</span>Linear fc1{<span style=color:#66d9ef>nullptr</span>}, fc2{<span style=color:#66d9ef>nullptr</span>}, fc3{<span style=color:#66d9ef>nullptr</span>};
+</span></span><span style=display:flex><span>};
+</span></span></code></pre></div><p>Once done, we can go ahead and test the network on our sample dataset. Let&rsquo;s go ahead and load data first. We&rsquo;ll be using 10 epochs, learning rate (0.01), and <code>nll_loss</code> as loss functio.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cpp data-lang=cpp><span style=display:flex><span><span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>() {
+</span></span><span style=display:flex><span>	<span style=color:#75715e>// Create multi-threaded data loader for MNIST data
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>	<span style=color:#66d9ef>auto</span> data_loader <span style=color:#f92672>=</span> torch<span style=color:#f92672>::</span>data<span style=color:#f92672>::</span>make_data_loader<span style=color:#f92672>&lt;</span>torch<span style=color:#f92672>::</span>data<span style=color:#f92672>::</span>samplers<span style=color:#f92672>::</span>SequentialSampler<span style=color:#f92672>&gt;</span>(
+</span></span><span style=display:flex><span>			std<span style=color:#f92672>::</span>move(torch<span style=color:#f92672>::</span>data<span style=color:#f92672>::</span>datasets<span style=color:#f92672>::</span>MNIST(<span style=color:#e6db74>&#34;/absolute/path/to/data&#34;</span>).map(torch<span style=color:#f92672>::</span>data<span style=color:#f92672>::</span>transforms<span style=color:#f92672>::</span>Normalize<span style=color:#f92672>&lt;&gt;</span>(<span style=color:#ae81ff>0.13707</span>, <span style=color:#ae81ff>0.3081</span>)).map(
+</span></span><span style=display:flex><span>				torch<span style=color:#f92672>::</span>data<span style=color:#f92672>::</span>transforms<span style=color:#f92672>::</span>Stack<span style=color:#f92672>&lt;&gt;</span>())), <span style=color:#ae81ff>64</span>);
+</span></span><span style=display:flex><span>	
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// Build VGG-16 Network
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>auto</span> net <span style=color:#f92672>=</span> std<span style=color:#f92672>::</span>make_shared<span style=color:#f92672>&lt;</span>Net<span style=color:#f92672>&gt;</span>();
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    torch<span style=color:#f92672>::</span>optim<span style=color:#f92672>::</span>SGD optimizer(net<span style=color:#f92672>-&gt;</span>parameters(), <span style=color:#ae81ff>0.01</span>); <span style=color:#75715e>// Learning Rate 0.01
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>	<span style=color:#75715e>// net.train();
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>for</span>(size_t epoch<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>; epoch<span style=color:#f92672>&lt;=</span><span style=color:#ae81ff>10</span>; <span style=color:#f92672>++</span>epoch) {
+</span></span><span style=display:flex><span>		size_t batch_index <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>;
+</span></span><span style=display:flex><span>		<span style=color:#75715e>// Iterate data loader to yield batches from the dataset
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>		<span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>auto</span><span style=color:#f92672>&amp;</span> batch: <span style=color:#f92672>*</span>data_loader) {
+</span></span><span style=display:flex><span>			<span style=color:#75715e>// Reset gradients
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>			optimizer.zero_grad();
+</span></span><span style=display:flex><span>			<span style=color:#75715e>// Execute the model
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>			torch<span style=color:#f92672>::</span>Tensor prediction <span style=color:#f92672>=</span> net<span style=color:#f92672>-&gt;</span>forward(batch.data);
+</span></span><span style=display:flex><span>			<span style=color:#75715e>// Compute loss value
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>			torch<span style=color:#f92672>::</span>Tensor loss <span style=color:#f92672>=</span> torch<span style=color:#f92672>::</span>nll_loss(prediction, batch.target);
+</span></span><span style=display:flex><span>			<span style=color:#75715e>// Compute gradients
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>			loss.backward();
+</span></span><span style=display:flex><span>			<span style=color:#75715e>// Update the parameters
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>			optimizer.step();
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>			<span style=color:#75715e>// Output the loss and checkpoint every 100 batches
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>			<span style=color:#66d9ef>if</span> (<span style=color:#f92672>++</span>batch_index <span style=color:#f92672>%</span> <span style=color:#ae81ff>2</span> <span style=color:#f92672>==</span> <span style=color:#ae81ff>0</span>) {
+</span></span><span style=display:flex><span>				std<span style=color:#f92672>::</span>cout <span style=color:#f92672>&lt;&lt;</span> <span style=color:#e6db74>&#34;Epoch: &#34;</span> <span style=color:#f92672>&lt;&lt;</span> epoch <span style=color:#f92672>&lt;&lt;</span> <span style=color:#e6db74>&#34; | Batch: &#34;</span> <span style=color:#f92672>&lt;&lt;</span> batch_index 
+</span></span><span style=display:flex><span>					<span style=color:#f92672>&lt;&lt;</span> <span style=color:#e6db74>&#34; | Loss: &#34;</span> <span style=color:#f92672>&lt;&lt;</span> loss.item<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>float</span><span style=color:#f92672>&gt;</span>() <span style=color:#f92672>&lt;&lt;</span> std<span style=color:#f92672>::</span>endl;
+</span></span><span style=display:flex><span>				torch<span style=color:#f92672>::</span>save(net, <span style=color:#e6db74>&#34;net.pt&#34;</span>);
+</span></span><span style=display:flex><span>			}
+</span></span><span style=display:flex><span>		}
+</span></span><span style=display:flex><span>	}
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>For code, check out my repo here: <a href=https://github.com/krshrimali/Digit-Recognition-MNIST-SVHN-PyTorch-CPP>https://github.com/krshrimali/Digit-Recognition-MNIST-SVHN-PyTorch-CPP</a></p><p>In the next blog, we will discuss about another network on MNIST and SVHN Dataset.</p><h1 id=references>References<a hidden class=anchor aria-hidden=true href=#references>#</a></h1><ol><li><a href=https://pytorch.org/cppdocs/>https://pytorch.org/cppdocs/</a></li><li><a href=http://yann.lecun.com/exdb/mnist/>http://yann.lecun.com/exdb/mnist/</a></li></ol></div><footer class=post-footer><ul class=post-tags><li><a href=https://krshrimali.github.io/tags/development/>Development</a></li><li><a href=https://krshrimali.github.io/tags/coding/>Coding</a></li><li><a href=https://krshrimali.github.io/tags/cpp/>Cpp</a></li><li><a href=https://krshrimali.github.io/tags/notes/>Notes</a></li><li><a href=https://krshrimali.github.io/tags/pytorch-cpp/>Pytorch-Cpp</a></li><li><a href=https://krshrimali.github.io/tags/libtorch/>Libtorch</a></li></ul><nav class=paginav><a class=prev href=https://krshrimali.github.io/posts/2019/07/custom-data-loading-using-pytorch-c-api/><span class=title>« Prev</span><br><span>Custom Data Loading using PyTorch C++ API</span></a></nav><ul class=share-buttons><li><a target=_blank rel="noopener noreferrer" aria-label="share Introduction to PyTorch C++ API: MNIST Digit Recognition using VGG-16 Network on x" href="https://x.com/intent/tweet/?text=Introduction%20to%20PyTorch%20C%2b%2b%20API%3a%20MNIST%20Digit%20Recognition%20using%20VGG-16%20Network&amp;url=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2019%2f06%2fintroduction-to-pytorch-c-api-mnist-digit-recognition-using-vgg-16-network%2f&amp;hashtags=development%2ccoding%2ccpp%2cnotes%2cpytorch-cpp%2clibtorch"><svg viewBox="0 0 512 512" height="30" width="30" fill="currentColor"><path d="M512 62.554V449.446C512 483.97 483.97 512 449.446 512H62.554C28.03 512 0 483.97.0 449.446V62.554C0 28.03 28.029.0 62.554.0H449.446C483.971.0 512 28.03 512 62.554zM269.951 190.75 182.567 75.216H56L207.216 272.95 63.9 436.783h61.366L235.9 310.383l96.667 126.4H456L298.367 228.367l134-153.151H371.033zM127.633 110h36.468l219.38 290.065H349.5z"/></svg></a></li><li><a target=_blank rel="noopener noreferrer" aria-label="share Introduction to PyTorch C++ API: MNIST Digit Recognition using VGG-16 Network on linkedin" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2019%2f06%2fintroduction-to-pytorch-c-api-mnist-digit-recognition-using-vgg-16-network%2f&amp;title=Introduction%20to%20PyTorch%20C%2b%2b%20API%3a%20MNIST%20Digit%20Recognition%20using%20VGG-16%20Network&amp;summary=Introduction%20to%20PyTorch%20C%2b%2b%20API%3a%20MNIST%20Digit%20Recognition%20using%20VGG-16%20Network&amp;source=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2019%2f06%2fintroduction-to-pytorch-c-api-mnist-digit-recognition-using-vgg-16-network%2f"><svg viewBox="0 0 512 512" height="30" width="30" fill="currentColor"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zM160.461 423.278V197.561h-75.04v225.717h75.04zm270.539.0V293.839c0-69.333-37.018-101.586-86.381-101.586-39.804.0-57.634 21.891-67.617 37.266v-31.958h-75.021c.995 21.181.0 225.717.0 225.717h75.02V297.222c0-6.748.486-13.492 2.474-18.315 5.414-13.475 17.767-27.434 38.494-27.434 27.135.0 38.007 20.707 38.007 51.037v120.768H431zM123.448 88.722C97.774 88.722 81 105.601 81 127.724c0 21.658 16.264 39.002 41.455 39.002h.484c26.165.0 42.452-17.344 42.452-39.002-.485-22.092-16.241-38.954-41.943-39.002z"/></svg></a></li><li><a target=_blank rel="noopener noreferrer" aria-label="share Introduction to PyTorch C++ API: MNIST Digit Recognition using VGG-16 Network on reddit" href="https://reddit.com/submit?url=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2019%2f06%2fintroduction-to-pytorch-c-api-mnist-digit-recognition-using-vgg-16-network%2f&title=Introduction%20to%20PyTorch%20C%2b%2b%20API%3a%20MNIST%20Digit%20Recognition%20using%20VGG-16%20Network"><svg viewBox="0 0 512 512" height="30" width="30" fill="currentColor"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zM446 265.638c0-22.964-18.616-41.58-41.58-41.58-11.211.0-21.361 4.457-28.841 11.666-28.424-20.508-67.586-33.757-111.204-35.278l18.941-89.121 61.884 13.157c.756 15.734 13.642 28.29 29.56 28.29 16.407.0 29.706-13.299 29.706-29.701.0-16.403-13.299-29.702-29.706-29.702-11.666.0-21.657 6.792-26.515 16.578l-69.105-14.69c-1.922-.418-3.939-.042-5.585 1.036-1.658 1.073-2.811 2.761-3.224 4.686l-21.152 99.438c-44.258 1.228-84.046 14.494-112.837 35.232-7.468-7.164-17.589-11.591-28.757-11.591-22.965.0-41.585 18.616-41.585 41.58.0 16.896 10.095 31.41 24.568 37.918-.639 4.135-.99 8.328-.99 12.576.0 63.977 74.469 115.836 166.33 115.836s166.334-51.859 166.334-115.836c0-4.218-.347-8.387-.977-12.493 14.564-6.47 24.735-21.034 24.735-38.001zM326.526 373.831c-20.27 20.241-59.115 21.816-70.534 21.816-11.428.0-50.277-1.575-70.522-21.82-3.007-3.008-3.007-7.882.0-10.889 3.003-2.999 7.882-3.003 10.885.0 12.777 12.781 40.11 17.317 59.637 17.317 19.522.0 46.86-4.536 59.657-17.321 3.016-2.999 7.886-2.995 10.885.008 3.008 3.011 3.003 7.882-.008 10.889zm-5.23-48.781c-16.373.0-29.701-13.324-29.701-29.698.0-16.381 13.328-29.714 29.701-29.714 16.378.0 29.706 13.333 29.706 29.714.0 16.374-13.328 29.698-29.706 29.698zM160.91 295.348c0-16.381 13.328-29.71 29.714-29.71 16.369.0 29.689 13.329 29.689 29.71.0 16.373-13.32 29.693-29.689 29.693-16.386.0-29.714-13.32-29.714-29.693z"/></svg></a></li><li><a target=_blank rel="noopener noreferrer" aria-label="share Introduction to PyTorch C++ API: MNIST Digit Recognition using VGG-16 Network on facebook" href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2019%2f06%2fintroduction-to-pytorch-c-api-mnist-digit-recognition-using-vgg-16-network%2f"><svg viewBox="0 0 512 512" height="30" width="30" fill="currentColor"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H342.978V319.085h66.6l12.672-82.621h-79.272v-53.617c0-22.603 11.073-44.636 46.58-44.636H425.6v-70.34s-32.71-5.582-63.982-5.582c-65.288.0-107.96 39.569-107.96 111.204v62.971h-72.573v82.621h72.573V512h-191.104c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892z"/></svg></a></li><li><a target=_blank rel="noopener noreferrer" aria-label="share Introduction to PyTorch C++ API: MNIST Digit Recognition using VGG-16 Network on whatsapp" href="https://api.whatsapp.com/send?text=Introduction%20to%20PyTorch%20C%2b%2b%20API%3a%20MNIST%20Digit%20Recognition%20using%20VGG-16%20Network%20-%20https%3a%2f%2fkrshrimali.github.io%2fposts%2f2019%2f06%2fintroduction-to-pytorch-c-api-mnist-digit-recognition-using-vgg-16-network%2f"><svg viewBox="0 0 512 512" height="30" width="30" fill="currentColor"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zm-58.673 127.703c-33.842-33.881-78.847-52.548-126.798-52.568-98.799.0-179.21 80.405-179.249 179.234-.013 31.593 8.241 62.428 23.927 89.612l-25.429 92.884 95.021-24.925c26.181 14.28 55.659 21.807 85.658 21.816h.074c98.789.0 179.206-80.413 179.247-179.243.018-47.895-18.61-92.93-52.451-126.81zM263.976 403.485h-.06c-26.734-.01-52.954-7.193-75.828-20.767l-5.441-3.229-56.386 14.792 15.05-54.977-3.542-5.637c-14.913-23.72-22.791-51.136-22.779-79.287.033-82.142 66.867-148.971 149.046-148.971 39.793.014 77.199 15.531 105.329 43.692 28.128 28.16 43.609 65.592 43.594 105.4-.034 82.149-66.866 148.983-148.983 148.984zm81.721-111.581c-4.479-2.242-26.499-13.075-30.604-14.571-4.105-1.495-7.091-2.241-10.077 2.241-2.986 4.483-11.569 14.572-14.182 17.562-2.612 2.988-5.225 3.364-9.703 1.12-4.479-2.241-18.91-6.97-36.017-22.23C231.8 264.15 222.81 249.484 220.198 245s-.279-6.908 1.963-9.14c2.016-2.007 4.48-5.232 6.719-7.847 2.24-2.615 2.986-4.484 4.479-7.472 1.493-2.99.747-5.604-.374-7.846-1.119-2.241-10.077-24.288-13.809-33.256-3.635-8.733-7.327-7.55-10.077-7.688-2.609-.13-5.598-.158-8.583-.158-2.986.0-7.839 1.121-11.944 5.604-4.105 4.484-15.675 15.32-15.675 37.364.0 22.046 16.048 43.342 18.287 46.332 2.24 2.99 31.582 48.227 76.511 67.627 10.685 4.615 19.028 7.371 25.533 9.434 10.728 3.41 20.492 2.929 28.209 1.775 8.605-1.285 26.499-10.833 30.231-21.295 3.732-10.464 3.732-19.431 2.612-21.298-1.119-1.869-4.105-2.99-8.583-5.232z"/></svg></a></li><li><a target=_blank rel="noopener noreferrer" aria-label="share Introduction to PyTorch C++ API: MNIST Digit Recognition using VGG-16 Network on telegram" href="https://telegram.me/share/url?text=Introduction%20to%20PyTorch%20C%2b%2b%20API%3a%20MNIST%20Digit%20Recognition%20using%20VGG-16%20Network&amp;url=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2019%2f06%2fintroduction-to-pytorch-c-api-mnist-digit-recognition-using-vgg-16-network%2f"><svg viewBox="2 2 28 28" height="30" width="30" fill="currentColor"><path d="M26.49 29.86H5.5a3.37 3.37.0 01-2.47-1 3.35 3.35.0 01-1-2.47V5.48A3.36 3.36.0 013 3 3.37 3.37.0 015.5 2h21A3.38 3.38.0 0129 3a3.36 3.36.0 011 2.46V26.37a3.35 3.35.0 01-1 2.47 3.38 3.38.0 01-2.51 1.02zm-5.38-6.71a.79.79.0 00.85-.66L24.73 9.24a.55.55.0 00-.18-.46.62.62.0 00-.41-.17q-.08.0-16.53 6.11a.59.59.0 00-.41.59.57.57.0 00.43.52l4 1.24 1.61 4.83a.62.62.0 00.63.43.56.56.0 00.4-.17L16.54 20l4.09 3A.9.9.0 0021.11 23.15zM13.8 20.71l-1.21-4q8.72-5.55 8.78-5.55c.15.0.23.0.23.16a.18.18.0 010 .06s-2.51 2.3-7.52 6.8z"/></svg></a></li><li><a target=_blank rel="noopener noreferrer" aria-label="share Introduction to PyTorch C++ API: MNIST Digit Recognition using VGG-16 Network on ycombinator" href="https://news.ycombinator.com/submitlink?t=Introduction%20to%20PyTorch%20C%2b%2b%20API%3a%20MNIST%20Digit%20Recognition%20using%20VGG-16%20Network&u=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2019%2f06%2fintroduction-to-pytorch-c-api-mnist-digit-recognition-using-vgg-16-network%2f"><svg width="30" height="30" viewBox="0 0 512 512" fill="currentColor"><path d="M449.446.0C483.971.0 512 28.03 512 62.554V449.446C512 483.97 483.97 512 449.446 512H62.554C28.03 512 0 483.97.0 449.446V62.554C0 28.03 28.029.0 62.554.0H449.446zM183.8767 87.9921h-62.034L230.6673 292.4508V424.0079h50.6655V292.4508L390.1575 87.9921H328.1233L256 238.2489z"/></svg></a></li></ul></footer></article></main><footer class=footer><span>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</span> ·
+<span>Powered by
+<a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
+<a href=https://github.com/adityatelange/hugo-PaperMod/ rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top aria-label="go to top" title="Go to Top (Alt + G)" class=top-link id=top-link accesskey=g><svg viewBox="0 0 12 6" fill="currentColor"><path d="M12 6H0l6-6z"/></svg>
+</a><script>let menu=document.getElementById("menu");menu&&(menu.scrollLeft=localStorage.getItem("menu-scroll-position"),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)}),document.querySelectorAll('a[href^="#"]').forEach(e=>{e.addEventListener("click",function(e){e.preventDefault();var t=this.getAttribute("href").substr(1);window.matchMedia("(prefers-reduced-motion: reduce)").matches?document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView({behavior:"smooth"}),t==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${t}`)})})</script><script>var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")}</script><script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove("dark"),localStorage.setItem("pref-theme","light")):(document.body.classList.add("dark"),localStorage.setItem("pref-theme","dark"))})</script><script>document.querySelectorAll("pre > code").forEach(e=>{const n=e.parentNode.parentNode,t=document.createElement("button");t.classList.add("copy-code"),t.innerHTML="copy";function s(){t.innerHTML="copied!",setTimeout(()=>{t.innerHTML="copy"},2e3)}t.addEventListener("click",t=>{if("clipboard"in navigator){navigator.clipboard.writeText(e.textContent),s();return}const n=document.createRange();n.selectNodeContents(e);const o=window.getSelection();o.removeAllRanges(),o.addRange(n);try{document.execCommand("copy"),s()}catch{}o.removeRange(n)}),n.classList.contains("highlight")?n.appendChild(t):n.parentNode.firstChild==n||(e.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName=="TABLE"?e.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(t):e.parentNode.appendChild(t))})</script></body></html>

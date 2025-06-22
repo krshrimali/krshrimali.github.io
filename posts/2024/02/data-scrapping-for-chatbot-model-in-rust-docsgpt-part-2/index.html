@@ -1,13 +1,4 @@
-<!DOCTYPE html>
-<html lang="en" dir="auto">
-
-<head><meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="index, follow">
-<title>Data Scrapping for ChatBot Model in Rust | DocsGPT | Part-2 | Kushashwa Ravi Shrimali (Kush)</title>
-<meta name="keywords" content="project, deep learning, LLM, rust">
-<meta name="description" content="Alright everyone, we are back. Just FYI, we&rsquo;ve had a blog on introduction to DocsGPT before: https://krshrimali.github.io/posts/2024/02/building-a-chatbot-from-your-documentation-website-docsgpt/. This is a follow up blog where we&rsquo;ll discuss data scraping and preprocessing to be able to finetune our model for ChatBot use-case.
+<!doctype html><html lang=en dir=auto><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>Data Scrapping for ChatBot Model in Rust | DocsGPT | Part-2 | Kushashwa Ravi Shrimali (Kush)</title><meta name=keywords content="project,deep learning,LLM,rust"><meta name=description content="Alright everyone, we are back. Just FYI, we&rsquo;ve had a blog on introduction to DocsGPT before: https://krshrimali.github.io/posts/2024/02/building-a-chatbot-from-your-documentation-website-docsgpt/. This is a follow up blog where we&rsquo;ll discuss data scraping and preprocessing to be able to finetune our model for ChatBot use-case.
 Quick recap?
 
 Input is going to be a single link to documentation page (index page).
@@ -15,72 +6,9 @@ Need to fetch data for &ldquo;all the internal pages&rdquo;.
 Preprocess (and/or clean) and transform the data to be able to finetune the model.
 Finetune the model and use it for ChatBot use-case.
 
-In this blog, we&rsquo;ll be covering the first two above, and the rest will be covered in the next blog(s).">
-<meta name="author" content="map[name:Kushashwa Ravi Shrimali]">
-<link rel="canonical" href="https://krshrimali.github.io/posts/2024/02/data-scrapping-for-chatbot-model-in-rust-docsgpt-part-2/">
-<link crossorigin="anonymous" href="https://krshrimali.github.io/assets/css/stylesheet.8fe10233a706bc87f2e08b3cf97b8bd4c0a80f10675a143675d59212121037c0.css" integrity="sha256-j&#43;ECM6cGvIfy4Is8&#43;XuL1MCoDxBnWhQ2ddWSEhIQN8A=" rel="preload stylesheet" as="style">
-<link rel="icon" href="https://krshrimali.github.io/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="https://krshrimali.github.io/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://krshrimali.github.io/favicon-32x32.png">
-<link rel="apple-touch-icon" href="https://krshrimali.github.io/apple-touch-icon.png">
-<link rel="mask-icon" href="https://krshrimali.github.io/safari-pinned-tab.svg">
-<meta name="theme-color" content="#2e2e33">
-<meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="https://krshrimali.github.io/posts/2024/02/data-scrapping-for-chatbot-model-in-rust-docsgpt-part-2/">
-<noscript>
-    <style>
-        #theme-toggle,
-        .top-link {
-            display: none;
-        }
-
-    </style>
-    <style>
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --theme: rgb(29, 30, 32);
-                --entry: rgb(46, 46, 51);
-                --primary: rgb(218, 218, 219);
-                --secondary: rgb(155, 156, 157);
-                --tertiary: rgb(65, 66, 68);
-                --content: rgb(196, 196, 197);
-                --code-block-bg: rgb(46, 46, 51);
-                --code-bg: rgb(55, 56, 62);
-                --border: rgb(51, 51, 51);
-            }
-
-            .list {
-                background: var(--theme);
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-track {
-                background: 0 0;
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-thumb {
-                border-color: var(--theme);
-            }
-        }
-
-    </style>
-</noscript><meta property="og:url" content="https://krshrimali.github.io/posts/2024/02/data-scrapping-for-chatbot-model-in-rust-docsgpt-part-2/">
-  <meta property="og:site_name" content="Kushashwa Ravi Shrimali (Kush)">
-  <meta property="og:title" content="Data Scrapping for ChatBot Model in Rust | DocsGPT | Part-2">
-  <meta property="og:description" content="Alright everyone, we are back. Just FYI, we’ve had a blog on introduction to DocsGPT before: https://krshrimali.github.io/posts/2024/02/building-a-chatbot-from-your-documentation-website-docsgpt/. This is a follow up blog where we’ll discuss data scraping and preprocessing to be able to finetune our model for ChatBot use-case.
+In this blog, we&rsquo;ll be covering the first two above, and the rest will be covered in the next blog(s)."><meta name=author content="map[name:Kushashwa Ravi Shrimali]"><link rel=canonical href=https://krshrimali.github.io/posts/2024/02/data-scrapping-for-chatbot-model-in-rust-docsgpt-part-2/><link crossorigin=anonymous href=https://krshrimali.github.io/assets/css/stylesheet.8fe10233a706bc87f2e08b3cf97b8bd4c0a80f10675a143675d59212121037c0.css integrity="sha256-j+ECM6cGvIfy4Is8+XuL1MCoDxBnWhQ2ddWSEhIQN8A=" rel="preload stylesheet" as=style><link rel=icon href=https://krshrimali.github.io/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://krshrimali.github.io/favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://krshrimali.github.io/favicon-32x32.png><link rel=apple-touch-icon href=https://krshrimali.github.io/apple-touch-icon.png><link rel=mask-icon href=https://krshrimali.github.io/safari-pinned-tab.svg><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><link rel=alternate hreflang=en href=https://krshrimali.github.io/posts/2024/02/data-scrapping-for-chatbot-model-in-rust-docsgpt-part-2/><noscript><style>#theme-toggle,.top-link{display:none}</style><style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--code-block-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51)}.list{background:var(--theme)}.list:not(.dark)::-webkit-scrollbar-track{background:0 0}.list:not(.dark)::-webkit-scrollbar-thumb{border-color:var(--theme)}}</style></noscript><meta property="og:url" content="https://krshrimali.github.io/posts/2024/02/data-scrapping-for-chatbot-model-in-rust-docsgpt-part-2/"><meta property="og:site_name" content="Kushashwa Ravi Shrimali (Kush)"><meta property="og:title" content="Data Scrapping for ChatBot Model in Rust | DocsGPT | Part-2"><meta property="og:description" content="Alright everyone, we are back. Just FYI, we’ve had a blog on introduction to DocsGPT before: https://krshrimali.github.io/posts/2024/02/building-a-chatbot-from-your-documentation-website-docsgpt/. This is a follow up blog where we’ll discuss data scraping and preprocessing to be able to finetune our model for ChatBot use-case.
 Quick recap?
-Input is going to be a single link to documentation page (index page). Need to fetch data for “all the internal pages”. Preprocess (and/or clean) and transform the data to be able to finetune the model. Finetune the model and use it for ChatBot use-case. In this blog, we’ll be covering the first two above, and the rest will be covered in the next blog(s).">
-  <meta property="og:locale" content="en">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2024-02-26T00:00:00+00:00">
-    <meta property="article:modified_time" content="2024-02-26T00:00:00+00:00">
-    <meta property="article:tag" content="Project">
-    <meta property="article:tag" content="Deep Learning">
-    <meta property="article:tag" content="LLM">
-    <meta property="article:tag" content="Rust">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Data Scrapping for ChatBot Model in Rust | DocsGPT | Part-2">
-<meta name="twitter:description" content="Alright everyone, we are back. Just FYI, we&rsquo;ve had a blog on introduction to DocsGPT before: https://krshrimali.github.io/posts/2024/02/building-a-chatbot-from-your-documentation-website-docsgpt/. This is a follow up blog where we&rsquo;ll discuss data scraping and preprocessing to be able to finetune our model for ChatBot use-case.
+Input is going to be a single link to documentation page (index page). Need to fetch data for “all the internal pages”. Preprocess (and/or clean) and transform the data to be able to finetune the model. Finetune the model and use it for ChatBot use-case. In this blog, we’ll be covering the first two above, and the rest will be covered in the next blog(s)."><meta property="og:locale" content="en"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2024-02-26T00:00:00+00:00"><meta property="article:modified_time" content="2024-02-26T00:00:00+00:00"><meta property="article:tag" content="Project"><meta property="article:tag" content="Deep Learning"><meta property="article:tag" content="LLM"><meta property="article:tag" content="Rust"><meta name=twitter:card content="summary"><meta name=twitter:title content="Data Scrapping for ChatBot Model in Rust | DocsGPT | Part-2"><meta name=twitter:description content="Alright everyone, we are back. Just FYI, we&rsquo;ve had a blog on introduction to DocsGPT before: https://krshrimali.github.io/posts/2024/02/building-a-chatbot-from-your-documentation-website-docsgpt/. This is a follow up blog where we&rsquo;ll discuss data scraping and preprocessing to be able to finetune our model for ChatBot use-case.
 Quick recap?
 
 Input is going to be a single link to documentation page (index page).
@@ -88,510 +16,97 @@ Need to fetch data for &ldquo;all the internal pages&rdquo;.
 Preprocess (and/or clean) and transform the data to be able to finetune the model.
 Finetune the model and use it for ChatBot use-case.
 
-In this blog, we&rsquo;ll be covering the first two above, and the rest will be covered in the next blog(s).">
-
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position":  1 ,
-      "name": "Posts",
-      "item": "https://krshrimali.github.io/posts/"
-    }, 
-    {
-      "@type": "ListItem",
-      "position":  2 ,
-      "name": "Data Scrapping for ChatBot Model in Rust | DocsGPT | Part-2",
-      "item": "https://krshrimali.github.io/posts/2024/02/data-scrapping-for-chatbot-model-in-rust-docsgpt-part-2/"
-    }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "Data Scrapping for ChatBot Model in Rust | DocsGPT | Part-2",
-  "name": "Data Scrapping for ChatBot Model in Rust | DocsGPT | Part-2",
-  "description": "Alright everyone, we are back. Just FYI, we\u0026rsquo;ve had a blog on introduction to DocsGPT before: https://krshrimali.github.io/posts/2024/02/building-a-chatbot-from-your-documentation-website-docsgpt/. This is a follow up blog where we\u0026rsquo;ll discuss data scraping and preprocessing to be able to finetune our model for ChatBot use-case.\nQuick recap?\nInput is going to be a single link to documentation page (index page). Need to fetch data for \u0026ldquo;all the internal pages\u0026rdquo;. Preprocess (and/or clean) and transform the data to be able to finetune the model. Finetune the model and use it for ChatBot use-case. In this blog, we\u0026rsquo;ll be covering the first two above, and the rest will be covered in the next blog(s).\n",
-  "keywords": [
-    "project", "deep learning", "LLM", "rust"
-  ],
-  "articleBody": "Alright everyone, we are back. Just FYI, we’ve had a blog on introduction to DocsGPT before: https://krshrimali.github.io/posts/2024/02/building-a-chatbot-from-your-documentation-website-docsgpt/. This is a follow up blog where we’ll discuss data scraping and preprocessing to be able to finetune our model for ChatBot use-case.\nQuick recap?\nInput is going to be a single link to documentation page (index page). Need to fetch data for “all the internal pages”. Preprocess (and/or clean) and transform the data to be able to finetune the model. Finetune the model and use it for ChatBot use-case. In this blog, we’ll be covering the first two above, and the rest will be covered in the next blog(s).\nData Scraping The problem is simple, let’s just define our function and it’s return type. It kinda sets the tone.\npub fn fetch_data(input_link: \u0026str) -\u003e Result\u003cVec\u003cString\u003e, Box\u003cdyn std::error::Error\u003e\u003e { // input_link is the link to the index page of the documentation concerned } Alright, so as it might be clear already, we’ll be passing link to the index page of the documentation. For our use-case of PyTorch documentation, we’ll use: https://pytorch.org/docs/stable/index.html. The return type is Vec where each string is the content of the internal page.\nThis is an example function though, we’ll be moving to another format as we go ahead. But for now, let’s just keep it simple. There are 2 problems we’re trying to solve here:\nFetch “all the internal pages” through the index page. This includes going through all the hyperlinks in each page starting from the index page, and fetching the content of each page. We’ll include any external page (that is not internal to the documentation, for simplicity). Getting content of the page To be able to solve these problems, we’ll use soup crate in Rust: https://docs.rs/soup/latest/soup/. For those who are used to using beautifulsoup in Python, it’s pretty similar.\nLet’s start with the first problem. We’ll define a function extract_all_hyperlinks which will take the index page link and return all the internal links. (the function won’t be recursive)\nNote that, to be able to do this, we’ll just make sure to get the content of the index page first.\npub fn fetch_raw_html(main_html_link: String) -\u003e Result\u003cString, std::io::Error\u003e { let output = reqwest::blocking::get(main_html_link).expect(\"Failed to fetch the URL\"); let output_text = output.text().expect(\"Failed to read the response text\"); Ok(output_text.to_string()) } fn main() { let main_html_link: String = \"https://pytorch.org/docs/stable/index.html\".to_string(); let raw_data: Result\u003cString, std::io::Error\u003e = fetch_raw_html(main_html_link.clone()); env_logger::init(); let mut all_links: Vec\u003cString\u003e = Vec::new(); let mut all_text: Vec\u003cString\u003e = Vec::new(); let if_succeeded = extract_all_hyperlinks(raw_data, \u0026mut all_links, \u0026mut all_text); } If you’re wondering, why fetch raw HTML separately and then extract hyperlinks from the content? Rust is naturally a functional language, and following the practice to keep a single function limited to one single action, we’re doing this. Will help testing efforts in the future.\nAlright, so - so far, we got the raw HTML content (used reqwest crate for fetching the content), and then we’re passing it to extract_all_hyperlinks function. The function will look something like this:\npub fn extract_all_hyperlinks( raw_data: Result\u003cString, std::io::Error\u003e, all_links: \u0026mut Vec\u003cString\u003e, all_text: \u0026mut Vec\u003cString\u003e, ) -\u003e Result\u003c(), std::io::Error\u003e { match raw_data { Ok(content) =\u003e { let soup = Soup::new(\u0026content); let text = soup.text(); all_text.push(text); let all_tags_a_href = soup.tag(\"a\").find_all(); all_tags_a_href.enumerate().for_each(|(_, tag)| { let href = tag.get(\"href\"); match href { Some(href) =\u003e { // NOTE: Can you think of a better way to differentiate b/w internal and external links? if href.starts_with(\"http\") || href.starts_with('_') || href.starts_with('#') || href.starts_with('.') { log::info!(\"Skipping: {:?}\", href); return; } all_links.push(href); } None =\u003e log::warn!(\"No href attribute found\"), } }); Ok(()) } Err(e) =\u003e { log::error!(\"Error reading file: {:?}\", e,); Err(e) } } } What are we doing here?\nWe got the content from fetch_raw_html, if valid we’ll create a Soup object from it and get the text. Once we have the text, we’ll get all the a tags and their href attributes. We’ll skip the external links (for simplicity) and add the internal links to all_links vector. I’m open to ideas on differentiating b/w external and internal links. For now, anything that starts with http, _, #, or . is considered external (please note that https automatically comes in this because it’s a superset of http). We’ll also add the text to all_text vector. It’s comparatively easier to test these functions now, thanks to the original idea of keeping their jobs separate.\nAlright, now we have the hyperlinks, but we haven’t fetched all the content of those hyperlinks and their hyperlinks and their hyperlinks… (nested hyperlinks xD).\nIt’s easy if you think about it:\nIterate through all the hyperlinks, for each link - get the data and store it. ^^ Hmm, sounds very easy, duh? Well, we are missing one part. What if the link is repeated? Which is quite possible in any documentation. Let’s revise our list above:\nIterate through all the hyperlinks, for each link - get the data and store it. If the link is already in a HashSet, skip it. Otherwise, add it to the HashSet and store the data. Here’s where we’ll just re-use our functions defined above:\nfn main() { // ... let mut visited_set: HashSet\u003cString\u003e = HashSet::new(); for link in all_links.iter() { if visited_set.contains(link) { log::info!(\"Skipping link because it's alr visited: {:?}\", link); continue; } // NOTE: Guess what we are doing here? let modified_link = Path::new(\u0026main_html_link).parent().unwrap().join(link); let content = fetch_raw_html(modified_link.display().to_string()); let success = extract_all_hyperlinks(content, \u0026mut nested_links, \u0026mut all_text); visited_set.insert(link.clone()); if success.is_ok() { log::info!(\"Success for link: {:?}\", link); log::debug!(\"Nested links: {:?}\", nested_links); } else { log::info!(\"Failed for link: {:?}\", link); } } // ... } If you saw the code above, there is a note which says:\n// NOTE: Guess what we are doing here?\nAlright, so for any internal link, which would look like this: /docs/stable/tensors.html, we’ll just join it with the parent link and fetch the content. This is a very simple way to do it, and it’s not the best way to do it. But for now, it’s good enough. Do note that, the parent link comes from the initial link the user passes to this flow, which was: https://pytorch.org/docs/stable/index.html in this case. So we’ll just replace /index.html with /docs/stable/tensors.html and fetch the content.\nOnce this is done, the next task would be to understand what data we got - how we can transform it - what kind of cleaning methods are needed etc. That’s going to be a good exercise for the next blog. For now, I think, this is a good start! Right? :)\nYouTube! As always, a shameless plug, I do have a YouTube channel guys! Please consider referring to the channel if there’s anything that interests you there. Here’s the link: https://www.youtube.com/c/kushashwaraviShrimali.\nDiscord! Oh, and yes, we do have a discord channel. Please consider joining the channel for any discussions, or if you need any help. Here’s the link: https://discord.gg/nh2KuAX3V8.\nAlright then 🤝, I’ll see you soon in the next blog. Thank you all, bye! ❤️\n",
-  "wordCount" : "1144",
-  "inLanguage": "en",
-  "datePublished": "2024-02-26T00:00:00Z",
-  "dateModified": "2024-02-26T00:00:00Z",
-  "author":{
-    "@type": "Person",
-    "name": {"name":"Kushashwa Ravi Shrimali"}
-  },
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://krshrimali.github.io/posts/2024/02/data-scrapping-for-chatbot-model-in-rust-docsgpt-part-2/"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "Kushashwa Ravi Shrimali (Kush)",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://krshrimali.github.io/favicon.ico"
-    }
-  }
-}
-</script>
-</head>
-
-<body class="" id="top">
-<script>
-    if (localStorage.getItem("pref-theme") === "dark") {
-        document.body.classList.add('dark');
-    } else if (localStorage.getItem("pref-theme") === "light") {
-        document.body.classList.remove('dark')
-    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        document.body.classList.add('dark');
-    }
-
-</script>
-
-<header class="header">
-    <nav class="nav">
-        <div class="logo">
-            <a href="https://krshrimali.github.io/" accesskey="h" title="Kushashwa Ravi Shrimali (Kush) (Alt + H)">Kushashwa Ravi Shrimali (Kush)</a>
-            <div class="logo-switches">
-                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
-                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                    </svg>
-                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="5"></circle>
-                        <line x1="12" y1="1" x2="12" y2="3"></line>
-                        <line x1="12" y1="21" x2="12" y2="23"></line>
-                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                        <line x1="1" y1="12" x2="3" y2="12"></line>
-                        <line x1="21" y1="12" x2="23" y2="12"></line>
-                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                    </svg>
-                </button>
-            </div>
-        </div>
-        <ul id="menu">
-            <li>
-                <a href="https://krshrimali.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
-                    <span>Search</span>
-                </a>
-            </li>
-            <li>
-                <a href="https://krshrimali.github.io/about" title="About">
-                    <span>About</span>
-                </a>
-            </li>
-            <li>
-                <a href="https://krshrimali.github.io/posts" title="Blog">
-                    <span>Blog</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
-</header>
-<main class="main">
-
-<article class="post-single">
-  <header class="post-header">
-    <div class="breadcrumbs"><a href="https://krshrimali.github.io/">Home</a>&nbsp;»&nbsp;<a href="https://krshrimali.github.io/posts/">Posts</a></div>
-    <h1 class="post-title entry-hint-parent">
-      Data Scrapping for ChatBot Model in Rust | DocsGPT | Part-2
-    </h1>
-    <div class="post-meta"><span title='2024-02-26 00:00:00 +0000 UTC'>February 26, 2024</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;map[name:Kushashwa Ravi Shrimali]
-
-</div>
-  </header> <div class="toc">
-    <details >
-        <summary accesskey="c" title="(Alt + C)">
-            <span class="details">Table of Contents</span>
-        </summary>
-
-        <div class="inner"><ul>
-                <li>
-                    <a href="#data-scraping" aria-label="Data Scraping">Data Scraping</a></li>
-                <li>
-                    <a href="#youtube" aria-label="YouTube!">YouTube!</a></li>
-                <li>
-                    <a href="#discord" aria-label="Discord!">Discord!</a>
-                </li>
-            </ul>
-        </div>
-    </details>
-</div>
-
-  <div class="post-content"><p>Alright everyone, we are back. Just FYI, we&rsquo;ve had a blog on introduction to DocsGPT before: <a href="https://krshrimali.github.io/posts/2024/02/building-a-chatbot-from-your-documentation-website-docsgpt/">https://krshrimali.github.io/posts/2024/02/building-a-chatbot-from-your-documentation-website-docsgpt/</a>. This is a follow up blog where we&rsquo;ll discuss data scraping and preprocessing to be able to finetune our model for ChatBot use-case.</p>
-<p>Quick recap?</p>
-<ol>
-<li>Input is going to be a <em>single link to documentation page (index page)</em>.</li>
-<li>Need to fetch data for &ldquo;all the internal pages&rdquo;.</li>
-<li>Preprocess (and/or clean) and transform the data to be able to finetune the model.</li>
-<li>Finetune the model and use it for ChatBot use-case.</li>
-</ol>
-<p>In this blog, we&rsquo;ll be covering the first two above, and the rest will be covered in the next blog(s).</p>
-<h2 id="data-scraping">Data Scraping<a hidden class="anchor" aria-hidden="true" href="#data-scraping">#</a></h2>
-<p>The problem is simple, let&rsquo;s just define our function and it&rsquo;s return type. It kinda sets the tone.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">fetch_data</span>(input_link: <span style="color:#66d9ef">&amp;</span><span style="color:#66d9ef">str</span>) -&gt; Result<span style="color:#f92672">&lt;</span>Vec<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span>, Box<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">dyn</span> std::error::Error<span style="color:#f92672">&gt;&gt;</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// input_link is the link to the index page of the documentation concerned
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
-</span></span></code></pre></div><p>Alright, so as it might be clear already, we&rsquo;ll be passing link to the index page of the documentation. For our use-case of PyTorch documentation, we&rsquo;ll use: <a href="https://pytorch.org/docs/stable/index.html">https://pytorch.org/docs/stable/index.html</a>. The return type is <code>Vec&lt;String&gt;</code> where each string is the content of the internal page.</p>
-<p>This is an example function though, we&rsquo;ll be moving to another format as we go ahead. But for now, let&rsquo;s just keep it simple. There are 2 problems we&rsquo;re trying to solve here:</p>
-<ol>
-<li>Fetch &ldquo;all the internal pages&rdquo; through the index page.
-<ul>
-<li>This includes going through all the hyperlinks in each page starting from the index page, and fetching the content of each page.</li>
-<li>We&rsquo;ll include any external page (that is not internal to the documentation, for simplicity).</li>
-</ul>
-</li>
-<li>Getting content of the page</li>
-</ol>
-<p>To be able to solve these problems, we&rsquo;ll use <code>soup</code> crate in Rust: <a href="https://docs.rs/soup/latest/soup/">https://docs.rs/soup/latest/soup/</a>. For those who are used to using <code>beautifulsoup</code> in Python, it&rsquo;s pretty similar.</p>
-<p>Let&rsquo;s start with the first problem. We&rsquo;ll define a function <code>extract_all_hyperlinks</code> which will take the index page link and return all the internal links. (the function won&rsquo;t be recursive)</p>
-<p>Note that, to be able to do this, we&rsquo;ll just make sure to get the content of the index page first.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">fetch_raw_html</span>(main_html_link: String) -&gt; Result<span style="color:#f92672">&lt;</span>String, std::io::Error<span style="color:#f92672">&gt;</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> output <span style="color:#f92672">=</span> reqwest::blocking::get(main_html_link).expect(<span style="color:#e6db74">&#34;Failed to fetch the URL&#34;</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> output_text <span style="color:#f92672">=</span> output.text().expect(<span style="color:#e6db74">&#34;Failed to read the response text&#34;</span>);
-</span></span><span style="display:flex;"><span>    Ok(output_text.to_string())
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">main</span>() {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> main_html_link: String <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;https://pytorch.org/docs/stable/index.html&#34;</span>.to_string();
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> raw_data: Result<span style="color:#f92672">&lt;</span>String, std::io::Error<span style="color:#f92672">&gt;</span> <span style="color:#f92672">=</span> fetch_raw_html(main_html_link.clone());
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    env_logger::init();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> all_links: Vec<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> <span style="color:#f92672">=</span> Vec::new();
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> all_text: Vec<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> <span style="color:#f92672">=</span> Vec::new();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> if_succeeded <span style="color:#f92672">=</span> extract_all_hyperlinks(raw_data, <span style="color:#f92672">&amp;</span><span style="color:#66d9ef">mut</span> all_links, <span style="color:#f92672">&amp;</span><span style="color:#66d9ef">mut</span> all_text);
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>If you&rsquo;re wondering, why fetch raw HTML separately and then extract hyperlinks from the content? Rust is naturally a functional language, and following the practice to keep a single function limited to one single action, we&rsquo;re doing this. Will help testing efforts in the future.</p>
-<p>Alright, so - so far, we got the raw HTML content (used <code>reqwest</code> crate for fetching the content), and then we&rsquo;re passing it to <code>extract_all_hyperlinks</code> function. The function will look something like this:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">extract_all_hyperlinks</span>(
-</span></span><span style="display:flex;"><span>    raw_data: Result<span style="color:#f92672">&lt;</span>String, std::io::Error<span style="color:#f92672">&gt;</span>,
-</span></span><span style="display:flex;"><span>    all_links: <span style="color:#66d9ef">&amp;</span><span style="color:#a6e22e">mut</span> Vec<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span>,
-</span></span><span style="display:flex;"><span>    all_text: <span style="color:#66d9ef">&amp;</span><span style="color:#a6e22e">mut</span> Vec<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span>,
-</span></span><span style="display:flex;"><span>) -&gt; Result<span style="color:#f92672">&lt;</span>(), std::io::Error<span style="color:#f92672">&gt;</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">match</span> raw_data {
-</span></span><span style="display:flex;"><span>        Ok(content) <span style="color:#f92672">=&gt;</span> {
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">let</span> soup <span style="color:#f92672">=</span> Soup::new(<span style="color:#f92672">&amp;</span>content);
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">let</span> text <span style="color:#f92672">=</span> soup.text();
-</span></span><span style="display:flex;"><span>            all_text.push(text);
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">let</span> all_tags_a_href <span style="color:#f92672">=</span> soup.tag(<span style="color:#e6db74">&#34;a&#34;</span>).find_all();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>            all_tags_a_href.enumerate().for_each(<span style="color:#f92672">|</span>(_, tag)<span style="color:#f92672">|</span> {
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">let</span> href <span style="color:#f92672">=</span> tag.get(<span style="color:#e6db74">&#34;href&#34;</span>);
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">match</span> href {
-</span></span><span style="display:flex;"><span>                    Some(href) <span style="color:#f92672">=&gt;</span> {
-</span></span><span style="display:flex;"><span>                        <span style="color:#75715e">// NOTE: Can you think of a better way to differentiate b/w internal and external links?
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                        <span style="color:#66d9ef">if</span> href.starts_with(<span style="color:#e6db74">&#34;http&#34;</span>)
-</span></span><span style="display:flex;"><span>                            <span style="color:#f92672">||</span> href.starts_with(<span style="color:#e6db74">&#39;_&#39;</span>)
-</span></span><span style="display:flex;"><span>                            <span style="color:#f92672">||</span> href.starts_with(<span style="color:#e6db74">&#39;#&#39;</span>)
-</span></span><span style="display:flex;"><span>                            <span style="color:#f92672">||</span> href.starts_with(<span style="color:#e6db74">&#39;.&#39;</span>)
-</span></span><span style="display:flex;"><span>                        {
-</span></span><span style="display:flex;"><span>                            log::<span style="color:#a6e22e">info!</span>(<span style="color:#e6db74">&#34;Skipping: {:?}&#34;</span>, href);
-</span></span><span style="display:flex;"><span>                            <span style="color:#66d9ef">return</span>;
-</span></span><span style="display:flex;"><span>                        }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>                        all_links.push(href);
-</span></span><span style="display:flex;"><span>                    }
-</span></span><span style="display:flex;"><span>                    None <span style="color:#f92672">=&gt;</span> log::<span style="color:#a6e22e">warn!</span>(<span style="color:#e6db74">&#34;No href attribute found&#34;</span>),
-</span></span><span style="display:flex;"><span>                }
-</span></span><span style="display:flex;"><span>            });
-</span></span><span style="display:flex;"><span>            Ok(())
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        Err(e) <span style="color:#f92672">=&gt;</span> {
-</span></span><span style="display:flex;"><span>            log::<span style="color:#a6e22e">error!</span>(<span style="color:#e6db74">&#34;Error reading file: {:?}&#34;</span>, e,);
-</span></span><span style="display:flex;"><span>            Err(e)
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>What are we doing here?</p>
-<ul>
-<li>We got the content from <code>fetch_raw_html</code>, if valid we&rsquo;ll create a <code>Soup</code> object from it and get the text.</li>
-<li>Once we have the text, we&rsquo;ll get all the <code>a</code> tags and their <code>href</code> attributes.</li>
-<li>We&rsquo;ll skip the external links (for simplicity) and add the internal links to <code>all_links</code> vector.
-<ul>
-<li>I&rsquo;m open to ideas on differentiating b/w external and internal links. For now, anything that starts with <code>http</code>, <code>_</code>, <code>#</code>, or <code>.</code> is considered external (please note that <code>https</code> automatically comes in this because it&rsquo;s a superset of <code>http</code>).</li>
-</ul>
-</li>
-<li>We&rsquo;ll also add the text to <code>all_text</code> vector.</li>
-</ul>
-<p>It&rsquo;s comparatively easier to test these functions now, thanks to the original idea of keeping their jobs separate.</p>
-<p>Alright, now we have the hyperlinks, but we haven&rsquo;t fetched all the content of those hyperlinks and their hyperlinks and their hyperlinks&hellip; (nested hyperlinks xD).</p>
-<p>It&rsquo;s easy if you think about it:</p>
-<ol>
-<li>Iterate through all the hyperlinks, for each link - get the data and store it.</li>
-</ol>
-<p>^^ Hmm, sounds very easy, duh? Well, we are missing one part. What if the link is repeated? Which is quite possible in any documentation. Let&rsquo;s revise our list above:</p>
-<ol>
-<li>Iterate through all the hyperlinks, for each link - get the data and store it.</li>
-<li>If the link is already in a HashSet, skip it. Otherwise, add it to the HashSet and store the data.</li>
-</ol>
-<p>Here&rsquo;s where we&rsquo;ll just re-use our functions defined above:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">main</span>() {
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// ...
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> visited_set: <span style="color:#a6e22e">HashSet</span><span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> <span style="color:#f92672">=</span> HashSet::new();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> link <span style="color:#66d9ef">in</span> all_links.iter() {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> visited_set.contains(link) {
-</span></span><span style="display:flex;"><span>            log::<span style="color:#a6e22e">info!</span>(<span style="color:#e6db74">&#34;Skipping link because it&#39;s alr visited: {:?}&#34;</span>, link);
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">continue</span>;
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// NOTE: Guess what we are doing here?
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">let</span> modified_link <span style="color:#f92672">=</span> Path::new(<span style="color:#f92672">&amp;</span>main_html_link).parent().unwrap().join(link);
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">let</span> content <span style="color:#f92672">=</span> fetch_raw_html(modified_link.display().to_string());
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">let</span> success <span style="color:#f92672">=</span> extract_all_hyperlinks(content, <span style="color:#f92672">&amp;</span><span style="color:#66d9ef">mut</span> nested_links, <span style="color:#f92672">&amp;</span><span style="color:#66d9ef">mut</span> all_text);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        visited_set.insert(link.clone());
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> success.is_ok() {
-</span></span><span style="display:flex;"><span>            log::<span style="color:#a6e22e">info!</span>(<span style="color:#e6db74">&#34;Success for link: {:?}&#34;</span>, link);
-</span></span><span style="display:flex;"><span>            log::<span style="color:#a6e22e">debug!</span>(<span style="color:#e6db74">&#34;Nested links: {:?}&#34;</span>, nested_links);
-</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">else</span> {
-</span></span><span style="display:flex;"><span>            log::<span style="color:#a6e22e">info!</span>(<span style="color:#e6db74">&#34;Failed for link: {:?}&#34;</span>, link);
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// ...
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
-</span></span></code></pre></div><p>If you saw the code above, there is a note which says:</p>
-<blockquote>
-<p>// NOTE: Guess what we are doing here?</p></blockquote>
-<p>Alright, so for any internal link, which would look like this: <code>/docs/stable/tensors.html</code>, we&rsquo;ll just join it with the parent link and fetch the content. This is a very simple way to do it, and it&rsquo;s not the best way to do it. But for now, it&rsquo;s good enough. Do note that, the parent link comes from the initial link the user passes to this flow, which was: <code>https://pytorch.org/docs/stable/index.html</code> in this case. So we&rsquo;ll just replace <code>/index.html</code> with <code>/docs/stable/tensors.html</code> and fetch the content.</p>
-<p>Once this is done, the next task would be to understand what data we got - how we can transform it - what kind of cleaning methods are needed etc. That&rsquo;s going to be a good exercise for the next blog. For now, I think, this is a good start! Right? :)</p>
-<h2 id="youtube">YouTube!<a hidden class="anchor" aria-hidden="true" href="#youtube">#</a></h2>
-<p>As always, a shameless plug, I do have a YouTube channel guys! Please consider referring to the channel if there&rsquo;s anything that interests you there. Here&rsquo;s the link: <a href="https://www.youtube.com/c/kushashwaraviShrimali">https://www.youtube.com/c/kushashwaraviShrimali</a>.</p>
-<h2 id="discord">Discord!<a hidden class="anchor" aria-hidden="true" href="#discord">#</a></h2>
-<p>Oh, and yes, we do have a discord channel. Please consider joining the channel for any discussions, or if you need any help. Here&rsquo;s the link: <a href="https://discord.gg/nh2KuAX3V8">https://discord.gg/nh2KuAX3V8</a>.</p>
-<p>Alright then 🤝, I&rsquo;ll see you soon in the next blog. Thank you all, bye! ❤️</p>
-
-
-  </div>
-
-  <footer class="post-footer">
-    <ul class="post-tags">
-      <li><a href="https://krshrimali.github.io/tags/project/">Project</a></li>
-      <li><a href="https://krshrimali.github.io/tags/deep-learning/">Deep Learning</a></li>
-      <li><a href="https://krshrimali.github.io/tags/llm/">LLM</a></li>
-      <li><a href="https://krshrimali.github.io/tags/rust/">Rust</a></li>
-    </ul>
-<nav class="paginav">
-  <a class="prev" href="https://krshrimali.github.io/posts/2024/02/building-a-chatbot-from-your-documentation-website-docsgpt/">
-    <span class="title">« Prev</span>
-    <br>
-    <span>Building a ChatBot from your Documentation Website | DocsGPT</span>
-  </a>
-  <a class="next" href="https://krshrimali.github.io/posts/2024/01/bring-back-the-old-times-celebrate-your-wins/">
-    <span class="title">Next »</span>
-    <br>
-    <span>Bring back the old times - celebrate your wins!</span>
-  </a>
-</nav>
-
-
-<ul class="share-buttons">
-    <li>
-        <a target="_blank" rel="noopener noreferrer" aria-label="share Data Scrapping for ChatBot Model in Rust | DocsGPT | Part-2 on x"
-            href="https://x.com/intent/tweet/?text=Data%20Scrapping%20for%20ChatBot%20Model%20in%20Rust%20%7c%20DocsGPT%20%7c%20Part-2&amp;url=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2024%2f02%2fdata-scrapping-for-chatbot-model-in-rust-docsgpt-part-2%2f&amp;hashtags=project%2cdeeplearning%2cLLM%2crust">
-            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
-                <path
-                    d="M512 62.554 L 512 449.446 C 512 483.97 483.97 512 449.446 512 L 62.554 512 C 28.03 512 0 483.97 0 449.446 L 0 62.554 C 0 28.03 28.029 0 62.554 0 L 449.446 0 C 483.971 0 512 28.03 512 62.554 Z M 269.951 190.75 L 182.567 75.216 L 56 75.216 L 207.216 272.95 L 63.9 436.783 L 125.266 436.783 L 235.9 310.383 L 332.567 436.783 L 456 436.783 L 298.367 228.367 L 432.367 75.216 L 371.033 75.216 Z M 127.633 110 L 164.101 110 L 383.481 400.065 L 349.5 400.065 Z" />
-            </svg>
-        </a>
-    </li>
-    <li>
-        <a target="_blank" rel="noopener noreferrer" aria-label="share Data Scrapping for ChatBot Model in Rust | DocsGPT | Part-2 on linkedin"
-            href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2024%2f02%2fdata-scrapping-for-chatbot-model-in-rust-docsgpt-part-2%2f&amp;title=Data%20Scrapping%20for%20ChatBot%20Model%20in%20Rust%20%7c%20DocsGPT%20%7c%20Part-2&amp;summary=Data%20Scrapping%20for%20ChatBot%20Model%20in%20Rust%20%7c%20DocsGPT%20%7c%20Part-2&amp;source=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2024%2f02%2fdata-scrapping-for-chatbot-model-in-rust-docsgpt-part-2%2f">
-            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
-                <path
-                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-288.985,423.278l0,-225.717l-75.04,0l0,225.717l75.04,0Zm270.539,0l0,-129.439c0,-69.333 -37.018,-101.586 -86.381,-101.586c-39.804,0 -57.634,21.891 -67.617,37.266l0,-31.958l-75.021,0c0.995,21.181 0,225.717 0,225.717l75.02,0l0,-126.056c0,-6.748 0.486,-13.492 2.474,-18.315c5.414,-13.475 17.767,-27.434 38.494,-27.434c27.135,0 38.007,20.707 38.007,51.037l0,120.768l75.024,0Zm-307.552,-334.556c-25.674,0 -42.448,16.879 -42.448,39.002c0,21.658 16.264,39.002 41.455,39.002l0.484,0c26.165,0 42.452,-17.344 42.452,-39.002c-0.485,-22.092 -16.241,-38.954 -41.943,-39.002Z" />
-            </svg>
-        </a>
-    </li>
-    <li>
-        <a target="_blank" rel="noopener noreferrer" aria-label="share Data Scrapping for ChatBot Model in Rust | DocsGPT | Part-2 on reddit"
-            href="https://reddit.com/submit?url=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2024%2f02%2fdata-scrapping-for-chatbot-model-in-rust-docsgpt-part-2%2f&title=Data%20Scrapping%20for%20ChatBot%20Model%20in%20Rust%20%7c%20DocsGPT%20%7c%20Part-2">
-            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
-                <path
-                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-3.446,265.638c0,-22.964 -18.616,-41.58 -41.58,-41.58c-11.211,0 -21.361,4.457 -28.841,11.666c-28.424,-20.508 -67.586,-33.757 -111.204,-35.278l18.941,-89.121l61.884,13.157c0.756,15.734 13.642,28.29 29.56,28.29c16.407,0 29.706,-13.299 29.706,-29.701c0,-16.403 -13.299,-29.702 -29.706,-29.702c-11.666,0 -21.657,6.792 -26.515,16.578l-69.105,-14.69c-1.922,-0.418 -3.939,-0.042 -5.585,1.036c-1.658,1.073 -2.811,2.761 -3.224,4.686l-21.152,99.438c-44.258,1.228 -84.046,14.494 -112.837,35.232c-7.468,-7.164 -17.589,-11.591 -28.757,-11.591c-22.965,0 -41.585,18.616 -41.585,41.58c0,16.896 10.095,31.41 24.568,37.918c-0.639,4.135 -0.99,8.328 -0.99,12.576c0,63.977 74.469,115.836 166.33,115.836c91.861,0 166.334,-51.859 166.334,-115.836c0,-4.218 -0.347,-8.387 -0.977,-12.493c14.564,-6.47 24.735,-21.034 24.735,-38.001Zm-119.474,108.193c-20.27,20.241 -59.115,21.816 -70.534,21.816c-11.428,0 -50.277,-1.575 -70.522,-21.82c-3.007,-3.008 -3.007,-7.882 0,-10.889c3.003,-2.999 7.882,-3.003 10.885,0c12.777,12.781 40.11,17.317 59.637,17.317c19.522,0 46.86,-4.536 59.657,-17.321c3.016,-2.999 7.886,-2.995 10.885,0.008c3.008,3.011 3.003,7.882 -0.008,10.889Zm-5.23,-48.781c-16.373,0 -29.701,-13.324 -29.701,-29.698c0,-16.381 13.328,-29.714 29.701,-29.714c16.378,0 29.706,13.333 29.706,29.714c0,16.374 -13.328,29.698 -29.706,29.698Zm-160.386,-29.702c0,-16.381 13.328,-29.71 29.714,-29.71c16.369,0 29.689,13.329 29.689,29.71c0,16.373 -13.32,29.693 -29.689,29.693c-16.386,0 -29.714,-13.32 -29.714,-29.693Z" />
-            </svg>
-        </a>
-    </li>
-    <li>
-        <a target="_blank" rel="noopener noreferrer" aria-label="share Data Scrapping for ChatBot Model in Rust | DocsGPT | Part-2 on facebook"
-            href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2024%2f02%2fdata-scrapping-for-chatbot-model-in-rust-docsgpt-part-2%2f">
-            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
-                <path
-                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-106.468,0l0,-192.915l66.6,0l12.672,-82.621l-79.272,0l0,-53.617c0,-22.603 11.073,-44.636 46.58,-44.636l36.042,0l0,-70.34c0,0 -32.71,-5.582 -63.982,-5.582c-65.288,0 -107.96,39.569 -107.96,111.204l0,62.971l-72.573,0l0,82.621l72.573,0l0,192.915l-191.104,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Z" />
-            </svg>
-        </a>
-    </li>
-    <li>
-        <a target="_blank" rel="noopener noreferrer" aria-label="share Data Scrapping for ChatBot Model in Rust | DocsGPT | Part-2 on whatsapp"
-            href="https://api.whatsapp.com/send?text=Data%20Scrapping%20for%20ChatBot%20Model%20in%20Rust%20%7c%20DocsGPT%20%7c%20Part-2%20-%20https%3a%2f%2fkrshrimali.github.io%2fposts%2f2024%2f02%2fdata-scrapping-for-chatbot-model-in-rust-docsgpt-part-2%2f">
-            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
-                <path
-                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-58.673,127.703c-33.842,-33.881 -78.847,-52.548 -126.798,-52.568c-98.799,0 -179.21,80.405 -179.249,179.234c-0.013,31.593 8.241,62.428 23.927,89.612l-25.429,92.884l95.021,-24.925c26.181,14.28 55.659,21.807 85.658,21.816l0.074,0c98.789,0 179.206,-80.413 179.247,-179.243c0.018,-47.895 -18.61,-92.93 -52.451,-126.81Zm-126.797,275.782l-0.06,0c-26.734,-0.01 -52.954,-7.193 -75.828,-20.767l-5.441,-3.229l-56.386,14.792l15.05,-54.977l-3.542,-5.637c-14.913,-23.72 -22.791,-51.136 -22.779,-79.287c0.033,-82.142 66.867,-148.971 149.046,-148.971c39.793,0.014 77.199,15.531 105.329,43.692c28.128,28.16 43.609,65.592 43.594,105.4c-0.034,82.149 -66.866,148.983 -148.983,148.984Zm81.721,-111.581c-4.479,-2.242 -26.499,-13.075 -30.604,-14.571c-4.105,-1.495 -7.091,-2.241 -10.077,2.241c-2.986,4.483 -11.569,14.572 -14.182,17.562c-2.612,2.988 -5.225,3.364 -9.703,1.12c-4.479,-2.241 -18.91,-6.97 -36.017,-22.23c-13.314,-11.876 -22.304,-26.542 -24.916,-31.026c-2.612,-4.484 -0.279,-6.908 1.963,-9.14c2.016,-2.007 4.48,-5.232 6.719,-7.847c2.24,-2.615 2.986,-4.484 4.479,-7.472c1.493,-2.99 0.747,-5.604 -0.374,-7.846c-1.119,-2.241 -10.077,-24.288 -13.809,-33.256c-3.635,-8.733 -7.327,-7.55 -10.077,-7.688c-2.609,-0.13 -5.598,-0.158 -8.583,-0.158c-2.986,0 -7.839,1.121 -11.944,5.604c-4.105,4.484 -15.675,15.32 -15.675,37.364c0,22.046 16.048,43.342 18.287,46.332c2.24,2.99 31.582,48.227 76.511,67.627c10.685,4.615 19.028,7.371 25.533,9.434c10.728,3.41 20.492,2.929 28.209,1.775c8.605,-1.285 26.499,-10.833 30.231,-21.295c3.732,-10.464 3.732,-19.431 2.612,-21.298c-1.119,-1.869 -4.105,-2.99 -8.583,-5.232Z" />
-            </svg>
-        </a>
-    </li>
-    <li>
-        <a target="_blank" rel="noopener noreferrer" aria-label="share Data Scrapping for ChatBot Model in Rust | DocsGPT | Part-2 on telegram"
-            href="https://telegram.me/share/url?text=Data%20Scrapping%20for%20ChatBot%20Model%20in%20Rust%20%7c%20DocsGPT%20%7c%20Part-2&amp;url=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2024%2f02%2fdata-scrapping-for-chatbot-model-in-rust-docsgpt-part-2%2f">
-            <svg version="1.1" xml:space="preserve" viewBox="2 2 28 28" height="30px" width="30px" fill="currentColor">
-                <path
-                    d="M26.49,29.86H5.5a3.37,3.37,0,0,1-2.47-1,3.35,3.35,0,0,1-1-2.47V5.48A3.36,3.36,0,0,1,3,3,3.37,3.37,0,0,1,5.5,2h21A3.38,3.38,0,0,1,29,3a3.36,3.36,0,0,1,1,2.46V26.37a3.35,3.35,0,0,1-1,2.47A3.38,3.38,0,0,1,26.49,29.86Zm-5.38-6.71a.79.79,0,0,0,.85-.66L24.73,9.24a.55.55,0,0,0-.18-.46.62.62,0,0,0-.41-.17q-.08,0-16.53,6.11a.59.59,0,0,0-.41.59.57.57,0,0,0,.43.52l4,1.24,1.61,4.83a.62.62,0,0,0,.63.43.56.56,0,0,0,.4-.17L16.54,20l4.09,3A.9.9,0,0,0,21.11,23.15ZM13.8,20.71l-1.21-4q8.72-5.55,8.78-5.55c.15,0,.23,0,.23.16a.18.18,0,0,1,0,.06s-2.51,2.3-7.52,6.8Z" />
-            </svg>
-        </a>
-    </li>
-    <li>
-        <a target="_blank" rel="noopener noreferrer" aria-label="share Data Scrapping for ChatBot Model in Rust | DocsGPT | Part-2 on ycombinator"
-            href="https://news.ycombinator.com/submitlink?t=Data%20Scrapping%20for%20ChatBot%20Model%20in%20Rust%20%7c%20DocsGPT%20%7c%20Part-2&u=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2024%2f02%2fdata-scrapping-for-chatbot-model-in-rust-docsgpt-part-2%2f">
-            <svg version="1.1" xml:space="preserve" width="30px" height="30px" viewBox="0 0 512 512" fill="currentColor"
-                xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape">
-                <path
-                    d="M449.446 0C483.971 0 512 28.03 512 62.554L512 449.446C512 483.97 483.97 512 449.446 512L62.554 512C28.03 512 0 483.97 0 449.446L0 62.554C0 28.03 28.029 0 62.554 0L449.446 0ZM183.8767 87.9921H121.8427L230.6673 292.4508V424.0079H281.3328V292.4508L390.1575 87.9921H328.1233L256 238.2489z" />
-            </svg>
-        </a>
-    </li>
-</ul>
-
-  </footer>
-</article>
-    </main>
-    
-<footer class="footer">
-        <span>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</span> · 
-
-    <span>
-        Powered by
-        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
-        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
-    </span>
-</footer>
-<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
-        <path d="M12 6H0l6-6z" />
-    </svg>
-</a>
-
-<script>
-    let menu = document.getElementById('menu')
-    if (menu) {
-        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
-        menu.onscroll = function () {
-            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
-        }
-    }
-
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener("click", function (e) {
-            e.preventDefault();
-            var id = this.getAttribute("href").substr(1);
-            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
-                    behavior: "smooth"
-                });
-            } else {
-                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
-            }
-            if (id === "top") {
-                history.replaceState(null, null, " ");
-            } else {
-                history.pushState(null, null, `#${id}`);
-            }
-        });
-    });
-
-</script>
-<script>
-    var mybutton = document.getElementById("top-link");
-    window.onscroll = function () {
-        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
-            mybutton.style.visibility = "visible";
-            mybutton.style.opacity = "1";
-        } else {
-            mybutton.style.visibility = "hidden";
-            mybutton.style.opacity = "0";
-        }
-    };
-
-</script>
-<script>
-    document.getElementById("theme-toggle").addEventListener("click", () => {
-        if (document.body.className.includes("dark")) {
-            document.body.classList.remove('dark');
-            localStorage.setItem("pref-theme", 'light');
-        } else {
-            document.body.classList.add('dark');
-            localStorage.setItem("pref-theme", 'dark');
-        }
-    })
-
-</script>
-<script>
-    document.querySelectorAll('pre > code').forEach((codeblock) => {
-        const container = codeblock.parentNode.parentNode;
-
-        const copybutton = document.createElement('button');
-        copybutton.classList.add('copy-code');
-        copybutton.innerHTML = 'copy';
-
-        function copyingDone() {
-            copybutton.innerHTML = 'copied!';
-            setTimeout(() => {
-                copybutton.innerHTML = 'copy';
-            }, 2000);
-        }
-
-        copybutton.addEventListener('click', (cb) => {
-            if ('clipboard' in navigator) {
-                navigator.clipboard.writeText(codeblock.textContent);
-                copyingDone();
-                return;
-            }
-
-            const range = document.createRange();
-            range.selectNodeContents(codeblock);
-            const selection = window.getSelection();
-            selection.removeAllRanges();
-            selection.addRange(range);
-            try {
-                document.execCommand('copy');
-                copyingDone();
-            } catch (e) { };
-            selection.removeRange(range);
-        });
-
-        if (container.classList.contains("highlight")) {
-            container.appendChild(copybutton);
-        } else if (container.parentNode.firstChild == container) {
-            
-        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
-            
-            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
-        } else {
-            
-            codeblock.parentNode.appendChild(copybutton);
-        }
-    });
-</script>
-</body>
-
-</html>
+In this blog, we&rsquo;ll be covering the first two above, and the rest will be covered in the next blog(s)."><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Posts","item":"https://krshrimali.github.io/posts/"},{"@type":"ListItem","position":2,"name":"Data Scrapping for ChatBot Model in Rust | DocsGPT | Part-2","item":"https://krshrimali.github.io/posts/2024/02/data-scrapping-for-chatbot-model-in-rust-docsgpt-part-2/"}]}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Data Scrapping for ChatBot Model in Rust | DocsGPT | Part-2","name":"Data Scrapping for ChatBot Model in Rust | DocsGPT | Part-2","description":"Alright everyone, we are back. Just FYI, we\u0026rsquo;ve had a blog on introduction to DocsGPT before: https://krshrimali.github.io/posts/2024/02/building-a-chatbot-from-your-documentation-website-docsgpt/. This is a follow up blog where we\u0026rsquo;ll discuss data scraping and preprocessing to be able to finetune our model for ChatBot use-case.\nQuick recap?\nInput is going to be a single link to documentation page (index page). Need to fetch data for \u0026ldquo;all the internal pages\u0026rdquo;. Preprocess (and/or clean) and transform the data to be able to finetune the model. Finetune the model and use it for ChatBot use-case. In this blog, we\u0026rsquo;ll be covering the first two above, and the rest will be covered in the next blog(s).\n","keywords":["project","deep learning","LLM","rust"],"articleBody":"Alright everyone, we are back. Just FYI, we’ve had a blog on introduction to DocsGPT before: https://krshrimali.github.io/posts/2024/02/building-a-chatbot-from-your-documentation-website-docsgpt/. This is a follow up blog where we’ll discuss data scraping and preprocessing to be able to finetune our model for ChatBot use-case.\nQuick recap?\nInput is going to be a single link to documentation page (index page). Need to fetch data for “all the internal pages”. Preprocess (and/or clean) and transform the data to be able to finetune the model. Finetune the model and use it for ChatBot use-case. In this blog, we’ll be covering the first two above, and the rest will be covered in the next blog(s).\nData Scraping The problem is simple, let’s just define our function and it’s return type. It kinda sets the tone.\npub fn fetch_data(input_link: \u0026str) -\u003e Result\u003cVec\u003cString\u003e, Box\u003cdyn std::error::Error\u003e\u003e { // input_link is the link to the index page of the documentation concerned } Alright, so as it might be clear already, we’ll be passing link to the index page of the documentation. For our use-case of PyTorch documentation, we’ll use: https://pytorch.org/docs/stable/index.html. The return type is Vec where each string is the content of the internal page.\nThis is an example function though, we’ll be moving to another format as we go ahead. But for now, let’s just keep it simple. There are 2 problems we’re trying to solve here:\nFetch “all the internal pages” through the index page. This includes going through all the hyperlinks in each page starting from the index page, and fetching the content of each page. We’ll include any external page (that is not internal to the documentation, for simplicity). Getting content of the page To be able to solve these problems, we’ll use soup crate in Rust: https://docs.rs/soup/latest/soup/. For those who are used to using beautifulsoup in Python, it’s pretty similar.\nLet’s start with the first problem. We’ll define a function extract_all_hyperlinks which will take the index page link and return all the internal links. (the function won’t be recursive)\nNote that, to be able to do this, we’ll just make sure to get the content of the index page first.\npub fn fetch_raw_html(main_html_link: String) -\u003e Result\u003cString, std::io::Error\u003e { let output = reqwest::blocking::get(main_html_link).expect(\"Failed to fetch the URL\"); let output_text = output.text().expect(\"Failed to read the response text\"); Ok(output_text.to_string()) } fn main() { let main_html_link: String = \"https://pytorch.org/docs/stable/index.html\".to_string(); let raw_data: Result\u003cString, std::io::Error\u003e = fetch_raw_html(main_html_link.clone()); env_logger::init(); let mut all_links: Vec\u003cString\u003e = Vec::new(); let mut all_text: Vec\u003cString\u003e = Vec::new(); let if_succeeded = extract_all_hyperlinks(raw_data, \u0026mut all_links, \u0026mut all_text); } If you’re wondering, why fetch raw HTML separately and then extract hyperlinks from the content? Rust is naturally a functional language, and following the practice to keep a single function limited to one single action, we’re doing this. Will help testing efforts in the future.\nAlright, so - so far, we got the raw HTML content (used reqwest crate for fetching the content), and then we’re passing it to extract_all_hyperlinks function. The function will look something like this:\npub fn extract_all_hyperlinks( raw_data: Result\u003cString, std::io::Error\u003e, all_links: \u0026mut Vec\u003cString\u003e, all_text: \u0026mut Vec\u003cString\u003e, ) -\u003e Result\u003c(), std::io::Error\u003e { match raw_data { Ok(content) =\u003e { let soup = Soup::new(\u0026content); let text = soup.text(); all_text.push(text); let all_tags_a_href = soup.tag(\"a\").find_all(); all_tags_a_href.enumerate().for_each(|(_, tag)| { let href = tag.get(\"href\"); match href { Some(href) =\u003e { // NOTE: Can you think of a better way to differentiate b/w internal and external links? if href.starts_with(\"http\") || href.starts_with('_') || href.starts_with('#') || href.starts_with('.') { log::info!(\"Skipping: {:?}\", href); return; } all_links.push(href); } None =\u003e log::warn!(\"No href attribute found\"), } }); Ok(()) } Err(e) =\u003e { log::error!(\"Error reading file: {:?}\", e,); Err(e) } } } What are we doing here?\nWe got the content from fetch_raw_html, if valid we’ll create a Soup object from it and get the text. Once we have the text, we’ll get all the a tags and their href attributes. We’ll skip the external links (for simplicity) and add the internal links to all_links vector. I’m open to ideas on differentiating b/w external and internal links. For now, anything that starts with http, _, #, or . is considered external (please note that https automatically comes in this because it’s a superset of http). We’ll also add the text to all_text vector. It’s comparatively easier to test these functions now, thanks to the original idea of keeping their jobs separate.\nAlright, now we have the hyperlinks, but we haven’t fetched all the content of those hyperlinks and their hyperlinks and their hyperlinks… (nested hyperlinks xD).\nIt’s easy if you think about it:\nIterate through all the hyperlinks, for each link - get the data and store it. ^^ Hmm, sounds very easy, duh? Well, we are missing one part. What if the link is repeated? Which is quite possible in any documentation. Let’s revise our list above:\nIterate through all the hyperlinks, for each link - get the data and store it. If the link is already in a HashSet, skip it. Otherwise, add it to the HashSet and store the data. Here’s where we’ll just re-use our functions defined above:\nfn main() { // ... let mut visited_set: HashSet\u003cString\u003e = HashSet::new(); for link in all_links.iter() { if visited_set.contains(link) { log::info!(\"Skipping link because it's alr visited: {:?}\", link); continue; } // NOTE: Guess what we are doing here? let modified_link = Path::new(\u0026main_html_link).parent().unwrap().join(link); let content = fetch_raw_html(modified_link.display().to_string()); let success = extract_all_hyperlinks(content, \u0026mut nested_links, \u0026mut all_text); visited_set.insert(link.clone()); if success.is_ok() { log::info!(\"Success for link: {:?}\", link); log::debug!(\"Nested links: {:?}\", nested_links); } else { log::info!(\"Failed for link: {:?}\", link); } } // ... } If you saw the code above, there is a note which says:\n// NOTE: Guess what we are doing here?\nAlright, so for any internal link, which would look like this: /docs/stable/tensors.html, we’ll just join it with the parent link and fetch the content. This is a very simple way to do it, and it’s not the best way to do it. But for now, it’s good enough. Do note that, the parent link comes from the initial link the user passes to this flow, which was: https://pytorch.org/docs/stable/index.html in this case. So we’ll just replace /index.html with /docs/stable/tensors.html and fetch the content.\nOnce this is done, the next task would be to understand what data we got - how we can transform it - what kind of cleaning methods are needed etc. That’s going to be a good exercise for the next blog. For now, I think, this is a good start! Right? :)\nYouTube! As always, a shameless plug, I do have a YouTube channel guys! Please consider referring to the channel if there’s anything that interests you there. Here’s the link: https://www.youtube.com/c/kushashwaraviShrimali.\nDiscord! Oh, and yes, we do have a discord channel. Please consider joining the channel for any discussions, or if you need any help. Here’s the link: https://discord.gg/nh2KuAX3V8.\nAlright then 🤝, I’ll see you soon in the next blog. Thank you all, bye! ❤️\n","wordCount":"1144","inLanguage":"en","datePublished":"2024-02-26T00:00:00Z","dateModified":"2024-02-26T00:00:00Z","author":{"@type":"Person","name":{"name":"Kushashwa Ravi Shrimali"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://krshrimali.github.io/posts/2024/02/data-scrapping-for-chatbot-model-in-rust-docsgpt-part-2/"},"publisher":{"@type":"Organization","name":"Kushashwa Ravi Shrimali (Kush)","logo":{"@type":"ImageObject","url":"https://krshrimali.github.io/favicon.ico"}}}</script></head><body id=top><script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add("dark"):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove("dark"):window.matchMedia("(prefers-color-scheme: dark)").matches&&document.body.classList.add("dark")</script><header class=header><nav class=nav><div class=logo><a href=https://krshrimali.github.io/ accesskey=h title="Kushashwa Ravi Shrimali (Kush) (Alt + H)">Kushashwa Ravi Shrimali (Kush)</a><div class=logo-switches><button id=theme-toggle accesskey=t title="(Alt + T)" aria-label="Toggle theme">
+<svg id="moon" width="24" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+<svg id="sun" width="24" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></div></div><ul id=menu><li><a href=https://krshrimali.github.io/search/ title="Search (Alt + /)" accesskey=/><span>Search</span></a></li><li><a href=https://krshrimali.github.io/about title=About><span>About</span></a></li><li><a href=https://krshrimali.github.io/posts title=Blog><span>Blog</span></a></li></ul></nav></header><main class=main><article class=post-single><header class=post-header><div class=breadcrumbs><a href=https://krshrimali.github.io/>Home</a>&nbsp;»&nbsp;<a href=https://krshrimali.github.io/posts/>Posts</a></div><h1 class="post-title entry-hint-parent">Data Scrapping for ChatBot Model in Rust | DocsGPT | Part-2</h1><div class=post-meta><span title='2024-02-26 00:00:00 +0000 UTC'>February 26, 2024</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;map[name:Kushashwa Ravi Shrimali]</div></header><div class=toc><details><summary accesskey=c title="(Alt + C)"><span class=details>Table of Contents</span></summary><div class=inner><ul><li><a href=#data-scraping aria-label="Data Scraping">Data Scraping</a></li><li><a href=#youtube aria-label=YouTube!>YouTube!</a></li><li><a href=#discord aria-label=Discord!>Discord!</a></li></ul></div></details></div><div class=post-content><p>Alright everyone, we are back. Just FYI, we&rsquo;ve had a blog on introduction to DocsGPT before: <a href=https://krshrimali.github.io/posts/2024/02/building-a-chatbot-from-your-documentation-website-docsgpt/>https://krshrimali.github.io/posts/2024/02/building-a-chatbot-from-your-documentation-website-docsgpt/</a>. This is a follow up blog where we&rsquo;ll discuss data scraping and preprocessing to be able to finetune our model for ChatBot use-case.</p><p>Quick recap?</p><ol><li>Input is going to be a <em>single link to documentation page (index page)</em>.</li><li>Need to fetch data for &ldquo;all the internal pages&rdquo;.</li><li>Preprocess (and/or clean) and transform the data to be able to finetune the model.</li><li>Finetune the model and use it for ChatBot use-case.</li></ol><p>In this blog, we&rsquo;ll be covering the first two above, and the rest will be covered in the next blog(s).</p><h2 id=data-scraping>Data Scraping<a hidden class=anchor aria-hidden=true href=#data-scraping>#</a></h2><p>The problem is simple, let&rsquo;s just define our function and it&rsquo;s return type. It kinda sets the tone.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-rust data-lang=rust><span style=display:flex><span><span style=color:#66d9ef>pub</span> <span style=color:#66d9ef>fn</span> <span style=color:#a6e22e>fetch_data</span>(input_link: <span style=color:#66d9ef>&amp;</span><span style=color:#66d9ef>str</span>) -&gt; Result<span style=color:#f92672>&lt;</span>Vec<span style=color:#f92672>&lt;</span>String<span style=color:#f92672>&gt;</span>, Box<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>dyn</span> std::error::Error<span style=color:#f92672>&gt;&gt;</span> {
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// input_link is the link to the index page of the documentation concerned
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>}
+</span></span></code></pre></div><p>Alright, so as it might be clear already, we&rsquo;ll be passing link to the index page of the documentation. For our use-case of PyTorch documentation, we&rsquo;ll use: <a href=https://pytorch.org/docs/stable/index.html>https://pytorch.org/docs/stable/index.html</a>. The return type is <code>Vec&lt;String></code> where each string is the content of the internal page.</p><p>This is an example function though, we&rsquo;ll be moving to another format as we go ahead. But for now, let&rsquo;s just keep it simple. There are 2 problems we&rsquo;re trying to solve here:</p><ol><li>Fetch &ldquo;all the internal pages&rdquo; through the index page.<ul><li>This includes going through all the hyperlinks in each page starting from the index page, and fetching the content of each page.</li><li>We&rsquo;ll include any external page (that is not internal to the documentation, for simplicity).</li></ul></li><li>Getting content of the page</li></ol><p>To be able to solve these problems, we&rsquo;ll use <code>soup</code> crate in Rust: <a href=https://docs.rs/soup/latest/soup/>https://docs.rs/soup/latest/soup/</a>. For those who are used to using <code>beautifulsoup</code> in Python, it&rsquo;s pretty similar.</p><p>Let&rsquo;s start with the first problem. We&rsquo;ll define a function <code>extract_all_hyperlinks</code> which will take the index page link and return all the internal links. (the function won&rsquo;t be recursive)</p><p>Note that, to be able to do this, we&rsquo;ll just make sure to get the content of the index page first.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-rust data-lang=rust><span style=display:flex><span><span style=color:#66d9ef>pub</span> <span style=color:#66d9ef>fn</span> <span style=color:#a6e22e>fetch_raw_html</span>(main_html_link: String) -&gt; Result<span style=color:#f92672>&lt;</span>String, std::io::Error<span style=color:#f92672>&gt;</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>let</span> output <span style=color:#f92672>=</span> reqwest::blocking::get(main_html_link).expect(<span style=color:#e6db74>&#34;Failed to fetch the URL&#34;</span>);
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>let</span> output_text <span style=color:#f92672>=</span> output.text().expect(<span style=color:#e6db74>&#34;Failed to read the response text&#34;</span>);
+</span></span><span style=display:flex><span>    Ok(output_text.to_string())
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>fn</span> <span style=color:#a6e22e>main</span>() {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>let</span> main_html_link: String <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;https://pytorch.org/docs/stable/index.html&#34;</span>.to_string();
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>let</span> raw_data: Result<span style=color:#f92672>&lt;</span>String, std::io::Error<span style=color:#f92672>&gt;</span> <span style=color:#f92672>=</span> fetch_raw_html(main_html_link.clone());
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    env_logger::init();
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>let</span> <span style=color:#66d9ef>mut</span> all_links: Vec<span style=color:#f92672>&lt;</span>String<span style=color:#f92672>&gt;</span> <span style=color:#f92672>=</span> Vec::new();
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>let</span> <span style=color:#66d9ef>mut</span> all_text: Vec<span style=color:#f92672>&lt;</span>String<span style=color:#f92672>&gt;</span> <span style=color:#f92672>=</span> Vec::new();
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>let</span> if_succeeded <span style=color:#f92672>=</span> extract_all_hyperlinks(raw_data, <span style=color:#f92672>&amp;</span><span style=color:#66d9ef>mut</span> all_links, <span style=color:#f92672>&amp;</span><span style=color:#66d9ef>mut</span> all_text);
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>If you&rsquo;re wondering, why fetch raw HTML separately and then extract hyperlinks from the content? Rust is naturally a functional language, and following the practice to keep a single function limited to one single action, we&rsquo;re doing this. Will help testing efforts in the future.</p><p>Alright, so - so far, we got the raw HTML content (used <code>reqwest</code> crate for fetching the content), and then we&rsquo;re passing it to <code>extract_all_hyperlinks</code> function. The function will look something like this:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-rust data-lang=rust><span style=display:flex><span><span style=color:#66d9ef>pub</span> <span style=color:#66d9ef>fn</span> <span style=color:#a6e22e>extract_all_hyperlinks</span>(
+</span></span><span style=display:flex><span>    raw_data: Result<span style=color:#f92672>&lt;</span>String, std::io::Error<span style=color:#f92672>&gt;</span>,
+</span></span><span style=display:flex><span>    all_links: <span style=color:#66d9ef>&amp;</span><span style=color:#a6e22e>mut</span> Vec<span style=color:#f92672>&lt;</span>String<span style=color:#f92672>&gt;</span>,
+</span></span><span style=display:flex><span>    all_text: <span style=color:#66d9ef>&amp;</span><span style=color:#a6e22e>mut</span> Vec<span style=color:#f92672>&lt;</span>String<span style=color:#f92672>&gt;</span>,
+</span></span><span style=display:flex><span>) -&gt; Result<span style=color:#f92672>&lt;</span>(), std::io::Error<span style=color:#f92672>&gt;</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>match</span> raw_data {
+</span></span><span style=display:flex><span>        Ok(content) <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>let</span> soup <span style=color:#f92672>=</span> Soup::new(<span style=color:#f92672>&amp;</span>content);
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>let</span> text <span style=color:#f92672>=</span> soup.text();
+</span></span><span style=display:flex><span>            all_text.push(text);
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>let</span> all_tags_a_href <span style=color:#f92672>=</span> soup.tag(<span style=color:#e6db74>&#34;a&#34;</span>).find_all();
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            all_tags_a_href.enumerate().for_each(<span style=color:#f92672>|</span>(_, tag)<span style=color:#f92672>|</span> {
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>let</span> href <span style=color:#f92672>=</span> tag.get(<span style=color:#e6db74>&#34;href&#34;</span>);
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>match</span> href {
+</span></span><span style=display:flex><span>                    Some(href) <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>                        <span style=color:#75715e>// NOTE: Can you think of a better way to differentiate b/w internal and external links?
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>                        <span style=color:#66d9ef>if</span> href.starts_with(<span style=color:#e6db74>&#34;http&#34;</span>)
+</span></span><span style=display:flex><span>                            <span style=color:#f92672>||</span> href.starts_with(<span style=color:#e6db74>&#39;_&#39;</span>)
+</span></span><span style=display:flex><span>                            <span style=color:#f92672>||</span> href.starts_with(<span style=color:#e6db74>&#39;#&#39;</span>)
+</span></span><span style=display:flex><span>                            <span style=color:#f92672>||</span> href.starts_with(<span style=color:#e6db74>&#39;.&#39;</span>)
+</span></span><span style=display:flex><span>                        {
+</span></span><span style=display:flex><span>                            log::<span style=color:#a6e22e>info!</span>(<span style=color:#e6db74>&#34;Skipping: {:?}&#34;</span>, href);
+</span></span><span style=display:flex><span>                            <span style=color:#66d9ef>return</span>;
+</span></span><span style=display:flex><span>                        }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>                        all_links.push(href);
+</span></span><span style=display:flex><span>                    }
+</span></span><span style=display:flex><span>                    None <span style=color:#f92672>=&gt;</span> log::<span style=color:#a6e22e>warn!</span>(<span style=color:#e6db74>&#34;No href attribute found&#34;</span>),
+</span></span><span style=display:flex><span>                }
+</span></span><span style=display:flex><span>            });
+</span></span><span style=display:flex><span>            Ok(())
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        Err(e) <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>            log::<span style=color:#a6e22e>error!</span>(<span style=color:#e6db74>&#34;Error reading file: {:?}&#34;</span>, e,);
+</span></span><span style=display:flex><span>            Err(e)
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>What are we doing here?</p><ul><li>We got the content from <code>fetch_raw_html</code>, if valid we&rsquo;ll create a <code>Soup</code> object from it and get the text.</li><li>Once we have the text, we&rsquo;ll get all the <code>a</code> tags and their <code>href</code> attributes.</li><li>We&rsquo;ll skip the external links (for simplicity) and add the internal links to <code>all_links</code> vector.<ul><li>I&rsquo;m open to ideas on differentiating b/w external and internal links. For now, anything that starts with <code>http</code>, <code>_</code>, <code>#</code>, or <code>.</code> is considered external (please note that <code>https</code> automatically comes in this because it&rsquo;s a superset of <code>http</code>).</li></ul></li><li>We&rsquo;ll also add the text to <code>all_text</code> vector.</li></ul><p>It&rsquo;s comparatively easier to test these functions now, thanks to the original idea of keeping their jobs separate.</p><p>Alright, now we have the hyperlinks, but we haven&rsquo;t fetched all the content of those hyperlinks and their hyperlinks and their hyperlinks&mldr; (nested hyperlinks xD).</p><p>It&rsquo;s easy if you think about it:</p><ol><li>Iterate through all the hyperlinks, for each link - get the data and store it.</li></ol><p>^^ Hmm, sounds very easy, duh? Well, we are missing one part. What if the link is repeated? Which is quite possible in any documentation. Let&rsquo;s revise our list above:</p><ol><li>Iterate through all the hyperlinks, for each link - get the data and store it.</li><li>If the link is already in a HashSet, skip it. Otherwise, add it to the HashSet and store the data.</li></ol><p>Here&rsquo;s where we&rsquo;ll just re-use our functions defined above:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-rust data-lang=rust><span style=display:flex><span><span style=color:#66d9ef>fn</span> <span style=color:#a6e22e>main</span>() {
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// ...
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>let</span> <span style=color:#66d9ef>mut</span> visited_set: <span style=color:#a6e22e>HashSet</span><span style=color:#f92672>&lt;</span>String<span style=color:#f92672>&gt;</span> <span style=color:#f92672>=</span> HashSet::new();
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> link <span style=color:#66d9ef>in</span> all_links.iter() {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> visited_set.contains(link) {
+</span></span><span style=display:flex><span>            log::<span style=color:#a6e22e>info!</span>(<span style=color:#e6db74>&#34;Skipping link because it&#39;s alr visited: {:?}&#34;</span>, link);
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>continue</span>;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// NOTE: Guess what we are doing here?
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>let</span> modified_link <span style=color:#f92672>=</span> Path::new(<span style=color:#f92672>&amp;</span>main_html_link).parent().unwrap().join(link);
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>let</span> content <span style=color:#f92672>=</span> fetch_raw_html(modified_link.display().to_string());
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>let</span> success <span style=color:#f92672>=</span> extract_all_hyperlinks(content, <span style=color:#f92672>&amp;</span><span style=color:#66d9ef>mut</span> nested_links, <span style=color:#f92672>&amp;</span><span style=color:#66d9ef>mut</span> all_text);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        visited_set.insert(link.clone());
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> success.is_ok() {
+</span></span><span style=display:flex><span>            log::<span style=color:#a6e22e>info!</span>(<span style=color:#e6db74>&#34;Success for link: {:?}&#34;</span>, link);
+</span></span><span style=display:flex><span>            log::<span style=color:#a6e22e>debug!</span>(<span style=color:#e6db74>&#34;Nested links: {:?}&#34;</span>, nested_links);
+</span></span><span style=display:flex><span>        } <span style=color:#66d9ef>else</span> {
+</span></span><span style=display:flex><span>            log::<span style=color:#a6e22e>info!</span>(<span style=color:#e6db74>&#34;Failed for link: {:?}&#34;</span>, link);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// ...
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>}
+</span></span></code></pre></div><p>If you saw the code above, there is a note which says:</p><blockquote><p>// NOTE: Guess what we are doing here?</p></blockquote><p>Alright, so for any internal link, which would look like this: <code>/docs/stable/tensors.html</code>, we&rsquo;ll just join it with the parent link and fetch the content. This is a very simple way to do it, and it&rsquo;s not the best way to do it. But for now, it&rsquo;s good enough. Do note that, the parent link comes from the initial link the user passes to this flow, which was: <code>https://pytorch.org/docs/stable/index.html</code> in this case. So we&rsquo;ll just replace <code>/index.html</code> with <code>/docs/stable/tensors.html</code> and fetch the content.</p><p>Once this is done, the next task would be to understand what data we got - how we can transform it - what kind of cleaning methods are needed etc. That&rsquo;s going to be a good exercise for the next blog. For now, I think, this is a good start! Right? :)</p><h2 id=youtube>YouTube!<a hidden class=anchor aria-hidden=true href=#youtube>#</a></h2><p>As always, a shameless plug, I do have a YouTube channel guys! Please consider referring to the channel if there&rsquo;s anything that interests you there. Here&rsquo;s the link: <a href=https://www.youtube.com/c/kushashwaraviShrimali>https://www.youtube.com/c/kushashwaraviShrimali</a>.</p><h2 id=discord>Discord!<a hidden class=anchor aria-hidden=true href=#discord>#</a></h2><p>Oh, and yes, we do have a discord channel. Please consider joining the channel for any discussions, or if you need any help. Here&rsquo;s the link: <a href=https://discord.gg/nh2KuAX3V8>https://discord.gg/nh2KuAX3V8</a>.</p><p>Alright then 🤝, I&rsquo;ll see you soon in the next blog. Thank you all, bye! ❤️</p></div><footer class=post-footer><ul class=post-tags><li><a href=https://krshrimali.github.io/tags/project/>Project</a></li><li><a href=https://krshrimali.github.io/tags/deep-learning/>Deep Learning</a></li><li><a href=https://krshrimali.github.io/tags/llm/>LLM</a></li><li><a href=https://krshrimali.github.io/tags/rust/>Rust</a></li></ul><nav class=paginav><a class=prev href=https://krshrimali.github.io/posts/2024/02/building-a-chatbot-from-your-documentation-website-docsgpt/><span class=title>« Prev</span><br><span>Building a ChatBot from your Documentation Website | DocsGPT</span>
+</a><a class=next href=https://krshrimali.github.io/posts/2024/01/bring-back-the-old-times-celebrate-your-wins/><span class=title>Next »</span><br><span>Bring back the old times - celebrate your wins!</span></a></nav><ul class=share-buttons><li><a target=_blank rel="noopener noreferrer" aria-label="share Data Scrapping for ChatBot Model in Rust | DocsGPT | Part-2 on x" href="https://x.com/intent/tweet/?text=Data%20Scrapping%20for%20ChatBot%20Model%20in%20Rust%20%7c%20DocsGPT%20%7c%20Part-2&amp;url=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2024%2f02%2fdata-scrapping-for-chatbot-model-in-rust-docsgpt-part-2%2f&amp;hashtags=project%2cdeeplearning%2cLLM%2crust"><svg viewBox="0 0 512 512" height="30" width="30" fill="currentColor"><path d="M512 62.554V449.446C512 483.97 483.97 512 449.446 512H62.554C28.03 512 0 483.97.0 449.446V62.554C0 28.03 28.029.0 62.554.0H449.446C483.971.0 512 28.03 512 62.554zM269.951 190.75 182.567 75.216H56L207.216 272.95 63.9 436.783h61.366L235.9 310.383l96.667 126.4H456L298.367 228.367l134-153.151H371.033zM127.633 110h36.468l219.38 290.065H349.5z"/></svg></a></li><li><a target=_blank rel="noopener noreferrer" aria-label="share Data Scrapping for ChatBot Model in Rust | DocsGPT | Part-2 on linkedin" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2024%2f02%2fdata-scrapping-for-chatbot-model-in-rust-docsgpt-part-2%2f&amp;title=Data%20Scrapping%20for%20ChatBot%20Model%20in%20Rust%20%7c%20DocsGPT%20%7c%20Part-2&amp;summary=Data%20Scrapping%20for%20ChatBot%20Model%20in%20Rust%20%7c%20DocsGPT%20%7c%20Part-2&amp;source=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2024%2f02%2fdata-scrapping-for-chatbot-model-in-rust-docsgpt-part-2%2f"><svg viewBox="0 0 512 512" height="30" width="30" fill="currentColor"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zM160.461 423.278V197.561h-75.04v225.717h75.04zm270.539.0V293.839c0-69.333-37.018-101.586-86.381-101.586-39.804.0-57.634 21.891-67.617 37.266v-31.958h-75.021c.995 21.181.0 225.717.0 225.717h75.02V297.222c0-6.748.486-13.492 2.474-18.315 5.414-13.475 17.767-27.434 38.494-27.434 27.135.0 38.007 20.707 38.007 51.037v120.768H431zM123.448 88.722C97.774 88.722 81 105.601 81 127.724c0 21.658 16.264 39.002 41.455 39.002h.484c26.165.0 42.452-17.344 42.452-39.002-.485-22.092-16.241-38.954-41.943-39.002z"/></svg></a></li><li><a target=_blank rel="noopener noreferrer" aria-label="share Data Scrapping for ChatBot Model in Rust | DocsGPT | Part-2 on reddit" href="https://reddit.com/submit?url=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2024%2f02%2fdata-scrapping-for-chatbot-model-in-rust-docsgpt-part-2%2f&title=Data%20Scrapping%20for%20ChatBot%20Model%20in%20Rust%20%7c%20DocsGPT%20%7c%20Part-2"><svg viewBox="0 0 512 512" height="30" width="30" fill="currentColor"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zM446 265.638c0-22.964-18.616-41.58-41.58-41.58-11.211.0-21.361 4.457-28.841 11.666-28.424-20.508-67.586-33.757-111.204-35.278l18.941-89.121 61.884 13.157c.756 15.734 13.642 28.29 29.56 28.29 16.407.0 29.706-13.299 29.706-29.701.0-16.403-13.299-29.702-29.706-29.702-11.666.0-21.657 6.792-26.515 16.578l-69.105-14.69c-1.922-.418-3.939-.042-5.585 1.036-1.658 1.073-2.811 2.761-3.224 4.686l-21.152 99.438c-44.258 1.228-84.046 14.494-112.837 35.232-7.468-7.164-17.589-11.591-28.757-11.591-22.965.0-41.585 18.616-41.585 41.58.0 16.896 10.095 31.41 24.568 37.918-.639 4.135-.99 8.328-.99 12.576.0 63.977 74.469 115.836 166.33 115.836s166.334-51.859 166.334-115.836c0-4.218-.347-8.387-.977-12.493 14.564-6.47 24.735-21.034 24.735-38.001zM326.526 373.831c-20.27 20.241-59.115 21.816-70.534 21.816-11.428.0-50.277-1.575-70.522-21.82-3.007-3.008-3.007-7.882.0-10.889 3.003-2.999 7.882-3.003 10.885.0 12.777 12.781 40.11 17.317 59.637 17.317 19.522.0 46.86-4.536 59.657-17.321 3.016-2.999 7.886-2.995 10.885.008 3.008 3.011 3.003 7.882-.008 10.889zm-5.23-48.781c-16.373.0-29.701-13.324-29.701-29.698.0-16.381 13.328-29.714 29.701-29.714 16.378.0 29.706 13.333 29.706 29.714.0 16.374-13.328 29.698-29.706 29.698zM160.91 295.348c0-16.381 13.328-29.71 29.714-29.71 16.369.0 29.689 13.329 29.689 29.71.0 16.373-13.32 29.693-29.689 29.693-16.386.0-29.714-13.32-29.714-29.693z"/></svg></a></li><li><a target=_blank rel="noopener noreferrer" aria-label="share Data Scrapping for ChatBot Model in Rust | DocsGPT | Part-2 on facebook" href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2024%2f02%2fdata-scrapping-for-chatbot-model-in-rust-docsgpt-part-2%2f"><svg viewBox="0 0 512 512" height="30" width="30" fill="currentColor"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H342.978V319.085h66.6l12.672-82.621h-79.272v-53.617c0-22.603 11.073-44.636 46.58-44.636H425.6v-70.34s-32.71-5.582-63.982-5.582c-65.288.0-107.96 39.569-107.96 111.204v62.971h-72.573v82.621h72.573V512h-191.104c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892z"/></svg></a></li><li><a target=_blank rel="noopener noreferrer" aria-label="share Data Scrapping for ChatBot Model in Rust | DocsGPT | Part-2 on whatsapp" href="https://api.whatsapp.com/send?text=Data%20Scrapping%20for%20ChatBot%20Model%20in%20Rust%20%7c%20DocsGPT%20%7c%20Part-2%20-%20https%3a%2f%2fkrshrimali.github.io%2fposts%2f2024%2f02%2fdata-scrapping-for-chatbot-model-in-rust-docsgpt-part-2%2f"><svg viewBox="0 0 512 512" height="30" width="30" fill="currentColor"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zm-58.673 127.703c-33.842-33.881-78.847-52.548-126.798-52.568-98.799.0-179.21 80.405-179.249 179.234-.013 31.593 8.241 62.428 23.927 89.612l-25.429 92.884 95.021-24.925c26.181 14.28 55.659 21.807 85.658 21.816h.074c98.789.0 179.206-80.413 179.247-179.243.018-47.895-18.61-92.93-52.451-126.81zM263.976 403.485h-.06c-26.734-.01-52.954-7.193-75.828-20.767l-5.441-3.229-56.386 14.792 15.05-54.977-3.542-5.637c-14.913-23.72-22.791-51.136-22.779-79.287.033-82.142 66.867-148.971 149.046-148.971 39.793.014 77.199 15.531 105.329 43.692 28.128 28.16 43.609 65.592 43.594 105.4-.034 82.149-66.866 148.983-148.983 148.984zm81.721-111.581c-4.479-2.242-26.499-13.075-30.604-14.571-4.105-1.495-7.091-2.241-10.077 2.241-2.986 4.483-11.569 14.572-14.182 17.562-2.612 2.988-5.225 3.364-9.703 1.12-4.479-2.241-18.91-6.97-36.017-22.23C231.8 264.15 222.81 249.484 220.198 245s-.279-6.908 1.963-9.14c2.016-2.007 4.48-5.232 6.719-7.847 2.24-2.615 2.986-4.484 4.479-7.472 1.493-2.99.747-5.604-.374-7.846-1.119-2.241-10.077-24.288-13.809-33.256-3.635-8.733-7.327-7.55-10.077-7.688-2.609-.13-5.598-.158-8.583-.158-2.986.0-7.839 1.121-11.944 5.604-4.105 4.484-15.675 15.32-15.675 37.364.0 22.046 16.048 43.342 18.287 46.332 2.24 2.99 31.582 48.227 76.511 67.627 10.685 4.615 19.028 7.371 25.533 9.434 10.728 3.41 20.492 2.929 28.209 1.775 8.605-1.285 26.499-10.833 30.231-21.295 3.732-10.464 3.732-19.431 2.612-21.298-1.119-1.869-4.105-2.99-8.583-5.232z"/></svg></a></li><li><a target=_blank rel="noopener noreferrer" aria-label="share Data Scrapping for ChatBot Model in Rust | DocsGPT | Part-2 on telegram" href="https://telegram.me/share/url?text=Data%20Scrapping%20for%20ChatBot%20Model%20in%20Rust%20%7c%20DocsGPT%20%7c%20Part-2&amp;url=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2024%2f02%2fdata-scrapping-for-chatbot-model-in-rust-docsgpt-part-2%2f"><svg viewBox="2 2 28 28" height="30" width="30" fill="currentColor"><path d="M26.49 29.86H5.5a3.37 3.37.0 01-2.47-1 3.35 3.35.0 01-1-2.47V5.48A3.36 3.36.0 013 3 3.37 3.37.0 015.5 2h21A3.38 3.38.0 0129 3a3.36 3.36.0 011 2.46V26.37a3.35 3.35.0 01-1 2.47 3.38 3.38.0 01-2.51 1.02zm-5.38-6.71a.79.79.0 00.85-.66L24.73 9.24a.55.55.0 00-.18-.46.62.62.0 00-.41-.17q-.08.0-16.53 6.11a.59.59.0 00-.41.59.57.57.0 00.43.52l4 1.24 1.61 4.83a.62.62.0 00.63.43.56.56.0 00.4-.17L16.54 20l4.09 3A.9.9.0 0021.11 23.15zM13.8 20.71l-1.21-4q8.72-5.55 8.78-5.55c.15.0.23.0.23.16a.18.18.0 010 .06s-2.51 2.3-7.52 6.8z"/></svg></a></li><li><a target=_blank rel="noopener noreferrer" aria-label="share Data Scrapping for ChatBot Model in Rust | DocsGPT | Part-2 on ycombinator" href="https://news.ycombinator.com/submitlink?t=Data%20Scrapping%20for%20ChatBot%20Model%20in%20Rust%20%7c%20DocsGPT%20%7c%20Part-2&u=https%3a%2f%2fkrshrimali.github.io%2fposts%2f2024%2f02%2fdata-scrapping-for-chatbot-model-in-rust-docsgpt-part-2%2f"><svg width="30" height="30" viewBox="0 0 512 512" fill="currentColor"><path d="M449.446.0C483.971.0 512 28.03 512 62.554V449.446C512 483.97 483.97 512 449.446 512H62.554C28.03 512 0 483.97.0 449.446V62.554C0 28.03 28.029.0 62.554.0H449.446zM183.8767 87.9921h-62.034L230.6673 292.4508V424.0079h50.6655V292.4508L390.1575 87.9921H328.1233L256 238.2489z"/></svg></a></li></ul></footer></article></main><footer class=footer><span>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</span> ·
+<span>Powered by
+<a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
+<a href=https://github.com/adityatelange/hugo-PaperMod/ rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top aria-label="go to top" title="Go to Top (Alt + G)" class=top-link id=top-link accesskey=g><svg viewBox="0 0 12 6" fill="currentColor"><path d="M12 6H0l6-6z"/></svg>
+</a><script>let menu=document.getElementById("menu");menu&&(menu.scrollLeft=localStorage.getItem("menu-scroll-position"),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)}),document.querySelectorAll('a[href^="#"]').forEach(e=>{e.addEventListener("click",function(e){e.preventDefault();var t=this.getAttribute("href").substr(1);window.matchMedia("(prefers-reduced-motion: reduce)").matches?document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView({behavior:"smooth"}),t==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${t}`)})})</script><script>var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")}</script><script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove("dark"),localStorage.setItem("pref-theme","light")):(document.body.classList.add("dark"),localStorage.setItem("pref-theme","dark"))})</script><script>document.querySelectorAll("pre > code").forEach(e=>{const n=e.parentNode.parentNode,t=document.createElement("button");t.classList.add("copy-code"),t.innerHTML="copy";function s(){t.innerHTML="copied!",setTimeout(()=>{t.innerHTML="copy"},2e3)}t.addEventListener("click",t=>{if("clipboard"in navigator){navigator.clipboard.writeText(e.textContent),s();return}const n=document.createRange();n.selectNodeContents(e);const o=window.getSelection();o.removeAllRanges(),o.addRange(n);try{document.execCommand("copy"),s()}catch{}o.removeRange(n)}),n.classList.contains("highlight")?n.appendChild(t):n.parentNode.firstChild==n||(e.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName=="TABLE"?e.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(t):e.parentNode.appendChild(t))})</script></body></html>

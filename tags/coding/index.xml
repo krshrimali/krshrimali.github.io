@@ -1,222 +1,140 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
-  <channel>
-    <title>Coding on Kushashwa Ravi Shrimali (Kush)</title>
-    <link>https://krshrimali.github.io/tags/coding/</link>
-    <description>Recent content in Coding on Kushashwa Ravi Shrimali (Kush)</description>
-    <generator>Hugo -- 0.147.6</generator>
-    <language>en</language>
-    <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Sun, 23 Mar 2025 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://krshrimali.github.io/tags/coding/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Progress Update: Context Pilot (Revamping)</title>
-      <link>https://krshrimali.github.io/posts/2025/03/progress-update-context-pilot-revamping/</link>
-      <pubDate>Sun, 23 Mar 2025 00:00:00 +0000</pubDate>
-      <guid>https://krshrimali.github.io/posts/2025/03/progress-update-context-pilot-revamping/</guid>
-      <description>&lt;p&gt;I&amp;rsquo;ve had many iterations on this project that I&amp;rsquo;m going to talk about today, over the last 1.5-2 years. There are good and bad things about it. Good is that I&amp;rsquo;m persisting with completing it one day, bad is that I&amp;rsquo;ve not done it yet.&lt;/p&gt;
-&lt;p&gt;In this blog, I&amp;rsquo;ll quickly touch upon why it has taken so much time and what&amp;rsquo;s happening behind the scenes.&lt;/p&gt;
-&lt;h2 id=&#34;about-the-project&#34;&gt;About the project:&lt;/h2&gt;
-&lt;p&gt;For a piece of code, this project is going to help you with questions like:&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>I started building an app using Rust and here is how it went...</title>
-      <link>https://krshrimali.github.io/posts/2022/12/i-started-building-an-app-using-rust-and-here-is-how-it-went.../</link>
-      <pubDate>Mon, 12 Dec 2022 00:00:00 +0000</pubDate>
-      <guid>https://krshrimali.github.io/posts/2022/12/i-started-building-an-app-using-rust-and-here-is-how-it-went.../</guid>
-      <description>&lt;p&gt;Hi everyone!! I&amp;rsquo;ve an update, on what I&amp;rsquo;ve been up to - and I&amp;rsquo;m excited. It&amp;rsquo;s a &lt;em&gt;rusty&lt;/em&gt; update 😉. As always, I would love to tell you a story (this will help set some context), but if you want to skip and go directly to the update, please scroll to: &lt;code&gt;# THE Update&lt;/code&gt; section.&lt;/p&gt;
-&lt;h2 id=&#34;the-story&#34;&gt;The Story&lt;/h2&gt;
-&lt;p&gt;I&amp;rsquo;ve been through, possibly, the best and the worst time of my life. I use these contrasting words because everything went wrong - and that&amp;rsquo;s where you get an opportunity to shine. I think I fairly enjoyed resisting the pain and fighting through the odds, hopefully you&amp;rsquo;ll learn about it very soon on my blog (just need the courage to say it out loud :)).&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Porting a Tiling Window Manager Extenstion to C&#43;&#43; (Bismuth): Part-2 (getting closest relative window)</title>
-      <link>https://krshrimali.github.io/posts/2022/07/porting-a-tiling-window-manager-extenstion-to-c-bismuth-part-2-getting-closest-relative-window/</link>
-      <pubDate>Sun, 31 Jul 2022 00:00:00 +0000</pubDate>
-      <guid>https://krshrimali.github.io/posts/2022/07/porting-a-tiling-window-manager-extenstion-to-c-bismuth-part-2-getting-closest-relative-window/</guid>
-      <description>&lt;p&gt;Hi everyone! In this blog, I will be discussing the algorithm used in Bismuth to find the closest relative window to be focused for &lt;code&gt;focusWindowByDirection&lt;/code&gt; event. If you haven&amp;rsquo;t read the previous blog, make sure to give it a read &lt;a href=&#34;https://krshrimali.github.io/posts/2022/07/porting-a-tiling-window-manager-extenstion-to-c-bismuth-part-1/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
-&lt;h2 id=&#34;recap-from-the-previous-blog&#34;&gt;Recap from the previous blog&lt;/h2&gt;
-&lt;p&gt;Let&amp;rsquo;s start with a quick recap though, in the previous blog, we discussed:&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;focusWindowByDirection&lt;/code&gt; requires the following information:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;direction&lt;/code&gt; (from the user) - can be one of: &lt;code&gt;right, left, top/up, bottom/down&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;activeWindow&lt;/code&gt; (from the current session) - this is needed since &lt;code&gt;focusWindowByDirection&lt;/code&gt; event is a &lt;em&gt;relative&lt;/em&gt; event to your current focused window.&lt;/li&gt;
-&lt;li&gt;Neighbor window candidates (&lt;code&gt;neighborCandidates&lt;/code&gt;) to your current window (&lt;code&gt;activeWindow&lt;/code&gt;) and the given direction (&lt;code&gt;direction&lt;/code&gt;).&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// declaration
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;vector&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;Window&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; Engine&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;getNeighborCandidates(&lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; FocusDirection &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;direction, &lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; Window &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;basisWindow);
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// use
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;vector&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;Window&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; neighborCandidates &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; getNeighborCandidates(direction, basisWindow);
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;From these neighbor candidates (&lt;code&gt;neighborCandidates&lt;/code&gt;), we will now find the closest relative window corner. To me, it was tricky to understand at first, so we&amp;rsquo;ll be discussing this in detail over in the later sections.&lt;/li&gt;
-&lt;li&gt;Once we know the closest relative window corner, we&amp;rsquo;ll try to find the window which satisfies the corner condition.&lt;/li&gt;
-&lt;li&gt;If there were multiple found, we&amp;rsquo;ll return the first one based on the time-stamp (last used)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;understanding-the-scenario&#34;&gt;Understanding the scenario&lt;/h2&gt;
-&lt;p&gt;I want to start off with a visual, took me some time to draw it, but in case it doesn&amp;rsquo;t look good, I&amp;rsquo;m sorry! My drawing teacher in the high school tried his best, but&amp;hellip;&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Porting a Tiling Window Manager Extenstion to C&#43;&#43; (Bismuth): Part-1</title>
-      <link>https://krshrimali.github.io/posts/2022/07/porting-a-tiling-window-manager-extenstion-to-c-bismuth-part-1/</link>
-      <pubDate>Sat, 23 Jul 2022 00:00:00 +0000</pubDate>
-      <guid>https://krshrimali.github.io/posts/2022/07/porting-a-tiling-window-manager-extenstion-to-c-bismuth-part-1/</guid>
-      <description>&lt;p&gt;Hi everyone! I understand it&amp;rsquo;s been a long time, and I&amp;rsquo;m so excited to be writing this blog today. In today&amp;rsquo;s blog, I wanted to talk about my journey (so far) on contributing to &lt;a href=&#34;https://github.com/Bismuth-Forge/bismuth/&#34;&gt;Bismuth (a KDE&amp;rsquo;s Tiling Window Manager Extension)&lt;/a&gt;, mainly how and why I started, and where I am right now.&lt;/p&gt;
-&lt;h2 id=&#34;the-story-why-kde-plasma-and-why-bismuth&#34;&gt;The Story: Why KDE Plasma and Why Bismuth?&lt;/h2&gt;
-&lt;p&gt;For the last few months (close to a year), I&amp;rsquo;ve been using Pop OS (a linux distribution by System 76) which had this amazing automatic tiling window extension called &lt;a href=&#34;https://github.com/pop-os/shell&#34;&gt;&lt;code&gt;pop-shell&lt;/code&gt;&lt;/a&gt;, and it was close to what I always needed:&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Common Collections (Vector and Strings) in Rust [Notes]</title>
-      <link>https://krshrimali.github.io/posts/2022/01/common-collections-vector-and-strings-in-rust-notes/</link>
-      <pubDate>Sun, 09 Jan 2022 00:00:00 +0000</pubDate>
-      <guid>https://krshrimali.github.io/posts/2022/01/common-collections-vector-and-strings-in-rust-notes/</guid>
-      <description>&lt;h2 id=&#34;chapter-8-common-collections&#34;&gt;Chapter 8: Common Collections&lt;/h2&gt;
-&lt;p&gt;These are my notes from the &lt;a href=&#34;https://doc.rust-lang.org/book/ch08-00-common-collections.html&#34;&gt;chapter-8&lt;/a&gt; of &lt;a href=&#34;https://doc.rust-lang.org/book&#34;&gt;rust book&lt;/a&gt;. Please scroll down to the bottom (&lt;code&gt;Note&lt;/code&gt;) section if you are curious about what this is.&lt;/p&gt;
-&lt;h3 id=&#34;81-storing-lists-of-values-with-vectors&#34;&gt;8.1: Storing Lists of Values with Vectors&lt;/h3&gt;
-&lt;p&gt;&lt;code&gt;Vec&amp;lt;T&amp;gt;&lt;/code&gt; collection type discussed, aka vector:
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Coding on Kushashwa Ravi Shrimali (Kush)</title><link>https://krshrimali.github.io/tags/coding/</link><description>Recent content in Coding on Kushashwa Ravi Shrimali (Kush)</description><generator>Hugo -- 0.147.8</generator><language>en</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sun, 23 Mar 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://krshrimali.github.io/tags/coding/index.xml" rel="self" type="application/rss+xml"/><item><title>Progress Update: Context Pilot (Revamping)</title><link>https://krshrimali.github.io/posts/2025/03/progress-update-context-pilot-revamping/</link><pubDate>Sun, 23 Mar 2025 00:00:00 +0000</pubDate><guid>https://krshrimali.github.io/posts/2025/03/progress-update-context-pilot-revamping/</guid><description>&lt;p>I&amp;rsquo;ve had many iterations on this project that I&amp;rsquo;m going to talk about today, over the last 1.5-2 years. There are good and bad things about it. Good is that I&amp;rsquo;m persisting with completing it one day, bad is that I&amp;rsquo;ve not done it yet.&lt;/p>
+&lt;p>In this blog, I&amp;rsquo;ll quickly touch upon why it has taken so much time and what&amp;rsquo;s happening behind the scenes.&lt;/p>
+&lt;h2 id="about-the-project">About the project:&lt;/h2>
+&lt;p>For a piece of code, this project is going to help you with questions like:&lt;/p></description></item><item><title>I started building an app using Rust and here is how it went...</title><link>https://krshrimali.github.io/posts/2022/12/i-started-building-an-app-using-rust-and-here-is-how-it-went.../</link><pubDate>Mon, 12 Dec 2022 00:00:00 +0000</pubDate><guid>https://krshrimali.github.io/posts/2022/12/i-started-building-an-app-using-rust-and-here-is-how-it-went.../</guid><description>&lt;p>Hi everyone!! I&amp;rsquo;ve an update, on what I&amp;rsquo;ve been up to - and I&amp;rsquo;m excited. It&amp;rsquo;s a &lt;em>rusty&lt;/em> update 😉. As always, I would love to tell you a story (this will help set some context), but if you want to skip and go directly to the update, please scroll to: &lt;code># THE Update&lt;/code> section.&lt;/p>
+&lt;h2 id="the-story">The Story&lt;/h2>
+&lt;p>I&amp;rsquo;ve been through, possibly, the best and the worst time of my life. I use these contrasting words because everything went wrong - and that&amp;rsquo;s where you get an opportunity to shine. I think I fairly enjoyed resisting the pain and fighting through the odds, hopefully you&amp;rsquo;ll learn about it very soon on my blog (just need the courage to say it out loud :)).&lt;/p></description></item><item><title>Porting a Tiling Window Manager Extenstion to C++ (Bismuth): Part-2 (getting closest relative window)</title><link>https://krshrimali.github.io/posts/2022/07/porting-a-tiling-window-manager-extenstion-to-c-bismuth-part-2-getting-closest-relative-window/</link><pubDate>Sun, 31 Jul 2022 00:00:00 +0000</pubDate><guid>https://krshrimali.github.io/posts/2022/07/porting-a-tiling-window-manager-extenstion-to-c-bismuth-part-2-getting-closest-relative-window/</guid><description>&lt;p>Hi everyone! In this blog, I will be discussing the algorithm used in Bismuth to find the closest relative window to be focused for &lt;code>focusWindowByDirection&lt;/code> event. If you haven&amp;rsquo;t read the previous blog, make sure to give it a read &lt;a href="https://krshrimali.github.io/posts/2022/07/porting-a-tiling-window-manager-extenstion-to-c-bismuth-part-1/">here&lt;/a>.&lt;/p>
+&lt;h2 id="recap-from-the-previous-blog">Recap from the previous blog&lt;/h2>
+&lt;p>Let&amp;rsquo;s start with a quick recap though, in the previous blog, we discussed:&lt;/p>
+&lt;p>&lt;code>focusWindowByDirection&lt;/code> requires the following information:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>direction&lt;/code> (from the user) - can be one of: &lt;code>right, left, top/up, bottom/down&lt;/code>.&lt;/li>
+&lt;li>&lt;code>activeWindow&lt;/code> (from the current session) - this is needed since &lt;code>focusWindowByDirection&lt;/code> event is a &lt;em>relative&lt;/em> event to your current focused window.&lt;/li>
+&lt;li>Neighbor window candidates (&lt;code>neighborCandidates&lt;/code>) to your current window (&lt;code>activeWindow&lt;/code>) and the given direction (&lt;code>direction&lt;/code>).&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cpp" data-lang="cpp">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// declaration
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>std&lt;span style="color:#f92672">::&lt;/span>vector&lt;span style="color:#f92672">&amp;lt;&lt;/span>Window&lt;span style="color:#f92672">&amp;gt;&lt;/span> Engine&lt;span style="color:#f92672">::&lt;/span>getNeighborCandidates(&lt;span style="color:#66d9ef">const&lt;/span> FocusDirection &lt;span style="color:#f92672">&amp;amp;&lt;/span>direction, &lt;span style="color:#66d9ef">const&lt;/span> Window &lt;span style="color:#f92672">&amp;amp;&lt;/span>basisWindow);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// use
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>std&lt;span style="color:#f92672">::&lt;/span>vector&lt;span style="color:#f92672">&amp;lt;&lt;/span>Window&lt;span style="color:#f92672">&amp;gt;&lt;/span> neighborCandidates &lt;span style="color:#f92672">=&lt;/span> getNeighborCandidates(direction, basisWindow);
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>From these neighbor candidates (&lt;code>neighborCandidates&lt;/code>), we will now find the closest relative window corner. To me, it was tricky to understand at first, so we&amp;rsquo;ll be discussing this in detail over in the later sections.&lt;/li>
+&lt;li>Once we know the closest relative window corner, we&amp;rsquo;ll try to find the window which satisfies the corner condition.&lt;/li>
+&lt;li>If there were multiple found, we&amp;rsquo;ll return the first one based on the time-stamp (last used)&lt;/li>
+&lt;/ul>
+&lt;h2 id="understanding-the-scenario">Understanding the scenario&lt;/h2>
+&lt;p>I want to start off with a visual, took me some time to draw it, but in case it doesn&amp;rsquo;t look good, I&amp;rsquo;m sorry! My drawing teacher in the high school tried his best, but&amp;hellip;&lt;/p></description></item><item><title>Porting a Tiling Window Manager Extenstion to C++ (Bismuth): Part-1</title><link>https://krshrimali.github.io/posts/2022/07/porting-a-tiling-window-manager-extenstion-to-c-bismuth-part-1/</link><pubDate>Sat, 23 Jul 2022 00:00:00 +0000</pubDate><guid>https://krshrimali.github.io/posts/2022/07/porting-a-tiling-window-manager-extenstion-to-c-bismuth-part-1/</guid><description>&lt;p>Hi everyone! I understand it&amp;rsquo;s been a long time, and I&amp;rsquo;m so excited to be writing this blog today. In today&amp;rsquo;s blog, I wanted to talk about my journey (so far) on contributing to &lt;a href="https://github.com/Bismuth-Forge/bismuth/">Bismuth (a KDE&amp;rsquo;s Tiling Window Manager Extension)&lt;/a>, mainly how and why I started, and where I am right now.&lt;/p>
+&lt;h2 id="the-story-why-kde-plasma-and-why-bismuth">The Story: Why KDE Plasma and Why Bismuth?&lt;/h2>
+&lt;p>For the last few months (close to a year), I&amp;rsquo;ve been using Pop OS (a linux distribution by System 76) which had this amazing automatic tiling window extension called &lt;a href="https://github.com/pop-os/shell">&lt;code>pop-shell&lt;/code>&lt;/a>, and it was close to what I always needed:&lt;/p></description></item><item><title>Common Collections (Vector and Strings) in Rust [Notes]</title><link>https://krshrimali.github.io/posts/2022/01/common-collections-vector-and-strings-in-rust-notes/</link><pubDate>Sun, 09 Jan 2022 00:00:00 +0000</pubDate><guid>https://krshrimali.github.io/posts/2022/01/common-collections-vector-and-strings-in-rust-notes/</guid><description>&lt;h2 id="chapter-8-common-collections">Chapter 8: Common Collections&lt;/h2>
+&lt;p>These are my notes from the &lt;a href="https://doc.rust-lang.org/book/ch08-00-common-collections.html">chapter-8&lt;/a> of &lt;a href="https://doc.rust-lang.org/book">rust book&lt;/a>. Please scroll down to the bottom (&lt;code>Note&lt;/code>) section if you are curious about what this is.&lt;/p>
+&lt;h3 id="81-storing-lists-of-values-with-vectors">8.1: Storing Lists of Values with Vectors&lt;/h3>
+&lt;p>&lt;code>Vec&amp;lt;T&amp;gt;&lt;/code> collection type discussed, aka vector:
 * By default contiguous.
-* All values should be of same type.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-rust&#34; data-lang=&#34;rust&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// Creation
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;let&lt;/span&gt; v: Vec&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;i32&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; Vec::new();
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// vec! macro for convenience
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// default integer type is i32
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;let&lt;/span&gt; v &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;vec!&lt;/span&gt;[&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;];
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// Modifying
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;let&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;mut&lt;/span&gt; v &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; Vec::new();
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// Rust infers the type from the elements pushed here
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;v.push(&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;);
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;v.push(&lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;);
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// ...
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// Dropping
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// a vector is freed, when it goes out of scope
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;{
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;let&lt;/span&gt; v &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;vec!&lt;/span&gt;[&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;];
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;// ...
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;} &lt;span style=&#34;color:#75715e&#34;&gt;// &amp;lt;-- v goes out of scope here, and hence memory is freed as well
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// Reading Elements of Vectors
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;let&lt;/span&gt; v &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;vec!&lt;/span&gt;[&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;];
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// First way:
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;let&lt;/span&gt; third: &lt;span style=&#34;color:#66d9ef&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;i32&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;v[&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;];
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;println!&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;The third element is: &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;, third);
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// Second way:
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;match&lt;/span&gt; v.get(&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;) {
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    Some(num) &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;println!&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;The third element is: &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;, num),
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    None &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;println!&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;There is no third element.&amp;#34;&lt;/span&gt;),
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;.get(&amp;amp;index)&lt;/code&gt; method allows you to handle out of range errors.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Common Collections (Vector and Strings) in Rust [Notes]</title>
-      <link>https://krshrimali.github.io/posts/2022/01/common-collections-vector-and-strings-in-rust-notes/</link>
-      <pubDate>Sun, 09 Jan 2022 00:00:00 +0000</pubDate>
-      <guid>https://krshrimali.github.io/posts/2022/01/common-collections-vector-and-strings-in-rust-notes/</guid>
-      <description>&lt;h2 id=&#34;chapter-8-common-collections-hash-maps&#34;&gt;Chapter 8: Common Collections (Hash Maps)&lt;/h2&gt;
-&lt;p&gt;In the &lt;a href=&#34;https://krshrimali.github.io/posts/2022/01/common-collections-vector-and-strings-in-rust-notes/&#34;&gt;previous blog&lt;/a&gt;, I shared my notes on strings and vectors in Rust, and in this post we&amp;rsquo;ll cover Hash Maps. I personally have found their use in competitive programming, a lot, but hopefully as we move on, we&amp;rsquo;ll see lots of use-cases in real-life problems.&lt;/p&gt;
-&lt;h2 id=&#34;hash-maps&#34;&gt;Hash Maps&lt;/h2&gt;
-&lt;p&gt;Hash Maps: &lt;code&gt;HashMap&amp;lt;K, V&amp;gt;&lt;/code&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;You can&amp;rsquo;t access using indices, but through keys.&lt;/li&gt;
-&lt;li&gt;Hash Maps store data on heap.&lt;/li&gt;
-&lt;li&gt;Hash Maps are homogenous (all keys must have same type, and all values must have same type).&lt;/li&gt;
-&lt;li&gt;Use &lt;code&gt;std::collections::HashMap&lt;/code&gt; to bring &lt;code&gt;HashMap&lt;/code&gt; to scope.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;Creating a New Hash Map&lt;/strong&gt;&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Prefer const_iterators to iterators (Notes)</title>
-      <link>https://krshrimali.github.io/posts/2021/09/prefer-const_iterators-to-iterators-notes/</link>
-      <pubDate>Sun, 26 Sep 2021 00:00:00 +0000</pubDate>
-      <guid>https://krshrimali.github.io/posts/2021/09/prefer-const_iterators-to-iterators-notes/</guid>
-      <description>&lt;hr&gt;
-&lt;p&gt;&lt;strong&gt;NOTE&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;My notes on Chapter 3, Item 13 of Effective Modern C++ written by Scott Meyers.&lt;/p&gt;
-&lt;p&gt;Some (or even all) of the text can be similar to what you see in the book, as these are notes: I&amp;rsquo;ve tried not to be unnecessarily creative with my words. :)&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://raw.githubusercontent.com/krshrimali/blog/main/assets/cover-images/prefer-const-iterators-to-iterators.png&#34;&gt;&lt;/p&gt;
-&lt;p&gt;In C++, iterators come handy to point at memory addresses of STL containers. For example,&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// C++11
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;vector&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; x {&lt;span style=&#34;color:#ae81ff&#34;&gt;11&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;9&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;23&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;};
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// begin() member function returns an iterator, which points to the first
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// memory address of the container x
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;vector&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;::&lt;/span&gt;iterator it &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; x.begin();
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;While the general practice is to use &lt;code&gt;const&lt;/code&gt; whenever possible, but programmers tend to use whenever it&amp;rsquo;s &lt;em&gt;practical&lt;/em&gt;. &lt;code&gt;const_iterators&lt;/code&gt; is particularly suggested when you want to use iterators, but you don&amp;rsquo;t need to modify what it points to.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Declaring Overriding Functions override (Notes)</title>
-      <link>https://krshrimali.github.io/posts/2021/09/declaring-overriding-functions-override-notes/</link>
-      <pubDate>Sat, 25 Sep 2021 00:00:00 +0000</pubDate>
-      <guid>https://krshrimali.github.io/posts/2021/09/declaring-overriding-functions-override-notes/</guid>
-      <description>&lt;hr&gt;
-&lt;p&gt;&lt;strong&gt;NOTE&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;My notes on Chapter 3, Item 12 of Effective Modern C++ written by Scott Meyers.&lt;/p&gt;
-&lt;p&gt;Some (or even all) of the text can be similar to what you see in the book, as these are notes: I&amp;rsquo;ve tried not to be unnecessarily creative with my words. :)&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://raw.githubusercontent.com/krshrimali/blog/main/assets/cover-images/declaring-overriding-functions-override.png&#34;&gt;&lt;/p&gt;
-&lt;p&gt;Overriding != Overloading&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;Example&lt;/em&gt; of virtual function overriding:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// Base class
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Base&lt;/span&gt; {
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;virtual&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; doWork();
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;// ...
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;};
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// Derived class from Base
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Derived&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; Base {
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;// virtual is optional
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;// this will &amp;#34;override&amp;#34; Base::doWork
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;virtual&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; doWork();
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;// ...
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;};
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// This creates a &amp;#34;Base&amp;#34; class pointer to &amp;#34;Derived&amp;#34; class object
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;unique_ptr&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;Base&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; upb &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;make_unique&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;Derived&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;();
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// Derived doWork() function is invoked
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;upb&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;doWork();
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This is how virtual function overriding allows to invoke a &amp;ldquo;derived class function&amp;rdquo; from a base class interface.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Prefer Deleted Functions to Private Undefined Ones (Notes)</title>
-      <link>https://krshrimali.github.io/posts/2021/08/prefer-deleted-functions-to-private-undefined-ones-notes/</link>
-      <pubDate>Wed, 25 Aug 2021 00:00:00 +0000</pubDate>
-      <guid>https://krshrimali.github.io/posts/2021/08/prefer-deleted-functions-to-private-undefined-ones-notes/</guid>
-      <description>&lt;h2 id=&#34;prefer-deleted-functions-to-private-undefined-ones&#34;&gt;Prefer deleted functions to private undefined ones&lt;/h2&gt;
-&lt;p&gt;This item (11) in the chapter 3 focuses on:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Why and How to prevent users calling particular functions?&lt;/li&gt;
-&lt;li&gt;C++-98 and C++-11 approach&lt;/li&gt;
-&lt;li&gt;What&amp;rsquo;s the difference between deleting a function vs declaring a member function private (and not defining them)?&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://raw.githubusercontent.com/krshrimali/blog/main/assets/cover-images/Item-11-Notes.png&#34;&gt;&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;&lt;strong&gt;NOTE&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;These are my notes on Chapter 3, Item 11 of Effective Modern C++ written by Scott Meyers.&lt;/p&gt;
-&lt;p&gt;Some (or even all) of the text can be similar to what you see in the book, as these are notes: I&amp;rsquo;ve tried not to be unnecessarily creative with my words. :)&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Prefer Scoped Enums over Unscoped Enums (Notes)</title>
-      <link>https://krshrimali.github.io/posts/2021/08/prefer-scoped-enums-over-unscoped-enums-notes/</link>
-      <pubDate>Sat, 14 Aug 2021 00:00:00 +0000</pubDate>
-      <guid>https://krshrimali.github.io/posts/2021/08/prefer-scoped-enums-over-unscoped-enums-notes/</guid>
-      <description>&lt;h2 id=&#34;scoped-vs-unscoped-enums&#34;&gt;Scoped vs Unscoped Enums&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;General rule:&lt;/strong&gt; declaring a name inside curly braces is limited to that scope.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Exception:&lt;/strong&gt; C++-98 style Enums&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://raw.githubusercontent.com/krshrimali/blog/main/assets/cover-images/Unscoped-Scoped-Enums.png&#34;&gt;&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;&lt;strong&gt;NOTE&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;My notes on Chapter 3, Item 10 of Effective Modern C++ written by Scott Meyers.&lt;/p&gt;
-&lt;p&gt;Some (or even all) of the text can be similar to what you see in the book, as these are notes: I&amp;rsquo;ve tried not to be unnecessarily creative with my words. :)&lt;/p&gt;</description>
-    </item>
-  </channel>
-</rss>
+* All values should be of same type.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-rust" data-lang="rust">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// Creation
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>&lt;span style="color:#66d9ef">let&lt;/span> v: Vec&lt;span style="color:#f92672">&amp;lt;&lt;/span>&lt;span style="color:#66d9ef">i32&lt;/span>&lt;span style="color:#f92672">&amp;gt;&lt;/span> &lt;span style="color:#f92672">=&lt;/span> Vec::new();
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// vec! macro for convenience
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// default integer type is i32
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>&lt;span style="color:#66d9ef">let&lt;/span> v &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#a6e22e">vec!&lt;/span>[&lt;span style="color:#ae81ff">1&lt;/span>, &lt;span style="color:#ae81ff">2&lt;/span>, &lt;span style="color:#ae81ff">3&lt;/span>];
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// Modifying
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>&lt;span style="color:#66d9ef">let&lt;/span> &lt;span style="color:#66d9ef">mut&lt;/span> v &lt;span style="color:#f92672">=&lt;/span> Vec::new();
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// Rust infers the type from the elements pushed here
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>v.push(&lt;span style="color:#ae81ff">5&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>v.push(&lt;span style="color:#ae81ff">6&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// ...
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// Dropping
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// a vector is freed, when it goes out of scope
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">let&lt;/span> v &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#a6e22e">vec!&lt;/span>[&lt;span style="color:#ae81ff">1&lt;/span>, &lt;span style="color:#ae81ff">2&lt;/span>, &lt;span style="color:#ae81ff">3&lt;/span>, &lt;span style="color:#ae81ff">4&lt;/span>];
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// ...
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>} &lt;span style="color:#75715e">// &amp;lt;-- v goes out of scope here, and hence memory is freed as well
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// Reading Elements of Vectors
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>&lt;span style="color:#66d9ef">let&lt;/span> v &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#a6e22e">vec!&lt;/span>[&lt;span style="color:#ae81ff">1&lt;/span>, &lt;span style="color:#ae81ff">2&lt;/span>, &lt;span style="color:#ae81ff">3&lt;/span>, &lt;span style="color:#ae81ff">4&lt;/span>, &lt;span style="color:#ae81ff">5&lt;/span>];
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// First way:
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>&lt;span style="color:#66d9ef">let&lt;/span> third: &lt;span style="color:#66d9ef">&amp;amp;&lt;/span>&lt;span style="color:#66d9ef">i32&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#f92672">&amp;amp;&lt;/span>v[&lt;span style="color:#ae81ff">2&lt;/span>];
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">println!&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;The third element is: &lt;/span>&lt;span style="color:#e6db74">{}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>, third);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// Second way:
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>&lt;span style="color:#66d9ef">match&lt;/span> v.get(&lt;span style="color:#ae81ff">2&lt;/span>) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Some(num) &lt;span style="color:#f92672">=&amp;gt;&lt;/span> &lt;span style="color:#a6e22e">println!&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;The third element is: &lt;/span>&lt;span style="color:#e6db74">{}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>, num),
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> None &lt;span style="color:#f92672">=&amp;gt;&lt;/span> &lt;span style="color:#a6e22e">println!&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;There is no third element.&amp;#34;&lt;/span>),
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>.get(&amp;amp;index)&lt;/code> method allows you to handle out of range errors.&lt;/p></description></item><item><title>Common Collections (Vector and Strings) in Rust [Notes]</title><link>https://krshrimali.github.io/posts/2022/01/common-collections-vector-and-strings-in-rust-notes/</link><pubDate>Sun, 09 Jan 2022 00:00:00 +0000</pubDate><guid>https://krshrimali.github.io/posts/2022/01/common-collections-vector-and-strings-in-rust-notes/</guid><description>&lt;h2 id="chapter-8-common-collections-hash-maps">Chapter 8: Common Collections (Hash Maps)&lt;/h2>
+&lt;p>In the &lt;a href="https://krshrimali.github.io/posts/2022/01/common-collections-vector-and-strings-in-rust-notes/">previous blog&lt;/a>, I shared my notes on strings and vectors in Rust, and in this post we&amp;rsquo;ll cover Hash Maps. I personally have found their use in competitive programming, a lot, but hopefully as we move on, we&amp;rsquo;ll see lots of use-cases in real-life problems.&lt;/p>
+&lt;h2 id="hash-maps">Hash Maps&lt;/h2>
+&lt;p>Hash Maps: &lt;code>HashMap&amp;lt;K, V&amp;gt;&lt;/code>&lt;/p>
+&lt;ul>
+&lt;li>You can&amp;rsquo;t access using indices, but through keys.&lt;/li>
+&lt;li>Hash Maps store data on heap.&lt;/li>
+&lt;li>Hash Maps are homogenous (all keys must have same type, and all values must have same type).&lt;/li>
+&lt;li>Use &lt;code>std::collections::HashMap&lt;/code> to bring &lt;code>HashMap&lt;/code> to scope.&lt;/li>
+&lt;/ul>
+&lt;p>&lt;strong>Creating a New Hash Map&lt;/strong>&lt;/p></description></item><item><title>Prefer const_iterators to iterators (Notes)</title><link>https://krshrimali.github.io/posts/2021/09/prefer-const_iterators-to-iterators-notes/</link><pubDate>Sun, 26 Sep 2021 00:00:00 +0000</pubDate><guid>https://krshrimali.github.io/posts/2021/09/prefer-const_iterators-to-iterators-notes/</guid><description>&lt;hr>
+&lt;p>&lt;strong>NOTE&lt;/strong>&lt;/p>
+&lt;p>My notes on Chapter 3, Item 13 of Effective Modern C++ written by Scott Meyers.&lt;/p>
+&lt;p>Some (or even all) of the text can be similar to what you see in the book, as these are notes: I&amp;rsquo;ve tried not to be unnecessarily creative with my words. :)&lt;/p>
+&lt;hr>
+&lt;p>&lt;img loading="lazy" src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/cover-images/prefer-const-iterators-to-iterators.png">&lt;/p>
+&lt;p>In C++, iterators come handy to point at memory addresses of STL containers. For example,&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cpp" data-lang="cpp">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// C++11
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>std&lt;span style="color:#f92672">::&lt;/span>vector&lt;span style="color:#f92672">&amp;lt;&lt;/span>&lt;span style="color:#66d9ef">int&lt;/span>&lt;span style="color:#f92672">&amp;gt;&lt;/span> x {&lt;span style="color:#ae81ff">11&lt;/span>, &lt;span style="color:#ae81ff">9&lt;/span>, &lt;span style="color:#ae81ff">23&lt;/span>, &lt;span style="color:#ae81ff">6&lt;/span>};
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// begin() member function returns an iterator, which points to the first
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// memory address of the container x
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>std&lt;span style="color:#f92672">::&lt;/span>vector&lt;span style="color:#f92672">&amp;lt;&lt;/span>&lt;span style="color:#66d9ef">int&lt;/span>&lt;span style="color:#f92672">&amp;gt;::&lt;/span>iterator it &lt;span style="color:#f92672">=&lt;/span> x.begin();
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>While the general practice is to use &lt;code>const&lt;/code> whenever possible, but programmers tend to use whenever it&amp;rsquo;s &lt;em>practical&lt;/em>. &lt;code>const_iterators&lt;/code> is particularly suggested when you want to use iterators, but you don&amp;rsquo;t need to modify what it points to.&lt;/p></description></item><item><title>Declaring Overriding Functions override (Notes)</title><link>https://krshrimali.github.io/posts/2021/09/declaring-overriding-functions-override-notes/</link><pubDate>Sat, 25 Sep 2021 00:00:00 +0000</pubDate><guid>https://krshrimali.github.io/posts/2021/09/declaring-overriding-functions-override-notes/</guid><description>&lt;hr>
+&lt;p>&lt;strong>NOTE&lt;/strong>&lt;/p>
+&lt;p>My notes on Chapter 3, Item 12 of Effective Modern C++ written by Scott Meyers.&lt;/p>
+&lt;p>Some (or even all) of the text can be similar to what you see in the book, as these are notes: I&amp;rsquo;ve tried not to be unnecessarily creative with my words. :)&lt;/p>
+&lt;hr>
+&lt;p>&lt;img loading="lazy" src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/cover-images/declaring-overriding-functions-override.png">&lt;/p>
+&lt;p>Overriding != Overloading&lt;/p>
+&lt;p>&lt;em>Example&lt;/em> of virtual function overriding:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cpp" data-lang="cpp">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// Base class
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>&lt;span style="color:#66d9ef">class&lt;/span> &lt;span style="color:#a6e22e">Base&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">public&lt;/span>&lt;span style="color:#f92672">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">virtual&lt;/span> &lt;span style="color:#66d9ef">void&lt;/span> doWork();
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// ...
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>};
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// Derived class from Base
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>&lt;span style="color:#66d9ef">class&lt;/span> &lt;span style="color:#a6e22e">Derived&lt;/span>&lt;span style="color:#f92672">:&lt;/span> &lt;span style="color:#66d9ef">public&lt;/span> Base {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">public&lt;/span>&lt;span style="color:#f92672">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// virtual is optional
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#75715e">// this will &amp;#34;override&amp;#34; Base::doWork
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#66d9ef">virtual&lt;/span> &lt;span style="color:#66d9ef">void&lt;/span> doWork();
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// ...
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>};
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// This creates a &amp;#34;Base&amp;#34; class pointer to &amp;#34;Derived&amp;#34; class object
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>std&lt;span style="color:#f92672">::&lt;/span>unique_ptr&lt;span style="color:#f92672">&amp;lt;&lt;/span>Base&lt;span style="color:#f92672">&amp;gt;&lt;/span> upb &lt;span style="color:#f92672">=&lt;/span> std&lt;span style="color:#f92672">::&lt;/span>make_unique&lt;span style="color:#f92672">&amp;lt;&lt;/span>Derived&lt;span style="color:#f92672">&amp;gt;&lt;/span>();
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// Derived doWork() function is invoked
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>upb&lt;span style="color:#f92672">-&amp;gt;&lt;/span>doWork();
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>This is how virtual function overriding allows to invoke a &amp;ldquo;derived class function&amp;rdquo; from a base class interface.&lt;/p></description></item><item><title>Prefer Deleted Functions to Private Undefined Ones (Notes)</title><link>https://krshrimali.github.io/posts/2021/08/prefer-deleted-functions-to-private-undefined-ones-notes/</link><pubDate>Wed, 25 Aug 2021 00:00:00 +0000</pubDate><guid>https://krshrimali.github.io/posts/2021/08/prefer-deleted-functions-to-private-undefined-ones-notes/</guid><description>&lt;h2 id="prefer-deleted-functions-to-private-undefined-ones">Prefer deleted functions to private undefined ones&lt;/h2>
+&lt;p>This item (11) in the chapter 3 focuses on:&lt;/p>
+&lt;ul>
+&lt;li>Why and How to prevent users calling particular functions?&lt;/li>
+&lt;li>C++-98 and C++-11 approach&lt;/li>
+&lt;li>What&amp;rsquo;s the difference between deleting a function vs declaring a member function private (and not defining them)?&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img loading="lazy" src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/cover-images/Item-11-Notes.png">&lt;/p>
+&lt;hr>
+&lt;p>&lt;strong>NOTE&lt;/strong>&lt;/p>
+&lt;p>These are my notes on Chapter 3, Item 11 of Effective Modern C++ written by Scott Meyers.&lt;/p>
+&lt;p>Some (or even all) of the text can be similar to what you see in the book, as these are notes: I&amp;rsquo;ve tried not to be unnecessarily creative with my words. :)&lt;/p></description></item><item><title>Prefer Scoped Enums over Unscoped Enums (Notes)</title><link>https://krshrimali.github.io/posts/2021/08/prefer-scoped-enums-over-unscoped-enums-notes/</link><pubDate>Sat, 14 Aug 2021 00:00:00 +0000</pubDate><guid>https://krshrimali.github.io/posts/2021/08/prefer-scoped-enums-over-unscoped-enums-notes/</guid><description>&lt;h2 id="scoped-vs-unscoped-enums">Scoped vs Unscoped Enums&lt;/h2>
+&lt;ul>
+&lt;li>&lt;strong>General rule:&lt;/strong> declaring a name inside curly braces is limited to that scope.&lt;/li>
+&lt;li>&lt;strong>Exception:&lt;/strong> C++-98 style Enums&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img loading="lazy" src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/cover-images/Unscoped-Scoped-Enums.png">&lt;/p>
+&lt;hr>
+&lt;p>&lt;strong>NOTE&lt;/strong>&lt;/p>
+&lt;p>My notes on Chapter 3, Item 10 of Effective Modern C++ written by Scott Meyers.&lt;/p>
+&lt;p>Some (or even all) of the text can be similar to what you see in the book, as these are notes: I&amp;rsquo;ve tried not to be unnecessarily creative with my words. :)&lt;/p></description></item></channel></rss>
