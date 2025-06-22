@@ -1,29 +1,366 @@
-<!doctype html><html lang=en dir=auto><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>Posts | Kushashwa Ravi Shrimali (Kush)</title><meta name=keywords content><meta name=description content="Posts - Kushashwa Ravi Shrimali (Kush)"><meta name=author content="Kushashwa Ravi Shrimali"><link rel=canonical href=https://krshrimali.github.io/posts/><link crossorigin=anonymous href=https://krshrimali.github.io/assets/css/stylesheet.8fe10233a706bc87f2e08b3cf97b8bd4c0a80f10675a143675d59212121037c0.css integrity="sha256-j+ECM6cGvIfy4Is8+XuL1MCoDxBnWhQ2ddWSEhIQN8A=" rel="preload stylesheet" as=style><link rel=icon href=https://krshrimali.github.io/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://krshrimali.github.io/favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://krshrimali.github.io/favicon-32x32.png><link rel=apple-touch-icon href=https://krshrimali.github.io/apple-touch-icon.png><link rel=mask-icon href=https://krshrimali.github.io/safari-pinned-tab.svg><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><link rel=alternate type=application/rss+xml href=https://krshrimali.github.io/posts/index.xml><link rel=alternate hreflang=en href=https://krshrimali.github.io/posts/><noscript><style>#theme-toggle,.top-link{display:none}</style><style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--code-block-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51)}.list{background:var(--theme)}.list:not(.dark)::-webkit-scrollbar-track{background:0 0}.list:not(.dark)::-webkit-scrollbar-thumb{border-color:var(--theme)}}</style></noscript><link rel=stylesheet href=https://krshrimali.github.io/css/custom.css><meta property="og:url" content="https://krshrimali.github.io/posts/"><meta property="og:site_name" content="Kushashwa Ravi Shrimali (Kush)"><meta property="og:title" content="Posts"><meta property="og:locale" content="en"><meta property="og:type" content="website"><meta name=twitter:card content="summary"><meta name=twitter:title content="Posts"><meta name=twitter:description content></head><body class=list id=top><script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add("dark"):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove("dark"):window.matchMedia("(prefers-color-scheme: dark)").matches&&document.body.classList.add("dark")</script><header class=header><nav class=nav><div class=logo><a href=https://krshrimali.github.io/ accesskey=h title="Kushashwa Ravi Shrimali (Kush) (Alt + H)">Kushashwa Ravi Shrimali (Kush)</a><div class=logo-switches><button id=theme-toggle accesskey=t title="(Alt + T)" aria-label="Toggle theme">
-<svg id="moon" width="24" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
-<svg id="sun" width="24" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></div></div><ul id=menu><li><a href=https://krshrimali.github.io/search/ title="Search (Alt + /)" accesskey=/><span>Search</span></a></li><li><a href=https://krshrimali.github.io/about title=About><span>About</span></a></li><li><a href=https://krshrimali.github.io/posts title=Blog><span class=active>Blog</span></a></li></ul></nav></header><main class=main><header class=page-header><div class=breadcrumbs><a href=https://krshrimali.github.io/>Home</a></div><h1>Posts
-<a href=https://krshrimali.github.io/posts/index.xml title=RSS aria-label=RSS><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" height="23"><path d="M4 11a9 9 0 019 9"/><path d="M4 4a16 16 0 0116 16"/><circle cx="5" cy="19" r="1"/></svg></a></h1></header><article class=post-entry><header class=entry-header><h2 class=entry-hint-parent>Union Find Problem, and a naive implementation (C++)</h2></header><div class=entry-content><p>Hi Everyone, today I want to talk about Union Find Problem. This is going to be a series covering:
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Posts | Kushashwa Ravi Shrimali (Kush)</title>
+<meta name="keywords" content="">
+<meta name="description" content="Posts - Kushashwa Ravi Shrimali (Kush)">
+<meta name="author" content="Kushashwa Ravi Shrimali">
+<link rel="canonical" href="https://krshrimali.github.io/posts/">
+<link crossorigin="anonymous" href="https://krshrimali.github.io/assets/css/stylesheet.2211ca3164be7830024f6aad2b3a2e520843a64f8f048445c3401c1249aa051d.css" integrity="sha256-IhHKMWS&#43;eDACT2qtKzouUghDpk&#43;PBIRFw0AcEkmqBR0=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://krshrimali.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://krshrimali.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://krshrimali.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://krshrimali.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://krshrimali.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" type="application/rss+xml" href="https://krshrimali.github.io/posts/index.xml">
+<link rel="alternate" hreflang="en" href="https://krshrimali.github.io/posts/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><link rel="stylesheet" href="https://krshrimali.github.io/css/custom.css"><meta property="og:url" content="https://krshrimali.github.io/posts/">
+  <meta property="og:site_name" content="Kushashwa Ravi Shrimali (Kush)">
+  <meta property="og:title" content="Posts">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Posts">
+<meta name="twitter:description" content="">
+
+</head>
+
+<body class="list" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://krshrimali.github.io/" accesskey="h" title="Kushashwa Ravi Shrimali (Kush) (Alt + H)">Kushashwa Ravi Shrimali (Kush)</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://krshrimali.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://krshrimali.github.io/about" title="About">
+                    <span>About</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://krshrimali.github.io/posts" title="Blog">
+                    <span class="active">Blog</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main"> 
+<header class="page-header"><div class="breadcrumbs"><a href="https://krshrimali.github.io/">Home</a></div>
+  <h1>
+    Posts
+    <a href="https://krshrimali.github.io/posts/index.xml" title="RSS" aria-label="RSS">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" height="23">
+        <path d="M4 11a9 9 0 0 1 9 9" />
+        <path d="M4 4a16 16 0 0 1 16 16" />
+        <circle cx="5" cy="19" r="1" />
+      </svg>
+    </a>
+  </h1>
+</header>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">Union Find Problem, and a naive implementation (C&#43;&#43;)
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Hi Everyone, today I want to talk about Union Find Problem. This is going to be a series covering:
 Union Find Problem (this blog) Solutions to Union Find (1): Quick Find Solutions to Union Find (2): Quick Union Solutions to Union Find (3): Weighted Quick Union Applications of Union Find (perculation and more) Cool project using Union Find Solving some competitive programming questions using Union Find Each blog will try to cover very basic concepts behind the topic, and also what it’s all about.
-...</p></div><footer class=entry-footer><span title='2021-08-14 00:00:00 +0000 UTC'>August 14, 2021</span>&nbsp;·&nbsp;7 min&nbsp;·&nbsp;Kushashwa Ravi Shrimali</footer><a class=entry-link aria-label="post link to Union Find Problem, and a naive implementation (C++)" href=https://krshrimali.github.io/posts/2021/08/union-find-problem-and-a-naive-implementation-c-/></a></article><article class=post-entry><header class=entry-header><h2 class=entry-hint-parent>Prefer Alias Declarations to Typedefs (Notes)</h2></header><div class=entry-content><p>One solution to avoiding using long type names:
-// So C++98 like typedef std::unique_ptr&lt;std::unordered_map&lt;std::string, std::string>> UPtrMapSS; ...</p></div><footer class=entry-footer><span title='2021-08-12 00:00:00 +0000 UTC'>August 12, 2021</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Kushashwa Ravi Shrimali</footer><a class=entry-link aria-label="post link to Prefer Alias Declarations to Typedefs (Notes)" href=https://krshrimali.github.io/posts/2021/08/prefer-alias-declarations-to-typedefs-notes/></a></article><article class=post-entry><header class=entry-header><h2 class=entry-hint-parent>Function Pointers and Function Objects in C++</h2></header><div class=entry-content><p>In today’s blog, we’ll talk about two important concepts in C++: Function Pointers and Function Objects.
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2021-08-14 00:00:00 +0000 UTC'>August 14, 2021</span>&nbsp;·&nbsp;7 min&nbsp;·&nbsp;Kushashwa Ravi Shrimali</footer>
+  <a class="entry-link" aria-label="post link to Union Find Problem, and a naive implementation (C&#43;&#43;)" href="https://krshrimali.github.io/posts/2021/08/union-find-problem-and-a-naive-implementation-c-/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">Prefer Alias Declarations to Typedefs (Notes)
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>One solution to avoiding using long type names:
+// So C&#43;&#43;98 like typedef std::unique_ptr&lt;std::unordered_map&lt;std::string, std::string&gt;&gt; UPtrMapSS; ...</p>
+  </div>
+  <footer class="entry-footer"><span title='2021-08-12 00:00:00 +0000 UTC'>August 12, 2021</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Kushashwa Ravi Shrimali</footer>
+  <a class="entry-link" aria-label="post link to Prefer Alias Declarations to Typedefs (Notes)" href="https://krshrimali.github.io/posts/2021/08/prefer-alias-declarations-to-typedefs-notes/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">Function Pointers and Function Objects in C&#43;&#43;
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>In today’s blog, we’ll talk about two important concepts in C&#43;&#43;: Function Pointers and Function Objects.
 Please note that, function objects are commonly referred as functors but we have failed to notice any official alias to the name. Hence, we’ll restrict ourselves to using Function Objects in this blog.
-...</p></div><footer class=entry-footer><span title='2021-07-18 00:00:00 +0000 UTC'>July 18, 2021</span>&nbsp;·&nbsp;9 min&nbsp;·&nbsp;Kushashwa Ravi Shrimali</footer><a class=entry-link aria-label="post link to Function Pointers and Function Objects in C++" href=https://krshrimali.github.io/posts/2021/07/function-pointers-and-function-objects-in-c-/></a></article><article class=post-entry><header class=entry-header><h2 class=entry-hint-parent>How to crop a circle in OpenCV? Implementing Portrait Bokeh - Part 2</h2></header><div class=entry-content><p>Hi everyone! In the previous blog we implemented Portrait Bokeh using Face Detection in OpenCV. While the results were good for a start, we definitely want to be closer to the output we expect. The end goal is to blur everything except the face. The main problem we noticed was:
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2021-07-18 00:00:00 +0000 UTC'>July 18, 2021</span>&nbsp;·&nbsp;9 min&nbsp;·&nbsp;Kushashwa Ravi Shrimali</footer>
+  <a class="entry-link" aria-label="post link to Function Pointers and Function Objects in C&#43;&#43;" href="https://krshrimali.github.io/posts/2021/07/function-pointers-and-function-objects-in-c-/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">How to crop a circle in OpenCV? Implementing Portrait Bokeh - Part 2
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>
+Hi everyone! In the previous blog we implemented Portrait Bokeh using Face Detection in OpenCV. While the results were good for a start, we definitely want to be closer to the output we expect. The end goal is to blur everything except the face. The main problem we noticed was:
 The face cropped was a rectangle, and it was clearly visible in the output result. To overcome this, we will be talking about cropping a circle in OpenCV today. This will enable us to get rid of “some” of the background noise we got earlier, for Portrait Bokeh. Let’s take this step by step, and first talk about the intuition.
-...</p></div><footer class=entry-footer><span title='2020-12-10 00:00:00 +0000 UTC'>December 10, 2020</span>&nbsp;·&nbsp;10 min&nbsp;·&nbsp;Kushashwa Ravi Shrimali</footer><a class=entry-link aria-label="post link to How to crop a circle in OpenCV? Implementing Portrait Bokeh - Part 2" href=https://krshrimali.github.io/posts/2020/12/how-to-crop-a-circle-in-opencv-implementing-portrait-bokeh-part-2/></a></article><article class=post-entry><header class=entry-header><h2 class=entry-hint-parent>Implementing Portrait Bokeh in OpenCV using Face Detection (Part-1)</h2></header><div class=entry-content><p>OpenCV: Using face detection for Portrait Bokeh (Background Blur) (Part - 1) This blog discusses using Face Detection in OpenCV for Portrait Bokeh. We’ll be implementing Portrait Bokeh (blurring everything but faces) using 3 different methods in this series:
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2020-12-10 00:00:00 +0000 UTC'>December 10, 2020</span>&nbsp;·&nbsp;10 min&nbsp;·&nbsp;Kushashwa Ravi Shrimali</footer>
+  <a class="entry-link" aria-label="post link to How to crop a circle in OpenCV? Implementing Portrait Bokeh - Part 2" href="https://krshrimali.github.io/posts/2020/12/how-to-crop-a-circle-in-opencv-implementing-portrait-bokeh-part-2/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">Implementing Portrait Bokeh in OpenCV using Face Detection (Part-1)
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>
+OpenCV: Using face detection for Portrait Bokeh (Background Blur) (Part - 1) This blog discusses using Face Detection in OpenCV for Portrait Bokeh. We’ll be implementing Portrait Bokeh (blurring everything but faces) using 3 different methods in this series:
 Using Face Detection (cropping a rectangle) Using Face Detection (cropping a circle) Using Facial Landmark Detection and Convex Hull Don’t lose hopes if you are confused. We will be going through each method one by one, and hopefully the road will be crearer from here.
-...</p></div><footer class=entry-footer><span title='2020-12-07 00:00:00 +0000 UTC'>December 7, 2020</span>&nbsp;·&nbsp;5 min&nbsp;·&nbsp;Kushashwa Ravi Shrimali</footer><a class=entry-link aria-label="post link to Implementing Portrait Bokeh in OpenCV using Face Detection (Part-1)" href=https://krshrimali.github.io/posts/2020/12/implementing-portrait-bokeh-in-opencv-using-face-detection-part-1/></a></article><article class=post-entry><header class=entry-header><h2 class=entry-hint-parent>Releasing Docker Container and Binder for using Xeus-Cling, Libtorch and OpenCV in C++</h2></header><div class=entry-content><p>Today, I am elated to share Docker image for OpenCV, Libtorch and Xeus-Cling. We’ll discuss how to use the dockerfile and binder.
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2020-12-07 00:00:00 +0000 UTC'>December 7, 2020</span>&nbsp;·&nbsp;5 min&nbsp;·&nbsp;Kushashwa Ravi Shrimali</footer>
+  <a class="entry-link" aria-label="post link to Implementing Portrait Bokeh in OpenCV using Face Detection (Part-1)" href="https://krshrimali.github.io/posts/2020/12/implementing-portrait-bokeh-in-opencv-using-face-detection-part-1/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">Releasing Docker Container and Binder for using Xeus-Cling, Libtorch and OpenCV in C&#43;&#43;
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Today, I am elated to share Docker image for OpenCV, Libtorch and Xeus-Cling. We’ll discuss how to use the dockerfile and binder.
 Before I move on, the credits for creating and maintaining Docker image goes to Vishwesh Ravi Shrimali. He has been working on some cool stuff, please do get in touch with him if you’re interested to know.
 First question in your mind would be, Why use Docker or Binder? The answer to it lies in the frequency of queries on the discussion forum of PyTorch and Stackoverflow on Installation of Libtorch with OpenCV in Windows/Linux/OSX. I’ve had nightmares setting up the Windows system myself for Libtorch and nothing could be better than using Docker. Read on, to know why.
-...</p></div><footer class=entry-footer><span title='2020-09-15 00:00:00 +0000 UTC'>September 15, 2020</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Kushashwa Ravi Shrimali</footer><a class=entry-link aria-label="post link to Releasing Docker Container and Binder for using Xeus-Cling, Libtorch and OpenCV in C++" href=https://krshrimali.github.io/posts/2020/09/releasing-docker-container-and-binder-for-using-xeus-cling-libtorch-and-opencv-in-c-/></a></article><article class=post-entry><header class=entry-header><h2 class=entry-hint-parent>Understanding how Vectors work in C++ (Part-2): What happens when you initialize a vector?</h2></header><div class=entry-content><p>In the last blog post, I realized there were a lot of methods inherited from the base struct _Vector_base_ and _Vector_impl_data. Instead of directly going to the source code of these structs, I’ll go through their methods and objects by explaining what happens when we initialize a vector.
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2020-09-15 00:00:00 +0000 UTC'>September 15, 2020</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Kushashwa Ravi Shrimali</footer>
+  <a class="entry-link" aria-label="post link to Releasing Docker Container and Binder for using Xeus-Cling, Libtorch and OpenCV in C&#43;&#43;" href="https://krshrimali.github.io/posts/2020/09/releasing-docker-container-and-binder-for-using-xeus-cling-libtorch-and-opencv-in-c-/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">Understanding how Vectors work in C&#43;&#43; (Part-2): What happens when you initialize a vector?
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>In the last blog post, I realized there were a lot of methods inherited from the base struct _Vector_base_ and _Vector_impl_data. Instead of directly going to the source code of these structs, I’ll go through their methods and objects by explaining what happens when we initialize a vector.
 That is, we will start from calling a vector constructor and then see how memory is allocated. If you haven’t looked at the previous blog post, please take a look here. I want to be thorough with the blog post, so I’ll divide this into multiple posts. By the end of this post, you’ll go through the following structs:
-...</p></div><footer class=entry-footer><span title='2020-04-26 00:00:00 +0000 UTC'>April 26, 2020</span>&nbsp;·&nbsp;7 min&nbsp;·&nbsp;Kushashwa Ravi Shrimali</footer><a class=entry-link aria-label="post link to Understanding how Vectors work in C++ (Part-2): What happens when you initialize a vector?" href=https://krshrimali.github.io/posts/2020/04/understanding-how-vectors-work-in-c-part-2-what-happens-when-you-initialize-a-vector/></a></article><article class=post-entry><header class=entry-header><h2 class=entry-hint-parent>Understanding how Vectors work in C++ (Part-3): Diving deep into member functions of vectors</h2></header><div class=entry-content><p>In this blog, we’ll continue diving deep into the source code of Vector Containers in GCC compiler. Today, we will be discussing some of the most commonly used methods of vectors, and how they are implemented.
-Before we start, if you haven’t looked at the previous blogs in the C++ series, please take a look here. If you are already familiar with memory allocation in vector containers and vector’s base structs, then you can skip reading the previous blogs and continue here. If not, I suggest you reading them.
-...</p></div><footer class=entry-footer><span title='2020-04-26 00:00:00 +0000 UTC'>April 26, 2020</span>&nbsp;·&nbsp;7 min&nbsp;·&nbsp;Kushashwa Ravi Shrimali</footer><a class=entry-link aria-label="post link to Understanding how Vectors work in C++ (Part-3): Diving deep into member functions of vectors" href=https://krshrimali.github.io/posts/2020/04/understanding-how-vectors-work-in-c-part-3-diving-deep-into-member-functions-of-vectors/></a></article><article class=post-entry><header class=entry-header><h2 class=entry-hint-parent>Understanding how Vectors work in C++ (Part-1): How does push_back work?</h2></header><div class=entry-content><p>This blog is focused to explain how vectors work in the backend, and we’ll specially look at push_back method of the vector container. Looking at the source code helps to understand the implementation, and how vectors can be used efficiently.
-Vector Containers are type of sequenced containers in C++ commonly uses as a better alternative of arrays. They are also known as dynamic arrays, and as the term suggests - it’s one of the advantages they hold over native arrays in C++. You might have heard of Standard Library containers like vector, set, queue, priority_queue before. They all implement methods defined by the Container Concept.
-...</p></div><footer class=entry-footer><span title='2020-04-18 00:00:00 +0000 UTC'>April 18, 2020</span>&nbsp;·&nbsp;7 min&nbsp;·&nbsp;Kushashwa Ravi Shrimali</footer><a class=entry-link aria-label="post link to Understanding how Vectors work in C++ (Part-1): How does push_back work?" href=https://krshrimali.github.io/posts/2020/04/understanding-how-vectors-work-in-c-part-1-how-does-push_back-work/></a></article><article class=post-entry><header class=entry-header><h2 class=entry-hint-parent>[Training and Results] Deep Convolutional Generative Adversarial Networks on CelebA Dataset using PyTorch C++ API</h2></header><div class=entry-content><p>It’s been around 5 months since I released my last blog on DCGAN Review and Implementation using PyTorch C++ API and I’ve missed writing blogs badly! Straight the to the point, I’m back!
-But before we start, the PyTorch C++ Frontend has gone through several changes and thanks to the awesome contributors around the world, it resembles the Python API more than it ever did! Since a lot of things have changed, I have also updated my previous blogs (tested on 1.4 Stable build).
-...</p></div><footer class=entry-footer><span title='2020-02-23 00:00:00 +0000 UTC'>February 23, 2020</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Kushashwa Ravi Shrimali</footer><a class=entry-link aria-label="post link to [Training and Results] Deep Convolutional Generative Adversarial Networks on CelebA Dataset using PyTorch C++ API" href=https://krshrimali.github.io/posts/2020/02/training-and-results-deep-convolutional-generative-adversarial-networks-on-celeba-dataset-using-pytorch-c-api/></a></article><footer class=page-footer><nav class=pagination><a class=prev href=https://krshrimali.github.io/posts/page/3/>«&nbsp;Prev&nbsp;
-</a><a class=next href=https://krshrimali.github.io/posts/page/5/>Next&nbsp;&nbsp;»</a></nav></footer></main><footer class=footer><span>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</span> ·
-<span>Powered by
-<a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
-<a href=https://github.com/adityatelange/hugo-PaperMod/ rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top aria-label="go to top" title="Go to Top (Alt + G)" class=top-link id=top-link accesskey=g><svg viewBox="0 0 12 6" fill="currentColor"><path d="M12 6H0l6-6z"/></svg>
-</a><script>let menu=document.getElementById("menu");menu&&(menu.scrollLeft=localStorage.getItem("menu-scroll-position"),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)}),document.querySelectorAll('a[href^="#"]').forEach(e=>{e.addEventListener("click",function(e){e.preventDefault();var t=this.getAttribute("href").substr(1);window.matchMedia("(prefers-reduced-motion: reduce)").matches?document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView({behavior:"smooth"}),t==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${t}`)})})</script><script>var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")}</script><script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove("dark"),localStorage.setItem("pref-theme","light")):(document.body.classList.add("dark"),localStorage.setItem("pref-theme","dark"))})</script></body></html>
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2020-04-26 00:00:00 +0000 UTC'>April 26, 2020</span>&nbsp;·&nbsp;7 min&nbsp;·&nbsp;Kushashwa Ravi Shrimali</footer>
+  <a class="entry-link" aria-label="post link to Understanding how Vectors work in C&#43;&#43; (Part-2): What happens when you initialize a vector?" href="https://krshrimali.github.io/posts/2020/04/understanding-how-vectors-work-in-c-part-2-what-happens-when-you-initialize-a-vector/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">Understanding how Vectors work in C&#43;&#43; (Part-3): Diving deep into member functions of vectors
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>In this blog, we’ll continue diving deep into the source code of Vector Containers in GCC compiler. Today, we will be discussing some of the most commonly used methods of vectors, and how they are implemented.
+Before we start, if you haven’t looked at the previous blogs in the C&#43;&#43; series, please take a look here. If you are already familiar with memory allocation in vector containers and vector’s base structs, then you can skip reading the previous blogs and continue here. If not, I suggest you reading them.
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2020-04-26 00:00:00 +0000 UTC'>April 26, 2020</span>&nbsp;·&nbsp;7 min&nbsp;·&nbsp;Kushashwa Ravi Shrimali</footer>
+  <a class="entry-link" aria-label="post link to Understanding how Vectors work in C&#43;&#43; (Part-3): Diving deep into member functions of vectors" href="https://krshrimali.github.io/posts/2020/04/understanding-how-vectors-work-in-c-part-3-diving-deep-into-member-functions-of-vectors/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">Understanding how Vectors work in C&#43;&#43; (Part-1): How does push_back work?
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>This blog is focused to explain how vectors work in the backend, and we’ll specially look at push_back method of the vector container. Looking at the source code helps to understand the implementation, and how vectors can be used efficiently.
+Vector Containers are type of sequenced containers in C&#43;&#43; commonly uses as a better alternative of arrays. They are also known as dynamic arrays, and as the term suggests - it’s one of the advantages they hold over native arrays in C&#43;&#43;. You might have heard of Standard Library containers like vector, set, queue, priority_queue before. They all implement methods defined by the Container Concept.
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2020-04-18 00:00:00 +0000 UTC'>April 18, 2020</span>&nbsp;·&nbsp;7 min&nbsp;·&nbsp;Kushashwa Ravi Shrimali</footer>
+  <a class="entry-link" aria-label="post link to Understanding how Vectors work in C&#43;&#43; (Part-1): How does push_back work?" href="https://krshrimali.github.io/posts/2020/04/understanding-how-vectors-work-in-c-part-1-how-does-push_back-work/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">[Training and Results] Deep Convolutional Generative Adversarial Networks on CelebA Dataset using PyTorch C&#43;&#43; API
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>It’s been around 5 months since I released my last blog on DCGAN Review and Implementation using PyTorch C&#43;&#43; API and I’ve missed writing blogs badly! Straight the to the point, I’m back!
+But before we start, the PyTorch C&#43;&#43; Frontend has gone through several changes and thanks to the awesome contributors around the world, it resembles the Python API more than it ever did! Since a lot of things have changed, I have also updated my previous blogs (tested on 1.4 Stable build).
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2020-02-23 00:00:00 +0000 UTC'>February 23, 2020</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Kushashwa Ravi Shrimali</footer>
+  <a class="entry-link" aria-label="post link to [Training and Results] Deep Convolutional Generative Adversarial Networks on CelebA Dataset using PyTorch C&#43;&#43; API" href="https://krshrimali.github.io/posts/2020/02/training-and-results-deep-convolutional-generative-adversarial-networks-on-celeba-dataset-using-pytorch-c-api/"></a>
+</article>
+<footer class="page-footer">
+  <nav class="pagination">
+    <a class="prev" href="https://krshrimali.github.io/posts/page/3/">
+      «&nbsp;Prev&nbsp;
+    </a>
+    <a class="next" href="https://krshrimali.github.io/posts/page/5/">Next&nbsp;&nbsp;»
+    </a>
+  </nav>
+</footer>
+    </main>
+    
+<footer class="footer">
+        <span>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

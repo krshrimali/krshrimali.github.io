@@ -1,15 +1,34 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Iterators on Kushashwa Ravi Shrimali (Kush)</title><link>https://krshrimali.github.io/tags/iterators/</link><description>Recent content in Iterators on Kushashwa Ravi Shrimali (Kush)</description><generator>Hugo -- 0.147.8</generator><language>en</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sun, 26 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://krshrimali.github.io/tags/iterators/index.xml" rel="self" type="application/rss+xml"/><item><title>Prefer const_iterators to iterators (Notes)</title><link>https://krshrimali.github.io/posts/2021/09/prefer-const_iterators-to-iterators-notes/</link><pubDate>Sun, 26 Sep 2021 00:00:00 +0000</pubDate><guid>https://krshrimali.github.io/posts/2021/09/prefer-const_iterators-to-iterators-notes/</guid><description>&lt;hr>
-&lt;p>&lt;strong>NOTE&lt;/strong>&lt;/p>
-&lt;p>My notes on Chapter 3, Item 13 of Effective Modern C++ written by Scott Meyers.&lt;/p>
-&lt;p>Some (or even all) of the text can be similar to what you see in the book, as these are notes: I&amp;rsquo;ve tried not to be unnecessarily creative with my words. :)&lt;/p>
-&lt;hr>
-&lt;p>&lt;img loading="lazy" src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/cover-images/prefer-const-iterators-to-iterators.png">&lt;/p>
-&lt;p>In C++, iterators come handy to point at memory addresses of STL containers. For example,&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cpp" data-lang="cpp">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// C++11
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>std&lt;span style="color:#f92672">::&lt;/span>vector&lt;span style="color:#f92672">&amp;lt;&lt;/span>&lt;span style="color:#66d9ef">int&lt;/span>&lt;span style="color:#f92672">&amp;gt;&lt;/span> x {&lt;span style="color:#ae81ff">11&lt;/span>, &lt;span style="color:#ae81ff">9&lt;/span>, &lt;span style="color:#ae81ff">23&lt;/span>, &lt;span style="color:#ae81ff">6&lt;/span>};
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// begin() member function returns an iterator, which points to the first
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// memory address of the container x
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>std&lt;span style="color:#f92672">::&lt;/span>vector&lt;span style="color:#f92672">&amp;lt;&lt;/span>&lt;span style="color:#66d9ef">int&lt;/span>&lt;span style="color:#f92672">&amp;gt;::&lt;/span>iterator it &lt;span style="color:#f92672">=&lt;/span> x.begin();
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>While the general practice is to use &lt;code>const&lt;/code> whenever possible, but programmers tend to use whenever it&amp;rsquo;s &lt;em>practical&lt;/em>. &lt;code>const_iterators&lt;/code> is particularly suggested when you want to use iterators, but you don&amp;rsquo;t need to modify what it points to.&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Iterators on Kushashwa Ravi Shrimali (Kush)</title>
+    <link>https://krshrimali.github.io/tags/iterators/</link>
+    <description>Recent content in Iterators on Kushashwa Ravi Shrimali (Kush)</description>
+    <generator>Hugo -- 0.146.3</generator>
+    <language>en</language>
+    <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
+    <lastBuildDate>Sun, 26 Sep 2021 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://krshrimali.github.io/tags/iterators/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Prefer const_iterators to iterators (Notes)</title>
+      <link>https://krshrimali.github.io/posts/2021/09/prefer-const_iterators-to-iterators-notes/</link>
+      <pubDate>Sun, 26 Sep 2021 00:00:00 +0000</pubDate>
+      <guid>https://krshrimali.github.io/posts/2021/09/prefer-const_iterators-to-iterators-notes/</guid>
+      <description>&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;NOTE&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;My notes on Chapter 3, Item 13 of Effective Modern C++ written by Scott Meyers.&lt;/p&gt;
+&lt;p&gt;Some (or even all) of the text can be similar to what you see in the book, as these are notes: I&amp;rsquo;ve tried not to be unnecessarily creative with my words. :)&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://raw.githubusercontent.com/krshrimali/blog/main/assets/cover-images/prefer-const-iterators-to-iterators.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;In C++, iterators come handy to point at memory addresses of STL containers. For example,&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// C++11
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;vector&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; x {&lt;span style=&#34;color:#ae81ff&#34;&gt;11&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;9&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;23&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;};
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// begin() member function returns an iterator, which points to the first
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// memory address of the container x
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;vector&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;::&lt;/span&gt;iterator it &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; x.begin();
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;While the general practice is to use &lt;code&gt;const&lt;/code&gt; whenever possible, but programmers tend to use whenever it&amp;rsquo;s &lt;em&gt;practical&lt;/em&gt;. &lt;code&gt;const_iterators&lt;/code&gt; is particularly suggested when you want to use iterators, but you don&amp;rsquo;t need to modify what it points to.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
