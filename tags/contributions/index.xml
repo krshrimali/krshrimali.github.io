@@ -1,49 +1,23 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
-  <channel>
-    <title>Contributions on Kushashwa Ravi Shrimali (Kush)</title>
-    <link>https://krshrimali.github.io/tags/contributions/</link>
-    <description>Recent content in Contributions on Kushashwa Ravi Shrimali (Kush)</description>
-    <generator>Hugo -- 0.146.3</generator>
-    <language>en</language>
-    <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Sun, 31 Jul 2022 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://krshrimali.github.io/tags/contributions/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Porting a Tiling Window Manager Extenstion to C&#43;&#43; (Bismuth): Part-2 (getting closest relative window)</title>
-      <link>https://krshrimali.github.io/posts/2022/07/porting-a-tiling-window-manager-extenstion-to-c-bismuth-part-2-getting-closest-relative-window/</link>
-      <pubDate>Sun, 31 Jul 2022 00:00:00 +0000</pubDate>
-      <guid>https://krshrimali.github.io/posts/2022/07/porting-a-tiling-window-manager-extenstion-to-c-bismuth-part-2-getting-closest-relative-window/</guid>
-      <description>&lt;p&gt;Hi everyone! In this blog, I will be discussing the algorithm used in Bismuth to find the closest relative window to be focused for &lt;code&gt;focusWindowByDirection&lt;/code&gt; event. If you haven&amp;rsquo;t read the previous blog, make sure to give it a read &lt;a href=&#34;https://krshrimali.github.io/posts/2022/07/porting-a-tiling-window-manager-extenstion-to-c-bismuth-part-1/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
-&lt;h2 id=&#34;recap-from-the-previous-blog&#34;&gt;Recap from the previous blog&lt;/h2&gt;
-&lt;p&gt;Let&amp;rsquo;s start with a quick recap though, in the previous blog, we discussed:&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;focusWindowByDirection&lt;/code&gt; requires the following information:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;direction&lt;/code&gt; (from the user) - can be one of: &lt;code&gt;right, left, top/up, bottom/down&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;activeWindow&lt;/code&gt; (from the current session) - this is needed since &lt;code&gt;focusWindowByDirection&lt;/code&gt; event is a &lt;em&gt;relative&lt;/em&gt; event to your current focused window.&lt;/li&gt;
-&lt;li&gt;Neighbor window candidates (&lt;code&gt;neighborCandidates&lt;/code&gt;) to your current window (&lt;code&gt;activeWindow&lt;/code&gt;) and the given direction (&lt;code&gt;direction&lt;/code&gt;).&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// declaration
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;vector&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;Window&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; Engine&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;getNeighborCandidates(&lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; FocusDirection &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;direction, &lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; Window &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;basisWindow);
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// use
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;vector&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;Window&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; neighborCandidates &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; getNeighborCandidates(direction, basisWindow);
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;From these neighbor candidates (&lt;code&gt;neighborCandidates&lt;/code&gt;), we will now find the closest relative window corner. To me, it was tricky to understand at first, so we&amp;rsquo;ll be discussing this in detail over in the later sections.&lt;/li&gt;
-&lt;li&gt;Once we know the closest relative window corner, we&amp;rsquo;ll try to find the window which satisfies the corner condition.&lt;/li&gt;
-&lt;li&gt;If there were multiple found, we&amp;rsquo;ll return the first one based on the time-stamp (last used)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;understanding-the-scenario&#34;&gt;Understanding the scenario&lt;/h2&gt;
-&lt;p&gt;I want to start off with a visual, took me some time to draw it, but in case it doesn&amp;rsquo;t look good, I&amp;rsquo;m sorry! My drawing teacher in the high school tried his best, but&amp;hellip;&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Porting a Tiling Window Manager Extenstion to C&#43;&#43; (Bismuth): Part-1</title>
-      <link>https://krshrimali.github.io/posts/2022/07/porting-a-tiling-window-manager-extenstion-to-c-bismuth-part-1/</link>
-      <pubDate>Sat, 23 Jul 2022 00:00:00 +0000</pubDate>
-      <guid>https://krshrimali.github.io/posts/2022/07/porting-a-tiling-window-manager-extenstion-to-c-bismuth-part-1/</guid>
-      <description>&lt;p&gt;Hi everyone! I understand it&amp;rsquo;s been a long time, and I&amp;rsquo;m so excited to be writing this blog today. In today&amp;rsquo;s blog, I wanted to talk about my journey (so far) on contributing to &lt;a href=&#34;https://github.com/Bismuth-Forge/bismuth/&#34;&gt;Bismuth (a KDE&amp;rsquo;s Tiling Window Manager Extension)&lt;/a&gt;, mainly how and why I started, and where I am right now.&lt;/p&gt;
-&lt;h2 id=&#34;the-story-why-kde-plasma-and-why-bismuth&#34;&gt;The Story: Why KDE Plasma and Why Bismuth?&lt;/h2&gt;
-&lt;p&gt;For the last few months (close to a year), I&amp;rsquo;ve been using Pop OS (a linux distribution by System 76) which had this amazing automatic tiling window extension called &lt;a href=&#34;https://github.com/pop-os/shell&#34;&gt;&lt;code&gt;pop-shell&lt;/code&gt;&lt;/a&gt;, and it was close to what I always needed:&lt;/p&gt;</description>
-    </item>
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Contributions on Kushashwa Ravi Shrimali (Kush)</title><link>https://krshrimali.github.io/tags/contributions/</link><description>Recent content in Contributions on Kushashwa Ravi Shrimali (Kush)</description><generator>Hugo -- 0.147.8</generator><language>en</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sun, 31 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://krshrimali.github.io/tags/contributions/index.xml" rel="self" type="application/rss+xml"/><item><title>Porting a Tiling Window Manager Extenstion to C++ (Bismuth): Part-2 (getting closest relative window)</title><link>https://krshrimali.github.io/posts/2022/07/porting-a-tiling-window-manager-extenstion-to-c-bismuth-part-2-getting-closest-relative-window/</link><pubDate>Sun, 31 Jul 2022 00:00:00 +0000</pubDate><guid>https://krshrimali.github.io/posts/2022/07/porting-a-tiling-window-manager-extenstion-to-c-bismuth-part-2-getting-closest-relative-window/</guid><description>&lt;p>Hi everyone! In this blog, I will be discussing the algorithm used in Bismuth to find the closest relative window to be focused for &lt;code>focusWindowByDirection&lt;/code> event. If you haven&amp;rsquo;t read the previous blog, make sure to give it a read &lt;a href="https://krshrimali.github.io/posts/2022/07/porting-a-tiling-window-manager-extenstion-to-c-bismuth-part-1/">here&lt;/a>.&lt;/p>
+&lt;h2 id="recap-from-the-previous-blog">Recap from the previous blog&lt;/h2>
+&lt;p>Let&amp;rsquo;s start with a quick recap though, in the previous blog, we discussed:&lt;/p>
+&lt;p>&lt;code>focusWindowByDirection&lt;/code> requires the following information:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>direction&lt;/code> (from the user) - can be one of: &lt;code>right, left, top/up, bottom/down&lt;/code>.&lt;/li>
+&lt;li>&lt;code>activeWindow&lt;/code> (from the current session) - this is needed since &lt;code>focusWindowByDirection&lt;/code> event is a &lt;em>relative&lt;/em> event to your current focused window.&lt;/li>
+&lt;li>Neighbor window candidates (&lt;code>neighborCandidates&lt;/code>) to your current window (&lt;code>activeWindow&lt;/code>) and the given direction (&lt;code>direction&lt;/code>).&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cpp" data-lang="cpp">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// declaration
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>std&lt;span style="color:#f92672">::&lt;/span>vector&lt;span style="color:#f92672">&amp;lt;&lt;/span>Window&lt;span style="color:#f92672">&amp;gt;&lt;/span> Engine&lt;span style="color:#f92672">::&lt;/span>getNeighborCandidates(&lt;span style="color:#66d9ef">const&lt;/span> FocusDirection &lt;span style="color:#f92672">&amp;amp;&lt;/span>direction, &lt;span style="color:#66d9ef">const&lt;/span> Window &lt;span style="color:#f92672">&amp;amp;&lt;/span>basisWindow);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// use
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>std&lt;span style="color:#f92672">::&lt;/span>vector&lt;span style="color:#f92672">&amp;lt;&lt;/span>Window&lt;span style="color:#f92672">&amp;gt;&lt;/span> neighborCandidates &lt;span style="color:#f92672">=&lt;/span> getNeighborCandidates(direction, basisWindow);
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>From these neighbor candidates (&lt;code>neighborCandidates&lt;/code>), we will now find the closest relative window corner. To me, it was tricky to understand at first, so we&amp;rsquo;ll be discussing this in detail over in the later sections.&lt;/li>
+&lt;li>Once we know the closest relative window corner, we&amp;rsquo;ll try to find the window which satisfies the corner condition.&lt;/li>
+&lt;li>If there were multiple found, we&amp;rsquo;ll return the first one based on the time-stamp (last used)&lt;/li>
+&lt;/ul>
+&lt;h2 id="understanding-the-scenario">Understanding the scenario&lt;/h2>
+&lt;p>I want to start off with a visual, took me some time to draw it, but in case it doesn&amp;rsquo;t look good, I&amp;rsquo;m sorry! My drawing teacher in the high school tried his best, but&amp;hellip;&lt;/p></description></item><item><title>Porting a Tiling Window Manager Extenstion to C++ (Bismuth): Part-1</title><link>https://krshrimali.github.io/posts/2022/07/porting-a-tiling-window-manager-extenstion-to-c-bismuth-part-1/</link><pubDate>Sat, 23 Jul 2022 00:00:00 +0000</pubDate><guid>https://krshrimali.github.io/posts/2022/07/porting-a-tiling-window-manager-extenstion-to-c-bismuth-part-1/</guid><description>&lt;p>Hi everyone! I understand it&amp;rsquo;s been a long time, and I&amp;rsquo;m so excited to be writing this blog today. In today&amp;rsquo;s blog, I wanted to talk about my journey (so far) on contributing to &lt;a href="https://github.com/Bismuth-Forge/bismuth/">Bismuth (a KDE&amp;rsquo;s Tiling Window Manager Extension)&lt;/a>, mainly how and why I started, and where I am right now.&lt;/p>
+&lt;h2 id="the-story-why-kde-plasma-and-why-bismuth">The Story: Why KDE Plasma and Why Bismuth?&lt;/h2>
+&lt;p>For the last few months (close to a year), I&amp;rsquo;ve been using Pop OS (a linux distribution by System 76) which had this amazing automatic tiling window extension called &lt;a href="https://github.com/pop-os/shell">&lt;code>pop-shell&lt;/code>&lt;/a>, and it was close to what I always needed:&lt;/p></description></item></channel></rss>

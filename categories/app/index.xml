@@ -1,22 +1,3 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
-  <channel>
-    <title>App on Kushashwa Ravi Shrimali (Kush)</title>
-    <link>https://krshrimali.github.io/categories/app/</link>
-    <description>Recent content in App on Kushashwa Ravi Shrimali (Kush)</description>
-    <generator>Hugo -- 0.146.3</generator>
-    <language>en</language>
-    <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Mon, 12 Dec 2022 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://krshrimali.github.io/categories/app/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>I started building an app using Rust and here is how it went...</title>
-      <link>https://krshrimali.github.io/posts/2022/12/i-started-building-an-app-using-rust-and-here-is-how-it-went.../</link>
-      <pubDate>Mon, 12 Dec 2022 00:00:00 +0000</pubDate>
-      <guid>https://krshrimali.github.io/posts/2022/12/i-started-building-an-app-using-rust-and-here-is-how-it-went.../</guid>
-      <description>&lt;p&gt;Hi everyone!! I&amp;rsquo;ve an update, on what I&amp;rsquo;ve been up to - and I&amp;rsquo;m excited. It&amp;rsquo;s a &lt;em&gt;rusty&lt;/em&gt; update 😉. As always, I would love to tell you a story (this will help set some context), but if you want to skip and go directly to the update, please scroll to: &lt;code&gt;# THE Update&lt;/code&gt; section.&lt;/p&gt;
-&lt;h2 id=&#34;the-story&#34;&gt;The Story&lt;/h2&gt;
-&lt;p&gt;I&amp;rsquo;ve been through, possibly, the best and the worst time of my life. I use these contrasting words because everything went wrong - and that&amp;rsquo;s where you get an opportunity to shine. I think I fairly enjoyed resisting the pain and fighting through the odds, hopefully you&amp;rsquo;ll learn about it very soon on my blog (just need the courage to say it out loud :)).&lt;/p&gt;</description>
-    </item>
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>App on Kushashwa Ravi Shrimali (Kush)</title><link>https://krshrimali.github.io/categories/app/</link><description>Recent content in App on Kushashwa Ravi Shrimali (Kush)</description><generator>Hugo -- 0.147.8</generator><language>en</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Mon, 12 Dec 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://krshrimali.github.io/categories/app/index.xml" rel="self" type="application/rss+xml"/><item><title>I started building an app using Rust and here is how it went...</title><link>https://krshrimali.github.io/posts/2022/12/i-started-building-an-app-using-rust-and-here-is-how-it-went.../</link><pubDate>Mon, 12 Dec 2022 00:00:00 +0000</pubDate><guid>https://krshrimali.github.io/posts/2022/12/i-started-building-an-app-using-rust-and-here-is-how-it-went.../</guid><description>&lt;p>Hi everyone!! I&amp;rsquo;ve an update, on what I&amp;rsquo;ve been up to - and I&amp;rsquo;m excited. It&amp;rsquo;s a &lt;em>rusty&lt;/em> update 😉. As always, I would love to tell you a story (this will help set some context), but if you want to skip and go directly to the update, please scroll to: &lt;code># THE Update&lt;/code> section.&lt;/p>
+&lt;h2 id="the-story">The Story&lt;/h2>
+&lt;p>I&amp;rsquo;ve been through, possibly, the best and the worst time of my life. I use these contrasting words because everything went wrong - and that&amp;rsquo;s where you get an opportunity to shine. I think I fairly enjoyed resisting the pain and fighting through the odds, hopefully you&amp;rsquo;ll learn about it very soon on my blog (just need the courage to say it out loud :)).&lt;/p></description></item></channel></rss>

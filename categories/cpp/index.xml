@@ -1,185 +1,103 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
-  <channel>
-    <title>Cpp on Kushashwa Ravi Shrimali (Kush)</title>
-    <link>https://krshrimali.github.io/categories/cpp/</link>
-    <description>Recent content in Cpp on Kushashwa Ravi Shrimali (Kush)</description>
-    <generator>Hugo -- 0.146.3</generator>
-    <language>en</language>
-    <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Sun, 27 Oct 2024 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://krshrimali.github.io/categories/cpp/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Where are Linked Lists used?</title>
-      <link>https://krshrimali.github.io/posts/2024/10/where-are-linked-lists-used/</link>
-      <pubDate>Sun, 27 Oct 2024 00:00:00 +0000</pubDate>
-      <guid>https://krshrimali.github.io/posts/2024/10/where-are-linked-lists-used/</guid>
-      <description>&lt;p&gt;It&amp;rsquo;s the Day-1 of &lt;em&gt;staying&lt;/em&gt; curious. I&amp;rsquo;ll talk more about it towards the end, but first - let&amp;rsquo;s get to the topic.&lt;/p&gt;
-&lt;p&gt;Starting from my college life, I&amp;rsquo;ve always been excited to know the &amp;ldquo;how&amp;rdquo;, &amp;ldquo;why&amp;rdquo;, &amp;ldquo;what&amp;rdquo;, &amp;ldquo;where&amp;rdquo; questions of each data structure we would study. This series is not just about data structures though, anything that you can imagine with Computer Science - I hope to cover some of those in some more blog posts.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Porting a Tiling Window Manager Extenstion to C&#43;&#43; (Bismuth): Part-2 (getting closest relative window)</title>
-      <link>https://krshrimali.github.io/posts/2022/07/porting-a-tiling-window-manager-extenstion-to-c-bismuth-part-2-getting-closest-relative-window/</link>
-      <pubDate>Sun, 31 Jul 2022 00:00:00 +0000</pubDate>
-      <guid>https://krshrimali.github.io/posts/2022/07/porting-a-tiling-window-manager-extenstion-to-c-bismuth-part-2-getting-closest-relative-window/</guid>
-      <description>&lt;p&gt;Hi everyone! In this blog, I will be discussing the algorithm used in Bismuth to find the closest relative window to be focused for &lt;code&gt;focusWindowByDirection&lt;/code&gt; event. If you haven&amp;rsquo;t read the previous blog, make sure to give it a read &lt;a href=&#34;https://krshrimali.github.io/posts/2022/07/porting-a-tiling-window-manager-extenstion-to-c-bismuth-part-1/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
-&lt;h2 id=&#34;recap-from-the-previous-blog&#34;&gt;Recap from the previous blog&lt;/h2&gt;
-&lt;p&gt;Let&amp;rsquo;s start with a quick recap though, in the previous blog, we discussed:&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;focusWindowByDirection&lt;/code&gt; requires the following information:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;direction&lt;/code&gt; (from the user) - can be one of: &lt;code&gt;right, left, top/up, bottom/down&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;activeWindow&lt;/code&gt; (from the current session) - this is needed since &lt;code&gt;focusWindowByDirection&lt;/code&gt; event is a &lt;em&gt;relative&lt;/em&gt; event to your current focused window.&lt;/li&gt;
-&lt;li&gt;Neighbor window candidates (&lt;code&gt;neighborCandidates&lt;/code&gt;) to your current window (&lt;code&gt;activeWindow&lt;/code&gt;) and the given direction (&lt;code&gt;direction&lt;/code&gt;).&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// declaration
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;vector&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;Window&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; Engine&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;getNeighborCandidates(&lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; FocusDirection &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;direction, &lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; Window &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;basisWindow);
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// use
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;vector&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;Window&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; neighborCandidates &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; getNeighborCandidates(direction, basisWindow);
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;From these neighbor candidates (&lt;code&gt;neighborCandidates&lt;/code&gt;), we will now find the closest relative window corner. To me, it was tricky to understand at first, so we&amp;rsquo;ll be discussing this in detail over in the later sections.&lt;/li&gt;
-&lt;li&gt;Once we know the closest relative window corner, we&amp;rsquo;ll try to find the window which satisfies the corner condition.&lt;/li&gt;
-&lt;li&gt;If there were multiple found, we&amp;rsquo;ll return the first one based on the time-stamp (last used)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;understanding-the-scenario&#34;&gt;Understanding the scenario&lt;/h2&gt;
-&lt;p&gt;I want to start off with a visual, took me some time to draw it, but in case it doesn&amp;rsquo;t look good, I&amp;rsquo;m sorry! My drawing teacher in the high school tried his best, but&amp;hellip;&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Porting a Tiling Window Manager Extenstion to C&#43;&#43; (Bismuth): Part-1</title>
-      <link>https://krshrimali.github.io/posts/2022/07/porting-a-tiling-window-manager-extenstion-to-c-bismuth-part-1/</link>
-      <pubDate>Sat, 23 Jul 2022 00:00:00 +0000</pubDate>
-      <guid>https://krshrimali.github.io/posts/2022/07/porting-a-tiling-window-manager-extenstion-to-c-bismuth-part-1/</guid>
-      <description>&lt;p&gt;Hi everyone! I understand it&amp;rsquo;s been a long time, and I&amp;rsquo;m so excited to be writing this blog today. In today&amp;rsquo;s blog, I wanted to talk about my journey (so far) on contributing to &lt;a href=&#34;https://github.com/Bismuth-Forge/bismuth/&#34;&gt;Bismuth (a KDE&amp;rsquo;s Tiling Window Manager Extension)&lt;/a&gt;, mainly how and why I started, and where I am right now.&lt;/p&gt;
-&lt;h2 id=&#34;the-story-why-kde-plasma-and-why-bismuth&#34;&gt;The Story: Why KDE Plasma and Why Bismuth?&lt;/h2&gt;
-&lt;p&gt;For the last few months (close to a year), I&amp;rsquo;ve been using Pop OS (a linux distribution by System 76) which had this amazing automatic tiling window extension called &lt;a href=&#34;https://github.com/pop-os/shell&#34;&gt;&lt;code&gt;pop-shell&lt;/code&gt;&lt;/a&gt;, and it was close to what I always needed:&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Prefer const_iterators to iterators (Notes)</title>
-      <link>https://krshrimali.github.io/posts/2021/09/prefer-const_iterators-to-iterators-notes/</link>
-      <pubDate>Sun, 26 Sep 2021 00:00:00 +0000</pubDate>
-      <guid>https://krshrimali.github.io/posts/2021/09/prefer-const_iterators-to-iterators-notes/</guid>
-      <description>&lt;hr&gt;
-&lt;p&gt;&lt;strong&gt;NOTE&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;My notes on Chapter 3, Item 13 of Effective Modern C++ written by Scott Meyers.&lt;/p&gt;
-&lt;p&gt;Some (or even all) of the text can be similar to what you see in the book, as these are notes: I&amp;rsquo;ve tried not to be unnecessarily creative with my words. :)&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://raw.githubusercontent.com/krshrimali/blog/main/assets/cover-images/prefer-const-iterators-to-iterators.png&#34;&gt;&lt;/p&gt;
-&lt;p&gt;In C++, iterators come handy to point at memory addresses of STL containers. For example,&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// C++11
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;vector&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; x {&lt;span style=&#34;color:#ae81ff&#34;&gt;11&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;9&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;23&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;};
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// begin() member function returns an iterator, which points to the first
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// memory address of the container x
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;vector&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;::&lt;/span&gt;iterator it &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; x.begin();
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;While the general practice is to use &lt;code&gt;const&lt;/code&gt; whenever possible, but programmers tend to use whenever it&amp;rsquo;s &lt;em&gt;practical&lt;/em&gt;. &lt;code&gt;const_iterators&lt;/code&gt; is particularly suggested when you want to use iterators, but you don&amp;rsquo;t need to modify what it points to.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Declaring Overriding Functions override (Notes)</title>
-      <link>https://krshrimali.github.io/posts/2021/09/declaring-overriding-functions-override-notes/</link>
-      <pubDate>Sat, 25 Sep 2021 00:00:00 +0000</pubDate>
-      <guid>https://krshrimali.github.io/posts/2021/09/declaring-overriding-functions-override-notes/</guid>
-      <description>&lt;hr&gt;
-&lt;p&gt;&lt;strong&gt;NOTE&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;My notes on Chapter 3, Item 12 of Effective Modern C++ written by Scott Meyers.&lt;/p&gt;
-&lt;p&gt;Some (or even all) of the text can be similar to what you see in the book, as these are notes: I&amp;rsquo;ve tried not to be unnecessarily creative with my words. :)&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://raw.githubusercontent.com/krshrimali/blog/main/assets/cover-images/declaring-overriding-functions-override.png&#34;&gt;&lt;/p&gt;
-&lt;p&gt;Overriding != Overloading&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;Example&lt;/em&gt; of virtual function overriding:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// Base class
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Base&lt;/span&gt; {
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;virtual&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; doWork();
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;// ...
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;};
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// Derived class from Base
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Derived&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; Base {
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;// virtual is optional
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;// this will &amp;#34;override&amp;#34; Base::doWork
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;virtual&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; doWork();
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;// ...
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;};
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// This creates a &amp;#34;Base&amp;#34; class pointer to &amp;#34;Derived&amp;#34; class object
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;unique_ptr&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;Base&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; upb &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;make_unique&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;Derived&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;();
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// Derived doWork() function is invoked
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;upb&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;doWork();
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This is how virtual function overriding allows to invoke a &amp;ldquo;derived class function&amp;rdquo; from a base class interface.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Prefer Deleted Functions to Private Undefined Ones (Notes)</title>
-      <link>https://krshrimali.github.io/posts/2021/08/prefer-deleted-functions-to-private-undefined-ones-notes/</link>
-      <pubDate>Wed, 25 Aug 2021 00:00:00 +0000</pubDate>
-      <guid>https://krshrimali.github.io/posts/2021/08/prefer-deleted-functions-to-private-undefined-ones-notes/</guid>
-      <description>&lt;h2 id=&#34;prefer-deleted-functions-to-private-undefined-ones&#34;&gt;Prefer deleted functions to private undefined ones&lt;/h2&gt;
-&lt;p&gt;This item (11) in the chapter 3 focuses on:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Why and How to prevent users calling particular functions?&lt;/li&gt;
-&lt;li&gt;C++-98 and C++-11 approach&lt;/li&gt;
-&lt;li&gt;What&amp;rsquo;s the difference between deleting a function vs declaring a member function private (and not defining them)?&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://raw.githubusercontent.com/krshrimali/blog/main/assets/cover-images/Item-11-Notes.png&#34;&gt;&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;&lt;strong&gt;NOTE&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;These are my notes on Chapter 3, Item 11 of Effective Modern C++ written by Scott Meyers.&lt;/p&gt;
-&lt;p&gt;Some (or even all) of the text can be similar to what you see in the book, as these are notes: I&amp;rsquo;ve tried not to be unnecessarily creative with my words. :)&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Prefer Scoped Enums over Unscoped Enums (Notes)</title>
-      <link>https://krshrimali.github.io/posts/2021/08/prefer-scoped-enums-over-unscoped-enums-notes/</link>
-      <pubDate>Sat, 14 Aug 2021 00:00:00 +0000</pubDate>
-      <guid>https://krshrimali.github.io/posts/2021/08/prefer-scoped-enums-over-unscoped-enums-notes/</guid>
-      <description>&lt;h2 id=&#34;scoped-vs-unscoped-enums&#34;&gt;Scoped vs Unscoped Enums&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;General rule:&lt;/strong&gt; declaring a name inside curly braces is limited to that scope.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Exception:&lt;/strong&gt; C++-98 style Enums&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://raw.githubusercontent.com/krshrimali/blog/main/assets/cover-images/Unscoped-Scoped-Enums.png&#34;&gt;&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;&lt;strong&gt;NOTE&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;My notes on Chapter 3, Item 10 of Effective Modern C++ written by Scott Meyers.&lt;/p&gt;
-&lt;p&gt;Some (or even all) of the text can be similar to what you see in the book, as these are notes: I&amp;rsquo;ve tried not to be unnecessarily creative with my words. :)&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Union Find Problem, and a naive implementation (C&#43;&#43;)</title>
-      <link>https://krshrimali.github.io/posts/2021/08/union-find-problem-and-a-naive-implementation-c-/</link>
-      <pubDate>Sat, 14 Aug 2021 00:00:00 +0000</pubDate>
-      <guid>https://krshrimali.github.io/posts/2021/08/union-find-problem-and-a-naive-implementation-c-/</guid>
-      <description>&lt;p&gt;Hi Everyone, today I want to talk about Union Find Problem. This is going to be a series covering:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Union Find Problem (this blog)&lt;/li&gt;
-&lt;li&gt;Solutions to Union Find (1): Quick Find&lt;/li&gt;
-&lt;li&gt;Solutions to Union Find (2): Quick Union&lt;/li&gt;
-&lt;li&gt;Solutions to Union Find (3): Weighted Quick Union&lt;/li&gt;
-&lt;li&gt;Applications of Union Find (perculation and more)&lt;/li&gt;
-&lt;li&gt;Cool project using Union Find&lt;/li&gt;
-&lt;li&gt;Solving some competitive programming questions using Union Find&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://raw.githubusercontent.com/krshrimali/blog/main/assets/cover-images/Union-Find-Intro.png&#34;&gt;&lt;/p&gt;
-&lt;p&gt;Each blog will try to cover very basic concepts behind the topic, and also what it&amp;rsquo;s all about.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Prefer Alias Declarations to Typedefs (Notes)</title>
-      <link>https://krshrimali.github.io/posts/2021/08/prefer-alias-declarations-to-typedefs-notes/</link>
-      <pubDate>Thu, 12 Aug 2021 00:00:00 +0000</pubDate>
-      <guid>https://krshrimali.github.io/posts/2021/08/prefer-alias-declarations-to-typedefs-notes/</guid>
-      <description>&lt;p&gt;One solution to avoiding using long type names:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// So C++98 like
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;typedef&lt;/span&gt; std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;unique_ptr&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;unordered_map&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;string, std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;string&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&amp;gt;&lt;/span&gt; UPtrMapSS;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
-    </item>
-    <item>
-      <title>Function Pointers and Function Objects in C&#43;&#43;</title>
-      <link>https://krshrimali.github.io/posts/2021/07/function-pointers-and-function-objects-in-c-/</link>
-      <pubDate>Sun, 18 Jul 2021 00:00:00 +0000</pubDate>
-      <guid>https://krshrimali.github.io/posts/2021/07/function-pointers-and-function-objects-in-c-/</guid>
-      <description>&lt;p&gt;In today&amp;rsquo;s blog, we&amp;rsquo;ll talk about two important concepts in C++: Function Pointers and Function Objects.&lt;/p&gt;
-&lt;p&gt;Please note that, function objects are commonly referred as &lt;em&gt;functors&lt;/em&gt; but we have failed to notice any official alias to the name. Hence, we&amp;rsquo;ll restrict ourselves to using &lt;em&gt;Function Objects&lt;/em&gt; in this blog.&lt;/p&gt;</description>
-    </item>
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Cpp on Kushashwa Ravi Shrimali (Kush)</title><link>https://krshrimali.github.io/categories/cpp/</link><description>Recent content in Cpp on Kushashwa Ravi Shrimali (Kush)</description><generator>Hugo -- 0.147.8</generator><language>en</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sun, 27 Oct 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://krshrimali.github.io/categories/cpp/index.xml" rel="self" type="application/rss+xml"/><item><title>Where are Linked Lists used?</title><link>https://krshrimali.github.io/posts/2024/10/where-are-linked-lists-used/</link><pubDate>Sun, 27 Oct 2024 00:00:00 +0000</pubDate><guid>https://krshrimali.github.io/posts/2024/10/where-are-linked-lists-used/</guid><description>&lt;p>It&amp;rsquo;s the Day-1 of &lt;em>staying&lt;/em> curious. I&amp;rsquo;ll talk more about it towards the end, but first - let&amp;rsquo;s get to the topic.&lt;/p>
+&lt;p>Starting from my college life, I&amp;rsquo;ve always been excited to know the &amp;ldquo;how&amp;rdquo;, &amp;ldquo;why&amp;rdquo;, &amp;ldquo;what&amp;rdquo;, &amp;ldquo;where&amp;rdquo; questions of each data structure we would study. This series is not just about data structures though, anything that you can imagine with Computer Science - I hope to cover some of those in some more blog posts.&lt;/p></description></item><item><title>Porting a Tiling Window Manager Extenstion to C++ (Bismuth): Part-2 (getting closest relative window)</title><link>https://krshrimali.github.io/posts/2022/07/porting-a-tiling-window-manager-extenstion-to-c-bismuth-part-2-getting-closest-relative-window/</link><pubDate>Sun, 31 Jul 2022 00:00:00 +0000</pubDate><guid>https://krshrimali.github.io/posts/2022/07/porting-a-tiling-window-manager-extenstion-to-c-bismuth-part-2-getting-closest-relative-window/</guid><description>&lt;p>Hi everyone! In this blog, I will be discussing the algorithm used in Bismuth to find the closest relative window to be focused for &lt;code>focusWindowByDirection&lt;/code> event. If you haven&amp;rsquo;t read the previous blog, make sure to give it a read &lt;a href="https://krshrimali.github.io/posts/2022/07/porting-a-tiling-window-manager-extenstion-to-c-bismuth-part-1/">here&lt;/a>.&lt;/p>
+&lt;h2 id="recap-from-the-previous-blog">Recap from the previous blog&lt;/h2>
+&lt;p>Let&amp;rsquo;s start with a quick recap though, in the previous blog, we discussed:&lt;/p>
+&lt;p>&lt;code>focusWindowByDirection&lt;/code> requires the following information:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>direction&lt;/code> (from the user) - can be one of: &lt;code>right, left, top/up, bottom/down&lt;/code>.&lt;/li>
+&lt;li>&lt;code>activeWindow&lt;/code> (from the current session) - this is needed since &lt;code>focusWindowByDirection&lt;/code> event is a &lt;em>relative&lt;/em> event to your current focused window.&lt;/li>
+&lt;li>Neighbor window candidates (&lt;code>neighborCandidates&lt;/code>) to your current window (&lt;code>activeWindow&lt;/code>) and the given direction (&lt;code>direction&lt;/code>).&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cpp" data-lang="cpp">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// declaration
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>std&lt;span style="color:#f92672">::&lt;/span>vector&lt;span style="color:#f92672">&amp;lt;&lt;/span>Window&lt;span style="color:#f92672">&amp;gt;&lt;/span> Engine&lt;span style="color:#f92672">::&lt;/span>getNeighborCandidates(&lt;span style="color:#66d9ef">const&lt;/span> FocusDirection &lt;span style="color:#f92672">&amp;amp;&lt;/span>direction, &lt;span style="color:#66d9ef">const&lt;/span> Window &lt;span style="color:#f92672">&amp;amp;&lt;/span>basisWindow);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// use
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>std&lt;span style="color:#f92672">::&lt;/span>vector&lt;span style="color:#f92672">&amp;lt;&lt;/span>Window&lt;span style="color:#f92672">&amp;gt;&lt;/span> neighborCandidates &lt;span style="color:#f92672">=&lt;/span> getNeighborCandidates(direction, basisWindow);
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>From these neighbor candidates (&lt;code>neighborCandidates&lt;/code>), we will now find the closest relative window corner. To me, it was tricky to understand at first, so we&amp;rsquo;ll be discussing this in detail over in the later sections.&lt;/li>
+&lt;li>Once we know the closest relative window corner, we&amp;rsquo;ll try to find the window which satisfies the corner condition.&lt;/li>
+&lt;li>If there were multiple found, we&amp;rsquo;ll return the first one based on the time-stamp (last used)&lt;/li>
+&lt;/ul>
+&lt;h2 id="understanding-the-scenario">Understanding the scenario&lt;/h2>
+&lt;p>I want to start off with a visual, took me some time to draw it, but in case it doesn&amp;rsquo;t look good, I&amp;rsquo;m sorry! My drawing teacher in the high school tried his best, but&amp;hellip;&lt;/p></description></item><item><title>Porting a Tiling Window Manager Extenstion to C++ (Bismuth): Part-1</title><link>https://krshrimali.github.io/posts/2022/07/porting-a-tiling-window-manager-extenstion-to-c-bismuth-part-1/</link><pubDate>Sat, 23 Jul 2022 00:00:00 +0000</pubDate><guid>https://krshrimali.github.io/posts/2022/07/porting-a-tiling-window-manager-extenstion-to-c-bismuth-part-1/</guid><description>&lt;p>Hi everyone! I understand it&amp;rsquo;s been a long time, and I&amp;rsquo;m so excited to be writing this blog today. In today&amp;rsquo;s blog, I wanted to talk about my journey (so far) on contributing to &lt;a href="https://github.com/Bismuth-Forge/bismuth/">Bismuth (a KDE&amp;rsquo;s Tiling Window Manager Extension)&lt;/a>, mainly how and why I started, and where I am right now.&lt;/p>
+&lt;h2 id="the-story-why-kde-plasma-and-why-bismuth">The Story: Why KDE Plasma and Why Bismuth?&lt;/h2>
+&lt;p>For the last few months (close to a year), I&amp;rsquo;ve been using Pop OS (a linux distribution by System 76) which had this amazing automatic tiling window extension called &lt;a href="https://github.com/pop-os/shell">&lt;code>pop-shell&lt;/code>&lt;/a>, and it was close to what I always needed:&lt;/p></description></item><item><title>Prefer const_iterators to iterators (Notes)</title><link>https://krshrimali.github.io/posts/2021/09/prefer-const_iterators-to-iterators-notes/</link><pubDate>Sun, 26 Sep 2021 00:00:00 +0000</pubDate><guid>https://krshrimali.github.io/posts/2021/09/prefer-const_iterators-to-iterators-notes/</guid><description>&lt;hr>
+&lt;p>&lt;strong>NOTE&lt;/strong>&lt;/p>
+&lt;p>My notes on Chapter 3, Item 13 of Effective Modern C++ written by Scott Meyers.&lt;/p>
+&lt;p>Some (or even all) of the text can be similar to what you see in the book, as these are notes: I&amp;rsquo;ve tried not to be unnecessarily creative with my words. :)&lt;/p>
+&lt;hr>
+&lt;p>&lt;img loading="lazy" src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/cover-images/prefer-const-iterators-to-iterators.png">&lt;/p>
+&lt;p>In C++, iterators come handy to point at memory addresses of STL containers. For example,&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cpp" data-lang="cpp">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// C++11
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>std&lt;span style="color:#f92672">::&lt;/span>vector&lt;span style="color:#f92672">&amp;lt;&lt;/span>&lt;span style="color:#66d9ef">int&lt;/span>&lt;span style="color:#f92672">&amp;gt;&lt;/span> x {&lt;span style="color:#ae81ff">11&lt;/span>, &lt;span style="color:#ae81ff">9&lt;/span>, &lt;span style="color:#ae81ff">23&lt;/span>, &lt;span style="color:#ae81ff">6&lt;/span>};
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// begin() member function returns an iterator, which points to the first
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// memory address of the container x
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>std&lt;span style="color:#f92672">::&lt;/span>vector&lt;span style="color:#f92672">&amp;lt;&lt;/span>&lt;span style="color:#66d9ef">int&lt;/span>&lt;span style="color:#f92672">&amp;gt;::&lt;/span>iterator it &lt;span style="color:#f92672">=&lt;/span> x.begin();
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>While the general practice is to use &lt;code>const&lt;/code> whenever possible, but programmers tend to use whenever it&amp;rsquo;s &lt;em>practical&lt;/em>. &lt;code>const_iterators&lt;/code> is particularly suggested when you want to use iterators, but you don&amp;rsquo;t need to modify what it points to.&lt;/p></description></item><item><title>Declaring Overriding Functions override (Notes)</title><link>https://krshrimali.github.io/posts/2021/09/declaring-overriding-functions-override-notes/</link><pubDate>Sat, 25 Sep 2021 00:00:00 +0000</pubDate><guid>https://krshrimali.github.io/posts/2021/09/declaring-overriding-functions-override-notes/</guid><description>&lt;hr>
+&lt;p>&lt;strong>NOTE&lt;/strong>&lt;/p>
+&lt;p>My notes on Chapter 3, Item 12 of Effective Modern C++ written by Scott Meyers.&lt;/p>
+&lt;p>Some (or even all) of the text can be similar to what you see in the book, as these are notes: I&amp;rsquo;ve tried not to be unnecessarily creative with my words. :)&lt;/p>
+&lt;hr>
+&lt;p>&lt;img loading="lazy" src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/cover-images/declaring-overriding-functions-override.png">&lt;/p>
+&lt;p>Overriding != Overloading&lt;/p>
+&lt;p>&lt;em>Example&lt;/em> of virtual function overriding:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cpp" data-lang="cpp">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// Base class
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>&lt;span style="color:#66d9ef">class&lt;/span> &lt;span style="color:#a6e22e">Base&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">public&lt;/span>&lt;span style="color:#f92672">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">virtual&lt;/span> &lt;span style="color:#66d9ef">void&lt;/span> doWork();
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// ...
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>};
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// Derived class from Base
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>&lt;span style="color:#66d9ef">class&lt;/span> &lt;span style="color:#a6e22e">Derived&lt;/span>&lt;span style="color:#f92672">:&lt;/span> &lt;span style="color:#66d9ef">public&lt;/span> Base {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">public&lt;/span>&lt;span style="color:#f92672">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// virtual is optional
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#75715e">// this will &amp;#34;override&amp;#34; Base::doWork
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#66d9ef">virtual&lt;/span> &lt;span style="color:#66d9ef">void&lt;/span> doWork();
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// ...
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>};
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// This creates a &amp;#34;Base&amp;#34; class pointer to &amp;#34;Derived&amp;#34; class object
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>std&lt;span style="color:#f92672">::&lt;/span>unique_ptr&lt;span style="color:#f92672">&amp;lt;&lt;/span>Base&lt;span style="color:#f92672">&amp;gt;&lt;/span> upb &lt;span style="color:#f92672">=&lt;/span> std&lt;span style="color:#f92672">::&lt;/span>make_unique&lt;span style="color:#f92672">&amp;lt;&lt;/span>Derived&lt;span style="color:#f92672">&amp;gt;&lt;/span>();
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// Derived doWork() function is invoked
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>upb&lt;span style="color:#f92672">-&amp;gt;&lt;/span>doWork();
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>This is how virtual function overriding allows to invoke a &amp;ldquo;derived class function&amp;rdquo; from a base class interface.&lt;/p></description></item><item><title>Prefer Deleted Functions to Private Undefined Ones (Notes)</title><link>https://krshrimali.github.io/posts/2021/08/prefer-deleted-functions-to-private-undefined-ones-notes/</link><pubDate>Wed, 25 Aug 2021 00:00:00 +0000</pubDate><guid>https://krshrimali.github.io/posts/2021/08/prefer-deleted-functions-to-private-undefined-ones-notes/</guid><description>&lt;h2 id="prefer-deleted-functions-to-private-undefined-ones">Prefer deleted functions to private undefined ones&lt;/h2>
+&lt;p>This item (11) in the chapter 3 focuses on:&lt;/p>
+&lt;ul>
+&lt;li>Why and How to prevent users calling particular functions?&lt;/li>
+&lt;li>C++-98 and C++-11 approach&lt;/li>
+&lt;li>What&amp;rsquo;s the difference between deleting a function vs declaring a member function private (and not defining them)?&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img loading="lazy" src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/cover-images/Item-11-Notes.png">&lt;/p>
+&lt;hr>
+&lt;p>&lt;strong>NOTE&lt;/strong>&lt;/p>
+&lt;p>These are my notes on Chapter 3, Item 11 of Effective Modern C++ written by Scott Meyers.&lt;/p>
+&lt;p>Some (or even all) of the text can be similar to what you see in the book, as these are notes: I&amp;rsquo;ve tried not to be unnecessarily creative with my words. :)&lt;/p></description></item><item><title>Prefer Scoped Enums over Unscoped Enums (Notes)</title><link>https://krshrimali.github.io/posts/2021/08/prefer-scoped-enums-over-unscoped-enums-notes/</link><pubDate>Sat, 14 Aug 2021 00:00:00 +0000</pubDate><guid>https://krshrimali.github.io/posts/2021/08/prefer-scoped-enums-over-unscoped-enums-notes/</guid><description>&lt;h2 id="scoped-vs-unscoped-enums">Scoped vs Unscoped Enums&lt;/h2>
+&lt;ul>
+&lt;li>&lt;strong>General rule:&lt;/strong> declaring a name inside curly braces is limited to that scope.&lt;/li>
+&lt;li>&lt;strong>Exception:&lt;/strong> C++-98 style Enums&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img loading="lazy" src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/cover-images/Unscoped-Scoped-Enums.png">&lt;/p>
+&lt;hr>
+&lt;p>&lt;strong>NOTE&lt;/strong>&lt;/p>
+&lt;p>My notes on Chapter 3, Item 10 of Effective Modern C++ written by Scott Meyers.&lt;/p>
+&lt;p>Some (or even all) of the text can be similar to what you see in the book, as these are notes: I&amp;rsquo;ve tried not to be unnecessarily creative with my words. :)&lt;/p></description></item><item><title>Union Find Problem, and a naive implementation (C++)</title><link>https://krshrimali.github.io/posts/2021/08/union-find-problem-and-a-naive-implementation-c-/</link><pubDate>Sat, 14 Aug 2021 00:00:00 +0000</pubDate><guid>https://krshrimali.github.io/posts/2021/08/union-find-problem-and-a-naive-implementation-c-/</guid><description>&lt;p>Hi Everyone, today I want to talk about Union Find Problem. This is going to be a series covering:&lt;/p>
+&lt;ul>
+&lt;li>Union Find Problem (this blog)&lt;/li>
+&lt;li>Solutions to Union Find (1): Quick Find&lt;/li>
+&lt;li>Solutions to Union Find (2): Quick Union&lt;/li>
+&lt;li>Solutions to Union Find (3): Weighted Quick Union&lt;/li>
+&lt;li>Applications of Union Find (perculation and more)&lt;/li>
+&lt;li>Cool project using Union Find&lt;/li>
+&lt;li>Solving some competitive programming questions using Union Find&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img loading="lazy" src="https://raw.githubusercontent.com/krshrimali/blog/main/assets/cover-images/Union-Find-Intro.png">&lt;/p>
+&lt;p>Each blog will try to cover very basic concepts behind the topic, and also what it&amp;rsquo;s all about.&lt;/p></description></item><item><title>Prefer Alias Declarations to Typedefs (Notes)</title><link>https://krshrimali.github.io/posts/2021/08/prefer-alias-declarations-to-typedefs-notes/</link><pubDate>Thu, 12 Aug 2021 00:00:00 +0000</pubDate><guid>https://krshrimali.github.io/posts/2021/08/prefer-alias-declarations-to-typedefs-notes/</guid><description>&lt;p>One solution to avoiding using long type names:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cpp" data-lang="cpp">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// So C++98 like
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>&lt;span style="color:#66d9ef">typedef&lt;/span> std&lt;span style="color:#f92672">::&lt;/span>unique_ptr&lt;span style="color:#f92672">&amp;lt;&lt;/span>std&lt;span style="color:#f92672">::&lt;/span>unordered_map&lt;span style="color:#f92672">&amp;lt;&lt;/span>std&lt;span style="color:#f92672">::&lt;/span>string, std&lt;span style="color:#f92672">::&lt;/span>string&lt;span style="color:#f92672">&amp;gt;&amp;gt;&lt;/span> UPtrMapSS;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Function Pointers and Function Objects in C++</title><link>https://krshrimali.github.io/posts/2021/07/function-pointers-and-function-objects-in-c-/</link><pubDate>Sun, 18 Jul 2021 00:00:00 +0000</pubDate><guid>https://krshrimali.github.io/posts/2021/07/function-pointers-and-function-objects-in-c-/</guid><description>&lt;p>In today&amp;rsquo;s blog, we&amp;rsquo;ll talk about two important concepts in C++: Function Pointers and Function Objects.&lt;/p>
+&lt;p>Please note that, function objects are commonly referred as &lt;em>functors&lt;/em> but we have failed to notice any official alias to the name. Hence, we&amp;rsquo;ll restrict ourselves to using &lt;em>Function Objects&lt;/em> in this blog.&lt;/p></description></item></channel></rss>
