@@ -1,4 +1,12 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Posts on Kushashwa Ravi Shrimali (Kush)</title><link>https://krshrimali.github.io/posts/</link><description>Recent content in Posts on Kushashwa Ravi Shrimali (Kush)</description><generator>Hugo -- 0.147.8</generator><language>en</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Mon, 23 Jun 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://krshrimali.github.io/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>One year older!</title><link>https://krshrimali.github.io/posts/2025/06/one-year-older/</link><pubDate>Mon, 23 Jun 2025 00:00:00 +0000</pubDate><guid>https://krshrimali.github.io/posts/2025/06/one-year-older/</guid><description>&lt;p>I generally don&amp;rsquo;t do this, but I thought this would be a good time to reflect on the past year and share some thoughts with you all. It&amp;rsquo;s been a year since I turned 30, and I wanted to take a moment to appreciate the journey so far.&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Posts on Kushashwa Ravi Shrimali (Kush)</title><link>https://krshrimali.github.io/posts/</link><description>Recent content in Posts on Kushashwa Ravi Shrimali (Kush)</description><generator>Hugo -- 0.148.2</generator><language>en</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Tue, 29 Jul 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://krshrimali.github.io/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Introducing Context Pilot: A Git History Assistant</title><link>https://krshrimali.github.io/posts/2025/07/introducing-context-pilot-a-git-history-assistant/</link><pubDate>Tue, 29 Jul 2025 00:00:00 +0000</pubDate><guid>https://krshrimali.github.io/posts/2025/07/introducing-context-pilot-a-git-history-assistant/</guid><description>&lt;p>I know we all are developers and with increase in loss of attention now a days (at least I&amp;rsquo;ve this), let me quickly note some points down:&lt;/p>
+&lt;ul>
+&lt;li>As tempted I was, this blog was not written by any AI agent/model/autocomplete. Same as the project (except the README) - I intended to write this down myself.&lt;/li>
+&lt;li>This project is emotionally very close to me, and I&amp;rsquo;ll discuss the story towards the end. For those interested, I&amp;rsquo;d love if you all give it a read.&lt;/li>
+&lt;li>This is only applicable to repositories with &amp;ldquo;git&amp;rdquo; as the version history.&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="what-is-context-pilot">What is Context Pilot?&lt;/h2>
+&lt;p>Briefly, this project help answers the questions for you:&lt;/p></description></item><item><title>One year older!</title><link>https://krshrimali.github.io/posts/2025/06/one-year-older/</link><pubDate>Mon, 23 Jun 2025 00:00:00 +0000</pubDate><guid>https://krshrimali.github.io/posts/2025/06/one-year-older/</guid><description>&lt;p>I generally don&amp;rsquo;t do this, but I thought this would be a good time to reflect on the past year and share some thoughts with you all. It&amp;rsquo;s been a year since I turned 30, and I wanted to take a moment to appreciate the journey so far.&lt;/p>
 &lt;p>Haha, gotta turn off copilot for this one. I&amp;rsquo;m not 30. I guess, LLMs can&amp;rsquo;t express how I feel and how old I am right now. Very obvious!&lt;/p></description></item><item><title>Progress Update: Context Pilot (Revamping)</title><link>https://krshrimali.github.io/posts/2025/03/progress-update-context-pilot-revamping/</link><pubDate>Sun, 23 Mar 2025 00:00:00 +0000</pubDate><guid>https://krshrimali.github.io/posts/2025/03/progress-update-context-pilot-revamping/</guid><description>&lt;p>I&amp;rsquo;ve had many iterations on this project that I&amp;rsquo;m going to talk about today, over the last 1.5-2 years. There are good and bad things about it. Good is that I&amp;rsquo;m persisting with completing it one day, bad is that I&amp;rsquo;ve not done it yet.&lt;/p>
 &lt;p>In this blog, I&amp;rsquo;ll quickly touch upon why it has taken so much time and what&amp;rsquo;s happening behind the scenes.&lt;/p>
 &lt;h2 id="about-the-project">About the project:&lt;/h2>
@@ -57,33 +65,4 @@
 &lt;/ul>
 &lt;/li>
 &lt;/ol>
-&lt;p>TODOs:&lt;/p></description></item><item><title>Daily Update: 1st May 2023</title><link>https://krshrimali.github.io/posts/2023/05/daily-update-1st-may-2023/</link><pubDate>Mon, 01 May 2023 00:00:00 +0000</pubDate><guid>https://krshrimali.github.io/posts/2023/05/daily-update-1st-may-2023/</guid><description>&lt;p>Interesting day, lots of design stuff for the &lt;a href="https://github.com/krshrimali/keystroke-store-rs">project we&amp;rsquo;ve been working on&lt;/a>.&lt;/p>
-&lt;ol>
-&lt;li>Designing flow for the word combinator service
-&lt;ul>
-&lt;li>This is actually tricky, as we are figuring out how we&amp;rsquo;ll figure out the keystrokes into words/phrases (I&amp;rsquo;d like to call them &lt;em>entities&lt;/em> at one point of time).&lt;/li>
-&lt;li>The algorithm is close, and I&amp;rsquo;m particularly hopeful about it:
-&lt;ul>
-&lt;li>It considers some edge cases of mouse events, sitting idle, and gives user the control what they would like to choose.&lt;/li>
-&lt;li>More on this very soon!&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>Boring nerdy stuff: Exploring fzf
-&lt;ul>
-&lt;li>I wanted to have fzf previews height changed to 100%, finally changed my zsh config for that. It looks much better now.&lt;/li>
-&lt;li>Then figured out that I&amp;rsquo;m using outdated formula for fzf, and I&amp;rsquo;ll end up going through fzf release notes to see what has changed over the last few releases.
-&lt;ul>
-&lt;li>It&amp;rsquo;s usually a good practice I believe to go through the release notes, and be aware of the tools you use.&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>Work day tomorrow, so doing some early readings.
-&lt;ul>
-&lt;li>Of course can&amp;rsquo;t share details, but yep, going to be more occupied now.&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;/ol>
-&lt;p>A lot of TODOs from &lt;del>yesterday&lt;/del> day before yesterday are left 🥺, I&amp;rsquo;ll move them to tomorrow, yay! Procrastination, let&amp;rsquo;s go 😆🎉&lt;/p></description></item></channel></rss>
+&lt;p>TODOs:&lt;/p></description></item></channel></rss>
