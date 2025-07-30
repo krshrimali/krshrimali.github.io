@@ -1,3 +1,24 @@
 :root {
-    --main-width: 50%;
+    --main-width: 720px; /* Default desktop width */
+}
+
+/* Tablet and smaller desktop screens */
+@media screen and (max-width: 1024px) {
+    :root {
+        --main-width: 90%; /* Use more of the available width */
+    }
+}
+
+/* Mobile screens */
+@media screen and (max-width: 768px) {
+    :root {
+        --main-width: 95%; /* Use almost full width on mobile for better readability */
+    }
+}
+
+/* Very small mobile screens */
+@media screen and (max-width: 480px) {
+    :root {
+        --main-width: 98%; /* Maximum width utilization on very small screens */
+    }
 }
