@@ -6,26 +6,26 @@
 &lt;p&gt;&lt;img src="https://krshrimali.github.io/assets/cover-images/declaring-overriding-functions-override.png" alt=""&gt;&lt;/p&gt;
 &lt;p&gt;Overriding != Overloading&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Example&lt;/em&gt; of virtual function overriding:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-cpp" data-lang="cpp"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// Base class
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;class&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;Base&lt;/span&gt; {
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;public&lt;/span&gt;&lt;span style="color:#f92672"&gt;:&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;virtual&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;void&lt;/span&gt; doWork();
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;// ...
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-cpp" data-lang="cpp"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#60a0b0;font-style:italic"&gt;// Base class
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#007020;font-weight:bold"&gt;class&lt;/span&gt; &lt;span style="color:#0e84b5;font-weight:bold"&gt;Base&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#007020;font-weight:bold"&gt;public&lt;/span&gt;&lt;span style="color:#666"&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#007020;font-weight:bold"&gt;virtual&lt;/span&gt; &lt;span style="color:#902000"&gt;void&lt;/span&gt; doWork();
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#60a0b0;font-style:italic"&gt;// ...
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;};
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// Derived class from Base
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;class&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;Derived&lt;/span&gt;&lt;span style="color:#f92672"&gt;:&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;public&lt;/span&gt; Base {
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;public&lt;/span&gt;&lt;span style="color:#f92672"&gt;:&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;// virtual is optional
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;// this will &amp;#34;override&amp;#34; Base::doWork
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;virtual&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;void&lt;/span&gt; doWork();
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;// ...
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#60a0b0;font-style:italic"&gt;// Derived class from Base
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#007020;font-weight:bold"&gt;class&lt;/span&gt; &lt;span style="color:#0e84b5;font-weight:bold"&gt;Derived&lt;/span&gt;&lt;span style="color:#666"&gt;:&lt;/span&gt; &lt;span style="color:#007020;font-weight:bold"&gt;public&lt;/span&gt; Base {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#007020;font-weight:bold"&gt;public&lt;/span&gt;&lt;span style="color:#666"&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#60a0b0;font-style:italic"&gt;// virtual is optional
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#60a0b0;font-style:italic"&gt;// this will &amp;#34;override&amp;#34; Base::doWork
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#007020;font-weight:bold"&gt;virtual&lt;/span&gt; &lt;span style="color:#902000"&gt;void&lt;/span&gt; doWork();
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#60a0b0;font-style:italic"&gt;// ...
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;};
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// This creates a &amp;#34;Base&amp;#34; class pointer to &amp;#34;Derived&amp;#34; class object
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;std&lt;span style="color:#f92672"&gt;::&lt;/span&gt;unique_ptr&lt;span style="color:#f92672"&gt;&amp;lt;&lt;/span&gt;Base&lt;span style="color:#f92672"&gt;&amp;gt;&lt;/span&gt; upb &lt;span style="color:#f92672"&gt;=&lt;/span&gt; std&lt;span style="color:#f92672"&gt;::&lt;/span&gt;make_unique&lt;span style="color:#f92672"&gt;&amp;lt;&lt;/span&gt;Derived&lt;span style="color:#f92672"&gt;&amp;gt;&lt;/span&gt;();
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#60a0b0;font-style:italic"&gt;// This creates a &amp;#34;Base&amp;#34; class pointer to &amp;#34;Derived&amp;#34; class object
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;std&lt;span style="color:#666"&gt;::&lt;/span&gt;unique_ptr&lt;span style="color:#666"&gt;&amp;lt;&lt;/span&gt;Base&lt;span style="color:#666"&gt;&amp;gt;&lt;/span&gt; upb &lt;span style="color:#666"&gt;=&lt;/span&gt; std&lt;span style="color:#666"&gt;::&lt;/span&gt;make_unique&lt;span style="color:#666"&gt;&amp;lt;&lt;/span&gt;Derived&lt;span style="color:#666"&gt;&amp;gt;&lt;/span&gt;();
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// Derived doWork() function is invoked
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;upb&lt;span style="color:#f92672"&gt;-&amp;gt;&lt;/span&gt;doWork();
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#60a0b0;font-style:italic"&gt;// Derived doWork() function is invoked
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;upb&lt;span style="color:#666"&gt;-&amp;gt;&lt;/span&gt;doWork();
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This is how virtual function overriding allows to invoke a &amp;ldquo;derived class function&amp;rdquo; from a base class interface.&lt;/p&gt;</description></item></channel></rss>
