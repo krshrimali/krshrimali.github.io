@@ -30,6 +30,8 @@
   --font-head: var(--font-body);
 }
 
+/* Light is always the default; dark only applies when explicitly toggled
+   (see theme.js), regardless of OS-level prefers-color-scheme. */
 :root[data-theme="dark"] {
   --paper: #0d0d0d;
   --paper-alt: #1a1a1a;
@@ -40,20 +42,6 @@
   --accent: #e6bb3d;
   --code-bg: #1e1e1e;
   --selection: #4a3d13;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --paper: #0d0d0d;
-    --paper-alt: #1a1a1a;
-    --ink: #f2f2f2;
-    --ink-soft: #cfcfcf;
-    --ink-faint: #8f8f8f;
-    --rule: #2e2e2e;
-    --accent: #e6bb3d;
-    --code-bg: #1e1e1e;
-    --selection: #4a3d13;
-  }
 }
 
 /* -------------------------------------------------------------------------
@@ -350,6 +338,14 @@ main { padding: 0; min-height: 50vh; }
   font-size: 1.15rem;
   font-weight: 700;
   margin: 0 0 1.4rem;
+}
+
+.recent-video {
+  font-size: 0.94rem;
+  color: var(--ink-soft);
+  margin: 0 0 1.6em;
+  padding-bottom: 1.2em;
+  border-bottom: 1px solid var(--rule);
 }
 
 /* -------------------------------------------------------------------------

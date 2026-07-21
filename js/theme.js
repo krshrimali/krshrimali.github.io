@@ -3,9 +3,7 @@
   if (!btn) return;
 
   function currentTheme() {
-    var attr = document.documentElement.getAttribute("data-theme");
-    if (attr) return attr;
-    return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    return document.documentElement.getAttribute("data-theme") || "light";
   }
 
   function label(theme) {
