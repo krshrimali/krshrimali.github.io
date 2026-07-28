@@ -25,7 +25,7 @@
   --code-bg: #faffff;
   --selection: #f2e2a0;
 
-  --content-width: 800px;
+  --content-width: min(1400px, 92vw);
   --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --font-head: var(--font-body);
 }
